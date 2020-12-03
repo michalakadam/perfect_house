@@ -13,6 +13,7 @@ import { RentalManagementComponent } from './rental-management/rental-management
 import { ConsultancyComponent } from './consultancy/consultancy.component';
 import { CustomerMessageComponent } from './shared/customer-message/customer-message.component';
 import { MainComponent } from './main/main.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { MainComponent } from './main/main.component';
     ConsultancyComponent,
     CustomerMessageComponent,
     MainComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
