@@ -11,7 +11,7 @@ import { MapComponent } from './shared/map/map.component';
 import { AgentBriefComponent } from './shared/agent-brief/agent-brief.component';
 import { RentalManagementComponent } from './rental-management/rental-management.component';
 import { ConsultancyComponent } from './consultancy/consultancy.component';
-import { CustomerMessageComponent } from './contact/customer-message/customer-message.component';
+import { CustomerMessageComponent } from './shared/customer-message/customer-message.component';
 import { MainComponent } from './main/main.component';
 
 @NgModule({
