@@ -1,0 +1,14 @@
+app-container {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+
+    .header-with-router-outlet {
+        flex-grow: 1;
+    }
+
+    perfect-header, router-outlet, perfect-footer {
+        flex-shrink: 0;
+    }
+}

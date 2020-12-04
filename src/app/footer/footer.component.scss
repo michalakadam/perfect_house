@@ -1,0 +1,38 @@
+@import "~src/variables.scss";
+
+@mixin flexbox($direction) {
+    display: flex;
+    flex-direction: $direction;
+}
+
+.footer-container {
+    @include flexbox(column);
+    @media screen and (max-width: $mobile-large) {
+        font-size: 12px;
+    }
+
+    .links-container {
+        @include flexbox(row);
+        justify-content: space-evenly;
+    }
+
+    .logo-with-note-container {
+        @include flexbox(row);
+        justify-content: space-between;
+        @media screen and (max-width: $mobile-large) {
+            flex-direction: column;
+        }
+
+        
+        img {
+            margin-left: 10vw;
+            margin-top: -20px;
+            width: 200px;
+        }
+
+        span {
+            margin-right: 10vw;
+            margin-top: 13px;
+        }
+    }
+}
