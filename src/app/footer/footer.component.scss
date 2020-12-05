@@ -1,25 +1,22 @@
 @import "~src/variables.scss";
 
-@mixin flexbox($direction) {
+:host {
+    background-color: $dark-green;
+    color: $font-white;
     display: flex;
-    flex-direction: $direction;
-}
-
-.footer-container {
-    @include flexbox(column);
-    background-color: $light-green;
-    color: $dark-green;
-    padding: 10px 0;
+    flex-direction: column;
+    padding: 15px 0;
 
     .links-container {
-        @include flexbox(row);
+        display: flex;
         justify-content: space-evenly;
         font-weight: 600;
+        line-height: 18px;
     }
 
     .legal-info {
         font-size: 10px;
-        margin-top: 10px;
+        margin-top: 15px;
         text-align: center;
     }
 }
