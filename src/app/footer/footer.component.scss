@@ -1,0 +1,25 @@
+@import "~src/variables.scss";
+
+@mixin flexbox($direction) {
+    display: flex;
+    flex-direction: $direction;
+}
+
+.footer-container {
+    @include flexbox(column);
+    background-color: $light-green;
+    color: $dark-green;
+    padding: 10px 0;
+
+    .links-container {
+        @include flexbox(row);
+        justify-content: space-evenly;
+        font-weight: 600;
+    }
+
+    .legal-info {
+        font-size: 10px;
+        margin-top: 10px;
+        text-align: center;
+    }
+}
