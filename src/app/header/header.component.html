@@ -1,34 +1,44 @@
 <div class="header-container">
-    <img src="../../assets/perfect_house.png">
+    <img src="../../assets/perfect_house_logo.png" [routerLink]="['/']">
     <div class="navigation-container">
-        <span class="navigation-button">Oferty</span>
-        <span class="navigation-link"
-            [routerLink]="['/doradztwo']"
-            routerLinkActive="active-link"
-            [routerLinkActiveOptions]="{exact: true}"
-            tabindex="0"
-            role="button"
-            aria-pressed="false">Doradztwo</span>
-        <span class="navigation-link"
-            [routerLink]="['/zarzadzanie']"
-            routerLinkActive="active-link"
-            [routerLinkActiveOptions]="{exact: true}"
-            tabindex="0"
-            role="button"
-            aria-pressed="false">Zarządzanie najmem</span>
-        <span class="navigation-link"
-            [routerLink]="['/o-nas']"
-            routerLinkActive="active-link"
-            [routerLinkActiveOptions]="{exact: true}"
-            tabindex="0"
-            role="button"
-            aria-pressed="false">O nas</span>
-        <span class="navigation-link"
-            [routerLink]="['/kontakt']"
-            routerLinkActive="active-link"
-            [routerLinkActiveOptions]="{exact: true}"
-            tabindex="0"
-            role="button"
-            aria-pressed="false">Kontakt</span>
+        <span class="link-container">
+            <span class="link">Oferty</span>
+        </span>
+        <span class="link-container">
+            <span class="link"
+                [routerLink]="['/doradztwo']"
+                routerLinkActive="active-link"
+                [routerLinkActiveOptions]="{exact: true}"
+                tabindex="0"
+                role="button"
+                aria-pressed="false">Doradztwo</span>
+            </span>
+        <span class="link-container" style="width: 165px;">
+            <span class="link"
+                [routerLink]="['/zarzadzanie']"
+                routerLinkActive="active-link"
+                [routerLinkActiveOptions]="{exact: true}"
+                tabindex="0"
+                role="button"
+                aria-pressed="false">Zarządzanie najmem</span>
+            </span>
+        <span class="link-container" style="width: 110px;">
+            <span class="link"
+                [routerLink]="['/o-nas']"
+                routerLinkActive="active-link"
+                [routerLinkActiveOptions]="{exact: true}"
+                tabindex="0"
+                role="button"
+                aria-pressed="false">O nas</span>
+            </span>
+        <span class="link-container">
+            <span class="link"
+                [routerLink]="['/kontakt']"
+                routerLinkActive="active-link"
+                [routerLinkActiveOptions]="{exact: true}"
+                tabindex="0"
+                role="button"
+                aria-pressed="false">Kontakt</span>
+            </span>
     </div>
 </div>

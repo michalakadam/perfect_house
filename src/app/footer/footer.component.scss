@@ -1,0 +1,22 @@
+@import "~src/variables.scss";
+
+:host {
+    background-color: $dark-green;
+    color: $font-white;
+    display: flex;
+    flex-direction: column;
+    padding: 15px 0;
+
+    .links-container {
+        display: flex;
+        justify-content: space-evenly;
+        font-weight: 600;
+        line-height: 18px;
+    }
+
+    .legal-info {
+        font-size: 10px;
+        margin-top: 15px;
+        text-align: center;
+    }
+}
