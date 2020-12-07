@@ -2,7 +2,13 @@
     <img src="../../assets/perfect_house_logo.png" [routerLink]="['/']">
     <div class="navigation-container">
         <span class="link-container">
-            <span class="link">Oferty</span>
+            <span class="link"
+                [routerLink]="['/oferty']"
+                routerLinkActive="active-link"
+                [routerLinkActiveOptions]="{exact: true}"
+                tabindex="0"
+                role="button"
+                aria-pressed="false">Oferty</span>
         </span>
         <span class="link-container">
             <span class="link"
