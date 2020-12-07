@@ -1,6 +1,6 @@
 @import "~src/variables.scss";
 
-.header-container {
+:host {
     display: flex;
     flex-direction: column;
     margin: 22px 0;
