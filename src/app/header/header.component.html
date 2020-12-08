@@ -1,7 +1,13 @@
 <img src="../../assets/perfect_house_logo.png" [routerLink]="['/']">
 <div class="navigation-container">
     <span class="link-container">
-        <span class="link">Oferty</span>
+        <span class="link"
+            [routerLink]="['/oferty']"
+            routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{exact: true}"
+            tabindex="0"
+            role="button"
+            aria-pressed="false">Oferty</span>
     </span>
     <span class="link-container">
         <span class="link"
@@ -11,7 +17,7 @@
             tabindex="0"
             role="button"
             aria-pressed="false">Doradztwo</span>
-        </span>
+    </span>
     <span class="link-container" style="width: 165px;">
         <span class="link"
             [routerLink]="['/zarzadzanie']"
@@ -20,7 +26,7 @@
             tabindex="0"
             role="button"
             aria-pressed="false">Zarządzanie najmem</span>
-        </span>
+    </span>
     <span class="link-container" style="width: 110px;">
         <span class="link"
             [routerLink]="['/o-nas']"
@@ -29,7 +35,7 @@
             tabindex="0"
             role="button"
             aria-pressed="false">O nas</span>
-        </span>
+    </span>
     <span class="link-container">
         <span class="link"
             [routerLink]="['/kontakt']"
@@ -38,5 +44,5 @@
             tabindex="0"
             role="button"
             aria-pressed="false">Kontakt</span>
-        </span>
+    </span>
 </div>

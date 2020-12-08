@@ -14,6 +14,7 @@ import { ConsultancyComponent } from './consultancy/consultancy.component';
 import { CustomerMessageComponent } from './shared/customer-message/customer-message.component';
 import { MainComponent } from './main/main.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { OffersComponent } from './offers/offers.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     CustomerMessageComponent,
     MainComponent,
     PageNotFoundComponent,
+    OffersComponent,
   ],
   imports: [
     BrowserModule,
