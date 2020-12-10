@@ -1,0 +1,30 @@
+ @import "~src/variables.scss";
+
+:host {
+    background: url('../../assets/page-not-found-background.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 67.75vh;
+    justify-content: center;
+    text-align: center;
+    @media screen and (max-width: $mobile-large) {
+        height: 65.7vh;
+    }
+
+    .error-code {
+        font-size: 96px;
+        @media screen and (max-width: $mobile-large) {
+            font-size: 64px;
+        }
+    }
+
+    .error-message {
+        font-size: 16px;
+        margin-top: 20px;
+        @media screen and (max-width: $mobile-large) {
+            font-size: 12px;
+        }
+    }
+}

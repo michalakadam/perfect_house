@@ -1,0 +1,17 @@
+// Frequently used values saved as variables.
+// To use them add << @import "~src/variables.scss"; >> at scss file top.
+
+// colors
+$light-green: #b4e333;
+$dark-green: #144433;
+$font-grey: #535353;
+$font-white: #fefefe;
+
+// size screens for responsive design
+$desktop-large: 1470px;
+$desktop-medium: 1240px;
+$desktop-small: 960px;
+$tablet: 768px;
+$mobile-large: 640px;
+$mobile: 480px;
+$mobile-small: 300px;
