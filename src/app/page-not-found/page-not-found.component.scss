@@ -1,7 +1,7 @@
  @import "~src/variables.scss";
 
 :host {
-    background: url('../../assets/page-not-found-background.jpeg') no-repeat center center fixed;
+    background: url('/assets/page-not-found-background.jpeg') no-repeat center center fixed;
     background-size: cover;
     color: white;
     display: flex;
