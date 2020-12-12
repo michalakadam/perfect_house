@@ -18,6 +18,9 @@ import { OffersComponent } from './offers/offers.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -39,8 +42,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
+    MatButtonModule,
     MatDividerModule,
     MatIconModule,
+    MatListModule,
+    MatSidenavModule,
   ],
   bootstrap: [
     AppComponent,
