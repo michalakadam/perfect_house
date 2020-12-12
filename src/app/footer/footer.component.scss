@@ -5,18 +5,22 @@
     color: $font-white;
     display: flex;
     flex-direction: column;
-    padding: 15px 0;
+    padding-bottom: 15px;
 
     .links-container {
         display: flex;
         justify-content: space-evenly;
-        font-weight: 600;
         line-height: 18px;
+        margin-bottom: 20px;
+
+        .link {
+            cursor: pointer;
+        }
     }
 
     .legal-info {
         font-size: 10px;
-        margin-top: 15px;
+        margin-top: 14px;
         text-align: center;
     }
 }

@@ -15,6 +15,7 @@ import { CustomerMessageComponent } from './shared/customer-message/customer-mes
 import { MainComponent } from './main/main.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { OffersComponent } from './offers/offers.component';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { OffersComponent } from './offers/offers.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatDividerModule,
   ],
   bootstrap: [
     AppComponent,
