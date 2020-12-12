@@ -15,28 +15,32 @@ import { CustomerMessageComponent } from './shared/customer-message/customer-mes
 import { MainComponent } from './main/main.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { OffersComponent } from './offers/offers.component';
-import {MatDividerModule} from '@angular/material/divider';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent,
     AboutComponent,
-    ContactComponent,
-    MapComponent,
     AgentBriefComponent,
-    RentalManagementComponent,
+    AppComponent,
     ConsultancyComponent,
+    ContactComponent,
     CustomerMessageComponent,
+    FooterComponent,
+    HeaderComponent,
     MainComponent,
-    PageNotFoundComponent,
+    MapComponent,
     OffersComponent,
+    PageNotFoundComponent,
+    RentalManagementComponent,
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
+    BrowserModule,
     MatDividerModule,
+    MatIconModule,
   ],
   bootstrap: [
     AppComponent,

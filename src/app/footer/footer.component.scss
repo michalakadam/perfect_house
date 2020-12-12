@@ -16,6 +16,21 @@
         .link {
             cursor: pointer;
         }
+
+        address {
+            font-style: unset;
+        }
+
+        .icons-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            width: 90px;
+
+            a {
+                color: unset;
+            }
+        }
     }
 
     .legal-info {
