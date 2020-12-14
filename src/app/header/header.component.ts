@@ -17,7 +17,6 @@ export class HeaderComponent {
     this.windowSizeDetector.windowSizeChanged$
     .pipe(
       skip(1),
-      debounceTime(200),
     ).subscribe(() => {
       this.changeDetector.detectChanges();
     });

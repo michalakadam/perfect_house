@@ -13,7 +13,7 @@
         height: 26px;
         left: 23px;
         position: absolute;
-        top: 22px;
+        top: 26px;
         width: 26px;
 
         mat-icon {
@@ -28,7 +28,7 @@
         outline: none;
         width: 200px;
         @media screen and (max-width: $mobile-large) {
-            width: 140px;
+            width: 180px;
         }
     }
 
@@ -39,10 +39,7 @@
         right: 15px;
         position: absolute;
         text-decoration: none;
-        top:22px;
-        @media screen and (max-width: $mobile-large) {
-            top:17px;
-        }
+        top: 22px;
 
         mat-icon {
             padding-right: 10px;
