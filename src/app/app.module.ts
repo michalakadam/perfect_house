@@ -22,6 +22,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatButtonModule} from '@angular/material/button';
 import { NavigationComponent } from './header/navigation/navigation.component';
+import { SideNavigationComponent } from './header/side-navigation/side-navigation.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { NavigationComponent } from './header/navigation/navigation.component';
     PageNotFoundComponent,
     RentalManagementComponent,
     NavigationComponent,
+    SideNavigationComponent,
   ],
   imports: [
     AppRoutingModule,

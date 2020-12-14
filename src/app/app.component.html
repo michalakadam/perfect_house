@@ -1,5 +1,9 @@
-<perfect-header></perfect-header>
-<div class="router-outlet-container">   
+<perfect-header (sideMenuToggled)="toggleSideMenuVisibility()"></perfect-header>
+<perfect-side-navigation *ngIf="isSideMenuVisible" [@inOutAnimation]></perfect-side-navigation>
+
+<div class="router-outlet-container"
+    [style.opacity]="isSideMenuVisible ? 0.3 : 1">   
     <router-outlet></router-outlet>
 </div>
+
 <perfect-footer></perfect-footer>

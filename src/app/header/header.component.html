@@ -1,5 +1,7 @@
 <button mat-icon-button
-    *ngIf="windowSizeDetector.isWindowSmallerThanMobileLarge">
+    id="sideNavToggleButton"
+    *ngIf="windowSizeDetector.isWindowSmallerThanMobileLarge"
+    (click)="sideMenuToggled.emit()">
     <mat-icon>menu</mat-icon>
 </button>
 <img src="/assets/perfect_house_logo.png" [routerLink]="['/']">

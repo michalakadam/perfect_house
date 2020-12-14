@@ -1,6 +1,6 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
-import { debounceTime, skip } from 'rxjs/operators';
+import { skip } from 'rxjs/operators';
 
 /** Nagłówek strony. Zawiera logo firmy, numer telefonu oraz nawigację. */
 @Component({
@@ -10,6 +10,8 @@ import { debounceTime, skip } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
+
+  @Output() sideMenuToggled = new EventEmitter();
 
   constructor(
     public windowSizeDetector: WindowSizeDetector,
