@@ -1,9 +1,14 @@
-<button mat-icon-button><mat-icon>menu</mat-icon></button>
+<button mat-icon-button *ngIf="windowSizeDetector.isWindowSmallerThanMobileLarge">
+    <mat-icon>menu</mat-icon>
+</button>
 <img src="/assets/perfect_house_logo.png" [routerLink]="['/']">
 <a href="tel:+48514753514">
-    <mat-icon><i class="fas fa-phone-square-alt"></i></mat-icon><span class="number">514 753 514</span>
+    <mat-icon><i class="fas fa-phone-square-alt"></i></mat-icon>
+    <span class="phone-number" *ngIf="!windowSizeDetector.isWindowSmallerThanMobileLarge">
+        514 753 514
+    </span>
 </a>
-<nav>
+<nav *ngIf="!windowSizeDetector.isWindowSmallerThanMobileLarge">
     <span class="link-container">
         <span class="link"
             [routerLink]="['/oferty']"
