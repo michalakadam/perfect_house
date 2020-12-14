@@ -21,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatButtonModule} from '@angular/material/button';
+import { NavigationComponent } from './header/navigation/navigation.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import {MatButtonModule} from '@angular/material/button';
     OffersComponent,
     PageNotFoundComponent,
     RentalManagementComponent,
+    NavigationComponent,
   ],
   imports: [
     AppRoutingModule,

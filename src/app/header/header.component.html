@@ -1,57 +1,15 @@
-<button mat-icon-button *ngIf="windowSizeDetector.isWindowSmallerThanMobileLarge">
+<button mat-icon-button
+    *ngIf="windowSizeDetector.isWindowSmallerThanMobileLarge">
     <mat-icon>menu</mat-icon>
 </button>
 <img src="/assets/perfect_house_logo.png" [routerLink]="['/']">
 <a href="tel:+48514753514">
     <mat-icon><i class="fas fa-phone-square-alt"></i></mat-icon>
-    <span class="phone-number" *ngIf="!windowSizeDetector.isWindowSmallerThanMobileLarge">
+    <span class="phone-number"
+        *ngIf="!windowSizeDetector.isWindowSmallerThanMobileLarge">
         514 753 514
     </span>
 </a>
-<nav *ngIf="!windowSizeDetector.isWindowSmallerThanMobileLarge">
-    <span class="link-container">
-        <span class="link"
-            [routerLink]="['/oferty']"
-            routerLinkActive="active-link"
-            [routerLinkActiveOptions]="{exact: true}"
-            tabindex="0"
-            role="button"
-            aria-pressed="false">Oferty</span>
-    </span>
-    <span class="link-container">
-        <span class="link"
-            [routerLink]="['/doradztwo']"
-            routerLinkActive="active-link"
-            [routerLinkActiveOptions]="{exact: true}"
-            tabindex="0"
-            role="button"
-            aria-pressed="false">Doradztwo</span>
-    </span>
-    <span class="link-container" style="width: 165px;">
-        <span class="link"
-            [routerLink]="['/zarzadzanie']"
-            routerLinkActive="active-link"
-            [routerLinkActiveOptions]="{exact: true}"
-            tabindex="0"
-            role="button"
-            aria-pressed="false">Zarządzanie najmem</span>
-    </span>
-    <span class="link-container" style="width: 110px;">
-        <span class="link"
-            [routerLink]="['/o-nas']"
-            routerLinkActive="active-link"
-            [routerLinkActiveOptions]="{exact: true}"
-            tabindex="0"
-            role="button"
-            aria-pressed="false">O nas</span>
-    </span>
-    <span class="link-container">
-        <span class="link"
-            [routerLink]="['/kontakt']"
-            routerLinkActive="active-link"
-            [routerLinkActiveOptions]="{exact: true}"
-            tabindex="0"
-            role="button"
-            aria-pressed="false">Kontakt</span>
-    </span>
-</nav>
+<perfect-navigation
+    *ngIf="!windowSizeDetector.isWindowSmallerThanMobileLarge">
+</perfect-navigation>

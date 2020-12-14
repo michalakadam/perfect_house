@@ -1,0 +1,49 @@
+@import "~src/variables.scss";
+
+nav {
+    display: table;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 18px auto 0;
+    width: 600px;
+    text-align: center;
+
+    .link-container {
+        display: table-cell;
+        position: relative;
+
+        .link {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+
+            &::after {    
+                background: none repeat scroll 0 0 transparent;
+                content: "";
+                display: block;
+                height: 2.5px;
+                left: 50%;
+                position: absolute;
+                background: $light-green;
+                transition: width 0.3s ease 0s, left 0.3s ease 0s;
+                width: 0;
+            }
+
+            &:hover::after { 
+                width: 100%; 
+                left: 0; 
+            }
+        }
+
+        .active-link::after {
+            background: none repeat scroll 0 0 transparent;
+            content: "";
+            display: block;
+            height: 2.5px;
+            left: 0;
+            position: absolute;
+            background: $light-green;
+            width: 100%;
+        }
+    }
+}
