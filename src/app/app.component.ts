@@ -27,7 +27,6 @@ import { trigger, style, animate, transition } from '@angular/animations';
       ],
     ),
   ],
-  host: {'(document:click)': 'onClick($event)'},
 })
 export class AppComponent implements OnInit {
   isSideMenuVisible = false;
@@ -50,8 +49,13 @@ export class AppComponent implements OnInit {
   /** 
    * Closes side navigation when any element on the page is clicked
    * except for button that toggles side navigation.
+   * @param event is of type MouseEvent but it has to be marked as any
+   * because TS uses default MouseEvent interface, not Angular one.
+   * 'path' property does not exist on a default MouseEvent.
    */
-  onClick(event) {
+  @HostListener('document:click', ['$event'])
+  onClick(event: any) {
+    console.log(event);
     if (this.windowSizeDetector.isWindowSmallerThanMobileLarge && this.isSideMenuVisible) {
       const isSideNavButtonClicked = event.path
         .map(element => element.id)
