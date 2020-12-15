@@ -8,7 +8,7 @@ import { trigger, style, animate, transition } from '@angular/animations';
   styleUrls: ['./app.component.scss'],
   animations: [
     trigger(
-      'inOutAnimation', 
+      'openCloseSideNavAnimation', 
       [
         transition(
           ':enter', 
@@ -32,7 +32,7 @@ import { trigger, style, animate, transition } from '@angular/animations';
 export class AppComponent implements OnInit {
   isSideMenuVisible = false;
 
-  constructor(public windowSizeDetector: WindowSizeDetector) {}
+  constructor(readonly windowSizeDetector: WindowSizeDetector) {}
 
   ngOnInit() {
     this.windowSizeDetector.updateWindowSizeFlags(window.innerWidth);
@@ -48,11 +48,11 @@ export class AppComponent implements OnInit {
   }
 
   /** 
-   * Close side navigation when any element on the page is clicked
+   * Closes side navigation when any element on the page is clicked
    * except for button that toggles side navigation.
    */
   onClick(event) {
-    if (this.isSideMenuVisible) {
+    if (this.windowSizeDetector.isWindowSmallerThanMobileLarge && this.isSideMenuVisible) {
       const isSideNavButtonClicked = event.path
         .map(element => element.id)
         .includes('sideNavToggleButton');

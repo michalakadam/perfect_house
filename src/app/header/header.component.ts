@@ -14,10 +14,11 @@ export class HeaderComponent {
   @Output() sideMenuToggled = new EventEmitter();
 
   constructor(
-    public windowSizeDetector: WindowSizeDetector,
+    readonly windowSizeDetector: WindowSizeDetector,
     private changeDetector: ChangeDetectorRef) {
     this.windowSizeDetector.windowSizeChanged$
     .pipe(
+      // Change of window size at initialization propagates properly.
       skip(1),
     ).subscribe(() => {
       this.changeDetector.detectChanges();
