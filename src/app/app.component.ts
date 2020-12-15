@@ -55,7 +55,6 @@ export class AppComponent implements OnInit {
    */
   @HostListener('document:click', ['$event'])
   onClick(event: any) {
-    console.log(event);
     if (this.windowSizeDetector.isWindowSmallerThanMobileLarge && this.isSideMenuVisible) {
       const isSideNavButtonClicked = event.path
         .map(element => element.id)
