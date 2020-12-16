@@ -23,6 +23,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatButtonModule} from '@angular/material/button';
 import { NavigationComponent } from './header/navigation/navigation.component';
 import { SideNavigationComponent } from './header/side-navigation/side-navigation.component';
+import { FooterLinksSectionComponent } from './footer/footer-links-section/footer-links-section.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { SideNavigationComponent } from './header/side-navigation/side-navigatio
     RentalManagementComponent,
     NavigationComponent,
     SideNavigationComponent,
+    FooterLinksSectionComponent,
   ],
   imports: [
     AppRoutingModule,

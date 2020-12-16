@@ -1,0 +1,11 @@
+.header-container {
+    display: flex;
+    justify-content: space-between;
+
+    .toggle {
+        cursor: pointer;
+        margin: auto 0;
+        min-width: 70px;
+        text-align: center;
+    }
+}

@@ -1,30 +1,39 @@
 <div class="links-container">
-    <section>
-        <h4>Na wynajem</h4>
+    <perfect-footer-links-section
+        [headerTitle]="'Na wynajem'"
+        [showResponsiveView]="windowSizeDetector.isWindowSmallerThanMobileLarge"
+        [isSectionOpen]="isRentalSectionOpen"
+        (sectionToggled)="toggleRentalSectionOpen()">
+            <div class="link">Mieszkania</div>
+            <div class="link">Domy</div>
+            <div class="link">Działki</div>
+            <div class="link">Lokale</div>
+            <div class="link">Hale</div>
+            <div class="link">Obiekty</div>
+    </perfect-footer-links-section>
+    <perfect-footer-links-section
+        [headerTitle]="'Na sprzedaż'"
+        [showResponsiveView]="windowSizeDetector.isWindowSmallerThanMobileLarge"
+        [isSectionOpen]="isSaleSectionOpen"
+        (sectionToggled)="toggleSaleSectionOpen()">
         <div class="link">Mieszkania</div>
         <div class="link">Domy</div>
         <div class="link">Działki</div>
         <div class="link">Lokale</div>
         <div class="link">Hale</div>
         <div class="link">Obiekty</div>
-    </section>
-    <section>
-        <h4>Na sprzedaż</h4>
-        <div class="link">Mieszkania</div>
-        <div class="link">Domy</div>
-        <div class="link">Działki</div>
-        <div class="link">Lokale</div>
-        <div class="link">Hale</div>
-        <div class="link">Obiekty</div>
-    </section>
-    <section>
-        <h4>Inne oferty</h4>
+    </perfect-footer-links-section>
+    <perfect-footer-links-section
+        [headerTitle]="'Inne oferty'"
+        [showResponsiveView]="windowSizeDetector.isWindowSmallerThanMobileLarge"
+        [isSectionOpen]="isOtherSectionOpen"
+        (sectionToggled)="toggleOtherSectionOpen()">
         <div class="link">Inwestycyjne</div>
         <div class="link">Specjalne</div>
         <div class="link">Nad Bałtykiem</div>
         <div class="link">Bez prowizji</div>
         <div class="link">Z wirtualną wizytą</div>
-    </section>
+    </perfect-footer-links-section>
     <section>
         <h4>Kontakt</h4>
         <address>
@@ -47,4 +56,8 @@
     </section>
 </div>
 <mat-divider></mat-divider>
-<div class="legal-info">Agencja nieruchomości Perfect House © 2020. Wszelkie prawa zastrzeżone.</div>
+<div class="legal-info">
+    Agencja nieruchomości Perfect House © 2020.
+    <span *ngIf="windowSizeDetector.isWindowSmallerThanMobileLarge"><br/></span>
+    Wszelkie prawa zastrzeżone.
+</div>

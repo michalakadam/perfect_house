@@ -12,6 +12,10 @@
         justify-content: space-evenly;
         line-height: 18px;
         margin-bottom: 20px;
+        @media screen and (max-width: $mobile-large) {
+            flex-direction: column;
+            margin-left: 24px;
+        }
 
         .link {
             cursor: pointer;
