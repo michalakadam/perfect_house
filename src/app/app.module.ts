@@ -15,26 +15,44 @@ import { CustomerMessageComponent } from './shared/customer-message/customer-mes
 import { MainComponent } from './main/main.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { OffersComponent } from './offers/offers.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
+import {MatButtonModule} from '@angular/material/button';
+import { NavigationComponent } from './header/navigation/navigation.component';
+import { SideNavigationComponent } from './header/side-navigation/side-navigation.component';
+import { FooterLinksSectionComponent } from './footer/footer-links-section/footer-links-section.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent,
     AboutComponent,
-    ContactComponent,
-    MapComponent,
     AgentBriefComponent,
-    RentalManagementComponent,
+    AppComponent,
     ConsultancyComponent,
+    ContactComponent,
     CustomerMessageComponent,
+    FooterComponent,
+    HeaderComponent,
     MainComponent,
-    PageNotFoundComponent,
+    MapComponent,
     OffersComponent,
+    PageNotFoundComponent,
+    RentalManagementComponent,
+    NavigationComponent,
+    SideNavigationComponent,
+    FooterLinksSectionComponent,
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
+    BrowserModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatIconModule,
+    MatListModule,
+    MatSidenavModule,
   ],
   bootstrap: [
     AppComponent,
