@@ -1,33 +1,63 @@
 <div class="links-container">
-    <div class="for-rent">
-        <div>Mieszkania na wynajem</div>
-        <div>Domy na wynajem</div>
-        <div>Działki na wynajem</div>
-        <div>Lokale na wynajem</div>
-        <div>Hale na wynajem</div>
-        <div>Obiekty na wynajem</div>
-    </div>
-    <div class="for-sale">
-        <div>Mieszkania na sprzedaż</div>
-        <div>Domy na sprzedaż</div>
-        <div>Działki na sprzedaż</div>
-        <div>Lokale na sprzedaż</div>
-        <div>Hale na sprzedaż</div>
-        <div>Obiekty na sprzedaż</div>
-    </div>
-    <div class="special-offers">
-        <div>Oferty inwestycyjne</div>
-        <div>Oferty specjalne</div>
-        <div>Nieruchomości nad Bałtykiem</div>
-    </div>
-    <div class="contact-info">
-        <div>Biuro nieruchomości Perfect House</div>
-        <div>ul. Klin 17/2, 60-602 Poznań</div>
-        <div>biuro@e-perfecthouse.pl</div>
-        <div>61 296 03 95, 514 753 514</div>
+    <perfect-footer-links-section
+        [headerTitle]="'Na wynajem'"
+        [showResponsiveView]="windowSizeDetector.isWindowSmallerThanMobileLarge"
+        [isSectionOpen]="isRentalSectionOpen"
+        (sectionToggled)="toggleRentalSectionOpen()">
+            <div class="link">Mieszkania</div>
+            <div class="link">Domy</div>
+            <div class="link">Działki</div>
+            <div class="link">Lokale</div>
+            <div class="link">Hale</div>
+            <div class="link">Obiekty</div>
+    </perfect-footer-links-section>
+    <perfect-footer-links-section
+        [headerTitle]="'Na sprzedaż'"
+        [showResponsiveView]="windowSizeDetector.isWindowSmallerThanMobileLarge"
+        [isSectionOpen]="isSaleSectionOpen"
+        (sectionToggled)="toggleSaleSectionOpen()">
+        <div class="link">Mieszkania</div>
+        <div class="link">Domy</div>
+        <div class="link">Działki</div>
+        <div class="link">Lokale</div>
+        <div class="link">Hale</div>
+        <div class="link">Obiekty</div>
+    </perfect-footer-links-section>
+    <perfect-footer-links-section
+        [headerTitle]="'Inne oferty'"
+        [showResponsiveView]="windowSizeDetector.isWindowSmallerThanMobileLarge"
+        [isSectionOpen]="isOtherSectionOpen"
+        (sectionToggled)="toggleOtherSectionOpen()">
+        <div class="link">Inwestycyjne</div>
+        <div class="link">Specjalne</div>
+        <div class="link">Nad Bałtykiem</div>
+        <div class="link">Bez prowizji</div>
+        <div class="link">Z wirtualną wizytą</div>
+    </perfect-footer-links-section>
+    <section>
+        <h4>Kontakt</h4>
+        <address>
+            <div>Biuro nieruchomości Perfect House</div>
+            <div>ul. Klin 17/2, 60-602 Poznań</div>
+            <div>biuro@e-perfecthouse.pl</div>
+            <div>61 296 03 95, 514 753 514</div>
+        </address>
         <div class="icons-container">
-
+            <a target="_blank" href="https://www.facebook.com/perfecthousepoznan" rel="noopener noreferrer">
+                <mat-icon><i class="fab fa-facebook-square"></i></mat-icon>
+            </a>
+            <a target="_blank" href="https://www.instagram.com/perfecthousepoznan" rel="noopener noreferrer">
+                <mat-icon><i class="fab fa-instagram-square"></i></mat-icon>
+            </a>
+            <a target="_blank" href="mailto:biuro@e-perfecthouse.pl" rel="noopener noreferrer">
+                <mat-icon><i class="fas fa-envelope-square"></i></mat-icon>
+            </a>
         </div>
-    </div>
+    </section>
 </div>
-<div class="legal-info">Agencja nieruchomości Perfect House © 2020. Wszelkie prawa zastrzeżone.</div>
+<mat-divider></mat-divider>
+<div class="legal-info">
+    Agencja nieruchomości Perfect House © 2020.
+    <span *ngIf="windowSizeDetector.isWindowSmallerThanMobile"><br/></span>
+    Wszelkie prawa zastrzeżone.
+</div>

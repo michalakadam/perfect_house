@@ -1,0 +1,33 @@
+@import "~src/variables.scss";
+
+:host {
+    background-color: $dark-green;
+    box-shadow: 2px 2px 2px 1px #90A4AE;
+    color: $font-white;
+    height: 225px;
+    left: 40px;
+    position: absolute;
+    top: 60px;
+    width: 200px;
+    z-index: 100;
+
+    mat-list-item {
+        height: 40px;
+
+        .link {
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            height: 100%;
+            line-height: 44px;
+            margin: 0 -16px;
+            padding-left: 22px;
+            width: 106%;
+        }
+
+        .active-link {
+            background-color: $light-green;
+            color: $dark-green;
+        }
+    }
+}

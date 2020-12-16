@@ -1,0 +1,11 @@
+<nav>
+    <span class="link-container" *ngFor="let link of links">
+        <span class="link"
+            [routerLink]="link.route"
+            routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{exact: true}"
+            tabindex="0"
+            role="button"
+            aria-pressed="false">{{link.title}}</span>
+    </span>
+</nav>
