@@ -12,9 +12,9 @@
                 <mat-icon *ngIf="!isSectionOpen">keyboard_arrow_down</mat-icon>
             </span>
         </div>
-        <ng-template [ngIf]="isSectionOpen">
+        <div *ngIf="isSectionOpen" [@openCloseLinks]>
             <ng-container *ngTemplateOutlet="links"></ng-container>
-        </ng-template>
+        </div>
     </div>
 </section>
 
