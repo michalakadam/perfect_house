@@ -13,4 +13,8 @@ export class FooterLinksSectionComponent {
   @Input() isSectionOpen = false;
   
   @Output() sectionToggled = new EventEmitter();
+
+  computeSectionMargin(): number {
+    return this.showResponsiveView && !this.isSectionOpen ? -15 : 0;
+  }
 }

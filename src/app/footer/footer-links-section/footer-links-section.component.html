@@ -1,4 +1,4 @@
-<section>
+<section [style.margin-bottom.px]="computeSectionMargin()">
     <div class="non-responsive-container" *ngIf="!showResponsiveView">
         <h4>{{headerTitle}}</h4>
         <ng-container *ngTemplateOutlet="links"></ng-container>
