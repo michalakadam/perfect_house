@@ -1,7 +1,9 @@
+@import "~src/variables.scss";
+
 div {
-    color: rgba(0,0,0, 0.8);
+    $font-grey: #535353;
     font-size: 15px;
-    text-align: left;
+    text-align: justify;
     font-family: Verdana, sans-serif;
     margin: 0 100px;
 }
@@ -13,14 +15,19 @@ h2 {
     font-size: 20px;
     line-height: 0px;
 }
-.main-text{
+main {
     font-size: 17px;
     margin: 0 100px;
     margin-block-start: 50px;
     margin-block-end: 50px;
 }
-.contact{
-    color: black;
+.contact {
+    $font-grey: #535353;
     text-align: center;
     font-size: 15px;
+}
+section {
+    font-size: 18px;
+    text-align: justify;
+    margin: 0 100px;
 }
