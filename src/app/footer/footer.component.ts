@@ -28,13 +28,25 @@ export class FooterComponent {
 
   toggleRentalSectionOpen() {
     this.isRentalSectionOpen = !this.isRentalSectionOpen;
+    if (this.isRentalSectionOpen) {
+      this.isSaleSectionOpen = false; 
+      this.isOtherSectionOpen = false;
+    }
   }
 
   toggleSaleSectionOpen() {
     this.isSaleSectionOpen = !this.isSaleSectionOpen;
+    if (this.isSaleSectionOpen) {
+      this.isRentalSectionOpen = false;
+      this.isOtherSectionOpen = false;
+    }
   }
 
   toggleOtherSectionOpen() {
     this.isOtherSectionOpen = !this.isOtherSectionOpen;
+    if (this.isOtherSectionOpen) {
+      this.isRentalSectionOpen = false;
+      this.isSaleSectionOpen = false;
+    }
   }
 }
