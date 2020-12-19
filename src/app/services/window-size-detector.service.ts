@@ -18,11 +18,16 @@ export class WindowSizeDetector {
 
     constructor() {
         this.windowSizeChanged$ = this.windowSizeChangedSubject.asObservable();
+        this.updateWindowSizeFlags(window.innerWidth);
     }
 
-    updateWindowSizeFlags(windowSize: number) {
+    windowSizeChanged(windowSize: number) {
+        this.updateWindowSizeFlags(windowSize);
+        this.windowSizeChangedSubject.next();
+    }
+
+    private updateWindowSizeFlags(windowSize: number) {
         this.isWindowSmallerThanMobileLarge = windowSize < WindowSizeDetector.MOBILE_LARGE;
         this.isWindowSmallerThanMobile = windowSize < WindowSizeDetector.MOBILE;
-        this.windowSizeChangedSubject.next();
     }
 }
