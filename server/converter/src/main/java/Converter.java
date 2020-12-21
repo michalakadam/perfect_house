@@ -1,16 +1,13 @@
-import org.json.JSONObject;
 import org.json.XML;
 import org.json.JSONException;
 
 final class Converter {
 
-    private static int PRETTY_PRINT_INDENT_FACTOR = 4;
+    private static int INDENT_SIZE = 4;
 
-    void convertToJson() {
+    static void convertToJson(String xmlContent) {
         try {
-            JSONObject xmlJsonObject = XML.toJSONObject("");
-            String jsonPrettyPrintString = xmlJsonObject.toString(PRETTY_PRINT_INDENT_FACTOR);
-            System.out.println(jsonPrettyPrintString);
+            System.out.println(XML.toJSONObject(xmlContent).toString(INDENT_SIZE));
         } catch (JSONException jsonException) {
             System.out.println(jsonException.toString());
         }
