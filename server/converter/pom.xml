@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>dev.michalak.adam</groupId>
+    <artifactId>perfecthouse</artifactId>
+    <version>1.0</version>
+    <description>XML to JSON converter for Perfect House website</description>
+    <url>e-perfecthouse.pl</url>
+
+    <properties>
+        <!-- https://maven.apache.org/general.html#encoding-warning -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- https://maven.apache.org/general.html#special-characters-site -->
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>${project.java.version}</maven.compiler.source>
+        <maven.compiler.target>${project.java.version}</maven.compiler.target>
+        <maven.compiler.encoding>${project.build.sourceEncoding}</maven.compiler.encoding>
+
+        <!-- versions should go here, so below they can be omitted -->
+        <project.java.version>14</project.java.version>
+        <version.maven>3.6.3</version.maven>
+        <version.plugin.jar>3.2.0</version.plugin.jar>
+        <version.plugin.shade>3.2.4</version.plugin.shade>
+        <version.dependency.json>20201115</version.dependency.json>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>${version.dependency.json}</version>
+          </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-jar-plugin</artifactId>
+              <version>${version.plugin.jar}</version>
+              <configuration>
+                <archive>
+                  <manifest>
+                    <addClasspath>true</addClasspath>
+                    <mainClass>ConverterRunner</mainClass>
+                  </manifest>
+                </archive>
+              </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>${version.plugin.shade}</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <finalName>uber-${project.artifactId}-${project.version}</finalName>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
