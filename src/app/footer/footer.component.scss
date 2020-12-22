@@ -11,7 +11,13 @@
         display: flex;
         justify-content: space-evenly;
         line-height: 18px;
-        margin-bottom: 20px;
+        margin: 0 auto 20px;
+        width: 800px;
+        @media screen and (max-width: $desktop-small) {
+            margin: unset;
+            margin-bottom: 20px;
+            width: unset;
+        }
         @media screen and (max-width: $mobile-large) {
             flex-direction: column;
             margin-left: 24px;

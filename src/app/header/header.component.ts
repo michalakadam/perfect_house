@@ -16,11 +16,7 @@ export class HeaderComponent {
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,
     private changeDetector: ChangeDetectorRef) {
-    this.windowSizeDetector.windowSizeChanged$
-    .pipe(
-      // Change of window size at initialization propagates properly.
-      skip(1),
-    ).subscribe(() => {
+    this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
       this.changeDetector.detectChanges();
     });
   }
