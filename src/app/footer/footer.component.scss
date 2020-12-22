@@ -1,7 +1,7 @@
 @import "~src/variables.scss";
 
 :host {
-    background-color: $dark-green;
+    background-color: $font-grey;
     color: $font-white;
     display: flex;
     flex-direction: column;
@@ -35,10 +35,14 @@
             display: flex;
             justify-content: space-between;
             margin-top: 5px;
-            width: 90px;
+            width: 120px;
 
             a {
                 color: unset;
+
+                mat-icon {
+                    font-size: 32px !important;
+                }
             }
         }
     }

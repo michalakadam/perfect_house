@@ -14,14 +14,14 @@ import { trigger, style, animate, transition } from '@angular/animations';
           ':enter', 
           [
             style({ height: 0, opacity: 0 }),
-            animate('0.1s ease-out', style({ height: 100, opacity: 1 })),
+            animate('0.25s ease', style({ height: 100, opacity: 1 })),
           ],
         ),
         transition(
           ':leave', 
           [
             style({ height: 100, opacity: 1 }),
-            animate('0.1s ease-in', style({ height: 0, opacity: 0 })),
+            animate('0.25s ease', style({ height: 0, opacity: 0 })),
           ],
         ),
       ],
