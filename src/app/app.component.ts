@@ -49,7 +49,7 @@ export class AppComponent {
    * @param event is of type TouchEvent but it has to be marked as any
    * because TS uses does not recognize its path property.
    */
-  @HostListener('document:touchstart', ['$event'])
+  @HostListener('document:touchend', ['$event'])
   onClick(event: any) {
     if (this.windowSizeDetector.isWindowSmallerThanMobileLarge && this.isSideMenuVisible) {
       const isSideNavButtonClicked = event.path
