@@ -1,0 +1,40 @@
+@import "~src/variables.scss";
+
+.component-container {
+    margin: 0 auto; 
+    width: 1000px;
+    @media screen and (max-width: $desktop-medium) {
+        width: 600px;
+    }
+
+    @media screen and (max-width: $mobile-large) {
+        width: unset;
+        margin: 0 20px;
+    }
+    main {
+        margin-block-end: 50px;
+        margin-block-start: 0px;
+        text-align: justify;
+       
+        img {
+            float: left;
+            height: auto;
+            margin: 0 10px 10px 0;
+            max-width: 300px;
+        }
+        p {
+            line-height: 2em;
+        }
+        a {
+            color: $font-grey;
+            font-size: 16px;
+            font-style: normal;
+            text-decoration: none;
+            
+                span {
+                    font-style: italic;
+                    font-size: inherit;
+                }
+        }
+    }
+}
