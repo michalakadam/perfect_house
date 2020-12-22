@@ -1,13 +1,16 @@
-<main> 
+<div class='component-container'>
+<header>
     <h1>Zarządzanie najmem</h1>
     <p class='title'>
-        <i>Najem bez ryzyka!</i> 
+        Najem bez ryzyka! 
         Wygodny i bezproblemowy dochód z wynajmu nieruchomości mieszkaniowych oraz komercyjnych.
         Zarabiaj bezpiecznie na nieruchomościach z Perfect House.
     </p> 
-    
-    <mat-divider></mat-divider>
+</header>
 
+<mat-divider></mat-divider>
+
+<main> 
     <h3>Jak zarządzamy najmem?</h3>   
     <p>
         <strong>W pierwszej kolejności</strong> określamy stan i zyskowność nieruchomości – nasi specjaliści doradzą Państwu 
@@ -45,15 +48,21 @@
 <footer>
     <section class="contact">
         <h3>
-            W sprawie zarządzania nieruchomościami prosimy o kontakt z Magdaleną Janicką, nr licencji 23037 
+            W sprawie zarządzania nieruchomościami prosimy o kontakt <span *ngIf="!windowSizeDetector.isWindowSmallerThanMobile"><br/></span>z Magdaleną Janicką, <span *ngIf="windowSizeDetector.isWindowSmallerThanMobile"><br/></span>nr licencji 23037 
             <br/>
             <br/>
-            Kontakt: tel. 514 753 514
-            <address property='email'>
-                <a href="mailto:m.janicka@e-perfecthouse.pl" style="color: #535353; text-decoration: none;">
-                    email: m.janicka@e-perfecthouse.pl
+             
+            <address property='Telefon'>
+                <a href="tel:514 753 514">
+                    Telefon: <span>514 753 514</span>
                 </a>
+            </address>
+            <address property='email'>
+                <a href="mailto:m.janicka@e-perfecthouse.pl">
+                    Email: <span>m.janicka@e-perfecthouse.pl</span>
+                </a> 
             </address>
         </h3>
     </section>
 </footer>
+</div>
