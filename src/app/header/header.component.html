@@ -1,17 +1,20 @@
-<button mat-icon-button
-    id="sideNavToggleButton"
-    *ngIf="windowSizeDetector.isWindowSmallerThanMobileLarge"
-    (click)="sideMenuToggled.emit()">
-    <mat-icon>menu</mat-icon>
-</button>
-<img src="/assets/logo_with_lock.png" [routerLink]="['/']">
-<a href="tel:+48514753514">
-    <mat-icon><i class="fas fa-phone-square-alt"></i></mat-icon>
-    <span class="phone-number"
-        *ngIf="!windowSizeDetector.isWindowSmallerThanMobileLarge">
-        514 753 514
-    </span>
-</a>
+<div class="top-buttons-container">
+    <button mat-icon-button
+        id="sideNavToggleButton"
+        *ngIf="windowSizeDetector.isWindowSmallerThanMobileLarge"
+        (click)="sideMenuToggled.emit()">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <img src="/assets/logo_with_lock.png" [routerLink]="['/']">
+    <a href="tel:+48514753514">
+        <mat-icon><i class="fas fa-phone-square-alt"></i></mat-icon>
+        <span class="phone-number"
+            *ngIf="!windowSizeDetector.isWindowSmallerThanMobileLarge">
+            514 753 514
+        </span>
+    </a>
+</div>
+
 <perfect-navigation
     *ngIf="!windowSizeDetector.isWindowSmallerThanMobileLarge">
 </perfect-navigation>
