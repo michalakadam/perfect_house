@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
 import { trigger, style, animate, transition } from '@angular/animations';
 
@@ -28,18 +28,14 @@ import { trigger, style, animate, transition } from '@angular/animations';
     ),
   ],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   isSideMenuVisible = false;
 
   constructor(readonly windowSizeDetector: WindowSizeDetector) {}
 
-  ngOnInit() {
-    this.windowSizeDetector.updateWindowSizeFlags(window.innerWidth);
-  }
-
   @HostListener('window:resize', ['$event'])
   onResize() {
-      this.windowSizeDetector.updateWindowSizeFlags(window.innerWidth);
+      this.windowSizeDetector.windowSizeChanged(window.innerWidth);
   }
 
   toggleSideMenuVisibility() {
@@ -47,13 +43,13 @@ export class AppComponent implements OnInit {
   }
 
   /** 
-   * Closes side navigation when any element on the page is clicked
-   * except for button that toggles side navigation.
-   * @param event is of type MouseEvent but it has to be marked as any
-   * because TS uses default MouseEvent interface, not Angular one.
-   * 'path' property does not exist on a default MouseEvent.
+   * This method should be triggered only on mobile devices!
+   * Closes side navigation when any element on the page is touched
+   * except for the button that toggles side navigation.
+   * @param event is of type TouchEvent but it has to be marked as any
+   * because TS uses does not recognize its path property.
    */
-  @HostListener('document:click', ['$event'])
+  @HostListener('document:touchend', ['$event'])
   onClick(event: any) {
     if (this.windowSizeDetector.isWindowSmallerThanMobileLarge && this.isSideMenuVisible) {
       const isSideNavButtonClicked = event.path

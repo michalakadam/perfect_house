@@ -17,24 +17,32 @@ export class FooterComponent {
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,
     private changeDetector: ChangeDetectorRef) {
-    this.windowSizeDetector.windowSizeChanged$
-    .pipe(
-      // Change of window size at initialization propagates properly.
-      skip(1),
-    ).subscribe(() => {
+    this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
       this.changeDetector.detectChanges();
     });
   }
 
   toggleRentalSectionOpen() {
     this.isRentalSectionOpen = !this.isRentalSectionOpen;
+    if (this.isRentalSectionOpen) {
+      this.isSaleSectionOpen = false; 
+      this.isOtherSectionOpen = false;
+    }
   }
 
   toggleSaleSectionOpen() {
     this.isSaleSectionOpen = !this.isSaleSectionOpen;
+    if (this.isSaleSectionOpen) {
+      this.isRentalSectionOpen = false;
+      this.isOtherSectionOpen = false;
+    }
   }
 
   toggleOtherSectionOpen() {
     this.isOtherSectionOpen = !this.isOtherSectionOpen;
+    if (this.isOtherSectionOpen) {
+      this.isRentalSectionOpen = false;
+      this.isSaleSectionOpen = false;
+    }
   }
 }

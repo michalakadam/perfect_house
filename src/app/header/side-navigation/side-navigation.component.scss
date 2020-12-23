@@ -1,7 +1,7 @@
 @import "~src/variables.scss";
 
 :host {
-    background-color: $dark-green;
+    background-color: $font-grey;
     box-shadow: 2px 2px 2px 1px #90A4AE;
     color: $font-white;
     height: 225px;
@@ -27,7 +27,7 @@
 
         .active-link {
             background-color: $light-green;
-            color: $dark-green;
+            font-weight: 700;
         }
     }
 }
