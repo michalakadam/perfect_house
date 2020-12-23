@@ -12,11 +12,7 @@
         margin: 0 20px;
     }
     
-    main {
-        margin-block-end: 50px;
-        margin-block-start: 0px;
-        text-align: justify;
-
+    header {
         h1 {
             font-size: 15px; 
         }
@@ -24,6 +20,12 @@
         .title {
             font-size: 14px;
         }
+    }
+
+    main {
+        margin-block-end: 50px;
+        margin-block-start: 0px;
+        text-align: justify;
 
         h3 {
             font-size: 13px;
@@ -33,17 +35,19 @@
     .contact {
         $font-grey: #535353;
         text-align: center;
-        font-size: 12px;
+        font-size: 14px;
         
-        a {
-            color: $font-grey;
-            text-decoration: none;
-            font-style: normal;
-            font-size: 14px;
+        .tel-and-email {
+            list-style-type: none;
+            a {
+                color: $font-grey;
+                text-decoration: none;
+                font-style: normal;
+
                 span {
                     font-style: italic;
-                    font-size: inherit;
-                }
+                    }
+            }
         }
     }
 }
