@@ -1,4 +1,6 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { skip } from 'rxjs/operators';
+import { WindowSizeDetector } from '../services/window-size-detector.service';
 
 /** Kontener strony 'Zarządzanie najmem'. */
 @Component({
@@ -7,4 +9,12 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./rental-management.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RentalManagementComponent {}
+export class RentalManagementComponent {
+  constructor(
+    readonly windowSizeDetector: WindowSizeDetector,
+    private changeDetector: ChangeDetectorRef) {
+      this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
+        this.changeDetector.detectChanges();
+     });
+  }
+}
