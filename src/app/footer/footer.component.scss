@@ -1,17 +1,24 @@
 @import "~src/variables.scss";
 
 :host {
-    background-color: $dark-green;
+    background-color: $font-grey;
     color: $font-white;
     display: flex;
     flex-direction: column;
+    margin-top: 14px;
     padding-bottom: 15px;
 
     .links-container {
         display: flex;
         justify-content: space-evenly;
         line-height: 18px;
-        margin-bottom: 20px;
+        margin: 0 auto 20px;
+        width: 800px;
+        @media screen and (max-width: $desktop-small) {
+            margin: unset;
+            margin-bottom: 20px;
+            width: unset;
+        }
         @media screen and (max-width: $mobile-large) {
             flex-direction: column;
             margin-left: 24px;
@@ -29,10 +36,14 @@
             display: flex;
             justify-content: space-between;
             margin-top: 5px;
-            width: 90px;
+            width: 120px;
 
             a {
                 color: unset;
+
+                mat-icon {
+                    font-size: 32px !important;
+                }
             }
         }
     }

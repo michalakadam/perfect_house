@@ -1,33 +1,51 @@
 @import "~src/variables.scss";
 
-main {
-    $font-grey: #535353;
-    font-family: "Open Sans", sans-serif;
-    font-size: 12px;
-    margin: 200px;
-    margin-block-end: 50px;
-    margin-block-start: 0px;
-    text-align: justify;
+.component-container {
+    margin: 0 auto; 
+    width: 800px;
+    @media screen and (max-width: $desktop-medium) {
+        width: 600px;
+    }
+
     @media screen and (max-width: $mobile-large) {
-        flex-direction: column;
-        margin: 30px 30px;
+        width: unset;
+        margin: 0 20px;
+    }
+    
+    header {
+        h2 {
+            @media screen and (max-width: $mobile-large) {
+                font-size: 14px;
+            }
+        }
+
+        .title {
+            font-size: 14px;
+            text-align: justify;
+            @media screen and (max-width: $mobile-large) {
+                font-size: 12px;
+            }
+        }
     }
 
-    h1 {
-        font-size: 15px; 
+    main {
+        margin-block-end: 50px;
+        margin-block-start: 0px;
+        text-align: justify;
+
+        h3 {
+            font-size: 13px;
+        }
     }
 
-    .title {
+    .contact {
+        text-align: center;
         font-size: 14px;
+        
+        a {
+            color: unset;
+            text-decoration: none;
+            font-style: italic;
+        }
     }
-
-    h3 {
-        font-size: 13px;
-    }
-}
-
-.contact {
-    $font-grey: #535353;
-    text-align: center;
-    font-size: 12px;
 }
