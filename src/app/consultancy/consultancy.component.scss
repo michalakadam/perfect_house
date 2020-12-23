@@ -11,17 +11,19 @@
         width: unset;
         margin: 0 20px;
     }
+    header {    
+        img {
+            float: right;
+            height: auto;
+            margin: 10px 10px 10px 20px;
+            max-width: 300px;
+    }
+    }
     main {
         margin-block-end: 50px;
         margin-block-start: 0px;
         text-align: justify;
-       
-        img {
-            float: left;
-            height: auto;
-            margin: 0 10px 10px 0;
-            max-width: 300px;
-        }
+        
         p {
             line-height: 2em;
         }
