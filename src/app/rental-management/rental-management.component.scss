@@ -13,12 +13,18 @@
     }
     
     header {
-        h1 {
-            font-size: 15px; 
+        h2 {
+            @media screen and (max-width: $mobile-large) {
+                font-size: 14px;
+            }
         }
 
         .title {
             font-size: 14px;
+            text-align: justify;
+            @media screen and (max-width: $mobile-large) {
+                font-size: 12px;
+            }
         }
     }
 
@@ -37,16 +43,13 @@
         text-align: center;
         font-size: 14px;
         
-        .tel-and-email {
-            list-style-type: none;
-            a {
-                color: $font-grey;
-                text-decoration: none;
-                font-style: normal;
+        a {
+            color: $font-grey;
+            text-decoration: none;
+            font-style: normal;
 
-                span {
-                    font-style: italic;
-                    }
+            span {
+                font-style: italic;
             }
         }
     }
