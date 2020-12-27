@@ -1,45 +1,41 @@
 @import "~src/variables.scss";
+@import "~src/styles.scss";
 
 .component-container {
-    margin: 0 auto; 
-    width: 1000px;
-    @media screen and (max-width: $desktop-medium) {
-        width: 600px;
-    }
-
-    @media screen and (max-width: $mobile-large) {
-        width: unset;
-        margin: 0 20px;
-    }
+    @include widthForSmallAndLargeScreen;
+    
     header {    
-        .img-large-screen {
+        h2 {
+            @include h2ForMobile;
+            }
+
+        #vertical-pic {
             float: right;
             height: auto;
             margin: 14px 0px 10px 20px;
             max-width: 300px;
         }
-        .img-small-screen {
+        #horizontal-pic {
             height: auto;
             max-width: 100%;
         }
     }
     main {
-        margin-block-end: 50px;
-        margin-block-start: 0px;
-        text-align: justify;
+        @include justifyContent;
         
-        p {
-            line-height: 2em;
+        h3 {
+            font-size: 13px;
         }
+
         a {
-            color: $font-grey;
+            color: unset;
+            text-decoration: none;
             font-size: 16px;
             font-style: normal;
-            text-decoration: none;
-            
+        
                 span {
                     font-style: italic;
-                    font-size: inherit;
+                    
                 }
         }
     }
