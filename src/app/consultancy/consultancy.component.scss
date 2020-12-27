@@ -12,12 +12,16 @@
         margin: 0 20px;
     }
     header {    
-        img {
+        .img-large-screen {
             float: right;
             height: auto;
-            margin: 10px 10px 10px 20px;
+            margin: 14px 0px 10px 20px;
             max-width: 300px;
-    }
+        }
+        .img-small-screen {
+            height: auto;
+            max-width: 100%;
+        }
     }
     main {
         margin-block-end: 50px;

@@ -2,7 +2,10 @@
     <header>
         <h2>Doradztwo</h2>
         <mat-divider></mat-divider>
-        <img src="https://www.e-perfecthouse.pl/grafika/consultant-779590_1280.jpg">
+        <img class="img-large-screen" *ngIf="!windowSizeDetector.isWindowSmallerThanMobileLarge" 
+            src="https://www.e-perfecthouse.pl/grafika/consultant-779590_1280.jpg">
+        <img class="img-small-screen" *ngIf="windowSizeDetector.isWindowSmallerThanMobileLarge" 
+        src="https://cdn.pixabay.com/photo/2016/01/19/17/53/writing-1149962_1280.jpg">
     </header>
     <main>
         <h3>
