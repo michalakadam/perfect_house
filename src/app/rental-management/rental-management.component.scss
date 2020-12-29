@@ -1,24 +1,11 @@
 @import "~src/variables.scss";
-
+@import "~src/styles.scss"; 
 .component-container {
-    margin: 0 auto; 
-    width: 800px;
-    @media screen and (max-width: $desktop-medium) {
-        width: 600px;
-    }
 
-    @media screen and (max-width: $mobile-large) {
-        width: unset;
-        margin: 0 20px;
-    }
-    
+    @include articlePage;
+
     header {
-        h2 {
-            @media screen and (max-width: $mobile-large) {
-                font-size: 14px;
-            }
-        }
-
+    
         .title {
             font-size: 14px;
             text-align: justify;
@@ -27,16 +14,9 @@
             }
         }
     }
-
-    main {
-        margin-block-end: 50px;
-        margin-block-start: 0px;
-        text-align: justify;
-
-        h3 {
-            font-size: 13px;
+    h3 {
+        font-size: 13px;
         }
-    }
 
     .contact {
         text-align: center;
