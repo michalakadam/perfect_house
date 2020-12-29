@@ -28,7 +28,8 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/data"
+              "src/agents",
+              "src/offers"
             ],
             "styles": [
               "src/styles.scss"
@@ -91,7 +92,9 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/agents",
+              "src/offers"
             ],
             "styles": [
               "src/styles.scss"
