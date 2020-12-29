@@ -45,5 +45,7 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# Compiled Java files
-/server/converter/target
+# backend data
+src/agents
+src/offers
+
