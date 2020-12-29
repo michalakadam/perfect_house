@@ -3,16 +3,15 @@
         <h2>Doradztwo</h2>
         <mat-divider></mat-divider>
         <img id="vertical-pic" *ngIf="!windowSizeDetector.isWindowSmallerThanMobileLarge" 
-            src="https://www.e-perfecthouse.pl/grafika/consultant-779590_1280.jpg">
+            src="/assets/consultancy-vertical.png">
         <img id="horizontal-pic" *ngIf="windowSizeDetector.isWindowSmallerThanMobileLarge" 
-        src="https://cdn.pixabay.com/photo/2016/01/19/17/53/writing-1149962_1280.jpg">
+        src="/assets/consultancy-horizontal.jpeg">
     </header>
     <main>
         <h3>
             Licencjonowany pośrednik z doświadczeniem
             w analizie stanu prawnego nieruchomości.
-        </h3>
-        <h3>
+        <br/>
             Przygotowanie nieruchomości do sprzedaży.
         </h3>
         
@@ -26,8 +25,12 @@
             Chcesz, aby jedno doświadczone biuro prowadziło
             sprzedaż Twojej nieruchomości?
         </p>
-        <a href="tel:61 296 03 95">Zadzwoń: <span>61 296 03 95</span>
-        </a>
+        <div class='tel'>
+            Zadzwoń:
+            <a href="tel:61 296 03 95">
+                "61 296 03 95"
+            </a>
+        </div>
         <p>
             Kupujesz i chcesz czuć się bezpiecznie inwestując
             własne pieniądze na zakup nieruchomości? 
@@ -38,8 +41,12 @@
             Nie wiesz jakie dokumenty należy zweryfikować aby
             kupić bezpiecznie?
         </p>
-        <a href="tel:61 296 03 95">Zadzwoń: <span>61 296 03 95</span>
-        </a>
+        <div class='tel'>
+            Zadzwoń:
+            <a href="tel:61 296 03 95">
+                "61 296 03 95"
+            </a>
+        </div>
         <p>
             Umów się na bezpłatną rozmowę a przekonasz się,
             że koszt naszej usługi to nikły procent od wartości

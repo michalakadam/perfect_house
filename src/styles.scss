@@ -27,7 +27,7 @@ html {
     }
 }
 
-@mixin widthForSmallAndLargeScreen { 
+@mixin articlePage { 
     margin: 0 auto; 
     width: 800px;
     @media screen and (max-width: $desktop-medium) {
@@ -38,15 +38,16 @@ html {
         width: unset;
         margin: 0 20px;
     }
-}
-@mixin justifyContent {
-    margin-block-end: 50px;
-    margin-block-start: 0px;
-    text-align: justify;
-}
 
-@mixin h2ForMobile {
-    @media screen and (max-width: $mobile-large) {
-        font-size: 14px;
+    main {
+        margin-block-end: 50px;
+        margin-block-start: 0px;
+        text-align: justify;
+    }
+
+    h2 {
+        @media screen and (max-width: $mobile-large) {
+            font-size: 14px;
+        }
     }
 }
