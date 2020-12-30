@@ -43,13 +43,13 @@ export class AppComponent {
   }
 
   /** 
-   * This method should be triggered only on mobile devices!
-   * Closes side navigation when any element on the page is touched
-   * except for the button that toggles side navigation.
-   * @param event is of type TouchEvent but it has to be marked as any
-   * because TS uses does not recognize its path property.
+   * Closes side navigation when any element on the page is clicked
+   * except for button that toggles side navigation.
+   * @param event is of type MouseEvent but it has to be marked as any
+   * because TS uses default MouseEvent interface, not Angular one.
+   * 'path' property does not exist on a default MouseEvent.
    */
-  @HostListener('document:touchend', ['$event'])
+  @HostListener('document:click', ['$event'])
   onClick(event: any) {
     if (this.windowSizeDetector.isWindowSmallerThanMobileLarge && this.isSideMenuVisible) {
       const isSideNavButtonClicked = event.path

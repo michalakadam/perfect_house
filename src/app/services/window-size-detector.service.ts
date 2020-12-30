@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, HostListener, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
 /** Exposes flags describing current window width. */

@@ -46,22 +46,11 @@
         </p>
     </main>
     <footer class="contact">
-        W sprawie zarządzania nieruchomościami prosimy o kontakt 
-        <span *ngIf="!windowSizeDetector.isWindowSmallerThanMobile"><br/></span>z Magdaleną Janicką,
-        <span *ngIf="windowSizeDetector.isWindowSmallerThanMobile"><br/></span>nr licencji 23037 
-        <br/>
-        <br/>
-        <div>
-            Telefon: 
-            <a href="tel:+48 514 753 514">
-                514 753 514
-            </a>
-        </div>
-        <div>
-            Email:  
-            <a href="mailto:m.janicka@e-perfecthouse.pl">
-                m.janicka@e-perfecthouse.pl
-            </a> 
+        <p>
+            <strong>Osoba odpowiedzialna za zarządzanie najmem:</strong>
+        </p>
+        <div class="agent-brief-container">
+            <perfect-agent-brief [agent]="agentResponsibleForRentalManagement"></perfect-agent-brief>
         </div>
     </footer>
 </div>
