@@ -14,19 +14,20 @@
     }
 
     main {
+        margin-bottom: 0;
+
         h3 {
             font-size: 13px;
         }
     }
 
-    .contact {
-        text-align: center;
-        font-size: 14px;
-        
-        a {
-            color: unset;
-            text-decoration: none;
-            font-style: italic;
+    footer {
+        p {
+            font-size: 12px;
+        }
+
+        .agent-brief-container {
+            text-align: center;
         }
     }
 }

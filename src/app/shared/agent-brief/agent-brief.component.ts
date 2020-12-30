@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
 /** Awatar pracownika. Zawiera zdjęcie, imię i nazwisko oraz tytuł zawodowy. */
 @Component({
@@ -7,4 +7,12 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./agent-brief.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AgentBriefComponent {}
+export class AgentBriefComponent {
+  @Input() photo = "";
+  @Input() name = "";
+  @Input() surname = "";
+  @Input() position = "";
+  @Input() mail = "";
+  @Input() mobile = "";
+  @Input() licenseNumber = "";
+}
