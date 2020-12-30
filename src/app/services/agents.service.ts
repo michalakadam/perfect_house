@@ -14,24 +14,31 @@ export class AgentsService {
     }
 
     private convertToReadableAgents(): Agent[] {
-        return rawAgents.Agenci.Agent.map(agent => {
+        return rawAgents.Agenci.Agent
+        .filter(agent => agent.Nazwa !== 'Biuro Perfecthouse')
+        .map(agent => {
             return {
                 id: agent.ID,
-                fullName: agent.Nazwa,
-                name: agent.Imie,
-                surname: agent.Nazwisko,
-                position: agent.DzialFunkcja,
-                photo: agent.PlikFoto,
+                fullName: agent.Imie + ' ' + agent.Nazwisko,
+                position: this.computePosition(agent.Nazwa),
+                photoFileName: agent.PlikFoto,
                 phone: agent.Telefon,
                 mobile: agent.Komorka,
                 mail: agent.Email,
-                superior: agent.OdpowiedzialnyNazwa,
-                superiorLicenseNumber: agent.NrLicencji,
+                licenseNumber: agent.NrLicencji,
             }
         });
     }
 
+    private computePosition(nameWithPosition: string) {
+        return nameWithPosition.split(' - ')[1];
+    }
+
     listAgents(): Agent[] {
         return this.agents;
+    }
+
+    getAgentByFullName(fullName: string): Agent {
+        return this.agents.find(agent => agent.fullName === fullName);
     }
 }

@@ -3,7 +3,7 @@ import { AgentsService } from '../services/agents.service';
 import { WindowSizeDetector } from '../services/window-size-detector.service';
 import { Agent } from '../shared/models/agent';4
 
-const AGENT_RESPONSIBLE_SURNAME = 'Janicka';
+const AGENT_RESPONSIBLE_FULL_NAME = 'Magdalena Janicka';
 
 /** Kontener strony 'Zarządzanie najmem'. */
 @Component({
@@ -23,7 +23,7 @@ export class RentalManagementComponent {
         this.changeDetector.detectChanges();
       });
 
-      this.agentResponsibleForRentalManagement = this.agentsService.listAgents()
-        .filter(agent => agent.surname === AGENT_RESPONSIBLE_SURNAME)[0];
+      this.agentResponsibleForRentalManagement =
+        this.agentsService.getAgentByFullName(AGENT_RESPONSIBLE_FULL_NAME);
   }
 }
