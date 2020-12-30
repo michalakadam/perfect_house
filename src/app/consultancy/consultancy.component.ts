@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { WindowSizeDetector } from '../services/window-size-detector.service';
 
 /** Kontener strony 'Doradztwo'. */
 @Component({
@@ -7,4 +8,11 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./consultancy.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ConsultancyComponent {}
+export class ConsultancyComponent {
+  constructor (readonly windowSizeDetector: WindowSizeDetector, 
+    readonly changeDetector: ChangeDetectorRef) {
+    this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
+      this.changeDetector.detectChanges();
+    });
+  }
+}
