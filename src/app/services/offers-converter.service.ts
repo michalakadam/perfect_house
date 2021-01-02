@@ -12,7 +12,7 @@ export class OffersConverter {
         return rawOffers.map(offer => {
             return {
                 id: this.convertToNumber(offer.ID),
-                estateType: offer.Przedmiot || '',
+                estateType: this.computeEstateType(offer.Przedmiot || ''),
                 agentId: this.convertToNumber(offer.Agent),
                 title: offer.TytulOferty || '',
                 description: offer.UwagiOpis || '',
@@ -39,8 +39,8 @@ export class OffersConverter {
                 
                 price: this.convertToNumber(offer.Cena),
                 pricePerSquareMeter: this.convertToNumber(offer.CenaM2),
-                pricePerUsableSquareMeter: this.convertToNumber(offer.CenaM2PowUzytk),
-                rentPrice: this.convertToNumber(offer.CzynszLetni),
+                pricePerUsableSquareMeter: this.convertToNumber(offer.CenaM2PowUzytk?.text),
+                rentPrice: this.convertToNumber(offer.CzynszLetni?.text),
                 grossRentPricePerSquareMeter: this.convertToNumber(offer.CzynszNajmuBrutto_m2?.text),
                 netRentPricePerSquareMeter: this.convertToNumber(offer.CzynszNajmuNetto_m2?.text),
                 deposit: this.convertToNumber(offer.Kaucja?.text),
@@ -50,8 +50,8 @@ export class OffersConverter {
                 
                 country: offer.Kraj?.text || '',
                 voivodeship: offer.Wojewodztwo || '',
-                county: offer.Powiat || '',
-                city: offer.Lokalizacja || '',
+                county: this.computeCounty(offer.Powiat || ''),
+                city: this.computeCity(offer.Lokalizacja || ''),
                 district: offer.Dzielnica || offer.Rejon || '',
                 postalCode: offer.KodPocztowy?.text || '',
                 street: offer.Ulica || '',
@@ -75,7 +75,7 @@ export class OffersConverter {
                 rooms: this.convertRooms(this.convertToArray(offer.Pomieszczenia?.Pomieszczenie)),
                 numberOfRooms: this.convertToNumber(offer.IloscPokoi),
                 roomsHeight: this.convertToNumber(offer.WysokoscPomieszczen),
-                floor: offer.Pietro || '',
+                floor: this.convertFloor(offer.Pietro || ''),
                 numberOfFloors: this.convertToNumber(offer.IloscKondygnacji || offer.IloscPieter?.text || ''),
                 floorHeight: this.convertToNumber(offer.WysokoscKondygnacji?.text),
                 isBasementAvailable: this.convertToBoolean(offer.Piwnica),
@@ -169,11 +169,14 @@ export class OffersConverter {
     }
 
     private convertToNumber(numberAsString: string|undefined): number {
+        if (numberAsString) {
+            numberAsString = numberAsString.replace(',', '.');
+        }
         return Number.isNaN(Number(numberAsString)) ? -1 : Number(numberAsString);
     }
 
     private convertPhotos(rawPhotos: any[]): string[] {
-        return rawPhotos.map(rawPhoto => rawPhoto.ID);
+        return rawPhotos.map(rawPhoto => 'ofe_' + rawPhoto.ID + '.jpg');
     }
 
     private convertRooms(rawRooms: any[]): Room[] {
@@ -186,5 +189,36 @@ export class OffersConverter {
                 details: rawRoom.Typ?.text,
             };
         });
+    }
+
+    private computeCounty(county: string): string {
+        // Counties named after cities end with m..
+        if (county.includes('m.')) {
+            return '';
+        }
+        return county;
+    }
+
+    private computeCity(location: string): string {
+        return location.replace(' (gw)', '');
+    }
+
+    private computeEstateType(estateType: string): string {
+        if (estateType === 'Dzialka') {
+            return 'Działka';
+        }
+        if (estateType === 'Biurowiec') {
+            return 'Obiekt';
+        }
+        return estateType;
+    }
+
+    private convertFloor(floor: string): string {
+        const containsNumber = /\d/;
+        if (containsNumber.test(floor)) {
+            // Removes leter p following floor number.
+            floor = floor.match(/\d+/)[0];
+        }
+        return floor;
     }
 }

@@ -1,0 +1,52 @@
+<div class="component-container">
+    <div class="picture"
+        style="background-image: url('/offers/{{ offer.photos[0] }}');"></div>
+    <div class="details-container">
+        <div class="details">
+            <h4 class="description">
+                <span>{{ offer.estateType }} na &nbsp;</span>
+                <span *ngIf="offer.isForRent; else rent">sprzedaż</span>
+                <ng-template #rent>wynajem</ng-template>
+                <span>:</span>
+            </h4>
+            <h3>{{ offer.title }}</h3> 
+            <div class="location">
+                <mat-icon>location_on</mat-icon>
+                <span>{{ offer.city }},&nbsp;</span>
+                <span *ngIf="offer.county">{{ offer.county}},&nbsp;</span>
+                <span>{{ offer.voivodeship }}</span>
+            </div>
+            <div class="details-row">
+                <span class="key-value-pair">
+                    <span class="key">Powierzchnia: </span>
+                    <span class="value">{{ offer.totalArea | prettifyNumber:"m²" }}</span>
+                </span>
+                <span class="key-value-pair">
+                    <span class="key">Cena za m²: </span>
+                    <span class="value">{{ offer.pricePerSquareMeter | prettifyNumber:"zł" }}</span>
+                </span>
+            </div>
+            <div class="details-row">                
+                <span 
+                    class="key-value-pair"
+                    *ngIf="offer.estateType === 'Mieszkanie' || offer.estateType === 'Lokal'">
+                    <span class="key">Piętro: </span>
+                    <span class="value">{{ offer.floor }}</span>
+                </span>
+                <span 
+                    class="key-value-pair"
+                    *ngIf="offer.estateType === 'Dom' || offer.estateType === 'Obiekt'">
+                    <span class="key">Powierzchnia działki: </span>
+                    <span class="value">{{ offer.landArea | prettifyNumber:"m²" }}</span>
+                </span>
+                <span
+                    class="key-value-pair"
+                    *ngIf="offer.estateType === 'Dom' || offer.estateType === 'Mieszkanie' || offer.estateType === 'Lokal'">
+                    <span class="key">Liczba pokoi: </span>
+                    <span class="value">{{ offer.numberOfRooms | prettifyNumber }}</span>
+                </span>
+            </div>
+        </div>
+        <div class="price">{{ offer.price | prettifyNumber:"zł" }}</div>
+    </div>
+</div>

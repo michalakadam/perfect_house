@@ -13,4 +13,8 @@ export class OffersDao {
     constructor(private offersConverter: OffersConverter) {
         this.offers = this.offersConverter.convertToReadableOffers(rawOffers.Oferty.Oferta);
     }
+
+    listAll(): Offer[] {
+        return this.offers;
+    }
 }

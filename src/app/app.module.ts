@@ -24,6 +24,8 @@ import {MatButtonModule} from '@angular/material/button';
 import { NavigationComponent } from './header/navigation/navigation.component';
 import { SideNavigationComponent } from './header/side-navigation/side-navigation.component';
 import { FooterLinksSectionComponent } from './footer/footer-links-section/footer-links-section.component';
+import { OfferCardComponent } from './offers/offer-card/offer-card.component';
+import { NumberPrettifier } from './shared/pipes/number-prettifier';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { FooterLinksSectionComponent } from './footer/footer-links-section/foote
     NavigationComponent,
     SideNavigationComponent,
     FooterLinksSectionComponent,
+    OfferCardComponent,
+    NumberPrettifier,
   ],
   imports: [
     AppRoutingModule,
