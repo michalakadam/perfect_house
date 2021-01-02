@@ -1,3 +1,33 @@
+@import "~src/variables.scss";
+
 :host {
-    width: 90%
+    width: 90%;
+
+    p-paginator {
+        ::ng-deep .p-paginator {
+            margin-top: 44px;
+
+            .p-paginator-pages {
+                .p-link {
+                    color: $font-grey;
+                    font-size: 12px;
+                    font-weight: 700;
+
+                    &:focus {
+                        box-shadow: unset;
+                    }
+                }
+
+                .p-highlight {
+                    background: $light-green;
+                    border-color: $light-green;
+                    color: $font-white;
+                }
+            }
+
+            button {
+                color: $font-grey;
+            }
+        }
+    }
 }

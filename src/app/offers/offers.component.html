@@ -1,3 +1,9 @@
 <perfect-offer-card
     *ngFor="let offer of offersDao.listAll()"
     [offer]="offer"></perfect-offer-card>
+
+<p-paginator
+    [rows]="50"
+    [totalRecords]="offersDao.listAll().length"
+    (onPageChange)="paginate($event)"></p-paginator>
+    

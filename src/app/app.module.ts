@@ -18,14 +18,15 @@ import { OffersComponent } from './offers/offers.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatListModule} from '@angular/material/list';
-import {MatButtonModule} from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
 import { NavigationComponent } from './header/navigation/navigation.component';
 import { SideNavigationComponent } from './header/side-navigation/side-navigation.component';
 import { FooterLinksSectionComponent } from './footer/footer-links-section/footer-links-section.component';
 import { OfferCardComponent } from './offers/offer-card/offer-card.component';
 import { NumberPrettifier } from './shared/pipes/number-prettifier';
+import {PaginatorModule} from 'primeng/paginator';
 
 @NgModule({
   declarations: [
@@ -36,17 +37,17 @@ import { NumberPrettifier } from './shared/pipes/number-prettifier';
     ContactComponent,
     CustomerMessageComponent,
     FooterComponent,
+    FooterLinksSectionComponent,
     HeaderComponent,
     MainComponent,
     MapComponent,
+    NavigationComponent,
+    NumberPrettifier,
+    OfferCardComponent,
     OffersComponent,
     PageNotFoundComponent,
     RentalManagementComponent,
-    NavigationComponent,
     SideNavigationComponent,
-    FooterLinksSectionComponent,
-    OfferCardComponent,
-    NumberPrettifier,
   ],
   imports: [
     AppRoutingModule,
@@ -57,6 +58,7 @@ import { NumberPrettifier } from './shared/pipes/number-prettifier';
     MatIconModule,
     MatListModule,
     MatSidenavModule,
+    PaginatorModule,
   ],
   bootstrap: [
     AppComponent,

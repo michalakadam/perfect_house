@@ -11,4 +11,8 @@ import { OffersDao } from '../services/offers-dao.service';
 export class OffersComponent {
 
   constructor(readonly offersDao: OffersDao) {}
+
+  paginate(event) {
+    // TODO: Implement pagination.
+  }
 }
