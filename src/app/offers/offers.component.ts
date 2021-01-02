@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { OffersDao } from '../services/offers-dao.service';
 
 /** Strona wyświetla oferty nieruchomości oferując możliwość ich zaawansowanego wyszukiwania. */
 @Component({
@@ -7,4 +8,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./offers.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OffersComponent {}
+export class OffersComponent {
+
+  constructor(readonly offersDao: OffersDao) {}
+}
