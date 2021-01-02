@@ -45,7 +45,9 @@ export class OffersConverter {
                 netRentPricePerSquareMeter: this.convertToNumber(offer.CzynszNajmuNetto_m2?.text),
                 deposit: this.convertToNumber(offer.Kaucja?.text),
                 depositType: offer.TypKaucji?.text,
-                additionalFees: this.convertToArray(offer.DodatkoweOplatyWCzynszu?.lista || offer.DodatkoweOplatyWgLicznikow?.lista),
+                additionalFees: this.convertToArray(
+                    offer.DodatkoweOplatyWCzynszu?.lista ||
+                    offer.DodatkoweOplatyWgLicznikow?.lista),
                 garagePrice: this.convertToNumber(offer.CenaGarazu?.text),
                 
                 country: offer.Kraj?.text || '',
@@ -68,7 +70,9 @@ export class OffersConverter {
                 landArea: this.convertToNumber(offer.PowierzchniaDzialki?.text),
                 usableArea: this.convertToNumber(offer.PowierzchniaUzytkowa?.text),
                 terraceArea: this.convertToNumber(offer.PowierzchniaTarasBalkon?.text),
-                officeArea: this.convertToNumber(offer.PowierzchniaBiurowa?.text || offer.PowierzchniaPomieszczenBiurowychDo?.text),
+                officeArea: this.convertToNumber(
+                    offer.PowierzchniaBiurowa?.text ||
+                    offer.PowierzchniaPomieszczenBiurowychDo?.text),
                 officeBuildingArea: this.convertToNumber(offer.PowierzchniaBiurowca?.text),
                 floorArea: this.convertToNumber(offer.PowierzchniaKondygnacji?.text),
 
@@ -76,7 +80,9 @@ export class OffersConverter {
                 numberOfRooms: this.convertToNumber(offer.IloscPokoi),
                 roomsHeight: this.convertToNumber(offer.WysokoscPomieszczen),
                 floor: this.convertFloor(offer.Pietro || ''),
-                numberOfFloors: this.convertToNumber(offer.IloscKondygnacji || offer.IloscPieter?.text || ''),
+                numberOfFloors: this.convertToNumber(
+                    offer.IloscKondygnacji ||
+                    offer.IloscPieter?.text || ''),
                 floorHeight: this.convertToNumber(offer.WysokoscKondygnacji?.text),
                 isBasementAvailable: this.convertToBoolean(offer.Piwnica),
                 numberOfBedrooms: this.convertToNumber(offer.IloscSypialni?.text),
@@ -91,7 +97,9 @@ export class OffersConverter {
                 waterConnectionDetails: offer.Woda?.text || '',
                 electricityConnectionDetails: offer.Prad?.text || '',
                 garage: offer.Garaz?.text || offer.GarazMieszkanie?.text || '',
-                isParkingAvailable: this.convertToBoolean(offer.WlasnyParking || offer.MozliwoscParkowania?.text),
+                isParkingAvailable: this.convertToBoolean(
+                    offer.WlasnyParking ||
+                    offer.MozliwoscParkowania?.text),
                 isElevatorAvailable: this.convertToBoolean(offer.WindaJest?.text),
                 isFenceAvailable: this.convertToBoolean(offer.Ogrodzenie),
                 isMarketPrimary: this.convertToBoolean(offer.Pierwotny),
