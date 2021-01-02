@@ -5,7 +5,11 @@
 
     p-paginator {
         ::ng-deep .p-paginator {
+            margin-left: -30px;
+            margin-right: -30px;
             margin-top: 44px;
+            padding-left: unset;
+            padding-right: unset;
 
             .p-paginator-pages {
                 .p-link {
