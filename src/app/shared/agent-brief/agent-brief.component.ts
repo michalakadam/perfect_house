@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, ChangeDetectorRef } from '@angular/core';
+import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
 import { Agent } from '../models/agent';
 
 /** Awatar pracownika. Zawiera zdjęcie, imię i nazwisko oraz tytuł zawodowy. */
@@ -10,4 +11,13 @@ import { Agent } from '../models/agent';
 })
 export class AgentBriefComponent {
   @Input() agent: Agent;
+  @Input() isContactInfoVisible = false;
+  @Input() isVertical = false;
+
+  constructor(readonly windowSizeDetector: WindowSizeDetector,
+    readonly changeDetector: ChangeDetectorRef) {
+      this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
+        this.changeDetector.detectChanges();
+      });
+    }
 }

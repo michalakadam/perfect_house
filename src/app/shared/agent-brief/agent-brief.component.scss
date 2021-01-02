@@ -1,10 +1,7 @@
 @import "~src/variables.scss";
 
-:host {
+.component-container {
     display: flex;
-    @media screen and (max-width: $mobile-small) {
-        flex-direction: column;
-    }
 
     .agent-photo {
         background-size: cover;
@@ -13,17 +10,10 @@
         border-radius: 50%;
         height: 120px;
         width: 120px;
-        @media screen and (max-width: $mobile-small) {
-            margin: 0 auto;
-        }
     }
 
     .agent-info-container {
         margin: auto 0 auto 10px;
-        @media screen and (max-width: $mobile-small) {
-            margin: 0;
-            text-align: center;
-        }
         
         & > * {
             margin-bottom: 3px;
@@ -32,9 +22,6 @@
         .full-name {
             font-size: 14px;
             font-weight: 700;
-            @media screen and (max-width: $mobile-small) {
-                margin-top: 5px;
-            }
         }
 
         .position {
@@ -48,17 +35,32 @@
             text-decoration: none;
             font-style: italic;
 
-            &:last-of-type {
-                @media screen and (max-width: $mobile-small) {
-                    padding-left: 38px;
-                }
-            }
-
             mat-icon {
                 color: $light-green;
                 font-size: 18px;
                 line-height: 14px;
             }
+        }
+    }
+}
+
+.vertical-component-container {
+    flex-direction: column;
+
+    .agent-photo {
+        margin: 0 auto;
+    }
+
+    .agent-info-container {
+        margin: 0;
+        text-align: center;
+        
+        .full-name {
+            margin-top: 5px;
+        }
+
+        a:last-of-type {
+            padding-left: 38px;
         }
     }
 }
