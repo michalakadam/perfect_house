@@ -1,4 +1,8 @@
 <div class="component-container">
+    <perfect-search-tool
+        [filters]="currentFilters"
+        (searchButtonClicked)=applyFilters($event)></perfect-search-tool>
+
     <perfect-sorting-tool
         [offersQuantity]="offersDao.getOffersQuantity()"
         [selectedSorting]="currentSorting"

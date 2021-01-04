@@ -28,7 +28,12 @@ import { OfferCardComponent } from './offers/offer-card/offer-card.component';
 import { NumberPrettifier } from './shared/pipes/number-prettifier';
 import { PaginatorModule } from 'primeng/paginator';
 import { SortingToolComponent } from './offers/sorting-tool/sorting-tool.component';
-import {DropdownModule} from 'primeng/dropdown';
+import { DropdownModule } from 'primeng/dropdown';
+import { SearchToolComponent } from './offers/search-tool/search-tool.component';
+import { InputTextModule } from 'primeng/inputtext';
+import { FormsModule } from '@angular/forms';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -51,18 +56,23 @@ import {DropdownModule} from 'primeng/dropdown';
     RentalManagementComponent,
     SideNavigationComponent,
     SortingToolComponent,
+    SearchToolComponent,
   ],
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
+    ButtonModule,
     DropdownModule,
+    FormsModule,
+    InputTextModule,
     MatButtonModule,
     MatDividerModule,
     MatIconModule,
     MatListModule,
     MatSidenavModule,
     PaginatorModule,
+    SelectButtonModule,
   ],
   bootstrap: [
     AppComponent,

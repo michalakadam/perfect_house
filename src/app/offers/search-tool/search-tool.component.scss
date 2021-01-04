@@ -1,0 +1,142 @@
+@import "~src/variables.scss";
+@import "~src/mixins.scss";
+
+.component-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    @media screen and (max-width: $desktop-small) {
+        border-radius: 15px;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        margin-bottom: 20px;
+        padding: 15px;
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    }
+    @media screen and (max-width: $mobile) {
+        margin-bottom: 10px;
+    }
+
+    .row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        width: 100%;
+        @media screen and (max-width: $desktop-small) {
+            flex-direction: column;
+            margin-bottom: 0;
+        }
+
+        .desktop-small-row {
+            display: flex;
+            @media screen and (max-width: $desktop-small) {
+                margin-bottom: 10px;
+            }
+
+            & > p-dropdown {
+                &:first-of-type {
+                    margin-right: 10px;
+                }
+            }
+
+            &:last-of-type {
+                @media screen and (max-width: $mobile) {
+                    flex-direction: column;
+                }
+
+                & > p-dropdown {
+                    &:first-of-type {
+                        @media screen and (max-width: $mobile) {
+                            margin-bottom: 10px;
+                        }
+                    }
+                }
+            }
+        }
+
+        p-dropdown {
+            @include perfect-dropdown;
+
+            ::ng-deep &.estate-dropdown .p-inputtext {
+                width: 80px;
+            }
+
+            ::ng-deep &.transaction-dropdown .p-inputtext {
+                min-width: 85px;
+            }
+
+            ::ng-deep &.voivodeship-dropdown .p-inputtext {
+                min-width: 140px;
+            }
+        }
+
+        .market-toggle-container {
+            align-items: center;
+            display: flex;
+            font-weight: 700;
+
+            .title {
+                color: $font-light-grey;
+                margin-right: 5px;
+            }
+
+            ::ng-deep .p-button {
+                &.p-highlight {
+                    background-color: $light-green;
+                    color: $font-white;
+                    border-color: $light-green;
+                }
+
+                &:not(.p-disabled):not(.p-highlight):hover {
+                    background-color: unset;
+                    border-color: $light-green;
+                }
+
+                &:focus {
+                    box-shadow: unset;
+                }
+
+                .p-button-label {
+                    font-weight: 700;
+                }
+            }
+        }
+
+        .p-input-icon-left {
+            ::ng-deep .p-inputtext {
+                padding-right: 2rem;
+                width: 170px;
+
+                &:enabled {
+                    &:focus {
+                        box-shadow: 0 0 0 0.2rem $light-green;
+                        border-color: $dark-green;
+                    }
+
+                    &:hover {
+                        border-color: $light-green;
+                    }
+                }
+            }
+
+            .remove-location-icon {
+                cursor: pointer;
+                margin-right: -12px;
+                right: 20px;
+                position: relative;
+                top: 1px;
+            }
+        }
+        
+        .submit-button-container {
+            align-self: flex-end;
+            ::ng-deep .p-button {
+                background-color: $light-green;
+                border: 1px solid $light-green;
+
+                .p-button-label {
+                    font-weight: 700;
+                }
+            }
+        }
+    }
+}

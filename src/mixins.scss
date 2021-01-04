@@ -24,3 +24,31 @@
         }
     }
 }
+
+@mixin perfect-dropdown {
+    ::ng-deep .p-dropdown {
+        &:not(.p-disabled){
+            &:hover {
+                border-color: $light-green;
+            }
+
+            &.p-focus {
+                box-shadow: 0 0 0 0.2rem $light-green;
+                border-color: $dark-green;
+            }
+        }
+
+        .p-inputtext {
+            font-weight: 700;
+        }
+
+        .p-dropdown-items .p-dropdown-item {
+            font-weight: 700;
+
+            &.p-highlight {
+                background: $light-green;
+                color: $font-white;
+            }
+        }
+    }
+}

@@ -36,7 +36,6 @@
         img {
             cursor: pointer;
             outline: none;
-            width: 220px;
             max-height: 33.6px;
         }
 
@@ -44,7 +43,11 @@
             color: $font-grey;
             font-size: 14px;
             font-weight: 600;
+            margin-right: 8px;
             text-decoration: none;
+            @media screen and (max-width: $mobile-large) {
+                margin-right: 0;
+            }
 
             mat-icon {
                 padding-right: 10px;
@@ -56,8 +59,9 @@
             }
 
             .phone-number {
-                position: relative;
                 bottom: 6px;
+                left: 5px;
+                position: relative;
             }
         }
     }

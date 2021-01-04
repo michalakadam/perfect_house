@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 
 import * as rawOffers from "src/offers/offers.json";
+import { OffersFilters } from '../shared/models/filters';
 import { Offer } from '../shared/models/offer';
-import { Sorting, SortingType } from '../shared/models/sorting';
+import { Sorting } from '../shared/models/sorting';
 import { OffersConverter } from './offers-converter.service';
+import { OffersFilter } from './offers-filter.service';
 import { OffersSorter } from './offers-sorter.service';
 
 const OFFERS_PER_PAGE = 50;
@@ -16,14 +18,19 @@ export class OffersDao {
     private currentSearchOffers: Offer[];
 
     constructor(private offersConverter: OffersConverter,
-        private OffersSorter: OffersSorter) {
+        private offersSorter: OffersSorter,
+        private offersFilter: OffersFilter) {
         this.allOffers = this.offersConverter.convertToReadableOffers(rawOffers.Oferty.Oferta);
     }
 
-    list(page: number, sorting: Sorting): Offer[] {
-        // TODO: Implement filtering.
-        this.currentSearchOffers = this.OffersSorter.sortOffers(this.allOffers, sorting);
+    list(sorting: Sorting, filters: OffersFilters): Offer[] {
+        const filteredOffers = this.offersFilter.filterOffers(this.allOffers, filters);
 
+        this.currentSearchOffers = this.offersSorter.sortOffers(filteredOffers, sorting);
+        return this.currentSearchOffers.slice(0, OFFERS_PER_PAGE);
+    }
+
+    listOffersForPage(page: number) {
         const startIndex = page * OFFERS_PER_PAGE; 
         return this.currentSearchOffers.slice(startIndex, startIndex + OFFERS_PER_PAGE);
     }
