@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, ChangeDetectorRef } from '@angular/core';
 import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
 import { Agent } from '../models';
 
