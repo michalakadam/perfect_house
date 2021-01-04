@@ -10,6 +10,20 @@
         width: 300px;
     }
 
+    .no-offers-prompt {
+        text-align: center;
+        
+        .emoji {
+            color: $light-green;
+            font-size: 54px;
+            margin-bottom: 20px;
+        }
+
+        h4 {
+            color: $font-light-grey;
+        }
+    }
+
     p-paginator {
         ::ng-deep .p-paginator {
             margin-top: 44px;
