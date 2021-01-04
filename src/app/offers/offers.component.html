@@ -1,0 +1,20 @@
+<div class="component-container">
+    <perfect-search-tool
+        [filters]="currentFilters"
+        (searchButtonClicked)=applyFilters($event)></perfect-search-tool>
+
+    <perfect-sorting-tool
+        [offersQuantity]="offersDao.getOffersQuantity()"
+        [selectedSorting]="currentSorting"
+        (sortingChanged)="listSortedOffers($event)"></perfect-sorting-tool>
+
+    <perfect-offer-card
+        *ngFor="let offer of offers"
+        [offer]="offer"></perfect-offer-card>
+
+    <p-paginator
+        *ngIf="isPaginatorVisible"
+        [rows]="offersDao.getOffersPerPage()"
+        [totalRecords]="offersDao.getOffersQuantity()"
+        (onPageChange)="changePage($event.page)"></p-paginator>
+</div>

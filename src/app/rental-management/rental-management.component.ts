@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { AgentsService } from '../services/agents.service';
+import { AgentsDao } from '../services/agents-dao.service';
 import { WindowSizeDetector } from '../services/window-size-detector.service';
-import { Agent } from '../shared/models/agent';4
+import { Agent } from '../shared/models';4
 
 const AGENT_RESPONSIBLE_FULL_NAME = 'Magdalena Janicka';
 
@@ -17,13 +17,13 @@ export class RentalManagementComponent {
 
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,
-    readonly agentsService: AgentsService,
+    readonly agentsDao: AgentsDao,
     private changeDetector: ChangeDetectorRef) {
       this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
         this.changeDetector.detectChanges();
       });
 
       this.agentResponsibleForRentalManagement =
-        this.agentsService.getAgentByFullName(AGENT_RESPONSIBLE_FULL_NAME);
+        this.agentsDao.getAgentByFullName(AGENT_RESPONSIBLE_FULL_NAME);
   }
 }

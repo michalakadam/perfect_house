@@ -1,6 +1,7 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
 import { trigger, style, animate, transition } from '@angular/animations';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'perfect-root',
@@ -28,10 +29,15 @@ import { trigger, style, animate, transition } from '@angular/animations';
     ),
   ],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   isSideMenuVisible = false;
 
-  constructor(readonly windowSizeDetector: WindowSizeDetector) {}
+  constructor(readonly windowSizeDetector: WindowSizeDetector,
+    private primengConfig: PrimeNGConfig) {}
+
+  ngOnInit() {
+    this.primengConfig.ripple = true;
+  }
 
   @HostListener('window:resize', ['$event'])
   onResize() {

@@ -18,12 +18,22 @@ import { OffersComponent } from './offers/offers.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatListModule} from '@angular/material/list';
-import {MatButtonModule} from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
 import { NavigationComponent } from './header/navigation/navigation.component';
 import { SideNavigationComponent } from './header/side-navigation/side-navigation.component';
 import { FooterLinksSectionComponent } from './footer/footer-links-section/footer-links-section.component';
+import { OfferCardComponent } from './offers/offer-card/offer-card.component';
+import { NumberPrettifier } from './shared/pipes/number-prettifier';
+import { PaginatorModule } from 'primeng/paginator';
+import { SortingToolComponent } from './offers/sorting-tool/sorting-tool.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { SearchToolComponent } from './offers/search-tool/search-tool.component';
+import { InputTextModule } from 'primeng/inputtext';
+import { FormsModule } from '@angular/forms';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -34,25 +44,35 @@ import { FooterLinksSectionComponent } from './footer/footer-links-section/foote
     ContactComponent,
     CustomerMessageComponent,
     FooterComponent,
+    FooterLinksSectionComponent,
     HeaderComponent,
     MainComponent,
     MapComponent,
+    NavigationComponent,
+    NumberPrettifier,
+    OfferCardComponent,
     OffersComponent,
     PageNotFoundComponent,
     RentalManagementComponent,
-    NavigationComponent,
     SideNavigationComponent,
-    FooterLinksSectionComponent,
+    SortingToolComponent,
+    SearchToolComponent,
   ],
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
+    ButtonModule,
+    DropdownModule,
+    FormsModule,
+    InputTextModule,
     MatButtonModule,
     MatDividerModule,
     MatIconModule,
     MatListModule,
     MatSidenavModule,
+    PaginatorModule,
+    SelectButtonModule,
   ],
   bootstrap: [
     AppComponent,

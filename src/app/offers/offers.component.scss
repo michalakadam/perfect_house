@@ -1,0 +1,41 @@
+@import "~src/variables.scss";
+
+.component-container {
+    margin: 0 auto;
+    width: 800px;
+    @media screen and (max-width: $desktop-small) {
+        width: 400px;
+    }
+    @media screen and (max-width: $mobile) {
+        width: 300px;
+    }
+
+    p-paginator {
+        ::ng-deep .p-paginator {
+            margin-top: 44px;
+            padding-left: unset;
+            padding-right: unset;
+
+            .p-paginator-pages {
+                .p-link {
+                    color: $font-grey;
+                    font-weight: 700;
+
+                    &:focus {
+                        box-shadow: unset;
+                    }
+                }
+
+                .p-highlight {
+                    background: $light-green;
+                    border-color: $light-green;
+                    color: $font-white;
+                }
+            }
+
+            button {
+                color: $font-grey;
+            }
+        }
+    }
+}

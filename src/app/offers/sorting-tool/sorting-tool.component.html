@@ -1,0 +1,21 @@
+<div class="component-container">
+    <div class="offers-counter">
+        <span class="title">
+            Liczba ofert: 
+        </span>
+        <span>
+            {{ offersQuantity }}
+        </span>
+    </div>
+    <div class="sorter">
+        <span class="title">
+            Sortuj po:
+        </span>
+        <p-dropdown
+            [options]="availableSortings" 
+            [(ngModel)]="selectedSorting" 
+            optionLabel="displayName"
+            scrollHeight="250px"
+            (onChange)="sortingChanged.emit($event.value)"></p-dropdown>
+    </div>
+</div>
