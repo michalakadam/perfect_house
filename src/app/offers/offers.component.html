@@ -8,6 +8,16 @@
         [selectedSorting]="currentSorting"
         (sortingChanged)="listSortedOffers($event)"></perfect-sorting-tool>
 
+    <div class="no-offers-prompt" *ngIf="offersDao.getOffersQuantity() === 0">
+        <h2>
+            <div class="emoji"> \(^Д^)/ </div>
+            <div>Brak ofert spełniających podane kryteria.</div>
+        </h2>
+        <h4>
+            Zmień kryteria i wyszukaj ponownie.
+        </h4>
+    </div>
+
     <perfect-offer-card
         *ngFor="let offer of offers"
         [offer]="offer"></perfect-offer-card>
