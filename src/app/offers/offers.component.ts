@@ -21,19 +21,21 @@ export class OffersComponent {
 
   constructor(readonly offersDao: OffersDao) {
     this.offers = this.offersDao.list(this.currentSorting, this.currentFilters);
-    this.isPaginatorVisible = this.offersDao.getNumberOfPages() !== 0;
+    this.isPaginatorVisible = this.offersDao.getNumberOfPages() > 0;
   }
 
   applyFilters(filters: OffersFilters) {
     this.currentFilters = filters;
     this.currentPage = FIRST_PAGE_NUMBER;
     this.offers = this.offersDao.list(this.currentSorting, filters);
+    this.isPaginatorVisible = this.offersDao.getNumberOfPages() > 0;
   }
 
   listSortedOffers(sorting: Sorting) {
     this.currentSorting = sorting;
     this.currentPage = FIRST_PAGE_NUMBER;
     this.offers = this.offersDao.list(sorting, this.currentFilters);
+    this.isPaginatorVisible = this.offersDao.getNumberOfPages() > 0;
   }
 
   changePage(page: number) {
