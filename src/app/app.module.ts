@@ -26,7 +26,9 @@ import { SideNavigationComponent } from './header/side-navigation/side-navigatio
 import { FooterLinksSectionComponent } from './footer/footer-links-section/footer-links-section.component';
 import { OfferCardComponent } from './offers/offer-card/offer-card.component';
 import { NumberPrettifier } from './shared/pipes/number-prettifier';
-import {PaginatorModule} from 'primeng/paginator';
+import { PaginatorModule } from 'primeng/paginator';
+import { SortingToolComponent } from './offers/sorting-tool/sorting-tool.component';
+import {DropdownModule} from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -48,11 +50,13 @@ import {PaginatorModule} from 'primeng/paginator';
     PageNotFoundComponent,
     RentalManagementComponent,
     SideNavigationComponent,
+    SortingToolComponent,
   ],
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
+    DropdownModule,
     MatButtonModule,
     MatDividerModule,
     MatIconModule,

@@ -2,13 +2,14 @@
 @import "../node_modules/primeng/resources/primeng.min.css";
 @import "~src/variables.scss";
 
+
 html {
+    font-size: 12px;
     height: 100%;
 
     body {
         color: $font-grey;
         font-family: 'Open Sans', sans-serif;
-        font-size: 12px;
         height: 100%;
         margin: 0;
         overflow-x: hidden;

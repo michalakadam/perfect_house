@@ -1,0 +1,56 @@
+@import "~src/variables.scss";
+
+.component-container {
+    align-items: center;
+    display: flex;
+    font-weight: 700;
+    justify-content: space-between;
+    width: 100%;
+    @media screen and (max-width: $mobile) {
+        flex-direction: column;
+    }
+
+    .offers-counter {
+        width: 96x;
+        @media screen and (max-width: $mobile) {
+            margin-bottom: 5px;
+        }
+
+        .title {
+            color: $font-light-grey;
+        }
+    }
+
+    .sorter {
+        .title {
+            color: $font-light-grey;
+            margin-right: 3px;
+        }
+
+        ::ng-deep p-dropdown .p-dropdown {
+            &:not(.p-disabled){
+                &:hover {
+                    border-color: $light-green;
+                }
+
+                &.p-focus {
+                    box-shadow: 0 0 0 0.2rem $light-green;
+                    border-color: $dark-green;
+                }
+            }
+
+            .p-inputtext {
+                font-weight: 700;
+            }
+
+            .p-dropdown-items .p-dropdown-item {
+                font-weight: 700;
+
+                &.p-highlight {
+                    background: $light-green;
+                    color: $font-white;
+                }
+            }
+        }
+    }
+}
