@@ -1,0 +1,54 @@
+<div class="component-container">
+    <div class="row">
+        <div class="desktop-small-row">
+            <p-dropdown
+                class="estate-dropdown"
+                [options]="availableEstateTypes" 
+                [(ngModel)]="selectedEstateType"
+                optionLabel="displayName"></p-dropdown>
+
+            <p-dropdown
+                class="transaction-dropdown"
+                [options]="availableTransactions" 
+                [(ngModel)]="selectedTransaction" 
+                optionLabel="displayName"></p-dropdown>
+        </div>
+
+        <div class="market-toggle-container desktop-small-row">
+            <span class="title">
+                Rynek: 
+            </span>
+            <p-selectButton
+                [options]="availableMarkets"
+                [(ngModel)]="marketValues"
+                multiple="multiple"
+                optionLabel="displayName"
+                optionValue="value"></p-selectButton>
+        </div>
+
+        <div class="desktop-small-row">
+            <p-dropdown
+                class="voivodeship-dropdown desktop"
+                [options]="availableVoivodeships" 
+                [(ngModel)]="selectedVoivodeship"></p-dropdown>
+
+            <div class="p-input-icon-left">
+                <i class="pi pi-map-marker"></i>
+                <input type="text" pInputText placeholder="lokalizacja" [(ngModel)]="location"/>
+                <i *ngIf="location" class="pi pi-times remove-location-icon" (click)="location = ''"></i>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div></div>
+        <div class="submit-button-container">
+            <button
+                pButton 
+                pRippletype="button"
+                icon="pi pi-search"
+                label="Wyszukaj" 
+                class="p-button-raised"
+                (click)="applyFilters()"></button>
+        </div>
+    </div>
+</div>

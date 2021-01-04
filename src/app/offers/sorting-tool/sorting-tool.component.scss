@@ -1,0 +1,35 @@
+@import "~src/variables.scss";
+@import "~src/mixins.scss";
+
+.component-container {
+    align-items: center;
+    display: flex;
+    font-weight: 700;
+    justify-content: space-between;
+    width: 100%;
+    @media screen and (max-width: $mobile) {
+        flex-direction: column;
+    }
+
+    .offers-counter {
+        width: 96x;
+        @media screen and (max-width: $mobile) {
+            margin-bottom: 10px;
+        }
+
+        .title {
+            color: $font-light-grey;
+        }
+    }
+
+    .sorter {
+        .title {
+            color: $font-light-grey;
+            margin-right: 3px;
+        }
+
+        p-dropdown {
+            @include perfect-dropdown;
+        }
+    }
+}

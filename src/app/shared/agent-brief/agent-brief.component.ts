@@ -1,6 +1,6 @@
-import { Component, ChangeDetectionStrategy, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
-import { Agent } from '../models/agent';
+import { Agent } from '../models';
 
 /** Awatar pracownika. Zawiera zdjęcie, imię i nazwisko oraz tytuł zawodowy. */
 @Component({
