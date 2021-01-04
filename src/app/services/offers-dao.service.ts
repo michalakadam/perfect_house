@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import * as rawOffers from "src/offers/offers.json";
-import { OffersFilters } from '../shared/models/filters';
-import { Offer } from '../shared/models/offer';
-import { Sorting } from '../shared/models/sorting';
+import { OffersFilters, Offer, Sorting } from '../shared/models';
 import { OffersConverter } from './offers-converter.service';
 import { OffersFilter } from './offers-filter.service';
 import { OffersSorter } from './offers-sorter.service';

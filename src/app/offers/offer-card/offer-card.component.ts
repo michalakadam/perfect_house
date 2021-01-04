@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
-import { Offer } from 'src/app/shared/models/offer';
+import { Offer } from 'src/app/shared/models';
 
 @Component({
   selector: 'perfect-offer-card',

@@ -1,7 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { AVAILABLE_TRANSACTIONS, Transaction } from 'src/app/shared/models/transaction';
-import { AVAILABLE_ESTATE_TYPES, Estate } from 'src/app/shared/models/estate';
-import { OffersFilters, DEFAULT_FILTERS } from 'src/app/shared/models/filters';
+import { AVAILABLE_TRANSACTIONS, Transaction, AVAILABLE_ESTATE_TYPES, Estate, OffersFilters, DEFAULT_FILTERS } from 'src/app/shared/models';
 
 const AVAILABLE_VOIVODESHIPS = [
   'cała Polska', 'dolnośląskie', 'kujawsko-pomorskie', 'lubelskie', 'lubuskie',

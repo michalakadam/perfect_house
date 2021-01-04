@@ -1,9 +1,6 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { OffersDao } from '../services/offers-dao.service';
-import { Offer } from '../shared/models/offer';
-import { Sorting, AVAILABLE_SORTINGS } from '../shared/models/sorting';
-import { AVAILABLE_TRANSACTIONS } from '../shared/models/transaction';
-import { DEFAULT_FILTERS, OffersFilters } from 'src/app/shared/models/filters';
+import { Offer, Sorting, AVAILABLE_SORTINGS, AVAILABLE_TRANSACTIONS, DEFAULT_FILTERS, OffersFilters } from '../shared/models';
 
 const FIRST_PAGE_NUMBER = 0;
 

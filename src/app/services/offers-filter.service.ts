@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { OffersFilters } from '../shared/models/filters';
-import { Offer } from '../shared/models/offer';
+import { Offer, OffersFilters } from '../shared/models';
 
 @Injectable({
   providedIn: 'root'

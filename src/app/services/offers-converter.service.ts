@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Offer } from '../shared/models/offer';
-import { Room } from '../shared/models/room';
+import { Offer, Room } from '../shared/models';
 
 @Injectable({
     providedIn: 'root',

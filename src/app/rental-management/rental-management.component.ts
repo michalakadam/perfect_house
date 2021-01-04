@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AgentsDao } from '../services/agents-dao.service';
 import { WindowSizeDetector } from '../services/window-size-detector.service';
-import { Agent } from '../shared/models/agent';4
+import { Agent } from '../shared/models';4
 
 const AGENT_RESPONSIBLE_FULL_NAME = 'Magdalena Janicka';
 

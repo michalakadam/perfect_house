@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, EventEmitter, Input, Output } from '@angular/core';
-import { Sorting, AVAILABLE_SORTINGS } from 'src/app/shared/models/sorting';
+import { Sorting, AVAILABLE_SORTINGS } from 'src/app/shared/models';
 
 @Component({
   selector: 'perfect-sorting-tool',

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Agent } from '../shared/models/agent';
+import { Agent } from '../shared/models';
 
 @Injectable({
     providedIn: 'root',
