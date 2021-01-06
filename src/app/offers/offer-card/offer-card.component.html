@@ -3,11 +3,16 @@
         style="background-image: url('/offers/{{ offer.photos[0] }}');"></div>
     <div class="details-container">
         <div class="details">
-            <h4 class="description">
-                <span>{{ offer.estateType }} na &nbsp;</span>
-                <span *ngIf="offer.isForRent; else rent">sprzedaż</span>
-                <ng-template #rent>wynajem</ng-template>
-                <span>:</span>
+            <h4>
+                <div class="description">
+                    <span>{{ offer.estateType }} na &nbsp;</span>
+                    <span *ngIf="offer.isForRent; else rent">sprzedaż</span>
+                    <ng-template #rent>wynajem</ng-template>
+                    <span>:</span>
+                </div>
+                <div class="offer-number">
+                    {{offer.symbol}}
+                </div>
             </h4>
             <h3>{{ offer.title }}</h3> 
             <div class="location">
@@ -47,6 +52,13 @@
                 </span>
             </div>
         </div>
-        <div class="price">{{ offer.price | prettifyNumber:"zł" }}</div>
+        <div class="price">
+            <span *ngIf="offer.price > 1">
+                {{ offer.price | prettifyNumber:"zł" }}
+            </span>
+            <span class="client-price" *ngIf="offer.price === 1">
+                Zaproponuj cenę!
+            </span>
+        </div>
     </div>
 </div>
