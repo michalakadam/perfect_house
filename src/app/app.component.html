@@ -1,11 +1,21 @@
-<perfect-header (sideMenuToggled)="toggleSideMenuVisibility()"></perfect-header>
-<perfect-side-navigation
+<perfect-header (sideMenuToggled)="toggleSideMenuVisibility()"
+    (aboutUsOptionsToggled)="toggleAboutUsOptionsVisibility()"></perfect-header>
+<perfect-dropdown-navigation
     *ngIf="isSideMenuVisible"
+    class="side-navigation"
+    [links]="allLinks"
+    [isSideNavigation]=true
     [@openCloseSideNavAnimation]>
-</perfect-side-navigation>
+</perfect-dropdown-navigation>
+
+<perfect-dropdown-navigation
+    *ngIf="isAboutUsOptionsVisible"
+    class="about-us-navigation"
+    [links]="aboutUsLinks">
+</perfect-dropdown-navigation>
 
 <div class="router-outlet-container"
-    [style.opacity]="isSideMenuVisible ? 0.3 : 1">   
+    [style.opacity]="isSideMenuVisible || isAboutUsOptionsVisible ? 0.3 : 1">   
     <router-outlet></router-outlet>
 </div>
 

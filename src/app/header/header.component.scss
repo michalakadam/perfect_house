@@ -15,10 +15,7 @@
         margin: 0 auto;
         width: 700px;
         @media screen and (max-width: $desktop-small) {
-            width: 70%;
-        }
-        @media screen and (max-width: $mobile-small) {
-            width: 95%;
+            width: 90%;
         }
 
         button {

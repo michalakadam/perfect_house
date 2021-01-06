@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { MapComponent } from './shared/map/map.component';
 import { AgentBriefComponent } from './shared/agent-brief/agent-brief.component';
@@ -20,7 +19,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { NavigationComponent } from './header/navigation/navigation.component';
-import { SideNavigationComponent } from './header/side-navigation/side-navigation.component';
+import { DropdownNavigationComponent } from './header/dropdown-navigation/dropdown-navigation.component';
 import { FooterLinksSectionComponent } from './footer/footer-links-section/footer-links-section.component';
 import { OfferCardComponent } from './offers/offer-card/offer-card.component';
 import { NumberPrettifier } from './shared/pipes/number-prettifier';
@@ -32,10 +31,10 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { ButtonModule } from 'primeng/button';
+import { AgentsComponent } from './agents/agents.component';
 
 @NgModule({
   declarations: [
-    AboutComponent,
     AgentBriefComponent,
     AppComponent,
     ConsultancyComponent,
@@ -51,9 +50,10 @@ import { ButtonModule } from 'primeng/button';
     OffersComponent,
     PageNotFoundComponent,
     RentalManagementComponent,
-    SideNavigationComponent,
+    DropdownNavigationComponent,
     SortingToolComponent,
     SearchToolComponent,
+    AgentsComponent,
   ],
   imports: [
     AppRoutingModule,

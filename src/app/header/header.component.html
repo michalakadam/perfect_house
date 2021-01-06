@@ -16,5 +16,6 @@
 </div>
 
 <perfect-navigation
-    *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall">
+    *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall"
+    (aboutUsToggled)="aboutUsOptionsToggled.emit()">
 </perfect-navigation>

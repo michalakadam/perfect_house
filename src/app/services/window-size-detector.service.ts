@@ -34,7 +34,6 @@ export class WindowSizeDetector {
 
     private updateWindowSizeFlags(windowSize: number) {
         this.isWindowSmallerThanDesktopSmall = windowSize < WindowSizeDetector.DESKTOP_SMALL;
-        console.log(this.isWindowSmallerThanDesktopSmall);
         this.isWindowSmallerThanTablet = windowSize < WindowSizeDetector.TABLET;
         this.isWindowSmallerThanMobileLarge = windowSize < WindowSizeDetector.MOBILE_LARGE;
         this.isWindowSmallerThanMobile = windowSize < WindowSizeDetector.MOBILE;

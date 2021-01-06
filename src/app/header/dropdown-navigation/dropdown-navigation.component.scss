@@ -4,11 +4,6 @@
     background-color: $font-white;
     border-radius: 10px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    height: 300px;
-    left: 20%;
-    position: absolute;
-    top: 60px;
-    width: 200px;
     z-index: 100;
     @media screen and (max-width: $mobile-small) {
         left: 40px;
@@ -33,6 +28,13 @@
             background-color: $light-green;
             color: $font-white;
             font-weight: 700;
+        }
+    }
+
+    .about-us-link {
+        .active-link {
+            background-color: white;
+            color: $light-green;
         }
     }
 }
