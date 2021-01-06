@@ -1,9 +1,9 @@
 @import "~src/variables.scss";
 
 :host {
-    background-color: $font-grey;
-    box-shadow: 2px 2px 2px 1px #90A4AE;
-    color: $font-white;
+    background-color: $font-white;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     height: 225px;
     left: 40px;
     position: absolute;
@@ -22,11 +22,12 @@
             line-height: 44px;
             margin: 0 -16px;
             padding-left: 22px;
-            width: 106%;
+            width: 118.9%;
         }
 
         .active-link {
             background-color: $light-green;
+            color: $font-white;
             font-weight: 700;
         }
     }
