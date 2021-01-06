@@ -52,3 +52,27 @@
         }
     }
 }
+
+@mixin perfect-button {
+    ::ng-deep .p-button {
+        background: $light-green;
+        border: 1px solid $light-green;
+        color: $font-white;
+
+        &.p-highlight {
+            border-color: $dark-green;
+        }
+
+        &:not(.p-disabled):not(.p-highlight):hover {
+            border-color: $dark-green;
+        }
+
+        &:focus {
+            box-shadow: unset;
+        }
+
+        .p-button-label {
+            font-weight: 700;
+        }
+    }
+}

@@ -1,4 +1,5 @@
 @import "~src/variables.scss";
+@import "~src/mixins.scss";
 
 $curvature: 15px;
 $mobile-curvature: 10px;
@@ -100,17 +101,35 @@ $mobile-curvature: 10px;
             }
         }
 
-        .price {
-            color: $light-green;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            margin-right: 10px;
-            text-align: right;
+        .bottom-row {
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
 
-            .client-price {
-                color: $font-grey;
-                font-size: 16px;
+            .phone {
+                color: unset;
+                cursor: pointer;
+                font-size: 14px;
+                margin-bottom: 14px;
+                text-decoration: none;
+
+                p-button {
+                    @include perfect-button;
+                }
+            }
+
+            .price {
+                color: $light-green;
+                font-size: 24px;
+                font-weight: 700;
+                margin-bottom: 15px;
+                margin-right: 10px;
+                text-align: right;
+
+                .client-price {
+                    color: $font-grey;
+                    font-size: 16px;
+                }
             }
         }
     }

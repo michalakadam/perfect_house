@@ -17,12 +17,12 @@ export const MENU_LINKS: MenuLink[] = [
         route: '/zarzadzanie',
     },
     {
-        title: 'Fotowoltaika',
-        route: '/fotowoltaika'
-    },
-    {
         title: 'Dla deweloperów',
         route: '/deweloperzy'
+    },
+    {
+        title: 'Fotowoltaika',
+        route: '/fotowoltaika'
     },
     {
         title: 'O nas',
@@ -59,12 +59,12 @@ export const ALL_LINKS: MenuLink[] = [
         route: '/zarzadzanie',
     },
     {
-        title: 'Fotowoltaika',
-        route: '/fotowoltaika'
-    },
-    {
         title: 'Dla deweloperów',
         route: '/deweloperzy'
+    },
+    {
+        title: 'Fotowoltaika',
+        route: '/fotowoltaika'
     },
     {
         title: 'Ludzie',

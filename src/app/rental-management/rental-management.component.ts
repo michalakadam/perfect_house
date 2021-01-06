@@ -3,7 +3,7 @@ import { AgentsDao } from '../services/agents-dao.service';
 import { WindowSizeDetector } from '../services/window-size-detector.service';
 import { Agent } from '../shared/models';4
 
-const AGENT_RESPONSIBLE_FULL_NAME = 'Magdalena Janicka';
+const AGENT_RESPONSIBLE_ID = 1155;
 
 /** Kontener strony 'Zarządzanie najmem'. */
 @Component({
@@ -24,6 +24,6 @@ export class RentalManagementComponent {
       });
 
       this.agentResponsibleForRentalManagement =
-        this.agentsDao.getAgentByFullName(AGENT_RESPONSIBLE_FULL_NAME);
+        this.agentsDao.getAgentById(AGENT_RESPONSIBLE_ID);
   }
 }
