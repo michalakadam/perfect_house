@@ -5,7 +5,7 @@
     flex-direction: column;
     margin: 22px 0;
     text-align: center;
-    @media screen and (max-width: $mobile-large) {
+    @media screen and (max-width: $desktop-small) {
         margin: 14px 0;
     }
 
@@ -13,8 +13,11 @@
         display: flex;
         justify-content: space-between;
         margin: 0 auto;
-        width: 560px;
-        @media screen and (max-width: $mobile-large) {
+        width: 700px;
+        @media screen and (max-width: $desktop-small) {
+            width: 70%;
+        }
+        @media screen and (max-width: $mobile-small) {
             width: 95%;
         }
 
@@ -37,16 +40,20 @@
             border-radius: 3px;
             cursor: pointer;
             outline: none;
+            margin-left: 270px;
             max-height: 33.6px;
+            @media screen and (max-width: $desktop-small) {
+                margin-left: 0;
+            }
         }
 
         a {
             color: $font-grey;
             font-size: 14px;
             font-weight: 600;
-            margin-right: 8px;
+            margin-right: 4px;
             text-decoration: none;
-            @media screen and (max-width: $mobile-large) {
+            @media screen and (max-width: $desktop-small) {
                 margin-right: 0;
             }
 

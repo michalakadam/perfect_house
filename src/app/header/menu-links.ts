@@ -17,8 +17,16 @@ export const MENU_LINKS: MenuLink[] = [
         route: '/zarzadzanie',
     },
     {
+        title: 'Fotowoltaika',
+        route: '/fotowoltaika'
+    },
+    {
+        title: 'Dla deweloperów',
+        route: '/deweloperzy'
+    },
+    {
         title: 'O nas',
-        route: '/o-nas',
+        route: 'multiple_options',
     },
     {
         title: 'Kontakt',
