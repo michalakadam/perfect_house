@@ -1,15 +1,14 @@
 @import "~src/variables.scss";
 
 :host {
-    background-color: $font-grey;
-    box-shadow: 2px 2px 2px 1px #90A4AE;
-    color: $font-white;
-    height: 225px;
-    left: 40px;
-    position: absolute;
-    top: 60px;
-    width: 200px;
+    background-color: $font-white;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     z-index: 100;
+    @media screen and (max-width: $mobile-small) {
+        left: 40px;
+    }
+
 
     mat-list-item {
         height: 40px;
@@ -22,12 +21,20 @@
             line-height: 44px;
             margin: 0 -16px;
             padding-left: 22px;
-            width: 106%;
+            width: 118.9%;
         }
 
         .active-link {
             background-color: $light-green;
+            color: $font-white;
             font-weight: 700;
+        }
+    }
+
+    .about-us-link {
+        .active-link {
+            background-color: white;
+            color: $light-green;
         }
     }
 }

@@ -17,11 +17,65 @@ export const MENU_LINKS: MenuLink[] = [
         route: '/zarzadzanie',
     },
     {
+        title: 'Dla deweloperów',
+        route: '/deweloperzy'
+    },
+    {
+        title: 'Fotowoltaika',
+        route: '/fotowoltaika'
+    },
+    {
         title: 'O nas',
-        route: '/o-nas',
+        route: '/o_nas',
     },
     {
         title: 'Kontakt',
         route: '/kontakt',
     },
-]
+];
+
+export const ABOUT_US_LINKS: MenuLink[] = [
+    {
+        title: 'Ludzie',
+        route: 'ludzie',
+    },
+    {
+        title: 'Aktualności',
+        route: '/aktualnosci',
+    },
+];
+
+export const ALL_LINKS: MenuLink[] = [
+    {
+        title: 'Oferty',
+        route: '/oferty',
+    },
+    {
+        title: 'Doradztwo',
+        route: '/doradztwo',
+    },
+    {
+        title: 'Zarządzanie najmem',
+        route: '/zarzadzanie',
+    },
+    {
+        title: 'Dla deweloperów',
+        route: '/deweloperzy'
+    },
+    {
+        title: 'Fotowoltaika',
+        route: '/fotowoltaika'
+    },
+    {
+        title: 'Ludzie',
+        route: 'ludzie',
+    },
+    {
+        title: 'Aktualności',
+        route: '/aktualnosci',
+    },
+    {
+        title: 'Kontakt',
+        route: '/kontakt',
+    },
+];

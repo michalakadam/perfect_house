@@ -10,6 +10,25 @@
         width: 300px;
     }
 
+    .other-tools-container {
+        @media screen and (max-width: $desktop-small) {
+            border-radius: 15px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+            padding: 15px;
+        }
+        @media screen and (max-width: $mobile) {
+            padding: 15px 0;
+        }
+
+        .top-paginator {
+            margin-top: -37px;
+
+            @media screen and (max-width: $desktop-small) {
+                margin-top: 0;
+            }
+        }
+    }
+
     .no-offers-prompt {
         text-align: center;
         
@@ -24,32 +43,7 @@
         }
     }
 
-    p-paginator {
-        ::ng-deep .p-paginator {
-            margin-top: 44px;
-            padding-left: unset;
-            padding-right: unset;
-
-            .p-paginator-pages {
-                .p-link {
-                    color: $font-grey;
-                    font-weight: 700;
-
-                    &:focus {
-                        box-shadow: unset;
-                    }
-                }
-
-                .p-highlight {
-                    background: $light-green;
-                    border-color: $light-green;
-                    color: $font-white;
-                }
-            }
-
-            button {
-                color: $font-grey;
-            }
-        }
+    .bottom-paginator {
+        margin-top: 44px;
     }
 }

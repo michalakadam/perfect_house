@@ -1,39 +1,27 @@
 @import "~src/variables.scss";
 
 nav {
-    display: table;
+    display: flex;
+    justify-content: space-evenly;
     font-size: 14px;
     font-weight: 600;
     margin: 18px auto 0;
-    width: 600px;
+    width: 750px;
     text-align: center;
 
-    .link-container {
-        display: table-cell;
+    .link {
+        cursor: pointer;
+        display: inline-block;
         position: relative;
+        transition: color 0.25s;
 
-        &:nth-child(3) {
-            width: 165px;
-        }
-
-        &:nth-child(4) {
-            width: 110px;
-        }
-
-        .link {
-            cursor: pointer;
-            display: inline-block;
-            position: relative;
-            transition: color 0.25s;
-
-            &:hover {
-                color: $light-green;
-                
-            }
-        }
-
-        .active-link {
+        &:hover {
             color: $light-green;
+            
         }
+    }
+
+    .active-link {
+        color: $light-green;
     }
 }

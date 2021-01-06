@@ -39,7 +39,9 @@ export class OffersComponent {
   }
 
   changePage(page: number) {
-    this.currentPage = page;
-    this.offers = this.offersDao.listOffersForPage(page);
+    if (page !== this.currentPage) {
+      this.currentPage = page;
+      this.offers = this.offersDao.listOffersForPage(page);
+    }
   }
 }

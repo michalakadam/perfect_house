@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { AgentsDao } from 'src/app/services/agents-dao.service';
 import { Offer } from 'src/app/shared/models';
 
 @Component({
@@ -9,4 +10,6 @@ import { Offer } from 'src/app/shared/models';
 })
 export class OfferCardComponent {
   @Input() offer: Offer;
+
+  constructor(readonly agentsDao: AgentsDao) {}
 }
