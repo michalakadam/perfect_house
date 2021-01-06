@@ -32,6 +32,7 @@ import { FormsModule } from '@angular/forms';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { ButtonModule } from 'primeng/button';
 import { AgentsComponent } from './agents/agents.component';
+import { PaginatorComponent } from './offers/paginator/paginator.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { AgentsComponent } from './agents/agents.component';
     SortingToolComponent,
     SearchToolComponent,
     AgentsComponent,
+    PaginatorComponent,
   ],
   imports: [
     AppRoutingModule,
