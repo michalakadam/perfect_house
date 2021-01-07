@@ -67,7 +67,7 @@ export class AppComponent implements OnInit {
    */
   @HostListener('document:click', ['$event'])
   onClick(event: any) {
-    if (this.windowSizeDetector.isWindowSmallerThanMobileLarge && this.isSideMenuVisible) {
+    if (this.windowSizeDetector.isWindowSmallerThanDesktopSmall && this.isSideMenuVisible) {
       const isSideNavButtonClicked = event.path
         .map(element => element.id)
         .includes('sideNavToggleButton');
