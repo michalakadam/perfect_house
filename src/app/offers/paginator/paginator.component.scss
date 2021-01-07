@@ -1,0 +1,29 @@
+@import "~src/variables.scss";
+
+p-paginator {
+    ::ng-deep .p-paginator {
+        padding-left: unset;
+        padding-right: unset;
+
+        .p-paginator-pages {
+            .p-link {
+                color: $font-grey;
+                font-weight: 700;
+
+                &:focus {
+                    box-shadow: unset;
+                }
+            }
+
+            .p-highlight {
+                background: $light-green;
+                border-color: $light-green;
+                color: $font-white;
+            }
+        }
+
+        button {
+            color: $font-grey;
+        }
+    }
+}

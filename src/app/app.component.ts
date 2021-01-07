@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { PrimeNGConfig } from 'primeng/api';
+import { ABOUT_US_LINKS, ALL_LINKS } from './header/menu-links';
 
 @Component({
   selector: 'perfect-root',
@@ -31,6 +32,9 @@ import { PrimeNGConfig } from 'primeng/api';
 })
 export class AppComponent implements OnInit {
   isSideMenuVisible = false;
+  isAboutUsOptionsVisible = false;
+  allLinks = ALL_LINKS;
+  aboutUsLinks = ABOUT_US_LINKS;
 
   constructor(readonly windowSizeDetector: WindowSizeDetector,
     private primengConfig: PrimeNGConfig) {}
@@ -47,6 +51,12 @@ export class AppComponent implements OnInit {
   toggleSideMenuVisibility() {
     this.isSideMenuVisible = !this.isSideMenuVisible;
   }
+  
+  toggleAboutUsOptionsVisibility() {
+    if (!this.isAboutUsOptionsVisible) {
+      setTimeout(() => this.isAboutUsOptionsVisible = true, 100);
+    }
+  }
 
   /** 
    * Closes side navigation when any element on the page is clicked
@@ -57,13 +67,16 @@ export class AppComponent implements OnInit {
    */
   @HostListener('document:click', ['$event'])
   onClick(event: any) {
-    if (this.windowSizeDetector.isWindowSmallerThanMobileLarge && this.isSideMenuVisible) {
+    if (this.windowSizeDetector.isWindowSmallerThanDesktopSmall && this.isSideMenuVisible) {
       const isSideNavButtonClicked = event.path
         .map(element => element.id)
         .includes('sideNavToggleButton');
       if (!isSideNavButtonClicked) {
         this.isSideMenuVisible = false;
       }
+    }
+    else if (this.isAboutUsOptionsVisible) {
+      this.isAboutUsOptionsVisible = false;
     }
   }
 }

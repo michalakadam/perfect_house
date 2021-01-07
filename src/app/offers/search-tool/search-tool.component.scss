@@ -127,16 +127,10 @@
             }
         }
         
-        .submit-button-container {
+        p-button {
             align-self: flex-end;
-            ::ng-deep .p-button {
-                background-color: $light-green;
-                border: 1px solid $light-green;
 
-                .p-button-label {
-                    font-weight: 700;
-                }
-            }
+            @include perfect-button;
         }
     }
 }

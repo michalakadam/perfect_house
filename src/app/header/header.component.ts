@@ -1,6 +1,5 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
-import { skip } from 'rxjs/operators';
 
 /** Nagłówek strony. Zawiera logo firmy, numer telefonu oraz nawigację. */
 @Component({
@@ -12,6 +11,7 @@ import { skip } from 'rxjs/operators';
 export class HeaderComponent {
 
   @Output() sideMenuToggled = new EventEmitter();
+  @Output() aboutUsOptionsToggled = new EventEmitter();
 
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,

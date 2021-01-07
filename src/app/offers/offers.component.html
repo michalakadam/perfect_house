@@ -3,10 +3,21 @@
         [filters]="currentFilters"
         (searchButtonClicked)=applyFilters($event)></perfect-search-tool>
 
-    <perfect-sorting-tool
-        [offersQuantity]="offersDao.getOffersQuantity()"
-        [selectedSorting]="currentSorting"
-        (sortingChanged)="listSortedOffers($event)"></perfect-sorting-tool>
+    <div class="other-tools-container">
+        <perfect-sorting-tool
+            [offersQuantity]="offersDao.getOffersQuantity()"
+            [selectedSorting]="currentSorting"
+            (sortingChanged)="listSortedOffers($event)"></perfect-sorting-tool>
+
+        <div class="top-paginator">
+            <perfect-paginator
+                *ngIf="isPaginatorVisible"
+                [offersPerPage]="offersDao.getOffersPerPage()"
+                [totalOffersQuantity]="offersDao.getOffersQuantity()"
+                [selectedPage]="currentPage"
+                (pageChanged)="changePage($event)"></perfect-paginator>
+        </div>
+    </div>
 
     <div class="no-offers-prompt" *ngIf="offersDao.getOffersQuantity() === 0">
         <h2>
@@ -22,9 +33,13 @@
         *ngFor="let offer of offers"
         [offer]="offer"></perfect-offer-card>
 
-    <p-paginator
-        *ngIf="isPaginatorVisible"
-        [rows]="offersDao.getOffersPerPage()"
-        [totalRecords]="offersDao.getOffersQuantity()"
-        (onPageChange)="changePage($event.page)"></p-paginator>
+    <div class="bottom-paginator">
+        <perfect-paginator
+            *ngIf="isPaginatorVisible"
+            class="bottom-paginator"
+            [offersPerPage]="offersDao.getOffersPerPage()"
+            [totalOffersQuantity]="offersDao.getOffersQuantity()"
+            [selectedPage]="currentPage"
+            (pageChanged)="changePage($event)"></perfect-paginator>
+    </div>
 </div>

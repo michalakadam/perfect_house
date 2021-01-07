@@ -1,5 +1,6 @@
 <mat-nav-list>
-    <mat-list-item *ngFor="let link of links">
+    <mat-list-item *ngFor="let link of links"
+        [ngClass]="{'about-us-link': !isSideNavigation}">
         <span class="link"
             [routerLink]="link.route"
             routerLinkActive="active-link"
