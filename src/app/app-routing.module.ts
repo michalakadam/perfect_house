@@ -14,6 +14,9 @@ const routes: Routes = [
   {
     path: '',
     component: MainComponent,
+    data: {
+      title: 'Perfect House',
+    },
   },
   {
     path: 'oferty',
@@ -62,6 +65,9 @@ const routes: Routes = [
   {
     path: '**',
     component: PageNotFoundComponent,
+    data: {
+      title: '404',
+    },
   },
 ];
 
