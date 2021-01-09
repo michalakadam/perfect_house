@@ -38,9 +38,11 @@ export class SearchToolComponent implements OnChanges {
   isPrimaryMarket: boolean;
   isSecondaryMarket: boolean;
   marketValues: number[] = [];
+  symbol = '';
 
   @Input() filters: OffersFilters;
-  @Output() searchButtonClicked = new EventEmitter<OffersFilters>();
+  @Output() searchOffers = new EventEmitter<OffersFilters>();
+  @Output() openOffer = new EventEmitter<string>();
 
   ngOnChanges() {
     this.selectedEstateType = this.availableEstateTypes.find(estateType => {
@@ -62,6 +64,11 @@ export class SearchToolComponent implements OnChanges {
   }
 
   applyFilters() {
+    if (this.symbol) {
+      this.openOffer.emit(this.symbol);
+      return;
+    }
+    
     const filters: OffersFilters = {
       estateType: this.selectedEstateType.displayName,
       isForRent: this.selectedTransaction.isForRent,
@@ -72,6 +79,6 @@ export class SearchToolComponent implements OnChanges {
     };
 
     this.filters = filters;
-    this.searchButtonClicked.emit(filters);
+    this.searchOffers.emit(filters);
   }
 }

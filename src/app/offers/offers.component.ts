@@ -120,7 +120,7 @@ export class OffersComponent implements OnInit {
     return filtersParameters;
   }
 
-  loadOffer(offer: Offer) {
-    this.router.navigate(['oferta', offer.symbol]);
+  loadOffer(symbol: string) {
+    this.router.navigate(['oferta', symbol]);
   }
 }

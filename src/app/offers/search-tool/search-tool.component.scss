@@ -101,7 +101,7 @@
             }
         }
 
-        .p-input-icon-left {
+        .input {
             ::ng-deep .p-inputtext {
                 padding-right: 2rem;
                 width: 170px;
@@ -118,7 +118,7 @@
                 }
             }
 
-            .remove-location-icon {
+            .remove-input-icon {
                 cursor: pointer;
                 margin-right: -12px;
                 right: 20px;

@@ -1,7 +1,8 @@
 <div class="component-container">
     <perfect-search-tool
         [filters]="currentFilters"
-        (searchButtonClicked)="loadNewResults(0, currentSorting, $event)">
+        (searchOffers)="loadNewResults(0, currentSorting, $event)"
+        (openOffer)="loadOffer($event)">
     </perfect-search-tool>
 
     <div class="other-tools-container">
@@ -35,7 +36,7 @@
     <perfect-offer-card
         *ngFor="let offer of offers"
         [offer]="offer"
-        (click)=loadOffer(offer)></perfect-offer-card>
+        (click)=loadOffer(offer.symbol)></perfect-offer-card>
 
     <div class="bottom-paginator">
         <perfect-paginator
