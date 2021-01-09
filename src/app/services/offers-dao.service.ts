@@ -47,4 +47,8 @@ export class OffersDao {
         }
         return Math.trunc(offersOverPageSize);
     }
+
+    getOfferBySymbol(symbol: string): Offer {
+        return this.allOffers.find(offer => offer.symbol === symbol);
+    }
 }

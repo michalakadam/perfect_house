@@ -5,6 +5,7 @@ import { AgentsComponent } from './agents/agents.component';
 import { ConsultancyComponent } from './consultancy/consultancy.component';
 import { ContactComponent } from './contact/contact.component';
 import { MainComponent } from './main/main.component';
+import { OfferComponent } from './offer/offer.component';
 import { OffersComponent } from './offers/offers.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RentalManagementComponent } from './rental-management/rental-management.component';
@@ -24,6 +25,10 @@ const routes: Routes = [
     data: {
       title: 'Oferty',
     },
+  },
+  {
+    path: 'oferta/:symbol',
+    component: OfferComponent,
   },
   {
     path: 'doradztwo',

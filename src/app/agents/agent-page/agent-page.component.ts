@@ -18,21 +18,17 @@ export class AgentPageComponent {
     private titleService: Title,
     private agentsDao: AgentsDao) {
     this.route.params.subscribe((params: Params) => {
-        const fullName = this.computeAgentFullName(params.agent);
-        if (fullName) {
-        this.titleService.setTitle(fullName);
-        this.agent = this.agentsDao.getAgentByFullName(fullName);
+        if (params.agent) {
+          this.agent = this.agentsDao.getAgentByFullName(
+            params.agent.split('-').join(' '));
+          if (this.agent) {
+            this.titleService.setTitle(this.agent.fullName);
+          } else {
+            this.router.navigate(['/strona-nie-istnieje']);
+          }
         } else {
           this.router.navigate(['/strona-nie-istnieje']);
         }    
       });
-  }
-
-  private computeAgentFullName(fullName: string) {
-    return this.capitalize(fullName.split('-').join(' '));
-  }
-
-  private capitalize(fullName) {
-    return fullName.replace(/(^|\s)\S/g, letter => letter.toUpperCase());
   }
 }

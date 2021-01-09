@@ -34,7 +34,8 @@
 
     <perfect-offer-card
         *ngFor="let offer of offers"
-        [offer]="offer"></perfect-offer-card>
+        [offer]="offer"
+        (click)=loadOffer(offer)></perfect-offer-card>
 
     <div class="bottom-paginator">
         <perfect-paginator

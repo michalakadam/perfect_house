@@ -34,6 +34,7 @@ import { ButtonModule } from 'primeng/button';
 import { AgentsComponent } from './agents/agents.component';
 import { PaginatorComponent } from './offers/paginator/paginator.component';
 import { AgentPageComponent } from './agents/agent-page/agent-page.component';
+import { OfferComponent } from './offer/offer.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { AgentPageComponent } from './agents/agent-page/agent-page.component';
     AgentsComponent,
     PaginatorComponent,
     AgentPageComponent,
+    OfferComponent,
   ],
   imports: [
     AppRoutingModule,
