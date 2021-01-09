@@ -17,22 +17,37 @@ const routes: Routes = [
   {
     path: 'oferty',
     component: OffersComponent,
+    data: {
+      title: 'Oferty',
+    },
   },
   {
     path: 'doradztwo',
     component: ConsultancyComponent,
+    data: {
+      title: 'Doradztwo',
+    },
   },
   {
     path: 'zarzadzanie',
     component: RentalManagementComponent,
+    data: {
+      title: 'Zarządzanie najmem',
+    },
   },
   {
     path: 'ludzie',
     component: AgentsComponent,
+    data: {
+      title: 'Ludzie',
+    },
   },
   {
     path: 'kontakt',
     component: ContactComponent,
+    data: {
+      title: 'Kontakt',
+    },
   },
   {
     path: '**',

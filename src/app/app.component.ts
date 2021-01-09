@@ -3,6 +3,8 @@ import { WindowSizeDetector } from 'src/app/services/window-size-detector.servic
 import { trigger, style, animate, transition } from '@angular/animations';
 import { PrimeNGConfig } from 'primeng/api';
 import { ABOUT_US_LINKS, ALL_LINKS } from './header/menu-links';
+import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, NavigationEnd, Router, RouterState } from '@angular/router';
 
 @Component({
   selector: 'perfect-root',
@@ -37,10 +39,33 @@ export class AppComponent implements OnInit {
   aboutUsLinks = ABOUT_US_LINKS;
 
   constructor(readonly windowSizeDetector: WindowSizeDetector,
-    private primengConfig: PrimeNGConfig) {}
+    private titleService: Title, private router: Router,
+    private primengConfig: PrimeNGConfig) {
+      router.events.subscribe(event => {
+      if(event instanceof NavigationEnd) {
+        console.log(router.routerState)
+        console.log(router.routerState.root)
+        const title = this.getTitle(router.routerState, router.routerState.root).join(' - ');
+        titleService.setTitle(title);
+      }
+    });
+    }
 
   ngOnInit() {
     this.primengConfig.ripple = true;
+  }
+
+  // Collect title data properties from all child routes.
+  getTitle(state, parent: ActivatedRoute) {
+    const data = [];
+    if(parent && parent.snapshot.data && parent.snapshot.data.title) {
+      data.push(parent.snapshot.data.title);
+    }
+
+    if(state && parent) {
+      data.push(... this.getTitle(state, state.firstChild(parent)));
+    }
+    return data;
   }
 
   @HostListener('window:resize', ['$event'])
