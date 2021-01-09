@@ -8,7 +8,7 @@ export interface OffersFilters {
 };
 
 export const DEFAULT_FILTERS = {
-    estateType: '',
+    estateType: 'wszystkie',
     isForRent: false,
     isPrimaryMarket: false,
     isSecondaryMarket: true,

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Offer, OffersFilters } from '../shared/models';
+import { AVAILABLE_ESTATE_TYPES, Offer, OffersFilters } from '../shared/models';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,13 @@ export class OffersFilter {
   }
 
   private filterByEstateType(offers: Offer[], estateType: string): Offer[] {
-    return offers.filter(offer => offer.estateType === estateType);
+    if (estateType === 'wszystkie') {
+      return offers;
+    }
+    const estate = AVAILABLE_ESTATE_TYPES
+      .find(estate => estate.displayName === estateType);
+
+    return estate ? offers.filter(offer => offer.estateType === estate.queryName) : [];
   }
 
   private filterByTransactionType(offers: Offer[], isForRent): Offer[] {

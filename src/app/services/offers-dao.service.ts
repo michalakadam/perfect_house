@@ -21,13 +21,14 @@ export class OffersDao {
         this.allOffers = this.offersConverter.convertToReadableOffers(rawOffers.Oferty.Oferta);
     }
 
-    list(sorting: Sorting, filters: OffersFilters): Offer[] {
+    list(page: number, sorting: Sorting, filters: OffersFilters): Offer[] {
         const filteredOffers = this.offersFilter.filterOffers(this.allOffers, filters);
 
         this.currentSearchOffers = this.offersSorter.sortOffers(filteredOffers, sorting);
-        return this.currentSearchOffers.slice(0, OFFERS_PER_PAGE);
+        const startIndex = page * OFFERS_PER_PAGE; 
+        return this.currentSearchOffers.slice(startIndex, startIndex + OFFERS_PER_PAGE);
     }
-
+    
     listOffersForPage(page: number) {
         const startIndex = page * OFFERS_PER_PAGE; 
         return this.currentSearchOffers.slice(startIndex, startIndex + OFFERS_PER_PAGE);

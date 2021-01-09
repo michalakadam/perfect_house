@@ -1,13 +1,15 @@
 <div class="component-container">
     <perfect-search-tool
         [filters]="currentFilters"
-        (searchButtonClicked)=applyFilters($event)></perfect-search-tool>
+        (searchButtonClicked)="loadNewResults(0, currentSorting, $event)">
+    </perfect-search-tool>
 
     <div class="other-tools-container">
         <perfect-sorting-tool
             [offersQuantity]="offersDao.getOffersQuantity()"
             [selectedSorting]="currentSorting"
-            (sortingChanged)="listSortedOffers($event)"></perfect-sorting-tool>
+            (sortingChanged)="loadNewResults(currentPage, $event, currentFilters)">
+        </perfect-sorting-tool>
 
         <div class="top-paginator">
             <perfect-paginator
@@ -15,7 +17,8 @@
                 [offersPerPage]="offersDao.getOffersPerPage()"
                 [totalOffersQuantity]="offersDao.getOffersQuantity()"
                 [selectedPage]="currentPage"
-                (pageChanged)="changePage($event)"></perfect-paginator>
+                (pageChanged)="loadNewResults($event, currentSorting, currentFilters)">
+            </perfect-paginator>
         </div>
     </div>
 
@@ -40,6 +43,7 @@
             [offersPerPage]="offersDao.getOffersPerPage()"
             [totalOffersQuantity]="offersDao.getOffersQuantity()"
             [selectedPage]="currentPage"
-            (pageChanged)="changePage($event)"></perfect-paginator>
+            (pageChanged)="loadNewResults($event, currentSorting, currentFilters)">
+        </perfect-paginator>
     </div>
 </div>

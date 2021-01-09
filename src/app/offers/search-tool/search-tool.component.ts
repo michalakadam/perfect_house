@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { AVAILABLE_TRANSACTIONS, Transaction, AVAILABLE_ESTATE_TYPES, Estate, OffersFilters, DEFAULT_FILTERS } from 'src/app/shared/models';
+import { AVAILABLE_TRANSACTIONS, Transaction, AVAILABLE_ESTATE_TYPES, Estate, OffersFilters } from 'src/app/shared/models';
 
 const AVAILABLE_VOIVODESHIPS = [
   'cała Polska', 'dolnośląskie', 'kujawsko-pomorskie', 'lubelskie', 'lubuskie',
@@ -39,12 +39,12 @@ export class SearchToolComponent implements OnInit {
   isSecondaryMarket: boolean;
   marketValues: number[] = [];
 
-  @Input() filters = DEFAULT_FILTERS;
+  @Input() filters: OffersFilters;
   @Output() searchButtonClicked = new EventEmitter<OffersFilters>();
 
   ngOnInit() {
     this.selectedEstateType = this.availableEstateTypes.find(estateType => {
-      return estateType.queryName === this.filters.estateType;
+      return estateType.displayName === this.filters.estateType;
     });
     this.selectedTransaction = this.availableTransactions.find(transaction => {
       return transaction.isForRent === this.filters.isForRent;
@@ -59,12 +59,11 @@ export class SearchToolComponent implements OnInit {
     if (this.isSecondaryMarket) {
       this.marketValues.push(1);
     }
-
   }
 
   applyFilters() {
     const filters: OffersFilters = {
-      estateType: this.selectedEstateType.queryName,
+      estateType: this.selectedEstateType.displayName,
       isForRent: this.selectedTransaction.isForRent,
       isPrimaryMarket: this.marketValues.indexOf(0) > -1,
       isSecondaryMarket: this.marketValues.indexOf(1) > -1,
