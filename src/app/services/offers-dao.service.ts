@@ -28,14 +28,9 @@ export class OffersDao {
         const startIndex = page * OFFERS_PER_PAGE; 
         return this.currentSearchOffers.slice(startIndex, startIndex + OFFERS_PER_PAGE);
     }
-    
-    listOffersForPage(page: number) {
-        const startIndex = page * OFFERS_PER_PAGE; 
-        return this.currentSearchOffers.slice(startIndex, startIndex + OFFERS_PER_PAGE);
-    }
 
     getOffersQuantity(): number {
-        return this.currentSearchOffers.length;
+        return this.currentSearchOffers ? this.currentSearchOffers.length : 0;
     }
 
     getOffersPerPage(): number {
@@ -43,6 +38,9 @@ export class OffersDao {
     }
 
     getNumberOfPages(): number {
+        if (!this.currentSearchOffers) {
+            return 0;
+        }
         const offersOverPageSize = this.currentSearchOffers.length / OFFERS_PER_PAGE; 
         if (this.currentSearchOffers.length % OFFERS_PER_PAGE === 0) {
             return offersOverPageSize - 1;

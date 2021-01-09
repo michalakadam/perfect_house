@@ -4,24 +4,60 @@
         [showResponsiveView]="windowSizeDetector.isWindowSmallerThanMobileLarge"
         [isSectionOpen]="isRentalSectionOpen"
         (sectionToggled)="toggleRentalSectionOpen()">
-            <div class="link">Mieszkania</div>
-            <div class="link">Domy</div>
-            <div class="link">Działki</div>
-            <div class="link">Lokale</div>
-            <div class="link">Hale</div>
-            <div class="link">Obiekty</div>
+            <div class="link"
+                (click)="loadOffers({estateType: 'mieszkania', isForRent: true})">
+                Mieszkania
+            </div>
+            <div class="link"
+                (click)="loadOffers({estateType: 'domy', isForRent: true})">
+                Domy
+            </div>
+            <div class="link"
+                (click)="loadOffers({estateType: 'działki', isForRent: true})">
+                Działki
+            </div>
+            <div class="link"
+                (click)="loadOffers({estateType: 'lokale', isForRent: true})">
+                Lokale
+            </div>
+            <div class="link"
+                (click)="loadOffers({estateType: 'hale', isForRent: true})">
+                Hale
+            </div>
+            <div class="link"
+                (click)="loadOffers({estateType: 'obiekty', isForRent: true})">
+                Obiekty
+            </div>
     </perfect-footer-links-section>
     <perfect-footer-links-section
         [headerTitle]="'Na sprzedaż'"
         [showResponsiveView]="windowSizeDetector.isWindowSmallerThanMobileLarge"
         [isSectionOpen]="isSaleSectionOpen"
         (sectionToggled)="toggleSaleSectionOpen()">
-        <div class="link">Mieszkania</div>
-        <div class="link">Domy</div>
-        <div class="link">Działki</div>
-        <div class="link">Lokale</div>
-        <div class="link">Hale</div>
-        <div class="link">Obiekty</div>
+            <div class="link"
+                (click)="loadOffers({estateType: 'mieszkania', isForRent: false})">
+                Mieszkania
+            </div>
+            <div class="link"
+                (click)="loadOffers({estateType: 'domy', isForRent: false})">
+                Domy
+            </div>
+            <div class="link"
+                (click)="loadOffers({estateType: 'działki', isForRent: false})">
+                Działki
+            </div>
+            <div class="link"
+                (click)="loadOffers({estateType: 'lokale', isForRent: false})">
+                Lokale
+            </div>
+            <div class="link"
+                (click)="loadOffers({estateType: 'hale', isForRent: false})">
+                Hale
+            </div>
+            <div class="link"
+                (click)="loadOffers({estateType: 'obiekty', isForRent: false})">
+                Obiekty
+            </div>
     </perfect-footer-links-section>
     <perfect-footer-links-section
         [headerTitle]="'Inne oferty'"

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { OffersDao } from '../services/offers-dao.service';
@@ -18,7 +18,7 @@ const DEFAULT_PARAMETERS = {
   styleUrls: ['./offers.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OffersComponent {
+export class OffersComponent implements OnInit {
   offers: Offer[];
   currentPage: number;
   currentSorting: Sorting;
@@ -27,14 +27,17 @@ export class OffersComponent {
 
   constructor(readonly offersDao: OffersDao,
     private router: Router,
-    private route: ActivatedRoute) {
-      this.route.params.subscribe(params => {
-        if (!params.hasOwnProperty('page') || !params.hasOwnProperty('sorting')) {
-          this.router.navigate(['oferty', {...DEFAULT_PARAMETERS, ...params}]);
-        } else {
-          this.loadOffersForCurrentParameters(params);
-        }
-      });
+    private route: ActivatedRoute,
+    private changeDetector: ChangeDetectorRef) {}
+
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      if (!params.hasOwnProperty('page') || !params.hasOwnProperty('sorting')) {
+        this.router.navigate(['oferty', {...DEFAULT_PARAMETERS, ...params}]);
+      } else {
+        this.loadOffersForCurrentParameters(params);
+      }
+    });
   }
 
   private loadOffersForCurrentParameters(params: any) {
@@ -52,6 +55,7 @@ export class OffersComponent {
       this.loadNewResults(0, this.currentSorting, this.currentFilters);
     }
     this.isPaginatorVisible = this.offersDao.getNumberOfPages() > 0;
+    this.changeDetector.detectChanges();
   }
 
   private computePageNumberFromParams(page: string): number {

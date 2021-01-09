@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { AVAILABLE_TRANSACTIONS, Transaction, AVAILABLE_ESTATE_TYPES, Estate, OffersFilters } from 'src/app/shared/models';
 
 const AVAILABLE_VOIVODESHIPS = [
@@ -25,7 +25,7 @@ const AVAILABLE_MARKETS = [
   styleUrls: ['./search-tool.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SearchToolComponent implements OnInit {
+export class SearchToolComponent implements OnChanges {
   availableEstateTypes = AVAILABLE_ESTATE_TYPES;
   availableTransactions = AVAILABLE_TRANSACTIONS;
   availableVoivodeships = AVAILABLE_VOIVODESHIPS;
@@ -42,7 +42,7 @@ export class SearchToolComponent implements OnInit {
   @Input() filters: OffersFilters;
   @Output() searchButtonClicked = new EventEmitter<OffersFilters>();
 
-  ngOnInit() {
+  ngOnChanges() {
     this.selectedEstateType = this.availableEstateTypes.find(estateType => {
       return estateType.displayName === this.filters.estateType;
     });
