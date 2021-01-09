@@ -21,4 +21,8 @@ export class AgentsDao {
     getAgentById(id: number): Agent {
         return this.agents.find(agent => agent.id === '' + id);
     }
+
+    getAgentByFullName(fullName: string): Agent {
+        return this.agents.find(agent => agent.fullName === fullName);
+    }
 }

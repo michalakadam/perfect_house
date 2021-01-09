@@ -43,13 +43,13 @@ export class AppComponent implements OnInit {
     private primengConfig: PrimeNGConfig) {
       router.events.subscribe(event => {
       if(event instanceof NavigationEnd) {
-        console.log(router.routerState)
-        console.log(router.routerState.root)
-        const title = this.getTitle(router.routerState, router.routerState.root).join(' - ');
-        titleService.setTitle(title);
+        if (!(event.url.startsWith('/ludzie/') && event.url.length > 8)) {
+          const title = this.getTitle(router.routerState, router.routerState.root).join(' - ');
+          this.titleService.setTitle(title);
+        }
       }
     });
-    }
+  }
 
   ngOnInit() {
     this.primengConfig.ripple = true;
@@ -61,7 +61,6 @@ export class AppComponent implements OnInit {
     if(parent && parent.snapshot.data && parent.snapshot.data.title) {
       data.push(parent.snapshot.data.title);
     }
-
     if(state && parent) {
       data.push(... this.getTitle(state, state.firstChild(parent)));
     }
