@@ -12,6 +12,7 @@ export class AgentsDao {
 
     constructor(private agentsConverter: AgentsConverter) {
         this.agents = this.agentsConverter.convertToReadableAgents(rawAgents.Agenci.Agent);
+        console.log(this.agents);
     }
 
     listAgents(): Agent[] {
