@@ -20,7 +20,7 @@ export class OffersConverter {
                 releaseDate: offer.TerminWydaniaData?.text || '',
                 // TerminWydaniaLista is always a single element object.
                 releaseDateTitle: offer.TerminWydaniaLista?.text || '',
-                number: this.convertToNumber(offer.Numer),
+                number: this.convertToNumber(offer.Nr),
                 symbol: offer.Symbol || '',
                 status: offer.Status || '',
                 legalStatus: offer.StanPrawny || '',

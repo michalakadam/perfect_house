@@ -19,12 +19,36 @@ export class OfferComponent {
     private offersDao: OffersDao) {
     this.route.params.subscribe((params: Params) => {
         if (params.symbol) {
-        this.offer = this.offersDao.getOfferBySymbol(params.symbol);
-        this.titleService.setTitle(this.offer.title);
-        console.log(this.offer)
-        } else if (!params.symbol || !this.offer) {
+          this.loadOffer(params.symbol);
+        } else  {
           this.router.navigate(['/strona-nie-istnieje']);
         }    
       });
+  }
+
+  private loadOffer(symbol: string) {
+    if (this.consistsOnlyOfNumbers(symbol)) {
+      this.reloadOfferUsingSymbol(Number(symbol));
+    } else {
+      this.offer = this.offersDao.getOfferBySymbol(symbol);
+      if (this.offer) {
+        this.titleService.setTitle(this.offer.title);
+      } else {
+        this.router.navigate(['/strona-nie-istnieje']);
+      }
+    }
+  }
+
+  private consistsOnlyOfNumbers(symbol: string) {
+    return /^\d+$/.test(symbol);
+  }
+
+  private reloadOfferUsingSymbol(offerNumber: number) {
+      const symbol = this.offersDao.getOfferByNumber(offerNumber)?.symbol;
+      if (symbol) {
+        this.router.navigate(['oferta', symbol]);
+      } else {
+        this.router.navigate(['/strona-nie-istnieje']);
+      }
   }
 }

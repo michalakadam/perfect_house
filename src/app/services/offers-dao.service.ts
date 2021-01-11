@@ -52,4 +52,8 @@ export class OffersDao {
     getOfferBySymbol(symbol: string): Offer {
         return this.allOffers.find(offer => offer.symbol === symbol);
     }
+
+    getOfferByNumber(number: number): Offer {
+        return this.allOffers.find(offer => offer.number === number);
+    }
 }

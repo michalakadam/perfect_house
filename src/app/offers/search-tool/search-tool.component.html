@@ -61,7 +61,7 @@
             <label for="virtualVisitAvailable">wirtualna wizyta</label>
         </div>
         <div class="input">
-            <input type="text" pInputText placeholder="numer oferty" [(ngModel)]="symbol"> 
+            <input type="text" pInputText placeholder="symbol / numer oferty" [(ngModel)]="symbol"> 
             <i *ngIf="symbol" class="pi pi-times remove-input-icon" (click)="symbol = ''"></i>
         </div>
         <p-button label="Wyszukaj" icon="pi pi-search" (click)="applyFilters()"></p-button>
