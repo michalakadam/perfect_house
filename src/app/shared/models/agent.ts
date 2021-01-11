@@ -7,4 +7,5 @@ export interface Agent {
     mobile: string,
     mail: string,
     licenseNumber: string,
+    description: string,
 }

@@ -13,6 +13,7 @@ export class AgentBriefComponent {
   @Input() agent: Agent;
   @Input() isContactInfoVisible = false;
   @Input() isVertical = false;
+  @Input() displayBigger = false;
 
   constructor(readonly windowSizeDetector: WindowSizeDetector,
     readonly changeDetector: ChangeDetectorRef) {
