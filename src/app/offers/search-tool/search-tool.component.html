@@ -40,6 +40,26 @@
         </div>
     </div>
     <div class="row">
+        <div class="checkbox-container">
+            <p-checkbox [(ngModel)]="isInvestment" binary="true" inputId="investment"></p-checkbox>
+            <label for="investment">inwestycyjne</label>
+        </div>
+        <div class="checkbox-container">
+            <p-checkbox [(ngModel)]="isSpecial" binary="true" inputId="special"></p-checkbox>
+            <label for="special">specjalne</label>
+        </div>
+        <div class="checkbox-container">
+            <p-checkbox [(ngModel)]="isByTheSea" binary="true" inputId="byTheSea"></p-checkbox>
+            <label for="byTheSea">nad Bałtykiem</label>
+        </div>
+        <div class="checkbox-container">
+            <p-checkbox [(ngModel)]="isNoCommission" binary="true" inputId="noCommission"></p-checkbox>
+            <label for="noCommission">bez prowizji</label>
+        </div>
+        <div class="checkbox-container">
+            <p-checkbox [(ngModel)]="isVirtualVisitAvailable" binary="true" inputId="virtualVisitAvailable"></p-checkbox>
+            <label for="virtualVisitAvailable">wirtualna wizyta</label>
+        </div>
         <div class="input">
             <input type="text" pInputText placeholder="numer oferty" [(ngModel)]="symbol"> 
             <i *ngIf="symbol" class="pi pi-times remove-input-icon" (click)="symbol = ''"></i>

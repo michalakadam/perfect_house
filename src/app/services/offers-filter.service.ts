@@ -19,6 +19,20 @@ export class OffersFilter {
     if (filters.location) {
       offers = this.filterByLocation(offers, filters.location);
     }
+    if (filters.isInvestment) {
+      offers = offers.filter(offer => 
+        offer.predestination && offer.predestination.includes('inwestycyjna'));
+    }
+    if (filters.isByTheSea || filters.isSpecial) {
+      // TODO: find out which flag is used in Galactica for this kind of offers.
+      return [];
+    }
+    if (filters.isNoCommission) {
+      offers = offers.filter(offer => offer.isNoCommission);
+    }
+    if (filters.isVirtualVisitAvailable) {
+      offers = offers.filter(offer => !!offer.virtualVisitUrl);
+    }
 
     return offers;
   }

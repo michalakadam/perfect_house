@@ -18,7 +18,8 @@ export class OffersDao {
     constructor(private offersConverter: OffersConverter,
         private offersSorter: OffersSorter,
         private offersFilter: OffersFilter) {
-        this.allOffers = this.offersConverter.convertToReadableOffers(rawOffers.Oferty.Oferta);
+            this.allOffers = this.offersConverter
+                .convertToReadableOffers(rawOffers.Oferty.Oferta);
     }
 
     list(page: number, sorting: Sorting, filters: OffersFilters): Offer[] {

@@ -5,6 +5,11 @@ export interface OffersFilters {
     isSecondaryMarket: boolean;
     voivodeship: string;
     location: string;
+    isInvestment: boolean;
+    isByTheSea: boolean;
+    isSpecial: boolean;
+    isNoCommission: boolean;
+    isVirtualVisitAvailable: boolean;
 };
 
 export const DEFAULT_FILTERS = {
@@ -14,4 +19,9 @@ export const DEFAULT_FILTERS = {
     isSecondaryMarket: true,
     voivodeship: 'cała Polska',
     location: '',
+    isInvestment: false,
+    isByTheSea: false,
+    isSpecial: false,
+    isNoCommission: false,
+    isVirtualVisitAvailable: false,
 };

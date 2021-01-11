@@ -19,6 +19,7 @@
     .row {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         margin-bottom: 20px;
         width: 100%;
         @media screen and (max-width: $desktop-small) {
@@ -131,6 +132,51 @@
             align-self: flex-end;
 
             @include perfect-button;
+        }
+
+        .checkbox-container {
+            display: flex;
+
+            p-checkbox {
+                padding-right: 3px;
+
+                ::ng-deep .p-checkbox {
+                    .p-checkbox-box {
+
+                        &.p-highlight {
+                            border-color: $light-green;
+                            background: $light-green;
+                        }
+
+                        .p-checkbox-icon {
+                            color: $dark-green;
+                            font-weight: 700;
+                        }
+                    }
+
+                    &:not(.p-checkbox-disabled) .p-checkbox-box {
+                        &.p-focus {
+                            border-color: $light-green;
+                            box-shadow: 0 0 0 0.2rem $light-green;
+                        }
+
+                        &:hover {
+                            border-color: $light-green;
+                            box-shadow: 0 0 0 0.2rem $light-green;
+                        }
+
+                        &:focus {
+                            border: $light-green;
+                        }
+                    }
+                }
+            }
+
+            label {
+                color: $font-light-grey;
+                font-weight: 700;
+                padding-top: 1.5px;
+            }
         }
     }
 }

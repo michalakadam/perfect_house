@@ -38,6 +38,11 @@ export class SearchToolComponent implements OnChanges {
   isPrimaryMarket: boolean;
   isSecondaryMarket: boolean;
   marketValues: number[] = [];
+  isInvestment: boolean;
+  isByTheSea: boolean;
+  isSpecial: boolean;
+  isNoCommission: boolean;
+  isVirtualVisitAvailable: boolean;
   symbol = '';
 
   @Input() filters: OffersFilters;
@@ -61,6 +66,11 @@ export class SearchToolComponent implements OnChanges {
     if (this.isSecondaryMarket) {
       this.marketValues.push(1);
     }
+    this.isInvestment = this.filters.isInvestment;
+    this.isByTheSea = this.filters.isByTheSea;
+    this.isSpecial = this.filters.isSpecial;
+    this.isNoCommission = this.filters.isNoCommission;
+    this.isVirtualVisitAvailable = this.filters.isVirtualVisitAvailable;
   }
 
   applyFilters() {
@@ -68,7 +78,7 @@ export class SearchToolComponent implements OnChanges {
       this.openOffer.emit(this.symbol);
       return;
     }
-    
+
     const filters: OffersFilters = {
       estateType: this.selectedEstateType.displayName,
       isForRent: this.selectedTransaction.isForRent,
@@ -76,6 +86,11 @@ export class SearchToolComponent implements OnChanges {
       isSecondaryMarket: this.marketValues.indexOf(1) > -1,
       voivodeship: this.selectedVoivodeship,
       location: this.location,
+      isInvestment: this.isInvestment,
+      isByTheSea: this.isByTheSea,
+      isSpecial: this.isSpecial,
+      isNoCommission: this.isNoCommission,
+      isVirtualVisitAvailable: this.isVirtualVisitAvailable,
     };
 
     this.filters = filters;

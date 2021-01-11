@@ -21,6 +21,7 @@ export class OfferComponent {
         if (params.symbol) {
         this.offer = this.offersDao.getOfferBySymbol(params.symbol);
         this.titleService.setTitle(this.offer.title);
+        console.log(this.offer)
         } else if (!params.symbol || !this.offer) {
           this.router.navigate(['/strona-nie-istnieje']);
         }    
