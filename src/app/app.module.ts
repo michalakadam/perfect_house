@@ -36,6 +36,7 @@ import { PaginatorComponent } from './offers/paginator/paginator.component';
 import { AgentPageComponent } from './agents/agent-page/agent-page.component';
 import { OfferComponent } from './offer/offer.component';
 import {CheckboxModule} from 'primeng/checkbox';
+import { InputComponent } from './shared/input/input.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import {CheckboxModule} from 'primeng/checkbox';
     PaginatorComponent,
     AgentPageComponent,
     OfferComponent,
+    InputComponent,
   ],
   imports: [
     AppRoutingModule,

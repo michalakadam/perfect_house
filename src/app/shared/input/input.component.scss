@@ -1,0 +1,27 @@
+@import "~src/variables.scss";
+
+.input {
+    ::ng-deep .p-inputtext {
+        padding-right: 2rem;
+        width: 170px;
+
+        &:enabled {
+            &:focus {
+                box-shadow: 0 0 0 0.2rem $light-green;
+                border-color: $dark-green;
+            }
+
+            &:hover {
+                border-color: $light-green;
+            }
+        }
+    }
+
+    .remove-input-icon {
+        cursor: pointer;
+        margin-right: -12px;
+        right: 20px;
+        position: relative;
+        top: 1px;
+    }
+}

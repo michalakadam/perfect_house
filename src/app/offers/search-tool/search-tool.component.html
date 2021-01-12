@@ -32,11 +32,11 @@
                 [options]="availableVoivodeships" 
                 [(ngModel)]="selectedVoivodeship"></p-dropdown>
 
-            <div class="p-input-icon-left input">
-                <i class="pi pi-map-marker"></i>
-                <input type="text" pInputText placeholder="lokalizacja" [(ngModel)]="location"/>
-                <i *ngIf="location" class="pi pi-times remove-location-icon" (click)="location = ''"></i>
-            </div>
+            <perfect-input
+                lhsIcon='pi pi-map-marker'
+                title='lokalizacja'
+                [(value)]="location">
+            </perfect-input>
         </div>
     </div>
     <div class="row">
@@ -60,10 +60,10 @@
             <p-checkbox [(ngModel)]="isVirtualVisitAvailable" binary="true" inputId="virtualVisitAvailable"></p-checkbox>
             <label for="virtualVisitAvailable">wirtualna wizyta</label>
         </div>
-        <div class="input">
-            <input type="text" pInputText placeholder="symbol / numer oferty" [(ngModel)]="symbol"> 
-            <i *ngIf="symbol" class="pi pi-times remove-input-icon" (click)="symbol = ''"></i>
-        </div>
+        <perfect-input
+            title='symbol / number oferty'
+            [(value)]="symbol">
+        </perfect-input>
         <p-button label="Wyszukaj" icon="pi pi-search" (click)="applyFilters()"></p-button>
     </div>
 </div>
