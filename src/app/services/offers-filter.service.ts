@@ -33,7 +33,39 @@ export class OffersFilter {
     if (filters.isVirtualVisitAvailable) {
       offers = offers.filter(offer => !!offer.virtualVisitUrl);
     }
-
+    if (filters.priceFrom > -1) {
+      offers = offers.filter(offer => offer.price > filters.priceFrom);
+    }
+    if (filters.priceTo > -1) {
+      offers = offers.filter(offer => offer.price < filters.priceTo);
+    }
+    if (filters.pricePerSquareMeterFrom > -1) {
+      offers = offers.filter(offer => 
+        offer.pricePerSquareMeter > filters.pricePerSquareMeterFrom);
+    }
+    if (filters.pricePerSquareMeterTo > -1) {
+      offers = offers.filter(offer => 
+        offer.pricePerSquareMeter < filters.pricePerSquareMeterTo);
+    }
+    if (filters.areaFrom > -1) {
+      offers = offers.filter(offer => offer.totalArea > filters.areaFrom);
+    }
+    if (filters.areaTo > -1) {
+      offers = offers.filter(offer => offer.totalArea < filters.areaTo);
+    }
+    if (filters.numberOfRoomsFrom > -1) {
+      offers = offers.filter(offer => offer.numberOfRooms > filters.numberOfRoomsFrom);
+    }
+    if (filters.numberOfRoomsTo > -1) {
+      offers = offers.filter(offer => offer.numberOfRooms < filters.numberOfRoomsTo);
+    }
+    if (filters.floorFrom > -1) {
+      offers = offers.filter(offer => offer.floor > filters.floorFrom);
+    }
+    if (filters.floorTo > -1) {
+      offers = offers.filter(offer => offer.floor < filters.floorTo);
+    }
+    
     return offers;
   }
 

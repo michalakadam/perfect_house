@@ -221,12 +221,15 @@ export class OffersConverter {
         return estateType;
     }
 
-    private convertFloor(floor: string): string {
+    private convertFloor(floor: string): number {
         const containsNumber = /\d/;
         if (containsNumber.test(floor)) {
             // Removes leter p following floor number.
-            floor = floor.match(/\d+/)[0];
+            return Number(floor.match(/\d+/)[0]);
         }
-        return floor;
+        else if (floor.toLowerCase().includes('parter')) {
+            return 0;
+        }
+        return -1;
     }
 }

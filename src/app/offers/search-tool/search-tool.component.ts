@@ -44,6 +44,17 @@ export class SearchToolComponent implements OnChanges {
   isNoCommission: boolean;
   isVirtualVisitAvailable: boolean;
   symbol = '';
+  priceFrom: string;
+  priceTo: string;
+  pricePerSquareMeterFrom: string;
+  pricePerSquareMeterTo: string;
+  areaFrom: string;
+  areaTo: string;
+  numberOfRoomsFrom: string;
+  numberOfRoomsTo: string;
+  floorFrom: string;
+  floorTo: string;
+  
 
   @Input() filters: OffersFilters;
   @Output() searchOffers = new EventEmitter<OffersFilters>();
@@ -71,6 +82,20 @@ export class SearchToolComponent implements OnChanges {
     this.isSpecial = this.filters.isSpecial;
     this.isNoCommission = this.filters.isNoCommission;
     this.isVirtualVisitAvailable = this.filters.isVirtualVisitAvailable;
+    this.priceFrom = this.computeFieldValue(this.filters.priceFrom);
+    this.priceTo = this.computeFieldValue(this.filters.priceTo);
+    this.pricePerSquareMeterFrom = this.computeFieldValue(this.filters.pricePerSquareMeterFrom);
+    this.pricePerSquareMeterTo = this.computeFieldValue(this.filters.pricePerSquareMeterTo);
+    this.areaFrom = this.computeFieldValue(this.filters.areaFrom);
+    this.areaTo = this.computeFieldValue(this.filters.areaTo);
+    this.numberOfRoomsFrom = this.computeFieldValue(this.filters.numberOfRoomsFrom);
+    this.numberOfRoomsTo = this.computeFieldValue(this.filters.numberOfRoomsTo);
+    this.floorFrom = this.computeFieldValue(this.filters.floorFrom);
+    this.floorTo = this.computeFieldValue(this.filters.floorTo);
+  }
+
+  private computeFieldValue(value: number): string {
+    return value === -1 ? '' : '' + value;
   }
 
   applyFilters() {
@@ -91,9 +116,23 @@ export class SearchToolComponent implements OnChanges {
       isSpecial: this.isSpecial,
       isNoCommission: this.isNoCommission,
       isVirtualVisitAvailable: this.isVirtualVisitAvailable,
+      priceFrom: this.computeFilterNumericValue(this.priceFrom),
+      priceTo: this.computeFilterNumericValue(this.priceTo),
+      pricePerSquareMeterFrom: this.computeFilterNumericValue(this.pricePerSquareMeterFrom),
+      pricePerSquareMeterTo: this.computeFilterNumericValue(this.pricePerSquareMeterTo),
+      areaFrom: this.computeFilterNumericValue(this.areaFrom),
+      areaTo: this.computeFilterNumericValue(this.areaTo),
+      numberOfRoomsFrom: this.computeFilterNumericValue(this.numberOfRoomsFrom),
+      numberOfRoomsTo: this.computeFilterNumericValue(this.numberOfRoomsTo),
+      floorFrom: this.computeFilterNumericValue(this.floorFrom),
+      floorTo: this.computeFilterNumericValue(this.floorTo),
     };
 
     this.filters = filters;
     this.searchOffers.emit(filters);
+  }
+
+  private computeFilterNumericValue(value: string): number {
+    return value ? Number(value) : -1;
   }
 }

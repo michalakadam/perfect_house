@@ -40,6 +40,60 @@
         </div>
     </div>
     <div class="row">
+        <perfect-input
+            title='cena od'
+            type='number'
+            [(value)]="priceFrom">
+        </perfect-input>
+        <perfect-input
+            title='cena do'
+            type='number'
+            [(value)]="priceTo">
+        </perfect-input>
+        <perfect-input
+            title='cena za m² od'
+            type='number'
+            [(value)]="pricePerSquareMeterFrom">
+        </perfect-input>
+        <perfect-input
+            title='cena za m² do'
+            type='number'
+            [(value)]="pricePerSquareMeterTo">
+        </perfect-input>
+        <perfect-input
+            title='powierzchnia od'
+            type='number'
+            [(value)]="areaFrom">
+        </perfect-input>
+        <perfect-input
+            title='powierzchnia do'
+            type='number'
+            [(value)]="areaTo">
+        </perfect-input>
+    </div>
+    <div class="row">
+        <perfect-input
+            title='liczba pokoi od'
+            type='number'
+            [(value)]="numberOfRoomsFrom">
+        </perfect-input>
+        <perfect-input
+            title='liczba pokoi do'
+            type='number'
+            [(value)]="numberOfRoomsTo">
+        </perfect-input>
+        <perfect-input
+            title='piętro od'
+            type='number'
+            [(value)]="floorFrom">
+        </perfect-input>
+        <perfect-input
+            title='piętro do'
+            type='number'
+            [(value)]="floorTo">
+        </perfect-input>
+    </div>
+    <div class="row">
         <div class="checkbox-container">
             <p-checkbox [(ngModel)]="isInvestment" binary="true" inputId="investment"></p-checkbox>
             <label for="investment">inwestycyjne</label>

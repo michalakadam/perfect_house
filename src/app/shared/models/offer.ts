@@ -68,7 +68,7 @@ export interface Offer {
     numberOfBedrooms: number;
     numberOfTerraces: number;
     numberOfFloors: number;
-    floor: string;
+    floor: number;
     floorHeight: number;
     isBasementAvailable: boolean;
     sewageConnectionDetails: string; 

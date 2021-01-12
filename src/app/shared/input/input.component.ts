@@ -9,6 +9,7 @@ import { Component, Input, ChangeDetectionStrategy, ViewChild, ElementRef, Outpu
 export class InputComponent {
   @Input() lhsIcon = '';
   @Input() title = '';
+  @Input() type = 'text'
 
   @Output()valueChange = new EventEmitter<string>();
 
