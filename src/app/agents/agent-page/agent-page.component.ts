@@ -13,6 +13,7 @@ import { Agent } from 'src/app/shared/models';
 export class AgentPageComponent {
   agent: Agent;
   
+
   constructor(private route: ActivatedRoute,
     private router: Router,
     private titleService: Title,
@@ -22,6 +23,7 @@ export class AgentPageComponent {
         if (fullName) {
         this.titleService.setTitle(fullName);
         this.agent = this.agentsDao.getAgentByFullName(fullName);
+        console.log(this.agent);
         } else {
           this.router.navigate(['/strona-nie-istnieje']);
         }    

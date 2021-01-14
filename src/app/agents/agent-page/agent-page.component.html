@@ -1,0 +1,19 @@
+<div class="component-container">
+    <div>
+        <p-card class="agent-component">
+            <perfect-agent-brief
+                [agent]="agent"
+                [displayBigger]=true
+                [isContactInfoVisible]=true
+                [isVertical]=true>
+            </perfect-agent-brief>
+        </p-card>
+    </div>
+
+    <div>
+        <p-card class="agent-description">
+            <div *ngIf="agent.description">
+                {{ agent.description }}
+            </div>
+        </p-card>
+    </div>

@@ -1,0 +1,21 @@
+@import "~src/variables.scss";
+@import "~src/mixins.scss";
+
+.component-container {
+    @include articlePage;
+
+    display: flex;
+    align-items: center;
+
+    .agent-component {
+        width: 300px;
+        margin: 30px;
+        
+    }
+
+    .agent-description {
+        width: 300px;
+        height: 400px;
+    }
+    
+}
