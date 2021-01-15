@@ -34,7 +34,7 @@ import { ButtonModule } from 'primeng/button';
 import { AgentsComponent } from './agents/agents.component';
 import { PaginatorComponent } from './offers/paginator/paginator.component';
 import { AgentPageComponent } from './agents/agent-page/agent-page.component';
-import {CardModule} from 'primeng/card';
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({
@@ -77,7 +77,7 @@ import {CardModule} from 'primeng/card';
     MatSidenavModule,
     PaginatorModule,
     SelectButtonModule,
-    CardModule,
+    MatCardModule,
   ],
   bootstrap: [
     AppComponent,
