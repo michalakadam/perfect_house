@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { OffersDao } from 'src/app/services/offers-dao.service';
 import { AVAILABLE_TRANSACTIONS, Transaction, AVAILABLE_ESTATE_TYPES, Estate, OffersFilters } from 'src/app/shared/models';
+import { trigger, style, animate, transition } from '@angular/animations';
 
 const AVAILABLE_VOIVODESHIPS = [
   'cała Polska', 'dolnośląskie', 'kujawsko-pomorskie', 'lubelskie', 'lubuskie',
@@ -24,13 +25,35 @@ const AVAILABLE_MARKETS = [
   selector: 'perfect-search-tool',
   templateUrl: './search-tool.component.html',
   styleUrls: ['./search-tool.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger(
+      'openCloseAdvanced', 
+      [
+        transition(
+          ':enter', 
+          [
+            style({ height: 0, opacity: 0 }),
+            animate('0.25s ease', style({ height: 50, opacity: 1 })),
+          ],
+        ),
+        transition(
+          ':leave', 
+          [
+            style({ height: 50, opacity: 1 }),
+            animate('0.25s ease', style({ height: 0, opacity: 0 })),
+          ],
+        ),
+      ],
+    ),
+  ],
 })
 export class SearchToolComponent implements OnChanges {
   availableEstateTypes = AVAILABLE_ESTATE_TYPES;
   availableTransactions = AVAILABLE_TRANSACTIONS;
   availableVoivodeships = AVAILABLE_VOIVODESHIPS;
   availableMarkets = AVAILABLE_MARKETS;
+  showAdvanced = false;
 
   selectedEstateType: Estate;
   selectedTransaction: Transaction;
@@ -41,7 +64,6 @@ export class SearchToolComponent implements OnChanges {
   marketValues: number[] = [];
   isInvestment: boolean;
   isByTheSea: boolean;
-  isSpecial: boolean;
   isNoCommission: boolean;
   isVirtualVisitAvailable: boolean;
   symbol = '';
@@ -85,7 +107,6 @@ export class SearchToolComponent implements OnChanges {
     }
     this.isInvestment = this.filters.isInvestment;
     this.isByTheSea = this.filters.isByTheSea;
-    this.isSpecial = this.filters.isSpecial;
     this.isNoCommission = this.filters.isNoCommission;
     this.isVirtualVisitAvailable = this.filters.isVirtualVisitAvailable;
     this.priceFrom = this.filters.priceFrom > -1 ?
@@ -111,6 +132,10 @@ export class SearchToolComponent implements OnChanges {
 
   private computeFieldValue(value: number): string {
     return value === -1 ? '' : '' + value;
+  }
+
+  toggleAdvancedVisibility() {
+    this.showAdvanced = !this.showAdvanced;
   }
 
   updatePriceFrom(priceFromString: string) {
@@ -172,7 +197,6 @@ export class SearchToolComponent implements OnChanges {
       location: this.location,
       isInvestment: this.isInvestment,
       isByTheSea: this.isByTheSea,
-      isSpecial: this.isSpecial,
       isNoCommission: this.isNoCommission,
       isVirtualVisitAvailable: this.isVirtualVisitAvailable,
       priceFrom: this.computeFilterNumericValue(this.priceFrom),

@@ -55,7 +55,7 @@
 
 @mixin perfect-button {
     ::ng-deep .p-button {
-        background: $light-green;
+        background-color: $light-green;
         border: 1px solid $light-green;
         color: $dark-green;
 

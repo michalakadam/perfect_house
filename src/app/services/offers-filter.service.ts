@@ -23,7 +23,7 @@ export class OffersFilter {
       offers = offers.filter(offer => 
         offer.predestination && offer.predestination.includes('inwestycyjna'));
     }
-    if (filters.isByTheSea || filters.isSpecial) {
+    if (filters.isByTheSea) {
       // TODO: find out which flag is used in Galactica for this kind of offers.
       return [];
     }

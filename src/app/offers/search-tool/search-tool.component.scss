@@ -20,36 +20,90 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
+        min-height: 50px;
         width: 100%;
         @media screen and (max-width: $desktop-small) {
             flex-direction: column;
             margin-bottom: 0;
         }
 
-        .desktop-small-row {
-            display: flex;
-            @media screen and (max-width: $desktop-small) {
-                margin-bottom: 10px;
-            }
+        .checkboxes-container {
+            display: grid;
+            gap: 10px 10px;
+            grid-template-columns: repeat(2, 1fr);
 
-            & > p-dropdown {
-                &:first-of-type {
-                    margin-right: 10px;
-                }
-            }
+            .checkbox-container {
+                display: flex;
 
-            &:last-of-type {
-                @media screen and (max-width: $mobile) {
-                    flex-direction: column;
-                }
+                p-checkbox {
+                    padding-right: 3px;
 
-                & > p-dropdown {
-                    &:first-of-type {
-                        @media screen and (max-width: $mobile) {
-                            margin-bottom: 10px;
+                    ::ng-deep .p-checkbox {
+                        .p-checkbox-box {
+
+                            &.p-highlight {
+                                border-color: $light-green;
+                                background: $light-green;
+                            }
+
+                            .p-checkbox-icon {
+                                color: $dark-green;
+                                font-weight: 700;
+                            }
+                        }
+
+                        &:not(.p-checkbox-disabled) .p-checkbox-box {
+                            &.p-focus {
+                                border-color: $light-green;
+                                box-shadow: 0 0 0 0.2rem $light-green;
+                            }
+
+                            &:hover {
+                                border-color: $light-green;
+                                box-shadow: 0 0 0 0.2rem $light-green;
+                            }
+
+                            &:focus {
+                                border: $light-green;
+                            }
                         }
                     }
+                }
+
+                label {
+                    color: $font-light-grey;
+                    font-weight: 700;
+                    padding-top: 1.5px;
+                }
+            }
+        }
+
+        .from-to-input-container {
+            display: flex;
+            flex-direction: column;
+
+            .title {
+                color: $font-light-grey;
+                font-weight: 700;
+                margin-bottom: 5px;
+            }
+
+            .inputs-container {
+                align-items: center;
+                display: flex;
+
+                span {
+                    color: $font-light-grey;
+                    font-weight: 700;
+                }
+
+                & > * {
+                    margin-right: 5px;
+                }
+
+                &:last-child {
+                    margin-right: unset;
                 }
             }
         }
@@ -102,62 +156,11 @@
             }
         }
         
-        p-button {
-            align-self: flex-end;
-
-            @include perfect-button;
-        }
-
-        .checkbox-container {
-            display: flex;
-
-            p-checkbox {
-                padding-right: 3px;
-
-                ::ng-deep .p-checkbox {
-                    .p-checkbox-box {
-
-                        &.p-highlight {
-                            border-color: $light-green;
-                            background: $light-green;
-                        }
-
-                        .p-checkbox-icon {
-                            color: $dark-green;
-                            font-weight: 700;
-                        }
-                    }
-
-                    &:not(.p-checkbox-disabled) .p-checkbox-box {
-                        &.p-focus {
-                            border-color: $light-green;
-                            box-shadow: 0 0 0 0.2rem $light-green;
-                        }
-
-                        &:hover {
-                            border-color: $light-green;
-                            box-shadow: 0 0 0 0.2rem $light-green;
-                        }
-
-                        &:focus {
-                            border: $light-green;
-                        }
-                    }
-                }
-            }
-
-            label {
-                color: $font-light-grey;
-                font-weight: 700;
-                padding-top: 1.5px;
-            }
-        }
-
         .slider-container {
             display: flex;
             flex-direction: column;
-            height: 30px;
-            width: 200px;
+            height: 50px;
+            width: 254px;
 
             .slider-title {
                 align-items: center;
@@ -197,6 +200,40 @@
                         &:hover {
                             background-color: $light-green;
                         }
+                    }
+                }
+            }
+        }
+
+        .buttons-container {
+            p-button {
+                @include perfect-button;
+            }
+
+            .show-advanced {
+                font-weight: 700;
+                margin-right: 10px;
+
+                span {
+                    font-weight: 700;
+                    margin-right: 3px;
+                }
+                
+                i {
+                    margin-top: 1px;
+                }
+
+                ::ng-deep .p-button {
+                    background-color: $dark-green;
+                    border: 1px solid $dark-green;
+                    color: $font-white;
+
+                    &.p-highlight {
+                        border-color: $light-green;
+                    }
+
+                    &:not(.p-disabled):not(.p-highlight):hover {
+                        border-color: light-green;
                     }
                 }
             }

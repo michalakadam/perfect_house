@@ -7,7 +7,6 @@ export interface OffersFilters {
     location: string;
     isInvestment: boolean;
     isByTheSea: boolean;
-    isSpecial: boolean;
     isNoCommission: boolean;
     isVirtualVisitAvailable: boolean;
     priceFrom: number;
@@ -31,7 +30,6 @@ export const DEFAULT_FILTERS = {
     location: '',
     isInvestment: false,
     isByTheSea: false,
-    isSpecial: false,
     isNoCommission: false,
     isVirtualVisitAvailable: false,
     priceFrom: -1,
