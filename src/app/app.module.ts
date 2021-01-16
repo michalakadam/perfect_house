@@ -39,7 +39,8 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { InputComponent } from './shared/input/input.component';
 import { SliderModule } from 'primeng/slider';
 import { GalleriaModule } from 'primeng/galleria';
-
+import { MatCardModule } from '@angular/material/card';
+ 
 @NgModule({
   declarations: [
     AgentBriefComponent,
@@ -84,6 +85,7 @@ import { GalleriaModule } from 'primeng/galleria';
     SelectButtonModule,
     SliderModule,
     GalleriaModule,
+    MatCardModule,
   ],
   bootstrap: [
     AppComponent,

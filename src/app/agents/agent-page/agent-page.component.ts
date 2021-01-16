@@ -12,7 +12,7 @@ import { Agent } from 'src/app/shared/models';
 })
 export class AgentPageComponent {
   agent: Agent;
-  
+
   constructor(private route: ActivatedRoute,
     private router: Router,
     private titleService: Title,
