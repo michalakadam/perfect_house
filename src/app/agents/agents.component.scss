@@ -29,7 +29,6 @@
         gap: 30px 50px;
         grid-template-columns: repeat(3, 1fr);
         margin: 40px auto 50px auto;
-        max-width: 800px;
     
         @media screen and (max-width: $desktop-small) {
             grid-template-columns: repeat(2, 1fr);
@@ -48,5 +47,6 @@
 
     .about-text {
         margin: 20px; 
+        text-align: justify;
     }
 }

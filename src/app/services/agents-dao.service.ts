@@ -16,12 +16,20 @@ export class AgentsDao {
 
     listAgents(): Agent[] {
         return this.agents
-        .sort(function(a, b){
-            if(a.fullName.split(/\s+/).pop() < b.fullName.split(/\s+/).pop()) { return -1; }
-            if(a.fullName.split(/\s+/).pop() > b.fullName.split(/\s+/).pop()) { return 1; }
+          .sort((a, b) => {
+            if (this.extractFirstLetter(a.fullName) < this.extractFirstLetter(b.fullName)) {
+              return -1;
+            }
+            if (this.extractFirstLetter(a.fullName) > this.extractFirstLetter(b.fullName)) {
+              return 1;
+            }
             return 0;
-        })
-    }
+          });
+      }
+      
+      private extractFirstLetter(fullName: string): string {
+        return fullName.split(/\s+/).pop();
+      }
 
     getAgentById(id: number): Agent {
         return this.agents.find(agent => agent.id === '' + id);
