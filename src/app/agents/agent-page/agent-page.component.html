@@ -1,5 +1,5 @@
 <div class="grid-container">
-    
+
     <mat-card>
         <perfect-agent-brief
             [agent]="agent"
@@ -9,7 +9,7 @@
         </perfect-agent-brief>
     </mat-card>
 
-    <mat-card>
+    <mat-card class="description">
         <div *ngIf="agent.description">
             {{ agent.description }}
         </div>

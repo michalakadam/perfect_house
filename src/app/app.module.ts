@@ -35,8 +35,7 @@ import { AgentsComponent } from './agents/agents.component';
 import { PaginatorComponent } from './offers/paginator/paginator.component';
 import { AgentPageComponent } from './agents/agent-page/agent-page.component';
 import { MatCardModule } from '@angular/material/card';
-
-
+ 
 @NgModule({
   declarations: [
     AgentBriefComponent,
@@ -60,7 +59,6 @@ import { MatCardModule } from '@angular/material/card';
     AgentsComponent,
     PaginatorComponent,
     AgentPageComponent,
-    
   ],
   imports: [
     AppRoutingModule,

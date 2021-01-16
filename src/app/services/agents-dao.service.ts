@@ -15,7 +15,12 @@ export class AgentsDao {
     }
 
     listAgents(): Agent[] {
-        return this.agents;
+        return this.agents
+        .sort(function(a, b){
+            if(a.fullName.split(/\s+/).pop() < b.fullName.split(/\s+/).pop()) { return -1; }
+            if(a.fullName.split(/\s+/).pop() > b.fullName.split(/\s+/).pop()) { return 1; }
+            return 0;
+        })
     }
 
     getAgentById(id: number): Agent {

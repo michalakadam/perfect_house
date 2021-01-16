@@ -6,33 +6,35 @@
         
         @include articlePage;
 
-        align-items: center;
         display: grid;
         gap: 30px 50px;
         grid-template-columns: repeat(2, 1fr);
+        justify-content: center;
         justify-items: center;
         margin: 50px auto;
         max-width: 700px;
 
         mat-card {
-            width: 300px;
-            height: 400px;
             font-size: 15px;
+            min-height: 400px;
+            text-align: justify;
+            text-justify: inter-word;
+            width: 300px;
         }
 
         @media screen and (max-width: $desktop-small) {
             grid-template-columns: repeat(2, 1fr);
-            }
+        }
 
         @media screen and (max-width: $tablet) {
             grid-template-columns: repeat(1, 1fr);
             justify-items: center;
             margin: 20px auto;
-            }
+        }
 
         @media screen and (max-width: $mobile) {
             grid-template-columns: repeat(1, 1fr);
             justify-items: center;
             margin: 20px auto;
-            }
+        }
 }

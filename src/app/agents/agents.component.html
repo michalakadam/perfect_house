@@ -6,7 +6,7 @@
     </header> 
     <div class="list-of-agents">
         <perfect-agent-brief
-            *ngFor="let agent of agentsDao.listAgents()"
+            *ngFor="let agent of agentsDao.listAgents()" 
             [agent]="agent" 
             [isVertical]=true
             (click)="navigateToAgentPage(agent)">

@@ -4,24 +4,36 @@
 .component-container { 
 
     @include articlePage;
-    
+
     @media screen and (max-width: $mobile) {
         
         .title { 
-            font-size: 19px;
+            font-size: 20px;
             text-align: center;
         }
     }
+    @media screen and (max-width: $desktop-small) {
 
+        .title { 
+            font-size: 20px;
+            text-align: center;
+        }
+    }
+    
+    .title { 
+        font-size: 20px;
+    }
+    
     .list-of-agents {
         display: grid;
         gap: 30px 50px;
         grid-template-columns: repeat(3, 1fr);
-        margin: 55px auto 50px auto;
+        margin: 40px auto 50px auto;
         max-width: 800px;
     
         @media screen and (max-width: $desktop-small) {
             grid-template-columns: repeat(2, 1fr);
+
         }
 
         @media screen and (max-width: $mobile) {

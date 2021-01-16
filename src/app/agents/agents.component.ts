@@ -4,7 +4,6 @@ import { AgentsDao } from 'src/app/services/agents-dao.service';
 import { WindowSizeDetector } from '../services/window-size-detector.service';
 import { Agent } from '../shared/models';
 
-
 /** Wyświetla matrycę agentów. */
 @Component({
   selector: 'perfect-agents',
