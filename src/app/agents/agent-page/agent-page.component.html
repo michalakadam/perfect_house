@@ -1,0 +1,18 @@
+<div class="grid-container">
+
+    <mat-card>
+        <perfect-agent-brief
+            [agent]="agent"
+            [displayBigger]=true
+            [isContactInfoVisible]=true
+            [isVertical]=true>
+        </perfect-agent-brief>
+    </mat-card>
+
+    <mat-card class="description">
+        <div *ngIf="agent.description">
+            {{ agent.description }}
+        </div>
+    </mat-card>
+    
+</div>

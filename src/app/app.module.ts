@@ -33,7 +33,14 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { ButtonModule } from 'primeng/button';
 import { AgentsComponent } from './agents/agents.component';
 import { PaginatorComponent } from './offers/paginator/paginator.component';
-
+import { AgentPageComponent } from './agents/agent-page/agent-page.component';
+import { OfferComponent } from './offer/offer.component';
+import { CheckboxModule } from 'primeng/checkbox';
+import { InputComponent } from './shared/input/input.component';
+import { SliderModule } from 'primeng/slider';
+import { GalleriaModule } from 'primeng/galleria';
+import { MatCardModule } from '@angular/material/card';
+ 
 @NgModule({
   declarations: [
     AgentBriefComponent,
@@ -56,12 +63,16 @@ import { PaginatorComponent } from './offers/paginator/paginator.component';
     SearchToolComponent,
     AgentsComponent,
     PaginatorComponent,
+    AgentPageComponent,
+    OfferComponent,
+    InputComponent,
   ],
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
     ButtonModule,
+    CheckboxModule,
     DropdownModule,
     FormsModule,
     InputTextModule,
@@ -72,6 +83,9 @@ import { PaginatorComponent } from './offers/paginator/paginator.component';
     MatSidenavModule,
     PaginatorModule,
     SelectButtonModule,
+    SliderModule,
+    GalleriaModule,
+    MatCardModule,
   ],
   bootstrap: [
     AppComponent,

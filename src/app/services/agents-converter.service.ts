@@ -20,6 +20,7 @@ export class AgentsConverter {
                     mobile: agent.Komorka,
                     mail: agent.Email,
                     licenseNumber: agent.NrLicencji,
+                    description: agent.Opis,
                 }
             });
     }

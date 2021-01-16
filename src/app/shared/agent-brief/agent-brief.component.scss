@@ -2,6 +2,7 @@
 
 .component-container {
     display: flex;
+    width: 350px;
 
     .agent-photo {
         background-size: cover;
@@ -25,7 +26,9 @@
         }
 
         .position {
-            line-height: 24px;;
+            color: $font-light-grey;
+            font-weight: 700;
+            line-height: 24px;
         }
 
         a {
@@ -41,26 +44,71 @@
                 line-height: 14px;
             }
         }
+
+        .license {
+            text-align: left;
+        }
     }
 }
 
 .vertical-component-container {
     flex-direction: column;
+    width: 200px;
 
     .agent-photo {
         margin: 0 auto;
     }
 
     .agent-info-container {
-        margin: 0;
+        margin: 0 auto;
         text-align: center;
         
         .full-name {
             margin-top: 5px;
         }
 
-        a:last-of-type {
-            padding-left: 38px;
+        .position {
+            margin-top: -5px
+        }
+
+        .contact-info > * {
+            margin: 0 auto;
+        }
+    }
+}
+
+.bigger-component-container {
+    width: 250px;
+
+    .agent-photo {
+        height: 220px;
+        width: 220px;
+    }
+
+    .agent-info-container {
+        margin-top: 12px;
+
+        .full-name {
+            font-size: 20px;
+        }
+
+        .position {
+            font-size: 16px;
+            margin-top: 0;
+        }
+        
+        .contact-info {
+            margin-top: 14px;
+
+            & > * {
+                font-size: 16px;
+                margin-top: 10px;
+            }
+
+            mat-icon {
+                font-size: 24px;
+                margin-right: 4px;
+            }
         }
     }
 }

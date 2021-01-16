@@ -1,3 +1,29 @@
 <div class="component-container">
-    
+    <p-galleria
+        [(value)]="images"
+        [numVisible]="2"
+        [circular]="true"
+        [autoPlay]="true"
+        [transitionInterval]="5000"
+        [showThumbnails]="false"
+        [showIndicators]="true"
+        [changeItemOnIndicatorHover]="true"> 
+        <ng-template pTemplate="item" let-item>
+            <img [src]="item.previewImageSrc"
+                style="width: 100%; display: block; cursor: pointer"
+                (click)="openUrl(item)"/>
+        </ng-template>
+        <ng-template pTemplate="thumbnail" let-item>
+            <div class="p-grid p-nogutter p-justify-center">
+                <img [src]="item.thumbnailImageSrc" style="display: block;" />
+            </div>
+        </ng-template>
+    </p-galleria>
+
+    <perfect-search-tool
+        [onMainPage]=true 
+        (searchOffers)="loadOffers($event)"
+        (openOffer)="loadOffer($event)">
+    </perfect-search-tool>
+
 </div>

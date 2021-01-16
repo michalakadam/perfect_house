@@ -3,7 +3,7 @@
 @mixin articlePage { 
     margin: 0 auto; 
     width: 800px;
-    @media screen and (max-width: $desktop-medium) {
+    @media screen and (max-width: $desktop-small) {
         width: 600px;
     }
 
@@ -47,7 +47,7 @@
 
             &.p-highlight {
                 background: $light-green;
-                color: $font-white;
+                color: $dark-green;
             }
         }
     }
@@ -55,9 +55,9 @@
 
 @mixin perfect-button {
     ::ng-deep .p-button {
-        background: $light-green;
+        background-color: $light-green;
         border: 1px solid $light-green;
-        color: $font-white;
+        color: $dark-green;
 
         &.p-highlight {
             border-color: $dark-green;

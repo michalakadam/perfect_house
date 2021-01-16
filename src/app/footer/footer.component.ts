@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { skip } from 'rxjs/operators';
 import { WindowSizeDetector } from '../services/window-size-detector.service';
 
@@ -16,7 +17,8 @@ export class FooterComponent {
 
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,
-    private changeDetector: ChangeDetectorRef) {
+    private changeDetector: ChangeDetectorRef,
+    private router: Router) {
     this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
       this.changeDetector.detectChanges();
     });
@@ -44,5 +46,10 @@ export class FooterComponent {
       this.isRentalSectionOpen = false;
       this.isSaleSectionOpen = false;
     }
+  }
+  
+  loadOffers(params: any) {
+    window.scrollTo(0, 0);
+    this.router.navigate(['oferty', params]);
   }
 }

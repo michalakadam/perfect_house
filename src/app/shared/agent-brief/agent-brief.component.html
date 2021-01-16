@@ -1,5 +1,6 @@
 <div class="component-container"
-    [ngClass]="{'vertical-component-container': isVertical || windowSizeDetector.isWindowSmallerThanMobileSmall}">
+    [ngClass]="{'bigger-component-container': displayBigger,
+        'vertical-component-container': isVertical || windowSizeDetector.isWindowSmallerThanMobileSmall}">
     <div class="agent-photo" style="background-image: url('/agents/{{ agent.photoFileName }}');"></div>
     <div class="agent-info-container">
         <div class="full-name">
@@ -8,7 +9,7 @@
         <div class="position">
             {{ agent.position }}
         </div>
-        <div *ngIf="isContactInfoVisible">
+        <div class="contact-info" *ngIf="isContactInfoVisible">
             <a href="mailto:{{ agent.mail }}">
                 <mat-icon><i class="fas fa-envelope-square"></i></mat-icon>
                 {{ agent.mail }}
@@ -18,7 +19,7 @@
                 {{ agent.mobile }}
             </a>
             <div class="license" *ngIf="agent.licenseNumber">
-                {{ agent.licenseNumber }}
+                Numer licencji: {{ agent.licenseNumber }}
             </div>
         </div>
     </div>

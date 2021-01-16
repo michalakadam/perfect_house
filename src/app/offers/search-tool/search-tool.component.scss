@@ -10,7 +10,6 @@
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
         margin-bottom: 20px;
         padding: 15px;
-        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
     }
     @media screen and (max-width: $mobile) {
         margin-bottom: 10px;
@@ -19,36 +18,111 @@
     .row {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 20px;
+        align-items: center;
+        margin-bottom: 10px;
+        min-height: 50px;
         width: 100%;
         @media screen and (max-width: $desktop-small) {
             flex-direction: column;
             margin-bottom: 0;
-        }
 
-        .desktop-small-row {
-            display: flex;
-            @media screen and (max-width: $desktop-small) {
+            & > * {
+                align-self: start;
                 margin-bottom: 10px;
             }
+        }
 
-            & > p-dropdown {
-                &:first-of-type {
-                    margin-right: 10px;
-                }
+        .dropdowns {
+            display: flex;
+            margin-right: unset;
+
+            p-dropdown:first-of-type {
+                margin-right: 10px;
             }
+        }
 
-            &:last-of-type {
-                @media screen and (max-width: $mobile) {
-                    flex-direction: column;
-                }
+        .checkboxes-container {
+            display: grid;
+            gap: 10px 10px;
+            grid-template-columns: repeat(2, 1fr);
 
-                & > p-dropdown {
-                    &:first-of-type {
-                        @media screen and (max-width: $mobile) {
-                            margin-bottom: 10px;
+            .checkbox-container {
+                display: flex;
+
+                p-checkbox {
+                    padding-right: 3px;
+
+                    ::ng-deep .p-checkbox {
+                        .p-checkbox-box {
+
+                            &.p-highlight {
+                                border-color: $light-green;
+                                background: $light-green;
+                            }
+
+                            .p-checkbox-icon {
+                                color: $dark-green;
+                                font-weight: 700;
+                            }
+                        }
+
+                        &:not(.p-checkbox-disabled) .p-checkbox-box {
+                            &.p-focus {
+                                border-color: $light-green;
+                                box-shadow: 0 0 0 0.2rem $light-green;
+                            }
+
+                            &:hover {
+                                border-color: $light-green;
+                                box-shadow: 0 0 0 0.2rem $light-green;
+                            }
+
+                            &:focus {
+                                border: $light-green;
+                            }
                         }
                     }
+                }
+
+                label {
+                    color: $font-light-grey;
+                    font-weight: 700;
+                    padding-top: 1.5px;
+                }
+            }
+        }
+
+        .location-input {
+            @media screen and (max-width: $desktop-small) {
+                margin-top: 10px;
+            }
+        }
+
+        .from-to-input-container {
+            display: flex;
+            flex-direction: column;
+
+            .title {
+                color: $font-light-grey;
+                font-weight: 700;
+                margin-bottom: 5px;
+            }
+
+            .inputs-container {
+                align-items: center;
+                display: flex;
+
+                span {
+                    color: $font-light-grey;
+                    font-weight: 700;
+                }
+
+                & > * {
+                    margin-right: 5px;
+                }
+
+                &:last-child {
+                    margin-right: unset;
                 }
             }
         }
@@ -82,7 +156,7 @@
             ::ng-deep .p-button {
                 &.p-highlight {
                     background-color: $light-green;
-                    color: $font-white;
+                    color: $dark-green;
                     border-color: $light-green;
                 }
 
@@ -100,37 +174,88 @@
                 }
             }
         }
+        
+        .slider-container {
+            display: flex;
+            flex-direction: column;
+            height: 50px;
+            width: 254px;
 
-        .p-input-icon-left {
-            ::ng-deep .p-inputtext {
-                padding-right: 2rem;
-                width: 170px;
+            .slider-title {
+                align-items: center;
+                display: flex;
+                margin-bottom: 10px;
 
-                &:enabled {
-                    &:focus {
-                        box-shadow: 0 0 0 0.2rem $light-green;
-                        border-color: $dark-green;
-                    }
+                span {
+                    color: $font-light-grey;
+                    font-weight: 700;
+                }
 
-                    &:hover {
-                        border-color: $light-green;
-                    }
+                & > * {
+                    margin-right: 5px;
+                }
+
+                &:last-child {
+                    margin-right: unset;
                 }
             }
 
-            .remove-location-icon {
-                cursor: pointer;
-                margin-right: -12px;
-                right: 20px;
-                position: relative;
-                top: 1px;
+            p-slider {
+                margin-left: 5px;
+                width: 242px;
+
+                ::ng-deep .p-slider {
+                    .p-slider-range {
+                        background-color: $light-green;
+                    }
+
+                    .p-slider-handle {
+                        border-color: $dark-green;
+
+                        &:focus {
+                            box-shadow: unset;
+                        }
+
+                        &:hover {
+                            background-color: $light-green;
+                        }
+                    }
+                }
             }
         }
-        
-        p-button {
-            align-self: flex-end;
 
-            @include perfect-button;
+        .buttons-container {
+            p-button {
+                @include perfect-button;
+            }
+
+            .show-advanced {
+                font-weight: 700;
+                margin-right: 10px;
+
+                span {
+                    font-weight: 700;
+                    margin-right: 3px;
+                }
+                
+                i {
+                    margin-top: 1px;
+                }
+
+                ::ng-deep .p-button {
+                    background-color: $dark-green;
+                    border: 1px solid $dark-green;
+                    color: $font-white;
+
+                    &.p-highlight {
+                        border-color: $light-green;
+                    }
+
+                    &:not(.p-disabled):not(.p-highlight):hover {
+                        border-color: light-green;
+                    }
+                }
+            }
         }
     }
 }
