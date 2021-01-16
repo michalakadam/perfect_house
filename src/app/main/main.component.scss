@@ -9,4 +9,20 @@
     @media screen and (max-width: $mobile) {
         width: 300px;
     }
+
+    p-galleria {
+        ::ng-deep .p-galleria .p-galleria-indicators {
+            .p-galleria-indicator.p-highlight {
+                button {
+                    background: $light-green;
+                    background-color: $light-green;
+
+                }
+                
+                .p-link:focus {
+                    box-shadow: 0 0 0 0.2rem $dark-green;
+                }
+            }
+        }
+    }
 }

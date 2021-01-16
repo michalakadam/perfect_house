@@ -23,15 +23,16 @@ export class OffersDao {
                 .convertToReadableOffers(rawOffers.Oferty.Oferta);
     }
 
+    initializeOffersForTheMainPage() {
+        this.currentSearchOffers = this.allOffers;
+        this.currentSearchOffersSortedByPriceAsc = this.sortCurrentOffersByPrice();
+    }
+
     list(page: number, sorting: Sorting, filters: OffersFilters): Offer[] {
         const filteredOffers = this.offersFilter.filterOffers(this.allOffers, filters);
 
         this.currentSearchOffers = this.offersSorter.sortOffers(filteredOffers, sorting);
-        this.currentSearchOffersSortedByPriceAsc = this.offersSorter
-            .sortOffers(
-                [...this.currentSearchOffers],
-                AVAILABLE_SORTINGS.find(sorting => sorting.displayName === 'cenie rosnąco')
-            );
+        this.currentSearchOffersSortedByPriceAsc = this.sortCurrentOffersByPrice();
         // Filtering by price needs to be done at the end in order to retrieve price slider
         // min/max value properly.
         this.currentSearchOffers = this.offersFilter
@@ -39,6 +40,15 @@ export class OffersDao {
 
         const startIndex = page * OFFERS_PER_PAGE; 
         return this.currentSearchOffers.slice(startIndex, startIndex + OFFERS_PER_PAGE);
+    }
+
+    private sortCurrentOffersByPrice(): Offer[] {
+        return this.offersSorter
+            .sortOffers(
+                [...this.currentSearchOffers],
+                AVAILABLE_SORTINGS.find(sorting => sorting.displayName === 'cenie rosnąco')
+            );
+
     }
 
     getOffersQuantity(): number {

@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { OffersDao } from 'src/app/services/offers-dao.service';
-import { AVAILABLE_TRANSACTIONS, Transaction, AVAILABLE_ESTATE_TYPES, Estate, OffersFilters } from 'src/app/shared/models';
+import { AVAILABLE_TRANSACTIONS, Transaction, AVAILABLE_ESTATE_TYPES, Estate, OffersFilters, DEFAULT_FILTERS } from 'src/app/shared/models';
 import { trigger, style, animate, transition } from '@angular/animations';
 
 const AVAILABLE_VOIVODESHIPS = [
@@ -80,8 +80,8 @@ export class SearchToolComponent implements OnChanges {
 
   priceRange: number[];
   
-
-  @Input() filters: OffersFilters;
+  @Input() onMainPage = false;
+  @Input() filters: OffersFilters = DEFAULT_FILTERS;
   @Output() searchOffers = new EventEmitter<OffersFilters>();
   @Output() openOffer = new EventEmitter<string>();
 
@@ -168,6 +168,9 @@ export class SearchToolComponent implements OnChanges {
   }
 
   applyFiltersIgnoringPrice() {
+    if (this.onMainPage) {
+      return;
+    }
     this.priceFrom = '-1';
     this.priceTo = '-1';
 

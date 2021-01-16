@@ -38,6 +38,7 @@ import { OfferComponent } from './offer/offer.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputComponent } from './shared/input/input.component';
 import { SliderModule } from 'primeng/slider';
+import { GalleriaModule } from 'primeng/galleria';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { SliderModule } from 'primeng/slider';
     PaginatorModule,
     SelectButtonModule,
     SliderModule,
+    GalleriaModule,
   ],
   bootstrap: [
     AppComponent,

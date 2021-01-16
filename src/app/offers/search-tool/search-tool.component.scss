@@ -10,7 +10,6 @@
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
         margin-bottom: 20px;
         padding: 15px;
-        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
     }
     @media screen and (max-width: $mobile) {
         margin-bottom: 10px;
@@ -26,6 +25,20 @@
         @media screen and (max-width: $desktop-small) {
             flex-direction: column;
             margin-bottom: 0;
+
+            & > * {
+                align-self: start;
+                margin-bottom: 10px;
+            }
+        }
+
+        .dropdowns {
+            display: flex;
+            margin-right: unset;
+
+            p-dropdown:first-of-type {
+                margin-right: 10px;
+            }
         }
 
         .checkboxes-container {
@@ -76,6 +89,12 @@
                     font-weight: 700;
                     padding-top: 1.5px;
                 }
+            }
+        }
+
+        .location-input {
+            @media screen and (max-width: $desktop-small) {
+                margin-top: 10px;
             }
         }
 
