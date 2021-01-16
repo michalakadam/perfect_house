@@ -1,0 +1,52 @@
+@import "~src/variables.scss";
+@import "~src/mixins.scss";
+
+.component-container { 
+
+    @include articlePage;
+
+    @media screen and (max-width: $mobile) {
+        
+        .title { 
+            font-size: 20px;
+            text-align: center;
+        }
+    }
+    @media screen and (max-width: $desktop-small) {
+
+        .title { 
+            font-size: 20px;
+            text-align: center;
+        }
+    }
+    
+    .title { 
+        font-size: 20px;
+    }
+    
+    .list-of-agents {
+        display: grid;
+        gap: 30px 50px;
+        grid-template-columns: repeat(3, 1fr);
+        margin: 40px auto 50px auto;
+    
+        @media screen and (max-width: $desktop-small) {
+            grid-template-columns: repeat(2, 1fr);
+
+        }
+
+        @media screen and (max-width: $mobile) {
+           grid-template-columns: repeat(1, 1fr);
+           justify-items: center;
+        }
+
+        perfect-agent-brief {
+            cursor: pointer;
+        }
+    }
+
+    .about-text {
+        margin: 20px; 
+        text-align: justify;
+    }
+}
