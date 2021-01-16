@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges, ChangeDetectorRef } from '@angular/core';
+import { OffersDao } from 'src/app/services/offers-dao.service';
 import { AVAILABLE_TRANSACTIONS, Transaction, AVAILABLE_ESTATE_TYPES, Estate, OffersFilters } from 'src/app/shared/models';
 
 const AVAILABLE_VOIVODESHIPS = [
@@ -54,11 +55,16 @@ export class SearchToolComponent implements OnChanges {
   numberOfRoomsTo: string;
   floorFrom: string;
   floorTo: string;
+
+  priceRange: number[];
   
 
   @Input() filters: OffersFilters;
   @Output() searchOffers = new EventEmitter<OffersFilters>();
   @Output() openOffer = new EventEmitter<string>();
+
+  constructor(readonly offersDao: OffersDao,
+    private changeDetector: ChangeDetectorRef) {}
 
   ngOnChanges() {
     this.selectedEstateType = this.availableEstateTypes.find(estateType => {
@@ -82,8 +88,16 @@ export class SearchToolComponent implements OnChanges {
     this.isSpecial = this.filters.isSpecial;
     this.isNoCommission = this.filters.isNoCommission;
     this.isVirtualVisitAvailable = this.filters.isVirtualVisitAvailable;
-    this.priceFrom = this.computeFieldValue(this.filters.priceFrom);
-    this.priceTo = this.computeFieldValue(this.filters.priceTo);
+    this.priceFrom = this.filters.priceFrom > -1 ?
+      this.computeFieldValue(this.filters.priceFrom) :
+      this.computeFieldValue(this.offersDao.getLowestPriceForCurrentSearch());
+    this.priceTo = this.filters.priceTo > -1 ?
+      this.computeFieldValue(this.filters.priceTo) :
+      this.computeFieldValue(this.offersDao.getHighestPriceForCurrentSearch());
+    this.priceRange = [
+      this.computeFilterNumericValue(this.priceFrom),
+      this.computeFilterNumericValue(this.priceTo)
+    ];
     this.pricePerSquareMeterFrom = this.computeFieldValue(this.filters.pricePerSquareMeterFrom);
     this.pricePerSquareMeterTo = this.computeFieldValue(this.filters.pricePerSquareMeterTo);
     this.areaFrom = this.computeFieldValue(this.filters.areaFrom);
@@ -92,10 +106,38 @@ export class SearchToolComponent implements OnChanges {
     this.numberOfRoomsTo = this.computeFieldValue(this.filters.numberOfRoomsTo);
     this.floorFrom = this.computeFieldValue(this.filters.floorFrom);
     this.floorTo = this.computeFieldValue(this.filters.floorTo);
+    this.changeDetector.detectChanges();
   }
 
   private computeFieldValue(value: number): string {
     return value === -1 ? '' : '' + value;
+  }
+
+  updatePriceFrom(priceFrom: number) {
+    if (priceFrom < this.offersDao.getLowestPriceForCurrentSearch()) {
+      priceFrom = this.offersDao.getLowestPriceForCurrentSearch();
+    }
+    if (priceFrom > this.offersDao.getHighestPriceForCurrentSearch()) {
+      priceFrom = this.offersDao.getHighestPriceForCurrentSearch();
+    }
+    this.priceRange = [priceFrom, this.computeFilterNumericValue(this.priceTo)];
+    this.changeDetector.detectChanges();
+  }
+
+  updatePriceTo(priceTo: number) {
+    if (priceTo < this.offersDao.getLowestPriceForCurrentSearch()) {
+      priceTo = this.offersDao.getLowestPriceForCurrentSearch();
+    }
+    if (priceTo > this.offersDao.getHighestPriceForCurrentSearch()) {
+      priceTo = this.offersDao.getHighestPriceForCurrentSearch();
+    }
+    this.priceRange = [this.computeFilterNumericValue(this.priceFrom), priceTo];
+    this.changeDetector.detectChanges();
+  }
+
+  updatePrices(event) {
+    this.priceFrom = this.computeFieldValue(event.values[0]);
+    this.priceTo = this.computeFieldValue(event.values[1]);
   }
 
   applyFilters() {

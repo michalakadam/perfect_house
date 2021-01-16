@@ -37,6 +37,7 @@ import { AgentPageComponent } from './agents/agent-page/agent-page.component';
 import { OfferComponent } from './offer/offer.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputComponent } from './shared/input/input.component';
+import { SliderModule } from 'primeng/slider';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { InputComponent } from './shared/input/input.component';
     MatSidenavModule,
     PaginatorModule,
     SelectButtonModule,
+    SliderModule,
   ],
   bootstrap: [
     AppComponent,

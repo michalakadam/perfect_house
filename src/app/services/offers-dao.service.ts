@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import * as rawOffers from "src/offers/offers.json";
-import { OffersFilters, Offer, Sorting } from '../shared/models';
+import { OffersFilters, Offer, Sorting, AVAILABLE_SORTINGS } from '../shared/models';
 import { OffersConverter } from './offers-converter.service';
 import { OffersFilter } from './offers-filter.service';
 import { OffersSorter } from './offers-sorter.service';
@@ -14,6 +14,7 @@ const OFFERS_PER_PAGE = 50;
 export class OffersDao {
     private allOffers: Offer[];
     private currentSearchOffers: Offer[];
+    private currentSearchOffersSortedByPriceAsc: Offer[];
 
     constructor(private offersConverter: OffersConverter,
         private offersSorter: OffersSorter,
@@ -26,6 +27,16 @@ export class OffersDao {
         const filteredOffers = this.offersFilter.filterOffers(this.allOffers, filters);
 
         this.currentSearchOffers = this.offersSorter.sortOffers(filteredOffers, sorting);
+        this.currentSearchOffersSortedByPriceAsc = this.offersSorter
+            .sortOffers(
+                this.currentSearchOffers,
+                AVAILABLE_SORTINGS.find(sorting => sorting.displayName === 'cenie rosnąco')
+            );
+        // Filtering by price needs to be done at the end in order to retrieve price slider
+        // min/max value properly.
+        this.currentSearchOffers = this.offersFilter
+            .filterOffersByPrice(this.currentSearchOffers, filters);
+
         const startIndex = page * OFFERS_PER_PAGE; 
         return this.currentSearchOffers.slice(startIndex, startIndex + OFFERS_PER_PAGE);
     }
@@ -55,5 +66,14 @@ export class OffersDao {
 
     getOfferByNumber(number: number): Offer {
         return this.allOffers.find(offer => offer.number === number);
+    }
+    
+    getLowestPriceForCurrentSearch(): number {
+        return this.currentSearchOffersSortedByPriceAsc[0].price;
+    }
+
+    getHighestPriceForCurrentSearch(): number {
+        return this.currentSearchOffersSortedByPriceAsc
+            [this.currentSearchOffersSortedByPriceAsc.length - 1].price;
     }
 }

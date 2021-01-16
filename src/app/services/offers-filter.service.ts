@@ -33,12 +33,6 @@ export class OffersFilter {
     if (filters.isVirtualVisitAvailable) {
       offers = offers.filter(offer => !!offer.virtualVisitUrl);
     }
-    if (filters.priceFrom > -1) {
-      offers = offers.filter(offer => offer.price > filters.priceFrom);
-    }
-    if (filters.priceTo > -1) {
-      offers = offers.filter(offer => offer.price < filters.priceTo);
-    }
     if (filters.pricePerSquareMeterFrom > -1) {
       offers = offers.filter(offer => 
         offer.pricePerSquareMeter > filters.pricePerSquareMeterFrom);
@@ -105,5 +99,16 @@ export class OffersFilter {
   private filterByLocation(offers: Offer[], location: string): Offer[] {
     return offers.filter(offer =>
       offer.city.toLowerCase() === location.toLowerCase());
+  }
+
+
+  filterOffersByPrice(offers: Offer[], filters: OffersFilters): Offer[] {
+    if (filters.priceFrom > -1) {
+      offers = offers.filter(offer => offer.price > filters.priceFrom);
+    }
+    if (filters.priceTo > -1) {
+      offers = offers.filter(offer => offer.price < filters.priceTo);
+    }
+    return offers;
   }
 }

@@ -40,16 +40,34 @@
         </div>
     </div>
     <div class="row">
-        <perfect-input
-            title='cena od'
-            type='number'
-            [(value)]="priceFrom">
-        </perfect-input>
-        <perfect-input
-            title='cena do'
-            type='number'
-            [(value)]="priceTo">
-        </perfect-input>
+        <div class="slider-container">
+            <div class="slider-title">
+                <span>Cena: </span>
+                <perfect-input
+                    type='number'
+                    [defaultValue]="offersDao.getLowestPriceForCurrentSearch()"
+                    [(value)]="priceFrom"
+                    (valueChange)="updatePriceFrom($event)">
+                </perfect-input>
+                <span>-</span>
+                <perfect-input
+                    type='number'
+                    [defaultValue]="offersDao.getHighestPriceForCurrentSearch()"
+                    [(value)]="priceTo"
+                    (valueChange)="updatePriceTo($event)">
+                </perfect-input>
+            </div>
+            <p-slider
+                [(ngModel)]="priceRange"
+                [range]="true"
+                [min]="offersDao.getLowestPriceForCurrentSearch()"
+                [max]="offersDao.getHighestPriceForCurrentSearch()"
+                [step]=100
+                (onChange)="updatePrices($event)">
+            </p-slider>
+        </div>
+    </div>
+    <div class="row">
         <perfect-input
             title='cena za m² od'
             type='number'

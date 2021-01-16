@@ -10,6 +10,7 @@ export class InputComponent {
   @Input() lhsIcon = '';
   @Input() title = '';
   @Input() type = 'text'
+  @Input() defaultValue = '';
 
   @Output()valueChange = new EventEmitter<string>();
 
@@ -28,7 +29,7 @@ export class InputComponent {
   @ViewChild('input') input: ElementRef;
 
   removeContent() {
-    this.value = '';
+    this.value = this.defaultValue;
     this.input.nativeElement.classList.remove('p-filled');
   }
 }
