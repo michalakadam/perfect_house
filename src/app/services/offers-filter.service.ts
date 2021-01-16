@@ -35,29 +35,29 @@ export class OffersFilter {
     }
     if (filters.pricePerSquareMeterFrom > -1) {
       offers = offers.filter(offer => 
-        offer.pricePerSquareMeter > filters.pricePerSquareMeterFrom);
+        offer.pricePerSquareMeter >= filters.pricePerSquareMeterFrom);
     }
     if (filters.pricePerSquareMeterTo > -1) {
       offers = offers.filter(offer => 
-        offer.pricePerSquareMeter < filters.pricePerSquareMeterTo);
+        offer.pricePerSquareMeter <= filters.pricePerSquareMeterTo);
     }
     if (filters.areaFrom > -1) {
-      offers = offers.filter(offer => offer.totalArea > filters.areaFrom);
+      offers = offers.filter(offer => offer.totalArea >= filters.areaFrom);
     }
     if (filters.areaTo > -1) {
-      offers = offers.filter(offer => offer.totalArea < filters.areaTo);
+      offers = offers.filter(offer => offer.totalArea <= filters.areaTo);
     }
     if (filters.numberOfRoomsFrom > -1) {
-      offers = offers.filter(offer => offer.numberOfRooms > filters.numberOfRoomsFrom);
+      offers = offers.filter(offer => offer.numberOfRooms >= filters.numberOfRoomsFrom);
     }
     if (filters.numberOfRoomsTo > -1) {
-      offers = offers.filter(offer => offer.numberOfRooms < filters.numberOfRoomsTo);
+      offers = offers.filter(offer => offer.numberOfRooms <= filters.numberOfRoomsTo);
     }
     if (filters.floorFrom > -1) {
-      offers = offers.filter(offer => offer.floor > filters.floorFrom);
+      offers = offers.filter(offer => offer.floor >= filters.floorFrom);
     }
     if (filters.floorTo > -1) {
-      offers = offers.filter(offer => offer.floor < filters.floorTo);
+      offers = offers.filter(offer => offer.floor <= filters.floorTo);
     }
     
     return offers;
@@ -104,10 +104,10 @@ export class OffersFilter {
 
   filterOffersByPrice(offers: Offer[], filters: OffersFilters): Offer[] {
     if (filters.priceFrom > -1) {
-      offers = offers.filter(offer => offer.price > filters.priceFrom);
+      offers = offers.filter(offer => offer.price >= filters.priceFrom);
     }
     if (filters.priceTo > -1) {
-      offers = offers.filter(offer => offer.price < filters.priceTo);
+      offers = offers.filter(offer => offer.price <= filters.priceTo);
     }
     return offers;
   }

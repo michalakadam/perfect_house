@@ -5,13 +5,17 @@
                 class="estate-dropdown"
                 [options]="availableEstateTypes" 
                 [(ngModel)]="selectedEstateType"
-                optionLabel="displayName"></p-dropdown>
+                optionLabel="displayName"
+                (onChange)="applyFiltersIgnoringPrice()">
+            </p-dropdown>
 
             <p-dropdown
                 class="transaction-dropdown"
                 [options]="availableTransactions" 
                 [(ngModel)]="selectedTransaction" 
-                optionLabel="displayName"></p-dropdown>
+                optionLabel="displayName"
+                (onChange)="applyFiltersIgnoringPrice()">
+            </p-dropdown>
         </div>
 
         <div class="market-toggle-container desktop-small-row">
@@ -23,14 +27,18 @@
                 [(ngModel)]="marketValues"
                 multiple="multiple"
                 optionLabel="displayName"
-                optionValue="value"></p-selectButton>
+                optionValue="value"
+                (onChange)="applyFiltersIgnoringPrice()">'
+            </p-selectButton>
         </div>
 
         <div class="desktop-small-row">
             <p-dropdown
                 class="voivodeship-dropdown desktop"
                 [options]="availableVoivodeships" 
-                [(ngModel)]="selectedVoivodeship"></p-dropdown>
+                [(ngModel)]="selectedVoivodeship"
+                (onChange)="applyFiltersIgnoringPrice()">
+            </p-dropdown>
 
             <perfect-input
                 lhsIcon='pi pi-map-marker'
@@ -63,7 +71,8 @@
                 [min]="offersDao.getLowestPriceForCurrentSearch()"
                 [max]="offersDao.getHighestPriceForCurrentSearch()"
                 [step]=100
-                (onChange)="updatePrices($event)">
+                (onChange)="updatePrices($event)"
+                (onSlideEnd)="applyFilters()">
             </p-slider>
         </div>
     </div>
@@ -113,23 +122,45 @@
     </div>
     <div class="row">
         <div class="checkbox-container">
-            <p-checkbox [(ngModel)]="isInvestment" binary="true" inputId="investment"></p-checkbox>
+            <p-checkbox
+                [(ngModel)]="isInvestment"
+                binary="true" 
+                inputId="investment"
+                (onChange)="applyFiltersIgnoringPrice()">
+            </p-checkbox>
             <label for="investment">inwestycyjne</label>
         </div>
         <div class="checkbox-container">
-            <p-checkbox [(ngModel)]="isSpecial" binary="true" inputId="special"></p-checkbox>
+            <p-checkbox
+                [(ngModel)]="isSpecial"
+                binary="true"
+                inputId="special"
+                (onChange)="applyFiltersIgnoringPrice()">
+            </p-checkbox>
             <label for="special">specjalne</label>
         </div>
         <div class="checkbox-container">
-            <p-checkbox [(ngModel)]="isByTheSea" binary="true" inputId="byTheSea"></p-checkbox>
+            <p-checkbox
+                [(ngModel)]="isByTheSea"
+                binary="true" 
+                inputId="byTheSea"
+                (onChange)="applyFiltersIgnoringPrice()"></p-checkbox>
             <label for="byTheSea">nad Bałtykiem</label>
         </div>
         <div class="checkbox-container">
-            <p-checkbox [(ngModel)]="isNoCommission" binary="true" inputId="noCommission"></p-checkbox>
+            <p-checkbox
+                [(ngModel)]="isNoCommission"
+                binary="true"
+                inputId="noCommission"
+                (onChange)="applyFiltersIgnoringPrice()"></p-checkbox>
             <label for="noCommission">bez prowizji</label>
         </div>
         <div class="checkbox-container">
-            <p-checkbox [(ngModel)]="isVirtualVisitAvailable" binary="true" inputId="virtualVisitAvailable"></p-checkbox>
+            <p-checkbox
+                [(ngModel)]="isVirtualVisitAvailable"
+                binary="true"
+                inputId="virtualVisitAvailable"
+                (onChange)="applyFiltersIgnoringPrice()"></p-checkbox>
             <label for="virtualVisitAvailable">wirtualna wizyta</label>
         </div>
         <perfect-input

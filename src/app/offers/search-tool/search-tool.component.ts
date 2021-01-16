@@ -113,7 +113,8 @@ export class SearchToolComponent implements OnChanges {
     return value === -1 ? '' : '' + value;
   }
 
-  updatePriceFrom(priceFrom: number) {
+  updatePriceFrom(priceFromString: string) {
+    let priceFrom = this.computeFilterNumericValue(priceFromString);
     if (priceFrom < this.offersDao.getLowestPriceForCurrentSearch()) {
       priceFrom = this.offersDao.getLowestPriceForCurrentSearch();
     }
@@ -124,7 +125,8 @@ export class SearchToolComponent implements OnChanges {
     this.changeDetector.detectChanges();
   }
 
-  updatePriceTo(priceTo: number) {
+  updatePriceTo(priceToString: string) {
+    let priceTo = this.computeFilterNumericValue(priceToString);
     if (priceTo < this.offersDao.getLowestPriceForCurrentSearch()) {
       priceTo = this.offersDao.getLowestPriceForCurrentSearch();
     }
@@ -140,11 +142,26 @@ export class SearchToolComponent implements OnChanges {
     this.priceTo = this.computeFieldValue(event.values[1]);
   }
 
+  applyFiltersIgnoringPrice() {
+    this.priceFrom = '-1';
+    this.priceTo = '-1';
+
+    this.applyFilters();
+  }
+
   applyFilters() {
     if (this.symbol) {
       this.openOffer.emit(this.symbol);
       return;
     }
+    if (this.computeFilterNumericValue(this.priceFrom) ===
+      this.offersDao.getLowestPriceForCurrentSearch()) {
+        this.priceFrom = '-1';
+    }
+    if (this.computeFilterNumericValue(this.priceTo) ===
+      this.offersDao.getHighestPriceForCurrentSearch()) {
+        this.priceTo = '-1';
+      }
 
     const filters: OffersFilters = {
       estateType: this.selectedEstateType.displayName,

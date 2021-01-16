@@ -29,7 +29,7 @@ export class OffersDao {
         this.currentSearchOffers = this.offersSorter.sortOffers(filteredOffers, sorting);
         this.currentSearchOffersSortedByPriceAsc = this.offersSorter
             .sortOffers(
-                this.currentSearchOffers,
+                [...this.currentSearchOffers],
                 AVAILABLE_SORTINGS.find(sorting => sorting.displayName === 'cenie rosnąco')
             );
         // Filtering by price needs to be done at the end in order to retrieve price slider
@@ -69,11 +69,14 @@ export class OffersDao {
     }
     
     getLowestPriceForCurrentSearch(): number {
-        return this.currentSearchOffersSortedByPriceAsc[0].price;
+        return this.getOffersQuantity() ?
+            this.currentSearchOffersSortedByPriceAsc[0].price : 0;
     }
 
     getHighestPriceForCurrentSearch(): number {
-        return this.currentSearchOffersSortedByPriceAsc
-            [this.currentSearchOffersSortedByPriceAsc.length - 1].price;
+        return this.getOffersQuantity() ?
+            this.currentSearchOffersSortedByPriceAsc[
+                this.currentSearchOffersSortedByPriceAsc.length - 1]
+            .price : 0;
     }
 }
