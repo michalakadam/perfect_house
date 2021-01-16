@@ -19,12 +19,13 @@ export interface Offer {
     isExclusive: boolean;
     isForRent: boolean
     photos: string[];
-    isZeroProvisionAvailable: boolean;
+    isNoCommission: boolean;
     isAvailableOnFacebook: boolean;
     parentOfferId: number,
     creationDate: string;
     updateDate: string;
     expirationDate: string;
+    virtualVisitUrl: string;
 
     price: number;
     pricePerSquareMeter: number;
@@ -67,7 +68,7 @@ export interface Offer {
     numberOfBedrooms: number;
     numberOfTerraces: number;
     numberOfFloors: number;
-    floor: string;
+    floor: number;
     floorHeight: number;
     isBasementAvailable: boolean;
     sewageConnectionDetails: string; 

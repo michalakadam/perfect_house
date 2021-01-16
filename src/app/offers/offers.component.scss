@@ -22,6 +22,7 @@
 
         .top-paginator {
             margin-top: -37px;
+            min-height: 32px;
 
             @media screen and (max-width: $desktop-small) {
                 margin-top: 0;

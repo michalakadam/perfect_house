@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
     private primengConfig: PrimeNGConfig) {
       router.events.subscribe(event => {
       if(event instanceof NavigationEnd) {
-        if (!(event.url.startsWith('/ludzie/') && event.url.length > 8)) {
+        if (!this.isUrlTitleComputedInComponent(event.url)) {
           const title = this.getTitle(router.routerState, router.routerState.root).join(' - ');
           this.titleService.setTitle(title);
         }
@@ -53,6 +53,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.primengConfig.ripple = true;
+  }
+
+  isUrlTitleComputedInComponent(url: string): boolean {
+    return url.startsWith('/ludzie/') && url.length > 8 || url.includes('oferta');
   }
 
   // Collect title data properties from all child routes.

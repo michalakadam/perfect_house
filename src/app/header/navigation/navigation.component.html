@@ -1,6 +1,6 @@
 <nav>
     <span class="link-container" *ngFor="let link of links">
-        <span *ngIf="link.route !== '/o_nas'"
+        <span *ngIf="link.route !== '/o_nas' && link.route !== '/oferty'"
             class="link"
             [routerLink]="link.route"
             routerLinkActive="active-link"
@@ -12,6 +12,13 @@
             class="link"
             [ngClass]="{'active-link':isAboutUsActive()}"
             (click)="aboutUsToggled.emit()"
+            tabindex="0"
+            role="button"
+            aria-pressed="false">{{link.title}}</span>
+        <span *ngIf="link.route === '/oferty'"
+            class="link"
+            [routerLink]="[link.route, {page: 1, sorting: 'creationDate_descending'}]"
+            routerLinkActive="active-link"
             tabindex="0"
             role="button"
             aria-pressed="false">{{link.title}}</span>

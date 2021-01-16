@@ -36,6 +36,7 @@ export class AgentsDao {
     }
 
     getAgentByFullName(fullName: string): Agent {
-        return this.agents.find(agent => agent.fullName === fullName);
+        return this.agents.find(
+            agent => agent.fullName.toLowerCase() === fullName.toLowerCase());
     }
 }

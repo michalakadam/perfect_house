@@ -20,7 +20,7 @@ export class OffersConverter {
                 releaseDate: offer.TerminWydaniaData?.text || '',
                 // TerminWydaniaLista is always a single element object.
                 releaseDateTitle: offer.TerminWydaniaLista?.text || '',
-                number: this.convertToNumber(offer.Numer),
+                number: this.convertToNumber(offer.Nr),
                 symbol: offer.Symbol || '',
                 status: offer.Status || '',
                 legalStatus: offer.StanPrawny || '',
@@ -29,12 +29,13 @@ export class OffersConverter {
                 isExclusive: this.convertToBoolean(offer.Wylacznosc),
                 isForRent: this.convertToBoolean(offer.Wynajem),
                 photos: this.convertPhotos(this.convertToArray(offer.Zdjecia.Foto)),
-                isZeroProvisionAvailable: this.convertToBoolean(offer.ZeroProwizji),
+                isNoCommission: this.convertToBoolean(offer.ZeroProwizji),
                 isAvailableOnFacebook: this.convertToBoolean(offer.PublikacjaFacebook?.text),
                 parentOfferId: this.convertToNumber(offer.OfertaBazowa?.text),
                 creationDate: offer.DataWprowadzenia || '',
                 updateDate: offer.DataEdycji?.text || '',
                 expirationDate: offer.DataWaznosci || '',
+                virtualVisitUrl: offer.WirtualnaWizyta?.Url || '',
                 
                 price: this.convertToNumber(offer.Cena),
                 pricePerSquareMeter: this.convertToNumber(offer.CenaM2),
@@ -220,12 +221,15 @@ export class OffersConverter {
         return estateType;
     }
 
-    private convertFloor(floor: string): string {
+    private convertFloor(floor: string): number {
         const containsNumber = /\d/;
         if (containsNumber.test(floor)) {
             // Removes leter p following floor number.
-            floor = floor.match(/\d+/)[0];
+            return Number(floor.match(/\d+/)[0]);
         }
-        return floor;
+        else if (floor.toLowerCase().includes('parter')) {
+            return 0;
+        }
+        return -1;
     }
 }

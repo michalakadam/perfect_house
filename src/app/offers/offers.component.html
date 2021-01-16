@@ -1,13 +1,16 @@
 <div class="component-container">
     <perfect-search-tool
         [filters]="currentFilters"
-        (searchButtonClicked)=applyFilters($event)></perfect-search-tool>
+        (searchOffers)="loadNewResults(0, currentSorting, $event)"
+        (openOffer)="loadOffer($event)">
+    </perfect-search-tool>
 
     <div class="other-tools-container">
         <perfect-sorting-tool
             [offersQuantity]="offersDao.getOffersQuantity()"
             [selectedSorting]="currentSorting"
-            (sortingChanged)="listSortedOffers($event)"></perfect-sorting-tool>
+            (sortingChanged)="loadNewResults(currentPage, $event, currentFilters)">
+        </perfect-sorting-tool>
 
         <div class="top-paginator">
             <perfect-paginator
@@ -15,7 +18,8 @@
                 [offersPerPage]="offersDao.getOffersPerPage()"
                 [totalOffersQuantity]="offersDao.getOffersQuantity()"
                 [selectedPage]="currentPage"
-                (pageChanged)="changePage($event)"></perfect-paginator>
+                (pageChanged)="loadNewResults($event, currentSorting, currentFilters)">
+            </perfect-paginator>
         </div>
     </div>
 
@@ -31,7 +35,8 @@
 
     <perfect-offer-card
         *ngFor="let offer of offers"
-        [offer]="offer"></perfect-offer-card>
+        [offer]="offer"
+        (click)=loadOffer(offer.symbol)></perfect-offer-card>
 
     <div class="bottom-paginator">
         <perfect-paginator
@@ -40,6 +45,7 @@
             [offersPerPage]="offersDao.getOffersPerPage()"
             [totalOffersQuantity]="offersDao.getOffersQuantity()"
             [selectedPage]="currentPage"
-            (pageChanged)="changePage($event)"></perfect-paginator>
+            (pageChanged)="loadNewResults($event, currentSorting, currentFilters)">
+        </perfect-paginator>
     </div>
 </div>

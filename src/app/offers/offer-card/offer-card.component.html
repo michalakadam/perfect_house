@@ -6,8 +6,8 @@
             <h4>
                 <div class="description">
                     <span>{{ offer.estateType }} na &nbsp;</span>
-                    <span *ngIf="offer.isForRent; else rent">sprzedaż</span>
-                    <ng-template #rent>wynajem</ng-template>
+                    <span *ngIf="offer.isForRent; else sale">wynajem</span>
+                    <ng-template #sale>sprzedaż</ng-template>
                     <span>:</span>
                 </div>
                 <div class="offer-number">

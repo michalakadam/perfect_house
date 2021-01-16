@@ -1,0 +1,8 @@
+<div class="input p-float-label"
+    [ngClass]="{'number-input': type === 'number'}">
+    <input #input [type]="type" pInputText [(ngModel)]="value"> 
+    <label *ngIf="title" for="input">
+        <i *ngIf="lhsIcon" [class]="lhsIcon"></i> {{ title }}
+    </label>
+    <i *ngIf="value" class="pi pi-times remove-input-icon" (click)="removeContent()"></i>
+</div>
