@@ -5,19 +5,9 @@
 
     @include articlePage;
 
-    @media screen and (max-width: $mobile) {
-        
-        .title { 
-            font-size: 20px;
-            text-align: center;
-        }
-    }
-    @media screen and (max-width: $desktop-small) {
-
-        .title { 
-            font-size: 20px;
-            text-align: center;
-        }
+    .title { 
+        font-size: 20px;
+        text-align: center;
     }
     
     .title { 

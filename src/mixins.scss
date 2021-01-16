@@ -3,7 +3,7 @@
 @mixin articlePage { 
     margin: 0 auto; 
     width: 800px;
-    @media screen and (max-width: $desktop-medium) {
+    @media screen and (max-width: $desktop-small) {
         width: 600px;
     }
 

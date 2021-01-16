@@ -9,7 +9,9 @@
         [showIndicators]="true"
         [changeItemOnIndicatorHover]="true"> 
         <ng-template pTemplate="item" let-item>
-            <img [src]="item.previewImageSrc" style="width: 100%; display: block;" />
+            <img [src]="item.previewImageSrc"
+                style="width: 100%; display: block; cursor: pointer"
+                (click)="openUrl(item)"/>
         </ng-template>
         <ng-template pTemplate="thumbnail" let-item>
             <div class="p-grid p-nogutter p-justify-center">

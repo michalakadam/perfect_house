@@ -30,6 +30,14 @@ export class MainComponent {
       this.offersDao.initializeOffersForTheMainPage();
     }
 
+  openUrl(image) {
+    let params = {};
+    if (image.title.includes('morze')) {
+      params = {isByTheSea: true};
+    }
+    this.router.navigate(['oferty', params]);
+  }
+
   loadOffers(filters: OffersFilters) {
     this.router.navigate(['oferty', this.computeFiltersParameters(filters)]);
   }
