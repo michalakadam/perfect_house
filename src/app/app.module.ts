@@ -40,6 +40,7 @@ import { InputComponent } from './shared/input/input.component';
 import { SliderModule } from 'primeng/slider';
 import { GalleriaModule } from 'primeng/galleria';
 import { MatCardModule } from '@angular/material/card';
+import { InputWithSliderComponent } from './shared/input-with-slider/input-with-slider.component';
  
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { MatCardModule } from '@angular/material/card';
     AgentPageComponent,
     OfferComponent,
     InputComponent,
+    InputWithSliderComponent,
   ],
   imports: [
     AppRoutingModule,

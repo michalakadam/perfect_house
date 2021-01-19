@@ -96,33 +96,15 @@
                 </perfect-input>
             </div>
         </div>
-        <div class="slider-container">
-            <div class="slider-title">
-                <span>Cena: </span>
-                <perfect-input
-                    type='number'
-                    [defaultValue]="offersDao.getLowestPriceForCurrentSearch()"
-                    [(value)]="priceFrom"
-                    (valueChange)="updatePriceFrom($event)">
-                </perfect-input>
-                <span>-</span>
-                <perfect-input
-                    type='number'
-                    [defaultValue]="offersDao.getHighestPriceForCurrentSearch()"
-                    [(value)]="priceTo"
-                    (valueChange)="updatePriceTo($event)">
-                </perfect-input>
-            </div>
-            <p-slider
-                [(ngModel)]="priceRange"
-                [range]="true"
-                [min]="offersDao.getLowestPriceForCurrentSearch()"
-                [max]="offersDao.getHighestPriceForCurrentSearch()"
-                [step]=100
-                (onChange)="updatePrices($event)"
-                (onSlideEnd)="applyFilters()">
-            </p-slider>
-        </div>
+        <perfect-input-with-slider
+            title=Cena
+            [lowerDefaultValue]="offersDao.getLowestPriceForCurrentSearch()"
+            [higherDefaultValue]="offersDao.getHighestPriceForCurrentSearch()"
+            [lowerValue]="computeFilterNumericValue(priceFrom)"
+            [higherValue]="computeFilterNumericValue(priceTo)"
+            (valuesChanged)="updatePrices($event)"
+            (slidingIsOver)="applyFilters()">
+        </perfect-input-with-slider>
     </div>
     <div class="row" *ngIf="showAdvanced" [@openCloseAdvanced]>
         <div class="from-to-input-container">

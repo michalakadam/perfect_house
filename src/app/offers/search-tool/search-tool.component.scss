@@ -175,55 +175,6 @@
             }
         }
         
-        .slider-container {
-            display: flex;
-            flex-direction: column;
-            height: 50px;
-            width: 254px;
-
-            .slider-title {
-                align-items: center;
-                display: flex;
-                margin-bottom: 10px;
-
-                span {
-                    color: $font-light-grey;
-                    font-weight: 700;
-                }
-
-                & > * {
-                    margin-right: 5px;
-                }
-
-                &:last-child {
-                    margin-right: unset;
-                }
-            }
-
-            p-slider {
-                margin-left: 5px;
-                width: 242px;
-
-                ::ng-deep .p-slider {
-                    .p-slider-range {
-                        background-color: $light-green;
-                    }
-
-                    .p-slider-handle {
-                        border-color: $dark-green;
-
-                        &:focus {
-                            box-shadow: unset;
-                        }
-
-                        &:hover {
-                            background-color: $light-green;
-                        }
-                    }
-                }
-            }
-        }
-
         .buttons-container {
             p-button {
                 @include perfect-button;

@@ -1,0 +1,27 @@
+<div class="component-container">
+    <div class="slider-title">
+        <span>{{ title }}: </span>
+        <perfect-input
+            type='number'
+            [defaultValue]="lowerDefault"
+            [(value)]="lower"
+            (valueChange)="updateLowerValue($event)">
+        </perfect-input>
+        <span>-</span>
+        <perfect-input
+            type='number'
+            [defaultValue]="higherDefault"
+            [(value)]="higher"
+            (valueChange)="updateHigherValue($event)">
+        </perfect-input>
+    </div>
+    <p-slider
+        [(ngModel)]="range"
+        [range]="true"
+        [min]="minValue"
+        [max]="maxValue"
+        [step]=100
+        (onChange)="updateValues($event)"
+        (onSlideEnd)="slidingIsOver.emit()">
+    </p-slider>
+</div>

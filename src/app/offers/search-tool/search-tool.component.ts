@@ -115,10 +115,6 @@ export class SearchToolComponent implements OnChanges {
     this.priceTo = this.filters.priceTo > -1 ?
       this.computeFieldValue(this.filters.priceTo) :
       this.computeFieldValue(this.offersDao.getHighestPriceForCurrentSearch());
-    this.priceRange = [
-      this.computeFilterNumericValue(this.priceFrom),
-      this.computeFilterNumericValue(this.priceTo)
-    ];
     this.pricePerSquareMeterFrom = this.computeFieldValue(this.filters.pricePerSquareMeterFrom);
     this.pricePerSquareMeterTo = this.computeFieldValue(this.filters.pricePerSquareMeterTo);
     this.areaFrom = this.computeFieldValue(this.filters.areaFrom);
@@ -138,33 +134,9 @@ export class SearchToolComponent implements OnChanges {
     this.showAdvanced = !this.showAdvanced;
   }
 
-  updatePriceFrom(priceFromString: string) {
-    let priceFrom = this.computeFilterNumericValue(priceFromString);
-    if (priceFrom < this.offersDao.getLowestPriceForCurrentSearch()) {
-      priceFrom = this.offersDao.getLowestPriceForCurrentSearch();
-    }
-    if (priceFrom > this.offersDao.getHighestPriceForCurrentSearch()) {
-      priceFrom = this.offersDao.getHighestPriceForCurrentSearch();
-    }
-    this.priceRange = [priceFrom, this.computeFilterNumericValue(this.priceTo)];
-    this.changeDetector.detectChanges();
-  }
-
-  updatePriceTo(priceToString: string) {
-    let priceTo = this.computeFilterNumericValue(priceToString);
-    if (priceTo < this.offersDao.getLowestPriceForCurrentSearch()) {
-      priceTo = this.offersDao.getLowestPriceForCurrentSearch();
-    }
-    if (priceTo > this.offersDao.getHighestPriceForCurrentSearch()) {
-      priceTo = this.offersDao.getHighestPriceForCurrentSearch();
-    }
-    this.priceRange = [this.computeFilterNumericValue(this.priceFrom), priceTo];
-    this.changeDetector.detectChanges();
-  }
-
-  updatePrices(event) {
-    this.priceFrom = this.computeFieldValue(event.values[0]);
-    this.priceTo = this.computeFieldValue(event.values[1]);
+  updatePrices(prices: number[]) {
+    this.priceFrom = this.computeFieldValue(prices[0]);
+    this.priceTo = this.computeFieldValue(prices[1]);
   }
 
   applyFiltersIgnoringPrice() {
@@ -218,7 +190,7 @@ export class SearchToolComponent implements OnChanges {
     this.searchOffers.emit(filters);
   }
 
-  private computeFilterNumericValue(value: string): number {
+  computeFilterNumericValue(value: string): number {
     return value ? Number(value) : -1;
   }
 }
