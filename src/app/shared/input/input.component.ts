@@ -11,6 +11,7 @@ export class InputComponent {
   @Input() title = '';
   @Input() type = 'text'
   @Input() defaultValue = '';
+  @Input() isRemovable = true;
 
   @Output()valueChange = new EventEmitter<string>();
 

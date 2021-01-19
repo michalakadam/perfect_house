@@ -20,11 +20,17 @@ export class InputWithSliderComponent {
     }
   @Input() 
     public set lowerValue(value: number) {
+      if (value === -1) {
+        value = this.lowerDefault;
+      }
       this.lower = value;
       this.updateRange();
     }
   @Input() 
     public set higherValue(value: number) {
+      if (value === -1) {
+        value = this.higherDefault;
+      }
       this.higher = value;
       this.updateRange();
     }
@@ -67,8 +73,8 @@ export class InputWithSliderComponent {
   }
 
   updateValues({values}) {
-    this.lower = values[0];
-    this.higher = values[1];
+    this.lower = values[0] < 0 ? this.minValue : values[0];
+    this.higher = values[1] < 0 ? this.maxValue : values[1];
     this.updateRange();
     this.valuesChanged.emit(this.range);
   }

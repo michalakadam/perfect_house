@@ -5,6 +5,7 @@
             type='number'
             [defaultValue]="lowerDefault"
             [(value)]="lower"
+            [isRemovable]=false
             (valueChange)="updateLowerValue($event)">
         </perfect-input>
         <span>-</span>
@@ -12,6 +13,7 @@
             type='number'
             [defaultValue]="higherDefault"
             [(value)]="higher"
+            [isRemovable]=false
             (valueChange)="updateHigherValue($event)">
         </perfect-input>
     </div>
