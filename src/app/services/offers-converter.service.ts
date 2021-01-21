@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Offer, Room } from '../shared/models';
+const toBeReplaced = ["Oferta wysłana z systemu Galactica Virgo"];
 
 @Injectable({
     providedIn: 'root',
@@ -14,7 +15,7 @@ export class OffersConverter {
                 estateType: this.computeEstateType(offer.Przedmiot || ''),
                 agentId: this.convertToNumber(offer.Agent),
                 title: offer.TytulOferty || '',
-                description: offer.UwagiOpis || '',
+                description: offer.UwagiOpis.replace(toBeReplaced, '') || '',
                 additionalDescription: offer.DodatkowyOpis || '',
                 additionalRemarks: offer.UwagiOpis || '',
                 releaseDate: offer.TerminWydaniaData?.text || '',
