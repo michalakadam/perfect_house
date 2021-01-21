@@ -20,10 +20,12 @@
         </ng-template>
     </p-galleria>
 
-    <perfect-search-tool
-        [onMainPage]=true 
-        (searchOffers)="loadOffers($event)"
-        (openOffer)="loadOffer($event)">
-    </perfect-search-tool>
+    <div class="search-tool-container">
+        <perfect-search-tool
+            [onMainPage]=true 
+            (searchOffers)="loadOffers($event)"
+            (openOffer)="loadOffer($event)">
+        </perfect-search-tool>
+    </div>
 
 </div>

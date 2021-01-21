@@ -50,7 +50,7 @@
                 display: flex;
 
                 p-checkbox {
-                    padding-right: 3px;
+                    padding-right: 5px;
 
                     ::ng-deep .p-checkbox {
                         .p-checkbox-box {
@@ -129,18 +129,6 @@
 
         p-dropdown {
             @include perfect-dropdown;
-
-            ::ng-deep &.estate-dropdown .p-inputtext {
-                width: 80px;
-            }
-
-            ::ng-deep &.transaction-dropdown .p-inputtext {
-                min-width: 85px;
-            }
-
-            ::ng-deep &.voivodeship-dropdown .p-inputtext {
-                min-width: 140px;
-            }
         }
 
         .market-toggle-container {

@@ -2,16 +2,13 @@
 
 .component-container {
     margin: 0 auto;
-    width: 800px;
-    @media screen and (max-width: $desktop-small) {
-        width: 400px;
-    }
-    @media screen and (max-width: $mobile) {
-        width: 300px;
-    }
+    width: 100%;
 
     p-galleria {
         ::ng-deep .p-galleria .p-galleria-indicators {
+            bottom: 50px;
+            position: relative;
+
             .p-galleria-indicator.p-highlight {
                 button {
                     background: $light-green;
@@ -23,6 +20,22 @@
                     box-shadow: 0 0 0 0.2rem $dark-green;
                 }
             }
+        }
+    }
+
+    .search-tool-container {
+        background-color: rgba(255, 255, 255, 0.85);
+        bottom: 336px;
+        padding: 20px 0;
+        position: relative;
+        z-index: 1;
+        @media screen and (max-width: $desktop-large) {
+            bottom: 326px;
+        }
+        @media screen and (max-width: $desktop-medium) {
+        }
+        perfect-search-tool {
+            margin: 0 auto;
         }
     }
 }

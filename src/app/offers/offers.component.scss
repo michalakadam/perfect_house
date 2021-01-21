@@ -2,30 +2,57 @@
 
 .component-container {
     margin: 0 auto;
-    width: 800px;
+    width: 1098px;
+    @media screen and (max-width: $desktop-large) {
+        width: 947px;
+    }
+    @media screen and (max-width: $desktop-medium) {
+        width: 830px;
+    }
     @media screen and (max-width: $desktop-small) {
-        width: 400px;
+        width: 90%;
     }
     @media screen and (max-width: $mobile) {
+        width: 350px;
+    }
+    @media screen and (max-width: $mobile-small) {
         width: 300px;
     }
 
-    .other-tools-container {
-        @media screen and (max-width: $desktop-small) {
-            border-radius: 15px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    .tools-container {
+        border-radius: 15px;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+        padding: 15px 25px;
+        @media screen and (max-width: $desktop-medium) {
             padding: 15px;
         }
-        @media screen and (max-width: $mobile) {
-            padding: 15px 0;
+        @media screen and (max-width: $desktop-small) {
+            border-radius: unset;
+            box-shadow: unset;
+            transition: unset;
+            padding: unset;
         }
 
-        .top-paginator {
-            margin-top: -37px;
-            min-height: 32px;
-
+        .other-tools-container {
             @media screen and (max-width: $desktop-small) {
-                margin-top: 0;
+                border-radius: 15px;
+                box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+                padding: 15px;
+            }
+            @media screen and (max-width: $mobile) {
+                padding: 15px 0;
+            }
+
+            .top-paginator {
+                margin-top: -46px;
+                min-height: 32px;
+                @media screen and (max-width: $desktop-large) {
+                    margin-top: -40px;
+                }
+                @media screen and (max-width: $desktop-small) {
+                    margin-top: 0;
+                }
             }
         }
     }

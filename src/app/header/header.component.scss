@@ -44,19 +44,15 @@
             border-radius: 3px;
             cursor: pointer;
             outline: none;
-            margin-left: 486px;
             max-height: 45px;
             @media screen and (max-width: $desktop-large) {
                 max-height: 42px;
-                margin-left: 417px;
             }
             @media screen and (max-width: $desktop-medium) {
                 max-height: 39px;
-                margin-left: 361px;
             }
             @media screen and (max-width: $desktop-small) {
                 max-height: 36px;
-                margin-left: 0;
             }
         }
 

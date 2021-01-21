@@ -7,13 +7,19 @@ $mobile-curvature: 10px;
 .component-container {
     border-radius: $curvature;
     display: flex;
+    height: 25vw;
     margin: 20px auto;
+    min-height: 265px;
+    max-height: 365px;
     width: 100%;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
     @media screen and (max-width: $desktop-small) {
         border-radius: $mobile-curvature;
         flex-direction: column;
+        height: unset;
+        min-height: unset;
+        max-height: unset;
     }
 
     &:hover {
@@ -22,20 +28,24 @@ $mobile-curvature: 10px;
     }
 
     .picture {
-        background-size: cover;
+        background-position: left top;
         background-repeat: no-repeat;
+        background-size: cover;
         border-bottom-left-radius: $curvature;
         border-top-left-radius: $curvature;
-        height: 267px;
-        width: 400px;
+        width: 50%;
         @media screen and (max-width: $desktop-small) {
             border-bottom-left-radius: 0;
             border-top-left-radius: $mobile-curvature;
             border-top-right-radius: $mobile-curvature;
+            height: 50vw;
+            width: 100%;
         }
         @media screen and (max-width: $mobile) {
+            height: 230px;
+        }
+        @media screen and (max-width: $mobile-small) {
             height: 200px;
-            width: 300px;
         }
     }
 
@@ -44,8 +54,16 @@ $mobile-curvature: 10px;
         flex-direction: column;
         justify-content: space-between;
         margin: 0 15px;
-        width: 375px;
+        width: 47%;
+        @media screen and (max-width: $desktop-small) {
+            min-height: 225px;
+            width: 95%;
+        }
         @media screen and (max-width: $mobile) {
+            min-height: unset;
+            width: 320px;
+        }
+        @media screen and (max-width: $mobile-small) {
             width: 275px;
         }
 
@@ -85,7 +103,16 @@ $mobile-curvature: 10px;
                 .key-value-pair {
                     &:first-of-type {
                         display: inline-block;
-                        width: 200px;
+                        width: 250px;
+                        @media screen and (max-width: $desktop-large) {
+                            width: 235px;
+                        }
+                        @media screen and (max-width: $desktop-medium) {
+                            width: 220px;
+                        }
+                        @media screen and (max-width: $desktop-small) {
+                            width: 200px;
+                        }
                     }
 
                     @media screen and (max-width: $mobile) {
