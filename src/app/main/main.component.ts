@@ -5,14 +5,19 @@ import { DEFAULT_FILTERS, OffersFilters } from '../shared/models';
 
 const IMAGES = [
   {
-    "previewImageSrc": "/assets/main_first.jpg",
-    "thumbnailImageSrc": "/assets/main_first.jpg",
-    "title": "Przejdź do ofert"
+    "previewImageSrc": "/assets/dla_ciebie.jpg",
+    "thumbnailImageSrc": "/assets/dla_ciebie.jpg",
+    "title": "Sprawdź nasze oferty dla Ciebie."
   },
   {
-    "previewImageSrc": "/assets/main_second.jpg",
-    "thumbnailImageSrc": "/assets/main_second.jpg",
-    "title": "Sprawdź oferty nad morzem"
+    "previewImageSrc": "/assets/nad_morzem.jpg",
+    "thumbnailImageSrc": "/assets/nad_morzem.jpg",
+    "title": "Zobacz inwestycje nad morzem."
+  },
+  {
+    "previewImageSrc": "/assets/po_poznansku.jpg",
+    "thumbnailImageSrc": "/assets/po_poznansku.jpg",
+    "title": "Sprawdź nasze oferty dla Ciebie."
   },
 ]
 /** Strona główna. */
