@@ -1,21 +1,16 @@
 @import "~src/variables.scss";
 @import "~src/mixins.scss";
 
-$curvature: 15px;
-$mobile-curvature: 10px;
-
 .component-container {
-    border-radius: $curvature;
+    @include perfect-box;
     display: flex;
     height: 25vw;
     margin: 20px auto;
     min-height: 265px;
     max-height: 365px;
     width: 100%;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
     @media screen and (max-width: $desktop-small) {
-        border-radius: $mobile-curvature;
         flex-direction: column;
         height: unset;
         min-height: unset;
@@ -32,13 +27,13 @@ $mobile-curvature: 10px;
         background-position: left top;
         background-repeat: no-repeat;
         background-size: cover;
-        border-bottom-left-radius: $curvature;
-        border-top-left-radius: $curvature;
+        border-bottom-left-radius: 15px;
+        border-top-left-radius: 15px;
         width: 50%;
         @media screen and (max-width: $desktop-small) {
             border-bottom-left-radius: 0;
-            border-top-left-radius: $mobile-curvature;
-            border-top-right-radius: $mobile-curvature;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
             height: 200px;
             width: 100%;
         }

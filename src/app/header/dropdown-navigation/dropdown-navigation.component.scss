@@ -1,9 +1,10 @@
 @import "~src/variables.scss";
+@import "~src/mixins.scss";
 
 :host {
+    @include perfect-box;
     background-color: $font-white;
     border-radius: 10px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     z-index: 100;
     @media screen and (max-width: $mobile-small) {
         left: 40px;

@@ -8,8 +8,7 @@
     }
 
     .tools-container {
-        border-radius: 15px;
-        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        @include perfect-box;
         transition: all 0.3s cubic-bezier(.25,.8,.25,1);
         padding: 15px 25px;
         @media screen and (max-width: $desktop-medium) {
@@ -24,8 +23,7 @@
 
         .other-tools-container {
             @media screen and (max-width: $desktop-small) {
-                border-radius: 15px;
-                box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+                @include perfect-box;
                 margin: 0 auto;
                 padding: 15px;
                 width: 316px;
