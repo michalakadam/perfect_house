@@ -29,6 +29,7 @@ const IMAGES = [
 })
 export class MainComponent {
   images = IMAGES;
+  advancedVisible = false;
 
   constructor(private offersDao: OffersDao,
     private router: Router) {
@@ -59,5 +60,9 @@ export class MainComponent {
 
   loadOffer(symbol: string) {
     this.router.navigate(['oferta', symbol]);
+  }
+
+  toggleAdvancedVisible() {
+    this.advancedVisible = !this.advancedVisible;
   }
 }

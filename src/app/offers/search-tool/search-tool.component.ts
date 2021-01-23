@@ -63,6 +63,7 @@ export class SearchToolComponent implements OnChanges {
   @Input() filters: OffersFilters = DEFAULT_FILTERS;
   @Output() searchOffers = new EventEmitter<OffersFilters>();
   @Output() openOffer = new EventEmitter<string>();
+  @Output() advancedToggled = new EventEmitter();
 
   constructor(readonly offersDao: OffersDao,
     readonly windowSizeDetector: WindowSizeDetector,
@@ -121,6 +122,7 @@ export class SearchToolComponent implements OnChanges {
 
   toggleAdvancedVisibility() {
     this.showAdvanced = !this.showAdvanced;
+    this.advancedToggled.emit();
   }
 
   updatePrices(prices: number[]) {

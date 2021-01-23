@@ -1,7 +1,6 @@
 @import "~src/variables.scss";
 
 .component-container {
-    margin: 0 auto;
     width: 100%;
 
     p-galleria {
@@ -23,19 +22,43 @@
         }
     }
 
-    .search-tool-container {
+    .search-tool-background {
         background-color: rgba(255, 255, 255, 0.85);
-        bottom: 336px;
-        padding: 20px 0;
+        bottom: 330px;
+        padding: 20px 0 10px;
         position: relative;
-        z-index: 1;
         @media screen and (max-width: $desktop-large) {
-            bottom: 326px;
+            bottom: 320px;
         }
-        @media screen and (max-width: $desktop-medium) {
+        @media screen and (max-width: $desktop-small) {
+            background-color: unset;
+            bottom: unset;
+            margin-top: -20px;
+            padding: unset;
         }
-        perfect-search-tool {
+
+        .search-tool-container {
             margin: 0 auto;
+            width: 1098px;
+            @media screen and (max-width: $desktop-large) {
+                width: 947px;
+            }
+            @media screen and (max-width: $desktop-medium) {
+                width: 830px;
+            }
+            @media screen and (max-width: $desktop-small) {
+                width: 100%;
+            }
+        }
+    }
+
+    .space-for-advanced {
+        bottom: 403px;
+        @media screen and (max-width: $desktop-large) {
+            bottom: 386x;
+        }
+        @media screen and (max-width: $desktop-small) {
+            bottom: unset;
         }
     }
 }

@@ -20,12 +20,16 @@
         </ng-template>
     </p-galleria>
 
-    <div class="search-tool-container">
-        <perfect-search-tool
-            [onMainPage]=true 
-            (searchOffers)="loadOffers($event)"
-            (openOffer)="loadOffer($event)">
-        </perfect-search-tool>
+    <div class="search-tool-background"
+        [ngClass]="{'space-for-advanced':advancedVisible}">
+        <div class="search-tool-container">
+            <perfect-search-tool
+                [onMainPage]=true 
+                (searchOffers)="loadOffers($event)"
+                (openOffer)="loadOffer($event)"
+                (advancedToggled)=toggleAdvancedVisible()>
+            </perfect-search-tool>
+        </div>
     </div>
 
 </div>
