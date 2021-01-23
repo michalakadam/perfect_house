@@ -1,4 +1,5 @@
 @import "~src/variables.scss";
+@import "~src/mixins.scss";
 
 :host {
     display: flex;
@@ -10,20 +11,10 @@
     }
 
     .top-buttons-container {
+        @include responsive-page;
         align-items: center;
         display: flex;
         justify-content: space-between;
-        margin: 0 auto;
-        width: 1098px;
-        @media screen and (max-width: $desktop-large) {
-            width: 947px;
-        }
-        @media screen and (max-width: $desktop-medium) {
-            width: 830px;
-        }
-        @media screen and (max-width: $desktop-small) {
-            width: 90%;
-        }
 
         button {
             background-color: $light-green;

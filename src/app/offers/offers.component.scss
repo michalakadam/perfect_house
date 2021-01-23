@@ -1,17 +1,10 @@
 @import "~src/variables.scss";
+@import "~src/mixins.scss";
 
 .component-container {
-    margin: 0 auto;
-    width: 1098px;
-    @media screen and (max-width: $desktop-large) {
-        width: 947px;
-    }
-    @media screen and (max-width: $desktop-medium) {
-        width: 830px;
-    }
+    @include responsive-page;
     @media screen and (max-width: $desktop-small) {
         margin-top: 10px;
-        width: 90%;
     }
 
     .tools-container {
