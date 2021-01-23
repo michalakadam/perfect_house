@@ -19,7 +19,7 @@
             </p-dropdown>
         </div>
 
-        <div class="market-toggle-container">
+        <div class="market-toggle-container" *ngIf="isOptionalElementVisible()">
             <span class="title">
                 Rynek: 
             </span>
@@ -85,7 +85,7 @@
                 <label for="virtualVisitAvailable">wirtualna wizyta</label>
             </div>
         </div>
-        <div class="from-to-input-container">
+        <div class="from-to-input-container area" *ngIf="isOptionalElementVisible()">
             <div class="title">Powierzchnia:</div>
             <div class="inputs-container">
                 <perfect-input
@@ -100,6 +100,7 @@
             </div>
         </div>
         <perfect-input-with-slider
+            class="price-slider"
             title=Cena
             [lowerDefaultValue]="offersDao.getLowestPriceForCurrentSearch()"
             [higherDefaultValue]="offersDao.getHighestPriceForCurrentSearch()"
@@ -154,10 +155,15 @@
         </div>
     </div>
     <div class="row">
-        <perfect-input
+        <perfect-input *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall"
             title='symbol / numer oferty'
             [(value)]="symbol">
         </perfect-input>
+        <div class="from-to-input-container symbol-input"
+            *ngIf="windowSizeDetector.isWindowSmallerThanDesktopSmall && showAdvanced">
+            <div class="title">Symbol / numer oferty:</div>
+            <perfect-input [(value)]="symbol"></perfect-input>
+        </div>
         <div class="buttons-container">
             <p-button class="show-advanced" (click)="toggleAdvancedVisibility()">
                 <span>Zaawansowane</span>

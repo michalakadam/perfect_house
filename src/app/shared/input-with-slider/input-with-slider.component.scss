@@ -19,6 +19,9 @@
         align-items: center;
         display: flex;
         margin-bottom: 10px;
+        @media screen and (max-width: $desktop-small) {
+            margin-bottom: 15px;
+        }
 
         span {
             color: $font-light-grey;

@@ -15,8 +15,8 @@
     @media screen and (max-width: $desktop-small) {
         border-radius: 15px;
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-        margin-bottom: 20px;
-        padding: 15px;
+        margin: 0 auto 20px;
+        padding: 15px 25px;
         width: 316px;
     }
 
@@ -30,6 +30,7 @@
         @media screen and (max-width: $desktop-small) {
             flex-direction: column;
             margin-bottom: 0;
+            min-height: 0;
             width: 270px;
 
             & > * {
@@ -44,13 +45,38 @@
 
             p-dropdown:first-of-type {
                 @include justify-two-elements;
+                @media screen and (max-width: $desktop-small) {
+                    ::ng-deep .p-dropdown {
+                        width: 108px;
+                    }
+                }
             }
         }
+
+        .location-fields {
+            display: flex;
+            @media screen and (max-width: $desktop-small) {
+                margin-top: 7px;
+            }
+            
+            .voivodeship-dropdown {
+                @include justify-two-elements;
+            }
+
+            ::ng-deep perfect-input input {
+                @media screen and (max-width: $desktop-small) {
+                    width: 142px;
+                }
+            }
+        }   
 
         .checkboxes-container {
             display: grid;
             gap: 10px 10px;
             grid-template-columns: repeat(2, 1fr);
+            @media screen and (max-width: $desktop-small) {
+                gap: 10px 0;
+            }
 
             .checkbox-container {
                 display: flex;
@@ -98,28 +124,34 @@
             }
         }
 
-
-        .location-fields {
-            display: flex;
-            
-            .voivodeship-dropdown {
-                @include justify-two-elements;
-            }
-        }   
-
         .from-to-input-container {
             display: flex;
             flex-direction: column;
+            @media screen and (max-width: $desktop-small) {
+                align-items: center;
+                flex-direction: row;
+                justify-content: space-between;
+                margin-bottom: 5px;
+                width: 262px;
+            }
 
             .title {
                 color: $font-light-grey;
                 font-weight: 700;
                 margin-bottom: 5px;
+                @media screen and (max-width: $desktop-small) {
+                    margin-bottom: 0;
+                }
             }
 
             .inputs-container {
                 align-items: center;
                 display: flex;
+                ::ng-deep perfect-input input {
+                    @media screen and (max-width: $desktop-small) {
+                        width: 75px;
+                    }
+                }
 
                 span {
                     color: $font-light-grey;
@@ -136,6 +168,12 @@
             }
         }
 
+        .area {
+            @media screen and (max-width: $desktop-small) {
+                order: 3;
+            }
+        }
+
         p-dropdown {
             @include perfect-dropdown;
         }
@@ -144,6 +182,9 @@
             align-items: center;
             display: flex;
             font-weight: 700;
+            @media screen and (max-width: $desktop-small) {
+                order: 3;
+            }
 
             .title {
                 color: $font-light-grey;
@@ -171,8 +212,33 @@
                 }
             }
         }
+
+        .price-slider {
+            @media screen and (max-width: $desktop-small) {
+                margin-left: 3px;
+            }
+        }
+
+        .symbol-input {
+            margin-bottom: 10px;
+
+            perfect-input {
+                margin-right: 5px;
+
+                ::ng-deep input {
+                    width: 110px;
+                }
+            }
+        }
         
         .buttons-container {
+            @media screen and (max-width: $desktop-small) {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 5px;
+                margin-top: 5px;
+                width: 257px;
+            }
             p-button {
                 @include perfect-button;
             }

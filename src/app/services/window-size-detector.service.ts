@@ -38,6 +38,5 @@ export class WindowSizeDetector {
         this.isWindowSmallerThanMobileLarge = windowSize < WindowSizeDetector.MOBILE_LARGE;
         this.isWindowSmallerThanMobile = windowSize < WindowSizeDetector.MOBILE;
         this.isWindowSmallerThanMobileSmall = windowSize < WindowSizeDetector.MOBILE_SMALL;
-        console.log(this.isWindowSmallerThanDesktopSmall)
     }
 }

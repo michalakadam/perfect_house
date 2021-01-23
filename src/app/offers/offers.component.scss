@@ -10,13 +10,8 @@
         width: 830px;
     }
     @media screen and (max-width: $desktop-small) {
+        margin-top: 10px;
         width: 90%;
-    }
-    @media screen and (max-width: $mobile) {
-        width: 350px;
-    }
-    @media screen and (max-width: $mobile-small) {
-        width: 316px;
     }
 
     .tools-container {
@@ -38,11 +33,9 @@
             @media screen and (max-width: $desktop-small) {
                 border-radius: 15px;
                 box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+                margin: 0 auto;
                 padding: 15px;
                 width: 316px;
-            }
-            @media screen and (max-width: $mobile) {
-                padding: 15px;
             }
 
             .top-paginator {

@@ -20,6 +20,7 @@ $mobile-curvature: 10px;
         height: unset;
         min-height: unset;
         max-height: unset;
+        width: 316px;
     }
 
     &:hover {
@@ -38,14 +39,8 @@ $mobile-curvature: 10px;
             border-bottom-left-radius: 0;
             border-top-left-radius: $mobile-curvature;
             border-top-right-radius: $mobile-curvature;
-            height: 50vw;
-            width: 100%;
-        }
-        @media screen and (max-width: $mobile) {
-            height: 230px;
-        }
-        @media screen and (max-width: $mobile-small) {
             height: 200px;
+            width: 100%;
         }
     }
 
@@ -56,14 +51,6 @@ $mobile-curvature: 10px;
         margin: 0 15px;
         width: 47%;
         @media screen and (max-width: $desktop-small) {
-            min-height: 225px;
-            width: 95%;
-        }
-        @media screen and (max-width: $mobile) {
-            min-height: unset;
-            width: 320px;
-        }
-        @media screen and (max-width: $mobile-small) {
             width: 275px;
         }
 
@@ -96,7 +83,7 @@ $mobile-curvature: 10px;
 
             .details-row {
                 margin-bottom: 15px;
-                @media screen and (max-width: $mobile) {
+                @media screen and (max-width: $desktop-small) {
                     margin-bottom: 0;
                 }
 
@@ -115,7 +102,7 @@ $mobile-curvature: 10px;
                         }
                     }
 
-                    @media screen and (max-width: $mobile) {
+                    @media screen and (max-width: $desktop-small) {
                         display: block;
                         margin-bottom: 14px;
                         width: unset;

@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { OffersDao } from 'src/app/services/offers-dao.service';
+import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
 import { AVAILABLE_TRANSACTIONS, Transaction, AVAILABLE_ESTATE_TYPES, Estate, OffersFilters, DEFAULT_FILTERS } from 'src/app/shared/models';
 
 const AVAILABLE_VOIVODESHIPS = [
@@ -64,7 +65,17 @@ export class SearchToolComponent implements OnChanges {
   @Output() openOffer = new EventEmitter<string>();
 
   constructor(readonly offersDao: OffersDao,
-    private changeDetector: ChangeDetectorRef) {}
+    readonly windowSizeDetector: WindowSizeDetector,
+    private changeDetector: ChangeDetectorRef) {
+    this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
+      this.changeDetector.detectChanges();
+    });
+  }
+
+  isOptionalElementVisible() {
+    return !this.windowSizeDetector.isWindowSmallerThanDesktopSmall ||
+      this.windowSizeDetector.isWindowSmallerThanDesktopSmall && this.showAdvanced;
+  }
 
   ngOnChanges() {
     this.selectedEstateType = this.availableEstateTypes.find(estateType => {
