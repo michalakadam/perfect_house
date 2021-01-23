@@ -1,7 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { OffersDao } from 'src/app/services/offers-dao.service';
 import { AVAILABLE_TRANSACTIONS, Transaction, AVAILABLE_ESTATE_TYPES, Estate, OffersFilters, DEFAULT_FILTERS } from 'src/app/shared/models';
-import { trigger, style, animate, transition } from '@angular/animations';
 
 const AVAILABLE_VOIVODESHIPS = [
   'cała Polska', 'dolnośląskie', 'kujawsko-pomorskie', 'lubelskie', 'lubuskie',
@@ -26,27 +25,6 @@ const AVAILABLE_MARKETS = [
   templateUrl: './search-tool.component.html',
   styleUrls: ['./search-tool.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger(
-      'openCloseAdvanced', 
-      [
-        transition(
-          ':enter', 
-          [
-            style({ height: 0, opacity: 0 }),
-            animate('0.25s ease', style({ height: 50, opacity: 1 })),
-          ],
-        ),
-        transition(
-          ':leave', 
-          [
-            style({ height: 50, opacity: 1 }),
-            animate('0.25s ease', style({ height: 0, opacity: 0 })),
-          ],
-        ),
-      ],
-    ),
-  ],
 })
 export class SearchToolComponent implements OnChanges {
   availableEstateTypes = AVAILABLE_ESTATE_TYPES;

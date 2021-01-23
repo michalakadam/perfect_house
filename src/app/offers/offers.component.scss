@@ -16,7 +16,7 @@
         width: 350px;
     }
     @media screen and (max-width: $mobile-small) {
-        width: 300px;
+        width: 316px;
     }
 
     .tools-container {
@@ -39,9 +39,10 @@
                 border-radius: 15px;
                 box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
                 padding: 15px;
+                width: 316px;
             }
             @media screen and (max-width: $mobile) {
-                padding: 15px 0;
+                padding: 15px;
             }
 
             .top-paginator {

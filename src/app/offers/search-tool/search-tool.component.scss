@@ -1,6 +1,13 @@
 @import "~src/variables.scss";
 @import "~src/mixins.scss";
 
+@mixin justify-two-elements {
+    margin-right: 28px;
+    @media screen and (max-width: $desktop-medium) {
+        margin-right: 10px;
+    }
+}
+
 .component-container {
     display: flex;
     flex-direction: column;
@@ -10,9 +17,7 @@
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
         margin-bottom: 20px;
         padding: 15px;
-    }
-    @media screen and (max-width: $mobile) {
-        margin-bottom: 10px;
+        width: 316px;
     }
 
     .row {
@@ -25,6 +30,7 @@
         @media screen and (max-width: $desktop-small) {
             flex-direction: column;
             margin-bottom: 0;
+            width: 270px;
 
             & > * {
                 align-self: start;
@@ -37,7 +43,7 @@
             margin-right: unset;
 
             p-dropdown:first-of-type {
-                margin-right: 10px;
+                @include justify-two-elements;
             }
         }
 
@@ -92,11 +98,14 @@
             }
         }
 
-        .location-input {
-            @media screen and (max-width: $desktop-small) {
-                margin-top: 10px;
+
+        .location-fields {
+            display: flex;
+            
+            .voivodeship-dropdown {
+                @include justify-two-elements;
             }
-        }
+        }   
 
         .from-to-input-container {
             display: flex;

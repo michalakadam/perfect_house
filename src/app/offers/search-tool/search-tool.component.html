@@ -33,19 +33,21 @@
             </p-selectButton>
         </div>
 
-        <p-dropdown
-            class="voivodeship-dropdown desktop"
-            [options]="availableVoivodeships" 
-            [(ngModel)]="selectedVoivodeship"
-            (onChange)="applyFiltersIgnoringPrice()">
-        </p-dropdown>
+        <div class="location-fields">
+            <p-dropdown
+                class="voivodeship-dropdown"
+                [options]="availableVoivodeships" 
+                [(ngModel)]="selectedVoivodeship"
+                (onChange)="applyFiltersIgnoringPrice()">
+            </p-dropdown>
 
-        <perfect-input
-            class="location-input"
-            lhsIcon='pi pi-map-marker'
-            title='lokalizacja'
-            [(value)]="location">
-        </perfect-input>
+            <perfect-input
+                class="location-input"
+                lhsIcon='pi pi-map-marker'
+                title='lokalizacja'
+                [(value)]="location">
+            </perfect-input>
+        </div>
     </div>
     <div class="row">
         <div class="checkboxes-container">
@@ -107,7 +109,7 @@
             (slidingIsOver)="applyFilters()">
         </perfect-input-with-slider>
     </div>
-    <div class="row" *ngIf="showAdvanced" [@openCloseAdvanced]>
+    <div class="row" *ngIf="showAdvanced">
         <div class="from-to-input-container">
             <div class="title">Cena za m²:</div>
             <div class="inputs-container">
