@@ -6,28 +6,25 @@
     @include article-page;
 
     .title { 
-        font-size: 20px;
         text-align: center;
     }
     
-    .title { 
-        font-size: 20px;
-    }
-    
     .list-of-agents {
+        align-items: center;
         display: grid;
         gap: 30px 50px;
         grid-template-columns: repeat(3, 1fr);
-        margin: 40px auto 50px auto;
-    
+        justify-items: center;
+        margin: 40px auto;
         @media screen and (max-width: $desktop-small) {
-            grid-template-columns: repeat(2, 1fr);
-
+            gap: 20px 10px;
+            margin: 20px auto;
         }
-
+        @media screen and (max-width: $tablet) {
+           grid-template-columns: repeat(2, 1fr);
+        }
         @media screen and (max-width: $mobile) {
            grid-template-columns: repeat(1, 1fr);
-           justify-items: center;
         }
 
         perfect-agent-brief {
@@ -36,7 +33,7 @@
     }
 
     .about-text {
-        margin: 20px; 
+        @include article-page;
         text-align: justify;
     }
 }

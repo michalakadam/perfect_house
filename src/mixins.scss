@@ -16,18 +16,11 @@
 
 @mixin article-page { 
     @include responsive-page;
-    margin: 0 auto; 
 
     main {
         margin-block-end: 50px;
         margin-block-start: 0px;
         text-align: justify;
-    }
-
-    h2 {
-        @media screen and (max-width: $mobile-large) {
-            font-size: 14px;
-        }
     }
 }
 

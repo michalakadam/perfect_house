@@ -1,14 +1,14 @@
 <div class="component-container"
-    [ngClass]="{'bigger-component-container': displayBigger,
+    [ngClass]="{'bigger-component-container': displayBigger || (!windowSizeDetector.isWindowSmallerThanDesktopLarge && isVertical),
         'vertical-component-container': isVertical || windowSizeDetector.isWindowSmallerThanMobileSmall}">
     <div class="agent-photo" style="background-image: url('/agents/{{ agent.photoFileName }}');"></div>
     <div class="agent-info-container">
-        <div class="full-name">
+        <h3 class="full-name">
             {{ agent.fullName }}
-        </div>
-        <div class="position">
+        </h3>
+        <h4 class="position">
             {{ agent.position }}
-        </div>
+        </h4>
         <div class="contact-info" *ngIf="isContactInfoVisible">
             <a href="mailto:{{ agent.mail }}">
                 <mat-icon><i class="fas fa-envelope-square"></i></mat-icon>
