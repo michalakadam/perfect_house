@@ -5,8 +5,8 @@
     <div class="list-of-agents">
         <perfect-agent-brief
             *ngFor="let agent of agentsDao.listAgents()" 
+            vertical
             [agent]="agent" 
-            [isVertical]=true
             (click)="navigateToAgentPage(agent)">
         </perfect-agent-brief>
     </div>

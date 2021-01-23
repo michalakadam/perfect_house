@@ -2,6 +2,7 @@ import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChan
 import { OffersDao } from 'src/app/services/offers-dao.service';
 import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
 import { AVAILABLE_TRANSACTIONS, Transaction, AVAILABLE_ESTATE_TYPES, Estate, OffersFilters, DEFAULT_FILTERS } from 'src/app/shared/models';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 const AVAILABLE_VOIVODESHIPS = [
   'cała Polska', 'dolnośląskie', 'kujawsko-pomorskie', 'lubelskie', 'lubuskie',
@@ -59,7 +60,11 @@ export class SearchToolComponent implements OnChanges {
 
   priceRange: number[];
   
-  @Input() onMainPage = false;
+  onMainPage = false;
+  @Input()
+  set mainPage(value: boolean) {
+    this.onMainPage = coerceBooleanProperty(value);
+  }
   @Input() filters: OffersFilters = DEFAULT_FILTERS;
   @Output() searchOffers = new EventEmitter<OffersFilters>();
   @Output() openOffer = new EventEmitter<string>();

@@ -24,7 +24,7 @@
         [ngClass]="{'space-for-advanced':advancedVisible}">
         <div class="search-tool-container">
             <perfect-search-tool
-                [onMainPage]=true 
+                mainPage 
                 (searchOffers)="loadOffers($event)"
                 (openOffer)="loadOffer($event)"
                 (advancedToggled)=toggleAdvancedVisible()>

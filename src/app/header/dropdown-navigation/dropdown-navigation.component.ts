@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Component({
   selector: 'perfect-dropdown-navigation',
@@ -8,5 +9,9 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 })
 export class DropdownNavigationComponent {
   @Input() links = [];
-  @Input() isSideNavigation = false;
+  isSideNavigation = false;
+  @Input()
+  set sideNavigation(value: boolean) {
+    this.isSideNavigation = coerceBooleanProperty(value);
+  }
 }
