@@ -32,4 +32,16 @@
         </div>
     </div>
 
+    <div class="carousel-container">
+        <p-carousel [value]="offersDao.getOffersForCarousel()"
+            styleClass="custom-carousel"
+            [numVisible]="computeOffersVisible()"
+            [numScroll]="1"
+            [circular]="true"
+            [autoplayInterval]="5000">
+            <ng-template let-offer pTemplate="item">
+                <perfect-offer-card [offer]="offer" inCarousel></perfect-offer-card>
+            </ng-template>
+        </p-carousel>
+    </div>
 </div>

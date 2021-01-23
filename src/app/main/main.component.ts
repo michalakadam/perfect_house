@@ -1,6 +1,7 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { OffersDao } from '../services/offers-dao.service';
+import { WindowSizeDetector } from '../services/window-size-detector.service';
 import { DEFAULT_FILTERS, OffersFilters } from '../shared/models';
 
 const IMAGES = [
@@ -31,10 +32,14 @@ export class MainComponent {
   images = IMAGES;
   advancedVisible = false;
 
-  constructor(private offersDao: OffersDao,
-    private router: Router) {
-      this.offersDao.initializeOffersForTheMainPage();
-    }
+  constructor (readonly offersDao: OffersDao, private router: Router,
+    readonly windowSizeDetector: WindowSizeDetector, 
+    readonly changeDetector: ChangeDetectorRef) {
+    this.offersDao.initializeOffersForTheMainPage();
+    this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
+      this.changeDetector.detectChanges();
+    });
+  }
 
   openUrl(image) {
     let params = {};
@@ -64,5 +69,18 @@ export class MainComponent {
 
   toggleAdvancedVisible() {
     this.advancedVisible = !this.advancedVisible;
+  }
+
+  computeOffersVisible() {
+    if (this.windowSizeDetector.isWindowSmallerThanTablet) {
+      return 1;
+    }
+    if (this.windowSizeDetector.isWindowSmallerThanDesktopMedium) {
+      return 2;
+    }
+    if (this.windowSizeDetector.isWindowSmallerThanDesktopLarge) {
+      return 3;
+    }
+    return 4;
   }
 }

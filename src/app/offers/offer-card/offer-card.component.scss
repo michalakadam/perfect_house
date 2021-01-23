@@ -10,13 +10,6 @@
     max-height: 365px;
     width: 100%;
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-    @media screen and (max-width: $desktop-small) {
-        flex-direction: column;
-        height: unset;
-        min-height: unset;
-        max-height: unset;
-        width: 316px;
-    }
 
     &:hover {
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
@@ -30,13 +23,6 @@
         border-bottom-left-radius: 15px;
         border-top-left-radius: 15px;
         width: 50%;
-        @media screen and (max-width: $desktop-small) {
-            border-bottom-left-radius: 0;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-            height: 200px;
-            width: 100%;
-        }
     }
 
     .details-container {
@@ -45,9 +31,6 @@
         justify-content: space-between;
         margin: 0 15px;
         width: 47%;
-        @media screen and (max-width: $desktop-small) {
-            width: 275px;
-        }
 
         .details {
             h4 {
@@ -78,9 +61,6 @@
 
             .details-row {
                 margin-bottom: 15px;
-                @media screen and (max-width: $desktop-small) {
-                    margin-bottom: 0;
-                }
 
                 .key-value-pair {
                     &:first-of-type {
@@ -92,15 +72,6 @@
                         @media screen and (max-width: $desktop-medium) {
                             width: 220px;
                         }
-                        @media screen and (max-width: $desktop-small) {
-                            width: 200px;
-                        }
-                    }
-
-                    @media screen and (max-width: $desktop-small) {
-                        display: block;
-                        margin-bottom: 14px;
-                        width: unset;
                     }
 
                     .key {
@@ -134,14 +105,63 @@
                 margin-bottom: 15px;
                 margin-right: 10px;
                 text-align: right;
-                @media screen and (max-width: $desktop-small) {
-                    font-size: 24px;
-                }
 
                 .client-price {
                     color: $font-grey;
                     font-size: 16px;
                 }
+            }
+        }
+    }
+}
+
+.smaller-container {
+    flex-direction: column;
+    font-size: 12px !important;
+    height: unset;
+    min-height: unset;
+    max-height: unset;
+    max-width: 316px;
+
+    .picture {
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        height: 200px;
+        width: 100%;
+    }
+
+    .details-container {
+        min-height: 277px;
+        width: 275px;
+
+        .details {
+            h4 {
+                width: 300px;
+            }
+            .details-row {
+                margin-bottom: 0;
+
+                .key-value-pair {
+                    display: block;
+                    margin-bottom: 14px;
+                    width: unset;
+                    &:first-of-type {
+                        width: 200px;
+                    }
+                }    
+            }
+        }
+
+        .bottom-row {
+            width: 300px;
+            .phone {
+                p-button {
+                    max-width: 128px;
+                }
+            }
+            .price {
+                font-size: 24px;
             }
         }
     }

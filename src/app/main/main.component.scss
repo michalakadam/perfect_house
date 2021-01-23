@@ -52,4 +52,34 @@
             bottom: unset;
         }
     }
+
+    .carousel-container {
+        bottom: 250px;
+        margin: 0 auto;
+        position: relative;
+        width: 97%;
+        @media screen and (max-width: $desktop-medium) {
+            width: 85%;
+        }
+        @media screen and (max-width: $desktop-small) {
+            bottom: unset;
+            position: initial;
+            width: 95%;
+        }
+        @media screen and (max-width: $tablet) {
+            width: 85%;
+        }
+        @media screen and (max-width: $mobile) {
+            width: 100%;
+        }
+        @media screen and (max-width: $mobile-small) {
+            margin: 0 -20px;
+        }
+
+        p-carousel {
+            ::ng-deep .p-carousel .p-carousel-indicators {
+                display: none;
+            }
+        }
+    }
 }
