@@ -77,8 +77,14 @@
         }
 
         p-carousel {
-            ::ng-deep .p-carousel .p-carousel-indicators {
-                display: none;
+            ::ng-deep .p-carousel {
+                .p-carousel-indicators {
+                    display: none;
+                }
+
+                .p-carousel-content .p-carousel-prev:focus, .p-carousel .p-carousel-content .p-carousel-next:focus {
+                    box-shadow: 0 0 0 0.2rem $light-green;
+                }
             }
         }
     }
