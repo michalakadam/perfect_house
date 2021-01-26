@@ -1,27 +1,35 @@
 @import "~src/variables.scss";
+@import "~src/mixins.scss";
 
 :host {
+    @include perfect-box;
     background-color: $font-white;
     border-radius: 10px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     z-index: 100;
     @media screen and (max-width: $mobile-small) {
         left: 40px;
     }
 
-
     mat-list-item {
         height: 40px;
-
         .link {
             cursor: pointer;
-            font-size: 12px;
+            font-size: 20px;
             font-weight: 600;
             height: 100%;
             line-height: 44px;
             margin: 0 -16px;
             padding-left: 22px;
             width: 118.9%;
+            @media screen and (max-width: $desktop-large) {
+                font-size: 18px;
+            }
+            @media screen and (max-width: $desktop-medium) {
+                font-size: 16px;
+            }
+            @media screen and (max-width: $mobile-small) {
+                font-size: 12px;
+            }
         }
 
         .active-link {

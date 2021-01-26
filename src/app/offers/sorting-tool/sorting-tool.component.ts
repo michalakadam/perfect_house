@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ChangeDetectionStrategy, EventEmitter, Input, Output, ChangeDetectorRef } from '@angular/core';
+import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
 import { Sorting, AVAILABLE_SORTINGS } from 'src/app/shared/models';
 
 @Component({
@@ -12,4 +13,11 @@ export class SortingToolComponent {
   @Input() offersQuantity = 0;
   @Input() selectedSorting: Sorting;
   @Output() sortingChanged = new EventEmitter<Sorting>();
+
+  constructor(readonly windowSizeDetector: WindowSizeDetector,
+    readonly changeDetector: ChangeDetectorRef) {
+    this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
+      this.changeDetector.detectChanges();
+    });
+  }
 }

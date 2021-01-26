@@ -2,7 +2,7 @@
 
 .component-container {
     display: flex;
-    width: 350px;
+    width: 360px;
 
     .agent-photo {
         background-size: cover;
@@ -17,36 +17,39 @@
         margin: auto 0 auto 10px;
         
         & > * {
-            margin-bottom: 3px;
+            margin-bottom: unset;
         }
         
         .full-name {
-            font-size: 14px;
             font-weight: 700;
+            margin-top: unset;
         }
 
         .position {
             color: $font-light-grey;
             font-weight: 700;
-            line-height: 24px;
+            margin: 3px 0 5px;
         }
 
         a {
             color: unset;
             display: flex;
             font-style: italic;
+            margin-bottom: 5px;
             text-decoration: none;
-            font-style: italic;
 
             mat-icon {
                 color: $light-green;
-                font-size: 18px;
                 line-height: 14px;
             }
         }
 
         .license {
             text-align: left;
+            
+            .title {
+                font-weight: 700;
+            }
         }
     }
 }
@@ -67,10 +70,6 @@
             margin-top: 5px;
         }
 
-        .position {
-            margin-top: -5px
-        }
-
         .contact-info > * {
             margin: 0 auto;
         }
@@ -81,19 +80,14 @@
     width: 250px;
 
     .agent-photo {
-        height: 220px;
-        width: 220px;
+        height: 180px;
+        width: 180px;
     }
 
     .agent-info-container {
         margin-top: 12px;
 
-        .full-name {
-            font-size: 20px;
-        }
-
         .position {
-            font-size: 16px;
             margin-top: 0;
         }
         
@@ -101,12 +95,10 @@
             margin-top: 14px;
 
             & > * {
-                font-size: 16px;
                 margin-top: 10px;
             }
 
             mat-icon {
-                font-size: 24px;
                 margin-right: 4px;
             }
         }

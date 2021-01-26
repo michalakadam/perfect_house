@@ -3,7 +3,13 @@
 .input {
     ::ng-deep .p-inputtext {
         padding-right: 2rem;
-        width: 170px;
+        width: 250px;
+        @media screen and (max-width: $desktop-large) {
+            width: 200px;
+        }
+        @media screen and (max-width: $desktop-medium) {
+            width: 170px;
+        }
 
         &:enabled {
             &:focus {
@@ -17,10 +23,14 @@
         }
     }
 
+    label {
+        font-size: unset;
+    }
+
     .remove-input-icon {
         cursor: pointer;
         margin-right: -12px;
-        right: 20px;
+        right: 24px;
         position: relative;
         top: 1px;
         z-index: 100;
@@ -29,8 +39,13 @@
 
 .number-input {
     input {
-        width: 100px;
-
+        width: 140px;
+        @media screen and (max-width: $desktop-large) {
+            width: 120px;
+        }
+        @media screen and (max-width: $desktop-medium) {
+            width: 100px;
+        }
         &[type=number]::-webkit-inner-spin-button,
         &[type=number]::-webkit-outer-spin-button {
             -webkit-appearance: none;

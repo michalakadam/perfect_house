@@ -11,7 +11,6 @@
     .links-container {
         display: flex;
         justify-content: space-evenly;
-        line-height: 18px;
         margin: 0 auto 20px;
         width: 800px;
         @media screen and (max-width: $desktop-small) {

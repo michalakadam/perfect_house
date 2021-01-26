@@ -1,7 +1,7 @@
 <div class="component-container">
     <p-galleria
         [(value)]="images"
-        [numVisible]="2"
+        [numVisible]="3"
         [circular]="true"
         [autoPlay]="true"
         [transitionInterval]="5000"
@@ -20,10 +20,28 @@
         </ng-template>
     </p-galleria>
 
-    <perfect-search-tool
-        [onMainPage]=true 
-        (searchOffers)="loadOffers($event)"
-        (openOffer)="loadOffer($event)">
-    </perfect-search-tool>
+    <div class="search-tool-background"
+        [ngClass]="{'space-for-advanced':advancedVisible}">
+        <div class="search-tool-container">
+            <perfect-search-tool
+                mainPage 
+                (searchOffers)="loadOffers($event)"
+                (openOffer)="loadOffer($event)"
+                (advancedToggled)=toggleAdvancedVisible()>
+            </perfect-search-tool>
+        </div>
+    </div>
 
+    <div class="carousel-container">
+        <p-carousel [value]="offersDao.getOffersForCarousel()"
+            styleClass="custom-carousel"
+            [numVisible]="computeOffersVisible()"
+            [numScroll]="1"
+            [circular]="true"
+            [autoplayInterval]="5000">
+            <ng-template let-offer pTemplate="item">
+                <perfect-offer-card [offer]="offer" inCarousel></perfect-offer-card>
+            </ng-template>
+        </p-carousel>
+    </div>
 </div>

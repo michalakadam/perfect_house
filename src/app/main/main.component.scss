@@ -1,17 +1,14 @@
 @import "~src/variables.scss";
+@import "~src/mixins.scss";
 
 .component-container {
-    margin: 0 auto;
-    width: 800px;
-    @media screen and (max-width: $desktop-small) {
-        width: 400px;
-    }
-    @media screen and (max-width: $mobile) {
-        width: 300px;
-    }
+    width: 100%;
 
     p-galleria {
         ::ng-deep .p-galleria .p-galleria-indicators {
+            bottom: 50px;
+            position: relative;
+
             .p-galleria-indicator.p-highlight {
                 button {
                     background: $light-green;
@@ -21,6 +18,72 @@
                 
                 .p-link:focus {
                     box-shadow: 0 0 0 0.2rem $dark-green;
+                }
+            }
+        }
+    }
+
+    .search-tool-background {
+        background-color: rgba(255, 255, 255, 0.85);
+        bottom: 330px;
+        padding: 20px 0 10px;
+        position: relative;
+        @media screen and (max-width: $desktop-large) {
+            bottom: 320px;
+        }
+        @media screen and (max-width: $desktop-small) {
+            background-color: unset;
+            bottom: unset;
+            margin-top: -20px;
+            padding: unset;
+        }
+
+        .search-tool-container {
+            @include responsive-page;
+        }
+    }
+
+    .space-for-advanced {
+        bottom: 403px;
+        @media screen and (max-width: $desktop-large) {
+            bottom: 386x;
+        }
+        @media screen and (max-width: $desktop-small) {
+            bottom: unset;
+        }
+    }
+
+    .carousel-container {
+        bottom: 250px;
+        margin: 0 auto;
+        position: relative;
+        width: 97%;
+        @media screen and (max-width: $desktop-medium) {
+            width: 85%;
+        }
+        @media screen and (max-width: $desktop-small) {
+            bottom: unset;
+            position: initial;
+            width: 95%;
+        }
+        @media screen and (max-width: $tablet) {
+            width: 85%;
+        }
+        @media screen and (max-width: $mobile) {
+            width: 100%;
+        }
+        @media screen and (max-width: $mobile-small) {
+            margin: 0 -20px;
+        }
+
+        p-carousel {
+            ::ng-deep .p-carousel {
+                .p-carousel-indicators {
+                    display: none;
+                }
+
+                .p-carousel-content .p-carousel-prev:focus, .p-carousel .p-carousel-content .p-carousel-next:focus {
+                    box-shadow: 0 0 0 0.2rem $light-green;
                 }
             }
         }

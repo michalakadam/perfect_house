@@ -7,15 +7,9 @@
     font-weight: 700;
     justify-content: space-between;
     width: 100%;
-    @media screen and (max-width: $mobile) {
-        flex-direction: column;
-    }
-
+    
     .offers-counter {
         width: 96x;
-        @media screen and (max-width: $mobile) {
-            margin-bottom: 10px;
-        }
 
         .title {
             color: $font-light-grey;

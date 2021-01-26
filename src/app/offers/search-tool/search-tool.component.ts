@@ -1,7 +1,8 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { OffersDao } from 'src/app/services/offers-dao.service';
+import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
 import { AVAILABLE_TRANSACTIONS, Transaction, AVAILABLE_ESTATE_TYPES, Estate, OffersFilters, DEFAULT_FILTERS } from 'src/app/shared/models';
-import { trigger, style, animate, transition } from '@angular/animations';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 const AVAILABLE_VOIVODESHIPS = [
   'cała Polska', 'dolnośląskie', 'kujawsko-pomorskie', 'lubelskie', 'lubuskie',
@@ -26,27 +27,6 @@ const AVAILABLE_MARKETS = [
   templateUrl: './search-tool.component.html',
   styleUrls: ['./search-tool.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger(
-      'openCloseAdvanced', 
-      [
-        transition(
-          ':enter', 
-          [
-            style({ height: 0, opacity: 0 }),
-            animate('0.25s ease', style({ height: 50, opacity: 1 })),
-          ],
-        ),
-        transition(
-          ':leave', 
-          [
-            style({ height: 50, opacity: 1 }),
-            animate('0.25s ease', style({ height: 0, opacity: 0 })),
-          ],
-        ),
-      ],
-    ),
-  ],
 })
 export class SearchToolComponent implements OnChanges {
   availableEstateTypes = AVAILABLE_ESTATE_TYPES;
@@ -80,13 +60,28 @@ export class SearchToolComponent implements OnChanges {
 
   priceRange: number[];
   
-  @Input() onMainPage = false;
+  onMainPage = false;
+  @Input()
+  set mainPage(value: boolean) {
+    this.onMainPage = coerceBooleanProperty(value);
+  }
   @Input() filters: OffersFilters = DEFAULT_FILTERS;
   @Output() searchOffers = new EventEmitter<OffersFilters>();
   @Output() openOffer = new EventEmitter<string>();
+  @Output() advancedToggled = new EventEmitter();
 
   constructor(readonly offersDao: OffersDao,
-    private changeDetector: ChangeDetectorRef) {}
+    readonly windowSizeDetector: WindowSizeDetector,
+    private changeDetector: ChangeDetectorRef) {
+    this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
+      this.changeDetector.detectChanges();
+    });
+  }
+
+  isOptionalElementVisible() {
+    return !this.windowSizeDetector.isWindowSmallerThanDesktopSmall ||
+      this.windowSizeDetector.isWindowSmallerThanDesktopSmall && this.showAdvanced;
+  }
 
   ngOnChanges() {
     this.selectedEstateType = this.availableEstateTypes.find(estateType => {
@@ -115,10 +110,6 @@ export class SearchToolComponent implements OnChanges {
     this.priceTo = this.filters.priceTo > -1 ?
       this.computeFieldValue(this.filters.priceTo) :
       this.computeFieldValue(this.offersDao.getHighestPriceForCurrentSearch());
-    this.priceRange = [
-      this.computeFilterNumericValue(this.priceFrom),
-      this.computeFilterNumericValue(this.priceTo)
-    ];
     this.pricePerSquareMeterFrom = this.computeFieldValue(this.filters.pricePerSquareMeterFrom);
     this.pricePerSquareMeterTo = this.computeFieldValue(this.filters.pricePerSquareMeterTo);
     this.areaFrom = this.computeFieldValue(this.filters.areaFrom);
@@ -136,35 +127,12 @@ export class SearchToolComponent implements OnChanges {
 
   toggleAdvancedVisibility() {
     this.showAdvanced = !this.showAdvanced;
+    this.advancedToggled.emit();
   }
 
-  updatePriceFrom(priceFromString: string) {
-    let priceFrom = this.computeFilterNumericValue(priceFromString);
-    if (priceFrom < this.offersDao.getLowestPriceForCurrentSearch()) {
-      priceFrom = this.offersDao.getLowestPriceForCurrentSearch();
-    }
-    if (priceFrom > this.offersDao.getHighestPriceForCurrentSearch()) {
-      priceFrom = this.offersDao.getHighestPriceForCurrentSearch();
-    }
-    this.priceRange = [priceFrom, this.computeFilterNumericValue(this.priceTo)];
-    this.changeDetector.detectChanges();
-  }
-
-  updatePriceTo(priceToString: string) {
-    let priceTo = this.computeFilterNumericValue(priceToString);
-    if (priceTo < this.offersDao.getLowestPriceForCurrentSearch()) {
-      priceTo = this.offersDao.getLowestPriceForCurrentSearch();
-    }
-    if (priceTo > this.offersDao.getHighestPriceForCurrentSearch()) {
-      priceTo = this.offersDao.getHighestPriceForCurrentSearch();
-    }
-    this.priceRange = [this.computeFilterNumericValue(this.priceFrom), priceTo];
-    this.changeDetector.detectChanges();
-  }
-
-  updatePrices(event) {
-    this.priceFrom = this.computeFieldValue(event.values[0]);
-    this.priceTo = this.computeFieldValue(event.values[1]);
+  updatePrices(prices: number[]) {
+    this.priceFrom = this.computeFieldValue(prices[0]);
+    this.priceTo = this.computeFieldValue(prices[1]);
   }
 
   applyFiltersIgnoringPrice() {
@@ -218,7 +186,7 @@ export class SearchToolComponent implements OnChanges {
     this.searchOffers.emit(filters);
   }
 
-  private computeFilterNumericValue(value: string): number {
+  computeFilterNumericValue(value: string): number {
     return value ? Number(value) : -1;
   }
 }
