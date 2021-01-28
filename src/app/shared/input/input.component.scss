@@ -1,15 +1,21 @@
 @import "~src/variables.scss";
+@import "~src/mixins.scss";
+
+@mixin input-size {
+    width: 250px;
+    @media screen and (max-width: $desktop-large) {
+        width: 200px;
+    }
+    @media screen and (max-width: $desktop-medium) {
+        width: 170px;
+    }
+}
+
 
 .input {
     ::ng-deep .p-inputtext {
+        @include input-size;
         padding-right: 2rem;
-        width: 250px;
-        @media screen and (max-width: $desktop-large) {
-            width: 200px;
-        }
-        @media screen and (max-width: $desktop-medium) {
-            width: 170px;
-        }
 
         &:enabled {
             &:focus {
@@ -29,7 +35,7 @@
 
     .remove-input-icon {
         cursor: pointer;
-        margin-right: -12px;
+        margin-right: -14px;
         right: 24px;
         position: relative;
         top: 1px;
@@ -55,5 +61,28 @@
 
     ::ng-deep .p-inputtext {
         width: 100px;
+    }
+}
+
+.options-dropdown {
+    @include input-size;
+    @include perfect-box;
+    background-color: white;
+    border-radius: 2px;
+    max-height: 220px;
+    overflow-x: hidden;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 10;
+
+    .option {
+        cursor: pointer;
+        font-weight: 700;
+        padding: 5px 10px;
+
+        &:hover {
+            background-color: $light-green;
+            color: $font-white;
+        }
     }
 }

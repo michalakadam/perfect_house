@@ -1,11 +1,23 @@
 <div class="input p-float-label"
     [ngClass]="{'number-input': type === 'number'}">
-    <input #input [type]="type" pInputText [(ngModel)]="value"> 
+    <input #input
+        [type]="type"
+        pInputText
+        [(ngModel)]="value"
+        (input)="computeDropdownVisibility(inputValue)"> 
     <label class="label" *ngIf="title" for="input">
         <i *ngIf="lhsIcon" [class]="lhsIcon"></i> {{ title }}
     </label>
-    <i *ngIf="value && isRemovable"
+    <i *ngIf="inputValue && isRemovable"
         class="pi pi-times remove-input-icon"
         (click)="removeContent()">
     </i>
+</div>
+<div class="options-dropdown" *ngIf="isDropdownVisible">
+    <div class="option"
+        *ngFor="let option of filterOptions(inputValue); let i = index"
+        (click)="optionSelected(option)"
+        [tabindex]="computeIndex(i)">
+        {{ option }}
+    </div>
 </div>

@@ -12,9 +12,11 @@ export class InputComponent {
   @Input() type = 'text'
   @Input() defaultValue = '';
   @Input() isRemovable = true;
+  @Input() options: string[] = [];
 
-  @Output()valueChange = new EventEmitter<string>();
+  @Output() valueChange = new EventEmitter<string>();
 
+  isDropdownVisible = false;
   inputValue : string;
 
   @Input()
@@ -30,7 +32,32 @@ export class InputComponent {
   @ViewChild('input') input: ElementRef;
 
   removeContent() {
-    this.value = this.defaultValue;
+    this.inputValue = this.defaultValue;
+    this.isDropdownVisible = false;
     this.input.nativeElement.classList.remove('p-filled');
+  }
+
+  filterOptions(currentValue: string): string[] {
+    return this.options.filter(option =>
+      option.toLowerCase().startsWith(currentValue.toLowerCase()));
+  }
+
+  optionSelected(option: string) {
+    this.inputValue = option;
+    this.isDropdownVisible = false;
+  }
+
+  computeDropdownVisibility(value: string) {
+    const filteredOptions = this.filterOptions(value);
+    if (!value.length || !filteredOptions.length) {
+      this.isDropdownVisible = false;
+    }
+    else if (value.length && filteredOptions.length) {
+      this.isDropdownVisible = true;
+    }
+  }
+
+  computeIndex(i: number): number {
+    return ++i;
   }
 }

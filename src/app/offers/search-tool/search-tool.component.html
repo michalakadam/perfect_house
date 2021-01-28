@@ -45,6 +45,7 @@
                 class="location-input"
                 lhsIcon='pi pi-map-marker'
                 title='lokalizacja'
+                [options]="offersDao.getDistinctLocations()"
                 [(value)]="location">
             </perfect-input>
         </div>
