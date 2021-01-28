@@ -92,6 +92,9 @@ export class OffersFilter {
   }
 
   private filterByVoivodeship(offers: Offer[], voivodeship: string): Offer[] {
+    if (!voivodeship) {
+      return offers;
+    }
     return offers.filter(offer => 
       offer.voivodeship.toLowerCase() === voivodeship.toLowerCase());
   }
