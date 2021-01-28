@@ -1,1 +1,67 @@
-<h1 style="text-align: center">{{ offer.title }}</h1>
+<div class="component-container">
+        <div class="picture">
+            <img style="width:500px; margin: 20px auto;" src="./offers/{{ offer.photos[0]}}">
+        </div>
+        <mat-card id="basic-info-card">
+            <h3 class="price"> {{ offer.price | prettifyNumber:"zł" }}</h3>
+            <div class="head-component">
+                <h2 class="title">{{ offer.title }} </h2>
+                <h3 class="price"> {{ offer.price | prettifyNumber:"zł" }}</h3>
+                <div class="location">
+                    <i class="pi pi-map-marker"></i>
+                    <span>{{ offer.city }},&nbsp;</span>
+                    <span *ngIf="offer.county">{{ offer.county}},&nbsp;</span>
+                    <span>{{ offer.voivodeship }}</span>
+                    <span>{{ offer.street }}</span>
+                </div>
+                <div class="details-row">
+                    <span class="key-value-pair">
+                        <span class="key">Cena za m²: </span>
+                        <span class="value">{{ offer.pricePerSquareMeter | prettifyNumber:"zł" }}</span>
+                    </span>
+                    <span class="key-value-pair">
+                        <span class="key">Powierzchnia: </span>
+                        <span class="value">{{ offer.totalArea | prettifyNumber:"m²" }}</span>
+                    </span>
+                    <span class="key-value-pair"
+                        *ngIf="offer.estateType === 'Dom' || offer.estateType === 'Mieszkanie' || offer.estateType === 'Lokal'">
+                        <span class="key">Liczba pokoi: </span>
+                        <span class="value">{{ offer.numberOfRooms | prettifyNumber }}</span>
+                    </span>
+                    <span class="key-value-pair"
+                        *ngIf="offer.estateType === 'Dom' || offer.estateType === 'Obiekt'">
+                        <span class="key">Powierzchnia działki: </span>
+                        <span class="value">{{ offer.landArea | prettifyNumber:"m²" }}</span>
+                    </span>
+                    <span class="key-value-pair"
+                        *ngIf="offer.estateType === 'Mieszkanie' || offer.estateType === 'Lokal'">
+                        <span class="key">Piętro: </span>
+                        <span class="value">{{ offer.floor }}</span>
+                    </span>
+                    <span class="key-value-pair"
+                        *ngIf="offer.estateType === 'Mieszkanie' || offer.estateType === 'Lokal'">
+                        <span class="key">Liczba pięter </span>
+                        <span class="value">{{ offer.floorHeight}}</span>
+                    </span>
+                </div>
+            </div>
+          
+        </mat-card>
+        <mat-card id="card-description">
+            <mat-card-title class="description-title">
+                <span>Opis</span> 
+                <span>Szczegóły</span>
+            </mat-card-title>
+            <mat-card-content>
+                <div *ngIf="offer.description">
+                    {{ offer.description }}
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <mat-card>
+            <perfect-agent-brief 
+            [agent]="agent" 
+            >
+            </perfect-agent-brief>
+        </mat-card>
+</div>

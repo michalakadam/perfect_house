@@ -1,8 +1,10 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { OffersDao } from '../services/offers-dao.service';
 import { Offer } from '../shared/models';
+import { AgentsDao } from 'src/app/services/agents-dao.service';
+import { Agent } from 'src/app/shared/models';
 
 @Component({
   selector: 'perfect-offer',
@@ -12,11 +14,12 @@ import { Offer } from '../shared/models';
 })
 export class OfferComponent {
   offer: Offer;
-  
+  agent: Agent;
   constructor(private route: ActivatedRoute,
     private router: Router,
     private titleService: Title,
-    private offersDao: OffersDao) {
+    private offersDao: OffersDao,
+    readonly agentsDao: AgentsDao,){
     this.route.params.subscribe((params: Params) => {
         if (params.symbol) {
           this.loadOffer(params.symbol);

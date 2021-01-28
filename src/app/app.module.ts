@@ -41,6 +41,7 @@ import { SliderModule } from 'primeng/slider';
 import { GalleriaModule } from 'primeng/galleria';
 import { InputWithSliderComponent } from './shared/input-with-slider/input-with-slider.component';
 import { CarouselModule } from 'primeng/carousel';
+import {MatCardModule} from '@angular/material/card';
  
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { CarouselModule } from 'primeng/carousel';
     PaginatorModule,
     SelectButtonModule,
     SliderModule,
+    MatCardModule,
   ],
   bootstrap: [
     AppComponent,

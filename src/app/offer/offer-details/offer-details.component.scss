@@ -1,0 +1,37 @@
+@import "~src/variables.scss";
+
+.location {
+    align-items: center;
+    color: $font-light-grey;
+    display: flex;
+    margin-bottom: 15px;
+    margin-left: -3px;
+
+    i {
+        margin-right: 3px;
+    }
+}
+
+.details-row {
+    margin-bottom: 15px;
+    @media screen and (max-width: $mobile) {
+        margin-bottom: 0;
+    }
+
+    .key-value-pair {
+        &:first-of-type {
+            display: inline-block;
+            width: 200px;
+        }
+
+        @media screen and (max-width: $mobile) {
+            display: block;
+            margin-bottom: 14px;
+            width: unset;
+        }
+
+        .key {
+            font-weight: 700;
+        }
+    }    
+}
