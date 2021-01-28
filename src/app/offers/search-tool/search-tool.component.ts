@@ -150,6 +150,9 @@ export class SearchToolComponent implements OnChanges {
       this.openOffer.emit(this.symbol);
       return;
     }
+    if (this.mainPage) {
+      return;
+    }
     if (this.computeFilterNumericValue(this.priceFrom) ===
       this.offersDao.getLowestPriceForCurrentSearch()) {
         this.priceFrom = '-1';
