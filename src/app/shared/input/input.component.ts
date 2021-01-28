@@ -15,6 +15,7 @@ export class InputComponent {
   @Input() options: string[] = [];
 
   @Output() valueChange = new EventEmitter<string>();
+  @Output() readyForSearch = new EventEmitter();
 
   isDropdownVisible = false;
   inputValue : string;
@@ -32,19 +33,24 @@ export class InputComponent {
   @ViewChild('input') input: ElementRef;
 
   removeContent() {
-    this.inputValue = this.defaultValue;
+    this.value = this.defaultValue;
     this.isDropdownVisible = false;
     this.input.nativeElement.classList.remove('p-filled');
+    this.readyForSearch.emit();
   }
 
   filterOptions(currentValue: string): string[] {
-    return this.options.filter(option =>
-      option.toLowerCase().startsWith(currentValue.toLowerCase()));
+    return this.options.filter(option => {
+      const optionSplitted = option.toLowerCase().split(', ');
+      return optionSplitted[0]?.startsWith(currentValue.toLowerCase()) ||
+        optionSplitted[1]?.startsWith(currentValue.toLowerCase())
+    });
   }
 
   optionSelected(option: string) {
-    this.inputValue = option;
+    this.value = option;
     this.isDropdownVisible = false;
+    this.readyForSearch.emit();
   }
 
   computeDropdownVisibility(value: string) {

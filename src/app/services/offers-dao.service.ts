@@ -112,7 +112,7 @@ export class OffersDao {
 
     getDistinctLocations(): string[] {
         return this.allOffers
-            .map(offer => offer.city)
+            .map(offer => offer.fullLocation)
             .filter((current, index, offers) =>
                 offers.indexOf(current) === index)
             .sort((a, b) => a < b ? -1 : a > b ? 1 : 0);

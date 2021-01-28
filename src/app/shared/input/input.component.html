@@ -16,8 +16,7 @@
 <div class="options-dropdown" *ngIf="isDropdownVisible">
     <div class="option"
         *ngFor="let option of filterOptions(inputValue); let i = index"
-        (click)="optionSelected(option)"
-        [tabindex]="computeIndex(i)">
+        (click)="optionSelected(option)">
         {{ option }}
     </div>
 </div>

@@ -32,7 +32,6 @@ export class OfferComponent {
     } else {
       this.offer = this.offersDao.getOfferBySymbol(symbol);
       if (this.offer) {
-        console.log(this.offer);
         this.titleService.setTitle(this.offer.title);
       } else {
         this.router.navigate(['/strona-nie-istnieje']);

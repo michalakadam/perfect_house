@@ -97,8 +97,12 @@ export class OffersFilter {
   }
 
   private filterByLocation(offers: Offer[], location: string): Offer[] {
-    return offers.filter(offer =>
-      offer.city.toLowerCase() === location.toLowerCase());
+    if (location.includes(',')) {
+      return offers.filter(offer =>
+        offer.fullLocation.toLowerCase() === location.toLowerCase());
+    }
+    return offers.filter(offer => offer.city.toLowerCase() === location.toLowerCase() ||
+      offer.district.toLowerCase() === location.toLowerCase());
   }
 
 

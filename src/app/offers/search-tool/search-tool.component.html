@@ -46,7 +46,8 @@
                 lhsIcon='pi pi-map-marker'
                 title='lokalizacja'
                 [options]="offersDao.getDistinctLocations()"
-                [(value)]="location">
+                [(value)]="location"
+                (readyForSearch)="applyFiltersIgnoringPrice()">
             </perfect-input>
         </div>
     </div>
