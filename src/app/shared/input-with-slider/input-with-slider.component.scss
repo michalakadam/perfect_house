@@ -1,0 +1,73 @@
+@import "~src/variables.scss";
+
+.component-container {
+    display: flex;
+    flex-direction: column;
+    height: 50px;
+    width: 344px;
+    @media screen and (max-width: $desktop-large) {
+        width: 299px
+    }
+    @media screen and (max-width: $desktop-medium) {
+        width: 260px;
+    }
+    @media screen and (max-width: $desktop-small) {
+        width: 254px;
+    }
+
+    .slider-title {
+        align-items: center;
+        display: flex;
+        margin-bottom: 10px;
+        @media screen and (max-width: $desktop-small) {
+            margin-bottom: 15px;
+        }
+
+        span {
+            color: $font-light-grey;
+            font-weight: 700;
+        }
+
+        & > * {
+            margin-right: 5px;
+        }
+
+        &:last-child {
+            margin-right: unset;
+        }
+    }
+
+    p-slider {
+        margin-left: 10px;
+        width: 326px;
+        @media screen and (max-width: $desktop-large) {
+            margin-left: 8px;
+            width: 284px;
+        }
+        @media screen and (max-width: $desktop-medium) {
+            width: 244px;
+        }
+        @media screen and (max-width: $desktop-small) {
+            margin-left: 5px;
+            width: 242px;
+        }
+
+        ::ng-deep .p-slider {
+            .p-slider-range {
+                background-color: $light-green;
+            }
+
+            .p-slider-handle {
+                border-color: $dark-green;
+
+                &:focus {
+                    box-shadow: unset;
+                }
+
+                &:hover {
+                    background-color: $light-green;
+                }
+            }
+        }
+    }
+}

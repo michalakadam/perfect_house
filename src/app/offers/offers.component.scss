@@ -1,31 +1,43 @@
 @import "~src/variables.scss";
+@import "~src/mixins.scss";
 
 .component-container {
-    margin: 0 auto;
-    width: 800px;
+    @include responsive-page;
     @media screen and (max-width: $desktop-small) {
-        width: 400px;
-    }
-    @media screen and (max-width: $mobile) {
-        width: 300px;
+        margin-top: 10px;
     }
 
-    .other-tools-container {
-        @media screen and (max-width: $desktop-small) {
-            border-radius: 15px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    .tools-container {
+        @include perfect-box;
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+        padding: 15px 25px;
+        @media screen and (max-width: $desktop-medium) {
             padding: 15px;
         }
-        @media screen and (max-width: $mobile) {
-            padding: 15px 0;
+        @media screen and (max-width: $desktop-small) {
+            border-radius: unset;
+            box-shadow: unset;
+            transition: unset;
+            padding: unset;
         }
 
-        .top-paginator {
-            margin-top: -37px;
-            min-height: 32px;
-
+        .other-tools-container {
             @media screen and (max-width: $desktop-small) {
-                margin-top: 0;
+                @include perfect-box;
+                margin: 0 auto;
+                padding: 15px;
+                width: 316px;
+            }
+
+            .top-paginator {
+                margin-top: -46px;
+                min-height: 32px;
+                @media screen and (max-width: $desktop-large) {
+                    margin-top: -40px;
+                }
+                @media screen and (max-width: $desktop-small) {
+                    margin-top: 0;
+                }
             }
         }
     }

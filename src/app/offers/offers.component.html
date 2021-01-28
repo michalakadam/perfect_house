@@ -1,25 +1,26 @@
 <div class="component-container">
-    <perfect-search-tool
-        [filters]="currentFilters"
-        (searchOffers)="loadNewResults(0, currentSorting, $event)"
-        (openOffer)="loadOffer($event)">
-    </perfect-search-tool>
+    <div class="tools-container">
+        <perfect-search-tool
+            [filters]="currentFilters"
+            (searchOffers)="loadNewResults(0, currentSorting, $event)"
+            (openOffer)="loadOffer($event)">
+        </perfect-search-tool>
 
-    <div class="other-tools-container">
-        <perfect-sorting-tool
-            [offersQuantity]="offersDao.getOffersQuantity()"
-            [selectedSorting]="currentSorting"
-            (sortingChanged)="loadNewResults(currentPage, $event, currentFilters)">
-        </perfect-sorting-tool>
+        <div class="other-tools-container">
+            <perfect-sorting-tool
+                [offersQuantity]="offersDao.getOffersQuantity()"
+                [selectedSorting]="currentSorting"
+                (sortingChanged)="loadNewResults(currentPage, $event, currentFilters)">
+            </perfect-sorting-tool>
 
-        <div class="top-paginator">
-            <perfect-paginator
-                *ngIf="isPaginatorVisible"
-                [offersPerPage]="offersDao.getOffersPerPage()"
-                [totalOffersQuantity]="offersDao.getOffersQuantity()"
-                [selectedPage]="currentPage"
-                (pageChanged)="loadNewResults($event, currentSorting, currentFilters)">
-            </perfect-paginator>
+            <div class="top-paginator" *ngIf="isPaginatorVisible">
+                <perfect-paginator
+                    [offersPerPage]="offersDao.getOffersPerPage()"
+                    [totalOffersQuantity]="offersDao.getOffersQuantity()"
+                    [selectedPage]="currentPage"
+                    (pageChanged)="loadNewResults($event, currentSorting, currentFilters)">
+                </perfect-paginator>
+            </div>
         </div>
     </div>
 

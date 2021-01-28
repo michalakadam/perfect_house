@@ -15,6 +15,7 @@ export class OffersDao {
     private allOffers: Offer[];
     private currentSearchOffers: Offer[];
     private currentSearchOffersSortedByPriceAsc: Offer[];
+    private randomOffersForCarousel: Offer[];
 
     constructor(private offersConverter: OffersConverter,
         private offersSorter: OffersSorter,
@@ -26,6 +27,7 @@ export class OffersDao {
     initializeOffersForTheMainPage() {
         this.currentSearchOffers = this.allOffers;
         this.currentSearchOffersSortedByPriceAsc = this.sortCurrentOffersByPrice();
+        this.randomOffersForCarousel = this.computeRandomOffers(20);
     }
 
     list(page: number, sorting: Sorting, filters: OffersFilters): Offer[] {
@@ -49,6 +51,24 @@ export class OffersDao {
                 AVAILABLE_SORTINGS.find(sorting => sorting.displayName === 'cenie rosnąco')
             );
 
+    }
+
+    getOffersForCarousel(): Offer[] {
+        return this.randomOffersForCarousel;
+    }
+
+    // Temporary solution until state management is implemented.
+    private computeRandomOffers(amount: number) {
+        let result = new Array(amount);
+        let offersTotalAmount = this.getOffersQuantity();
+        let taken = new Array(offersTotalAmount);
+        while (amount--) {
+            let x = Math.floor(Math.random() * offersTotalAmount);
+            result[amount] = this.currentSearchOffers[x in taken ? taken[x] : x];
+            taken[x] = --offersTotalAmount in taken ?
+                taken[offersTotalAmount] : offersTotalAmount;
+        }
+        return result;
     }
 
     getOffersQuantity(): number {
@@ -88,5 +108,13 @@ export class OffersDao {
             this.currentSearchOffersSortedByPriceAsc[
                 this.currentSearchOffersSortedByPriceAsc.length - 1]
             .price : 0;
+    }
+
+    getDistinctLocations(): string[] {
+        return this.allOffers
+            .map(offer => offer.fullLocation)
+            .filter((current, index, offers) =>
+                offers.indexOf(current) === index)
+            .sort((a, b) => a < b ? -1 : a > b ? 1 : 0);
     }
 }

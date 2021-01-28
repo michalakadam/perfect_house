@@ -1,27 +1,37 @@
 @import "~src/variables.scss";
 
-@mixin articlePage { 
-    margin: 0 auto; 
-    width: 800px;
+@mixin responsive-page {
+    margin: 0 auto;
+    width: 1098px;
+    @media screen and (max-width: $desktop-large) {
+        width: 947px;
+    }
+    @media screen and (max-width: $desktop-medium) {
+        width: 830px;
+    }
     @media screen and (max-width: $desktop-small) {
-        width: 600px;
+        width: 90%;
     }
+    @media screen and (max-width: $mobile) {
+        width: 98%;
+    }
+}
 
-    @media screen and (max-width: $mobile-large) {
-        width: unset;
-        margin: 0 20px;
-    }
+@mixin article-page { 
+    @include responsive-page;
 
     main {
         margin-block-end: 50px;
         margin-block-start: 0px;
         text-align: justify;
     }
+}
 
-    h2 {
-        @media screen and (max-width: $mobile-large) {
-            font-size: 14px;
-        }
+@mixin perfect-box {
+    border-radius: 15px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    @media screen and (max-width: $desktop-small) {
+        border-radius: 10px;
     }
 }
 

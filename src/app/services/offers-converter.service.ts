@@ -55,6 +55,8 @@ export class OffersConverter {
                 county: this.computeCounty(offer.Powiat || ''),
                 city: this.computeCity(offer.Lokalizacja || ''),
                 district: offer.Dzielnica || offer.Rejon || '',
+                fullLocation: this.computeFullLocation(
+                    this.computeCity(offer.Lokalizacja || ''), offer.Dzielnica || offer.Rejon || ''),
                 postalCode: offer.KodPocztowy?.text || '',
                 street: offer.Ulica || '',
                 location: offer.Polozenie?.text || '',
@@ -209,6 +211,11 @@ export class OffersConverter {
 
     private computeCity(location: string): string {
         return location.replace(' (gw)', '');
+    }
+
+    private computeFullLocation(city: string, district: string) {
+        const isDistrictAvailable = district && district !== city;
+        return city + (isDistrictAvailable ? ', ' + district : '');
     }
 
     private computeEstateType(estateType: string): string {

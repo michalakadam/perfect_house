@@ -3,29 +3,13 @@
 
 .component-container {
     
-    @include articlePage;
-
-    .title {
-        font-size: 14px;
-        text-align: justify;
-        @media screen and (max-width: $mobile-large) {
-            font-size: 12px;
-        }
-    }
+    @include article-page;
 
     main {
         margin-bottom: 0;
-
-        h3 {
-            font-size: 13px;
-        }
     }
 
     footer {
-        p {
-            font-size: 12px;
-        }
-
         .agent-brief-container {
             display: flex;
             justify-content: center;

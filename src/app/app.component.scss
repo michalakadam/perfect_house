@@ -16,14 +16,19 @@
     .about-us-navigation {
         height: 100px;
         position: absolute;
-        right: 25%;
-        top: 95px;
-        width: 125px;
+        left: 50%;
+        margin-left: 400px;
+        top: 115px;
+        width: 170px;
         @media screen and (max-width: $desktop-large) {
-            right: 20%;
+            margin-left: 340px;
+            top: 110px;
+            width: 160px;
         }
         @media screen and (max-width: $desktop-medium) {
-            right: 15%;
+            margin-left: 300px;
+            top: 105px;
+            width: 150px;
         }
     }
 

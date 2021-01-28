@@ -1,6 +1,8 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, ChangeDetectorRef } from '@angular/core';
 import { AgentsDao } from 'src/app/services/agents-dao.service';
 import { Offer } from 'src/app/shared/models';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
 
 @Component({
   selector: 'perfect-offer-card',
@@ -9,7 +11,19 @@ import { Offer } from 'src/app/shared/models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OfferCardComponent {
-  @Input() offer: Offer;
+  displaySmaller = false;
 
-  constructor(readonly agentsDao: AgentsDao) {}
+  @Input() offer: Offer;
+  @Input()
+  set inCarousel(value: boolean) {
+    this.displaySmaller = coerceBooleanProperty(value);
+  }
+
+  constructor (readonly agentsDao: AgentsDao,
+    readonly windowSizeDetector: WindowSizeDetector, 
+    readonly changeDetector: ChangeDetectorRef) {
+    this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
+      this.changeDetector.detectChanges();
+    });
+  }
 }

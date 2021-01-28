@@ -1,14 +1,12 @@
 <div class='component-container'>
     <header>
-        <h2 class='title'>
-        Ludzie
-        </h2>
+        <h2 class='title'>Ludzie</h2>
     </header> 
     <div class="list-of-agents">
         <perfect-agent-brief
             *ngFor="let agent of agentsDao.listAgents()" 
+            vertical
             [agent]="agent" 
-            [isVertical]=true
             (click)="navigateToAgentPage(agent)">
         </perfect-agent-brief>
     </div>
@@ -36,8 +34,7 @@
             potrzebami i możliwościami klientów a ceną nieruchomości. 
         </p>
         <p>
-            <strong>Cel jest prosty – po transakcji wszystkie jej strony muszą być
-            zadowolone.</strong>
+            <strong>Cel jest prosty – po transakcji wszystkie jej strony muszą być zadowolone.</strong>
         </p>
     </div>
 

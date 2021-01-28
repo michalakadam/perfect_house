@@ -1,7 +1,12 @@
 <div class="component-container">
     <div class="offers-counter">
-        <span class="title">
-            Liczba ofert: 
+        <span class="title"> 
+            <span *ngIf="windowSizeDetector.isWindowSmallerThanDesktopSmall; else fullTitle">
+                Ofert: 
+            </span>
+            <ng-template #fullTitle>
+                Liczba ofert: 
+            </ng-template>
         </span>
         <span>
             {{ offersQuantity }}
