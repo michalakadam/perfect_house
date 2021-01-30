@@ -1,0 +1,10 @@
+@import "~src/variables.scss";
+
+.map {
+    max-height: 30vw;
+
+    ::ng-deep .ol-control button {
+        background-color: $light-green;
+        color: $dark-green;
+    }
+}

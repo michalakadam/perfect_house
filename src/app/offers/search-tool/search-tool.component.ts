@@ -70,9 +70,12 @@ export class SearchToolComponent implements OnChanges {
   @Output() openOffer = new EventEmitter<string>();
   @Output() advancedToggled = new EventEmitter();
 
-  constructor(readonly offersDao: OffersDao,
+  offersDao: OffersDao;
+
+  constructor(offersDaoExternal: OffersDao,
     readonly windowSizeDetector: WindowSizeDetector,
     private changeDetector: ChangeDetectorRef) {
+      this.offersDao = offersDaoExternal;
     this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
       this.changeDetector.detectChanges();
     });
