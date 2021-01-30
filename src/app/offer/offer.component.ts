@@ -41,9 +41,7 @@ const IMAGES = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OfferComponent {
-  
   offer: Offer;
-  agent: Agent;
   images = IMAGES;
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -57,7 +55,6 @@ export class OfferComponent {
           this.router.navigate(['/strona-nie-istnieje']);
         }    
       });
-      this.agent = this.agentsDao.getAgentById(this.offer.id);
   }
 
   private loadOffer(symbol: string) {
@@ -84,5 +81,12 @@ export class OfferComponent {
       } else {
         this.router.navigate(['/strona-nie-istnieje']);
       }
+  }
+  navigateToAgentPage(agent: Agent) {
+    this.router.navigate(['/ludzie/' + this.computeAgentLink(agent.fullName)]);
+  }
+
+  computeAgentLink(agentFullName: string): string {
+    return agentFullName.toLowerCase().split(' ').join('-');
   }
 }

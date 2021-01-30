@@ -3,7 +3,7 @@
             <img style="width:500px; margin: 20px auto;" src="./offers/{{ offer.photos[0]}}">
         </div> -->
         
-    <p-galleria
+    <!-- <p-galleria
         [(value)]="images"
         [numVisible]="3"
         [circular]="true"
@@ -21,31 +21,32 @@
                 <img [src]="item.thumbnailImageSrc" style="display: block; width: 100px" />
             </div>
         </ng-template>
-    </p-galleria>
+    </p-galleria> -->
+    
         
-        <mat-card id="basic-info-card">
+        <div class="card basic-info-card">
                 <h3 class="price"> {{ offer.price | prettifyNumber:"zł" }}</h3>
                 <perfect-offer-details 
                 [offer]="offer">
                 </perfect-offer-details>
-        </mat-card>
-        <mat-card id="card-description">
-            <mat-card-title class="description-title">
+        </div>
+        <div class="card card-description">
+            <div class="description-title">
                 <span>Opis</span> 
                 <span>Szczegóły</span>
-            </mat-card-title>
-            <mat-card-content>
-                <div *ngIf="offer.description">
-                    {{ offer.description }}
-                </div>
-            </mat-card-content>
-        </mat-card>
-        <mat-card>
-        <perfect-agent-brief 
-            [agent]="agent"
-            bigger
-            contactInfoVisible
-            vertical>
-        </perfect-agent-brief>
-        </mat-card>
+            </div>
+            <div class="description-main" *ngIf="offer.description">
+                {{ offer.description }}
+            </div>
+        </div>
+
+        <div class="card agent-brief">
+            <perfect-agent-brief *ngIf="agentsDao.getAgentById(offer.agentId) as agent"
+                [agent]="agent"
+                bigger
+                contactInfoVisible
+                vertical
+                (click)="navigateToAgentPage(agent)">
+            </perfect-agent-brief>
+        </div>
 </div>

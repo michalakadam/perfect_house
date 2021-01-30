@@ -6,29 +6,58 @@
     
     @include article-page;
     
-    p-galleria {
-        ::ng-deep .p-galleria .p-galleria-indicators {
-            bottom: 50px;
-            position: relative;
+    // p-galleria {
+    //     ::ng-deep .p-galleria .p-galleria-indicators {
+    //         bottom: 50px;
+    //         position: relative;
 
-            .p-galleria-indicator.p-highlight {
-                button {
-                    background: $light-green;
-                    background-color: $light-green;
+    //         .p-galleria-indicator.p-highlight {
+    //             button {
+    //                 background: $light-green;
+    //                 background-color: $light-green;
 
-                }
+    //             }
                 
-                .p-link:focus {
-                    box-shadow: 0 0 0 0.2rem $dark-green;
-                }
-            }
+    //             .p-link:focus {
+    //                 box-shadow: 0 0 0 0.2rem $dark-green;
+    //             }
+    //         }
+    //     }
+    // }
+    .card {
+        @include perfect-box; 
+        margin: 20px auto;
+        padding: 25px;
+        @media screen and (max-width: $desktop-small) {
+            margin: 20px;;
+        }
+        @media screen and (max-width: $mobile-large) {
+            flex-direction: column;
+            margin: 20px auto;
+            width: 300px;
         }
     }
-    mat-card {
-        margin: 15px auto;
+    .basic-info-card {
+    // display: inline;
+    }
+    .agent-brief { 
+        max-height: 420px;
+        flex-direction: column;
+        margin: 0 auto;
+        width: 300px;
+        @media screen and (max-width: $desktop-small) {
+            margin-right: 20px;
+            max-height: 376px;
+            padding: 25px 0;
+        }
+        @media screen and (max-width: $mobile-large) {
+            margin-bottom: 20px;
+            margin-right: auto;
+            padding: 25px;
+        }
     }
 
-    #card-description {
+    .card-description {
         .description-title {
             display: grid;
             grid-template-columns: 1fr 1fr;
