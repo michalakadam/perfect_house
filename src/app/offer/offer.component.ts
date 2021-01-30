@@ -1,38 +1,10 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { OffersDao } from '../services/offers-dao.service';
-import { Offer } from '../shared/models';
+import { Offer, GalleryPhoto } from '../shared/models';
 import { AgentsDao } from 'src/app/services/agents-dao.service';
 import { Agent } from 'src/app/shared/models';
-
-const IMAGES = [
-  // {
-  //   "previewImageSrc": "src/offers/ofe_2554254.jpg",
-  //   "thumbnailImageSrc":"src/offers/ofe_2554254.jpg",
-  //   "title": "Zdjęcie oferty"
-  // },
-  // { 
-  //   "previewImageSrc": "src/offers/ofe_2554258.jpg",
-  //   "thumbnailImageSrc":"src/offers/ofe_2554258.jpg",
-  //   "title": "Zdjęcie oferty"
-  // },
-  {
-    "previewImageSrc": "/assets/dla_ciebie.jpg",
-    "thumbnailImageSrc": "/assets/dla_ciebie.jpg",
-    "title": "Sprawdź nasze oferty dla Ciebie."
-  },
-  {
-    "previewImageSrc": "/assets/nad_morzem.jpg",
-    "thumbnailImageSrc": "/assets/nad_morzem.jpg",
-    "title": "Zobacz inwestycje nad morzem."
-  },
-  {
-    "previewImageSrc": "/assets/po_poznansku.jpg",
-    "thumbnailImageSrc": "/assets/po_poznansku.jpg",
-    "title": "Sprawdź nasze oferty dla Ciebie."
-  },
-]
 
 @Component({
   selector: 'perfect-offer',
@@ -42,8 +14,9 @@ const IMAGES = [
 })
 export class OfferComponent {
   offer: Offer;
-  images = IMAGES;
+  images: GalleryPhoto[] = [];
   constructor(private route: ActivatedRoute,
+    private changeDetector: ChangeDetectorRef,
     private router: Router,
     private titleService: Title,
     private offersDao: OffersDao,
@@ -64,6 +37,8 @@ export class OfferComponent {
       this.offer = this.offersDao.getOfferBySymbol(symbol);
       if (this.offer) {
         this.titleService.setTitle(this.offer.title);
+        this.images = this.computeImages(this.offer.photos);
+        this.changeDetector.detectChanges();
       } else {
         this.router.navigate(['/strona-nie-istnieje']);
       }
@@ -88,5 +63,17 @@ export class OfferComponent {
 
   computeAgentLink(agentFullName: string): string {
     return agentFullName.toLowerCase().split(' ').join('-');
+  }
+  
+  computeImages(photos: string[]): GalleryPhoto[] {
+    let computedPhotos: GalleryPhoto[] = [];
+    for (let photo of photos) {
+      computedPhotos.push({ 
+        previewImageSrc: '/offers/' + photo,
+        thumbnailImageSrc: '/offers/' + photo,
+      })
+    }
+    return computedPhotos
+    
   }
 }
