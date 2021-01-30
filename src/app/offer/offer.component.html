@@ -1,51 +1,33 @@
 <div class="component-container">
-        <div class="picture">
+        <!-- <div class="picture">
             <img style="width:500px; margin: 20px auto;" src="./offers/{{ offer.photos[0]}}">
-        </div>
-        <mat-card id="basic-info-card">
-            <h3 class="price"> {{ offer.price | prettifyNumber:"zł" }}</h3>
-            <div class="head-component">
-                <h2 class="title">{{ offer.title }} </h2>
-                <h3 class="price"> {{ offer.price | prettifyNumber:"zł" }}</h3>
-                <div class="location">
-                    <i class="pi pi-map-marker"></i>
-                    <span>{{ offer.city }},&nbsp;</span>
-                    <span *ngIf="offer.county">{{ offer.county}},&nbsp;</span>
-                    <span>{{ offer.voivodeship }}</span>
-                    <span>{{ offer.street }}</span>
-                </div>
-                <div class="details-row">
-                    <span class="key-value-pair">
-                        <span class="key">Cena za m²: </span>
-                        <span class="value">{{ offer.pricePerSquareMeter | prettifyNumber:"zł" }}</span>
-                    </span>
-                    <span class="key-value-pair">
-                        <span class="key">Powierzchnia: </span>
-                        <span class="value">{{ offer.totalArea | prettifyNumber:"m²" }}</span>
-                    </span>
-                    <span class="key-value-pair"
-                        *ngIf="offer.estateType === 'Dom' || offer.estateType === 'Mieszkanie' || offer.estateType === 'Lokal'">
-                        <span class="key">Liczba pokoi: </span>
-                        <span class="value">{{ offer.numberOfRooms | prettifyNumber }}</span>
-                    </span>
-                    <span class="key-value-pair"
-                        *ngIf="offer.estateType === 'Dom' || offer.estateType === 'Obiekt'">
-                        <span class="key">Powierzchnia działki: </span>
-                        <span class="value">{{ offer.landArea | prettifyNumber:"m²" }}</span>
-                    </span>
-                    <span class="key-value-pair"
-                        *ngIf="offer.estateType === 'Mieszkanie' || offer.estateType === 'Lokal'">
-                        <span class="key">Piętro: </span>
-                        <span class="value">{{ offer.floor }}</span>
-                    </span>
-                    <span class="key-value-pair"
-                        *ngIf="offer.estateType === 'Mieszkanie' || offer.estateType === 'Lokal'">
-                        <span class="key">Liczba pięter </span>
-                        <span class="value">{{ offer.floorHeight}}</span>
-                    </span>
-                </div>
+        </div> -->
+        
+    <p-galleria
+        [(value)]="images"
+        [numVisible]="3"
+        [circular]="true"
+        [autoPlay]="true"
+        [transitionInterval]="5000"
+        [showThumbnails]="true"
+        [showIndicators]="true"
+        [changeItemOnIndicatorHover]="true"> 
+        <ng-template pTemplate="item" let-item>
+            <img [src]="item.previewImageSrc"
+                style="width: 100%; display: block; cursor: pointer"/>
+        </ng-template>
+        <ng-template pTemplate="thumbnail" let-item>
+            <div class="p-grid p-nogutter p-justify-center">
+                <img [src]="item.thumbnailImageSrc" style="display: block; width: 100px" />
             </div>
-          
+        </ng-template>
+    </p-galleria>
+        
+        <mat-card id="basic-info-card">
+                <h3 class="price"> {{ offer.price | prettifyNumber:"zł" }}</h3>
+                <perfect-offer-details 
+                [offer]="offer">
+                </perfect-offer-details>
         </mat-card>
         <mat-card id="card-description">
             <mat-card-title class="description-title">
@@ -59,9 +41,11 @@
             </mat-card-content>
         </mat-card>
         <mat-card>
-            <perfect-agent-brief 
-            [agent]="agent" 
-            >
-            </perfect-agent-brief>
+        <perfect-agent-brief 
+            [agent]="agent"
+            bigger
+            contactInfoVisible
+            vertical>
+        </perfect-agent-brief>
         </mat-card>
 </div>

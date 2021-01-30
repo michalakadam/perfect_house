@@ -7,6 +7,8 @@ import { Offer } from 'src/app/shared/models';
   styleUrls: ['./offer-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
+
 export class OfferDetailsComponent {
   @Input() offer: Offer;
+  
 }

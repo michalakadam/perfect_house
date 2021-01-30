@@ -5,48 +5,29 @@
 .component-container {
     
     @include article-page;
-    mat-card {
-        margin: 15px auto;
-        
-        .location {
-            align-items: center;
-            color: $font-light-grey;
-            display: flex;
-            margin-bottom: 15px;
-            margin-left: -3px;
+    
+    p-galleria {
+        ::ng-deep .p-galleria .p-galleria-indicators {
+            bottom: 50px;
+            position: relative;
 
-            i {
-                margin-right: 3px;
+            .p-galleria-indicator.p-highlight {
+                button {
+                    background: $light-green;
+                    background-color: $light-green;
+
+                }
+                
+                .p-link:focus {
+                    box-shadow: 0 0 0 0.2rem $dark-green;
+                }
             }
-        }
-
-        .details-row {
-            display: flex;
-            font-size: 16px;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            @media screen and (max-width: $mobile) {
-                margin-bottom: 0;
-            }
-
-            .key-value-pair {
-                &:first-of-type {
-                    display: inline-block;
-                    
-                }
-
-                @media screen and (max-width: $mobile) {
-                    display: block;
-                    margin-bottom: 14px;
-                    width: unset;
-                }
-
-                .key {
-                    font-weight: 700;
-                }
-            }    
         }
     }
+    mat-card {
+        margin: 15px auto;
+    }
+
     #card-description {
         .description-title {
             display: grid;

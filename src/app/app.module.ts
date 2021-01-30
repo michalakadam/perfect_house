@@ -41,8 +41,9 @@ import { SliderModule } from 'primeng/slider';
 import { GalleriaModule } from 'primeng/galleria';
 import { InputWithSliderComponent } from './shared/input-with-slider/input-with-slider.component';
 import { CarouselModule } from 'primeng/carousel';
-import {MatCardModule} from '@angular/material/card';
- 
+import { MatCardModule } from '@angular/material/card';
+import { OfferDetailsComponent } from 'src/app/offer/offer-details/offer-details.component';
+
 @NgModule({
   declarations: [
     AgentBriefComponent,
@@ -69,7 +70,9 @@ import {MatCardModule} from '@angular/material/card';
     OfferComponent,
     InputComponent,
     InputWithSliderComponent,
+    OfferDetailsComponent,
   ],
+  
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -95,4 +98,5 @@ import {MatCardModule} from '@angular/material/card';
     AppComponent,
   ],
 })
-export class AppModule { }
+export class AppModule {
+}
