@@ -82,8 +82,16 @@
                     display: none;
                 }
 
-                .p-carousel-content .p-carousel-prev:focus, .p-carousel .p-carousel-content .p-carousel-next:focus {
-                    box-shadow: 0 0 0 0.2rem $light-green;
+                .p-carousel-content {
+                    .p-carousel-prev, .p-carousel-next {
+                        &:focus {
+                            box-shadow: 0 0 0 0.2rem $light-green;
+                        }
+
+                        .pi {
+                            font-size: 1.3rem;
+                        }
+                    }
                 }
             }
         }
