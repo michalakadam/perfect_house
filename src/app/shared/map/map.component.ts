@@ -25,7 +25,9 @@ export class MapComponent implements OnInit {
       })
     });
 
-    this.addPoint(this.lattitude, this.longitude);
+    if (this.lattitude && this.longitude) {
+      this.addPoint(this.lattitude, this.longitude);
+    }
   }
 
   addPoint(lat: number, lng: number) {

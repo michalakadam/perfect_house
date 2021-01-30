@@ -32,11 +32,9 @@
         }
 
         a {
-            color: unset;
             display: flex;
             font-style: italic;
             margin-bottom: 5px;
-            text-decoration: none;
 
             mat-icon {
                 color: $light-green;

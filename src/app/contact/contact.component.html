@@ -1,1 +1,199 @@
-<perfect-map [lattitude]="officeLattitude" [longitude]="officeLongitude"></perfect-map>
+<div class="component-container">
+    <div class="map-container">
+        <perfect-map
+            [lattitude]="officeLattitude"
+            [longitude]="officeLongitude">
+        </perfect-map>
+    </div>
+
+    <div class="contact-info">
+        <h2>Kontakt</h2>
+        <mat-divider></mat-divider>
+        <address>
+            <div>Biuro nieruchomości <span class="name">Perfect House</span></div>
+            <div>ul. Klin 17/2, 60-602 Poznań</div>
+            <a target="_blank" href="mailto:biuro@e-perfecthouse.pl" rel="noopener noreferrer">
+                biuro@e-perfecthouse.pl
+            </a>
+            <a href="tel:612960395">61 296 03 95</a>
+            <a href="tel:514753514">514 753 514</a>
+        </address>
+        <div class="icons-container">
+            <a target="_blank" href="https://www.facebook.com/perfecthousepoznan" rel="noopener noreferrer">
+                <mat-icon><i class="fab fa-facebook-square"></i></mat-icon>
+            </a>
+            <a target="_blank" href="https://www.instagram.com/perfecthousepoznan" rel="noopener noreferrer">
+                <mat-icon><i class="fab fa-instagram-square"></i></mat-icon>
+            </a>
+            <a target="_blank" href="mailto:biuro@e-perfecthouse.pl" rel="noopener noreferrer">
+                <mat-icon><i class="fas fa-envelope-square"></i></mat-icon>
+            </a>
+        </div>    
+    </div>
+    <div class="info">
+        <div class="header">
+            <h3>
+                Informacja dla konsumentów
+            </h3>
+            <span class="toggle"
+                (click)="toggleInfoOpen()">
+                <mat-icon *ngIf="isInfoOpen">keyboard_arrow_up</mat-icon>
+                <mat-icon *ngIf="!isInfoOpen">keyboard_arrow_down</mat-icon>
+            </span>
+        </div>
+        <div class="content" *ngIf="isInfoOpen">
+            <mat-divider></mat-divider>
+            <p>
+                W celu nawiązania współpracy oraz poinformowania o głównych warunkach świadczenia usług
+                w zakresie pośrednictwa w obrocie nieruchomości, uprzejmie prosimy o zapoznanie się
+                z niżej podanymi informacjami. Jednocześnie pragniemy poinformować, że firma Perfect
+                House (zwana dalej: „Pośrednikiem”) z siedzibą w Poznaniu, adres biura (adres do
+                korespondencji): ul. Klin 17/2, 60-602 Poznań, działa na podstawie wpisu do Centralnej
+                Ewidencji i Informacji o Działalności Gospodarczej, prowadzonej przez Ministra Gospodarki, 
+                NIP 972 011 44 98, Regon: 300991458.
+            </p>
+
+            <h4>Sposoby komunikowania się z Pośrednikiem</h4>
+
+            <p style="margin-bottom: 0">
+                Wychodząc naprzeciw oczekiwaniom klientów, informujemy, iż w celu usprawnienia komunikacji 
+                z Pośrednikiem oraz składania reklamacji, możliwy jest kontakt:
+            </p>
+            <div>
+                a) Telefoniczny pod nr telefonów: 61 296 03 95 lub 514 753 514,
+            </div>
+            <div>
+                b) Za pośrednictwem poczty elektronicznej na adres mailowy: biuro@e-perfecthouse.pl
+            </div>
+            <p style="margin-top: 0">
+                Jednocześnie zachęcamy do odwiedzenia biura Pośrednika.
+            </p>
+
+            <h4>Przedmiot świadczenia usług</h4>
+
+            <p>
+                Pośrednik zobowiązuje się do świadczenia za wynagrodzeniem na rzecz konsumenta usług pośrednictwa
+                w obrocie nieruchomościami, polegających na podejmowaniu czynności zmierzających do znalezienia
+                nabywcy/najemcy na nieruchomość lub prawa związane z nieruchomością stanowiącą przedmiot umowy,
+                albo do znalezienia nieruchomości do nabycia lub najmu bądź inne prawa związane z nieruchomością
+                wynikające ze stosunków obligacyjnych lub rzeczowych.
+            </p>
+
+            <p style="margin-bottom: 0">
+                Nieruchomość będąca przedmiotem świadczenia zostanie zindywidualizowana w umowie, poprzez określenie
+                jej cech. Przez podejmowanie czynności zmierzających do znalezienia nabywcy/najemcy chętnego na zakup
+                Nieruchomości lub zainteresowanego jej najmem, bądź też znalezienia nieruchomości, której konsument
+                kupnem lub najmem jest zainteresowany, należy rozumieć:
+            </p>
+            <div>
+                a) Dokonywanie ogłoszeń i promocji ofert konsumenta w celu doprowadzenia do sprzedaży/kupna/wynajmu/najmu Nieruchomości,
+            </div>
+            <div>
+                b) Kontaktowanie z konsumentem osób zainteresowanych kupnem/sprzedażą/wynajmem/najmem Nieruchomości,
+            </div>
+            <div>
+                c) Analizę potrzeb konsumenta i przedstawianie mu ofert,
+            </div>
+            <div>
+                d) Dokonywanie, po uzgodnieniu z konsumentem, prezentacji Nieruchomości,
+            </div>
+            <div>
+                e) Obsługę transakcji z wyszukanym i zaakceptowanym przez konsumenta nabywcą nieruchomości/właścicielem nieruchomości.
+            </div>
+
+            <h4>Sposób ustalenia wynagrodzenia:</h4>
+
+            <p>
+                Pragniemy poinformować, iż wynagrodzenie przysługujące Pośrednikowi w przypadku najmu/wynajmu nieruchomości
+                stanowić będzie równowartość jednego czynszu najmu + 23% VAT, a w przypadku zakupu/sprzedaży uzgodniony
+                indywidualnie % brutto od ceny brutto, za jaką dokonany będzie zakup/sprzedaż Nieruchomości.
+                Wynagrodzenie przysługujące Pośrednikowi z tytułu wykonania umowy, płatne będzie w chwili zawarcia ostatecznej
+                umowy sprzedaży Nieruchomości.
+            </p>
+
+            <p>
+                W przypadku poprzedzenia sprzedaży umową przedwstępną, wynagrodzenie zostanie zapłacone w dwóch ratach: pierwsza
+                rata w wysokości 50% wynagrodzenia – płatna w dniu podpisania przedwstępnej umowy sprzedaży Nieruchomości,
+                druga rata w wysokości 50% wynagrodzenia – płatna w chwili zawarcia ostatecznej umowy sprzedaży Nieruchomości.
+            </p>
+            
+            <p>
+                W wypadku niestandardowych warunków transakcji istnieje też możliwość indywidualnego ustalenia transz 
+                i terminów płatności.
+            </p>
+
+            <h4>Koszty dodatkowe</h4>
+
+            <p>
+                Koszty pozyskania dokumentów niezbędnych do realizacji celu umowy obciążają konsumenta. W przypadku poniesienia
+                ww. kosztów przez Pośrednika, konsument zobowiązany będzie zwrócić poniesione nakłady na podstawie rachunków
+                przedstawionych przez Pośrednika w terminie 3 dni od daty przekazania mu rachunków. Poniesienie wszystkich
+                kosztów dodatkowych musi być uzgodnione każdorazowo z konsumentem.
+            </p>
+
+            <h4>Wypowiedzenie umowy</h4>
+
+            <p>
+                Umowa pośrednictwa w sprzedaży/kupnie/najmie/wynajmie nieruchomości jest zawierana z konsumentem na czas nieoznaczony.
+            </p>
+
+            <p>
+                Konsument może wypowiedzieć umowę z zachowaniem 7-dniowego terminu. Oświadczenie o wypowiedzeniu umowy powinno
+                zostać dostarczone Pośrednikowi na piśmie. W przypadku okazania osobie trzeciej nieruchomości stanowiącej przedmiot
+                umowy i podpisania przez nią „Potwierdzenia oglądania/przekazania adresu nieruchomości”, termin wypowiedzenia umowy
+                wynosić będzie 12 miesięcy w stosunku do tych osób.
+            </p>
+            
+            <p>
+                Oświadczenie konsumenta o wypowiedzeniu umowy uważa się za bezskuteczne w przypadku, gdy doszło do zbycia
+                nieruchomości lub prawa związanego z nieruchomością stanowiącego przedmiot umowy na rzecz osoby wskazanej
+                przez Pośrednika lub też doszło do podpisania umowy sprzedaży/kupna/wynajmu/najmu z osobą wskazaną przez Pośrednika.
+            </p>
+
+            <p>
+                Jeżeli w okresie 12 miesięcy po złożeniu przez konsumenta oświadczenia o wypowiedzeniu, zawrze on z osobą trzecią,
+                wskazaną przez Pośrednika, umowę przedwstępną sprzedaży lub umowę sprzedaży Nieruchomości lub kupna/wynajmu/najmu,
+                która to osoba trzecia została wskazana konsumentowi przez Pośrednika, co potwierdzone zostanie w tzw.
+                „Potwierdzeniu oglądania/przekazania adresu nieruchomości”, konsument obowiązany będzie do zapłaty na rzecz
+                Pośrednika wynagrodzenia umownego.
+            </p>
+
+            <h4>Procedura rozpatrywania reklamacji</h4>
+
+            <p>
+                Reklamację można złożyć za pośrednictwem poczty elektronicznej na adres e-mail: biuro@e-perfecthouse.pl lub w formie
+                listu na wskazany adres korespondencyjny Pośrednika. Reklamacja powinna zawierać: imię i nazwisko, datę zawarcia
+                Umowy, adres lub adres e-mail konsumenta oraz opisanie uzasadniających reklamację, a także konkretne żądanie konsumenta
+                związane ze składaną reklamacją. Jeżeli podane w reklamacji dane lub informacje wymagają uzupełnienia, przed
+                rozpatrzeniem reklamacji Pośrednik zwróci się do konsumenta składającego reklamację, o jej uzupełnienie we wskazanym zakresie.
+            </p>
+
+            <p>
+                Pośrednik rozpoznaje reklamację w terminie w terminie 14 dni od daty otrzymania prawidłowo sporządzonej reklamacji.
+                Konsument otrzyma informację o sposobie rozpatrzenia reklamacji drogą korespondencji elektronicznej lub listem poleconym.
+            </p>
+
+            <p>
+                W przypadku odrzucenia reklamacji, Pośrednik powiadomi o tym konsumenta drogą elektroniczną lub listem poleconym
+                podając powody tej decyzji. Konsument ma możliwość ponownego odwołania się od decyzji Pośrednika dotyczącej złożonej reklamacji.
+            </p>
+
+            <p>
+                W przypadku uznania reklamacji Pośrednik może wypłacić należną kwotę konsumentowi lub spełnić inne świadczenie uzgodnione przez Strony.
+            </p>
+
+            <h4>Prawo odstąpienia od umowy przez Pośrednika</h4>
+
+            <p style="margin-bottom: 0">
+                Pośrednikowi przysługiwać będzie prawo do odstąpienia od umowy, w przypadku gdy:
+            </p>
+            <div>
+                a) Konsument nie dostarczył Pośrednikowi wymaganych dokumentów, niezbędnych do wykonania niniejszej umowy,
+            </div>
+            <div>
+                b) Wyjdą na jaw okoliczności faktyczne lub prawne nieujawnione przez konsumenta, z powodu których wykonanie umowy
+                pośrednictwa w sprzedaży/najmie nieruchomości nie będzie możliwe lub będzie w znaczny sposób utrudnione.
+            </div>
+        </div>
+    </div>
+</div>
