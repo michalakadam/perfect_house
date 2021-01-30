@@ -150,7 +150,7 @@ export class SearchToolComponent implements OnChanges {
       this.openOffer.emit(this.symbol);
       return;
     }
-    if (this.mainPage) {
+    if (this.onMainPage) {
       return;
     }
     if (this.computeFilterNumericValue(this.priceFrom) ===
