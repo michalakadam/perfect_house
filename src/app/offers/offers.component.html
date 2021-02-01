@@ -35,7 +35,7 @@
     </div>
 
     <perfect-offer-card
-        *ngFor="let offer of offers"
+        *ngFor="let offer of offers; trackBy: trackById"
         [offer]="offer"
         (click)=loadOffer(offer.symbol)></perfect-offer-card>
 

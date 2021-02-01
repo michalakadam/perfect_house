@@ -123,4 +123,8 @@ export class OffersComponent implements OnInit {
   loadOffer(symbol: string) {
     this.router.navigate(['oferta', symbol]);
   }
+
+  trackById(index: number, offer: Offer) {
+    return offer.id;
+  }
 }
