@@ -1,0 +1,8 @@
+@import "~src/variables.scss";
+
+.map {
+    ::ng-deep .ol-control button {
+        background-color: $light-green;
+        color: $dark-green;
+    }
+}

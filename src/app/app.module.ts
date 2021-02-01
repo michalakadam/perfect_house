@@ -41,6 +41,7 @@ import { SliderModule } from 'primeng/slider';
 import { GalleriaModule } from 'primeng/galleria';
 import { InputWithSliderComponent } from './shared/input-with-slider/input-with-slider.component';
 import { CarouselModule } from 'primeng/carousel';
+import { UnderConstructionComponent } from './under-construction/under-construction.component';
  
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { CarouselModule } from 'primeng/carousel';
     OfferComponent,
     InputComponent,
     InputWithSliderComponent,
+    UnderConstructionComponent,
   ],
   imports: [
     AppRoutingModule,
