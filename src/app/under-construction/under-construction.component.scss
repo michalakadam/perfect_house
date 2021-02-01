@@ -2,28 +2,29 @@
 
 .component-container {
     // background image source: https://unsplash.com/photos/ziIu9izp5Ac
-    background: url('/assets/under_construction.jpeg') no-repeat center center fixed;
+    background: url('/assets/under_construction.jpeg') no-repeat center bottom fixed;
     background-size: cover;
     font-weight: 700;
     height: 68.7vh;
     margin-bottom: -14px;
     text-align: center;
     @media screen and (max-width: $desktop-small) {
-        height: 73.5vh;
-    }
-    @media screen and (max-width: $mobile-large) {
-        height: 68.7vh;
+        height: 73.9vh;
     }
 
-    .info {
-        color: white;
-        font-size: 96px;
-        padding-top: 50px;
-        @media screen and (max-width: $desktop-small) {
+    .info-container {
+        background-color: rgba(255, 255, 255, 0.85);
+        position: relative;
+        top: 100px;
+        width: 100%;
+
+        .info {
+            color: $dark-green;
             font-size: 64px;
-        }
-        @media screen and (max-width: $tablet) {
-            font-size: 44px;
+            margin: 0 auto;
+            @media screen and (max-width: $desktop-small) {
+                font-size: 44px;
+            }
         }
     }
 }
