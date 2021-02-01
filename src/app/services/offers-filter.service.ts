@@ -92,13 +92,20 @@ export class OffersFilter {
   }
 
   private filterByVoivodeship(offers: Offer[], voivodeship: string): Offer[] {
+    if (!voivodeship) {
+      return offers;
+    }
     return offers.filter(offer => 
       offer.voivodeship.toLowerCase() === voivodeship.toLowerCase());
   }
 
   private filterByLocation(offers: Offer[], location: string): Offer[] {
-    return offers.filter(offer =>
-      offer.city.toLowerCase() === location.toLowerCase());
+    if (location.includes(',')) {
+      return offers.filter(offer =>
+        offer.fullLocation.toLowerCase() === location.toLowerCase());
+    }
+    return offers.filter(offer => offer.city.toLowerCase() === location.toLowerCase() ||
+      offer.district.toLowerCase() === location.toLowerCase());
   }
 
 

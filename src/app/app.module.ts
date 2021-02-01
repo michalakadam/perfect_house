@@ -43,7 +43,7 @@ import { InputWithSliderComponent } from './shared/input-with-slider/input-with-
 import { CarouselModule } from 'primeng/carousel';
 import { MatCardModule } from '@angular/material/card';
 import { OfferDetailsComponent } from 'src/app/offer/offer-details/offer-details.component';
-
+import { UnderConstructionComponent } from './under-construction/under-construction.component';
 @NgModule({
   declarations: [
     AgentBriefComponent,
@@ -71,6 +71,7 @@ import { OfferDetailsComponent } from 'src/app/offer/offer-details/offer-details
     InputComponent,
     InputWithSliderComponent,
     OfferDetailsComponent,
+    UnderConstructionComponent,
   ],
   
   imports: [

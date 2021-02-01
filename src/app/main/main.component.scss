@@ -6,64 +6,73 @@
 
     p-galleria {
         ::ng-deep .p-galleria .p-galleria-indicators {
-            bottom: 50px;
-            position: relative;
-
-            .p-galleria-indicator.p-highlight {
-                button {
-                    background: $light-green;
-                    background-color: $light-green;
-
-                }
-                
-                .p-link:focus {
-                    box-shadow: 0 0 0 0.2rem $dark-green;
-                }
-            }
+            display: none;
         }
     }
 
     .search-tool-background {
         background-color: rgba(255, 255, 255, 0.85);
-        bottom: 330px;
+        bottom: 223px;
         padding: 20px 0 10px;
         position: relative;
         @media screen and (max-width: $desktop-large) {
-            bottom: 320px;
+            bottom: 196px;
+            padding: 10px 0 0;
+        }
+        @media screen and (max-width: $desktop-medium) {
+            background-color: white;
+            bottom: unset;
+            margin-top: 10px;
         }
         @media screen and (max-width: $desktop-small) {
-            background-color: unset;
-            bottom: unset;
-            margin-top: -20px;
+            margin-top: 20px;
             padding: unset;
         }
 
         .search-tool-container {
-            @include responsive-page;
+            margin: 0 auto;
+            width: 1050px;
+            @media screen and (max-width: $desktop-medium) {
+                @include responsive-page;
+                @include perfect-box;
+                padding: 5px 15px 0;
+            }
+            @media screen and (max-width: $desktop-small) {
+                border-radius: 0;
+                box-shadow: unset;
+            }
+            @media screen and (max-width: $mobile-small) {
+                padding: 5px 0 0;
+            }
         }
     }
 
     .space-for-advanced {
-        bottom: 403px;
+        bottom: 296px;
         @media screen and (max-width: $desktop-large) {
-            bottom: 386x;
+            bottom: 262px;
         }
-        @media screen and (max-width: $desktop-small) {
+        @media screen and (max-width: $desktop-medium) {
             bottom: unset;
         }
     }
 
     .carousel-container {
-        bottom: 250px;
-        margin: 0 auto;
+        bottom: 208px;
+        margin: 0 auto -200px;
         position: relative;
         width: 97%;
+        @media screen and (max-width: $desktop-large) {
+            bottom: 196px;
+        }
         @media screen and (max-width: $desktop-medium) {
+            bottom: unset;
+            margin-bottom: 0;
+            position: initial;
             width: 85%;
         }
         @media screen and (max-width: $desktop-small) {
-            bottom: unset;
-            position: initial;
+            margin-top: -10px;
             width: 95%;
         }
         @media screen and (max-width: $tablet) {
@@ -72,9 +81,6 @@
         @media screen and (max-width: $mobile) {
             width: 100%;
         }
-        @media screen and (max-width: $mobile-small) {
-            margin: 0 -20px;
-        }
 
         p-carousel {
             ::ng-deep .p-carousel {
@@ -82,10 +88,31 @@
                     display: none;
                 }
 
-                .p-carousel-content .p-carousel-prev:focus, .p-carousel .p-carousel-content .p-carousel-next:focus {
-                    box-shadow: 0 0 0 0.2rem $light-green;
+                .p-carousel-content {
+                    .p-carousel-prev, .p-carousel-next {
+                        &:focus {
+                            box-shadow: 0 0 0 0.2rem $light-green;
+                        }
+
+                        .pi {
+                            font-size: 1.3rem;
+                        }
+                        @media screen and (max-width: $mobile-small) {
+                            display: none;
+                        }
+                    }
                 }
             }
+        }
+    }
+
+    .move-to-advanced {
+        bottom: 281px;
+        @media screen and (max-width: $desktop-large) {
+            bottom: 262px;
+        }
+        @media screen and (max-width: $desktop-medium) {
+            bottom: unset;
         }
     }
 }

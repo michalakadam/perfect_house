@@ -18,8 +18,7 @@
             <h3>{{ offer.title }}</h3> 
             <div class="location">
                 <i class="pi pi-map-marker"></i>
-                <span>{{ offer.city }},&nbsp;</span>
-                <span *ngIf="offer.county">{{ offer.county}},&nbsp;</span>
+                <span>{{ offer.fullLocation }},&nbsp;</span>
                 <span>{{ offer.voivodeship }}</span>
             </div>
             <div class="details-row">

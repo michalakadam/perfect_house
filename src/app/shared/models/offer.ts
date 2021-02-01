@@ -43,6 +43,7 @@ export interface Offer {
     county: string;
     city: string;
     district: string;
+    fullLocation: string;
     postalCode: string;
     street: string;
     location: string;

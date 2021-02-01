@@ -12,6 +12,9 @@
     @media screen and (max-width: $desktop-small) {
         width: 90%;
     }
+    @media screen and (max-width: $mobile) {
+        width: 98%;
+    }
 }
 
 @mixin article-page { 

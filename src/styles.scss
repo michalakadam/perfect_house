@@ -28,5 +28,11 @@ html {
                 outline: 0;
             }
         }
+
+        a {
+            color: unset;
+            cursor: pointer;
+            text-decoration: none;
+        }
     }
 }
