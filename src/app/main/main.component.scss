@@ -41,6 +41,9 @@
                 border-radius: 0;
                 box-shadow: unset;
             }
+            @media screen and (max-width: $mobile-small) {
+                padding: 5px 0 0;
+            }
         }
     }
 
@@ -78,9 +81,6 @@
         @media screen and (max-width: $mobile) {
             width: 100%;
         }
-        @media screen and (max-width: $mobile-small) {
-            margin: 0 -20px;
-        }
 
         p-carousel {
             ::ng-deep .p-carousel {
@@ -96,6 +96,9 @@
 
                         .pi {
                             font-size: 1.3rem;
+                        }
+                        @media screen and (max-width: $mobile-small) {
+                            display: none;
                         }
                     }
                 }
