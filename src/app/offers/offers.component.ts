@@ -1,7 +1,9 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { OffersDao } from '../services/offers-dao.service';
+import { SnackbarService } from '../services/snackbar.service';
 import { Offer, Sorting, AVAILABLE_SORTINGS, DEFAULT_FILTERS, OffersFilters } from '../shared/models';
 
 const FIRST_PAGE_NUMBER = 1;
@@ -24,11 +26,14 @@ export class OffersComponent implements OnInit {
   currentSorting: Sorting;
   currentFilters = DEFAULT_FILTERS;
   isPaginatorVisible = true;
+  isSnackbarVisible = false;
+  snackbarContent = '';
 
   constructor(readonly offersDao: OffersDao,
     private router: Router,
     private route: ActivatedRoute,
-    private changeDetector: ChangeDetectorRef) {}
+    private changeDetector: ChangeDetectorRef,
+    private snackbarService: SnackbarService) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -38,6 +43,25 @@ export class OffersComponent implements OnInit {
         this.loadOffersForCurrentParameters(params);
       }
     });
+    
+    this.snackbarService.open$.subscribe(message => {
+      this.openSnackbar(message);
+      setTimeout(() => {
+        this.closeSnackbar();
+      }, 3000);
+    });
+  }
+
+  private openSnackbar(message: string) {
+      this.snackbarContent = message;
+      this.isSnackbarVisible = true;
+      this.changeDetector.detectChanges();
+  }
+
+  private closeSnackbar() {
+      this.snackbarContent = '';
+      this.isSnackbarVisible = false;
+      this.changeDetector.detectChanges();
   }
 
   private loadOffersForCurrentParameters(params: any) {
