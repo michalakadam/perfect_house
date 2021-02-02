@@ -1,39 +1,22 @@
 <div class="component-container">
-
-
-    <p-galleria 
-    [(value)]="images" 
-    [containerStyle]="{'max-width': '640px'}" 
-    [numVisible]="5"
-    [circular]="true"
-    [transitionInterval]="5000" 
-    [showItemNavigators]="true">
-    <ng-template pTemplate="item" let-item>
-        <img [src]="item.previewImageSrc" style="max-height: 400px;" />
-    </ng-template>
-    <ng-template pTemplate="thumbnail" let-item>
-        <div class="p-grid p-nogutter p-justify-center">
-            <img [src]="item.thumbnailImageSrc" style="display: block; width: 50px" />
-        </div>
-    </ng-template>
-</p-galleria>
-        
-    <div class="card basic-info-card">
-            <h3 class="price"> {{ offer.price | prettifyNumber:"zł" }}</h3>
-            <perfect-offer-details 
-            [offer]="offer">
-            </perfect-offer-details>
+    <div class="gallery">
+        <p-galleria 
+        [(value)]="images" 
+        [containerStyle]="{'max-width': '640px'}" 
+        [numVisible]="5"
+        [circular]="true"
+        [transitionInterval]="5000" 
+        [showItemNavigators]="false">
+        <ng-template pTemplate="item" let-item>
+            <img [src]="item.previewImageSrc" style="max-height: 400px; max-width: 500px;" />
+        </ng-template>
+        <ng-template pTemplate="thumbnail" let-item>
+            <div class="p-grid p-nogutter p-justify-center">
+                <img [src]="item.thumbnailImageSrc" style="display: block; width: 50px" />
+            </div>
+        </ng-template>
+        </p-galleria>
     </div>
-    <div class="card card-description">
-        <div class="description-title">
-            <span>Opis</span> 
-            <span>Szczegóły</span>
-        </div>
-        <div class="description-main" *ngIf="offer.description">
-            {{ offer.description }}
-        </div>
-    </div>
-
     <div class="card agent-brief">
         <perfect-agent-brief *ngIf="agentsDao.getAgentById(offer.agentId) as agent"
             [agent]="agent"
@@ -42,5 +25,18 @@
             vertical
             (click)="navigateToAgentPage(agent)">
         </perfect-agent-brief>
+    </div> 
+    <div class="card basic-info-card">
+            <div class="price">{{ offer.price | prettifyNumber:"zł" }}</div>
+            <perfect-offer-details 
+            [offer]="offer">
+            </perfect-offer-details>
+    </div>
+    <div class="card card-description">
+        <span>Opis</span> 
+        <span>Szczegóły</span>
+        <div class="description-main" *ngIf="offer.description">
+            {{ offer.description }}
+        </div>
     </div>
 </div>
