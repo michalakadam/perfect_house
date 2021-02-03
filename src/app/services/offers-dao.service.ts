@@ -109,4 +109,12 @@ export class OffersDao {
                 this.currentSearchOffersSortedByPriceAsc.length - 1]
             .price : 0;
     }
+
+    getDistinctLocations(): string[] {
+        return this.allOffers
+            .map(offer => offer.fullLocation)
+            .filter((current, index, offers) =>
+                offers.indexOf(current) === index)
+            .sort((a, b) => a < b ? -1 : a > b ? 1 : 0);
+    }
 }

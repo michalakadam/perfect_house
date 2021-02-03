@@ -11,14 +11,14 @@
         <span *ngIf="link.route === '/o_nas'"
             class="link"
             [ngClass]="{'active-link':isAboutUsActive()}"
-            (click)="aboutUsToggled.emit()"
+            (click)="handleAboutUsClick()"
             tabindex="0"
             role="button"
             aria-pressed="false">{{link.title}}</span>
         <span *ngIf="link.route === '/oferty'"
             class="link"
             [routerLink]="[link.route, {page: 1, sorting: 'creationDate_descending'}]"
-            routerLinkActive="active-link"
+            [ngClass]="{'active-link':isOffersLinkActive()}"
             tabindex="0"
             role="button"
             aria-pressed="false">{{link.title}}</span>

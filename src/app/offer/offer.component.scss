@@ -7,8 +7,17 @@
     @include article-page;
     display: grid;
     grid-gap: 0px 37px;
-    grid-template-columns: 500px 250px;
+    grid-template-columns: 2fr 1fr;
+    justify-content: center;
     margin: 30px auto;
+    @media screen and (max-width: $tablet) {
+        grid-template-columns: 1fr;
+
+     }
+     @media screen and (max-width: $mobile) {
+        grid-template-columns: 1fr;
+     }
+    
 
     .card {
         @include perfect-box; 

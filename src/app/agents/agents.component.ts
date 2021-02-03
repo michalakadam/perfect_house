@@ -22,11 +22,16 @@ export class AgentsComponent {
         this.changeDetector.detectChanges();
       });
   }
+
   navigateToAgentPage(agent: Agent) {
     this.router.navigate(['/ludzie/' + this.computeAgentLink(agent.fullName)]);
   }
 
   computeAgentLink(agentFullName: string): string {
     return agentFullName.toLowerCase().split(' ').join('-');
+  }
+
+  trackById(index: number, agent: Agent) {
+    return agent.id;
   }
 }

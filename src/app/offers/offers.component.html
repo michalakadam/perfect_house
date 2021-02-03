@@ -35,7 +35,7 @@
     </div>
 
     <perfect-offer-card
-        *ngFor="let offer of offers"
+        *ngFor="let offer of offers; trackBy: trackById"
         [offer]="offer"
         (click)=loadOffer(offer.symbol)></perfect-offer-card>
 
@@ -48,5 +48,12 @@
             [selectedPage]="currentPage"
             (pageChanged)="loadNewResults($event, currentSorting, currentFilters)">
         </perfect-paginator>
+    </div>
+</div>
+
+<div class="snackbar-container" *ngIf="isSnackbarVisible">
+    <div class="snackbar-content">
+        <span>{{ snackbarContent }}</span>
+        <i class="pi pi-times close-icon" (click)="isSnackbarVisible=false"></i>
     </div>
 </div>

@@ -9,6 +9,7 @@ import { OfferComponent } from './offer/offer.component';
 import { OffersComponent } from './offers/offers.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RentalManagementComponent } from './rental-management/rental-management.component';
+import { UnderConstructionComponent } from './under-construction/under-construction.component';
 
 
 const routes: Routes = [
@@ -31,17 +32,17 @@ const routes: Routes = [
     component: OfferComponent,
   },
   {
-    path: 'doradztwo',
+    path: 'doradztwo-kredytowe',
     component: ConsultancyComponent,
     data: {
-      title: 'Doradztwo',
+      title: 'Doradztwo kredytowe',
     },
   },
   {
     path: 'zarzadzanie',
     component: RentalManagementComponent,
     data: {
-      title: 'Zarządzanie najmem',
+      title: 'Zarządzanie nieruchomościami',
     },
   },
   {
@@ -61,10 +62,31 @@ const routes: Routes = [
     ],
   },
   {
+    path: 'aktualnosci',
+    component: UnderConstructionComponent,
+    data: {
+      title: 'Aktualności',
+    },
+  },
+  {
     path: 'kontakt',
     component: ContactComponent,
     data: {
       title: 'Kontakt',
+    },
+  },
+  {
+    path: 'deweloperzy',
+    component: UnderConstructionComponent,
+    data: {
+      title: 'Dla deweloperów',
+    },
+  },
+  {
+    path: 'fotowoltaika',
+    component: UnderConstructionComponent,
+    data: {
+      title: 'Fotowoltaika',
     },
   },
   {

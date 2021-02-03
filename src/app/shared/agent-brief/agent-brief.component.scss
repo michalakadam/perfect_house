@@ -2,7 +2,7 @@
 
 .component-container {
     display: flex;
-    width: 360px;
+    width: 375px;
 
     .agent-photo {
         background-size: cover;
@@ -32,11 +32,9 @@
         }
 
         a {
-            color: unset;
             display: flex;
             font-style: italic;
             margin-bottom: 5px;
-            text-decoration: none;
 
             mat-icon {
                 color: $light-green;
