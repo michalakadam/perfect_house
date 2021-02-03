@@ -42,7 +42,7 @@ const routes: Routes = [
     path: 'zarzadzanie',
     component: RentalManagementComponent,
     data: {
-      title: 'Zarządzanie najmem',
+      title: 'Zarządzanie nieruchomościami',
     },
   },
   {

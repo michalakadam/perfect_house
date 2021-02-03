@@ -42,12 +42,12 @@
             display: flex;
             justify-content: space-between;
             margin-right: unset;
-            width: 310px;
+            width: 320px;
             @media screen and (max-width: $desktop-large) {
-                width: 275px;
+                width: 280px;
             }
             @media screen and (max-width: $desktop-medium) {
-                width: 265px;
+                width: 260px;
             }
             @media screen and (max-width: $desktop-small) {
                 width: unset;
@@ -66,12 +66,12 @@
         .location-fields {
             display: flex;
             justify-content: space-between;
-            width: 440px;
+            width: 475px;
             @media screen and (max-width: $desktop-large) {
-                width: 390px;
+                width: 425px;
             }
             @media screen and (max-width: $desktop-medium) {
-                width: 325px;
+                width: 375px;
             }
             @media screen and (max-width: $desktop-small) {
                 margin-top: 7px;
@@ -81,10 +81,7 @@
             .voivodeship-dropdown {
                 @include justify-two-elements;
                 ::ng-deep .p-dropdown {
-                    width: 160px;
-                    @media screen and (max-width: $desktop-medium) {
-                        width: 135px;
-                    }
+                    width: 190px;
                     @media screen and (max-width: $desktop-small) {
                         width: 120px;
                     }
