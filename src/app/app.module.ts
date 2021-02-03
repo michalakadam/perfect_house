@@ -72,6 +72,9 @@ import { UnderConstructionComponent } from './under-construction/under-construct
     OfferDetailsComponent,
     UnderConstructionComponent,
     InputWithSliderComponent,
+    InputWithSliderComponent,
+    OfferDetailsComponent,
+    UnderConstructionComponent,
   ],
   
   imports: [
