@@ -60,3 +60,29 @@
         margin-top: 44px;
     }
 }
+
+.snackbar-container {
+    position: fixed;
+    bottom: 5%;
+    width: 100%;
+    .snackbar-content {
+        @include perfect-box;
+        align-items: center;
+        background-color: $dark-green;
+        color: $font-white;
+        display: flex;
+        font-weight: 700;
+        justify-content: space-between;
+        line-height: 5rem;
+        margin: 0 auto;
+        padding: 0 20px;
+        width: 350px;
+        @media screen and (max-width: $desktop-small) {
+            width: 300px;
+        }
+
+        i {
+            cursor: pointer;
+        }
+    }
+}

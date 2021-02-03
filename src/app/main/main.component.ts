@@ -20,6 +20,11 @@ const IMAGES = [
     "thumbnailImageSrc": "/assets/po_poznansku.jpg",
     "title": "Sprawdź nasze oferty dla Ciebie."
   },
+  {
+    "previewImageSrc": "/assets/zarzadzanie.jpg",
+    "thumbnailImageSrc": "/assets/zarzadzanie.jpg",
+    "title": "Zobacz, jakie proste może być zarządzanie nieruchomościami."
+  },
 ]
 /** Strona główna. */
 @Component({
@@ -42,6 +47,11 @@ export class MainComponent {
   }
 
   openUrl(image) {
+    if (image.previewImageSrc.includes('zarzadzanie')) {
+      this.router.navigate(['zarzadzanie']);
+      return;
+    }
+
     let params = {};
     if (image.title.includes('morze')) {
       params = {isByTheSea: true};
