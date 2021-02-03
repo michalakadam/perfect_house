@@ -3,9 +3,9 @@ import { AgentsDao } from '../services/agents-dao.service';
 import { WindowSizeDetector } from '../services/window-size-detector.service';
 import { Agent } from '../shared/models';4
 
-const AGENT_RESPONSIBLE_ID = 1155;
+const AGENT_RESPONSIBLE_ID = 10101;
 
-/** Kontener strony 'Zarządzanie najmem'. */
+/** Kontener strony 'Zarządzanie nieruchomościami'. */
 @Component({
   selector: 'perfect-rental-management',
   templateUrl: './rental-management.component.html',

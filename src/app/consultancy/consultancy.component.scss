@@ -10,7 +10,7 @@
             float: right;
             height: auto;
             margin: 14px 0px 10px 20px;
-            max-width: 300px;
+            max-width: 360px;
         }
         #horizontal-pic {
             height: auto;
@@ -18,12 +18,8 @@
         }
     }
     main {
-        .tel {
-            text-transform: uppercase;
-
-            a {
-                font-style: italic;
-            }
+        h2 {
+            color: $light-green;
         }
     }
 }

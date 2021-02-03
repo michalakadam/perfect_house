@@ -7,12 +7,43 @@
 
     main {
         margin-bottom: 0;
+
+        .top-list {
+            list-style-type: none;
+            padding-inline-start: 0;
+
+            .list-section-title {
+                font-weight: 700;
+                margin-top: 1rem;
+
+                &:first-of-type {
+                    margin-top: unset;
+                }
+            }
+
+            ul {
+                @media screen and (max-width: $desktop-small) {
+                    padding-inline-start: 30px;
+                }
+            }
+        }
     }
 
     footer {
+        margin: 2rem auto;
+
+        h3 {
+            color: $light-green;
+            text-align: center;
+        }
+
         .agent-brief-container {
             display: flex;
             justify-content: center;
         }
+    }
+
+    h2 {
+        color: $light-green;
     }
 }

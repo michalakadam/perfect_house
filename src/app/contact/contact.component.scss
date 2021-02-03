@@ -42,12 +42,6 @@
             margin: 0;
         }
 
-        mat-divider {
-            @media screen and (max-width: $desktop-small) {
-                width: 260px;
-            }
-        }
-
         address {
             display: flex;
             flex-direction: column;

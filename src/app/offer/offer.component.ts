@@ -50,7 +50,7 @@ export class OfferComponent {
     if (symbol) {
       this.router.navigate(['oferta', symbol]);
     } else {
-      this.handleNonexistentOffer(symbol);
+      this.handleNonexistentOffer(offerNumber + '');
     }
   }
   

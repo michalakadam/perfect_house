@@ -31,7 +31,10 @@
 
         .search-tool-container {
             margin: 0 auto;
-            width: 1050px;
+            width: 1120px;
+            @media screen and (max-width: $desktop-large) {
+                width: 990px;
+            }
             @media screen and (max-width: $desktop-medium) {
                 @include responsive-page;
                 @include perfect-box;

@@ -32,17 +32,17 @@ const routes: Routes = [
     component: OfferComponent,
   },
   {
-    path: 'doradztwo',
+    path: 'doradztwo-kredytowe',
     component: ConsultancyComponent,
     data: {
-      title: 'Doradztwo',
+      title: 'Doradztwo kredytowe',
     },
   },
   {
     path: 'zarzadzanie',
     component: RentalManagementComponent,
     data: {
-      title: 'Zarządzanie najmem',
+      title: 'Zarządzanie nieruchomościami',
     },
   },
   {

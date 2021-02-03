@@ -16,6 +16,7 @@ export class AgentsDao {
 
     listAgents(): Agent[] {
         return this.agents
+          .filter(agent => agent.id !== '10101')
           .sort((a, b) => {
             if (this.extractFirstLetter(a.fullName) < this.extractFirstLetter(b.fullName)) {
               return -1;

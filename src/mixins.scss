@@ -2,12 +2,12 @@
 
 @mixin responsive-page {
     margin: 0 auto;
-    width: 1098px;
+    width: 1178px;
     @media screen and (max-width: $desktop-large) {
-        width: 947px;
+        width: 1064px;
     }
     @media screen and (max-width: $desktop-medium) {
-        width: 830px;
+        width: 920px;
     }
     @media screen and (max-width: $desktop-small) {
         width: 90%;
@@ -19,11 +19,11 @@
 
 @mixin article-page { 
     @include responsive-page;
+    text-align: justify;
 
     main {
         margin-block-end: 50px;
         margin-block-start: 0px;
-        text-align: justify;
     }
 }
 
