@@ -3,7 +3,7 @@
 
 .component-container { 
 
-    @include article-page;
+    @include responsive-page;
 
     .title { 
         text-align: center;
@@ -34,6 +34,5 @@
 
     .about-text {
         @include article-page;
-        text-align: justify;
     }
 }

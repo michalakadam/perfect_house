@@ -40,7 +40,18 @@
 
         .dropdowns {
             display: flex;
+            justify-content: space-between;
             margin-right: unset;
+            width: 310px;
+            @media screen and (max-width: $desktop-large) {
+                width: 275px;
+            }
+            @media screen and (max-width: $desktop-medium) {
+                width: 265px;
+            }
+            @media screen and (max-width: $desktop-small) {
+                width: unset;
+            }
 
             p-dropdown:first-of-type {
                 @include justify-two-elements;
@@ -54,8 +65,17 @@
 
         .location-fields {
             display: flex;
+            justify-content: space-between;
+            width: 440px;
+            @media screen and (max-width: $desktop-large) {
+                width: 390px;
+            }
+            @media screen and (max-width: $desktop-medium) {
+                width: 325px;
+            }
             @media screen and (max-width: $desktop-small) {
                 margin-top: 7px;
+                width: unset;
             }
             
             .voivodeship-dropdown {

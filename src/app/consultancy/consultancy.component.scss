@@ -18,12 +18,8 @@
         }
     }
     main {
-        .tel {
-            text-transform: uppercase;
-
-            a {
-                font-style: italic;
-            }
+        h3 {
+            color: $light-green;
         }
     }
 }

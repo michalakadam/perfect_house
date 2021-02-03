@@ -9,7 +9,7 @@ export class WindowSizeDetector {
     // Variables describing possible window sizes must match those from src/variables.scss
     private static readonly DESKTOP_LARGE = 1470;
     private static readonly DESKTOP_MEDIUM = 1240;
-    private static readonly DESKTOP_SMALL = 900;
+    private static readonly DESKTOP_SMALL = 960;
     private static readonly TABLET = 760;
     private static readonly MOBILE_LARGE = 640;
     private static readonly MOBILE = 480;

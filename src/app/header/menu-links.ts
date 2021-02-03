@@ -9,8 +9,8 @@ export const MENU_LINKS: MenuLink[] = [
         route: '/oferty',
     },
     {
-        title: 'Doradztwo',
-        route: '/doradztwo',
+        title: 'Doradztwo kredytowe',
+        route: '/doradztwo-kredytowe',
     },
     {
         title: 'Zarządzanie najmem',
@@ -51,8 +51,8 @@ export const ALL_LINKS: MenuLink[] = [
         route: '/oferty',
     },
     {
-        title: 'Doradztwo',
-        route: '/doradztwo',
+        title: 'Doradztwo kredytowe',
+        route: '/doradztwo-kredytowe',
     },
     {
         title: 'Zarządzanie najmem',

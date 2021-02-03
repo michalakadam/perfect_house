@@ -32,10 +32,10 @@ const routes: Routes = [
     component: OfferComponent,
   },
   {
-    path: 'doradztwo',
+    path: 'doradztwo-kredytowe',
     component: ConsultancyComponent,
     data: {
-      title: 'Doradztwo',
+      title: 'Doradztwo kredytowe',
     },
   },
   {
