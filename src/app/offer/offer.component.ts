@@ -6,6 +6,8 @@ import { Offer, GalleryPhoto } from '../shared/models';
 import { AgentsDao } from 'src/app/services/agents-dao.service';
 import { Agent } from 'src/app/shared/models';
 import { SnackbarService } from '../services/snackbar.service';
+import { WindowSizeDetector } from '../services/window-size-detector.service'
+import { DESKTOP_LARGE, DESKTOP_SMALL, MOBILE, TABLET } from '../services/window-size-detector.service';
 
 @Component({
   selector: 'perfect-offer',
@@ -16,12 +18,31 @@ import { SnackbarService } from '../services/snackbar.service';
 export class OfferComponent {
   offer: Offer;
   images: GalleryPhoto[] = [];
+  responsiveOptions: any[] = [
+    {
+        breakpoint: DESKTOP_LARGE + 'px',
+        numVisible: 5
+    },
+    {
+        breakpoint: DESKTOP_SMALL + 'px',
+        numVisible: 4
+    },
+    {
+        breakpoint: TABLET + 'px',
+        numVisible: 3
+    },
+    {
+        breakpoint: MOBILE + 'px',
+        numVisible: 1
+    }
+];
   constructor(private route: ActivatedRoute,
     private changeDetector: ChangeDetectorRef,
     private router: Router,
     private titleService: Title,
     private offersDao: OffersDao,
     readonly agentsDao: AgentsDao,
+    readonly windowSizeDetector: WindowSizeDetector,
     private snackbarService: SnackbarService) {
     this.route.params.subscribe((params: Params) => {
         if (params.symbol) {
@@ -82,7 +103,7 @@ export class OfferComponent {
         thumbnailImageSrc: '/offers/' + photo,
       })
     }
-    return computedPhotos
+    return computedPhotos;
     
   }
 }

@@ -6,13 +6,14 @@
         [numVisible]="5"
         [circular]="true"
         [transitionInterval]="5000" 
-        [showItemNavigators]="false">
+        [showItemNavigators]="false"
+        [responsiveOptions]="responsiveOptions">
         <ng-template pTemplate="item" let-item>
-            <img [src]="item.previewImageSrc" style="max-height: 400px; max-width: 500px;" />
+            <img [src]="item.previewImageSrc" style="max-height: 400px;" />
         </ng-template>
         <ng-template pTemplate="thumbnail" let-item>
             <div class="p-grid p-nogutter p-justify-center">
-                <img [src]="item.thumbnailImageSrc" style="display: block; width: 50px" />
+                <img [src]="item.thumbnailImageSrc" style="display: block; max-width: 100%; height: 75px;" />
             </div>
         </ng-template>
         </p-galleria>
@@ -27,16 +28,28 @@
         </perfect-agent-brief>
     </div> 
     <div class="card basic-info-card">
-            <div class="price">{{ offer.price | prettifyNumber:"zł" }}</div>
+        <div class="price">
+            <span *ngIf="offer.price > 1">
+                {{ offer.price | prettifyNumber:"zł" }}
+            </span>
+            <span class="client-price" *ngIf="offer.price === 1">
+                Zaproponuj cenę!
+            </span>
+        </div>
             <perfect-offer-details 
             [offer]="offer">
             </perfect-offer-details>
     </div>
     <div class="card card-description">
-        <span>Opis</span> 
-        <span>Szczegóły</span>
-        <div class="description-main" *ngIf="offer.description">
-            {{ offer.description }}
-        </div>
+        <p-tabView>
+            <p-tabPanel header="Opis">
+                <div class="description-main" *ngIf="offer.description">
+                    {{ offer.description }}
+                </div>
+            </p-tabPanel>
+            <p-tabPanel header="Szczegóły">
+                Szczegóły
+            </p-tabPanel>
+        </p-tabView>
     </div>
-</div>
+

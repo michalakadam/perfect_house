@@ -44,6 +44,8 @@ import { CarouselModule } from 'primeng/carousel';
 import { MatCardModule } from '@angular/material/card';
 import { OfferDetailsComponent } from 'src/app/offer/offer-details/offer-details.component';
 import { UnderConstructionComponent } from './under-construction/under-construction.component';
+import { TabViewModule } from 'primeng/tabview';
+
 @NgModule({
   declarations: [
     AgentBriefComponent,
@@ -97,6 +99,7 @@ import { UnderConstructionComponent } from './under-construction/under-construct
     SelectButtonModule,
     SliderModule,
     MatCardModule,
+    TabViewModule,
   ],
   bootstrap: [
     AppComponent,
