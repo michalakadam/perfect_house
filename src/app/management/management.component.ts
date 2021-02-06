@@ -7,13 +7,13 @@ const AGENT_RESPONSIBLE_ID = 10101;
 
 /** Kontener strony 'Zarządzanie nieruchomościami'. */
 @Component({
-  selector: 'perfect-rental-management',
-  templateUrl: './rental-management.component.html',
-  styleUrls: ['./rental-management.component.scss'],
+  selector: 'perfect-management',
+  templateUrl: './management.component.html',
+  styleUrls: ['./management.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RentalManagementComponent {
-  agentResponsibleForRentalManagement: Agent;
+export class ManagementComponent {
+  agentResponsibleForManagement: Agent;
 
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,
@@ -23,7 +23,7 @@ export class RentalManagementComponent {
         this.changeDetector.detectChanges();
       });
 
-      this.agentResponsibleForRentalManagement =
+      this.agentResponsibleForManagement =
         this.agentsDao.getAgentById(AGENT_RESPONSIBLE_ID);
   }
 }

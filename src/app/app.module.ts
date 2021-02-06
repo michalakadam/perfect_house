@@ -7,7 +7,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ContactComponent } from './contact/contact.component';
 import { MapComponent } from './shared/map/map.component';
 import { AgentBriefComponent } from './shared/agent-brief/agent-brief.component';
-import { RentalManagementComponent } from './rental-management/rental-management.component';
+import { ManagementComponent } from './management/management.component';
 import { ConsultancyComponent } from './consultancy/consultancy.component';
 import { MainComponent } from './main/main.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -59,7 +59,7 @@ import { UnderConstructionComponent } from './under-construction/under-construct
     OfferCardComponent,
     OffersComponent,
     PageNotFoundComponent,
-    RentalManagementComponent,
+    ManagementComponent,
     DropdownNavigationComponent,
     SortingToolComponent,
     SearchToolComponent,

@@ -8,7 +8,7 @@ import { MainComponent } from './main/main.component';
 import { OfferComponent } from './offer/offer.component';
 import { OffersComponent } from './offers/offers.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { RentalManagementComponent } from './rental-management/rental-management.component';
+import { ManagementComponent } from './management/management.component';
 import { UnderConstructionComponent } from './under-construction/under-construction.component';
 
 
@@ -40,7 +40,7 @@ const routes: Routes = [
   },
   {
     path: 'zarzadzanie',
-    component: RentalManagementComponent,
+    component: ManagementComponent,
     data: {
       title: 'Zarządzanie nieruchomościami',
     },
