@@ -1,3 +1,4 @@
+import { importExpr } from '@angular/compiler/src/output/output_ast';
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { OffersDao } from '../services/offers-dao.service';
@@ -49,6 +50,10 @@ export class MainComponent {
   openUrl(image) {
     if (image.previewImageSrc.includes('zarzadzanie')) {
       this.router.navigate(['zarzadzanie']);
+      return;
+    }
+    if (image.previewImageSrc.includes('poznansku')) {
+      this.router.navigate(['wartosci']);
       return;
     }
 

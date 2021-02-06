@@ -36,8 +36,12 @@ export const MENU_LINKS: MenuLink[] = [
 
 export const ABOUT_US_LINKS: MenuLink[] = [
     {
+        title: 'Nasze wartości',
+        route: '/wartosci',
+    },
+    {
         title: 'Ludzie',
-        route: 'ludzie',
+        route: '/ludzie',
     },
     {
         title: 'Aktualności',
@@ -65,6 +69,10 @@ export const ALL_LINKS: MenuLink[] = [
     {
         title: 'Fotowoltaika',
         route: '/fotowoltaika'
+    },
+    {
+        title: 'Nasze wartości',
+        route: '/wartosci',
     },
     {
         title: 'Ludzie',

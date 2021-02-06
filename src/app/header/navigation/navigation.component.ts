@@ -34,7 +34,8 @@ export class NavigationComponent {
     const clicked = this.isAboutUsClicked;
     this.isAboutUsClicked = false;
 
-    return clicked || this.router.url === '/ludzie' || this.router.url === '/aktualnosci';
+    return clicked || this.router.url === '/ludzie' ||
+      this.router.url === '/aktualnosci' || this.router.url === '/wartosci';
   }
 
   isOffersLinkActive() {

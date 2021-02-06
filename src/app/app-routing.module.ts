@@ -46,6 +46,13 @@ const routes: Routes = [
     },
   },
   {
+    path: 'wartosci',
+    component: UnderConstructionComponent,
+    data: {
+      title: 'Nasze wartości',
+    }
+  },
+  {
     path: 'ludzie',
     children: [
       {
