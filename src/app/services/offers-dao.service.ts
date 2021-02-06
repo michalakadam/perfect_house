@@ -106,8 +106,24 @@ export class OffersDao {
     getDistinctLocations(): string[] {
         return this.allOffers
             .map(offer => offer.fullLocation)
-            .filter((current, index, offers) =>
-                offers.indexOf(current) === index)
-            .sort((a, b) => a < b ? -1 : a > b ? 1 : 0);
+            .filter(this.onlyUnique)
+            .sort(this.sortAlphabetically);
+    }
+
+    getAvailableVoivodeships(): string[] {
+        const distinctVoivodeships = this.allOffers
+            .map(offer => offer.voivodeship)
+            .filter(this.onlyUnique)
+            .sort(this.sortAlphabetically);
+
+        return ['cała Polska', ...distinctVoivodeships];
+    }
+
+    private onlyUnique(value, index, self) {
+        return self.indexOf(value) === index;
+    }
+
+    sortAlphabetically(a: string, b: string): number {
+        return a.localeCompare(b, 'pl');
     }
 }

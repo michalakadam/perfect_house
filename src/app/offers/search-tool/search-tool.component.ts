@@ -4,14 +4,7 @@ import { WindowSizeDetector } from 'src/app/services/window-size-detector.servic
 import { AVAILABLE_TRANSACTIONS, Transaction, AVAILABLE_ESTATE_TYPES, Estate, OffersFilters, DEFAULT_FILTERS } from 'src/app/shared/models';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subject, Subscription } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
-
-const AVAILABLE_VOIVODESHIPS = [
-  'cała Polska', 'dolnośląskie', 'kujawsko-pomorskie', 'lubelskie', 'lubuskie',
-  'łódzkie', 'małopolskie', 'mazowieckie', 'opolskie', 'podkarpackie', 'podlaskie',
-  'pomorskie', 'śląskie', 'świętokrzyskie', 'warmińsko-mazurskie', 'wielkopolskie',
-  'zachodniopomorskie',
-];
+import { debounceTime, filter } from 'rxjs/operators';
 
 const AVAILABLE_MARKETS = [
   {
@@ -36,8 +29,8 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
 
   availableEstateTypes = AVAILABLE_ESTATE_TYPES;
   availableTransactions = AVAILABLE_TRANSACTIONS;
-  availableVoivodeships = AVAILABLE_VOIVODESHIPS;
   availableMarkets = AVAILABLE_MARKETS;
+  availableVoivodeships = [];
   showAdvanced = false;
 
   selectedEstateType: Estate;
@@ -96,7 +89,9 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
       .pipe(debounceTime(500))
       .subscribe(() => {
         this.applyFiltersIgnoringPrice();
-      }));
+      })
+    );
+    this.availableVoivodeships = this.computeVoivodeshipsForDropdown(this.offersDao.getAvailableVoivodeships());
   }
 
   onInputProvided(){
@@ -152,6 +147,15 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
       this.windowSizeDetector.isWindowSmallerThanDesktopSmall && this.showAdvanced;
   }
 
+  computeVoivodeshipsForDropdown(voivodeships: string[]) {
+    return voivodeships.map(voivodeship => {
+      return {
+        label: voivodeship,
+        value: voivodeship,
+      }
+    })
+  }
+
   private computeFieldValue(value: number): string {
     return value === -1 ? '' : '' + value;
   }
@@ -196,7 +200,7 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
     if (this.computeFilterNumericValue(this.priceTo) ===
       this.offersDao.getHighestPriceForCurrentSearch()) {
         this.priceTo = '-1';
-      }
+    }
 
     const filters: OffersFilters = {
       estateType: this.selectedEstateType.displayName,

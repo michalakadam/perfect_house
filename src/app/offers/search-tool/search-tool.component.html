@@ -37,6 +37,8 @@
             <p-dropdown
                 class="voivodeship-dropdown"
                 [options]="availableVoivodeships" 
+                optionLabel="label"
+                optionValue="value"
                 [(ngModel)]="selectedVoivodeship"
                 (onChange)="applyFiltersIgnoringPrice()">
             </p-dropdown>
