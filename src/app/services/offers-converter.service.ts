@@ -8,7 +8,6 @@ import { Offer, Room } from '../shared/models';
 export class OffersConverter {
 
     convertToReadableOffers(rawOffers: any[]): Offer[] {
-        console.log(rawOffers.filter(o => o.Symbol === 'PRF-MW-4934'))
         return rawOffers.map(offer => {
             return {
                 id: this.convertToNumber(offer.ID),
