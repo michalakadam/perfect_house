@@ -1,8 +1,10 @@
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges, OnInit, ChangeDetectorRef } from '@angular/core';
 import { OffersDao } from 'src/app/services/offers-dao.service';
 import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
 import { AVAILABLE_TRANSACTIONS, Transaction, AVAILABLE_ESTATE_TYPES, Estate, OffersFilters, DEFAULT_FILTERS } from 'src/app/shared/models';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 const AVAILABLE_VOIVODESHIPS = [
   'cała Polska', 'dolnośląskie', 'kujawsko-pomorskie', 'lubelskie', 'lubuskie',
@@ -28,7 +30,9 @@ const AVAILABLE_MARKETS = [
   styleUrls: ['./search-tool.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchToolComponent implements OnChanges {
+export class SearchToolComponent implements OnInit, OnChanges {
+  private inputSubject: Subject<void> = new Subject();
+
   availableEstateTypes = AVAILABLE_ESTATE_TYPES;
   availableTransactions = AVAILABLE_TRANSACTIONS;
   availableVoivodeships = AVAILABLE_VOIVODESHIPS;
@@ -81,9 +85,16 @@ export class SearchToolComponent implements OnChanges {
     });
   }
 
-  isOptionalElementVisible() {
-    return !this.windowSizeDetector.isWindowSmallerThanDesktopSmall ||
-      this.windowSizeDetector.isWindowSmallerThanDesktopSmall && this.showAdvanced;
+  ngOnInit() {
+    this.inputSubject.asObservable()
+      .pipe(debounceTime(500))
+      .subscribe(() => {
+        this.applyFiltersIgnoringPrice();
+      });
+  }
+
+  onInputProvided(){
+    this.inputSubject.next();
   }
 
   ngOnChanges() {
@@ -122,6 +133,11 @@ export class SearchToolComponent implements OnChanges {
     this.floorFrom = this.computeFieldValue(this.filters.floorFrom);
     this.floorTo = this.computeFieldValue(this.filters.floorTo);
     this.changeDetector.detectChanges();
+  }
+
+  isOptionalElementVisible() {
+    return !this.windowSizeDetector.isWindowSmallerThanDesktopSmall ||
+      this.windowSizeDetector.isWindowSmallerThanDesktopSmall && this.showAdvanced;
   }
 
   private computeFieldValue(value: number): string {

@@ -92,12 +92,14 @@
             <div class="inputs-container">
                 <perfect-input
                     type='number'
-                    [(value)]="areaFrom">
+                    [(value)]="areaFrom"
+                    (valueChange)="onInputProvided()">
                 </perfect-input>
                 <span>-</span>
                 <perfect-input
                     type='number'
-                    [(value)]="areaTo">
+                    [(value)]="areaTo"
+                    (valueChange)="onInputProvided()">
                 </perfect-input>
             </div>
         </div>
@@ -118,12 +120,14 @@
             <div class="inputs-container">
                 <perfect-input
                     type='number'
-                    [(value)]="pricePerSquareMeterFrom">
+                    [(value)]="pricePerSquareMeterFrom"
+                    (valueChange)="onInputProvided()">
                 </perfect-input>
                 <span>-</span>
                 <perfect-input
                     type='number'
-                    [(value)]="pricePerSquareMeterTo">
+                    [(value)]="pricePerSquareMeterTo"
+                    (valueChange)="onInputProvided()">
                 </perfect-input>
             </div>
         </div>
@@ -132,12 +136,14 @@
             <div class="inputs-container">
                 <perfect-input
                     type='number'
-                    [(value)]="numberOfRoomsFrom">
+                    [(value)]="numberOfRoomsFrom"
+                    (valueChange)="onInputProvided()">
                 </perfect-input>
                 <span>-</span>
                 <perfect-input
                     type='number'
-                    [(value)]="numberOfRoomsTo">
+                    [(value)]="numberOfRoomsTo"
+                    (valueChange)="onInputProvided()">
                 </perfect-input>
             </div>
         </div>
@@ -146,12 +152,14 @@
             <div class="inputs-container">
                 <perfect-input
                     type='number'
-                    [(value)]="floorFrom">
+                    [(value)]="floorFrom"
+                    (valueChange)="onInputProvided()">
                 </perfect-input>
                 <span>-</span>
                 <perfect-input
                     type='number'
-                    [(value)]="floorTo">
+                    [(value)]="floorTo"
+                    (valueChange)="onInputProvided()">
                 </perfect-input>
             </div>
         </div>
