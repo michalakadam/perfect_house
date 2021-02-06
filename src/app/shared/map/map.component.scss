@@ -1,8 +1,13 @@
 @import "~src/variables.scss";
 
 .map {
-    ::ng-deep .ol-control button {
-        background-color: $light-green;
-        color: $dark-green;
+    ::ng-deep .ol-viewport {
+        max-height: 750px;
+        min-height: 300px;
+
+        .ol-control button {
+            background-color: $light-green;
+            color: $dark-green;
+        }
     }
 }
