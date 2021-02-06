@@ -1,9 +1,9 @@
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { OffersDao } from 'src/app/services/offers-dao.service';
 import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
 import { AVAILABLE_TRANSACTIONS, Transaction, AVAILABLE_ESTATE_TYPES, Estate, OffersFilters, DEFAULT_FILTERS } from 'src/app/shared/models';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
 const AVAILABLE_VOIVODESHIPS = [
@@ -30,8 +30,9 @@ const AVAILABLE_MARKETS = [
   styleUrls: ['./search-tool.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchToolComponent implements OnInit, OnChanges {
+export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   private inputSubject: Subject<void> = new Subject();
+  private subscription = new Subscription();
 
   availableEstateTypes = AVAILABLE_ESTATE_TYPES;
   availableTransactions = AVAILABLE_TRANSACTIONS;
@@ -80,17 +81,17 @@ export class SearchToolComponent implements OnInit, OnChanges {
     readonly windowSizeDetector: WindowSizeDetector,
     private changeDetector: ChangeDetectorRef) {
       this.offersDao = offersDaoExternal;
-    this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
+    this.subscription.add(this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
       this.changeDetector.detectChanges();
-    });
+    }));
   }
 
   ngOnInit() {
-    this.inputSubject.asObservable()
+    this.subscription.add(this.inputSubject.asObservable()
       .pipe(debounceTime(500))
       .subscribe(() => {
         this.applyFiltersIgnoringPrice();
-      });
+      }));
   }
 
   onInputProvided(){
@@ -210,5 +211,9 @@ export class SearchToolComponent implements OnInit, OnChanges {
 
   computeFilterNumericValue(value: string): number {
     return value ? Number(value) : -1;
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

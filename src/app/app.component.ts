@@ -1,10 +1,11 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { PrimeNGConfig } from 'primeng/api';
 import { ABOUT_US_LINKS, ALL_LINKS } from './header/menu-links';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router, RouterState } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'perfect-root',
@@ -32,7 +33,9 @@ import { ActivatedRoute, NavigationEnd, Router, RouterState } from '@angular/rou
     ),
   ],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
+  private subscription: Subscription;
+
   isSideMenuVisible = false;
   isAboutUsOptionsVisible = false;
   allLinks = ALL_LINKS;
@@ -41,13 +44,13 @@ export class AppComponent implements OnInit {
   constructor(readonly windowSizeDetector: WindowSizeDetector,
     private titleService: Title, private router: Router,
     private primengConfig: PrimeNGConfig) {
-      router.events.subscribe(event => {
-      if(event instanceof NavigationEnd) {
-        if (!this.isUrlTitleComputedInComponent(event.url)) {
-          const title = this.getTitle(router.routerState, router.routerState.root).join(' - ');
-          this.titleService.setTitle(title);
+      this. subscription = router.events.subscribe(event => {
+        if(event instanceof NavigationEnd) {
+          if (!this.isUrlTitleComputedInComponent(event.url)) {
+            const title = this.getTitle(router.routerState, router.routerState.root).join(' - ');
+            this.titleService.setTitle(title);
+          }
         }
-      }
     });
   }
 
@@ -106,5 +109,9 @@ export class AppComponent implements OnInit {
     else if (this.isAboutUsOptionsVisible) {
       this.isAboutUsOptionsVisible = false;
     }
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

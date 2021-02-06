@@ -1,7 +1,8 @@
-import { Component, ChangeDetectionStrategy, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
 import { Agent } from '../models';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { Subscription } from 'rxjs';
 
 /** Awatar pracownika. Zawiera zdjęcie, imię i nazwisko oraz tytuł zawodowy. */
 @Component({
@@ -10,7 +11,9 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
   styleUrls: ['./agent-brief.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AgentBriefComponent {
+export class AgentBriefComponent implements OnDestroy {
+  private subscription: Subscription;
+
   isContactInfoVisible = false;
   isVertical = false;
   isBigger = false;
@@ -31,8 +34,12 @@ export class AgentBriefComponent {
 
   constructor(readonly windowSizeDetector: WindowSizeDetector,
     readonly changeDetector: ChangeDetectorRef) {
-      this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
+      this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
         this.changeDetector.detectChanges();
       });
     }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }

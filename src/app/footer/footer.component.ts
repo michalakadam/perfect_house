@@ -1,5 +1,6 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { skip } from 'rxjs/operators';
 import { WindowSizeDetector } from '../services/window-size-detector.service';
 
@@ -10,7 +11,9 @@ import { WindowSizeDetector } from '../services/window-size-detector.service';
   styleUrls: ['./footer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FooterComponent {
+export class FooterComponent implements OnDestroy {
+  private subscription: Subscription;
+
   isRentalSectionOpen = false;
   isSaleSectionOpen = false;
   isOtherSectionOpen = false;
@@ -19,7 +22,7 @@ export class FooterComponent {
     readonly windowSizeDetector: WindowSizeDetector,
     private changeDetector: ChangeDetectorRef,
     private router: Router) {
-    this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
+    this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
       this.changeDetector.detectChanges();
     });
   }
@@ -51,5 +54,9 @@ export class FooterComponent {
   loadOffers(params: any) {
     window.scrollTo(0, 0);
     this.router.navigate(['oferty', params]);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

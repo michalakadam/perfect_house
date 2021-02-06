@@ -1,5 +1,6 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AgentsDao } from 'src/app/services/agents-dao.service';
 import { WindowSizeDetector } from '../services/window-size-detector.service';
 import { Agent } from '../shared/models';
@@ -11,14 +12,15 @@ import { Agent } from '../shared/models';
   styleUrls: ['./agents.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AgentsComponent {
+export class AgentsComponent implements OnDestroy {
+  private subscription: Subscription;
 
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,
     readonly agentsDao: AgentsDao,
     private changeDetector: ChangeDetectorRef,
     private router: Router) {
-      this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
+      this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
         this.changeDetector.detectChanges();
       });
   }
@@ -33,5 +35,9 @@ export class AgentsComponent {
 
   trackById(index: number, agent: Agent) {
     return agent.id;
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
