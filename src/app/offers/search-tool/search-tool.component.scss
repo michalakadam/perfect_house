@@ -216,7 +216,7 @@
                 margin-right: 5px;
             }
 
-            ::ng-deep .p-button {
+            ::ng-deep .p-buttonset .p-button {
                 &.p-highlight {
                     background-color: $light-green;
                     color: $dark-green;
@@ -230,6 +230,10 @@
 
                 &:focus {
                     box-shadow: unset;
+                }
+
+                &:not(:last-child) {
+                    border-right: 1px dashed $dark-green;
                 }
 
                 .p-button-label {

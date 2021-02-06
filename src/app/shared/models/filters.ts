@@ -24,7 +24,7 @@ export interface OffersFilters {
 export const DEFAULT_FILTERS = {
     estateType: 'wszystkie',
     isForRent: false,
-    isPrimaryMarket: false,
+    isPrimaryMarket: true,
     isSecondaryMarket: true,
     voivodeship: 'cała Polska',
     location: '',
