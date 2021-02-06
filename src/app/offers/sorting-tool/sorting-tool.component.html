@@ -2,10 +2,10 @@
     <div class="offers-counter">
         <span class="title"> 
             <span *ngIf="windowSizeDetector.isWindowSmallerThanDesktopSmall; else fullTitle">
-                Ofert: 
+                ofert: 
             </span>
             <ng-template #fullTitle>
-                Liczba ofert: 
+                liczba ofert: 
             </ng-template>
         </span>
         <span>
@@ -14,7 +14,7 @@
     </div>
     <div class="sorter">
         <span class="title">
-            Sortuj po:
+            sortuj po:
         </span>
         <p-dropdown
             [options]="availableSortings" 

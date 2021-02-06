@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { off } from 'process';
 import { AVAILABLE_ESTATE_TYPES, Offer, OffersFilters } from '../shared/models';
 
 @Injectable({
@@ -58,6 +59,22 @@ export class OffersFilter {
     }
     if (filters.floorTo > -1) {
       offers = offers.filter(offer => offer.floor <= filters.floorTo);
+    }
+    if (filters.isElevatorAvailable) {
+      offers = offers.filter(offer => offer.isElevatorAvailable);
+    }
+    if (filters.isParkingAvailable) {
+      offers = offers
+        .filter(offer => offer.isParkingAvailable || !!offer.garage || offer.isTruckParkingAvailable);
+    }
+    if (filters.isTerraceAvailable) {
+      offers = offers.filter(offer => offer.isTerraceAvailable);
+    }
+    if (filters.isBasementAvailable) {
+      offers = offers.filter(offer => offer.isBasementAvailable);
+    }
+    if (filters.isMpzpAvailable) {
+      offers = offers.filter(offer => !!offer.mpzp);
     }
     
     return offers;

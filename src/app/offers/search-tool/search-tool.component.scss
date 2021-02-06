@@ -38,6 +38,10 @@
             }
         }
 
+        &:last-of-type {
+            margin-top: 5px;
+        }
+
         .dropdowns {
             display: flex;
             justify-content: space-between;
@@ -166,6 +170,14 @@
                 margin-bottom: 5px;
                 @media screen and (max-width: $desktop-small) {
                     margin-bottom: 0;
+                }
+            }
+
+            &:not(.area) .inputs-container {
+                perfect-input {
+                    ::ng-deep input {
+                        width: 6rem;
+                    }
                 }
             }
 

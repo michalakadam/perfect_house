@@ -62,6 +62,11 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   numberOfRoomsTo: string;
   floorFrom: string;
   floorTo: string;
+  isElevatorAvailable: boolean;
+  isParkingAvailable: boolean;
+  isTerraceAvailable: boolean;
+  isBasementAvailable: boolean;
+  isMpzpAvailable: boolean;
 
   priceRange: number[];
   
@@ -133,6 +138,12 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
     this.numberOfRoomsTo = this.computeFieldValue(this.filters.numberOfRoomsTo);
     this.floorFrom = this.computeFieldValue(this.filters.floorFrom);
     this.floorTo = this.computeFieldValue(this.filters.floorTo);
+    this.isElevatorAvailable = this.filters.isElevatorAvailable;
+    this.isParkingAvailable = this.filters.isParkingAvailable;
+    this.isTerraceAvailable = this.filters.isTerraceAvailable;
+    this.isBasementAvailable = this.filters.isBasementAvailable;
+    this.isMpzpAvailable = this.filters.isMpzpAvailable;
+    
     this.changeDetector.detectChanges();
   }
 
@@ -208,6 +219,11 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
       numberOfRoomsTo: this.computeFilterNumericValue(this.numberOfRoomsTo),
       floorFrom: this.computeFilterNumericValue(this.floorFrom),
       floorTo: this.computeFilterNumericValue(this.floorTo),
+      isElevatorAvailable: this.isElevatorAvailable,
+      isParkingAvailable: this.isParkingAvailable,
+      isTerraceAvailable: this.isTerraceAvailable,
+      isBasementAvailable: this.isBasementAvailable,
+      isMpzpAvailable: this.isMpzpAvailable,
     };
 
     this.filters = filters;
