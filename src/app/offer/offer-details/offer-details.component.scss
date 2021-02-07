@@ -13,25 +13,34 @@
             margin-right: 3px;
         }
     }
+    .details-flex { 
+        display: grid;
+        font-size: 17px;
+        grid-template-columns: 1fr auto;
+        @media screen and (max-width: $mobile) {
+            font-size: unset;
+            grid-template-columns: 1fr;
+            width: 220px;
+        }
 
-    .details-row {
-        margin-bottom: 15px;
+        .details-row {
 
-        .key-value-pair {
-            &:first-of-type {
-                display: inline-block;
-                width: 250px;
-                @media screen and (max-width: $desktop-large) {
-                    width: 235px;
+            .key-value-pair {
+                &:first-of-type {
+                    display: inline-block;
+                    width: 250px;
+                    @media screen and (max-width: $desktop-large) {
+                        width: 235px;
+                    }
+                    @media screen and (max-width: $desktop-medium) {
+                        width: 220px;
+                    }
                 }
-                @media screen and (max-width: $desktop-medium) {
-                    width: 220px;
-                }
-            }
 
-            .key {
-                font-weight: 700;
-            }
-        }    
+                .key {
+                    font-weight: 700;
+                }
+            }    
+        }
     }
 }
