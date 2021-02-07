@@ -18,15 +18,7 @@
         </ng-template>
         </p-galleria>
     </div>
-    <div class="card agent-brief">
-        <perfect-agent-brief *ngIf="agentsDao.getAgentById(offer.agentId) as agent"
-            [agent]="agent"
-            bigger
-            contactInfoVisible
-            vertical
-            (click)="navigateToAgentPage(agent)">
-        </perfect-agent-brief>
-    </div> 
+  
     <div class="card basic-info-card">
         <div class="price">
             <span *ngIf="offer.price > 1">
@@ -36,20 +28,32 @@
                 Zaproponuj cenę!
             </span>
         </div>
-            <perfect-offer-details 
+        <perfect-offer-details 
             [offer]="offer">
-            </perfect-offer-details>
+        </perfect-offer-details>
     </div>
-    <div class="card card-description">
-        <p-tabView>
-            <p-tabPanel header="Opis">
-                <div class="description-main" *ngIf="offer.description">
-                    {{ offer.description }}
-                </div>
-            </p-tabPanel>
-            <p-tabPanel header="Szczegóły">
-                Szczegóły
-            </p-tabPanel>
-        </p-tabView>
+    <div class="description-agent-container">
+        <div class="card card-description">
+            <p-tabView>
+                <p-tabPanel header="Opis">
+                    <div class="description-main" *ngIf="offer.description">
+                        {{ offer.description }}
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel header="Szczegóły">
+                    Szczegóły
+                </p-tabPanel>
+            </p-tabView>
+        </div>
+        <div class="card agent-brief">
+            <perfect-agent-brief *ngIf="agentsDao.getAgentById(offer.agentId) as agent"
+                [agent]="agent"
+                bigger
+                contactInfoVisible
+                vertical
+                (click)="navigateToAgentPage(agent)">
+            </perfect-agent-brief>
+        </div> 
     </div>
+</div>
 

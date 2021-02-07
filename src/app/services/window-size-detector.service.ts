@@ -25,13 +25,6 @@ export class WindowSizeDetector {
     isWindowSmallerThanMobileLarge: boolean;
     isWindowSmallerThanMobile: boolean;
     isWindowSmallerThanMobileSmall: boolean;
-    static DESKTOP_LARGE: number;
-    static DESKTOP_MEDIUM: number;
-    static DESKTOP_SMALL: number;
-    static TABLET: number;
-    static MOBILE_LARGE: number;
-    static MOBILE: number;
-    static MOBILE_SMALL: number;
 
     constructor() {
         this.windowSizeChanged$ = this.windowSizeChangedSubject.asObservable();
@@ -44,12 +37,12 @@ export class WindowSizeDetector {
     }
 
     private updateWindowSizeFlags(windowSize: number) {
-        this.isWindowSmallerThanDesktopLarge = windowSize < WindowSizeDetector.DESKTOP_LARGE;
-        this.isWindowSmallerThanDesktopMedium = windowSize < WindowSizeDetector.DESKTOP_MEDIUM;
-        this.isWindowSmallerThanDesktopSmall = windowSize < WindowSizeDetector.DESKTOP_SMALL;
-        this.isWindowSmallerThanTablet = windowSize < WindowSizeDetector.TABLET;
-        this.isWindowSmallerThanMobileLarge = windowSize < WindowSizeDetector.MOBILE_LARGE;
-        this.isWindowSmallerThanMobile = windowSize < WindowSizeDetector.MOBILE;
-        this.isWindowSmallerThanMobileSmall = windowSize < WindowSizeDetector.MOBILE_SMALL;
+        this.isWindowSmallerThanDesktopLarge = windowSize < DESKTOP_LARGE;
+        this.isWindowSmallerThanDesktopMedium = windowSize < DESKTOP_MEDIUM;
+        this.isWindowSmallerThanDesktopSmall = windowSize < DESKTOP_SMALL;
+        this.isWindowSmallerThanTablet = windowSize < TABLET;
+        this.isWindowSmallerThanMobileLarge = windowSize < MOBILE_LARGE;
+        this.isWindowSmallerThanMobile = windowSize < MOBILE;
+        this.isWindowSmallerThanMobileSmall = windowSize < MOBILE_SMALL;
     }
 }
