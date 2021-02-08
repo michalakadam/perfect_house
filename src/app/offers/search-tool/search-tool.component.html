@@ -21,7 +21,7 @@
 
         <div class="market-toggle-container" *ngIf="isOptionalElementVisible()">
             <span class="title">
-                Rynek: 
+                rynek: 
             </span>
             <p-selectButton
                 [options]="availableMarkets"
@@ -37,6 +37,8 @@
             <p-dropdown
                 class="voivodeship-dropdown"
                 [options]="availableVoivodeships" 
+                optionLabel="label"
+                optionValue="value"
                 [(ngModel)]="selectedVoivodeship"
                 (onChange)="applyFiltersIgnoringPrice()">
             </p-dropdown>
@@ -82,28 +84,30 @@
                 <p-checkbox
                     [(ngModel)]="isVirtualVisitAvailable"
                     binary="true"
-                    inputId="virtualVisitAvailable"
+                    inputId="virtualVisit"
                     (onChange)="applyFiltersIgnoringPrice()"></p-checkbox>
-                <label for="virtualVisitAvailable">wirtualna wizyta</label>
+                <label for="virtualVisit">wirtualna wizyta</label>
             </div>
         </div>
         <div class="from-to-input-container area" *ngIf="isOptionalElementVisible()">
-            <div class="title">Powierzchnia:</div>
+            <div class="title">powierzchnia:</div>
             <div class="inputs-container">
                 <perfect-input
                     type='number'
-                    [(value)]="areaFrom">
+                    [(value)]="areaFrom"
+                    (valueChange)="onInputProvided()">
                 </perfect-input>
                 <span>-</span>
                 <perfect-input
                     type='number'
-                    [(value)]="areaTo">
+                    [(value)]="areaTo"
+                    (valueChange)="onInputProvided()">
                 </perfect-input>
             </div>
         </div>
         <perfect-input-with-slider
             class="price-slider"
-            title=Cena
+            title=cena
             [lowerDefaultValue]="offersDao.getLowestPriceForCurrentSearch()"
             [higherDefaultValue]="offersDao.getHighestPriceForCurrentSearch()"
             [lowerValue]="computeFilterNumericValue(priceFrom)"
@@ -113,66 +117,123 @@
         </perfect-input-with-slider>
     </div>
     <div class="row" *ngIf="showAdvanced">
-        <div class="from-to-input-container">
-            <div class="title">Cena za m²:</div>
-            <div class="inputs-container">
-                <perfect-input
-                    type='number'
-                    [(value)]="pricePerSquareMeterFrom">
-                </perfect-input>
-                <span>-</span>
-                <perfect-input
-                    type='number'
-                    [(value)]="pricePerSquareMeterTo">
-                </perfect-input>
+        <div class="checkboxes-container additional-fields">
+            <div class="checkbox-container"
+                *ngIf="filters.estateType === 'wszystkie' || filters.estateType === 'mieszkania'">
+                <p-checkbox
+                    [(ngModel)]="isElevatorAvailable"
+                    binary="true" 
+                    inputId="elevator"
+                    (onChange)="applyFiltersIgnoringPrice()">
+                </p-checkbox>
+                <label for="elevator">winda</label>
+            </div>
+            <div class="checkbox-container"
+                *ngIf="filters.estateType !== 'działki'">
+                <p-checkbox
+                    [(ngModel)]="isParkingAvailable"
+                    binary="true" 
+                    inputId="parking"
+                    (onChange)="applyFiltersIgnoringPrice()"></p-checkbox>
+                <label for="parking">parking/garaż</label>
+            </div>
+            <div class="checkbox-container"
+                *ngIf="filters.estateType === 'wszystkie' || filters.estateType === 'mieszkania' || filters.estateType === 'domy'">
+                <p-checkbox
+                    [(ngModel)]="isTerraceAvailable"
+                    binary="true"
+                    inputId="terrace"
+                    (onChange)="applyFiltersIgnoringPrice()"></p-checkbox>
+                <label for="terrace">balkon/taras</label>
+            </div>
+            <div class="checkbox-container"
+                *ngIf="filters.estateType === 'wszystkie' || filters.estateType === 'mieszkania' || filters.estateType === 'domy'">
+                <p-checkbox
+                    [(ngModel)]="isBasementAvailable"
+                    binary="true"
+                    inputId="basement"
+                    (onChange)="applyFiltersIgnoringPrice()"></p-checkbox>
+                <label for="basement">piwnica/komórka</label>
+            </div>
+            <div class="checkbox-container"
+                *ngIf="filters.estateType === 'działki' || filters.estateType === 'domy'">
+                <p-checkbox
+                    [(ngModel)]="isMpzpAvailable"
+                    binary="true"
+                    inputId="mpzp"
+                    (onChange)="applyFiltersIgnoringPrice()"></p-checkbox>
+                <label for="mpzp">MPZP</label>
             </div>
         </div>
         <div class="from-to-input-container">
-            <div class="title">Liczba pokoi:</div>
+            <div class="title">cena za m²:</div>
             <div class="inputs-container">
                 <perfect-input
                     type='number'
-                    [(value)]="numberOfRoomsFrom">
+                    [(value)]="pricePerSquareMeterFrom"
+                    (valueChange)="onInputProvided()">
                 </perfect-input>
                 <span>-</span>
                 <perfect-input
                     type='number'
-                    [(value)]="numberOfRoomsTo">
+                    [(value)]="pricePerSquareMeterTo"
+                    (valueChange)="onInputProvided()">
                 </perfect-input>
             </div>
         </div>
-        <div class="from-to-input-container">
-            <div class="title">Piętro:</div>
+        <div class="from-to-input-container"
+            *ngIf="filters.estateType !== 'działki' && filters.estateType !== 'hale'">
+            <div class="title">liczba pokoi:</div>
             <div class="inputs-container">
                 <perfect-input
                     type='number'
-                    [(value)]="floorFrom">
+                    [(value)]="numberOfRoomsFrom"
+                    (valueChange)="onInputProvided()">
                 </perfect-input>
                 <span>-</span>
                 <perfect-input
                     type='number'
-                    [(value)]="floorTo">
+                    [(value)]="numberOfRoomsTo"
+                    (valueChange)="onInputProvided()">
+                </perfect-input>
+            </div>
+        </div>
+        <div class="from-to-input-container"
+            *ngIf="filters.estateType === 'wszystkie' || filters.estateType === 'mieszkania' || filters.estateType === 'lokale'">
+            <div class="title">piętro:</div>
+            <div class="inputs-container">
+                <perfect-input
+                    type='number'
+                    [(value)]="floorFrom"
+                    (valueChange)="onInputProvided()">
+                </perfect-input>
+                <span>-</span>
+                <perfect-input
+                    type='number'
+                    [(value)]="floorTo"
+                    (valueChange)="onInputProvided()">
                 </perfect-input>
             </div>
         </div>
     </div>
     <div class="row">
-        <perfect-input *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall"
+        <perfect-input class="symbol-input" 
+            *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall || showAdvanced"
             title='symbol / numer oferty'
             [(value)]="symbol">
         </perfect-input>
-        <div class="from-to-input-container symbol-input"
+        <!-- <div class="symbol-input"
             *ngIf="windowSizeDetector.isWindowSmallerThanDesktopSmall && showAdvanced">
-            <div class="title">Symbol / numer oferty:</div>
+            <div class="title">symbol / numer oferty:</div>
             <perfect-input [(value)]="symbol"></perfect-input>
-        </div>
+        </div> -->
         <div class="buttons-container">
             <p-button class="show-advanced" (click)="toggleAdvancedVisibility()">
-                <span>Zaawansowane</span>
+                <span>zaawansowane</span>
                 <i *ngIf="showAdvanced" class="pi pi-chevron-up"></i>
                 <i *ngIf="!showAdvanced" class="pi pi-chevron-down"></i>
             </p-button>
-            <p-button label="Wyszukaj" icon="pi pi-search" (click)="applyFilters()"></p-button>
+            <p-button label="wyszukaj" icon="pi pi-search" (click)="search()"></p-button>
         </div>
     </div>
 </div>
