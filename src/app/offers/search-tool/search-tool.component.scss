@@ -107,6 +107,10 @@
                 gap: 10px 0;
             }
 
+            &.additional-fields {
+                gap: 10px 5px;
+            }
+
             .checkbox-container {
                 display: flex;
 
@@ -261,15 +265,8 @@
         }
 
         .symbol-input {
-            margin-bottom: 10px;
-
-            perfect-input {
-                margin-right: 5px;
-
-                ::ng-deep input {
-                    width: 110px;
-                }
-            }
+            margin-bottom: 15px;
+            margin-top: 10px;
         }
         
         .buttons-container {

@@ -117,7 +117,7 @@
         </perfect-input-with-slider>
     </div>
     <div class="row" *ngIf="showAdvanced">
-        <div class="checkboxes-container">
+        <div class="checkboxes-container additional-fields">
             <div class="checkbox-container"
                 *ngIf="filters.estateType === 'wszystkie' || filters.estateType === 'mieszkania'">
                 <p-checkbox
@@ -156,7 +156,7 @@
                 <label for="basement">piwnica/komórka</label>
             </div>
             <div class="checkbox-container"
-                *ngIf="filters.estateType === 'wszystkie' || filters.estateType === 'działki' || filters.estateType === 'domy'">
+                *ngIf="filters.estateType === 'działki' || filters.estateType === 'domy'">
                 <p-checkbox
                     [(ngModel)]="isMpzpAvailable"
                     binary="true"
@@ -217,15 +217,16 @@
         </div>
     </div>
     <div class="row">
-        <perfect-input *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall"
+        <perfect-input class="symbol-input" 
+            *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall || showAdvanced"
             title='symbol / numer oferty'
             [(value)]="symbol">
         </perfect-input>
-        <div class="symbol-input"
+        <!-- <div class="symbol-input"
             *ngIf="windowSizeDetector.isWindowSmallerThanDesktopSmall && showAdvanced">
             <div class="title">symbol / numer oferty:</div>
             <perfect-input [(value)]="symbol"></perfect-input>
-        </div>
+        </div> -->
         <div class="buttons-container">
             <p-button class="show-advanced" (click)="toggleAdvancedVisibility()">
                 <span>zaawansowane</span>

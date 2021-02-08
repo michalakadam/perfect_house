@@ -238,6 +238,8 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
     return value ? Number(value) : -1;
   }
 
+  
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
