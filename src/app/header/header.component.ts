@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
 
 /** Nagłówek strony. Zawiera logo firmy, numer telefonu oraz nawigację. */
@@ -8,7 +9,8 @@ import { WindowSizeDetector } from 'src/app/services/window-size-detector.servic
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnDestroy {
+  private subscription: Subscription;
 
   @Output() sideMenuToggled = new EventEmitter();
   @Output() aboutUsOptionsToggled = new EventEmitter();
@@ -16,8 +18,12 @@ export class HeaderComponent {
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,
     private changeDetector: ChangeDetectorRef) {
-    this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
+    this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
       this.changeDetector.detectChanges();
     });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

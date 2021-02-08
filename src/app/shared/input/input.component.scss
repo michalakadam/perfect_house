@@ -35,11 +35,14 @@
 
     .remove-input-icon {
         cursor: pointer;
-        margin-right: -14px;
+        margin-right: -16px;
         right: 24px;
         position: relative;
         top: 1px;
         z-index: 100;
+        @media screen and (max-width: $desktop-large) {
+            margin-right: -14px;
+        }
         @media screen and (max-width: $desktop-small) {
             margin-right: -12px;
         }

@@ -35,6 +35,9 @@
             display: flex;
             font-style: italic;
             margin-bottom: 5px;
+            @media screen and (max-width: $desktop-small) {
+                line-height: 24px;
+            }
 
             mat-icon {
                 color: $light-green;
@@ -70,6 +73,7 @@
 
         .contact-info > * {
             margin: 0 auto;
+            width: fit-content;
         }
     }
 }
@@ -86,14 +90,15 @@
         margin-top: 12px;
 
         .position {
-            margin-top: 0;
+            margin-bottom: 0;
+            margin-top: 10px;
         }
         
         .contact-info {
             margin-top: 14px;
 
             & > * {
-                margin-top: 10px;
+                margin-top: 7px;
             }
 
             mat-icon {

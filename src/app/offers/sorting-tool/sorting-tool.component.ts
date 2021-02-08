@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy, EventEmitter, Input, Output, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, EventEmitter, Input, Output, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
 import { Sorting, AVAILABLE_SORTINGS } from 'src/app/shared/models';
 
@@ -8,7 +9,8 @@ import { Sorting, AVAILABLE_SORTINGS } from 'src/app/shared/models';
   styleUrls: ['./sorting-tool.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SortingToolComponent {
+export class SortingToolComponent implements OnDestroy {
+  private subscription: Subscription;
   availableSortings = AVAILABLE_SORTINGS;
   @Input() offersQuantity = 0;
   @Input() selectedSorting: Sorting;
@@ -16,8 +18,12 @@ export class SortingToolComponent {
 
   constructor(readonly windowSizeDetector: WindowSizeDetector,
     readonly changeDetector: ChangeDetectorRef) {
-    this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
+    this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
       this.changeDetector.detectChanges();
     });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

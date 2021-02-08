@@ -1,6 +1,7 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { OffersDao } from '../services/offers-dao.service';
 import { SnackbarService } from '../services/snackbar.service';
 import { Offer } from '../shared/models';
@@ -11,7 +12,8 @@ import { Offer } from '../shared/models';
   styleUrls: ['./offer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OfferComponent {
+export class OfferComponent implements OnDestroy {
+  private subscription: Subscription;
   offer: Offer;
   
   constructor(private route: ActivatedRoute,
@@ -19,7 +21,7 @@ export class OfferComponent {
     private titleService: Title,
     private offersDao: OffersDao,
     private snackbarService: SnackbarService) {
-    this.route.params.subscribe((params: Params) => {
+    this.subscription = this.route.params.subscribe((params: Params) => {
         if (params.symbol) {
           this.loadOffer(params.symbol);
         } else  {
@@ -59,5 +61,9 @@ export class OfferComponent {
       this.snackbarService.open(`Oferta ${symbol} nie istnieje.`);
     }, 500)
     this.router.navigate(['/oferty']);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

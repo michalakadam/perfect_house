@@ -14,21 +14,21 @@
     }
 
     .about-us-navigation {
-        height: 100px;
+        height: 142px;
         position: absolute;
         left: 50%;
-        margin-left: 400px;
+        margin-left: 460px;
         top: 115px;
-        width: 170px;
+        width: 190px;
         @media screen and (max-width: $desktop-large) {
-            margin-left: 340px;
+            margin-left: 420px;
             top: 110px;
-            width: 160px;
+            width: 175px;
         }
         @media screen and (max-width: $desktop-medium) {
             margin-left: 300px;
             top: 105px;
-            width: 150px;
+            width: 160px;
         }
     }
 

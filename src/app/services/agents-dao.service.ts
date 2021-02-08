@@ -4,6 +4,8 @@ import * as rawAgents from "src/agents/agents.json";
 import { Agent } from '../shared/models';
 import { AgentsConverter } from './agents-converter.service';
 
+const CEO_ID = '1155';
+
 @Injectable({
     providedIn: 'root',
 })
@@ -15,22 +17,23 @@ export class AgentsDao {
     }
 
     listAgents(): Agent[] {
-        return this.agents
-          .filter(agent => agent.id !== '10101')
-          .sort((a, b) => {
-            if (this.extractFirstLetter(a.fullName) < this.extractFirstLetter(b.fullName)) {
-              return -1;
-            }
-            if (this.extractFirstLetter(a.fullName) > this.extractFirstLetter(b.fullName)) {
-              return 1;
-            }
-            return 0;
-          });
+        return this.agents.sort((a, b) => this.sortAgents(a, b));
       }
+
+    private sortAgents(a: Agent, b: Agent): number {
+      if (a.id === CEO_ID) {
+        return -1;
+      }
+      if (b.id === CEO_ID) {
+        return 1;
+      }
+      return this.extractSurname(a.fullName) < this.extractSurname(b.fullName) ? -1 :
+        (this.extractSurname(a.fullName) > this.extractSurname(b.fullName) ? 1 : 0)
+    }
       
-      private extractFirstLetter(fullName: string): string {
-        return fullName.split(/\s+/).pop();
-      }
+    private extractSurname(fullName: string): string {
+      return fullName.split(' ')[1];  
+    }
 
     getAgentById(id: number): Agent {
         return this.agents.find(agent => agent.id === '' + id);

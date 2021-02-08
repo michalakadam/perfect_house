@@ -19,12 +19,17 @@ export interface OffersFilters {
     numberOfRoomsTo: number;
     floorFrom: number;
     floorTo: number;
+    isElevatorAvailable: boolean;
+    isParkingAvailable: boolean;
+    isTerraceAvailable: boolean;
+    isBasementAvailable: boolean;
+    isMpzpAvailable: boolean;
 };
 
 export const DEFAULT_FILTERS = {
     estateType: 'wszystkie',
     isForRent: false,
-    isPrimaryMarket: false,
+    isPrimaryMarket: true,
     isSecondaryMarket: true,
     voivodeship: 'cała Polska',
     location: '',
@@ -42,4 +47,9 @@ export const DEFAULT_FILTERS = {
     numberOfRoomsTo: -1,
     floorFrom: -1,
     floorTo: -1,
+    isElevatorAvailable: false,
+    isParkingAvailable: false,
+    isTerraceAvailable: false,
+    isBasementAvailable: false,
+    isMpzpAvailable: false,
 };
