@@ -1,6 +1,7 @@
 <div class="component-container">
     <div class="gallery">
         <p-galleria 
+        [autoPlay]="true"
         [(value)]="images" 
         [containerStyle]="{'max-width': '640px'}" 
         [numVisible]="5"
@@ -28,12 +29,11 @@
                 Zaproponuj cenę!
             </span>
         </div>
-        <perfect-offer-details 
-            [offer]="offer">
+        <perfect-offer-details [offer]="offer">
         </perfect-offer-details>
     </div>
     <div class="description-agent-container">
-        <div class="card card-description">
+        <div class="card card-description" *ngIf="windowSizeDetector.isWindowSmallerThanMobileLarge">
             <p-tabView>
                 <p-tabPanel header="Opis">
                     <div class="description-main" *ngIf="offer.description">
@@ -45,6 +45,20 @@
                 </p-tabPanel>
             </p-tabView>
         </div>
+        <div class="two-containers" *ngIf="!windowSizeDetector.isWindowSmallerThanMobileLarge">
+            <div class="card description">
+                {{ offer.description }}
+                <br>
+                <br>
+                Szczegóły<br>
+                Szczegóły<br>
+                Szczegóły<br>
+                Szczegóły<br>
+                Szczegóły<br>
+                Szczegóły<br>
+                Szczegóły<br>
+            </div>
+        </div> 
         <div class="card agent-brief">
             <perfect-agent-brief *ngIf="agentsDao.getAgentById(offer.agentId) as agent"
                 [agent]="agent"
@@ -53,7 +67,6 @@
                 vertical
                 (click)="navigateToAgentPage(agent)">
             </perfect-agent-brief>
-        </div> 
-    </div>
+        </div>
+    </div> 
 </div>
-

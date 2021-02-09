@@ -13,10 +13,10 @@
             margin-right: 3px;
         }
     }
+
     .details-flex { 
         display: grid;
-        font-size: 17px;
-        grid-template-columns: 1fr auto;
+        grid-template-columns: 1fr 1fr;
         @media screen and (max-width: $mobile) {
             font-size: unset;
             grid-template-columns: 1fr;
@@ -24,7 +24,6 @@
         }
 
         .details-row {
-
             .key-value-pair {
                 &:first-of-type {
                     display: inline-block;

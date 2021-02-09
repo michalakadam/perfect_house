@@ -78,7 +78,6 @@ import { TabViewModule } from 'primeng/tabview';
     OfferDetailsComponent,
     UnderConstructionComponent,
   ],
-  
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,

@@ -16,7 +16,7 @@ export class OffersConverter {
                 estateType: this.computeEstateType(offer.Przedmiot || ''),
                 agentId: this.convertToNumber(offer.Agent),
                 title: offer.TytulOferty || '',
-                description: offer.UwagiOpis.replace(toBeReplaced, "") || '',
+                description: (offer.UwagiOpis || '').replace(toBeReplaced, ''),
                 additionalDescription: offer.DodatkowyOpis || '',
                 additionalRemarks: offer.UwagiOpis || '',
                 releaseDate: offer.TerminWydaniaData?.text || '',

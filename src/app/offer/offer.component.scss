@@ -5,9 +5,9 @@
 .component-container {
     
     @include responsive-page;
+    height: 100%;
     margin: 30px auto;
     max-width: 1200px;
-    height: 100%;
     @media screen and (max-width: $tablet) {
         width:500px;
      }
@@ -15,9 +15,9 @@
         width:300px;
      }
     .gallery {
+        align-items: center;
         display: flex;
         justify-content: center;
-        align-items: center;
         p-galleria{
             ::ng-deep .p-galleria { 
                 img {
@@ -36,8 +36,8 @@
 
     .basic-info-card {
         .price {
+            color: $dark-green;
             float: right;
-            color: $light-green;
             font-size: 36px;
             font-weight: 700;
             margin-bottom: 15px;
@@ -53,16 +53,14 @@
 
     .agent-brief { 
         cursor: pointer;
-        width: 255px;
         margin-right: 0px;
         max-height: 376px;
         padding: 25px 0;
-
+        width: 255px;
         @media screen and (max-width: $desktop-small) {
             margin-right: 20px;
             max-height: 376px;
             padding: 25px 0;
-            
         }
         @media screen and (max-width: $mobile-large) {
 
@@ -112,6 +110,9 @@
                     }
                 }            
             } 
-        }
+        }  
+    }
+    .two-containers {
+        margin-right: 20px;
     }
 }

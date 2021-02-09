@@ -10,5 +10,4 @@ import { Offer } from 'src/app/shared/models';
 
 export class OfferDetailsComponent {
   @Input() offer: Offer;
-  
 }
