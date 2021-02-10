@@ -104,6 +104,5 @@ export class OfferComponent {
       })
     }
     return computedPhotos;
-    
   }
 }
