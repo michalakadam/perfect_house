@@ -1,8 +1,9 @@
-import { Component, ChangeDetectionStrategy, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { AgentsDao } from 'src/app/services/agents-dao.service';
 import { Offer } from 'src/app/shared/models';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'perfect-offer-card',
@@ -10,7 +11,8 @@ import { WindowSizeDetector } from 'src/app/services/window-size-detector.servic
   styleUrls: ['./offer-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OfferCardComponent {
+export class OfferCardComponent implements OnDestroy {
+  private subscription: Subscription;
   displaySmaller = false;
 
   @Input() offer: Offer;
@@ -22,8 +24,12 @@ export class OfferCardComponent {
   constructor (readonly agentsDao: AgentsDao,
     readonly windowSizeDetector: WindowSizeDetector, 
     readonly changeDetector: ChangeDetectorRef) {
-    this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
+    this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
       this.changeDetector.detectChanges();
     });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

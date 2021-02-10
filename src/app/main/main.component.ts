@@ -1,5 +1,7 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { importExpr } from '@angular/compiler/src/output/output_ast';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { OffersDao } from '../services/offers-dao.service';
 import { WindowSizeDetector } from '../services/window-size-detector.service';
 import { DEFAULT_FILTERS, OffersFilters } from '../shared/models';
@@ -33,7 +35,9 @@ const IMAGES = [
   styleUrls: ['./main.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MainComponent {
+export class MainComponent implements OnDestroy {
+  private subscription: Subscription;
+
   images = IMAGES;
   advancedVisible = false;
 
@@ -41,7 +45,7 @@ export class MainComponent {
     readonly windowSizeDetector: WindowSizeDetector, 
     readonly changeDetector: ChangeDetectorRef) {
     this.offersDao.initializeOffersForTheMainPage();
-    this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
+    this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
       this.changeDetector.detectChanges();
     });
   }
@@ -49,6 +53,10 @@ export class MainComponent {
   openUrl(image) {
     if (image.previewImageSrc.includes('zarzadzanie')) {
       this.router.navigate(['zarzadzanie']);
+      return;
+    }
+    if (image.previewImageSrc.includes('poznansku')) {
+      this.router.navigate(['wartosci']);
       return;
     }
 
@@ -92,5 +100,9 @@ export class MainComponent {
       return 3;
     }
     return 4;
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

@@ -1,15 +1,10 @@
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { OffersDao } from 'src/app/services/offers-dao.service';
 import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
 import { AVAILABLE_TRANSACTIONS, Transaction, AVAILABLE_ESTATE_TYPES, Estate, OffersFilters, DEFAULT_FILTERS } from 'src/app/shared/models';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-
-const AVAILABLE_VOIVODESHIPS = [
-  'cała Polska', 'dolnośląskie', 'kujawsko-pomorskie', 'lubelskie', 'lubuskie',
-  'łódzkie', 'małopolskie', 'mazowieckie', 'opolskie', 'podkarpackie', 'podlaskie',
-  'pomorskie', 'śląskie', 'świętokrzyskie', 'warmińsko-mazurskie', 'wielkopolskie',
-  'zachodniopomorskie',
-];
+import { Subject, Subscription } from 'rxjs';
+import { debounceTime, filter } from 'rxjs/operators';
 
 const AVAILABLE_MARKETS = [
   {
@@ -28,11 +23,14 @@ const AVAILABLE_MARKETS = [
   styleUrls: ['./search-tool.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchToolComponent implements OnChanges {
+export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
+  private inputSubject: Subject<void> = new Subject();
+  private subscription = new Subscription();
+
   availableEstateTypes = AVAILABLE_ESTATE_TYPES;
   availableTransactions = AVAILABLE_TRANSACTIONS;
-  availableVoivodeships = AVAILABLE_VOIVODESHIPS;
   availableMarkets = AVAILABLE_MARKETS;
+  availableVoivodeships = [];
   showAdvanced = false;
 
   selectedEstateType: Estate;
@@ -57,6 +55,11 @@ export class SearchToolComponent implements OnChanges {
   numberOfRoomsTo: string;
   floorFrom: string;
   floorTo: string;
+  isElevatorAvailable: boolean;
+  isParkingAvailable: boolean;
+  isTerraceAvailable: boolean;
+  isBasementAvailable: boolean;
+  isMpzpAvailable: boolean;
 
   priceRange: number[];
   
@@ -76,14 +79,23 @@ export class SearchToolComponent implements OnChanges {
     readonly windowSizeDetector: WindowSizeDetector,
     private changeDetector: ChangeDetectorRef) {
       this.offersDao = offersDaoExternal;
-    this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
+    this.subscription.add(this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
       this.changeDetector.detectChanges();
-    });
+    }));
   }
 
-  isOptionalElementVisible() {
-    return !this.windowSizeDetector.isWindowSmallerThanDesktopSmall ||
-      this.windowSizeDetector.isWindowSmallerThanDesktopSmall && this.showAdvanced;
+  ngOnInit() {
+    this.subscription.add(this.inputSubject.asObservable()
+      .pipe(debounceTime(500))
+      .subscribe(() => {
+        this.applyFiltersIgnoringPrice();
+      })
+    );
+    this.availableVoivodeships = this.computeVoivodeshipsForDropdown(this.offersDao.getAvailableVoivodeships());
+  }
+
+  onInputProvided(){
+    this.inputSubject.next();
   }
 
   ngOnChanges() {
@@ -121,7 +133,27 @@ export class SearchToolComponent implements OnChanges {
     this.numberOfRoomsTo = this.computeFieldValue(this.filters.numberOfRoomsTo);
     this.floorFrom = this.computeFieldValue(this.filters.floorFrom);
     this.floorTo = this.computeFieldValue(this.filters.floorTo);
+    this.isElevatorAvailable = this.filters.isElevatorAvailable;
+    this.isParkingAvailable = this.filters.isParkingAvailable;
+    this.isTerraceAvailable = this.filters.isTerraceAvailable;
+    this.isBasementAvailable = this.filters.isBasementAvailable;
+    this.isMpzpAvailable = this.filters.isMpzpAvailable;
+    
     this.changeDetector.detectChanges();
+  }
+
+  isOptionalElementVisible() {
+    return !this.windowSizeDetector.isWindowSmallerThanDesktopSmall ||
+      this.windowSizeDetector.isWindowSmallerThanDesktopSmall && this.showAdvanced;
+  }
+
+  computeVoivodeshipsForDropdown(voivodeships: string[]) {
+    return voivodeships.map(voivodeship => {
+      return {
+        label: voivodeship,
+        value: voivodeship,
+      }
+    })
   }
 
   private computeFieldValue(value: number): string {
@@ -145,15 +177,20 @@ export class SearchToolComponent implements OnChanges {
     this.priceFrom = '-1';
     this.priceTo = '-1';
 
-    this.applyFilters();
+    this.search();
   }
 
   applyFilters() {
-    if (this.symbol) {
-      this.openOffer.emit(this.symbol);
+    if (this.onMainPage) {
       return;
     }
-    if (this.onMainPage) {
+
+    this.search();
+  }
+
+  search() {
+    if (this.symbol) {
+      this.openOffer.emit(this.symbol);
       return;
     }
     if (this.computeFilterNumericValue(this.priceFrom) ===
@@ -163,7 +200,7 @@ export class SearchToolComponent implements OnChanges {
     if (this.computeFilterNumericValue(this.priceTo) ===
       this.offersDao.getHighestPriceForCurrentSearch()) {
         this.priceTo = '-1';
-      }
+    }
 
     const filters: OffersFilters = {
       estateType: this.selectedEstateType.displayName,
@@ -186,6 +223,11 @@ export class SearchToolComponent implements OnChanges {
       numberOfRoomsTo: this.computeFilterNumericValue(this.numberOfRoomsTo),
       floorFrom: this.computeFilterNumericValue(this.floorFrom),
       floorTo: this.computeFilterNumericValue(this.floorTo),
+      isElevatorAvailable: this.isElevatorAvailable,
+      isParkingAvailable: this.isParkingAvailable,
+      isTerraceAvailable: this.isTerraceAvailable,
+      isBasementAvailable: this.isBasementAvailable,
+      isMpzpAvailable: this.isMpzpAvailable,
     };
 
     this.filters = filters;
@@ -194,5 +236,11 @@ export class SearchToolComponent implements OnChanges {
 
   computeFilterNumericValue(value: string): number {
     return value ? Number(value) : -1;
+  }
+
+  
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

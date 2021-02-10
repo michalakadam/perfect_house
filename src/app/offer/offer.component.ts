@@ -1,6 +1,8 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { OnDestroy } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { OffersDao } from '../services/offers-dao.service';
 import { Offer, GalleryPhoto } from '../shared/models';
 import { AgentsDao } from 'src/app/services/agents-dao.service';
@@ -15,7 +17,8 @@ import { DESKTOP_LARGE, DESKTOP_SMALL, MOBILE, TABLET } from '../services/window
   styleUrls: ['./offer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OfferComponent {
+export class OfferComponent implements OnDestroy {
+  private subscription: Subscription;
   offer: Offer;
   images: GalleryPhoto[] = [];
   responsiveOptions: any[] = [
@@ -44,7 +47,7 @@ export class OfferComponent {
     readonly agentsDao: AgentsDao,
     readonly windowSizeDetector: WindowSizeDetector,
     private snackbarService: SnackbarService) {
-    this.route.params.subscribe((params: Params) => {
+    this.subscription = this.route.params.subscribe((params: Params) => {
         if (params.symbol) {
           this.loadOffer(params.symbol);
         } else  {
@@ -104,5 +107,8 @@ export class OfferComponent {
       })
     }
     return computedPhotos;
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

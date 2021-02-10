@@ -43,7 +43,7 @@
                 }
 
                 .offer-number {
-                    margin-right: 10px;
+                    margin-right: 12px;
                 }
             }
 
@@ -101,8 +101,8 @@
             }
 
             .price {
-                color: $light-green;
-                font-size: 36px;
+                color: $dark-green;
+                font-size: 2.5rem;
                 font-weight: 700;
                 margin-bottom: 15px;
                 margin-right: 10px;
@@ -157,10 +157,12 @@
         }
 
         .bottom-row {
-            width: 300px;
+            width: 297px;
             .phone {
                 p-button {
-                    max-width: 128px;
+                    ::ng-deep .p-button {
+                        font-size: 12px !important;
+                    }
                 }
             }
             .price {

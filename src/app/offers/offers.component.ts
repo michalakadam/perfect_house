@@ -1,7 +1,7 @@
 import { ThisReceiver } from '@angular/compiler';
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import { OffersDao } from '../services/offers-dao.service';
 import { SnackbarService } from '../services/snackbar.service';
 import { Offer, Sorting, AVAILABLE_SORTINGS, DEFAULT_FILTERS, OffersFilters } from '../shared/models';
@@ -20,7 +20,9 @@ const DEFAULT_PARAMETERS = {
   styleUrls: ['./offers.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OffersComponent implements OnInit {
+export class OffersComponent implements OnInit, OnDestroy {
+  private subscription = new Subscription();
+
   offers: Offer[];
   currentPage: number;
   currentSorting: Sorting;
@@ -36,20 +38,20 @@ export class OffersComponent implements OnInit {
     private snackbarService: SnackbarService) {}
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
+    this.subscription.add(this.route.params.subscribe(params => {
       if (!params.hasOwnProperty('page') || !params.hasOwnProperty('sorting')) {
         this.router.navigate(['oferty', {...DEFAULT_PARAMETERS, ...params}]);
       } else {
         this.loadOffersForCurrentParameters(params);
       }
-    });
+    }));
     
-    this.snackbarService.open$.subscribe(message => {
+    this.subscription.add(this.snackbarService.open$.subscribe(message => {
       this.openSnackbar(message);
       setTimeout(() => {
         this.closeSnackbar();
       }, 3000);
-    });
+    }));
   }
 
   private openSnackbar(message: string) {
@@ -150,5 +152,9 @@ export class OffersComponent implements OnInit {
 
   trackById(index: number, offer: Offer) {
     return offer.id;
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

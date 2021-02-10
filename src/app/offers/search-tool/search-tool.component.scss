@@ -38,6 +38,10 @@
             }
         }
 
+        &:last-of-type {
+            margin-top: 5px;
+        }
+
         .dropdowns {
             display: flex;
             justify-content: space-between;
@@ -101,6 +105,10 @@
             grid-template-columns: repeat(2, 1fr);
             @media screen and (max-width: $desktop-small) {
                 gap: 10px 0;
+            }
+
+            &.additional-fields {
+                gap: 10px 5px;
             }
 
             .checkbox-container {
@@ -169,6 +177,14 @@
                 }
             }
 
+            &:not(.area) .inputs-container {
+                perfect-input {
+                    ::ng-deep input {
+                        width: 6rem;
+                    }
+                }
+            }
+
             .inputs-container {
                 align-items: center;
                 display: flex;
@@ -216,7 +232,7 @@
                 margin-right: 5px;
             }
 
-            ::ng-deep .p-button {
+            ::ng-deep .p-buttonset .p-button {
                 &.p-highlight {
                     background-color: $light-green;
                     color: $dark-green;
@@ -232,6 +248,10 @@
                     box-shadow: unset;
                 }
 
+                &:not(:last-child) {
+                    border-right: 1px dashed $dark-green;
+                }
+
                 .p-button-label {
                     font-weight: 700;
                 }
@@ -245,15 +265,8 @@
         }
 
         .symbol-input {
-            margin-bottom: 10px;
-
-            perfect-input {
-                margin-right: 5px;
-
-                ::ng-deep input {
-                    width: 110px;
-                }
-            }
+            margin-bottom: 15px;
+            margin-top: 10px;
         }
         
         .buttons-container {

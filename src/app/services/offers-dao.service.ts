@@ -15,7 +15,7 @@ export class OffersDao {
     private allOffers: Offer[];
     private currentSearchOffers: Offer[];
     private currentSearchOffersSortedByPriceAsc: Offer[];
-    private randomOffersForCarousel: Offer[];
+    private offersForCarousel: Offer[];
 
     constructor(private offersConverter: OffersConverter,
         private offersSorter: OffersSorter,
@@ -27,7 +27,7 @@ export class OffersDao {
     initializeOffersForTheMainPage() {
         this.currentSearchOffers = this.allOffers;
         this.currentSearchOffersSortedByPriceAsc = this.sortCurrentOffersByPrice();
-        this.randomOffersForCarousel = this.computeRandomOffers(20);
+        this.offersForCarousel = this.computeOffersForCarousel();
     }
 
     list(page: number, sorting: Sorting, filters: OffersFilters): Offer[] {
@@ -53,22 +53,15 @@ export class OffersDao {
 
     }
 
-    getOffersForCarousel(): Offer[] {
-        return this.randomOffersForCarousel;
+    computeOffersForCarousel(): Offer[] {
+        return this.allOffers
+            .filter(offer => offer.isExclusive)
+            .sort((a, b) => a.creationDate < b.creationDate ? -1 :
+                (a.creationDate > b.creationDate ? 1 : 0));
     }
 
-    // Temporary solution until state management is implemented.
-    private computeRandomOffers(amount: number) {
-        let result = new Array(amount);
-        let offersTotalAmount = this.getOffersQuantity();
-        let taken = new Array(offersTotalAmount);
-        while (amount--) {
-            let x = Math.floor(Math.random() * offersTotalAmount);
-            result[amount] = this.currentSearchOffers[x in taken ? taken[x] : x];
-            taken[x] = --offersTotalAmount in taken ?
-                taken[offersTotalAmount] : offersTotalAmount;
-        }
-        return result;
+    getOffersForCarousel(): Offer[] {
+        return this.offersForCarousel;
     }
 
     getOffersQuantity(): number {
@@ -113,8 +106,24 @@ export class OffersDao {
     getDistinctLocations(): string[] {
         return this.allOffers
             .map(offer => offer.fullLocation)
-            .filter((current, index, offers) =>
-                offers.indexOf(current) === index)
-            .sort((a, b) => a < b ? -1 : a > b ? 1 : 0);
+            .filter(this.onlyUnique)
+            .sort(this.sortAlphabetically);
+    }
+
+    getAvailableVoivodeships(): string[] {
+        const distinctVoivodeships = this.allOffers
+            .map(offer => offer.voivodeship)
+            .filter(this.onlyUnique)
+            .sort(this.sortAlphabetically);
+
+        return ['cała Polska', ...distinctVoivodeships];
+    }
+
+    private onlyUnique(value, index, self) {
+        return self.indexOf(value) === index;
+    }
+
+    sortAlphabetically(a: string, b: string): number {
+        return a.localeCompare(b, 'pl');
     }
 }

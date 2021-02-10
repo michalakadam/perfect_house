@@ -14,7 +14,12 @@
     <mat-divider></mat-divider>
 
     <main> 
-        <h2>ZARZĄDZANIE WSPÓLNOTAMI MIESZKANIOWYMI</h2>   
+        <div class="contact">
+            <h2>Zapytaj o ofertę:</h2>
+            <perfect-agent-brief [agent]="agentResponsibleForManagement" contactInfoVisible></perfect-agent-brief>
+        </div>
+        
+        <h2>Zarządzanie wspólnotami mieszkaniowymi</h2>   
         <p>
             Zarządzanie wspólnotami mieszkaniowymi to bardzo wymagające i złożone zajęcie. Nic więc
             dziwnego, że w dobie osiedli budowanych przez prywatnych inwestorów popyt na takie usługi
@@ -48,7 +53,7 @@
                 </ul>
         </ul>
 
-        <h2>ZARZĄDZANIE NIERUCHOMOŚCIAMI KOMERCYJNYMI</h2>
+        <h2>Zarządzanie nieruchomościami komercyjnymi</h2>
         <p>Polecamy następujące usługi w tym zakresie:</p>
         <ul class="top-list">
             <li class="list-section-title">a) ADMINISTROWANIE BUDYNKAMI</li>
@@ -75,7 +80,7 @@
                 </ul>
         </ul>
 
-        <h2>ZARZĄDZANIE LOKALAMI I OBSŁUGA NAJMU</h2>
+        <h2>Zarządzanie nieruchomościami komercyjnymi</h2>
         <p>
             Obecnie coraz częściej wynajmuje się lokale mieszkaniowe w ramach umowy najmu
             krótkoterminowego lub w zwykłej postaci. Zarządzanie najmem polega na profesjonalnym
@@ -133,12 +138,4 @@
             </ul>
         </ul>
     </main>
-    <footer class="contact">
-        <h3>ZAPYTAJ O OFERTĘ:</h3>
-        <div class="agent-brief-container">
-            <perfect-agent-brief
-                [agent]="agentResponsibleForRentalManagement"
-                contactInfoVisible></perfect-agent-brief>
-        </div>
-    </footer>
 </div>

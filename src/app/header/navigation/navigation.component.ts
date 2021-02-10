@@ -1,5 +1,6 @@
-import { Component, ChangeDetectionStrategy, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Output, EventEmitter, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { MENU_LINKS } from 'src/app/header/menu-links';
 
 @Component({
@@ -8,7 +9,9 @@ import { MENU_LINKS } from 'src/app/header/menu-links';
   styleUrls: ['./navigation.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavigationComponent {
+export class NavigationComponent implements OnDestroy {
+  private subscription: Subscription;
+
   links = MENU_LINKS;
   isAboutUsClicked = false;
   
@@ -16,7 +19,7 @@ export class NavigationComponent {
 
   constructor(private router: Router,
     private changeDetector: ChangeDetectorRef) {
-      this.router.events.subscribe(event => {
+      this.subscription = this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
           if (event.url === '/') {
             this.changeDetector.detectChanges();
@@ -34,10 +37,15 @@ export class NavigationComponent {
     const clicked = this.isAboutUsClicked;
     this.isAboutUsClicked = false;
 
-    return clicked || this.router.url === '/ludzie' || this.router.url === '/aktualnosci';
+    return clicked || this.router.url === '/ludzie' ||
+      this.router.url === '/aktualnosci' || this.router.url === '/wartosci';
   }
 
   isOffersLinkActive() {
     return this.router.url.includes('/ofert');
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

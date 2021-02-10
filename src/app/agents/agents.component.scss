@@ -29,6 +29,11 @@
 
         perfect-agent-brief {
             cursor: pointer;
+
+            &:first-of-type {
+                grid-column-start: 1;
+                grid-column-end: 4; 
+            }
         }
     }
 
