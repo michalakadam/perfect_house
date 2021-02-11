@@ -1,0 +1,118 @@
+@import "~src/variables.scss";
+@import "~src/mixins.scss";
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+.component-container {
+    
+    @include responsive-page;
+    height: 100%;
+    margin: 30px auto;
+    max-width: 1200px;
+    @media screen and (max-width: $tablet) {
+        width:500px;
+     }
+     @media screen and (max-width: $mobile) {
+        width:300px;
+     }
+    .gallery {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        p-galleria{
+            ::ng-deep .p-galleria { 
+                img {
+                    width: 100%;
+                    height: auto;
+                }
+            }
+        }
+    }   
+    .card {
+        @include perfect-box; 
+        margin: 20px auto;
+        padding: 25px;
+        width: 100%;
+        }
+
+    .basic-info-card {
+        .price {
+            color: $dark-green;
+            float: right;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            margin-right: 10px;
+            text-align: right;
+
+            .client-price {
+                color: $font-grey;
+                font-size: 16px;
+            }
+        }
+    }
+
+    .agent-brief { 
+        cursor: pointer;
+        margin-right: 0px;
+        max-height: 376px;
+        padding: 25px 0;
+        width: 255px;
+        @media screen and (max-width: $desktop-small) {
+            margin-right: 20px;
+            max-height: 376px;
+            padding: 25px 0;
+        }
+        @media screen and (max-width: $mobile-large) {
+
+            margin-right: 20px;
+            max-height: 376px;
+            padding: 25px 0;
+        }
+    }
+
+    .description-agent-container {
+        display: flex;
+        width: 100%;
+        @media screen and (max-width: $desktop-small) {
+            flex-direction: column;
+        }
+    
+        .card-description {
+            margin-left: 0px;
+            text-align: justify;
+            width: 850px;
+            
+            @media screen and (max-width: $desktop-large) {
+                width: 750px;
+            }
+            @media screen and (max-width: $desktop-medium) {
+                width: 600px;
+            }
+            @media screen and (max-width: $desktop-small) {
+                width: unset;
+            }
+        
+    
+            p-TabView { 
+                ::ng-deep .p-tabview .p-tabview-nav { 
+                    li.p-highlight .p-tabview-nav-link {
+                        border-color: $light-green;
+                        color: $dark-green;
+                    }
+
+                    li .p-tabview-nav-link:not(.p-disabled):focus {
+                        box-shadow: unset;
+                    }
+                    
+                    li:not(.p-highlight):not(.p-disabled):hover .p-tabview-nav-link {
+                        border-color:#dee2e6;
+                        color: $dark-green;
+                    }
+                }            
+            } 
+        }  
+    }
+    .two-containers {
+        margin-right: 20px;
+    }
+}

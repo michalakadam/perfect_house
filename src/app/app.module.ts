@@ -41,8 +41,11 @@ import { SliderModule } from 'primeng/slider';
 import { GalleriaModule } from 'primeng/galleria';
 import { InputWithSliderComponent } from './shared/input-with-slider/input-with-slider.component';
 import { CarouselModule } from 'primeng/carousel';
+import { MatCardModule } from '@angular/material/card';
+import { OfferDetailsComponent } from 'src/app/offer/offer-details/offer-details.component';
 import { UnderConstructionComponent } from './under-construction/under-construction.component';
- 
+import { TabViewModule } from 'primeng/tabview';
+
 @NgModule({
   declarations: [
     AgentBriefComponent,
@@ -68,7 +71,11 @@ import { UnderConstructionComponent } from './under-construction/under-construct
     AgentPageComponent,
     OfferComponent,
     InputComponent,
+    OfferDetailsComponent,
+    UnderConstructionComponent,
     InputWithSliderComponent,
+    InputWithSliderComponent,
+    OfferDetailsComponent,
     UnderConstructionComponent,
   ],
   imports: [
@@ -90,9 +97,12 @@ import { UnderConstructionComponent } from './under-construction/under-construct
     PaginatorModule,
     SelectButtonModule,
     SliderModule,
+    MatCardModule,
+    TabViewModule,
   ],
   bootstrap: [
     AppComponent,
   ],
 })
-export class AppModule { }
+export class AppModule {
+}
