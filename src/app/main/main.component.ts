@@ -1,4 +1,3 @@
-import { importExpr } from '@angular/compiler/src/output/output_ast';
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -101,7 +100,6 @@ export class MainComponent implements OnDestroy {
     }
     return 4;
   }
-
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }

@@ -1,0 +1,71 @@
+<div class="component-container"> 
+    <h3>Ogólne warunki</h3>
+    <div class="key-value-pair">
+        <span class="key">Symbol oferty: </span>
+        <span class="value">{{ offer.symbol }}</span>
+    </div>
+    <div class="key-value-pair">
+        <span class="key">Cena: </span>
+        <span class="value" *ngIf="offer.price > 1">
+            {{ offer.price | prettifyNumber:"zł" }}
+        </span>
+        <span class="value client-price" *ngIf="offer.price === 1">
+            Zaproponuj cenę!
+        </span>
+    </div>
+    <div class="key-value-pair">
+        <span class="key">Powierzchnia: </span>
+        <span class="value">{{ offer.totalArea | prettifyNumber:"m²" }}</span>
+    </div>
+    <div class="key-value-pair">
+        <span class="key">Cena za m²: </span>
+        <span class="value">{{ offer.pricePerSquareMeter | prettifyNumber:"zł" }}</span>
+    </div>
+    <div class="key-value-pair"
+        *ngIf="offer.estateType === 'Dom' || offer.estateType === 'Mieszkanie' || offer.estateType === 'Lokal'">
+        <span class="key">Liczba pokoi: </span>
+        <span class="value">{{ offer.numberOfRooms | prettifyNumber }}</span>
+    </div>
+    <div class="key-value-pair"
+        *ngIf="offer.estateType === 'Dom' || offer.estateType === 'Mieszkanie' || offer.estateType === 'Lokal'">
+        <span class="key">Liczba pięter: </span>
+        <span class="value">{{ offer.numberOfFloors | prettifyNumber }}</span>
+    </div>
+    <div class="key-value-pair"
+        *ngIf="offer.yearBuilt">
+        <span class="key">Rok budowy: </span>
+        <span class="value">{{ offer.yearBuilt }}</span>
+    </div>
+    <div class="key-value-pair"
+        *ngIf="offer.additionalFees">
+        <span class="key">Opłaty w czynszu: </span>
+        <span class="value">{{ offer.additionalFees }}</span>
+    </div>
+    <div class="key-value-pair">
+        <span class="key">Parking: </span>
+        <span class="value" *ngIf="offer.isParkingAvailable">Tak></span>
+        <span class="value" *ngIf="offer.isParkingAvailable === false">Nie</span>
+    </div>
+    <div class="key-value-pair" 
+        *ngIf="offer.garagePrice">
+        <span class="key">Cena za garaż: </span>
+        <span class="value">{{ offer.garagePrice }}</span>
+    </div>
+    <h3>Opis budynku</h3>
+    <div class="key-value-pair"
+        *ngIf="offer.buildingType">
+        <span class="key">Rodzaj budynku: </span>
+        <span class="value">{{ offer.buildingType }}</span>
+    </div>
+    <div class="key-value-pair"
+        *ngIf="offer.constructionTechnology">
+        <span class="key">Technologia budowlana: </span>
+        <span class="value">{{ offer.constructionTechnology }}</span>
+    </div>
+    <div class="key-value-pair">
+        <span class="key">Winda: </span>
+        <span class="value" *ngIf="offer.isElevatorAvailable">Tak</span>
+        <span class="value" *ngIf="offer.isElevatorAvailable === false">Nie</span>
+    </div>
+    
+</div>
