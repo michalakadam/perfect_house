@@ -1,22 +1,23 @@
-@import "~src/variables.scss";
 @import "~src/mixins.scss";
+@import "~src/variables.scss";
+
+
+.image-container {
+    img {
+        max-width: 100%;
+
+        @media screen and (max-width: $desktop-small) {
+            height: 60vw;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+}
 
 .component-container { 
 
     @include article-page;
     
-    header {    
-        #vertical-pic {
-            float: right;
-            height: auto;
-            margin: 14px 0px 10px 20px;
-            max-width: 360px;
-        }
-        #horizontal-pic {
-            height: auto;
-            max-width: 100%;
-        }
-    }
     main {
         h2 {
             color: $light-green;
