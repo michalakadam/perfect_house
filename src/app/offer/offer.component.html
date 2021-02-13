@@ -21,16 +21,15 @@
     </div>
   
     <div class="card basic-info-card">
-        <div class="price">
+        <div class="price" *ngIf="offer.price > -1">
             <span *ngIf="offer.price > 1">
-                {{ offer.price | prettifyNumber:"zł" }}
+                {{ offer.price | prettifyNumber:'zł' }}
             </span>
             <span class="client-price" *ngIf="offer.price === 1">
                 Zaproponuj cenę!
             </span>
         </div>
-        <perfect-offer-details [offer]="offer">
-        </perfect-offer-details>
+        <perfect-offer-details [offer]="offer"></perfect-offer-details>
     </div>
     <div class="description-agent-container">
         <div class="card card-description" *ngIf="windowSizeDetector.isWindowSmallerThanMobileLarge">

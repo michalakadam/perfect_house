@@ -10,4 +10,11 @@ import { Offer } from 'src/app/shared/models';
 
 export class OfferDetailsComponent {
   @Input() offer: Offer;
+
+  exists(value: any): boolean {
+    if (typeof value === 'number') {
+      return value > -1;
+    }
+    return !!value;  
+  }
 }
