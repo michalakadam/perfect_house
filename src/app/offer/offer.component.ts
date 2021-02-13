@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { OnDestroy } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -17,7 +17,7 @@ import { DESKTOP_LARGE, DESKTOP_SMALL, MOBILE, TABLET } from '../services/window
   styleUrls: ['./offer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OfferComponent implements OnDestroy {
+export class OfferComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   offer: Offer;
   images: GalleryPhoto[] = [];
@@ -46,7 +46,9 @@ export class OfferComponent implements OnDestroy {
     private offersDao: OffersDao,
     readonly agentsDao: AgentsDao,
     readonly windowSizeDetector: WindowSizeDetector,
-    private snackbarService: SnackbarService) {
+    private snackbarService: SnackbarService) {}
+
+  ngOnInit() {
     this.subscription = this.route.params.subscribe((params: Params) => {
         if (params.symbol) {
           this.loadOffer(params.symbol);
