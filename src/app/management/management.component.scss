@@ -50,6 +50,23 @@
             }
         }
 
+        .section-title {
+            align-items: center;
+            display: flex;
+            margin-bottom: 0;
+
+            img {
+                height: 2.5em;
+                margin-right: 0.5em;
+                width: 2.5em;
+                @media screen and (max-width: $mobile) {
+                    height: 4em;
+                    margin-right: 0;
+                    width: 4em;
+                }
+            }
+        }
+
         .top-list {
             list-style-type: none;
             padding-inline-start: 0;
