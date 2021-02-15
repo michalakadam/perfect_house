@@ -42,9 +42,9 @@ export class OffersConverter {
                 
                 price: this.convertToNumber(offer.Cena),
                 pricePerSquareMeter:this.convertToField(
-                    'Cena za m²', this.convertToNumber(offer.CenaM2), 'm²'),
+                    'Cena za m²', this.convertToNumber(offer.CenaM2), 'zł'),
                 pricePerUsableSquareMeter: this.convertToField(
-                    'Cena za m² pow. użytkowej', this.convertToNumber(offer.CenaM2PowUzytk?.text), 'm²'),
+                    'Cena za m² pow. użytkowej', this.convertToNumber(offer.CenaM2PowUzytk?.text), 'zł'),
                 rentPrice: this.convertToField(
                     'Czynsz najmu', this.convertToNumber(offer.CzynszLetni?.text), 'zł'),
                 grossRentPricePerSquareMeter: this.convertToField(
