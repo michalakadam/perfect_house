@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { off } from 'process';
 import { AVAILABLE_ESTATE_TYPES, Offer, OffersFilters } from '../shared/models';
 
 @Injectable({

@@ -1,20 +1,31 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { OffersDao } from 'src/app/services/offers-dao.service';
 import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
-import { AVAILABLE_TRANSACTIONS, Transaction, AVAILABLE_ESTATE_TYPES, Estate, OffersFilters, DEFAULT_FILTERS } from 'src/app/shared/models';
+import { AVAILABLE_ESTATE_TYPES, Estate, OffersFilters, DEFAULT_FILTERS } from 'src/app/shared/models';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
 
+const AVAILABLE_TRANSACTIONS = [
+  {
+    label: 'sprzedaż',
+    value: false,
+  },
+  {
+    label: 'wynajem',
+    value: true,
+  },
+];
+
 const AVAILABLE_MARKETS = [
   {
-    displayName: 'pierwotny',
+    label: 'pierwotny',
     value: 0,
   },
   {
-    displayName: 'wtórny',
+    label: 'wtórny',
     value: 1,
-  }
+  },
 ];
 
 @Component({
@@ -34,12 +45,11 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   showAdvanced = false;
 
   selectedEstateType: Estate;
-  selectedTransaction: Transaction;
+  selectedTransaction: string;
   selectedVoivodeship: string;
   location: string;
-  isPrimaryMarket: boolean;
-  isSecondaryMarket: boolean;
-  marketValues: number[] = [];
+  isForRent: boolean;
+  marketToggleValues: number[] = [];
   isInvestment: boolean;
   isByTheSea: boolean;
   isNoCommission: boolean;
@@ -102,18 +112,14 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
     this.selectedEstateType = this.availableEstateTypes.find(estateType => {
       return estateType.displayName === this.filters.estateType;
     });
-    this.selectedTransaction = this.availableTransactions.find(transaction => {
-      return transaction.isForRent === this.filters.isForRent;
-    }); 
     this.selectedVoivodeship = this.filters.voivodeship;
     this.location = this.filters.location;
-    this.isPrimaryMarket = this.filters.isPrimaryMarket;
-    this.isSecondaryMarket = this.filters.isSecondaryMarket;
-    if (this.isPrimaryMarket) {
-      this.marketValues.push(0);
+    this.isForRent = this.filters.isForRent;
+    if (this.filters.isPrimaryMarket) {
+      this.marketToggleValues.push(0);
     }
-    if (this.isSecondaryMarket) {
-      this.marketValues.push(1);
+    if (this.filters.isSecondaryMarket) {
+      this.marketToggleValues.push(1);
     }
     this.isInvestment = this.filters.isInvestment;
     this.isByTheSea = this.filters.isByTheSea;
@@ -204,9 +210,9 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
 
     const filters: OffersFilters = {
       estateType: this.selectedEstateType.displayName,
-      isForRent: this.selectedTransaction.isForRent,
-      isPrimaryMarket: this.marketValues.indexOf(0) > -1,
-      isSecondaryMarket: this.marketValues.indexOf(1) > -1,
+      isForRent: this.isForRent,
+      isPrimaryMarket: this.marketToggleValues.indexOf(0) > -1,
+      isSecondaryMarket: this.marketToggleValues.indexOf(1) > -1,
       voivodeship: this.selectedVoivodeship,
       location: this.location,
       isInvestment: this.isInvestment,
@@ -237,8 +243,6 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   computeFilterNumericValue(value: string): number {
     return value ? Number(value) : -1;
   }
-
-  
 
   ngOnDestroy() {
     this.subscription.unsubscribe();

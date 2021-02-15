@@ -1,57 +1,46 @@
 <div class="component-container">
     <div class="row">
-        <div class="dropdowns">
-            <p-dropdown
-                class="estate-dropdown"
-                [options]="availableEstateTypes" 
-                [(ngModel)]="selectedEstateType"
-                optionLabel="displayName"
-                scrollHeight="300px"
-                (onChange)="applyFiltersIgnoringPrice()">
-            </p-dropdown>
+        <p-dropdown
+            class="estate-dropdown"
+            [options]="availableEstateTypes" 
+            [(ngModel)]="selectedEstateType"
+            optionLabel="displayName"
+            scrollHeight="300px"
+            (onChange)="applyFiltersIgnoringPrice()">
+        </p-dropdown>
 
-            <p-dropdown
-                class="transaction-dropdown"
-                [options]="availableTransactions" 
-                [(ngModel)]="selectedTransaction" 
-                optionLabel="displayName"
-                (onChange)="applyFiltersIgnoringPrice()">
-            </p-dropdown>
-        </div>
+        <p-selectButton
+            class="transaction-toggle"
+            [options]="availableTransactions" 
+            [(ngModel)]="isForRent" 
+            (onChange)="applyFiltersIgnoringPrice()">'
+        </p-selectButton>
 
-        <div class="market-toggle-container" *ngIf="isOptionalElementVisible()">
-            <span class="title">
-                rynek: 
-            </span>
-            <p-selectButton
-                [options]="availableMarkets"
-                [(ngModel)]="marketValues"
-                multiple="multiple"
-                optionLabel="displayName"
-                optionValue="value"
-                (onChange)="applyFiltersIgnoringPrice()">'
-            </p-selectButton>
-        </div>
+        <p-selectButton *ngIf="isOptionalElementVisible()"
+            class="market-toggle"
+            [options]="availableMarkets"
+            [(ngModel)]="marketToggleValues"
+            multiple="multiple"
+            (onChange)="applyFiltersIgnoringPrice()">'
+        </p-selectButton>
 
-        <div class="location-fields">
-            <p-dropdown
-                class="voivodeship-dropdown"
-                [options]="availableVoivodeships" 
-                optionLabel="label"
-                optionValue="value"
-                [(ngModel)]="selectedVoivodeship"
-                (onChange)="applyFiltersIgnoringPrice()">
-            </p-dropdown>
+        <p-dropdown
+            class="voivodeship-dropdown"
+            [options]="availableVoivodeships" 
+            optionLabel="label"
+            optionValue="value"
+            [(ngModel)]="selectedVoivodeship"
+            (onChange)="applyFiltersIgnoringPrice()">
+        </p-dropdown>
 
-            <perfect-input
-                class="location-input"
-                lhsIcon='pi pi-map-marker'
-                title='lokalizacja'
-                [options]="offersDao.getDistinctLocations()"
-                [(value)]="location"
-                (readyForSearch)="applyFiltersIgnoringPrice()">
-            </perfect-input>
-        </div>
+        <perfect-input
+            class="location-input"
+            lhsIcon='pi pi-map-marker'
+            title='lokalizacja'
+            [options]="offersDao.getDistinctLocations()"
+            [(value)]="location"
+            (readyForSearch)="applyFiltersIgnoringPrice()">
+        </perfect-input>
     </div>
     <div class="row">
         <div class="checkboxes-container">

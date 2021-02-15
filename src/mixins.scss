@@ -86,3 +86,30 @@
         }
     }
 }
+
+@mixin perfect-toggle-button {
+    ::ng-deep .p-buttonset .p-button {
+        &.p-highlight {
+            background-color: $light-green;
+            color: $dark-green;
+            border-color: $dark-green;
+        }
+
+        &:not(.p-disabled):not(.p-highlight):hover {
+            background-color: unset;
+            border-color: $light-green;
+        }
+
+        &:not(:last-child) {
+            border-right: 1px solid $dark-green;
+        }
+
+        &:focus {
+            box-shadow: unset;
+        }
+
+        .p-button-label {
+            font-weight: 700;
+        }
+    }
+}
