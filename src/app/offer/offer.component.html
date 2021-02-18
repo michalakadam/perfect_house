@@ -47,5 +47,6 @@
 <ng-template #details>
     <div *ngFor="let field of definedOfferFields">
         {{ field.displayName }}: {{ field.value }}
+        <span class="unit" *ngIf="field.unit">{{ field.unit }}</span>
     </div>
 </ng-template>
