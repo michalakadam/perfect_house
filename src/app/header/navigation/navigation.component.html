@@ -10,8 +10,8 @@
             aria-pressed="false">{{link.title}}</span>
         <span *ngIf="link.route === '/o_nas'"
             class="link"
-            [ngClass]="{'active-link':isAboutUsActive()}"
-            (click)="handleAboutUsClick()"
+            [ngClass]="{'active-link':isAboutUsActive}"
+            (click)="aboutUsToggled.emit()"
             tabindex="0"
             role="button"
             aria-pressed="false">{{link.title}}</span>
