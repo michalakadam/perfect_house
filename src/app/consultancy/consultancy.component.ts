@@ -1,6 +1,4 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { WindowSizeDetector } from '../services/window-size-detector.service';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 /** Kontener strony 'Doradztwo'. */
 @Component({
@@ -9,17 +7,4 @@ import { WindowSizeDetector } from '../services/window-size-detector.service';
   styleUrls: ['./consultancy.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ConsultancyComponent implements OnDestroy {
-  private subscription: Subscription;
-
-  constructor (readonly windowSizeDetector: WindowSizeDetector, 
-    readonly changeDetector: ChangeDetectorRef) {
-    this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
-      this.changeDetector.detectChanges();
-    });
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-}
+export class ConsultancyComponent {}

@@ -42,62 +42,27 @@
             margin-top: 5px;
         }
 
-        .dropdowns {
-            display: flex;
-            justify-content: space-between;
-            margin-right: unset;
-            width: 320px;
-            @media screen and (max-width: $desktop-large) {
-                width: 280px;
-            }
-            @media screen and (max-width: $desktop-medium) {
-                width: 260px;
-            }
-            @media screen and (max-width: $desktop-small) {
-                width: unset;
-            }
+        .transaction-toggle {
+            @include perfect-toggle-button;
+        }
 
-            p-dropdown:first-of-type {
-                @include justify-two-elements;
+        .voivodeship-dropdown {
+            @include justify-two-elements;
+            ::ng-deep .p-dropdown {
+                width: 190px;
                 @media screen and (max-width: $desktop-small) {
-                    ::ng-deep .p-dropdown {
-                        width: 108px;
-                    }
+                    width: 120px;
                 }
             }
         }
 
-        .location-fields {
-            display: flex;
-            justify-content: space-between;
-            width: 475px;
-            @media screen and (max-width: $desktop-large) {
-                width: 425px;
-            }
-            @media screen and (max-width: $desktop-medium) {
-                width: 375px;
-            }
-            @media screen and (max-width: $desktop-small) {
-                margin-top: 7px;
-                width: unset;
-            }
-            
-            .voivodeship-dropdown {
-                @include justify-two-elements;
-                ::ng-deep .p-dropdown {
-                    width: 190px;
-                    @media screen and (max-width: $desktop-small) {
-                        width: 120px;
-                    }
-                }
-            }
-
+        .location-input {
             ::ng-deep perfect-input input {
                 @media screen and (max-width: $desktop-small) {
                     width: 130px;
                 }
             }
-        }   
+        }
 
         .checkboxes-container {
             display: grid;
@@ -219,42 +184,10 @@
             @include perfect-dropdown;
         }
 
-        .market-toggle-container {
-            align-items: center;
-            display: flex;
-            font-weight: 700;
+        .market-toggle {
+            @include perfect-toggle-button;
             @media screen and (max-width: $desktop-small) {
                 order: 3;
-            }
-
-            .title {
-                color: $font-light-grey;
-                margin-right: 5px;
-            }
-
-            ::ng-deep .p-buttonset .p-button {
-                &.p-highlight {
-                    background-color: $light-green;
-                    color: $dark-green;
-                    border-color: $light-green;
-                }
-
-                &:not(.p-disabled):not(.p-highlight):hover {
-                    background-color: unset;
-                    border-color: $light-green;
-                }
-
-                &:focus {
-                    box-shadow: unset;
-                }
-
-                &:not(:last-child) {
-                    border-right: 1px dashed $dark-green;
-                }
-
-                .p-button-label {
-                    font-weight: 700;
-                }
             }
         }
 

@@ -1,4 +1,4 @@
-export interface Estate {
+export interface EstateType {
     displayName: string,
     queryName: string,
 }

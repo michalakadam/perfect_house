@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { off } from 'process';
 import { AVAILABLE_ESTATE_TYPES, Offer, OffersFilters } from '../shared/models';
 
 @Injectable({
@@ -22,7 +21,7 @@ export class OffersFilter {
     }
     if (filters.isInvestment) {
       offers = offers.filter(offer => 
-        offer.predestination && offer.predestination.includes('inwestycyjna'));
+        offer.estateSubtypes && offer.estateSubtypes.values.indexOf('inwestycyjna') > -1);
     }
     if (filters.isByTheSea) {
       // TODO: find out which flag is used in Galactica for this kind of offers.
@@ -36,29 +35,29 @@ export class OffersFilter {
     }
     if (filters.pricePerSquareMeterFrom > -1) {
       offers = offers.filter(offer => 
-        offer.pricePerSquareMeter >= filters.pricePerSquareMeterFrom);
+        offer.pricePerSquareMeter.value >= filters.pricePerSquareMeterFrom);
     }
     if (filters.pricePerSquareMeterTo > -1) {
       offers = offers.filter(offer => 
-        offer.pricePerSquareMeter <= filters.pricePerSquareMeterTo);
+        offer.pricePerSquareMeter.value <= filters.pricePerSquareMeterTo);
     }
     if (filters.areaFrom > -1) {
-      offers = offers.filter(offer => offer.totalArea >= filters.areaFrom);
+      offers = offers.filter(offer => offer.totalArea.value >= filters.areaFrom);
     }
     if (filters.areaTo > -1) {
-      offers = offers.filter(offer => offer.totalArea <= filters.areaTo);
+      offers = offers.filter(offer => offer.totalArea.value <= filters.areaTo);
     }
     if (filters.numberOfRoomsFrom > -1) {
-      offers = offers.filter(offer => offer.numberOfRooms >= filters.numberOfRoomsFrom);
+      offers = offers.filter(offer => offer.numberOfRooms.value >= filters.numberOfRoomsFrom);
     }
     if (filters.numberOfRoomsTo > -1) {
-      offers = offers.filter(offer => offer.numberOfRooms <= filters.numberOfRoomsTo);
+      offers = offers.filter(offer => offer.numberOfRooms.value <= filters.numberOfRoomsTo);
     }
     if (filters.floorFrom > -1) {
-      offers = offers.filter(offer => offer.floor >= filters.floorFrom);
+      offers = offers.filter(offer => offer.floor.value >= filters.floorFrom);
     }
     if (filters.floorTo > -1) {
-      offers = offers.filter(offer => offer.floor <= filters.floorTo);
+      offers = offers.filter(offer => offer.floor.value <= filters.floorTo);
     }
     if (filters.isElevatorAvailable) {
       offers = offers.filter(offer => offer.isElevatorAvailable);

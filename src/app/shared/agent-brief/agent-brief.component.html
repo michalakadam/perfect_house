@@ -1,6 +1,6 @@
 <div class="component-container"
     [ngClass]="{'bigger-component-container': isBigger || (!windowSizeDetector.isWindowSmallerThanDesktopLarge && isVertical),
-        'vertical-component-container': isVertical || windowSizeDetector.isWindowSmallerThanMobileSmall}">
+        'vertical-component-container': isVertical || windowSizeDetector.isWindowSmallerThanMobile}">
     <div class="agent-photo" style="background-image: url('/agents/{{ agent.photoFileName }}');"></div>
     <div class="agent-info-container">
         <h3 class="full-name">

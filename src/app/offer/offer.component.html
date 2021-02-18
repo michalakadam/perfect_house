@@ -1,64 +1,37 @@
+<div class="image-container" style="background-image: url('/offers/{{ offer.photos[0] }}');">
+</div>
+
 <div class="component-container">
-    <div class="gallery">
-        <p-galleria 
-        [autoPlay]="true"
-        [(value)]="images" 
-        [containerStyle]="{'max-width': '640px'}" 
-        [numVisible]="5"
-        [circular]="true"
-        [transitionInterval]="5000" 
-        [showItemNavigators]="false"
-        [responsiveOptions]="responsiveOptions">
-        <ng-template pTemplate="item" let-item>
-            <img [src]="item.previewImageSrc" style="max-height: 400px;" />
-        </ng-template>
-        <ng-template pTemplate="thumbnail" let-item>
-            <div class="p-grid p-nogutter p-justify-center">
-                <img [src]="item.thumbnailImageSrc" style="display: block; max-width: 100%; height: 75px;" />
-            </div>
-        </ng-template>
-        </p-galleria>
-    </div>
-  
     <div class="card basic-info-card">
-        <div class="price">
+        <div class="price" *ngIf="offer.price > -1">
             <span *ngIf="offer.price > 1">
-                {{ offer.price | prettifyNumber:"zł" }}
+                {{ offer.price | prettifyNumber:'zł' }}
             </span>
             <span class="client-price" *ngIf="offer.price === 1">
                 Zaproponuj cenę!
             </span>
         </div>
-        <perfect-offer-details [offer]="offer">
-        </perfect-offer-details>
+        <perfect-offer-details [offer]="offer"></perfect-offer-details>
     </div>
-    <div class="description-agent-container">
-        <div class="card card-description" *ngIf="windowSizeDetector.isWindowSmallerThanMobileLarge">
+    <div class="description-details-agent-container">
+        <div class="card description-details" *ngIf="!windowSizeDetector.isWindowSmallerThanMobileLarge">
+            <div class="description">
+                {{ offer.description }}
+            </div>
+            <div class="details">
+                <ng-container *ngTemplateOutlet="details"></ng-container>
+            </div>
+        </div>
+        <div class="card description-details-responsive" *ngIf="windowSizeDetector.isWindowSmallerThanMobileLarge">
             <p-tabView>
                 <p-tabPanel header="Opis">
-                    <div class="description-main" *ngIf="offer.description">
-                        {{ offer.description }}
-                    </div>
+                    {{ offer.description }}
                 </p-tabPanel>
                 <p-tabPanel header="Szczegóły">
-                    Szczegóły
+                    <ng-container *ngTemplateOutlet="details"></ng-container>
                 </p-tabPanel>
             </p-tabView>
         </div>
-        <div class="two-containers" *ngIf="!windowSizeDetector.isWindowSmallerThanMobileLarge">
-            <div class="card description">
-                {{ offer.description }}
-                <br>
-                <br>
-                Szczegóły<br>
-                Szczegóły<br>
-                Szczegóły<br>
-                Szczegóły<br>
-                Szczegóły<br>
-                Szczegóły<br>
-                Szczegóły<br>
-            </div>
-        </div> 
         <div class="card agent-brief">
             <perfect-agent-brief *ngIf="agentsDao.getAgentById(offer.agentId) as agent"
                 [agent]="agent"
@@ -70,3 +43,10 @@
         </div>
     </div> 
 </div>
+
+<ng-template #details>
+    <div *ngFor="let field of definedOfferFields">
+        {{ field.displayName }}: {{ field.value }}
+        <span class="unit" *ngIf="field.unit">{{ field.unit }}</span>
+    </div>
+</ng-template>

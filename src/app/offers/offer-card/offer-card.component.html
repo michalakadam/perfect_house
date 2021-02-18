@@ -15,42 +15,7 @@
                     {{offer.symbol}}
                 </div>
             </h4>
-            <h3>{{ offer.title }}</h3> 
-            <div class="location">
-                <i class="pi pi-map-marker"></i>
-                <span>{{ offer.fullLocation }},&nbsp;</span>
-                <span>{{ offer.voivodeship }}</span>
-            </div>
-            <div class="details-row">
-                <span class="key-value-pair">
-                    <span class="key">Powierzchnia: </span>
-                    <span class="value">{{ offer.totalArea | prettifyNumber:"m²" }}</span>
-                </span>
-                <span class="key-value-pair">
-                    <span class="key">Cena za m²: </span>
-                    <span class="value">{{ offer.pricePerSquareMeter | prettifyNumber:"zł" }}</span>
-                </span>
-            </div>
-            <div class="details-row">                
-                <span 
-                    class="key-value-pair"
-                    *ngIf="offer.estateType === 'Mieszkanie' || offer.estateType === 'Lokal'">
-                    <span class="key">Piętro: </span>
-                    <span class="value">{{ offer.floor }}</span>
-                </span>
-                <span 
-                    class="key-value-pair"
-                    *ngIf="offer.estateType === 'Dom' || offer.estateType === 'Obiekt'">
-                    <span class="key">Powierzchnia działki: </span>
-                    <span class="value">{{ offer.landArea | prettifyNumber:"m²" }}</span>
-                </span>
-                <span
-                    class="key-value-pair"
-                    *ngIf="offer.estateType === 'Dom' || offer.estateType === 'Mieszkanie' || offer.estateType === 'Lokal'">
-                    <span class="key">Liczba pokoi: </span>
-                    <span class="value">{{ offer.numberOfRooms | prettifyNumber }}</span>
-                </span>
-            </div>
+            <perfect-offer-details [offer]="offer"></perfect-offer-details>
         </div>
         <div class="bottom-row">
             <a class="phone"
@@ -58,9 +23,9 @@
                 *ngIf="agentsDao.getAgentById(offer.agentId).mobile as phoneNumber">
                 <p-button [label]="phoneNumber" icon="fas fa-phone-alt"></p-button>
             </a>
-            <div class="price">
+            <div class="price" *ngIf="offer.price > -1">
                 <span *ngIf="offer.price > 1">
-                    {{ offer.price | prettifyNumber:"zł" }}
+                    {{ offer.price | prettifyNumber:'zł' }}
                 </span>
                 <span class="client-price" *ngIf="offer.price === 1">
                     Zaproponuj cenę!

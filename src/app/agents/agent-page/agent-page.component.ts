@@ -22,8 +22,9 @@ export class AgentPageComponent implements OnDestroy {
     private agentsDao: AgentsDao) {
     this.subscription = this.route.params.subscribe((params: Params) => {
       if (params.agent) {
-        this.agent = this.agentsDao.getAgentByFullName(
-          params.agent.split('-').join(' '));
+        const fullName = params.agent.includes('ilek-nowak') ?
+          'Magdalena Ilek-Nowak' : params.agent.split('-').join(' ');
+        this.agent = this.agentsDao.getAgentByFullName(fullName);
         if (this.agent) {
           this.titleService.setTitle(this.agent.fullName);
         } else {
