@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { Offer, Room } from '../shared/models';
+import { Offer, OfferField, Room } from '../shared/models';
 import { EstateSubtypes } from '../shared/models/estate-subtype';
-import { OfferField } from '../shared/models/offer-field';
 
 const DESCRIPTION_TO_BE_REPLACED = "Oferta wysłana z systemu Galactica Virgo";
 

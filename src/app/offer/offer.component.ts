@@ -4,12 +4,11 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { OffersDao } from '../services/offers-dao.service';
-import { Offer, GalleryPhoto } from '../shared/models';
+import { Offer, OfferField } from '../shared/models';
 import { AgentsDao } from 'src/app/services/agents-dao.service';
 import { Agent } from 'src/app/shared/models';
 import { SnackbarService } from '../services/snackbar.service';
 import { WindowSizeDetector } from '../services/window-size-detector.service'
-import { DESKTOP_LARGE, DESKTOP_SMALL, MOBILE, TABLET } from '../services/window-size-detector.service';
 
 @Component({
   selector: 'perfect-offer',
@@ -20,25 +19,8 @@ import { DESKTOP_LARGE, DESKTOP_SMALL, MOBILE, TABLET } from '../services/window
 export class OfferComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   offer: Offer;
-  images: GalleryPhoto[] = [];
-  responsiveOptions: any[] = [
-    {
-        breakpoint: DESKTOP_LARGE + 'px',
-        numVisible: 5
-    },
-    {
-        breakpoint: DESKTOP_SMALL + 'px',
-        numVisible: 4
-    },
-    {
-        breakpoint: TABLET + 'px',
-        numVisible: 3
-    },
-    {
-        breakpoint: MOBILE + 'px',
-        numVisible: 1
-    }
-];
+  definedOfferFields: OfferField<any>[] = [];
+
   constructor(private route: ActivatedRoute,
     private changeDetector: ChangeDetectorRef,
     private router: Router,
@@ -46,16 +28,20 @@ export class OfferComponent implements OnInit, OnDestroy {
     private offersDao: OffersDao,
     readonly agentsDao: AgentsDao,
     readonly windowSizeDetector: WindowSizeDetector,
-    private snackbarService: SnackbarService) {}
+    private snackbarService: SnackbarService) {
+      this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
+        this.changeDetector.detectChanges();
+      });
+    }
 
   ngOnInit() {
-    this.subscription = this.route.params.subscribe((params: Params) => {
+    this.subscription.add(this.route.params.subscribe((params: Params) => {
         if (params.symbol) {
           this.loadOffer(params.symbol);
         } else  {
           this.handleNonexistentOffer();
         }    
-      });
+      }));
   }
 
   private loadOffer(symbol: string) {
@@ -65,7 +51,7 @@ export class OfferComponent implements OnInit, OnDestroy {
       this.offer = this.offersDao.getOfferBySymbol(symbol);
       if (this.offer) {
         this.titleService.setTitle(this.offer.title);
-        this.images = this.computeImages(this.offer.photos);
+        this.definedOfferFields = this.computeDefinedOfferFields();
         this.changeDetector.detectChanges();
       } else {
         this.handleNonexistentOffer(symbol);
@@ -86,12 +72,34 @@ export class OfferComponent implements OnInit, OnDestroy {
     }
   }
   
-  handleNonexistentOffer(symbol = '') {
+  private handleNonexistentOffer(symbol = '') {
     setTimeout(() => {
       this.snackbarService.open(`Oferta ${symbol} nie istnieje.`);
     }, 500)
     this.router.navigate(['/oferty']);
   }
+
+  private computeDefinedOfferFields(): OfferField<any>[] {
+    return Object.values(this.offer).filter(value => this.isDefinedOfferField(value)); 
+  }
+
+  private isDefinedOfferField(value: any): boolean {
+    return this.isOfferField(value) && this.isDefined(value.value);
+  }
+
+  // Because of https://stackoverflow.com/a/46703380/11212568 instanceof
+  // does not work on interface.
+  private isOfferField(value: any): boolean {
+    return value.hasOwnProperty('displayName') && value.hasOwnProperty('value');
+  }
+
+  private isDefined(value: any): boolean {
+    if (typeof value === 'number') {
+    return value > -1;
+    }
+    return !!value;  
+  }
+
   navigateToAgentPage(agent: Agent) {
     this.router.navigate(['/ludzie/' + this.computeAgentLink(agent.fullName)]);
   }
@@ -99,17 +107,7 @@ export class OfferComponent implements OnInit, OnDestroy {
   computeAgentLink(agentFullName: string): string {
     return agentFullName.toLowerCase().split(' ').join('-');
   }
-  
-  computeImages(photos: string[]): GalleryPhoto[] {
-    let computedPhotos: GalleryPhoto[] = [];
-    for (let photo of photos) {
-      computedPhotos.push({ 
-        previewImageSrc: '/offers/' + photo,
-        thumbnailImageSrc: '/offers/' + photo,
-      })
-    }
-    return computedPhotos;
-  }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }

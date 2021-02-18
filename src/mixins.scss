@@ -113,3 +113,15 @@
         }
     }
 }
+
+@mixin screen-wide-image {
+    img {
+        max-width: 100%;
+
+        @media screen and (max-width: $desktop-small) {
+            height: 60vw;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+}

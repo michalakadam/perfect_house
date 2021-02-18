@@ -3,15 +3,7 @@
 
 
 .image-container {
-    img {
-        max-width: 100%;
-
-        @media screen and (max-width: $desktop-small) {
-            height: 60vw;
-            object-fit: cover;
-            object-position: center;
-        }
-    }
+    @include screen-wide-image;
 }
 
 .component-container { 
