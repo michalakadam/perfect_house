@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 
 import { Offer, Room } from '../shared/models';
+import { EstateSubtypes } from '../shared/models/estate-subtype';
 import { OfferField } from '../shared/models/offer-field';
 
-const toBeReplaced = "Oferta wysłana z systemu Galactica Virgo";
+const DESCRIPTION_TO_BE_REPLACED = "Oferta wysłana z systemu Galactica Virgo";
 
 @Injectable({
     providedIn: 'root',
@@ -15,9 +16,10 @@ export class OffersConverter {
             return {
                 id: this.convertToNumber(offer.ID),
                 estateType: this.computeEstateType(offer.Przedmiot || ''),
+                estateSubtypes: this.computeEstateSubtypes(offer),
                 agentId: this.convertToNumber(offer.Agent),
                 title: offer.TytulOferty || '',
-                description: (offer.UwagiOpis || '').replace(toBeReplaced, ''),
+                description: (offer.UwagiOpis || '').replace(DESCRIPTION_TO_BE_REPLACED, ''),
                 additionalDescription: offer.DodatkowyOpis || '',
                 additionalRemarks: offer.UwagiOpis || '',
                 releaseDate: offer.TerminWydaniaData?.text || '',
@@ -140,11 +142,6 @@ export class OffersConverter {
                 buildingName: this.convertToField('Nazwa obiektu', offer.NazwaObiektu || ''),
                 minimumRentingPeriodInMonths: this.convertToField(
                     'Minimalny okres najmu', this.convertToNumber(offer.MinOkresNajmu?.text)),
-                predestination: this.convertToArray(
-                    offer.PrzeznaczenieLokalu?.lista ||
-                    offer.PrzeznaczenieHali?.lista ||
-                    offer.PrzeznaczenieHaliSet?.lista ||
-                    offer.PrzeznaczenieDzialkiSet?.lista),
                 isReceptionAvailable: this.convertToField(
                     'Recepcja', this.convertToBoolean(offer.Recepcja?.text)),
                 isComputerNetworkAvailable: this.convertToField(
@@ -224,6 +221,43 @@ export class OffersConverter {
             numberAsString = numberAsString.replace(',', '.');
         }
         return Number.isNaN(Number(numberAsString)) ? -1 : Number(numberAsString);
+    }
+
+    private computeEstateSubtypes(offer: any): EstateSubtypes {
+        if (!offer.Przedmiot) {
+            return {displayName: '', values: []};
+        }
+        if (offer.Przedmiot === 'Dom' && offer.RodzajDomu?.text) {
+            return {
+                displayName: 'typ domu',
+                values: [offer.RodzajDomu.text],
+            }
+        }
+        if (offer.Przedmiot === 'Mieszkanie' && offer.RodzajMieszkania?.text) {
+            return {
+                displayName: 'typ budynku',
+                values: [offer.RodzajMieszkania.text],
+            };
+        }
+        if (offer.Przedmiot === 'Dzialka' && offer.PrzeznaczenieDzialkiSet?.lista) {
+            return {
+                displayName: 'przeznaczenie działki',
+                values: [...offer.PrzeznaczenieDzialkiSet.lista],
+            }
+        }
+        if (offer.Przedmiot === 'Lokal' && offer.PrzeznaczenieLokalu?.lista) {
+            return {
+                displayName: 'przeznaczeneie lokalu',
+                values: [...offer.PrzeznaczenieLokalu.lista],
+            }
+        }
+        if (offer.Przedmiot === 'Biurowiec' && offer.RodzajObiektu?.text) {
+            return {
+                displayName: 'typ obiektu',
+                values: [...offer.RodzajObiektu.text],
+            };
+        }
+        return {displayName: '', values: []};
     }
 
     private convertPhotos(rawPhotos: any[]): string[] {
