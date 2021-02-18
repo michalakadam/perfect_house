@@ -22,10 +22,11 @@
             padding: 1rem 1rem 2rem;
             position: absolute;
             top: 480px; 
-            width: 400px;
+            width: 475px;
             @media screen and (max-width: $desktop-large) {
                 margin-left: 95px;
                 top: 425px;
+                width: 430px;
             }
             @media screen and (max-width: $desktop-medium) {
                 margin-left: 35px;
@@ -36,9 +37,9 @@
                 left: unset;
                 position: unset;
                 top: unset;
-                width: 340px;
+                width: 390px;
             }
-            @media screen and (max-width: $mobile-small) {
+            @media screen and (max-width: $mobile) {
                 width: 224px;
             }
 
@@ -46,6 +47,15 @@
                 margin-block-start: 0;
                 @media screen and (max-width: $mobile-small) {
                     text-align: center;
+                }
+            }
+
+            perfect-agent-brief {
+                ::ng-deep .component-container {
+                    width: 450px;
+                    @media screen and (max-width: $mobile) {
+                        width: unset;
+                    }
                 }
             }
         }
