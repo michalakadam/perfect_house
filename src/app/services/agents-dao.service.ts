@@ -6,6 +6,8 @@ import { AgentsConverter } from './agents-converter.service';
 
 const CEO_ID = '1155';
 
+const MAGDA_PROFILE_FOR_MANAGEMENT_ID = '20202';
+
 @Injectable({
     providedIn: 'root',
 })
@@ -17,7 +19,9 @@ export class AgentsDao {
     }
 
     listAgents(): Agent[] {
-        return this.agents.sort((a, b) => this.sortAgents(a, b));
+        return this.agents
+          .filter(agent => agent.id !== MAGDA_PROFILE_FOR_MANAGEMENT_ID)
+          .sort((a, b) => this.sortAgents(a, b));
       }
 
     private sortAgents(a: Agent, b: Agent): number {

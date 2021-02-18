@@ -3,6 +3,8 @@ import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MENU_LINKS } from 'src/app/header/menu-links';
 
+const ABOUT_US_LINKS = ['/ludzie', '/aktualnosci', '/wartosci'];
+
 @Component({
   selector: 'perfect-navigation',
   templateUrl: './navigation.component.html',
@@ -13,7 +15,7 @@ export class NavigationComponent implements OnDestroy {
   private subscription: Subscription;
 
   links = MENU_LINKS;
-  isAboutUsClicked = false;
+  isAboutUsActive = false;
   
   @Output() aboutUsToggled = new EventEmitter();
 
@@ -21,24 +23,16 @@ export class NavigationComponent implements OnDestroy {
     private changeDetector: ChangeDetectorRef) {
       this.subscription = this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
+          this.isAboutUsActive = false;
+          if (ABOUT_US_LINKS.indexOf(event.url) > -1) {
+            this.isAboutUsActive = true;
+            this.changeDetector.detectChanges();
+          }
           if (event.url === '/') {
             this.changeDetector.detectChanges();
           }
         }
       });
-  }
-
-  handleAboutUsClick() {
-    this.isAboutUsClicked = true;
-    this.aboutUsToggled.emit()
-  }
-
-  isAboutUsActive() {
-    const clicked = this.isAboutUsClicked;
-    this.isAboutUsClicked = false;
-
-    return clicked || this.router.url === '/ludzie' ||
-      this.router.url === '/aktualnosci' || this.router.url === '/wartosci';
   }
 
   isOffersLinkActive() {

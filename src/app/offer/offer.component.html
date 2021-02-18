@@ -1,1 +1,52 @@
-<h1 style="text-align: center">{{ offer.title }}</h1>
+<div class="image-container" style="background-image: url('/offers/{{ offer.photos[0] }}');">
+</div>
+
+<div class="component-container">
+    <div class="card basic-info-card">
+        <div class="price" *ngIf="offer.price > -1">
+            <span *ngIf="offer.price > 1">
+                {{ offer.price | prettifyNumber:'zł' }}
+            </span>
+            <span class="client-price" *ngIf="offer.price === 1">
+                Zaproponuj cenę!
+            </span>
+        </div>
+        <perfect-offer-details [offer]="offer"></perfect-offer-details>
+    </div>
+    <div class="description-details-agent-container">
+        <div class="card description-details" *ngIf="!windowSizeDetector.isWindowSmallerThanMobileLarge">
+            <div class="description">
+                {{ offer.description }}
+            </div>
+            <div class="details">
+                <ng-container *ngTemplateOutlet="details"></ng-container>
+            </div>
+        </div>
+        <div class="card description-details-responsive" *ngIf="windowSizeDetector.isWindowSmallerThanMobileLarge">
+            <p-tabView>
+                <p-tabPanel header="Opis">
+                    {{ offer.description }}
+                </p-tabPanel>
+                <p-tabPanel header="Szczegóły">
+                    <ng-container *ngTemplateOutlet="details"></ng-container>
+                </p-tabPanel>
+            </p-tabView>
+        </div>
+        <div class="card agent-brief">
+            <perfect-agent-brief *ngIf="agentsDao.getAgentById(offer.agentId) as agent"
+                [agent]="agent"
+                bigger
+                contactInfoVisible
+                vertical
+                (click)="navigateToAgentPage(agent)">
+            </perfect-agent-brief>
+        </div>
+    </div> 
+</div>
+
+<ng-template #details>
+    <div *ngFor="let field of definedOfferFields">
+        {{ field.displayName }}: {{ field.value }}
+        <span class="unit" *ngIf="field.unit">{{ field.unit }}</span>
+    </div>
+</ng-template>

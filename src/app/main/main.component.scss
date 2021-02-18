@@ -100,7 +100,7 @@
                         .pi {
                             font-size: 1.3rem;
                         }
-                        @media screen and (max-width: $mobile-small) {
+                        @media screen and (max-width: $desktop-small) {
                             display: none;
                         }
                     }

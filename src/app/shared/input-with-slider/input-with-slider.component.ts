@@ -1,5 +1,10 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
+enum PositionOnScale {
+  LOWER,
+  HIGHER,
+}
+
 @Component({
   selector: 'perfect-input-with-slider',
   templateUrl: './input-with-slider.component.html',
@@ -47,11 +52,15 @@ export class InputWithSliderComponent {
   @Output() slidingIsOver = new EventEmitter();
 
   updateLowerValue(value: string) {
-    this.lower = this.computeValue(this.convertToNumericValue(value));
+    this.lower = this.computeValue(this.convertToNumericValue(value), PositionOnScale.LOWER);
+    this.updateRange();
+    this.valuesChanged.emit(this.range);
   }
 
   updateHigherValue(value: string) {
-    this.higher = this.computeValue(this.convertToNumericValue(value));
+    this.higher = this.computeValue(this.convertToNumericValue(value), PositionOnScale.HIGHER);
+    this.updateRange();
+    this.valuesChanged.emit(this.range);
   }
 
   private updateRange() {
@@ -62,19 +71,25 @@ export class InputWithSliderComponent {
     return value ? Number(value) : -1;
   }
 
-  private computeValue(value: number): number {
+  private computeValue(value: number, positionOnScale: PositionOnScale): number {
     if (value < this.minValue) {
       return this.minValue;
     }
     if (value > this.maxValue) {
       return this.maxValue;
     }
+    if (positionOnScale === PositionOnScale.LOWER && value > this.higher) {
+      return this.higher;
+    }
+    if (positionOnScale === PositionOnScale.HIGHER && value < this.lower) {
+      return this.lower;
+    }
     return value;
   }
 
   updateValues({values}) {
-    this.lower = values[0] < 0 ? this.minValue : values[0];
-    this.higher = values[1] < 0 ? this.maxValue : values[1];
+    this.lower = this.computeValue(values[0], PositionOnScale.LOWER);
+    this.higher = this.computeValue(values[1], PositionOnScale.HIGHER);
     this.updateRange();
     this.valuesChanged.emit(this.range);
   }
