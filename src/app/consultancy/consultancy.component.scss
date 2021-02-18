@@ -15,12 +15,5 @@
 }
 
 .component-container { 
-
     @include article-page;
-    
-    main {
-        h2 {
-            color: $light-green;
-        }
-    }
 }

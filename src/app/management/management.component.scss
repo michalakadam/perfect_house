@@ -6,7 +6,6 @@
     @include article-page;
 
     h2 {
-        color: $light-green;
         text-align: left;
         @media screen and (max-width: $mobile) {
             text-align: center;
