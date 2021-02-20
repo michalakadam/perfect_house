@@ -49,7 +49,7 @@ export class GroupedDropdownComponent {
   }
 
   isValueSelected(group, value) {
-    return group.isSelected && this.selected.includes(value);
+    return group.isSelected && this.selected.split('/')[1] === value;
   }
 
   groupSelected(group: DropdownGroup) {
