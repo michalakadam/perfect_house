@@ -21,7 +21,7 @@ export class OffersFilter {
     }
     if (filters.isInvestment) {
       offers = offers.filter(offer => 
-        offer.estateSubtypes && offer.estateSubtypes.values.indexOf('inwestycyjna') > -1);
+        offer.estateSubtypes && offer.estateSubtypes.indexOf('inwestycyjna') > -1);
     }
     if (filters.isByTheSea) {
       // TODO: find out which flag is used in Galactica for this kind of offers.
@@ -80,7 +80,7 @@ export class OffersFilter {
   }
 
   private filterByEstateType(offers: Offer[], estateType: string): Offer[] {
-    if (estateType === 'wszystkie') {
+    if (!estateType) {
       return offers;
     }
     const estate = AVAILABLE_ESTATE_TYPES

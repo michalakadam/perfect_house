@@ -27,11 +27,11 @@ export interface OffersFilters {
 };
 
 export const DEFAULT_FILTERS = {
-    estateType: 'wszystkie',
+    estateType: '',
     isForRent: false,
     isPrimaryMarket: true,
     isSecondaryMarket: true,
-    voivodeship: 'cała Polska',
+    voivodeship: '',
     location: '',
     isInvestment: false,
     isByTheSea: false,

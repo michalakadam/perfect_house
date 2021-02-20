@@ -4,7 +4,8 @@ import { WindowSizeDetector } from 'src/app/shared/services/window-size-detector
 import { AVAILABLE_ESTATE_TYPES, EstateType, OffersFilters, DEFAULT_FILTERS } from 'src/app/shared/models';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subject, Subscription } from 'rxjs';
-import { debounceTime, filter } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
+import { DropdownGroup } from './grouped-dropdown/grouped-dropdown.component';
 
 const AVAILABLE_TRANSACTIONS = [
   {
@@ -43,6 +44,8 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   availableMarkets = AVAILABLE_MARKETS;
   availableVoivodeships = [];
   showAdvanced = false;
+  estateTypesWithSubtypes: DropdownGroup[] = [];
+  voivodoshipsWithCounties: DropdownGroup[] = [];
 
   selectedEstateType: EstateType;
   selectedTransaction: string;
@@ -92,6 +95,22 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
     this.subscription.add(this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
       this.changeDetector.detectChanges();
     }));
+    
+    for (const estateType of this.availableEstateTypes) {
+      this.estateTypesWithSubtypes.push({
+        displayName: estateType.displayName.toLowerCase(),
+        values: estateType.displayName === 'mieszkanie' ?
+          this.offersDao.getBuildingTypesForEstateType(estateType.queryName) :
+          this.offersDao.getEstateSubtypesForEstateType(estateType.queryName)
+      });   
+    }
+
+    for (const voivodeship of this.offersDao.getAvailableVoivodeships()) {
+      this.voivodoshipsWithCounties.push({
+        displayName: voivodeship,
+        values: this.offersDao.getCountiesForVoivodeship(voivodeship),
+      });
+    }
   }
 
   ngOnInit() {
@@ -101,7 +120,6 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
         this.applyFiltersIgnoringPrice();
       })
     );
-    this.availableVoivodeships = this.computeVoivodeshipsForDropdown(this.offersDao.getAvailableVoivodeships());
   }
 
   onInputProvided(){
@@ -151,15 +169,6 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   isOptionalElementVisible() {
     return !this.windowSizeDetector.isWindowSmallerThanDesktopSmall ||
       this.windowSizeDetector.isWindowSmallerThanDesktopSmall && this.showAdvanced;
-  }
-
-  computeVoivodeshipsForDropdown(voivodeships: string[]) {
-    return voivodeships.map(voivodeship => {
-      return {
-        label: voivodeship,
-        value: voivodeship,
-      }
-    })
   }
 
   private computeFieldValue(value: number): string {

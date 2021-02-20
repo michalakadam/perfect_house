@@ -1,13 +1,10 @@
 <div class="component-container">
     <div class="row">
-        <p-dropdown
-            class="estate-dropdown"
-            [options]="availableEstateTypes" 
-            [(ngModel)]="selectedEstateType"
-            optionLabel="displayName"
-            scrollHeight="300px"
-            (onChange)="applyFiltersIgnoringPrice()">
-        </p-dropdown>
+        <perfect-grouped-dropdown
+            selected=""
+            placeholder="typ nieruchomości"
+            [groupsWithValues]="estateTypesWithSubtypes">
+        </perfect-grouped-dropdown>
 
         <p-selectButton
             class="transaction-toggle"
@@ -24,14 +21,11 @@
             (onChange)="applyFiltersIgnoringPrice()">'
         </p-selectButton>
 
-        <p-dropdown
-            class="voivodeship-dropdown"
-            [options]="availableVoivodeships" 
-            optionLabel="label"
-            optionValue="value"
-            [(ngModel)]="selectedVoivodeship"
-            (onChange)="applyFiltersIgnoringPrice()">
-        </p-dropdown>
+        <perfect-grouped-dropdown
+            selected=""
+            placeholder="województwo/powiat"
+            [groupsWithValues]="voivodoshipsWithCounties">
+        </perfect-grouped-dropdown>
 
         <perfect-input
             class="location-input"
@@ -108,7 +102,7 @@
     <div class="row" *ngIf="showAdvanced">
         <div class="checkboxes-container additional-fields">
             <div class="checkbox-container"
-                *ngIf="filters.estateType === 'wszystkie' || filters.estateType === 'mieszkania'">
+                *ngIf="!filters.estateType || filters.estateType === 'mieszkania'">
                 <p-checkbox
                     [(ngModel)]="isElevatorAvailable"
                     binary="true" 
@@ -127,7 +121,7 @@
                 <label for="parking">parking/garaż</label>
             </div>
             <div class="checkbox-container"
-                *ngIf="filters.estateType === 'wszystkie' || filters.estateType === 'mieszkania' || filters.estateType === 'domy'">
+                *ngIf="!filters.estateType || filters.estateType === 'mieszkania' || filters.estateType === 'domy'">
                 <p-checkbox
                     [(ngModel)]="isTerraceAvailable"
                     binary="true"
@@ -136,7 +130,7 @@
                 <label for="terrace">balkon/taras</label>
             </div>
             <div class="checkbox-container"
-                *ngIf="filters.estateType === 'wszystkie' || filters.estateType === 'mieszkania' || filters.estateType === 'domy'">
+                *ngIf="!filters.estateType || filters.estateType === 'mieszkania' || filters.estateType === 'domy'">
                 <p-checkbox
                     [(ngModel)]="isBasementAvailable"
                     binary="true"
@@ -188,7 +182,7 @@
             </div>
         </div>
         <div class="from-to-input-container"
-            *ngIf="filters.estateType === 'wszystkie' || filters.estateType === 'mieszkania' || filters.estateType === 'lokale'">
+            *ngIf="!filters.estateType || filters.estateType === 'mieszkania' || filters.estateType === 'lokale'">
             <div class="title">piętro:</div>
             <div class="inputs-container">
                 <perfect-input
@@ -218,7 +212,7 @@
         </div> -->
         <div class="buttons-container">
             <p-button class="show-advanced" (click)="toggleAdvancedVisibility()">
-                <span>zaawansowane</span>
+                <span class="label">zaawansowane</span>
                 <i *ngIf="showAdvanced" class="pi pi-chevron-up"></i>
                 <i *ngIf="!showAdvanced" class="pi pi-chevron-down"></i>
             </p-button>

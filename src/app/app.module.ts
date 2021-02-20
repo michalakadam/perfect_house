@@ -45,6 +45,7 @@ import { MatCardModule } from '@angular/material/card';
 import { OfferDetailsComponent } from 'src/app/offer/offer-details/offer-details.component';
 import { UnderConstructionComponent } from './under-construction/under-construction.component';
 import { TabViewModule } from 'primeng/tabview';
+import { GroupedDropdownComponent } from './offers/search-tool/grouped-dropdown/grouped-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { TabViewModule } from 'primeng/tabview';
     InputWithSliderComponent,
     OfferDetailsComponent,
     UnderConstructionComponent,
+    GroupedDropdownComponent,
   ],
   imports: [
     AppRoutingModule,

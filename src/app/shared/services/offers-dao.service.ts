@@ -111,12 +111,20 @@ export class OffersDao {
     }
 
     getAvailableVoivodeships(): string[] {
-        const distinctVoivodeships = this.allOffers
+        return this.allOffers
             .map(offer => offer.voivodeship)
             .filter(this.onlyUnique)
+            .filter(v => !v.includes('Attyka') && !v.includes('Costa'))
             .sort(this.sortAlphabetically);
+    }
 
-        return ['cała Polska', ...distinctVoivodeships];
+    getCountiesForVoivodeship(voivodeship: string): string[] {
+        return this.allOffers
+            .filter(offer => offer.voivodeship === voivodeship)
+            .map(offer => offer.county)
+            .filter(this.onlyUnique)
+            .filter(Boolean)
+            .sort(this.sortAlphabetically);
     }
 
     private onlyUnique(value, index, self) {
@@ -125,5 +133,26 @@ export class OffersDao {
 
     sortAlphabetically(a: string, b: string): number {
         return a.localeCompare(b, 'pl');
+    }
+    
+    getEstateSubtypesForEstateType(estateType: string): string[] {
+        return this.allOffers
+            .filter(offer => offer.estateType === estateType)
+            .flatMap(offer => offer.estateSubtypes)
+            .filter(this.onlyUnique)
+            .filter(Boolean)
+            .map(subtype => subtype.toLowerCase()
+                .replace('_', ' ')
+                .replace(' - ', '-'))
+            .sort(this.sortAlphabetically);
+    }
+
+    getBuildingTypesForEstateType(estateType: string): string[] {
+        return this.allOffers
+            .filter(offer => offer.estateType === estateType)
+            .map(offer => offer.buildingType.value)
+            .filter(this.onlyUnique)
+            .filter(Boolean)
+            .sort(this.sortAlphabetically);
     }
 }
