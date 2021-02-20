@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { OffersDao } from 'src/app/services/offers-dao.service';
-import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
+import { OffersDao } from 'src/app/shared/services/offers-dao.service';
+import { WindowSizeDetector } from 'src/app/shared/services/window-size-detector.service';
 import { AVAILABLE_ESTATE_TYPES, EstateType, OffersFilters, DEFAULT_FILTERS } from 'src/app/shared/models';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subject, Subscription } from 'rxjs';

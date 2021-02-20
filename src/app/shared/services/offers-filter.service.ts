@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AVAILABLE_ESTATE_TYPES, Offer, OffersFilters } from '../shared/models';
+import { AVAILABLE_ESTATE_TYPES, Offer, OffersFilters } from '../models';
 
 @Injectable({
   providedIn: 'root'

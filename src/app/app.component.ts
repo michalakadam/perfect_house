@@ -1,5 +1,5 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
+import { WindowSizeDetector } from 'src/app/shared/services/window-size-detector.service';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { PrimeNGConfig } from 'primeng/api';
 import { ABOUT_US_LINKS, ALL_LINKS } from './header/menu-links';

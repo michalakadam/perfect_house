@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import * as rawAgents from "src/agents/agents.json";
-import { Agent } from '../shared/models';
+import { Agent } from '../models';
 import { AgentsConverter } from './agents-converter.service';
 
 const CEO_ID = '1155';

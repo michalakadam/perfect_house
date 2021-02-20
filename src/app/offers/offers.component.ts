@@ -2,8 +2,8 @@ import { ThisReceiver } from '@angular/compiler';
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { OffersDao } from '../services/offers-dao.service';
-import { SnackbarService } from '../services/snackbar.service';
+import { OffersDao } from '../shared/services/offers-dao.service';
+import { SnackbarService } from '../shared/services/snackbar.service';
 import { Offer, Sorting, AVAILABLE_SORTINGS, DEFAULT_FILTERS, OffersFilters } from '../shared/models';
 
 const FIRST_PAGE_NUMBER = 1;
