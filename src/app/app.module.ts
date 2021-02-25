@@ -36,15 +36,16 @@ import { PaginatorComponent } from './offers/paginator/paginator.component';
 import { AgentPageComponent } from './agents/agent-page/agent-page.component';
 import { OfferComponent } from './offer/offer.component';
 import { CheckboxModule } from 'primeng/checkbox';
-import { InputComponent } from './shared/input/input.component';
+import { InputComponent } from './offers/search-tool/input/input.component';
 import { SliderModule } from 'primeng/slider';
 import { GalleriaModule } from 'primeng/galleria';
-import { InputWithSliderComponent } from './shared/input-with-slider/input-with-slider.component';
+import { InputWithSliderComponent } from './offers/search-tool/input-with-slider/input-with-slider.component';
 import { CarouselModule } from 'primeng/carousel';
 import { MatCardModule } from '@angular/material/card';
 import { OfferDetailsComponent } from 'src/app/offer/offer-details/offer-details.component';
 import { UnderConstructionComponent } from './under-construction/under-construction.component';
 import { TabViewModule } from 'primeng/tabview';
+import { GroupedDropdownComponent } from './offers/search-tool/grouped-dropdown/grouped-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { TabViewModule } from 'primeng/tabview';
     InputWithSliderComponent,
     OfferDetailsComponent,
     UnderConstructionComponent,
+    GroupedDropdownComponent,
   ],
   imports: [
     AppRoutingModule,

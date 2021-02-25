@@ -3,12 +3,12 @@ import { OnDestroy } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { OffersDao } from '../services/offers-dao.service';
+import { OffersDao } from '../shared/services/offers-dao.service';
 import { Offer, OfferField } from '../shared/models';
-import { AgentsDao } from 'src/app/services/agents-dao.service';
+import { AgentsDao } from 'src/app/shared/services/agents-dao.service';
 import { Agent } from 'src/app/shared/models';
-import { SnackbarService } from '../services/snackbar.service';
-import { WindowSizeDetector } from '../services/window-size-detector.service'
+import { SnackbarService } from '../shared/services/snackbar.service';
+import { WindowSizeDetector } from '../shared/services/window-size-detector.service'
 
 @Component({
   selector: 'perfect-offer',

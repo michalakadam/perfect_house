@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { skip } from 'rxjs/operators';
-import { WindowSizeDetector } from '../services/window-size-detector.service';
+import { WindowSizeDetector } from '../shared/services/window-size-detector.service';
 
 /** Stopka strony. Zawiera przydatne linki, informacje kontaktowe i logo firmy. */
 @Component({

@@ -2,8 +2,8 @@ import { importExpr } from '@angular/compiler/src/output/output_ast';
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { OffersDao } from '../services/offers-dao.service';
-import { WindowSizeDetector } from '../services/window-size-detector.service';
+import { OffersDao } from '../shared/services/offers-dao.service';
+import { WindowSizeDetector } from '../shared/services/window-size-detector.service';
 import { DEFAULT_FILTERS, GalleryPhoto, OffersFilters } from '../shared/models';
 
 const IMAGES: GalleryPhoto[] = [

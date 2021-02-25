@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
+import { WindowSizeDetector } from 'src/app/shared/services/window-size-detector.service';
 
 /** Nagłówek strony. Zawiera logo firmy, numer telefonu oraz nawigację. */
 @Component({

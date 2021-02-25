@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import * as rawOffers from "src/offers/offers.json";
-import { OffersFilters, Offer, Sorting, AVAILABLE_SORTINGS } from '../shared/models';
+import { OffersFilters, Offer, Sorting, AVAILABLE_SORTINGS } from '../models';
 import { OffersConverter } from './offers-converter.service';
 import { OffersFilter } from './offers-filter.service';
 import { OffersSorter } from './offers-sorter.service';
@@ -104,19 +104,34 @@ export class OffersDao {
     }
 
     getDistinctLocations(): string[] {
-        return this.allOffers
+        const gminy = this.allOffers
+            .map(offer => offer.city)
+            .filter(city => city.includes('(gmina)'))
+            .filter(this.onlyUnique)
+            .sort(this.sortAlphabetically);
+        const cities = this.allOffers
             .map(offer => offer.fullLocation)
             .filter(this.onlyUnique)
             .sort(this.sortAlphabetically);
+            
+        return [...gminy, ...cities];
     }
 
     getAvailableVoivodeships(): string[] {
-        const distinctVoivodeships = this.allOffers
+        return this.allOffers
             .map(offer => offer.voivodeship)
             .filter(this.onlyUnique)
+            .filter(v => !v.includes('Attyka') && !v.includes('Costa'))
             .sort(this.sortAlphabetically);
+    }
 
-        return ['cała Polska', ...distinctVoivodeships];
+    getCountiesForVoivodeship(voivodeship: string): string[] {
+        return this.allOffers
+            .filter(offer => offer.voivodeship === voivodeship)
+            .map(offer => offer.county)
+            .filter(this.onlyUnique)
+            .filter(Boolean)
+            .sort(this.sortAlphabetically);
     }
 
     private onlyUnique(value, index, self) {
@@ -125,5 +140,26 @@ export class OffersDao {
 
     sortAlphabetically(a: string, b: string): number {
         return a.localeCompare(b, 'pl');
+    }
+    
+    getEstateSubtypesForEstateType(estateType: string): string[] {
+        return this.allOffers
+            .filter(offer => offer.estateType === estateType)
+            .flatMap(offer => offer.estateSubtypes)
+            .filter(this.onlyUnique)
+            .filter(Boolean)
+            .map(subtype => subtype.toLowerCase()
+                .replace('_', ' ')
+                .replace(' - ', '-'))
+            .sort(this.sortAlphabetically);
+    }
+
+    getBuildingTypesForEstateType(estateType: string): string[] {
+        return this.allOffers
+            .filter(offer => offer.estateType === estateType)
+            .map(offer => offer.buildingType.value)
+            .filter(this.onlyUnique)
+            .filter(Boolean)
+            .sort(this.sortAlphabetically);
     }
 }
