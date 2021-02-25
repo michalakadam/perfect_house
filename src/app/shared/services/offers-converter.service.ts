@@ -270,10 +270,11 @@ export class OffersConverter {
     }
 
     private computeCity(location: string): string {
-        return location.replace(' (gw)', '');
+        return location.replace('(gw)', '(gmina)');
     }
 
     private computeFullLocation(city: string, district: string) {
+        city = city.replace(' (gmina)', '');
         const isDistrictAvailable = district && district !== city;
         return city + (isDistrictAvailable ? ', ' + district : '');
     }

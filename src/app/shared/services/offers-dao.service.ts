@@ -104,10 +104,17 @@ export class OffersDao {
     }
 
     getDistinctLocations(): string[] {
-        return this.allOffers
+        const gminy = this.allOffers
+            .map(offer => offer.city)
+            .filter(city => city.includes('(gmina)'))
+            .filter(this.onlyUnique)
+            .sort(this.sortAlphabetically);
+        const cities = this.allOffers
             .map(offer => offer.fullLocation)
             .filter(this.onlyUnique)
             .sort(this.sortAlphabetically);
+            
+        return [...gminy, ...cities];
     }
 
     getAvailableVoivodeships(): string[] {
