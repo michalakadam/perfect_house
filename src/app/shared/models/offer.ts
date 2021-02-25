@@ -1,11 +1,10 @@
-import { EstateSubtypes } from "./estate-subtype";
 import { OfferField } from "./offer-field";
 import { Room } from "./room";
 
 export interface Offer {
     id: number;
     estateType: string;
-    estateSubtypes: EstateSubtypes;
+    estateSubtypes: string[];
     agentId: number;
     title: string;
     description: string;

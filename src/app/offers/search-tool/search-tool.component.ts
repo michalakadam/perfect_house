@@ -1,10 +1,11 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { OffersDao } from 'src/app/services/offers-dao.service';
-import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
+import { OffersDao } from 'src/app/shared/services/offers-dao.service';
+import { WindowSizeDetector } from 'src/app/shared/services/window-size-detector.service';
 import { AVAILABLE_ESTATE_TYPES, EstateType, OffersFilters, DEFAULT_FILTERS } from 'src/app/shared/models';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subject, Subscription } from 'rxjs';
-import { debounceTime, filter } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
+import { DropdownGroup, DropdownValue } from './grouped-dropdown/grouped-dropdown.component';
 
 const AVAILABLE_TRANSACTIONS = [
   {
@@ -44,9 +45,9 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   availableVoivodeships = [];
   showAdvanced = false;
 
-  selectedEstateType: EstateType;
+  estateTypesWithSubtypes: DropdownGroup[] = [];
+  voivodeshipsWithCounties: DropdownGroup[] = [];
   selectedTransaction: string;
-  selectedVoivodeship: string;
   location: string;
   isForRent: boolean;
   marketToggleValues: number[] = [];
@@ -101,7 +102,6 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
         this.applyFiltersIgnoringPrice();
       })
     );
-    this.availableVoivodeships = this.computeVoivodeshipsForDropdown(this.offersDao.getAvailableVoivodeships());
   }
 
   onInputProvided(){
@@ -109,10 +109,12 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges() {
-    this.selectedEstateType = this.availableEstateTypes.find(estateType => {
-      return estateType.displayName === this.filters.estateType;
-    });
-    this.selectedVoivodeship = this.filters.voivodeship;
+    if (!this.estateTypesWithSubtypes.length) {
+      this.computeEstateTypesWithSubtypes(); 
+    }
+    if (!this.voivodeshipsWithCounties.length) {
+      this.computeVoivodeshipsWithCounties();
+    }
     this.location = this.filters.location;
     this.isForRent = this.filters.isForRent;
     if (this.filters.isPrimaryMarket) {
@@ -148,18 +150,57 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
     this.changeDetector.detectChanges();
   }
 
+  private computeEstateTypesWithSubtypes() {
+    for (const estateType of this.availableEstateTypes) {
+      const subtypes = this.getEstateSubtypesForDropdown(estateType);
+
+      this.estateTypesWithSubtypes.push({
+        displayName: estateType.displayName.toLowerCase(),
+        values: subtypes,
+        isVisible: !!subtypes.find(subtype => subtype.isSelected),
+        isSelected: estateType.displayName.toLowerCase() === this.filters.estateType.toLowerCase(),          
+      });   
+    }
+  }
+
+  private getEstateSubtypesForDropdown(estateType: EstateType): DropdownValue[] {
+    const subtypes = estateType.displayName === 'mieszkanie' ? 
+        this.offersDao.getBuildingTypesForEstateType(estateType.queryName) :
+        this.offersDao.getEstateSubtypesForEstateType(estateType.queryName); 
+
+    return subtypes.map(subtype => {
+      return {
+        displayName: subtype,
+        isSelected: subtype === this.filters.estateSubtype,
+      };
+    });
+  }
+
+  private computeVoivodeshipsWithCounties() {
+    for (const voivodeship of this.offersDao.getAvailableVoivodeships()) {
+      const counties = this.getCountiesForDropdown(voivodeship);
+
+      this.voivodeshipsWithCounties.push({
+        displayName: voivodeship,
+        values: counties,
+        isVisible: !!counties.find(county => county.isSelected),
+        isSelected: this.filters.voivodeship.toLowerCase() === voivodeship.toLowerCase(),
+      });
+    }
+  }
+
+  private getCountiesForDropdown(voivodeship: string): DropdownValue[] {
+    return this.offersDao.getCountiesForVoivodeship(voivodeship).map(county => {
+      return {
+        displayName: county,
+        isSelected: this.filters.county === county,
+      }
+    });
+  }
+
   isOptionalElementVisible() {
     return !this.windowSizeDetector.isWindowSmallerThanDesktopSmall ||
       this.windowSizeDetector.isWindowSmallerThanDesktopSmall && this.showAdvanced;
-  }
-
-  computeVoivodeshipsForDropdown(voivodeships: string[]) {
-    return voivodeships.map(voivodeship => {
-      return {
-        label: voivodeship,
-        value: voivodeship,
-      }
-    })
   }
 
   private computeFieldValue(value: number): string {
@@ -207,13 +248,15 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
       this.offersDao.getHighestPriceForCurrentSearch()) {
         this.priceTo = '-1';
     }
-
+    
     const filters: OffersFilters = {
-      estateType: this.selectedEstateType.displayName,
+      estateType: this.getSelectedDropdownGroupName(this.estateTypesWithSubtypes),
+      estateSubtype: this.getSelectedDropdownValueName(this.estateTypesWithSubtypes),
       isForRent: this.isForRent,
       isPrimaryMarket: this.marketToggleValues.indexOf(0) > -1,
       isSecondaryMarket: this.marketToggleValues.indexOf(1) > -1,
-      voivodeship: this.selectedVoivodeship,
+      voivodeship: this.getSelectedDropdownGroupName(this.voivodeshipsWithCounties),
+      county: this.getSelectedDropdownValueName(this.voivodeshipsWithCounties),
       location: this.location,
       isInvestment: this.isInvestment,
       isByTheSea: this.isByTheSea,
@@ -238,6 +281,14 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
 
     this.filters = filters;
     this.searchOffers.emit(filters);
+  }
+
+  private getSelectedDropdownGroupName(groups: DropdownGroup[]): string {
+    return groups.find(group => group.isSelected)?.displayName || '';
+  }
+
+  private getSelectedDropdownValueName(groups: DropdownGroup[]): string {
+    return groups.flatMap(group => group.values).find(value => value.isSelected)?.displayName || '';
   }
 
   computeFilterNumericValue(value: string): number {

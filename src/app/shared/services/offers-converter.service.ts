@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Offer, OfferField, Room } from '../shared/models';
-import { EstateSubtypes } from '../shared/models/estate-subtype';
+import { Offer, OfferField, Room } from '../models';
 
 const DESCRIPTION_TO_BE_REPLACED = "Oferta wysłana z systemu Galactica Virgo";
 
@@ -222,41 +221,28 @@ export class OffersConverter {
         return Number.isNaN(Number(numberAsString)) ? -1 : Number(numberAsString);
     }
 
-    private computeEstateSubtypes(offer: any): EstateSubtypes {
+    private computeEstateSubtypes(offer: any): string[] {
         if (!offer.Przedmiot) {
-            return {displayName: '', values: []};
+            return [];
         }
         if (offer.Przedmiot === 'Dom' && offer.RodzajDomu?.text) {
-            return {
-                displayName: 'typ domu',
-                values: [offer.RodzajDomu.text],
-            }
-        }
+            return [offer.RodzajDomu.text];
+        }   
         if (offer.Przedmiot === 'Mieszkanie' && offer.RodzajMieszkania?.text) {
-            return {
-                displayName: 'typ budynku',
-                values: [offer.RodzajMieszkania.text],
-            };
+            return [offer.RodzajMieszkania.text];
         }
         if (offer.Przedmiot === 'Dzialka' && offer.PrzeznaczenieDzialkiSet?.lista) {
-            return {
-                displayName: 'przeznaczenie działki',
-                values: [...offer.PrzeznaczenieDzialkiSet.lista],
-            }
+            return Array.isArray(offer.PrzeznaczenieDzialkiSet.lista) ? 
+                [...offer.PrzeznaczenieDzialkiSet.lista] : [offer.PrzeznaczenieDzialkiSet.lista];
         }
         if (offer.Przedmiot === 'Lokal' && offer.PrzeznaczenieLokalu?.lista) {
-            return {
-                displayName: 'przeznaczeneie lokalu',
-                values: [...offer.PrzeznaczenieLokalu.lista],
-            }
+            return Array.isArray(offer.PrzeznaczenieLokalu.lista) ? 
+                [...offer.PrzeznaczenieLokalu.lista] : [offer.PrzeznaczenieLokalu.lista];
         }
         if (offer.Przedmiot === 'Biurowiec' && offer.RodzajObiektu?.text) {
-            return {
-                displayName: 'typ obiektu',
-                values: [...offer.RodzajObiektu.text],
-            };
+            return [offer.RodzajObiektu.text];
         }
-        return {displayName: '', values: []};
+        return [];
     }
 
     private convertPhotos(rawPhotos: any[]): string[] {
@@ -284,10 +270,11 @@ export class OffersConverter {
     }
 
     private computeCity(location: string): string {
-        return location.replace(' (gw)', '');
+        return location.replace('(gw)', '(gmina)');
     }
 
     private computeFullLocation(city: string, district: string) {
+        city = city.replace(' (gmina)', '');
         const isDistrictAvailable = district && district !== city;
         return city + (isDistrictAvailable ? ', ' + district : '');
     }

@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
+import { WindowSizeDetector } from 'src/app/shared/services/window-size-detector.service';
 import { Agent } from '../models';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subscription } from 'rxjs';

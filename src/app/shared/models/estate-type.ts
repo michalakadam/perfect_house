@@ -5,31 +5,27 @@ export interface EstateType {
 
 export const AVAILABLE_ESTATE_TYPES = [
     {
-        displayName: 'wszystkie',
-        queryName: '',
-    },
-    {
-        displayName: 'mieszkania',
+        displayName: 'mieszkanie',
         queryName: 'Mieszkanie',
     },
     {
-        displayName: 'domy',
+        displayName: 'dom',
         queryName: 'Dom',
     },
     {
-        displayName: 'działki',
+        displayName: 'działka',
         queryName: 'Działka',
     },
     {
-        displayName: 'lokale',
+        displayName: 'lokal',
         queryName: 'Lokal',
     },
     {
-        displayName: 'hale',
+        displayName: 'hala',
         queryName: 'Hala',
     },
     {
-        displayName: 'obiekty',
+        displayName: 'obiekt',
         queryName: 'Obiekt',
     },
 ];
