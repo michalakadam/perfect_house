@@ -1,6 +1,6 @@
 <div class="component-container" tabindex="0">
-    <div class="selected-container" (click)="toggleDropdownVisibility()">
-        <span class="label-container">
+    <div class="selected-container">
+        <span class="label-container" (click)="toggleDropdownVisibility()">
             <div *ngIf="!selected" class="placeholder">
                 {{ placeholder }}
             </div>
@@ -8,8 +8,11 @@
                 {{ selected }}
             </div>
         </span>
-        <span class="icon-container">
+        <span class="icon-container" *ngIf="!selected" (click)="toggleDropdownVisibility()">
             <i class="pi pi-chevron-down"></i>
+        </span>
+        <span class="icon-container" *ngIf="selected" (click)="deselectAll()">
+            <i class="pi pi-times"></i>
         </span>
     </div>
     <div class="dropdown" *ngIf="isDropdownVisible">
@@ -27,13 +30,12 @@
                     <i class="pi pi-chevron-up" *ngIf="group.isVisible"></i>
                 </span>
             </div>
-            <div class="values-container"
-                *ngIf="group.isVisible">
+            <div class="values-container" *ngIf="group.isVisible">
                 <div class="value"
                     *ngFor="let value of group.values"
-                    [class.selected]="isValueSelected(group, value)"
+                    [class.selected]="value.isSelected"
                     (click)="valueSelected(group, value)">
-                    {{ value }}
+                    {{ value.displayName }}
                 </div>
             </div>
         </div>

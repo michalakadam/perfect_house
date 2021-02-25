@@ -1,9 +1,9 @@
 <div class="component-container">
     <div class="row">
         <perfect-grouped-dropdown
-            selected=""
             placeholder="typ nieruchomości"
-            [groupsWithValues]="estateTypesWithSubtypes">
+            [(groups)]="estateTypesWithSubtypes"
+            (onChange)="applyFiltersIgnoringPrice()">
         </perfect-grouped-dropdown>
 
         <p-selectButton
@@ -22,9 +22,11 @@
         </p-selectButton>
 
         <perfect-grouped-dropdown
-            selected=""
             placeholder="województwo/powiat"
-            [groupsWithValues]="voivodoshipsWithCounties">
+            [(groups)]="voivodeshipsWithCounties"
+            hideGroupNameWhenValueSelected="true"
+            valueNamePrefix="powiat"
+            (onChange)="applyFiltersIgnoringPrice()">
         </perfect-grouped-dropdown>
 
         <perfect-input

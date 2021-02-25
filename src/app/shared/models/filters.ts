@@ -1,9 +1,11 @@
 export interface OffersFilters {
     estateType: string;
+    estateSubtype: string;
     isForRent: boolean;
     isPrimaryMarket: boolean;
     isSecondaryMarket: boolean;
     voivodeship: string;
+    county: string;
     location: string;
     isInvestment: boolean;
     isByTheSea: boolean;
@@ -28,10 +30,12 @@ export interface OffersFilters {
 
 export const DEFAULT_FILTERS = {
     estateType: '',
+    estateSubtype: '',
     isForRent: false,
     isPrimaryMarket: true,
     isSecondaryMarket: true,
     voivodeship: '',
+    county: '',
     location: '',
     isInvestment: false,
     isByTheSea: false,

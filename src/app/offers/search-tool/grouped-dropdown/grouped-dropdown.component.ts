@@ -1,10 +1,15 @@
-import { Component, Input, ChangeDetectionStrategy, HostListener } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, HostListener, Output, EventEmitter } from '@angular/core';
 
 export interface DropdownGroup {
   displayName: string;
-  values: string[];
-  isVisible?: boolean;
-  isSelected?: boolean;
+  values: DropdownValue[];
+  isVisible: boolean;
+  isSelected: boolean;
+}
+
+export interface DropdownValue {
+  displayName: string;
+  isSelected: boolean;
 }
 
 @Component({
@@ -16,18 +21,36 @@ export interface DropdownGroup {
 export class GroupedDropdownComponent {
   clickedInside = false;
   isDropdownVisible = false;
+  selected = '';
   
-  @Input() selected = '';
   @Input() placeholder = '';
-  @Input() groupsWithValues: DropdownGroup[] = [];
+  @Input() hideGroupNameWhenValueSelected = false;
+  @Input() valueNamePrefix = '';
+
+  @Output() onChange = new EventEmitter<DropdownGroup[]>();
+
+  groupsWithValues: DropdownGroup[] = [];
+
+  @Input()
+  get groups(): DropdownGroup[] {
+    return this.groupsWithValues;
+  }
+
+  set groups(val: DropdownGroup[]) {
+    this.groupsWithValues = val;
+    const selectedGroup = this.groupsWithValues.find(group => group.isSelected);
+    if (selectedGroup) {
+      this.selected = this.computeSelected(selectedGroup);
+    }
+  }
 
   @HostListener('click')
   clickInside() {
     this.clickedInside = true;
   }
-  
+
   @HostListener('document:click')
-  clickout() {
+  clickOutside() {
     if (!this.clickedInside) {
       this.isDropdownVisible = false;
     }
@@ -48,31 +71,57 @@ export class GroupedDropdownComponent {
     group.isVisible = !group.isVisible;
   }
 
-  isValueSelected(group, value) {
-    return group.isSelected && this.selected.split('/')[1] === value;
-  }
-
   groupSelected(group: DropdownGroup) {
-    this.selected = group.displayName;
-    group.isVisible = false;
-    this.selectGroup(group);
+    this.selected = this.computeSelected(group);
+    this.select(group);
     this.isDropdownVisible = false;
+    this.onChange.emit();
   }
 
-  valueSelected(group: DropdownGroup, value: string) {
-    this.selected = group.displayName + '/' + value;
-    this.selectGroup(group);
+  valueSelected(group: DropdownGroup, value: DropdownValue) {
+    this.select(group, value);
+    this.selected = this.computeSelected(group);
     this.isDropdownVisible = false;
+    this.onChange.emit();
   }
 
-  private selectGroup(group: DropdownGroup) {
-    const otherGroups = this.groupsWithValues
-      .filter(g => g.displayName !== group.displayName)
+  private computeSelected(group: DropdownGroup) {
+    const selectedValue = group.values.find(value => value.isSelected);
+    if (!selectedValue) {
+      return group.displayName;
+    }
+    return this.hideGroupNameWhenValueSelected ?
+      this.valueNamePrefix + ' ' + selectedValue.displayName :
+      group.displayName + '/' + selectedValue.displayName;
 
-    for (const group of otherGroups) {
+  }
+
+  private select(group: DropdownGroup, value?: DropdownValue) {
+    for (const group of this.groupsWithValues) {
       group.isSelected = false;
+      group.isVisible = false;
+      for (const value of group.values) {
+        value.isSelected = false;
+      }
     }
 
     group.isSelected = true;
+    if (value) {
+      value.isSelected = true;
+      group.isVisible = true;
+    }
+  }
+
+  deselectAll() {
+    for (const group of this.groupsWithValues) {
+      group.isSelected = false;
+      group.isVisible = false;
+      for (const value of group.values) {
+        value.isSelected = false;
+      }
+    }
+    this.selected = '';
+    this.isDropdownVisible = false;
+    this.onChange.emit();
   }
 }
