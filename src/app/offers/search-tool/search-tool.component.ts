@@ -212,7 +212,9 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   updatePrices(prices: number[]) {
     this.priceFrom = this.computeFieldValue(prices[0]);
     this.priceTo = this.computeFieldValue(prices[1]);
-    this.applyFilters()
+    if (!this.mainPage) {
+      this.applyFilters();
+    }
   }
 
   applyFiltersIgnoringPrice() {
