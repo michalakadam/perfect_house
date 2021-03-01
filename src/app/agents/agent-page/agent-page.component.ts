@@ -16,10 +16,10 @@ export class AgentPageComponent implements OnDestroy {
 
   agent: Agent;
 
-  constructor(private route: ActivatedRoute,
-    private router: Router,
-    private titleService: Title,
-    private agentsDao: AgentsDao) {
+  constructor(private readonly route: ActivatedRoute,
+    private readonly router: Router,
+    private readonly titleService: Title,
+    private readonly agentsDao: AgentsDao) {
     this.subscription = this.route.params.subscribe((params: Params) => {
       if (params.agent) {
         const fullName = params.agent.includes('ilek-nowak') ?

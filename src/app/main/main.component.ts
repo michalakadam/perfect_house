@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { OffersDao } from '../shared/services/offers-dao.service';
 import { WindowSizeDetector } from '../shared/services/window-size-detector.service';
 import { DEFAULT_FILTERS, GalleryPhoto, OffersFilters } from '../shared/models';
+import { DEFAULT_PARAMETERS } from '../offers/offers.component';
 
 const IMAGES: GalleryPhoto[] = [
   {
@@ -41,7 +42,7 @@ export class MainComponent implements OnDestroy {
   images = IMAGES;
   advancedVisible = false;
 
-  constructor (readonly offersDao: OffersDao, private router: Router,
+  constructor (readonly offersDao: OffersDao, private readonly router: Router,
     readonly windowSizeDetector: WindowSizeDetector, 
     readonly changeDetector: ChangeDetectorRef) {
     this.offersDao.initializeOffersForTheMainPage();
@@ -68,7 +69,7 @@ export class MainComponent implements OnDestroy {
   }
 
   loadOffers(filters: OffersFilters) {
-    this.router.navigate(['oferty', this.computeFiltersParameters(filters)]);
+    this.router.navigate(['oferty', {...DEFAULT_PARAMETERS, ...this.computeFiltersParameters(filters)}]);
   }
 
   private computeFiltersParameters(filters: OffersFilters) {

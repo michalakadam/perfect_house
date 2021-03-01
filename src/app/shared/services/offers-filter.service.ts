@@ -66,20 +66,21 @@ export class OffersFilter {
       offers = offers.filter(offer => offer.floor.value <= filters.floorTo);
     }
     if (filters.isElevatorAvailable) {
-      offers = offers.filter(offer => offer.isElevatorAvailable);
+      offers = offers.filter(offer => offer.isElevatorAvailable.value);
     }
     if (filters.isParkingAvailable) {
       offers = offers
-        .filter(offer => offer.isParkingAvailable || !!offer.garage || offer.isTruckParkingAvailable);
+        .filter(offer =>
+          offer.isParkingAvailable.value || !!offer.garage.value || offer.isTruckParkingAvailable.value);
     }
     if (filters.isTerraceAvailable) {
-      offers = offers.filter(offer => offer.isTerraceAvailable);
+      offers = offers.filter(offer => offer.isTerraceAvailable.value);
     }
     if (filters.isBasementAvailable) {
-      offers = offers.filter(offer => offer.isBasementAvailable);
+      offers = offers.filter(offer => offer.isBasementAvailable.value);
     }
     if (filters.isMpzpAvailable) {
-      offers = offers.filter(offer => !!offer.mpzp);
+      offers = offers.filter(offer => !!offer.mpzp.value);
     }
     
     return offers;

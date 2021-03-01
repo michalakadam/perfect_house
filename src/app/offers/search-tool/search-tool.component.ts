@@ -36,7 +36,7 @@ const AVAILABLE_MARKETS = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
-  private inputSubject: Subject<void> = new Subject();
+  private inputSubject = new Subject();
   private subscription = new Subscription();
 
   availableEstateTypes = AVAILABLE_ESTATE_TYPES;
@@ -84,12 +84,9 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   @Output() openOffer = new EventEmitter<string>();
   @Output() advancedToggled = new EventEmitter();
 
-  offersDao: OffersDao;
-
-  constructor(offersDaoExternal: OffersDao,
+  constructor(readonly offersDao: OffersDao,
     readonly windowSizeDetector: WindowSizeDetector,
-    private changeDetector: ChangeDetectorRef) {
-      this.offersDao = offersDaoExternal;
+    private readonly changeDetector: ChangeDetectorRef) {
     this.subscription.add(this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
       this.changeDetector.detectChanges();
     }));
@@ -97,7 +94,7 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit() {
     this.subscription.add(this.inputSubject.asObservable()
-      .pipe(debounceTime(500))
+      .pipe(debounceTime(1000))
       .subscribe(() => {
         this.applyFiltersIgnoringPrice();
       })
@@ -215,6 +212,9 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   updatePrices(prices: number[]) {
     this.priceFrom = this.computeFieldValue(prices[0]);
     this.priceTo = this.computeFieldValue(prices[1]);
+    if (!this.mainPage) {
+      this.applyFilters();
+    }
   }
 
   applyFiltersIgnoringPrice() {

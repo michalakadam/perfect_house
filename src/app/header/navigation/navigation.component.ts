@@ -19,8 +19,8 @@ export class NavigationComponent implements OnDestroy {
   
   @Output() aboutUsToggled = new EventEmitter();
 
-  constructor(private router: Router,
-    private changeDetector: ChangeDetectorRef) {
+  constructor(private readonly router: Router,
+    private readonly changeDetector: ChangeDetectorRef) {
       this.subscription = this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
           this.isAboutUsActive = false;

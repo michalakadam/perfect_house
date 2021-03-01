@@ -8,7 +8,7 @@ import { Offer, Sorting, AVAILABLE_SORTINGS, DEFAULT_FILTERS, OffersFilters } fr
 
 const FIRST_PAGE_NUMBER = 1;
 const DEFAULT_SORTING_STRINGIFIED = 'creationDate_descending';
-const DEFAULT_PARAMETERS = {
+export const DEFAULT_PARAMETERS = {
   page: FIRST_PAGE_NUMBER,
   sorting: DEFAULT_SORTING_STRINGIFIED,
 }
@@ -32,10 +32,10 @@ export class OffersComponent implements OnInit, OnDestroy {
   snackbarContent = '';
 
   constructor(readonly offersDao: OffersDao,
-    private router: Router,
-    private route: ActivatedRoute,
-    private changeDetector: ChangeDetectorRef,
-    private snackbarService: SnackbarService) {}
+    private readonly router: Router,
+    private readonly route: ActivatedRoute,
+    private readonly changeDetector: ChangeDetectorRef,
+    private readonly snackbarService: SnackbarService) {}
 
   ngOnInit() {
     this.subscription.add(this.route.params.subscribe(params => {

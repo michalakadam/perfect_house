@@ -52,15 +52,11 @@ export class InputWithSliderComponent {
   @Output() slidingIsOver = new EventEmitter();
 
   updateLowerValue(value: string) {
-    this.lower = this.computeValue(this.convertToNumericValue(value), PositionOnScale.LOWER);
-    this.updateRange();
-    this.valuesChanged.emit(this.range);
+    this.updateValues([this.convertToNumericValue(value), this.higher]);
   }
 
   updateHigherValue(value: string) {
-    this.higher = this.computeValue(this.convertToNumericValue(value), PositionOnScale.HIGHER);
-    this.updateRange();
-    this.valuesChanged.emit(this.range);
+    this.updateValues([this.lower, this.convertToNumericValue(value)]);
   }
 
   private updateRange() {
@@ -87,7 +83,7 @@ export class InputWithSliderComponent {
     return value;
   }
 
-  updateValues({values}) {
+  updateValues(values: number[]) {
     this.lower = this.computeValue(values[0], PositionOnScale.LOWER);
     this.higher = this.computeValue(values[1], PositionOnScale.HIGHER);
     this.updateRange();

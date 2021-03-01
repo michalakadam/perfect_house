@@ -14,7 +14,7 @@ const MAGDA_PROFILE_FOR_MANAGEMENT_ID = '20202';
 export class AgentsDao {
     private agents: Agent[];
 
-    constructor(private agentsConverter: AgentsConverter) {
+    constructor(private readonly agentsConverter: AgentsConverter) {
         this.agents = this.agentsConverter.convertToReadableAgents(rawAgents.Agenci.Agent);
     }
 
