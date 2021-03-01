@@ -88,19 +88,24 @@
                             }
                         }
 
-                        &:not(.p-checkbox-disabled) .p-checkbox-box {
-                            &.p-focus {
-                                border-color: $light-green;
-                                box-shadow: 0 0 0 0.2rem $light-green;
+                        &:not(.p-checkbox-disabled) {
+                            .p-checkbox-box {
+                                &:hover {
+                                    border-color: $light-green;
+                                    box-shadow: 0 0 0 0.2rem $light-green;
+                                }
+
+                                &.p-focus {
+                                    border-color: #ced4da;
+                                    box-shadow: initial;
+                                }
                             }
 
-                            &:hover {
-                                border-color: $light-green;
-                                box-shadow: 0 0 0 0.2rem $light-green;
-                            }
-
-                            &:focus {
-                                border: $light-green;
+                            &.p-checkbox-checked .p-checkbox-box {
+                                &.p-focus {
+                                    border-color: $light-green;
+                                    box-shadow: 0 0 0 0.2rem $light-green;
+                                }
                             }
                         }
                     }
