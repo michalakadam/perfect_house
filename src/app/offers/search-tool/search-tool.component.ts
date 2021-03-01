@@ -84,12 +84,9 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   @Output() openOffer = new EventEmitter<string>();
   @Output() advancedToggled = new EventEmitter();
 
-  offersDao: OffersDao;
-
-  constructor(offersDaoExternal: OffersDao,
+  constructor(readonly offersDao: OffersDao,
     readonly windowSizeDetector: WindowSizeDetector,
-    private changeDetector: ChangeDetectorRef) {
-      this.offersDao = offersDaoExternal;
+    private readonly changeDetector: ChangeDetectorRef) {
     this.subscription.add(this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
       this.changeDetector.detectChanges();
     }));

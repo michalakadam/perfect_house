@@ -17,7 +17,7 @@ export class HeaderComponent implements OnDestroy {
 
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,
-    private changeDetector: ChangeDetectorRef) {
+    private readonly changeDetector: ChangeDetectorRef) {
     this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
       this.changeDetector.detectChanges();
     });

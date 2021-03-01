@@ -20,8 +20,8 @@ export class FooterComponent implements OnDestroy {
 
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,
-    private changeDetector: ChangeDetectorRef,
-    private router: Router) {
+    private readonly changeDetector: ChangeDetectorRef,
+    private readonly router: Router) {
     this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
       this.changeDetector.detectChanges();
     });

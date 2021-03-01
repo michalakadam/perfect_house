@@ -21,14 +21,14 @@ export class OfferComponent implements OnInit, OnDestroy {
   offer: Offer;
   definedOfferFields: OfferField<any>[] = [];
 
-  constructor(private route: ActivatedRoute,
-    private changeDetector: ChangeDetectorRef,
-    private router: Router,
-    private titleService: Title,
-    private offersDao: OffersDao,
-    readonly agentsDao: AgentsDao,
+  constructor(readonly agentsDao: AgentsDao,
     readonly windowSizeDetector: WindowSizeDetector,
-    private snackbarService: SnackbarService) {
+    private readonly route: ActivatedRoute,
+    private readonly changeDetector: ChangeDetectorRef,
+    private readonly router: Router,
+    private readonly titleService: Title,
+    private readonly offersDao: OffersDao,
+    private readonly snackbarService: SnackbarService) {
       this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
         this.changeDetector.detectChanges();
       });

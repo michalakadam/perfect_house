@@ -23,7 +23,7 @@ export class OfferCardComponent implements OnDestroy {
 
   constructor (readonly agentsDao: AgentsDao,
     readonly windowSizeDetector: WindowSizeDetector, 
-    readonly changeDetector: ChangeDetectorRef) {
+    private readonly changeDetector: ChangeDetectorRef) {
     this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
       this.changeDetector.detectChanges();
     });

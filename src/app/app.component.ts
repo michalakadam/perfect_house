@@ -42,8 +42,8 @@ export class AppComponent implements OnInit, OnDestroy {
   aboutUsLinks = ABOUT_US_LINKS;
 
   constructor(readonly windowSizeDetector: WindowSizeDetector,
-    private titleService: Title, private router: Router,
-    private primengConfig: PrimeNGConfig) {
+    private readonly titleService: Title, private readonly router: Router,
+    private readonly primengConfig: PrimeNGConfig) {
       this. subscription = router.events.subscribe(event => {
         if(event instanceof NavigationEnd) {
           if (!this.isUrlTitleComputedInComponent(event.url)) {

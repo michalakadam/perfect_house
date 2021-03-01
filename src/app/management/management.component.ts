@@ -20,7 +20,7 @@ export class ManagementComponent implements OnDestroy {
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,
     readonly agentsDao: AgentsDao,
-    private changeDetector: ChangeDetectorRef) {
+    private readonly changeDetector: ChangeDetectorRef) {
       this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
         this.changeDetector.detectChanges();
       });

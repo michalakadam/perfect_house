@@ -17,9 +17,9 @@ export class OffersDao {
     private currentSearchOffersSortedByPriceAsc: Offer[];
     private offersForCarousel: Offer[];
 
-    constructor(private offersConverter: OffersConverter,
-        private offersSorter: OffersSorter,
-        private offersFilter: OffersFilter) {
+    constructor(private readonly offersConverter: OffersConverter,
+        private readonly offersSorter: OffersSorter,
+        private readonly offersFilter: OffersFilter) {
             this.allOffers = this.offersConverter
                 .convertToReadableOffers(rawOffers.Oferty.Oferta);
     }

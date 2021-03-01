@@ -13,7 +13,7 @@ import { Agent } from '../shared/models';
 })
 export class AgentsComponent {
 
-  constructor(readonly agentsDao: AgentsDao, private router: Router) {}
+  constructor(readonly agentsDao: AgentsDao, private readonly router: Router) {}
 
   navigateToAgentPage(agent: Agent) {
     this.router.navigate(['/ludzie/' + this.computeAgentLink(agent.fullName)]);

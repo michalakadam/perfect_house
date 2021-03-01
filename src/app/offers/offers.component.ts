@@ -32,10 +32,10 @@ export class OffersComponent implements OnInit, OnDestroy {
   snackbarContent = '';
 
   constructor(readonly offersDao: OffersDao,
-    private router: Router,
-    private route: ActivatedRoute,
-    private changeDetector: ChangeDetectorRef,
-    private snackbarService: SnackbarService) {}
+    private readonly router: Router,
+    private readonly route: ActivatedRoute,
+    private readonly changeDetector: ChangeDetectorRef,
+    private readonly snackbarService: SnackbarService) {}
 
   ngOnInit() {
     this.subscription.add(this.route.params.subscribe(params => {

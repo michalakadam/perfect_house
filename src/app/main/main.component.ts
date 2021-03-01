@@ -41,7 +41,7 @@ export class MainComponent implements OnDestroy {
   images = IMAGES;
   advancedVisible = false;
 
-  constructor (readonly offersDao: OffersDao, private router: Router,
+  constructor (readonly offersDao: OffersDao, private readonly router: Router,
     readonly windowSizeDetector: WindowSizeDetector, 
     readonly changeDetector: ChangeDetectorRef) {
     this.offersDao.initializeOffersForTheMainPage();
