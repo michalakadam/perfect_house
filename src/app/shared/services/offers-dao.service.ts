@@ -50,14 +50,19 @@ export class OffersDao {
                 [...this.currentSearchOffers],
                 AVAILABLE_SORTINGS.find(sorting => sorting.displayName === 'cenie rosnąco')
             );
-
     }
 
     computeOffersForCarousel(): Offer[] {
-        return this.allOffers
-            .filter(offer => offer.isExclusive)
-            .sort((a, b) => a.creationDate < b.creationDate ? -1 :
-                (a.creationDate > b.creationDate ? 1 : 0));
+        return this.shuffleOffers(
+            this.allOffers.filter(offer => offer.isExclusive));
+    }
+
+    private shuffleOffers(offers: Offer[]): Offer[] {
+        for (let i = offers.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [offers[i], offers[j]] = [offers[j], offers[i]];
+        }
+        return offers;
     }
 
     getOffersForCarousel(): Offer[] {
