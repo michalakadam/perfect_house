@@ -22,8 +22,8 @@
         [range]="true"
         [min]="minValue"
         [max]="maxValue"
-        [step]=100
-        (onChange)="updateValues($event)"
+        [step]=1000
+        (onChange)="updateValues($event.values)"
         (onSlideEnd)="slidingIsOver.emit()">
     </p-slider>
 </div>

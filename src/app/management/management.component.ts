@@ -1,10 +1,10 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { AgentsDao } from '../services/agents-dao.service';
-import { WindowSizeDetector } from '../services/window-size-detector.service';
+import { AgentsDao } from '../shared/services/agents-dao.service';
+import { WindowSizeDetector } from '../shared/services/window-size-detector.service';
 import { Agent } from '../shared/models';4
 
-const AGENT_RESPONSIBLE_ID = 10101;
+const AGENT_RESPONSIBLE_ID = 20202;
 
 /** Kontener strony 'Zarządzanie nieruchomościami'. */
 @Component({
@@ -20,7 +20,7 @@ export class ManagementComponent implements OnDestroy {
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,
     readonly agentsDao: AgentsDao,
-    private changeDetector: ChangeDetectorRef) {
+    private readonly changeDetector: ChangeDetectorRef) {
       this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
         this.changeDetector.detectChanges();
       });

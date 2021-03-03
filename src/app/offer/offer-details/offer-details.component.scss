@@ -1,5 +1,4 @@
 @import "~src/variables.scss";
-@import "~src/mixins.scss";
 
 .component-container { 
     .location {
@@ -14,32 +13,18 @@
         }
     }
 
-    .details-flex { 
+    .pairs-container {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        @media screen and (max-width: $mobile) {
-            font-size: unset;
-            grid-template-columns: 1fr;
-            width: 220px;
-        }
+        gap: 0.75rem;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
 
-        .details-row {
-            .key-value-pair {
-                &:first-of-type {
-                    display: inline-block;
-                    width: 250px;
-                    @media screen and (max-width: $desktop-large) {
-                        width: 235px;
-                    }
-                    @media screen and (max-width: $desktop-medium) {
-                        width: 220px;
-                    }
-                }
+        .key-value-pair {
+            display: block;
+            width: unset;
 
-                .key {
-                    font-weight: 700;
-                }
-            }    
-        }
+            .key {
+                font-weight: 700;
+            }
+        }    
     }
 }

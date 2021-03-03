@@ -30,6 +30,7 @@
 @mixin perfect-box {
     border-radius: 15px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    z-index: 10;
     @media screen and (max-width: $desktop-small) {
         border-radius: 10px;
     }
@@ -83,6 +84,45 @@
 
         .p-button-label {
             font-weight: 700;
+        }
+    }
+}
+
+@mixin perfect-toggle-button {
+    ::ng-deep .p-buttonset .p-button {
+        &.p-highlight {
+            background-color: $light-green;
+            color: $dark-green;
+            border-color: $dark-green;
+        }
+
+        &:not(.p-disabled):not(.p-highlight):hover {
+            background-color: white;
+            border-color: $light-green;
+        }
+
+        &:not(:last-child) {
+            border-right: 1px solid $dark-green;
+        }
+
+        &:focus {
+            box-shadow: unset;
+        }
+
+        .p-button-label {
+            font-weight: 700;
+        }
+    }
+}
+
+@mixin screen-wide-image {
+    img {
+        max-width: 100%;
+
+        @media screen and (max-width: $desktop-small) {
+            height: 60vw;
+            object-fit: cover;
+            object-position: center;
         }
     }
 }

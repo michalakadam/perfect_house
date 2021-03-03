@@ -1,30 +1,31 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { OffersDao } from '../services/offers-dao.service';
-import { WindowSizeDetector } from '../services/window-size-detector.service';
-import { DEFAULT_FILTERS, OffersFilters } from '../shared/models';
+import { OffersDao } from '../shared/services/offers-dao.service';
+import { WindowSizeDetector } from '../shared/services/window-size-detector.service';
+import { DEFAULT_FILTERS, GalleryPhoto, OffersFilters } from '../shared/models';
+import { DEFAULT_PARAMETERS } from '../offers/offers.component';
 
-const IMAGES = [
+const IMAGES: GalleryPhoto[] = [
   {
-    "previewImageSrc": "/assets/dla_ciebie.jpg",
-    "thumbnailImageSrc": "/assets/dla_ciebie.jpg",
-    "title": "Sprawdź nasze oferty dla Ciebie."
+    previewImageSrc: "/assets/dla_ciebie.jpg",
+    thumbnailImageSrc: "/assets/dla_ciebie.jpg",
+    title: "Sprawdź nasze oferty dla Ciebie."
   },
   {
-    "previewImageSrc": "/assets/nad_morzem.jpg",
-    "thumbnailImageSrc": "/assets/nad_morzem.jpg",
-    "title": "Zobacz inwestycje nad morzem."
+    previewImageSrc: "/assets/nad_morzem.jpg",
+    thumbnailImageSrc: "/assets/nad_morzem.jpg",
+    title: "Zobacz inwestycje nad morzem."
   },
   {
-    "previewImageSrc": "/assets/po_poznansku.jpg",
-    "thumbnailImageSrc": "/assets/po_poznansku.jpg",
-    "title": "Sprawdź nasze oferty dla Ciebie."
+    previewImageSrc: "/assets/po_poznansku.jpg",
+    thumbnailImageSrc: "/assets/po_poznansku.jpg",
+    title: "Sprawdź nasze oferty dla Ciebie."
   },
   {
-    "previewImageSrc": "/assets/zarzadzanie.jpg",
-    "thumbnailImageSrc": "/assets/zarzadzanie.jpg",
-    "title": "Zobacz, jakie proste może być zarządzanie nieruchomościami."
+    previewImageSrc: "/assets/zarzadzanie.jpg",
+    thumbnailImageSrc: "/assets/zarzadzanie.jpg",
+    title: "Zobacz, jakie proste może być zarządzanie nieruchomościami."
   },
 ]
 /** Strona główna. */
@@ -40,7 +41,7 @@ export class MainComponent implements OnDestroy {
   images = IMAGES;
   advancedVisible = false;
 
-  constructor (readonly offersDao: OffersDao, private router: Router,
+  constructor (readonly offersDao: OffersDao, private readonly router: Router,
     readonly windowSizeDetector: WindowSizeDetector, 
     readonly changeDetector: ChangeDetectorRef) {
     this.offersDao.initializeOffersForTheMainPage();
@@ -67,7 +68,7 @@ export class MainComponent implements OnDestroy {
   }
 
   loadOffers(filters: OffersFilters) {
-    this.router.navigate(['oferty', this.computeFiltersParameters(filters)]);
+    this.router.navigate(['oferty', {...DEFAULT_PARAMETERS, ...this.computeFiltersParameters(filters)}]);
   }
 
   private computeFiltersParameters(filters: OffersFilters) {

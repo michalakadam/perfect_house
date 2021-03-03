@@ -93,14 +93,23 @@
 
                 .p-carousel-content {
                     .p-carousel-prev, .p-carousel-next {
+                        background-color: $light-green;
+                        color: $dark-green;
+
                         &:focus {
-                            box-shadow: 0 0 0 0.2rem $light-green;
+                            background-color: $light-green;
+                            box-shadow: initial;
+                        }
+
+                        &:hover {
+                            background-color: $light-green;
+                            box-shadow: 0 0 0 0.2rem $dark-green;
                         }
 
                         .pi {
-                            font-size: 1.3rem;
+                            font-size: 1.2rem;
                         }
-                        @media screen and (max-width: $mobile-small) {
+                        @media screen and (max-width: $desktop-small) {
                             display: none;
                         }
                     }

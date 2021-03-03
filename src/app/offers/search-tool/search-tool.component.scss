@@ -1,13 +1,6 @@
 @import "~src/variables.scss";
 @import "~src/mixins.scss";
 
-@mixin justify-two-elements {
-    margin-right: 28px;
-    @media screen and (max-width: $desktop-medium) {
-        margin-right: 10px;
-    }
-}
-
 .component-container {
     display: flex;
     flex-direction: column;
@@ -42,62 +35,26 @@
             margin-top: 5px;
         }
 
-        .dropdowns {
-            display: flex;
-            justify-content: space-between;
-            margin-right: unset;
-            width: 320px;
-            @media screen and (max-width: $desktop-large) {
-                width: 280px;
-            }
-            @media screen and (max-width: $desktop-medium) {
-                width: 260px;
-            }
-            @media screen and (max-width: $desktop-small) {
-                width: unset;
-            }
+        .transaction-toggle {
+            @include perfect-toggle-button;
 
-            p-dropdown:first-of-type {
-                @include justify-two-elements;
+            ::ng-deep .p-button {
+                @media screen and (max-width: $desktop-medium) {
+                    padding: 0.5rem 0.75rem;
+                }
                 @media screen and (max-width: $desktop-small) {
-                    ::ng-deep .p-dropdown {
-                        width: 108px;
-                    }
+                    padding: 0.5rem 1rem;
                 }
             }
         }
 
-        .location-fields {
-            display: flex;
-            justify-content: space-between;
-            width: 475px;
-            @media screen and (max-width: $desktop-large) {
-                width: 425px;
-            }
-            @media screen and (max-width: $desktop-medium) {
-                width: 375px;
-            }
-            @media screen and (max-width: $desktop-small) {
-                margin-top: 7px;
-                width: unset;
-            }
-            
-            .voivodeship-dropdown {
-                @include justify-two-elements;
-                ::ng-deep .p-dropdown {
-                    width: 190px;
-                    @media screen and (max-width: $desktop-small) {
-                        width: 120px;
-                    }
-                }
-            }
-
+        .location-input {
             ::ng-deep perfect-input input {
                 @media screen and (max-width: $desktop-small) {
                     width: 130px;
                 }
             }
-        }   
+        }
 
         .checkboxes-container {
             display: grid;
@@ -108,7 +65,7 @@
             }
 
             &.additional-fields {
-                gap: 10px 5px;
+                gap: 10px 4px;
             }
 
             .checkbox-container {
@@ -131,19 +88,24 @@
                             }
                         }
 
-                        &:not(.p-checkbox-disabled) .p-checkbox-box {
-                            &.p-focus {
-                                border-color: $light-green;
-                                box-shadow: 0 0 0 0.2rem $light-green;
+                        &:not(.p-checkbox-disabled) {
+                            .p-checkbox-box {
+                                &:hover {
+                                    border-color: $light-green;
+                                    box-shadow: 0 0 0 0.2rem $light-green;
+                                }
+
+                                &.p-focus {
+                                    border-color: #ced4da;
+                                    box-shadow: initial;
+                                }
                             }
 
-                            &:hover {
-                                border-color: $light-green;
-                                box-shadow: 0 0 0 0.2rem $light-green;
-                            }
-
-                            &:focus {
-                                border: $light-green;
+                            &.p-checkbox-checked .p-checkbox-box {
+                                &.p-focus {
+                                    border-color: $light-green;
+                                    box-shadow: 0 0 0 0.2rem $light-green;
+                                }
                             }
                         }
                     }
@@ -215,45 +177,18 @@
             }
         }
 
-        p-dropdown {
-            @include perfect-dropdown;
-        }
-
-        .market-toggle-container {
-            align-items: center;
-            display: flex;
-            font-weight: 700;
+        .market-toggle {
+            @include perfect-toggle-button;
             @media screen and (max-width: $desktop-small) {
                 order: 3;
             }
-
-            .title {
-                color: $font-light-grey;
-                margin-right: 5px;
-            }
-
-            ::ng-deep .p-buttonset .p-button {
-                &.p-highlight {
-                    background-color: $light-green;
-                    color: $dark-green;
-                    border-color: $light-green;
+            
+            ::ng-deep .p-button {
+                @media screen and (max-width: $desktop-medium) {
+                    padding: 0.5rem 0.75rem;
                 }
-
-                &:not(.p-disabled):not(.p-highlight):hover {
-                    background-color: unset;
-                    border-color: $light-green;
-                }
-
-                &:focus {
-                    box-shadow: unset;
-                }
-
-                &:not(:last-child) {
-                    border-right: 1px dashed $dark-green;
-                }
-
-                .p-button-label {
-                    font-weight: 700;
+                @media screen and (max-width: $desktop-small) {
+                    padding: 0.5rem 1rem;
                 }
             }
         }
@@ -270,6 +205,7 @@
         }
         
         .buttons-container {
+            display: flex;
             @media screen and (max-width: $desktop-small) {
                 display: flex;
                 justify-content: space-between;
@@ -277,6 +213,7 @@
                 margin-top: 5px;
                 width: 257px;
             }
+
             p-button {
                 @include perfect-button;
             }
@@ -285,15 +222,11 @@
                 font-weight: 700;
                 margin-right: 10px;
 
-                span {
+                .label {
                     font-weight: 700;
-                    margin-right: 3px;
+                    margin-right: 0.5rem;
                 }
                 
-                i {
-                    margin-top: 1px;
-                }
-
                 ::ng-deep .p-button {
                     background-color: $dark-green;
                     border: 1px solid $dark-green;

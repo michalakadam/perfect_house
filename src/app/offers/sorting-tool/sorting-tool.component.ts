@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, EventEmitter, Input, Output, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
+import { WindowSizeDetector } from 'src/app/shared/services/window-size-detector.service';
 import { Sorting, AVAILABLE_SORTINGS } from 'src/app/shared/models';
 
 @Component({

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import * as rawOffers from "src/offers/offers.json";
-import { OffersFilters, Offer, Sorting, AVAILABLE_SORTINGS } from '../shared/models';
+import { OffersFilters, Offer, Sorting, AVAILABLE_SORTINGS } from '../models';
 import { OffersConverter } from './offers-converter.service';
 import { OffersFilter } from './offers-filter.service';
 import { OffersSorter } from './offers-sorter.service';
@@ -17,9 +17,9 @@ export class OffersDao {
     private currentSearchOffersSortedByPriceAsc: Offer[];
     private offersForCarousel: Offer[];
 
-    constructor(private offersConverter: OffersConverter,
-        private offersSorter: OffersSorter,
-        private offersFilter: OffersFilter) {
+    constructor(private readonly offersConverter: OffersConverter,
+        private readonly offersSorter: OffersSorter,
+        private readonly offersFilter: OffersFilter) {
             this.allOffers = this.offersConverter
                 .convertToReadableOffers(rawOffers.Oferty.Oferta);
     }
@@ -50,14 +50,19 @@ export class OffersDao {
                 [...this.currentSearchOffers],
                 AVAILABLE_SORTINGS.find(sorting => sorting.displayName === 'cenie rosnąco')
             );
-
     }
 
     computeOffersForCarousel(): Offer[] {
-        return this.allOffers
-            .filter(offer => offer.isExclusive)
-            .sort((a, b) => a.creationDate < b.creationDate ? -1 :
-                (a.creationDate > b.creationDate ? 1 : 0));
+        return this.shuffleOffers(
+            this.allOffers.filter(offer => offer.isExclusive));
+    }
+
+    private shuffleOffers(offers: Offer[]): Offer[] {
+        for (let i = offers.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [offers[i], offers[j]] = [offers[j], offers[i]];
+        }
+        return offers;
     }
 
     getOffersForCarousel(): Offer[] {
@@ -104,19 +109,34 @@ export class OffersDao {
     }
 
     getDistinctLocations(): string[] {
-        return this.allOffers
+        const gminy = this.allOffers
+            .map(offer => offer.city)
+            .filter(city => city.includes('(gmina)'))
+            .filter(this.onlyUnique)
+            .sort(this.sortAlphabetically);
+        const cities = this.allOffers
             .map(offer => offer.fullLocation)
             .filter(this.onlyUnique)
             .sort(this.sortAlphabetically);
+            
+        return [...gminy, ...cities];
     }
 
     getAvailableVoivodeships(): string[] {
-        const distinctVoivodeships = this.allOffers
+        return this.allOffers
             .map(offer => offer.voivodeship)
             .filter(this.onlyUnique)
+            .filter(v => !v.includes('Attyka') && !v.includes('Costa'))
             .sort(this.sortAlphabetically);
+    }
 
-        return ['cała Polska', ...distinctVoivodeships];
+    getCountiesForVoivodeship(voivodeship: string): string[] {
+        return this.allOffers
+            .filter(offer => offer.voivodeship === voivodeship)
+            .map(offer => offer.county)
+            .filter(this.onlyUnique)
+            .filter(Boolean)
+            .sort(this.sortAlphabetically);
     }
 
     private onlyUnique(value, index, self) {
@@ -125,5 +145,26 @@ export class OffersDao {
 
     sortAlphabetically(a: string, b: string): number {
         return a.localeCompare(b, 'pl');
+    }
+    
+    getEstateSubtypesForEstateType(estateType: string): string[] {
+        return this.allOffers
+            .filter(offer => offer.estateType === estateType)
+            .flatMap(offer => offer.estateSubtypes)
+            .filter(this.onlyUnique)
+            .filter(Boolean)
+            .map(subtype => subtype.toLowerCase()
+                .replace('_', ' ')
+                .replace(' - ', '-'))
+            .sort(this.sortAlphabetically);
+    }
+
+    getBuildingTypesForEstateType(estateType: string): string[] {
+        return this.allOffers
+            .filter(offer => offer.estateType === estateType)
+            .map(offer => offer.buildingType.value)
+            .filter(this.onlyUnique)
+            .filter(Boolean)
+            .sort(this.sortAlphabetically);
     }
 }

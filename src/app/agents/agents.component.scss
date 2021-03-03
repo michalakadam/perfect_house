@@ -33,6 +33,13 @@
             &:first-of-type {
                 grid-column-start: 1;
                 grid-column-end: 4; 
+
+                @media screen and (max-width: $tablet) {
+                    grid-column-end: 3;
+                }
+                @media screen and (max-width: $mobile) {
+                    grid-column-end: initial;
+                }
             }
         }
     }

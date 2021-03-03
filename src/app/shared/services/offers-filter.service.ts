@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { off } from 'process';
-import { AVAILABLE_ESTATE_TYPES, Offer, OffersFilters } from '../shared/models';
+import { AVAILABLE_ESTATE_TYPES, Offer, OffersFilters } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -10,19 +9,25 @@ export class OffersFilter {
   filterOffers(offers: Offer[], filters: OffersFilters): Offer[] {
     if (filters.estateType) {
       offers = this.filterByEstateType(offers, filters.estateType);
+      if (filters.estateSubtype) {
+        offers = this.filterByEstateSubtype(offers, filters.estateType, filters.estateSubtype);
+      }
     }
     offers = this.filterByTransactionType(offers, filters.isForRent);
     offers = this.filterByMarketType(
       offers, filters.isPrimaryMarket, filters.isSecondaryMarket);
-    if (filters.voivodeship && filters.voivodeship !== 'cała Polska') {
+    if (filters.voivodeship) {
       offers = this.filterByVoivodeship(offers, filters.voivodeship);
+    }
+    if (filters.county) {
+      offers = this.filterByCounty(offers, filters.county);
     }
     if (filters.location) {
       offers = this.filterByLocation(offers, filters.location);
     }
     if (filters.isInvestment) {
       offers = offers.filter(offer => 
-        offer.predestination && offer.predestination.includes('inwestycyjna'));
+        offer.estateSubtypes && offer.estateSubtypes.indexOf('inwestycyjna') > -1);
     }
     if (filters.isByTheSea) {
       // TODO: find out which flag is used in Galactica for this kind of offers.
@@ -36,58 +41,63 @@ export class OffersFilter {
     }
     if (filters.pricePerSquareMeterFrom > -1) {
       offers = offers.filter(offer => 
-        offer.pricePerSquareMeter >= filters.pricePerSquareMeterFrom);
+        offer.pricePerSquareMeter.value >= filters.pricePerSquareMeterFrom);
     }
     if (filters.pricePerSquareMeterTo > -1) {
       offers = offers.filter(offer => 
-        offer.pricePerSquareMeter <= filters.pricePerSquareMeterTo);
+        offer.pricePerSquareMeter.value <= filters.pricePerSquareMeterTo);
     }
     if (filters.areaFrom > -1) {
-      offers = offers.filter(offer => offer.totalArea >= filters.areaFrom);
+      offers = offers.filter(offer => offer.totalArea.value >= filters.areaFrom);
     }
     if (filters.areaTo > -1) {
-      offers = offers.filter(offer => offer.totalArea <= filters.areaTo);
+      offers = offers.filter(offer => offer.totalArea.value <= filters.areaTo);
     }
     if (filters.numberOfRoomsFrom > -1) {
-      offers = offers.filter(offer => offer.numberOfRooms >= filters.numberOfRoomsFrom);
+      offers = offers.filter(offer => offer.numberOfRooms.value >= filters.numberOfRoomsFrom);
     }
     if (filters.numberOfRoomsTo > -1) {
-      offers = offers.filter(offer => offer.numberOfRooms <= filters.numberOfRoomsTo);
+      offers = offers.filter(offer => offer.numberOfRooms.value <= filters.numberOfRoomsTo);
     }
     if (filters.floorFrom > -1) {
-      offers = offers.filter(offer => offer.floor >= filters.floorFrom);
+      offers = offers.filter(offer => offer.floor.value >= filters.floorFrom);
     }
     if (filters.floorTo > -1) {
-      offers = offers.filter(offer => offer.floor <= filters.floorTo);
+      offers = offers.filter(offer => offer.floor.value <= filters.floorTo);
     }
     if (filters.isElevatorAvailable) {
-      offers = offers.filter(offer => offer.isElevatorAvailable);
+      offers = offers.filter(offer => offer.isElevatorAvailable.value);
     }
     if (filters.isParkingAvailable) {
       offers = offers
-        .filter(offer => offer.isParkingAvailable || !!offer.garage || offer.isTruckParkingAvailable);
+        .filter(offer =>
+          offer.isParkingAvailable.value || !!offer.garage.value || offer.isTruckParkingAvailable.value);
     }
     if (filters.isTerraceAvailable) {
-      offers = offers.filter(offer => offer.isTerraceAvailable);
+      offers = offers.filter(offer => offer.isTerraceAvailable.value);
     }
     if (filters.isBasementAvailable) {
-      offers = offers.filter(offer => offer.isBasementAvailable);
+      offers = offers.filter(offer => offer.isBasementAvailable.value);
     }
     if (filters.isMpzpAvailable) {
-      offers = offers.filter(offer => !!offer.mpzp);
+      offers = offers.filter(offer => !!offer.mpzp.value);
     }
     
     return offers;
   }
 
   private filterByEstateType(offers: Offer[], estateType: string): Offer[] {
-    if (estateType === 'wszystkie') {
-      return offers;
-    }
     const estate = AVAILABLE_ESTATE_TYPES
       .find(estate => estate.displayName === estateType);
 
     return estate ? offers.filter(offer => offer.estateType === estate.queryName) : [];
+  }
+  
+  private filterByEstateSubtype(offers: Offer[], estateType: string, estateSubtype: string): Offer[] {
+    if (estateType === 'mieszkanie') {
+      return offers.filter(offer => offer.buildingType.value === estateSubtype);
+    }
+    return offers.filter(offer => offer.estateSubtypes.indexOf(estateSubtype) > -1);
   }
 
   private filterByTransactionType(offers: Offer[], isForRent): Offer[] {
@@ -109,11 +119,13 @@ export class OffersFilter {
   }
 
   private filterByVoivodeship(offers: Offer[], voivodeship: string): Offer[] {
-    if (!voivodeship) {
-      return offers;
-    }
     return offers.filter(offer => 
       offer.voivodeship.toLowerCase() === voivodeship.toLowerCase());
+  }
+
+  private filterByCounty(offers: Offer[], county: string): Offer[] {
+    return offers.filter(offer =>
+      offer.county.toLowerCase() === county.toLowerCase());
   }
 
   private filterByLocation(offers: Offer[], location: string): Offer[] {

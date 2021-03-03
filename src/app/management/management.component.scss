@@ -6,7 +6,6 @@
     @include article-page;
 
     h2 {
-        color: $light-green;
         text-align: left;
         @media screen and (max-width: $mobile) {
             text-align: center;
@@ -23,22 +22,24 @@
             padding: 1rem 1rem 2rem;
             position: absolute;
             top: 480px; 
-            width: 400px;
+            width: 475px;
             @media screen and (max-width: $desktop-large) {
                 margin-left: 95px;
                 top: 425px;
+                width: 430px;
             }
             @media screen and (max-width: $desktop-medium) {
                 margin-left: 35px;
+                top: 450px;
             }
             @media screen and (max-width: $desktop-small) {
                 margin: 2rem auto;
                 left: unset;
                 position: unset;
                 top: unset;
-                width: 340px;
+                width: 390px;
             }
-            @media screen and (max-width: $mobile-small) {
+            @media screen and (max-width: $mobile) {
                 width: 224px;
             }
 
@@ -46,6 +47,32 @@
                 margin-block-start: 0;
                 @media screen and (max-width: $mobile-small) {
                     text-align: center;
+                }
+            }
+
+            perfect-agent-brief {
+                ::ng-deep .component-container {
+                    width: 450px;
+                    @media screen and (max-width: $mobile) {
+                        width: unset;
+                    }
+                }
+            }
+        }
+
+        .section-title {
+            align-items: center;
+            display: flex;
+            margin-bottom: 0;
+
+            img {
+                height: 2.5em;
+                margin-right: 0.5em;
+                width: 2.5em;
+                @media screen and (max-width: $mobile) {
+                    height: 4em;
+                    margin-right: 0;
+                    width: 4em;
                 }
             }
         }

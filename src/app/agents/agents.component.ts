@@ -1,8 +1,7 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AgentsDao } from 'src/app/services/agents-dao.service';
-import { WindowSizeDetector } from '../services/window-size-detector.service';
+import { AgentsDao } from 'src/app/shared/services/agents-dao.service';
 import { Agent } from '../shared/models';
 
 /** Wyświetla matrycę agentów. */
@@ -12,18 +11,9 @@ import { Agent } from '../shared/models';
   styleUrls: ['./agents.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AgentsComponent implements OnDestroy {
-  private subscription: Subscription;
+export class AgentsComponent {
 
-  constructor(
-    readonly windowSizeDetector: WindowSizeDetector,
-    readonly agentsDao: AgentsDao,
-    private changeDetector: ChangeDetectorRef,
-    private router: Router) {
-      this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
-        this.changeDetector.detectChanges();
-      });
-  }
+  constructor(readonly agentsDao: AgentsDao, private readonly router: Router) {}
 
   navigateToAgentPage(agent: Agent) {
     this.router.navigate(['/ludzie/' + this.computeAgentLink(agent.fullName)]);
@@ -35,9 +25,5 @@ export class AgentsComponent implements OnDestroy {
 
   trackById(index: number, agent: Agent) {
     return agent.id;
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 }

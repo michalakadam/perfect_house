@@ -1,8 +1,8 @@
 import { Component, ChangeDetectionStrategy, Input, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { AgentsDao } from 'src/app/services/agents-dao.service';
+import { AgentsDao } from 'src/app/shared/services/agents-dao.service';
 import { Offer } from 'src/app/shared/models';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
+import { WindowSizeDetector } from 'src/app/shared/services/window-size-detector.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -23,7 +23,7 @@ export class OfferCardComponent implements OnDestroy {
 
   constructor (readonly agentsDao: AgentsDao,
     readonly windowSizeDetector: WindowSizeDetector, 
-    readonly changeDetector: ChangeDetectorRef) {
+    private readonly changeDetector: ChangeDetectorRef) {
     this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
       this.changeDetector.detectChanges();
     });

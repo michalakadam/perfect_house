@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 
 import * as rawAgents from "src/agents/agents.json";
-import { Agent } from '../shared/models';
+import { Agent } from '../models';
 import { AgentsConverter } from './agents-converter.service';
 
 const CEO_ID = '1155';
+
+const MAGDA_PROFILE_FOR_MANAGEMENT_ID = '20202';
 
 @Injectable({
     providedIn: 'root',
@@ -12,12 +14,14 @@ const CEO_ID = '1155';
 export class AgentsDao {
     private agents: Agent[];
 
-    constructor(private agentsConverter: AgentsConverter) {
+    constructor(private readonly agentsConverter: AgentsConverter) {
         this.agents = this.agentsConverter.convertToReadableAgents(rawAgents.Agenci.Agent);
     }
 
     listAgents(): Agent[] {
-        return this.agents.sort((a, b) => this.sortAgents(a, b));
+        return this.agents
+          .filter(agent => agent.id !== MAGDA_PROFILE_FOR_MANAGEMENT_ID)
+          .sort((a, b) => this.sortAgents(a, b));
       }
 
     private sortAgents(a: Agent, b: Agent): number {

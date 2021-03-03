@@ -1,20 +1,32 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { OffersDao } from 'src/app/services/offers-dao.service';
-import { WindowSizeDetector } from 'src/app/services/window-size-detector.service';
-import { AVAILABLE_TRANSACTIONS, Transaction, AVAILABLE_ESTATE_TYPES, Estate, OffersFilters, DEFAULT_FILTERS } from 'src/app/shared/models';
+import { OffersDao } from 'src/app/shared/services/offers-dao.service';
+import { WindowSizeDetector } from 'src/app/shared/services/window-size-detector.service';
+import { AVAILABLE_ESTATE_TYPES, EstateType, OffersFilters, DEFAULT_FILTERS } from 'src/app/shared/models';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subject, Subscription } from 'rxjs';
-import { debounceTime, filter } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
+import { DropdownGroup, DropdownValue } from './grouped-dropdown/grouped-dropdown.component';
+
+const AVAILABLE_TRANSACTIONS = [
+  {
+    label: 'sprzedaż',
+    value: false,
+  },
+  {
+    label: 'wynajem',
+    value: true,
+  },
+];
 
 const AVAILABLE_MARKETS = [
   {
-    displayName: 'pierwotny',
+    label: 'pierwotny',
     value: 0,
   },
   {
-    displayName: 'wtórny',
+    label: 'wtórny',
     value: 1,
-  }
+  },
 ];
 
 @Component({
@@ -24,7 +36,7 @@ const AVAILABLE_MARKETS = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
-  private inputSubject: Subject<void> = new Subject();
+  private inputSubject = new Subject();
   private subscription = new Subscription();
 
   availableEstateTypes = AVAILABLE_ESTATE_TYPES;
@@ -33,13 +45,12 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   availableVoivodeships = [];
   showAdvanced = false;
 
-  selectedEstateType: Estate;
-  selectedTransaction: Transaction;
-  selectedVoivodeship: string;
+  estateTypesWithSubtypes: DropdownGroup[] = [];
+  voivodeshipsWithCounties: DropdownGroup[] = [];
+  selectedTransaction: string;
   location: string;
-  isPrimaryMarket: boolean;
-  isSecondaryMarket: boolean;
-  marketValues: number[] = [];
+  isForRent: boolean;
+  marketToggleValues: number[] = [];
   isInvestment: boolean;
   isByTheSea: boolean;
   isNoCommission: boolean;
@@ -73,12 +84,9 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   @Output() openOffer = new EventEmitter<string>();
   @Output() advancedToggled = new EventEmitter();
 
-  offersDao: OffersDao;
-
-  constructor(offersDaoExternal: OffersDao,
+  constructor(readonly offersDao: OffersDao,
     readonly windowSizeDetector: WindowSizeDetector,
-    private changeDetector: ChangeDetectorRef) {
-      this.offersDao = offersDaoExternal;
+    private readonly changeDetector: ChangeDetectorRef) {
     this.subscription.add(this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
       this.changeDetector.detectChanges();
     }));
@@ -86,12 +94,11 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit() {
     this.subscription.add(this.inputSubject.asObservable()
-      .pipe(debounceTime(500))
+      .pipe(debounceTime(1000))
       .subscribe(() => {
         this.applyFiltersIgnoringPrice();
       })
     );
-    this.availableVoivodeships = this.computeVoivodeshipsForDropdown(this.offersDao.getAvailableVoivodeships());
   }
 
   onInputProvided(){
@@ -99,21 +106,19 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges() {
-    this.selectedEstateType = this.availableEstateTypes.find(estateType => {
-      return estateType.displayName === this.filters.estateType;
-    });
-    this.selectedTransaction = this.availableTransactions.find(transaction => {
-      return transaction.isForRent === this.filters.isForRent;
-    }); 
-    this.selectedVoivodeship = this.filters.voivodeship;
-    this.location = this.filters.location;
-    this.isPrimaryMarket = this.filters.isPrimaryMarket;
-    this.isSecondaryMarket = this.filters.isSecondaryMarket;
-    if (this.isPrimaryMarket) {
-      this.marketValues.push(0);
+    if (!this.estateTypesWithSubtypes.length) {
+      this.computeEstateTypesWithSubtypes(); 
     }
-    if (this.isSecondaryMarket) {
-      this.marketValues.push(1);
+    if (!this.voivodeshipsWithCounties.length) {
+      this.computeVoivodeshipsWithCounties();
+    }
+    this.location = this.filters.location;
+    this.isForRent = this.filters.isForRent;
+    if (this.filters.isPrimaryMarket) {
+      this.marketToggleValues.push(0);
+    }
+    if (this.filters.isSecondaryMarket) {
+      this.marketToggleValues.push(1);
     }
     this.isInvestment = this.filters.isInvestment;
     this.isByTheSea = this.filters.isByTheSea;
@@ -142,18 +147,57 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
     this.changeDetector.detectChanges();
   }
 
+  private computeEstateTypesWithSubtypes() {
+    for (const estateType of this.availableEstateTypes) {
+      const subtypes = this.getEstateSubtypesForDropdown(estateType);
+
+      this.estateTypesWithSubtypes.push({
+        displayName: estateType.displayName.toLowerCase(),
+        values: subtypes,
+        isVisible: !!subtypes.find(subtype => subtype.isSelected),
+        isSelected: estateType.displayName.toLowerCase() === this.filters.estateType.toLowerCase(),          
+      });   
+    }
+  }
+
+  private getEstateSubtypesForDropdown(estateType: EstateType): DropdownValue[] {
+    const subtypes = estateType.displayName === 'mieszkanie' ? 
+        this.offersDao.getBuildingTypesForEstateType(estateType.queryName) :
+        this.offersDao.getEstateSubtypesForEstateType(estateType.queryName); 
+
+    return subtypes.map(subtype => {
+      return {
+        displayName: subtype,
+        isSelected: subtype === this.filters.estateSubtype,
+      };
+    });
+  }
+
+  private computeVoivodeshipsWithCounties() {
+    for (const voivodeship of this.offersDao.getAvailableVoivodeships()) {
+      const counties = this.getCountiesForDropdown(voivodeship);
+
+      this.voivodeshipsWithCounties.push({
+        displayName: voivodeship,
+        values: counties,
+        isVisible: !!counties.find(county => county.isSelected),
+        isSelected: this.filters.voivodeship.toLowerCase() === voivodeship.toLowerCase(),
+      });
+    }
+  }
+
+  private getCountiesForDropdown(voivodeship: string): DropdownValue[] {
+    return this.offersDao.getCountiesForVoivodeship(voivodeship).map(county => {
+      return {
+        displayName: county,
+        isSelected: this.filters.county === county,
+      }
+    });
+  }
+
   isOptionalElementVisible() {
     return !this.windowSizeDetector.isWindowSmallerThanDesktopSmall ||
       this.windowSizeDetector.isWindowSmallerThanDesktopSmall && this.showAdvanced;
-  }
-
-  computeVoivodeshipsForDropdown(voivodeships: string[]) {
-    return voivodeships.map(voivodeship => {
-      return {
-        label: voivodeship,
-        value: voivodeship,
-      }
-    })
   }
 
   private computeFieldValue(value: number): string {
@@ -168,6 +212,9 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   updatePrices(prices: number[]) {
     this.priceFrom = this.computeFieldValue(prices[0]);
     this.priceTo = this.computeFieldValue(prices[1]);
+    if (!this.mainPage) {
+      this.applyFilters();
+    }
   }
 
   applyFiltersIgnoringPrice() {
@@ -201,13 +248,15 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
       this.offersDao.getHighestPriceForCurrentSearch()) {
         this.priceTo = '-1';
     }
-
+    
     const filters: OffersFilters = {
-      estateType: this.selectedEstateType.displayName,
-      isForRent: this.selectedTransaction.isForRent,
-      isPrimaryMarket: this.marketValues.indexOf(0) > -1,
-      isSecondaryMarket: this.marketValues.indexOf(1) > -1,
-      voivodeship: this.selectedVoivodeship,
+      estateType: this.getSelectedDropdownGroupName(this.estateTypesWithSubtypes),
+      estateSubtype: this.getSelectedDropdownValueName(this.estateTypesWithSubtypes),
+      isForRent: this.isForRent,
+      isPrimaryMarket: this.marketToggleValues.indexOf(0) > -1,
+      isSecondaryMarket: this.marketToggleValues.indexOf(1) > -1,
+      voivodeship: this.getSelectedDropdownGroupName(this.voivodeshipsWithCounties),
+      county: this.getSelectedDropdownValueName(this.voivodeshipsWithCounties),
       location: this.location,
       isInvestment: this.isInvestment,
       isByTheSea: this.isByTheSea,
@@ -234,11 +283,17 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
     this.searchOffers.emit(filters);
   }
 
+  private getSelectedDropdownGroupName(groups: DropdownGroup[]): string {
+    return groups.find(group => group.isSelected)?.displayName || '';
+  }
+
+  private getSelectedDropdownValueName(groups: DropdownGroup[]): string {
+    return groups.flatMap(group => group.values).find(value => value.isSelected)?.displayName || '';
+  }
+
   computeFilterNumericValue(value: string): number {
     return value ? Number(value) : -1;
   }
-
-  
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
