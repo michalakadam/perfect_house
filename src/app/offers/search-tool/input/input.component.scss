@@ -29,6 +29,12 @@
         }
     }
 
+    &.selected {
+        @media screen and (max-width: $desktop-small) {
+            margin-top: 1rem;
+        }
+    }
+
     label {
         font-size: unset;
     }

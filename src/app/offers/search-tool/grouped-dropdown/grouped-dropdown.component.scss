@@ -28,6 +28,12 @@ $prime-light-grey: #ced4da;
         box-shadow: 0 0 0 0.2rem $light-green;
     }
 
+    &.selected {
+        @media screen and (max-width: $desktop-small) {
+            margin-top: 1rem;
+        }
+    }
+
     .component-label {
         bottom: 2.3rem;
         color: #6c757d;

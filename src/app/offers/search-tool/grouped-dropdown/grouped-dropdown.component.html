@@ -1,4 +1,4 @@
-<div class="component-container" tabindex="0">
+<div class="component-container" [ngClass]="{'selected': !!selected}" tabindex="0">
     <div class="component-label" *ngIf="selected">
         <span *ngIf="!hideGroupNameWhenValueSelected">
             {{ placeholder }}
