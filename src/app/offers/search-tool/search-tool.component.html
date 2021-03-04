@@ -32,7 +32,7 @@
             class="location-input"
             lhsIcon='pi pi-map-marker'
             title='lokalizacja'
-            [options]="offersDao.getDistinctLocations()"
+            [options]="offersDao.getDistinctLocations(filters.voivodeship, filters.county)"
             [(value)]="location"
             (readyForSearch)="applyFiltersIgnoringPrice()">
         </perfect-input>
