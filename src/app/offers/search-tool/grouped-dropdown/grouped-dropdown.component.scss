@@ -16,6 +16,7 @@ $prime-light-grey: #ced4da;
     border: 1px solid $prime-light-grey;
     border-radius: 3px;
     cursor: pointer;
+    position: relative;
     width: 12.9rem;
 
     &:hover {
@@ -25,6 +26,13 @@ $prime-light-grey: #ced4da;
     &:focus {
         border-color: $dark-green;
         box-shadow: 0 0 0 0.2rem $light-green;
+    }
+
+    .component-label {
+        bottom: 2.3rem;
+        color: #6c757d;
+        padding-left: 7px;
+        position: absolute;
     }
 
     .selected-container {

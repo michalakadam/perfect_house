@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy, HostListener, Output, EventEmitter } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, HostListener, Output, EventEmitter, OnInit, ChangeDetectorRef } from '@angular/core';
 
 export interface DropdownGroup {
   displayName: string;
@@ -18,12 +18,16 @@ export interface DropdownValue {
   styleUrls: ['./grouped-dropdown.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GroupedDropdownComponent {
+export class GroupedDropdownComponent implements OnInit {
   clickedInside = false;
   isDropdownVisible = false;
   selected = '';
+  groupLabel = '';
+  valueLabel = '';
+  isGroupSelected = false;
+  isValueSelected = false;
   
-  @Input() placeholder = '';
+  @Input()placeholder = '';
   @Input() hideGroupNameWhenValueSelected = false;
   @Input() valueNamePrefix = '';
 
@@ -44,6 +48,20 @@ export class GroupedDropdownComponent {
     }
   }
 
+  constructor(private readonly changeDetector: ChangeDetectorRef) {}
+
+  ngOnInit() {
+    if (this.placeholder.includes('/')) {
+      this.groupLabel = this.placeholder.split('/')[0];
+      this.valueLabel = this.placeholder.split('/')[1];
+      this.isValueSelected = this.computeIsValueSelected();
+      if (!this.isValueSelected) {
+        this.isGroupSelected = this.computeIsGroupSelected();
+      }
+      // this.changeDetector.detectChanges();
+    }
+  }
+
   @HostListener('click')
   clickInside() {
     this.clickedInside = true;
@@ -55,6 +73,14 @@ export class GroupedDropdownComponent {
       this.isDropdownVisible = false;
     }
     this.clickedInside = false;
+  }
+
+  private computeIsValueSelected(): boolean {
+    return !!this.groups.flatMap(group => group.values).find(value => value.isSelected);
+  }
+
+  private computeIsGroupSelected(): boolean {
+    return !!this.groups.find(group => group.isSelected);
   }
 
   toggleDropdownVisibility() {
@@ -75,6 +101,8 @@ export class GroupedDropdownComponent {
     this.selected = this.computeSelected(group);
     this.select(group);
     this.isDropdownVisible = false;
+    this.isGroupSelected = true;
+    this.isValueSelected = false;
     this.onChange.emit();
   }
 
@@ -82,6 +110,8 @@ export class GroupedDropdownComponent {
     this.select(group, value);
     this.selected = this.computeSelected(group);
     this.isDropdownVisible = false;
+    this.isGroupSelected = false;
+    this.isValueSelected = true;
     this.onChange.emit();
   }
 
@@ -91,8 +121,7 @@ export class GroupedDropdownComponent {
       return group.displayName;
     }
     return this.hideGroupNameWhenValueSelected ?
-      this.valueNamePrefix + ' ' + selectedValue.displayName :
-      group.displayName + '/' + selectedValue.displayName;
+      selectedValue.displayName : group.displayName + '/' + selectedValue.displayName;
 
   }
 
@@ -122,6 +151,8 @@ export class GroupedDropdownComponent {
     }
     this.selected = '';
     this.isDropdownVisible = false;
+    this.isGroupSelected = false;
+    this.isValueSelected = false;
     this.onChange.emit();
   }
 }

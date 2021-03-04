@@ -1,4 +1,15 @@
 <div class="component-container" tabindex="0">
+    <div class="component-label" *ngIf="selected">
+        <span *ngIf="!hideGroupNameWhenValueSelected">
+            {{ placeholder }}
+        </span>
+        <span *ngIf="hideGroupNameWhenValueSelected && isGroupSelected">
+            {{ groupLabel }}
+        </span>
+        <span *ngIf="hideGroupNameWhenValueSelected && isValueSelected">
+            {{ valueLabel }}
+        </span>
+    </div>
     <div class="selected-container">
         <span class="label-container" (click)="toggleDropdownVisibility()">
             <div *ngIf="!selected" class="placeholder">

@@ -10,7 +10,10 @@
     .tools-container {
         @include perfect-box;
         transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-        padding: 15px 25px;
+        padding: 20px 25px;
+        @media screen and (max-width: $desktop-large) {
+            padding: 15px 25px;
+        }
         @media screen and (max-width: $desktop-medium) {
             padding: 15px;
         }
