@@ -1,4 +1,11 @@
 <div class="image-container" style="background-image: url('/offers/{{ offer.photos[0] }}');">
+    <div class="button-icon-container">
+        <p-button class="gallery-button" label="Zobacz galerię"></p-button>
+        <span class="number-icon-container">
+            {{ offer.photos.length }}
+            <mat-icon id="collections">collections</mat-icon>
+        </span>
+    </div>
 </div>
 
 <div class="component-container">

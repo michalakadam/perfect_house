@@ -118,12 +118,12 @@ export class OffersFilter {
     return offers.filter(offer => !offer.isMarketPrimary);
   }
 
-  private filterByVoivodeship(offers: Offer[], voivodeship: string): Offer[] {
+  filterByVoivodeship(offers: Offer[], voivodeship: string): Offer[] {
     return offers.filter(offer => 
       offer.voivodeship.toLowerCase() === voivodeship.toLowerCase());
   }
 
-  private filterByCounty(offers: Offer[], county: string): Offer[] {
+  filterByCounty(offers: Offer[], county: string): Offer[] {
     return offers.filter(offer =>
       offer.county.toLowerCase() === county.toLowerCase());
   }

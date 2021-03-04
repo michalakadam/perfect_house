@@ -108,13 +108,22 @@ export class OffersDao {
             .price : 0;
     }
 
-    getDistinctLocations(): string[] {
-        const gminy = this.allOffers
+    getDistinctLocations(voivodeship: string, county: string): string[] {
+        let offers = this.allOffers;
+
+        if (voivodeship) {
+            offers = this.offersFilter.filterByVoivodeship(offers, voivodeship);
+        }
+        if (county) {
+            offers = this.offersFilter.filterByCounty(offers, county);
+        }
+
+        const gminy = offers
             .map(offer => offer.city)
             .filter(city => city.includes('(gmina)'))
             .filter(this.onlyUnique)
             .sort(this.sortAlphabetically);
-        const cities = this.allOffers
+        const cities = offers
             .map(offer => offer.fullLocation)
             .filter(this.onlyUnique)
             .sort(this.sortAlphabetically);

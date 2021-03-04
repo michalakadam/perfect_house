@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, ViewChild, ElementRef, Output, EventEmitter, HostListener, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'perfect-input',
@@ -18,7 +18,8 @@ export class InputComponent {
   @Output() readyForSearch = new EventEmitter();
 
   isDropdownVisible = false;
-  inputValue : string;
+  inputValue: string;
+  inFocus = false;
 
   @Input()
   get value(){
@@ -27,15 +28,41 @@ export class InputComponent {
 
   set value(val: string) {
     this.inputValue = val;
+    if (this.inputValue) {
+      this.inFocus = true;
+    }
     this.valueChange.emit(this.inputValue);
   }
   
   @ViewChild('input') input: ElementRef;
 
+  @HostListener('click', ['$event'])
+  clickInside(event: any) {
+    if (!event.path[0].classList.contains('remove-input-icon')) {
+      setTimeout(() => {
+        this.inFocus = true;
+        this.changeDetector.detectChanges();
+      }, 200);
+    }
+  }
+
+  @HostListener('document:click')
+  clickOutside() {
+    this.inFocus = false;
+    this.changeDetector.detectChanges();
+  }
+
+  constructor(private readonly changeDetector: ChangeDetectorRef) {}
+
+  computeLabelVisibility(): boolean {
+    return !!this.title && (!!this.inputValue || this.inFocus);
+  }
+
   removeContent() {
     this.value = this.defaultValue;
     this.isDropdownVisible = false;
     this.input.nativeElement.classList.remove('p-filled');
+    this.inFocus = false;
     this.readyForSearch.emit();
   }
 

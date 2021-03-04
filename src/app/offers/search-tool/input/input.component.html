@@ -1,4 +1,4 @@
-<div class="input p-float-label"
+<div class="input p-float-label" [ngClass]="{'selected': computeLabelVisibility()}"
     [ngClass]="{'number-input': type === 'number'}">
     <input #input
         [type]="type"
