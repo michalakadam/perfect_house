@@ -17,6 +17,7 @@ export class AgentBriefComponent implements OnDestroy {
   isContactInfoVisible = false;
   isVertical = false;
   isBigger = false;
+  isOnlyPhotoVisible = false;
 
   @Input() agent: Agent;
   @Input()
@@ -30,6 +31,10 @@ export class AgentBriefComponent implements OnDestroy {
   @Input()
   set bigger(value: boolean) {
     this.isBigger = coerceBooleanProperty(value);
+  }
+  @Input()
+  set onlyPhoto(value: boolean) {
+    this.isOnlyPhotoVisible = coerceBooleanProperty(value);
   }
 
   constructor(readonly windowSizeDetector: WindowSizeDetector,

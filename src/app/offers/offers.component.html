@@ -24,14 +24,31 @@
         </div>
     </div>
 
-    <div class="no-offers-prompt" *ngIf="offersDao.getOffersQuantity() === 0">
-        <h2>
-            <div class="emoji"> \(^Д^)/ </div>
-            <div>Brak ofert spełniających podane kryteria.</div>
-        </h2>
-        <h4>
-            Zmień kryteria i wyszukaj ponownie.
-        </h4>
+    <div class="no-offers-prompt" *ngIf="offersDao.getOffersQuantity() === 0 && agentsDao.getAgentById(1155) as agent">
+        <perfect-agent-brief
+            *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall"
+            [agent]="agent"
+            onlyPhoto
+            bigger>
+        </perfect-agent-brief>
+        <div class="prompt">
+            <h2>
+                Brak ofert spełniających podane kryteria.
+            </h2>
+            <h4>
+                Skontaktuj się z nami! Korzystając z naszego doświadczenia, pomożemy Ci znaleźć to, czego szukasz.
+            </h4>
+            <div class="contact-info-container">
+                <a href="mailto:{{ agent.mail }}">
+                    <mat-icon><i class="fas fa-envelope-square"></i></mat-icon>
+                    {{ agent.mail }}
+                </a>
+                <a href="tel:{{ agent.mobile }}">
+                    <mat-icon><i class="fas fa-phone-square-alt"></i></mat-icon>
+                    {{ agent.mobile }}
+                </a>
+            </div>
+        </div>
     </div>
 
     <perfect-offer-card
