@@ -103,7 +103,7 @@
     <div class="row" *ngIf="showAdvanced">
         <div class="checkboxes-container additional-fields">
             <div class="checkbox-container"
-                *ngIf="!filters.estateType || filters.estateType === 'mieszkania'">
+                *ngIf="!filters.estateType || filters.estateType === 'mieszkanie'">
                 <p-checkbox
                     [(ngModel)]="isElevatorAvailable"
                     binary="true" 
@@ -113,7 +113,7 @@
                 <label for="elevator">winda</label>
             </div>
             <div class="checkbox-container"
-                *ngIf="filters.estateType !== 'działki'">
+                *ngIf="filters.estateType !== 'działka'">
                 <p-checkbox
                     [(ngModel)]="isParkingAvailable"
                     binary="true" 
@@ -122,7 +122,7 @@
                 <label for="parking">parking/garaż</label>
             </div>
             <div class="checkbox-container"
-                *ngIf="!filters.estateType || filters.estateType === 'mieszkania' || filters.estateType === 'domy'">
+                *ngIf="!filters.estateType || filters.estateType === 'mieszkanie' || filters.estateType === 'dom'">
                 <p-checkbox
                     [(ngModel)]="isTerraceAvailable"
                     binary="true"
@@ -131,7 +131,7 @@
                 <label for="terrace">balkon/taras</label>
             </div>
             <div class="checkbox-container"
-                *ngIf="!filters.estateType || filters.estateType === 'mieszkania' || filters.estateType === 'domy'">
+                *ngIf="!filters.estateType || filters.estateType === 'mieszkanie' || filters.estateType === 'dom'">
                 <p-checkbox
                     [(ngModel)]="isBasementAvailable"
                     binary="true"
@@ -140,7 +140,7 @@
                 <label for="basement">piwnica/komórka</label>
             </div>
             <div class="checkbox-container"
-                *ngIf="filters.estateType === 'działki' || filters.estateType === 'domy'">
+                *ngIf="filters.estateType === 'działka' || filters.estateType === 'dom'">
                 <p-checkbox
                     [(ngModel)]="isMpzpAvailable"
                     binary="true"
@@ -166,7 +166,7 @@
             </div>
         </div>
         <div class="from-to-input-container"
-            *ngIf="filters.estateType !== 'działki' && filters.estateType !== 'hale'">
+            *ngIf="filters.estateType !== 'działka' && filters.estateType !== 'hala'">
             <div class="title">liczba pokoi:</div>
             <div class="inputs-container">
                 <perfect-input
@@ -183,7 +183,7 @@
             </div>
         </div>
         <div class="from-to-input-container"
-            *ngIf="!filters.estateType || filters.estateType === 'mieszkania' || filters.estateType === 'lokale'">
+            *ngIf="!filters.estateType || filters.estateType === 'mieszkanie' || filters.estateType === 'lokal'">
             <div class="title">piętro:</div>
             <div class="inputs-container">
                 <perfect-input
@@ -206,11 +206,6 @@
             title='symbol / numer oferty'
             [(value)]="symbol">
         </perfect-input>
-        <!-- <div class="symbol-input"
-            *ngIf="windowSizeDetector.isWindowSmallerThanDesktopSmall && showAdvanced">
-            <div class="title">symbol / numer oferty:</div>
-            <perfect-input [(value)]="symbol"></perfect-input>
-        </div> -->
         <div class="buttons-container">
             <p-button class="show-advanced" (click)="toggleAdvancedVisibility()">
                 <span class="label">zaawansowane</span>
