@@ -18,19 +18,19 @@
         .contact {
             @include perfect-box;
             left: 50%;
-            margin-left: 145px;
+            margin-left: 115px;
             padding: 1rem 1rem 2rem;
             position: absolute;
-            top: 480px; 
+            top: 490px; 
             width: 475px;
             @media screen and (max-width: $desktop-large) {
-                margin-left: 95px;
-                top: 425px;
+                margin-left: 100px;
+                top: 440px;
                 width: 430px;
             }
             @media screen and (max-width: $desktop-medium) {
-                margin-left: 35px;
-                top: 450px;
+                margin-left: 30px;
+                top: 465px;
             }
             @media screen and (max-width: $desktop-small) {
                 margin: 2rem auto;
@@ -63,16 +63,26 @@
         .section-title {
             align-items: center;
             display: flex;
-            margin-bottom: 0;
+            margin-bottom: -1rem;
+            margin-top: -1rem;
+
+            .title {
+                @media screen and (max-width: $desktop-small) {
+                    order: 2;
+                }
+            }
 
             img {
-                height: 2.5em;
-                margin-right: 0.5em;
-                width: 2.5em;
+                height: 7rem;
+                margin-left: 1rem;
+                width: 7rem;
+                @media screen and (max-width: $desktop-small) {
+                    margin-left: 0;
+                    margin-right: 1rem;
+                    order: 1;
+                }
                 @media screen and (max-width: $mobile) {
-                    height: 4em;
                     margin-right: 0;
-                    width: 4em;
                 }
             }
         }
