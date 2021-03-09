@@ -5,6 +5,8 @@ import { Subscription } from 'rxjs';
 import { OffersDao } from '../shared/services/offers-dao.service';
 import { SnackbarService } from '../shared/services/snackbar.service';
 import { Offer, Sorting, AVAILABLE_SORTINGS, DEFAULT_FILTERS, OffersFilters } from '../shared/models';
+import { AgentsDao } from '../shared/services/agents-dao.service';
+import { WindowSizeDetector } from '../shared/services/window-size-detector.service';
 
 const FIRST_PAGE_NUMBER = 1;
 const DEFAULT_SORTING_STRINGIFIED = 'creationDate_descending';
@@ -32,10 +34,16 @@ export class OffersComponent implements OnInit, OnDestroy {
   snackbarContent = '';
 
   constructor(readonly offersDao: OffersDao,
+    readonly agentsDao: AgentsDao,
+    readonly windowSizeDetector: WindowSizeDetector,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly changeDetector: ChangeDetectorRef,
-    private readonly snackbarService: SnackbarService) {}
+    private readonly snackbarService: SnackbarService) {
+      this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
+        this.changeDetector.detectChanges();
+      })
+    }
 
   ngOnInit() {
     this.subscription.add(this.route.params.subscribe(params => {

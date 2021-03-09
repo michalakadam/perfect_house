@@ -46,16 +46,69 @@
     }
 
     .no-offers-prompt {
-        text-align: center;
-        
-        .emoji {
-            color: $light-green;
-            font-size: 54px;
-            margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        margin-top: 5rem;
+        @media screen and (max-width: $desktop-small) {
+            flex-direction: column;
+            margin: 3rem auto 0;
+            max-width: 400px;
         }
 
-        h4 {
-            color: $font-light-grey;
+        & > * {
+            display: inline-block;
+        }
+
+        perfect-agent-brief {
+            width: 200px;
+        }
+        
+        .prompt {
+            text-align: center;
+            vertical-align: top;
+
+            h4 {
+                color: $font-light-grey;
+            }
+
+            .contact-info-container {
+                display: flex;
+                font-size: 1.3rem;
+                justify-content: center;
+                @media screen and (max-width: $mobile-small) {
+                    flex-direction: column;
+                }
+                
+                a {
+                    display: flex;
+                    font-style: italic;
+                    @media screen and (max-width: $desktop-small) {
+                        line-height: 2rem;
+                    }
+                    @media screen and (max-width: $mobile-small) {
+                        justify-content: center;
+                    }
+                
+                    &:first-of-type {
+                        margin-right: 2rem;
+                        @media screen and (max-width: $mobile-small) {
+                            margin-bottom: 1rem;
+                        }
+                    }
+
+                    mat-icon {
+                        color: $light-green;
+                        margin-right: 0.4rem;
+
+                        &.mat-icon {
+                            font-size: 2rem;
+                            height: 2rem;
+                            line-height: 1rem;
+                            width: 2rem;
+                        }
+                    }
+                }
+            }
         }
     }
 
