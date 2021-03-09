@@ -4,10 +4,12 @@
     ::ng-deep .ol-viewport {
         max-height: 750px;
         min-height: 300px;
+        pointer-events: none;
 
         .ol-control button {
             background-color: $light-green;
             color: $dark-green;
+            pointer-events: initial;
         }
     }
 }
