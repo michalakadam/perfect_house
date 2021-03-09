@@ -1,0 +1,5 @@
+@import "~src/mixins.scss";
+
+.component-container {
+    @include article-page;
+}

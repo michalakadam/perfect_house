@@ -10,6 +10,7 @@ import { OffersComponent } from './offers/offers.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ManagementComponent } from './management/management.component';
 import { UnderConstructionComponent } from './under-construction/under-construction.component';
+import { ValuesComponent } from './values/values.component';
 
 
 const routes: Routes = [
@@ -47,7 +48,7 @@ const routes: Routes = [
   },
   {
     path: 'wartosci',
-    component: UnderConstructionComponent,
+    component: ValuesComponent,
     data: {
       title: 'Nasze wartości',
     }

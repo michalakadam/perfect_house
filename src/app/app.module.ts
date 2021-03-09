@@ -46,6 +46,7 @@ import { OfferDetailsComponent } from 'src/app/offer/offer-details/offer-details
 import { UnderConstructionComponent } from './under-construction/under-construction.component';
 import { TabViewModule } from 'primeng/tabview';
 import { GroupedDropdownComponent } from './offers/search-tool/grouped-dropdown/grouped-dropdown.component';
+import { ValuesComponent } from './values/values.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { GroupedDropdownComponent } from './offers/search-tool/grouped-dropdown/
     OfferDetailsComponent,
     UnderConstructionComponent,
     GroupedDropdownComponent,
+    ValuesComponent,
   ],
   imports: [
     AppRoutingModule,
