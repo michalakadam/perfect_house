@@ -43,9 +43,7 @@ export class GroupedDropdownComponent implements OnInit {
   set groups(val: DropdownGroup[]) {
     this.groupsWithValues = val;
     const selectedGroup = this.groupsWithValues.find(group => group.isSelected);
-    if (selectedGroup) {
-      this.selected = this.computeSelected(selectedGroup);
-    }
+    this.selected = selectedGroup ? this.computeSelected(selectedGroup) : '';
   }
 
   constructor(private readonly changeDetector: ChangeDetectorRef) {}
@@ -58,7 +56,6 @@ export class GroupedDropdownComponent implements OnInit {
       if (!this.isValueSelected) {
         this.isGroupSelected = this.computeIsGroupSelected();
       }
-      // this.changeDetector.detectChanges();
     }
   }
 

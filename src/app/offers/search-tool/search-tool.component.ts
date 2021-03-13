@@ -106,12 +106,8 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges() {
-    if (!this.estateTypesWithSubtypes.length) {
-      this.computeEstateTypesWithSubtypes(); 
-    }
-    if (!this.voivodeshipsWithCounties.length) {
-      this.computeVoivodeshipsWithCounties();
-    }
+    this.computeEstateTypesWithSubtypes();
+    this.computeVoivodeshipsWithCounties();
     this.location = this.filters.location;
     this.isForRent = this.filters.isForRent;
     if (this.filters.isPrimaryMarket) {
@@ -148,6 +144,7 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private computeEstateTypesWithSubtypes() {
+    this.estateTypesWithSubtypes = [];
     for (const estateType of this.availableEstateTypes) {
       const subtypes = this.getEstateSubtypesForDropdown(estateType);
 
@@ -174,6 +171,7 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private computeVoivodeshipsWithCounties() {
+    this.voivodeshipsWithCounties = [];
     for (const voivodeship of this.offersDao.getAvailableVoivodeships()) {
       const counties = this.getCountiesForDropdown(voivodeship);
 
