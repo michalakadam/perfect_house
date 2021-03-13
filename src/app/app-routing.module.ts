@@ -11,6 +11,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ManagementComponent } from './management/management.component';
 import { UnderConstructionComponent } from './under-construction/under-construction.component';
 import { ValuesComponent } from './values/values.component';
+import { PhotovoltaicsComponent } from './photovoltaics/photovoltaics.component';
 
 
 const routes: Routes = [
@@ -92,7 +93,7 @@ const routes: Routes = [
   },
   {
     path: 'fotowoltaika',
-    component: UnderConstructionComponent,
+    component: PhotovoltaicsComponent,
     data: {
       title: 'Fotowoltaika',
     },

@@ -47,6 +47,7 @@ import { UnderConstructionComponent } from './under-construction/under-construct
 import { TabViewModule } from 'primeng/tabview';
 import { GroupedDropdownComponent } from './offers/search-tool/grouped-dropdown/grouped-dropdown.component';
 import { ValuesComponent } from './values/values.component';
+import { PhotovoltaicsComponent } from './photovoltaics/photovoltaics.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { ValuesComponent } from './values/values.component';
     UnderConstructionComponent,
     GroupedDropdownComponent,
     ValuesComponent,
+    PhotovoltaicsComponent,
   ],
   imports: [
     AppRoutingModule,
