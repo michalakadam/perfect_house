@@ -15,7 +15,6 @@ import { OffersComponent } from './offers/offers.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { NavigationComponent } from './header/navigation/navigation.component';
@@ -41,7 +40,6 @@ import { SliderModule } from 'primeng/slider';
 import { GalleriaModule } from 'primeng/galleria';
 import { InputWithSliderComponent } from './offers/search-tool/input-with-slider/input-with-slider.component';
 import { CarouselModule } from 'primeng/carousel';
-import { MatCardModule } from '@angular/material/card';
 import { OfferDetailsComponent } from 'src/app/offer/offer-details/offer-details.component';
 import { UnderConstructionComponent } from './under-construction/under-construction.component';
 import { TabViewModule } from 'primeng/tabview';
@@ -99,11 +97,9 @@ import { PhotovoltaicsComponent } from './photovoltaics/photovoltaics.component'
     MatDividerModule,
     MatIconModule,
     MatListModule,
-    MatSidenavModule,
     PaginatorModule,
     SelectButtonModule,
     SliderModule,
-    MatCardModule,
     TabViewModule,
   ],
   bootstrap: [

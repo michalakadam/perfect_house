@@ -1,7 +1,6 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { skip } from 'rxjs/operators';
 import { DEFAULT_PARAMETERS } from '../offers/offers.component';
 import { WindowSizeDetector } from '../shared/services/window-size-detector.service';
 
