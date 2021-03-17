@@ -1,14 +1,18 @@
-<div class="image-container" style="background-image: url('/offers/{{ offer.photos[0] }}');">
-    <div class="button-icon-container">
-        <p-button class="gallery-button" label="Zobacz galerię"></p-button>
-        <span class="number-icon-container">
-            {{ offer.photos.length }}
-            <mat-icon id="collections">collections</mat-icon>
-        </span>
-    </div>
-</div>
-
 <div class="component-container">
+    <div class="gallery-agent-container">
+        <perfect-gallery>
+
+        </perfect-gallery>
+        <div class="card agent-brief">
+            <perfect-agent-brief *ngIf="agentsDao.getAgentById(offer.agentId) as agent"
+                [agent]="agent"
+                bigger
+                contactInfoVisible
+                vertical
+                (click)="navigateToAgentPage(agent)">
+            </perfect-agent-brief>
+        </div>
+    </div>
     <div class="card basic-info-card">
         <div class="price" *ngIf="offer.price > -1">
             <span *ngIf="offer.price > 1">
@@ -20,35 +24,24 @@
         </div>
         <perfect-offer-details [offer]="offer"></perfect-offer-details>
     </div>
-    <div class="description-details-agent-container">
-        <div class="card description-details" *ngIf="!windowSizeDetector.isWindowSmallerThanMobileLarge">
-            <div class="description">
+    <div class="card description-details" *ngIf="!windowSizeDetector.isWindowSmallerThanMobile">
+        <div class="description">
+            {{ offer.description }}
+        </div>
+        <div class="details">
+            <ng-container *ngTemplateOutlet="details"></ng-container>
+        </div>
+    </div>
+    <div class="card description-details-responsive" *ngIf="windowSizeDetector.isWindowSmallerThanMobile">
+        <p-tabView>
+            <p-tabPanel header="Opis">
                 {{ offer.description }}
-            </div>
-            <div class="details">
+            </p-tabPanel>
+            <p-tabPanel header="Szczegóły">
                 <ng-container *ngTemplateOutlet="details"></ng-container>
-            </div>
-        </div>
-        <div class="card description-details-responsive" *ngIf="windowSizeDetector.isWindowSmallerThanMobileLarge">
-            <p-tabView>
-                <p-tabPanel header="Opis">
-                    {{ offer.description }}
-                </p-tabPanel>
-                <p-tabPanel header="Szczegóły">
-                    <ng-container *ngTemplateOutlet="details"></ng-container>
-                </p-tabPanel>
-            </p-tabView>
-        </div>
-        <div class="card agent-brief">
-            <perfect-agent-brief *ngIf="agentsDao.getAgentById(offer.agentId) as agent"
-                [agent]="agent"
-                bigger
-                contactInfoVisible
-                vertical
-                (click)="navigateToAgentPage(agent)">
-            </perfect-agent-brief>
-        </div>
-    </div> 
+            </p-tabPanel>
+        </p-tabView>
+    </div>
 </div>
 
 <ng-template #details>

@@ -46,6 +46,7 @@ import { TabViewModule } from 'primeng/tabview';
 import { GroupedDropdownComponent } from './offers/search-tool/grouped-dropdown/grouped-dropdown.component';
 import { ValuesComponent } from './values/values.component';
 import { PhotovoltaicsComponent } from './photovoltaics/photovoltaics.component';
+import { GalleryComponent } from './shared/gallery/gallery.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { PhotovoltaicsComponent } from './photovoltaics/photovoltaics.component'
     GroupedDropdownComponent,
     ValuesComponent,
     PhotovoltaicsComponent,
+    GalleryComponent,
   ],
   imports: [
     AppRoutingModule,
