@@ -152,10 +152,6 @@ export class OfferComponent implements OnInit, OnDestroy {
       this.isVirtualVisitActive = true;
     }
   }
-  
-  getSanitizedUrl() {
-    return this.domSanitizer.bypassSecurityTrustResourceUrl(this.offer.virtualVisitUrl);
-  }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();

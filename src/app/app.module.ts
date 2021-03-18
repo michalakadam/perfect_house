@@ -47,6 +47,7 @@ import { GroupedDropdownComponent } from './offers/search-tool/grouped-dropdown/
 import { ValuesComponent } from './values/values.component';
 import { PhotovoltaicsComponent } from './photovoltaics/photovoltaics.component';
 import { GalleryComponent } from './shared/gallery/gallery.component';
+import { UrlSanitizer } from './shared/pipes/url-sanitizer';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { GalleryComponent } from './shared/gallery/gallery.component';
     MapComponent,
     NavigationComponent,
     NumberPrettifier,
+    UrlSanitizer,
     OfferCardComponent,
     OffersComponent,
     PageNotFoundComponent,

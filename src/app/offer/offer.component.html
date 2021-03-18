@@ -10,7 +10,7 @@
                 [longitude]="offer.longitude">
             </perfect-map>
 
-            <embed *ngIf="isVirtualVisitActive" type="text/html" [src]="getSanitizedUrl()">
+            <embed *ngIf="isVirtualVisitActive" type="text/html" [src]="offer.virtualVisitUrl | safe">
         </div>
         <div class="card agent-brief">
             <perfect-agent-brief *ngIf="agentsDao.getAgentById(offer.agentId) as agent"
