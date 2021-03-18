@@ -20,9 +20,33 @@
         width: 100%;
     }
 
-    .gallery-agent-container {
+    .misc-agent-container {
         display: flex;
         justify-content: space-between;
+
+        .misc-container {
+            margin: 0;
+            margin-right: 1rem;
+            padding: 0;
+
+            perfect-map {
+                ::ng-deep .map .ol-viewport canvas {
+                    border-radius: 15px;
+                    @media screen and (max-width: $desktop-small) {
+                        border-radius: 10px;
+                    }
+                }
+            }
+
+            embed {
+                border-radius: 15px;
+                height: 100%;
+                width: 100%;
+                @media screen and (max-width: $desktop-small) {
+                    border-radius: 10px;
+                }
+            }
+        }
 
         .agent-brief { 
             cursor: pointer;
@@ -44,14 +68,40 @@
         }
     }
 
+    .buttons-container {
+        padding-top: 1rem;
+        
+        .p-button-rounded {
+            background-color: white;
+            border: 1px solid white;
+            color: $dark-green;
+            font-weight: 700; 
+            height: 2.75rem;
+            margin-right: 2rem;
+            width: 13rem;
+
+            &:not(.p-disabled):not(.p-highlight):hover {
+                border-color: $dark-green;
+            }
+        }
+
+        .selected {
+            background-color: $light-green;
+            border: 1px solid $light-green;
+            color: $dark-green;
+        }
+    }
+
     .basic-info-card {
+        padding-top: .01rem;
+
         .price {
             color: $dark-green;
             float: right;
-            font-size: 36px;
+            font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 15px;
-            margin-right: 10px;
+            margin-right: 1rem;
+            margin-top: .5rem;
             text-align: right;
 
             .client-price {

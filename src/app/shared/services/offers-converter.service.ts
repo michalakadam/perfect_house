@@ -68,8 +68,8 @@ export class OffersConverter {
                 postalCode: offer.KodPocztowy?.text || '',
                 street: offer.Ulica || '',
                 location: offer.Polozenie?.text || '',
-                mapLatitude: offer.MapSzerokoscGeogr || '',
-                mapLongtitude: offer.MapDlugoscGeogr || '',
+                lattitude: this.convertToNumber(offer.MapSzerokoscGeogr?.replace(',', '.')),
+                longitude: this.convertToNumber(offer.MapDlugoscGeogr?.replace(',', '.')),
                 publicTransport: this.convertToArray(offer.Komunikacja?.lista),
                 // Sasiedztwo?.lista is always a single element object.
                 neighbourhood: this.convertToField(

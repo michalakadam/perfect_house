@@ -8,7 +8,8 @@ import { Offer, OfferField } from '../shared/models';
 import { AgentsDao } from 'src/app/shared/services/agents-dao.service';
 import { Agent } from 'src/app/shared/models';
 import { SnackbarService } from '../shared/services/snackbar.service';
-import { WindowSizeDetector } from '../shared/services/window-size-detector.service'
+import { WindowSizeDetector } from '../shared/services/window-size-detector.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'perfect-offer',
@@ -20,6 +21,12 @@ export class OfferComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   offer: Offer;
   definedOfferFields: OfferField<any>[] = [];
+  areButtonsVisible = false;
+  isGalleryActive = true;
+  isMapButtonVisible = false;
+  isMapActive = false;
+  isVirtualVisitButtonVisible = false;
+  isVirtualVisitActive = false;
 
   constructor(readonly agentsDao: AgentsDao,
     readonly windowSizeDetector: WindowSizeDetector,
@@ -28,7 +35,8 @@ export class OfferComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly titleService: Title,
     private readonly offersDao: OffersDao,
-    private readonly snackbarService: SnackbarService) {
+    private readonly snackbarService: SnackbarService,
+    private readonly domSanitizer: DomSanitizer) {
       this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
         this.changeDetector.detectChanges();
       });
@@ -50,8 +58,10 @@ export class OfferComponent implements OnInit, OnDestroy {
     } else {
       this.offer = this.offersDao.getOfferBySymbol(symbol);
       if (this.offer) {
+        console.log(this.offer.virtualVisitUrl)
         this.titleService.setTitle(this.offer.title);
         this.definedOfferFields = this.computeDefinedOfferFields();
+        this.computeButtonsVisibility();
         this.changeDetector.detectChanges();
       } else {
         this.handleNonexistentOffer(symbol);
@@ -69,6 +79,17 @@ export class OfferComponent implements OnInit, OnDestroy {
       this.router.navigate(['oferta', symbol]);
     } else {
       this.handleNonexistentOffer(offerNumber + '');
+    }
+  }
+
+  private computeButtonsVisibility() {
+    if (this.offer.lattitude && this.offer.longitude) {
+      this.isMapButtonVisible = true;
+      this.areButtonsVisible = true;
+    }
+    if (this.offer.virtualVisitUrl) {
+      this.isVirtualVisitButtonVisible = true;
+      this.areButtonsVisible = true;
     }
   }
   
@@ -106,6 +127,34 @@ export class OfferComponent implements OnInit, OnDestroy {
 
   computeAgentLink(agentFullName: string): string {
     return agentFullName.toLowerCase().split(' ').join('-');
+  }
+
+  showGallery() {
+    if (!this.isGalleryActive) {
+      this.isGalleryActive = true;
+      this.isMapActive = false;
+      this.isVirtualVisitActive = false;
+    }
+  }
+
+  showMap() {
+    if (!this.isMapActive) {
+      this.isGalleryActive = false;
+      this.isMapActive = true;
+      this.isVirtualVisitActive = false;
+    }
+  }
+
+  showVirtualVisit() {
+    if (!this.isVirtualVisitActive) {
+      this.isGalleryActive = false;
+      this.isMapActive = false;
+      this.isVirtualVisitActive = true;
+    }
+  }
+  
+  getSanitizedUrl() {
+    return this.domSanitizer.bypassSecurityTrustResourceUrl(this.offer.virtualVisitUrl);
   }
 
   ngOnDestroy() {

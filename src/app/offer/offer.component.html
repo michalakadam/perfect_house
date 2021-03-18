@@ -1,8 +1,17 @@
 <div class="component-container">
-    <div class="gallery-agent-container">
-        <perfect-gallery>
+    <div class="misc-agent-container">
+        <div class="card misc-container">
+            <perfect-gallery *ngIf="isGalleryActive">
+            </perfect-gallery>
 
-        </perfect-gallery>
+            <perfect-map
+                *ngIf="isMapActive"
+                [lattitude]="offer.lattitude"
+                [longitude]="offer.longitude">
+            </perfect-map>
+
+            <embed *ngIf="isVirtualVisitActive" type="text/html" [src]="getSanitizedUrl()">
+        </div>
         <div class="card agent-brief">
             <perfect-agent-brief *ngIf="agentsDao.getAgentById(offer.agentId) as agent"
                 [agent]="agent"
@@ -12,6 +21,37 @@
                 (click)="navigateToAgentPage(agent)">
             </perfect-agent-brief>
         </div>
+    </div>
+    <div class="buttons-container" *ngIf="areButtonsVisible">
+        <button
+            pButton
+            pRipple
+            type="button"
+            label="Zdjęcia"
+            class="p-button-rounded p-button-raised"
+            [class.selected]="isGalleryActive"
+            (click)="showGallery()">
+        </button>
+        <button
+            *ngIf="isMapButtonVisible"
+            pButton
+            pRipple
+            type="button"
+            label="Mapa"
+            class="p-button-rounded p-button-raised"
+            [class.selected]="isMapActive"
+            (click)="showMap()">
+        </button>
+        <button
+            *ngIf="isVirtualVisitButtonVisible"
+            pButton
+            pRipple
+            type="button" 
+            label="Wirtualna wizyta"
+            class="p-button-rounded p-button-raised"
+            [class.selected]="isVirtualVisitActive"
+            (click)="showVirtualVisit()">
+        </button>
     </div>
     <div class="card basic-info-card">
         <div class="price" *ngIf="offer.price > -1">
