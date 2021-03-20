@@ -25,6 +25,7 @@
                 </perfect-agent-brief>
             </div>
             <button
+                *ngIf="isMapButtonVisible || isVirtualVisitButtonVisible"
                 pButton pRipple
                 type="button"
                 label="Zdjęcia"

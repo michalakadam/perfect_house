@@ -1,6 +1,9 @@
 <div class="component-container">
     <div class="photo">
-        <img [src]="currentPhotoUrl">
+        <img #current
+            [src]="currentPhotoUrl"
+            [class.vertical]="isCurrentPhotoVertical"
+            (load)="determineCurrentImageDimensions()">
     </div>
     <button
         pButton pRipple

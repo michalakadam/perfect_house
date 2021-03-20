@@ -9,6 +9,8 @@
     width: 100%;
 
     .photo {
+        align-items: center;
+        display: flex;
         height: 85%;
         overflow: hidden;
         width: 100%;
@@ -17,8 +19,17 @@
             display: block;
             margin: 0 auto;
             object-fit: contain;
-            height: 100%;
+            width: 100%;
             z-index: 0;
+
+            &.vertical {
+                height: 100%;
+                width: initial;
+            }
+
+            &.hidden {
+                visibility: hidden;
+            }
         }
     }
 

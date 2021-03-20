@@ -21,7 +21,6 @@ export class OfferComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   offer: Offer;
   definedOfferFields: OfferField<any>[] = [];
-  areButtonsVisible = false;
   isGalleryActive = true;
   isMapButtonVisible = false;
   isMapActive = false;
@@ -58,7 +57,6 @@ export class OfferComponent implements OnInit, OnDestroy {
     } else {
       this.offer = this.offersDao.getOfferBySymbol(symbol);
       if (this.offer) {
-        console.log(this.offer.virtualVisitUrl)
         this.titleService.setTitle(this.offer.title);
         this.definedOfferFields = this.computeDefinedOfferFields();
         this.computeButtonsVisibility();
@@ -85,11 +83,9 @@ export class OfferComponent implements OnInit, OnDestroy {
   private computeButtonsVisibility() {
     if (this.offer.lattitude && this.offer.longitude) {
       this.isMapButtonVisible = true;
-      this.areButtonsVisible = true;
     }
     if (this.offer.virtualVisitUrl) {
       this.isVirtualVisitButtonVisible = true;
-      this.areButtonsVisible = true;
     }
   }
   
@@ -111,7 +107,7 @@ export class OfferComponent implements OnInit, OnDestroy {
   // Because of https://stackoverflow.com/a/46703380/11212568 instanceof
   // does not work on interface.
   private isOfferField(value: any): boolean {
-    return value.hasOwnProperty('displayName') && value.hasOwnProperty('value');
+    return value && value.hasOwnProperty('displayName') && value.hasOwnProperty('value');
   }
 
   private isDefined(value: any): boolean {
