@@ -57,49 +57,46 @@
             }
         }
 
-        .agent-brief { 
-            cursor: pointer;
+        .agent-buttons-container {
+            display: flex;
+            flex-direction: column;
             margin: 0;
             margin-left: auto;
-            max-height: 376px;
-            padding: 25px 0;
             width: 323px;
-            @media screen and (max-width: $desktop-small) {
-                margin-right: 20px;
+
+            .agent-brief { 
+                cursor: pointer;
+                margin-top: 0;
                 max-height: 376px;
                 padding: 25px 0;
             }
-            @media screen and (max-width: $mobile-large) {
-                margin-right: 20px;
-                max-height: 376px;
-                padding: 25px 0;
+            
+            .p-button-rounded {
+                background-color: white;
+                border: 1px solid white;
+                color: $dark-green;
+                font-weight: 700; 
+                height: 2.75rem;
+                margin: 0 auto 1rem;
+                width: 13rem;
+
+                &:not(.p-disabled):not(.p-highlight):hover {
+                    border-color: $dark-green;
+                }
+
+                &:last-of-type {
+                    margin-bottom: 0;
+                }
+            }
+
+            .selected {
+                background-color: $light-green;
+                border: 1px solid $light-green;
+                color: $dark-green;
             }
         }
     }
 
-    .buttons-container {
-        padding-top: 1rem;
-        
-        .p-button-rounded {
-            background-color: white;
-            border: 1px solid white;
-            color: $dark-green;
-            font-weight: 700; 
-            height: 2.75rem;
-            margin-right: 2rem;
-            width: 13rem;
-
-            &:not(.p-disabled):not(.p-highlight):hover {
-                border-color: $dark-green;
-            }
-        }
-
-        .selected {
-            background-color: $light-green;
-            border: 1px solid $light-green;
-            color: $dark-green;
-        }
-    }
 
     .basic-info-card {
         padding-top: .01rem;

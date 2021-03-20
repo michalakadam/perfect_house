@@ -14,43 +14,43 @@
 
             <embed *ngIf="isVirtualVisitActive" type="text/html" [src]="offer.virtualVisitUrl | safe">
         </div>
-        <div class="card agent-brief">
-            <perfect-agent-brief *ngIf="agentsDao.getAgentById(offer.agentId) as agent"
-                [agent]="agent"
-                bigger
-                contactInfoVisible
-                vertical
-                (click)="navigateToAgentPage(agent)">
-            </perfect-agent-brief>
+        <div class="agent-buttons-container">
+            <div class="card agent-brief">
+                <perfect-agent-brief *ngIf="agentsDao.getAgentById(offer.agentId) as agent"
+                    [agent]="agent"
+                    bigger
+                    contactInfoVisible
+                    vertical
+                    (click)="navigateToAgentPage(agent)">
+                </perfect-agent-brief>
+            </div>
+            <button
+                pButton pRipple
+                type="button"
+                label="Zdjęcia"
+                class="p-button-rounded p-button-raised"
+                [class.selected]="isGalleryActive"
+                (click)="showGallery()">
+            </button>
+            <button
+                *ngIf="isMapButtonVisible"
+                pButton pRipple
+                type="button"
+                label="Mapa"
+                class="p-button-rounded p-button-raised"
+                [class.selected]="isMapActive"
+                (click)="showMap()">
+            </button>
+            <button
+                *ngIf="isVirtualVisitButtonVisible"
+                pButton pRipple
+                type="button" 
+                label="Wirtualna wizyta"
+                class="p-button-rounded p-button-raised"
+                [class.selected]="isVirtualVisitActive"
+                (click)="showVirtualVisit()">
+            </button>
         </div>
-    </div>
-    <div class="buttons-container" *ngIf="areButtonsVisible">
-        <button
-            pButton pRipple
-            type="button"
-            label="Zdjęcia"
-            class="p-button-rounded p-button-raised"
-            [class.selected]="isGalleryActive"
-            (click)="showGallery()">
-        </button>
-        <button
-            *ngIf="isMapButtonVisible"
-            pButton pRipple
-            type="button"
-            label="Mapa"
-            class="p-button-rounded p-button-raised"
-            [class.selected]="isMapActive"
-            (click)="showMap()">
-        </button>
-        <button
-            *ngIf="isVirtualVisitButtonVisible"
-            pButton pRipple
-            type="button" 
-            label="Wirtualna wizyta"
-            class="p-button-rounded p-button-raised"
-            [class.selected]="isVirtualVisitActive"
-            (click)="showVirtualVisit()">
-        </button>
     </div>
     <div class="card basic-info-card">
         <div class="price" *ngIf="offer.price > -1">
