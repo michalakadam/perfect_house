@@ -1,7 +1,9 @@
 <div class="component-container">
     <div class="misc-agent-container">
         <div class="card misc-container">
-            <perfect-gallery *ngIf="isGalleryActive">
+            <perfect-gallery
+                *ngIf="isGalleryActive"
+                [photoUrls]="computePhotoUrls()">
             </perfect-gallery>
 
             <perfect-map
@@ -24,8 +26,7 @@
     </div>
     <div class="buttons-container" *ngIf="areButtonsVisible">
         <button
-            pButton
-            pRipple
+            pButton pRipple
             type="button"
             label="Zdjęcia"
             class="p-button-rounded p-button-raised"
@@ -34,8 +35,7 @@
         </button>
         <button
             *ngIf="isMapButtonVisible"
-            pButton
-            pRipple
+            pButton pRipple
             type="button"
             label="Mapa"
             class="p-button-rounded p-button-raised"
@@ -44,8 +44,7 @@
         </button>
         <button
             *ngIf="isVirtualVisitButtonVisible"
-            pButton
-            pRipple
+            pButton pRipple
             type="button" 
             label="Wirtualna wizyta"
             class="p-button-rounded p-button-raised"

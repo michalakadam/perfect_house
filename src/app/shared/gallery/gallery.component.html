@@ -1,3 +1,24 @@
-<div class="gallery-component">
-    <h1>Tu będzie galeria</h1>
+<div class="component-container">
+    <div class="photo">
+        <img [src]="currentPhotoUrl">
+    </div>
+    <button
+        pButton pRipple
+        type="button"
+        icon="pi pi-chevron-left"
+        class="p-button-rounded"
+        [class.hidden]="!isPreviousPhotoAvailable()"
+        (click)="loadPreviousPhoto()">
+    </button>
+    <button
+        pButton pRipple
+        type="button"
+        icon="pi pi-chevron-right"
+        class="p-button-rounded"
+        [class.hidden]="!isNextPhotoAvailable()"
+        (click)="loadNextPhoto()">
+    </button>
+    <div class="carousel-container">
+        
+    </div>
 </div>

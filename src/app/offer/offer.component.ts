@@ -153,6 +153,12 @@ export class OfferComponent implements OnInit, OnDestroy {
     }
   }
 
+  computePhotoUrls() {
+    const photoUrlPrefix = '/offers/';
+
+    return this.offer.photos.map(photo => photoUrlPrefix + photo);
+  }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }

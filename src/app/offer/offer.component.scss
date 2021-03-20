@@ -22,11 +22,20 @@
 
     .misc-agent-container {
         display: flex;
+        height: 715px;
         justify-content: space-between;
+        @media screen and (max-width: $desktop-large) {
+            height: 627px;
+        }
+        @media screen and (max-width: $desktop-medium) {
+            height: 514px;
+        }
 
         .misc-container {
+            height: 100%;
             margin: 0;
             margin-right: 1rem;
+            overflow: hidden;
             padding: 0;
 
             perfect-map {
@@ -54,7 +63,7 @@
             margin-left: auto;
             max-height: 376px;
             padding: 25px 0;
-            width: 255px;
+            width: 323px;
             @media screen and (max-width: $desktop-small) {
                 margin-right: 20px;
                 max-height: 376px;
