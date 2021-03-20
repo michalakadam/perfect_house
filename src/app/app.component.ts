@@ -56,6 +56,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.primengConfig.ripple = true;
+    // Throw setting window size to event loop so that it happens
+    // after all components are initialized.
+    setTimeout(() => {
+      this.windowSizeDetector.windowSizeChanged(window.innerWidth);
+    });
   }
 
   isUrlTitleComputedInComponent(url: string): boolean {

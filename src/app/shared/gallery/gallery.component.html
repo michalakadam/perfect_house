@@ -1,27 +1,50 @@
 <div class="component-container">
-    <div class="photo">
-        <img #current
-            [src]="currentPhotoUrl"
-            [class.vertical]="isCurrentPhotoVertical"
-            (load)="determineCurrentImageDimensions()">
+    <div class="photo-with-buttons-container">
+        <div class="photo">
+            <img #current
+                [src]="currentPhotoUrl"
+                [class.vertical]="isCurrentPhotoVertical"
+                (load)="determineCurrentPhotoLayout()">
+        </div>
+        <button
+            pButton pRipple
+            type="button"
+            icon="pi pi-chevron-left"
+            class="p-button-rounded"
+            [class.hidden]="!isPreviousPhotoAvailable()"
+            (click)="loadPreviousPhoto()">
+        </button>
+        <button
+            pButton pRipple
+            type="button"
+            icon="pi pi-chevron-right"
+            class="p-button-rounded"
+            [class.hidden]="!isNextPhotoAvailable()"
+            (click)="loadNextPhoto()">
+        </button>
     </div>
-    <button
-        pButton pRipple
-        type="button"
-        icon="pi pi-chevron-left"
-        class="p-button-rounded"
-        [class.hidden]="!isPreviousPhotoAvailable()"
-        (click)="loadPreviousPhoto()">
-    </button>
-    <button
-        pButton pRipple
-        type="button"
-        icon="pi pi-chevron-right"
-        class="p-button-rounded"
-        [class.hidden]="!isNextPhotoAvailable()"
-        (click)="loadNextPhoto()">
-    </button>
     <div class="carousel-container">
-        
+        <div
+            class="carousel-button" 
+            [class.hidden]="carouselStartIndex === 0"
+            (click)="loadPreviousPhotos()">
+            <i class="pi pi-angle-double-left"></i>
+        </div>
+        <div class="photos-container">
+            <div *ngFor="let photoUrl of photosInCarousel"
+                class="photo-container"
+                (click)="selectPhoto(photoUrl)">
+                <img #photo
+                    [src]="photoUrl" 
+                    [class.selected]="photoUrl === currentPhotoUrl"
+                    [class.vertical]=isPhotoVertical(photo)>
+            </div> 
+        </div>
+        <div
+            class="carousel-button"
+            [class.hidden]="carouselEndIndex === photoUrls.length - 1"
+            (click)="loadNextPhotos()">
+            <i class="pi pi-angle-double-right"></i>
+        </div>
     </div>
 </div>

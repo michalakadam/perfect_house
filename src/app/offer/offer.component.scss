@@ -4,7 +4,7 @@
 .component-container {
     @include responsive-page;
     height: 100%;
-    margin: 30px auto;
+    margin: 0 auto 2rem;
     max-width: 1200px;
     @media screen and (max-width: $tablet) {
         width: 500px;
