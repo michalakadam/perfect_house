@@ -91,6 +91,7 @@
             margin-bottom: 6px;
         }
         @media screen and (max-width: $desktop-medium) {
+            border-top: 2px solid white;
             height: 78px;
             margin-bottom: 2px;
         }
@@ -101,11 +102,16 @@
             color: $dark-green;
             display: flex;
             font-weight: 700;
-            height: 32%;
-            margin: auto;
+            height: 106px;
+            margin: -12px auto 0;
             width: 1.5rem;
+            @media screen and (max-width: $desktop-large) {
+                height: 94px;
+                margin-top: -6px;
+            }
             @media screen and (max-width: $desktop-medium) {
-                border-top: 2px solid white;
+                height: 80px;
+                margin-top: -2px;
             }
 
             &:hover {
