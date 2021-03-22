@@ -53,34 +53,35 @@
             </button>
         </div>
     </div>
-    <div class="card basic-info-card">
-        <div class="price" *ngIf="offer.price > -1">
-            <span *ngIf="offer.price > 1">
-                {{ offer.price | prettifyNumber:'zł' }}
-            </span>
-            <span class="client-price" *ngIf="offer.price === 1">
-                Zaproponuj cenę!
-            </span>
+    <div class="card bottom-container">
+        <div class="basic-info">
+            <div class="price" *ngIf="offer.price > -1">
+                <span *ngIf="offer.price > 1">
+                    {{ offer.price | prettifyNumber:'zł' }}
+                </span>
+                <span class="client-price" *ngIf="offer.price === 1">
+                    Zaproponuj cenę!
+                </span>
+            </div>
+            <perfect-offer-details onOfferPage [offer]="offer"></perfect-offer-details>
         </div>
-        <perfect-offer-details [offer]="offer"></perfect-offer-details>
-    </div>
-    <div class="card description-details" *ngIf="!windowSizeDetector.isWindowSmallerThanMobile">
-        <div class="description">
-            {{ offer.description }}
-        </div>
-        <div class="details">
-            <ng-container *ngTemplateOutlet="details"></ng-container>
-        </div>
-    </div>
-    <div class="card description-details-responsive" *ngIf="windowSizeDetector.isWindowSmallerThanMobile">
-        <p-tabView>
-            <p-tabPanel header="Opis">
-                {{ offer.description }}
-            </p-tabPanel>
-            <p-tabPanel header="Szczegóły">
+        <div class="description-details" *ngIf="!windowSizeDetector.isWindowSmallerThanMobile">
+            <div class="description" [innerHTML]="offer.description">
+            </div>
+            <div class="details">
                 <ng-container *ngTemplateOutlet="details"></ng-container>
-            </p-tabPanel>
-        </p-tabView>
+            </div>
+        </div>
+        <div class="description-details-responsive" *ngIf="windowSizeDetector.isWindowSmallerThanMobile">
+            <p-tabView>
+                <p-tabPanel header="Opis">
+                    {{ offer.description }}
+                </p-tabPanel>
+                <p-tabPanel header="Szczegóły">
+                    <ng-container *ngTemplateOutlet="details"></ng-container>
+                </p-tabPanel>
+            </p-tabView>
+        </div>
     </div>
 </div>
 

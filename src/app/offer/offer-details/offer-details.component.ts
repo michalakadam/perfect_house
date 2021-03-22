@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Offer } from 'src/app/shared/models';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Component({
   selector: 'perfect-offer-details',
@@ -9,7 +10,13 @@ import { Offer } from 'src/app/shared/models';
 })
 
 export class OfferDetailsComponent {
+  isOnOfferPage = false;
+  
   @Input() offer: Offer;
+  @Input()
+  set onOfferPage(value: boolean) {
+    this.isOnOfferPage = coerceBooleanProperty(value);
+  }
 
   exists(value: any): boolean {
     if (typeof value === 'number') {

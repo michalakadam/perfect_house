@@ -39,10 +39,20 @@
             padding: 0;
 
             perfect-map {
-                ::ng-deep .map .ol-viewport canvas {
-                    border-radius: 15px;
-                    @media screen and (max-width: $desktop-small) {
-                        border-radius: 10px;
+                ::ng-deep .map {
+                    height: 715px;
+                    @media screen and (max-width: $desktop-large) {
+                        height: 627px;
+                    }
+                    @media screen and (max-width: $desktop-medium) {
+                        height: 514px;
+                    }
+
+                    .ol-viewport canvas {
+                        border-radius: 15px;
+                        @media screen and (max-width: $desktop-small) {
+                            border-radius: 10px;
+                        }
                     }
                 }
             }
@@ -98,84 +108,94 @@
     }
 
 
-    .basic-info-card {
+    .bottom-container {
         padding-top: .01rem;
 
-        .price {
-            color: $dark-green;
-            float: right;
-            font-size: 2rem;
-            font-weight: 700;
-            margin-right: 1rem;
-            margin-top: .5rem;
-            text-align: right;
+        .basic-info {
+            margin-bottom: 1.5rem;
 
-            .client-price {
-                color: $font-grey;
-                font-size: 16px;
-            }
-        }
-    }
+            .price {
+                color: $dark-green;
+                float: right;
+                font-size: 2rem;
+                font-weight: 700;
+                margin-right: 1.7rem;
+                position: relative;
+                text-align: right;
+                top: -0.4rem;
+                @media screen and (max-width: $desktop-large) {
+                    margin-right: 2.7rem;
+                }
 
-    .description-details {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        @media screen and (max-width: $desktop-small) {
-            flex-direction: column;
-        }
-
-        .description {
-            margin-right: 2rem;
-            text-align: justify;
-            width: 50%;
-            @media screen and (max-width: $desktop-small) {
-                margin-right: 0;
+                .client-price {
+                    color: $font-grey;
+                    font-size: 16px;
+                    position: relative;
+                    top: -0.3rem;
+                }
             }
         }
 
-        .details {
+        .description-details {
             display: flex;
-            flex-direction: column;
-            width: 50%;
+            justify-content: space-between;
+            width: 100%;
+            @media screen and (max-width: $desktop-small) {
+                flex-direction: column;
+            }
 
-            .unit {
-                margin-left: -0.25rem;
+            .description {
+                margin-right: 2rem;
+                text-align: justify;
+                width: 50%;
+                @media screen and (max-width: $desktop-small) {
+                    margin-right: 0;
+                }
+            }
+
+            .details {
+                display: flex;
+                flex-direction: column;
+                width: 50%;
+
+                .unit {
+                    margin-left: -0.25rem;
+                }
             }
         }
+
+        .description-details-responsive {
+            margin-left: 0px;
+            text-align: justify;
+            width: 850px;
+            
+            @media screen and (max-width: $desktop-large) {
+                width: 750px;
+            }
+            @media screen and (max-width: $desktop-medium) {
+                width: 600px;
+            }
+            @media screen and (max-width: $desktop-small) {
+                width: unset;
+            }
+
+            p-TabView { 
+                ::ng-deep .p-tabview .p-tabview-nav { 
+                    li.p-highlight .p-tabview-nav-link {
+                        border-color: $light-green;
+                        color: $dark-green;
+                    }
+
+                    li .p-tabview-nav-link:not(.p-disabled):focus {
+                        box-shadow: unset;
+                    }
+                    
+                    li:not(.p-highlight):not(.p-disabled):hover .p-tabview-nav-link {
+                        border-color:#dee2e6;
+                        color: $dark-green;
+                    }
+                }            
+            } 
+        }  
     }
-
-    .description-details-responsive {
-        margin-left: 0px;
-        text-align: justify;
-        width: 850px;
-        
-        @media screen and (max-width: $desktop-large) {
-            width: 750px;
-        }
-        @media screen and (max-width: $desktop-medium) {
-            width: 600px;
-        }
-        @media screen and (max-width: $desktop-small) {
-            width: unset;
-        }
-
-        p-TabView { 
-            ::ng-deep .p-tabview .p-tabview-nav { 
-                li.p-highlight .p-tabview-nav-link {
-                    border-color: $light-green;
-                    color: $dark-green;
-                }
-
-                li .p-tabview-nav-link:not(.p-disabled):focus {
-                    box-shadow: unset;
-                }
-                
-                li:not(.p-highlight):not(.p-disabled):hover .p-tabview-nav-link {
-                    border-color:#dee2e6;
-                    color: $dark-green;
-                }
-            }            
-        } 
-    }  
 }
