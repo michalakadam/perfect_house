@@ -48,6 +48,7 @@ import { ValuesComponent } from './values/values.component';
 import { PhotovoltaicsComponent } from './photovoltaics/photovoltaics.component';
 import { GalleryComponent } from './shared/gallery/gallery.component';
 import { UrlSanitizer } from './shared/pipes/url-sanitizer';
+import { StringDecoder } from './shared/pipes/string-decoder';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { UrlSanitizer } from './shared/pipes/url-sanitizer';
     NavigationComponent,
     NumberPrettifier,
     UrlSanitizer,
+    StringDecoder,
     OfferCardComponent,
     OffersComponent,
     PageNotFoundComponent,

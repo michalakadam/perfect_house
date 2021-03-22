@@ -9,7 +9,6 @@ import { AgentsDao } from 'src/app/shared/services/agents-dao.service';
 import { Agent } from 'src/app/shared/models';
 import { SnackbarService } from '../shared/services/snackbar.service';
 import { WindowSizeDetector } from '../shared/services/window-size-detector.service';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'perfect-offer',
@@ -34,8 +33,7 @@ export class OfferComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly titleService: Title,
     private readonly offersDao: OffersDao,
-    private readonly snackbarService: SnackbarService,
-    private readonly domSanitizer: DomSanitizer) {
+    private readonly snackbarService: SnackbarService) {
       this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
         this.changeDetector.detectChanges();
       });

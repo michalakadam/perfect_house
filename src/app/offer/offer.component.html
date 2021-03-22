@@ -66,7 +66,8 @@
             <perfect-offer-details onOfferPage [offer]="offer"></perfect-offer-details>
         </div>
         <div class="description-details" *ngIf="!windowSizeDetector.isWindowSmallerThanMobile">
-            <div class="description" [innerHTML]="offer.description">
+            <div class="description">
+                {{ offer.description | decodeString }}
             </div>
             <div class="details">
                 <ng-container *ngTemplateOutlet="details"></ng-container>
@@ -87,7 +88,9 @@
 
 <ng-template #details>
     <div *ngFor="let field of definedOfferFields">
-        {{ field.displayName }}: {{ field.value }}
-        <span class="unit" *ngIf="field.unit">{{ field.unit }}</span>
+        <div *ngIf="field.value">
+            {{ field.displayName }}: {{ field.value }}
+            <span class="unit" *ngIf="field.unit">{{ field.unit }}</span>
+        </div>
     </div>
 </ng-template>

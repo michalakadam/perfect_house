@@ -147,6 +147,7 @@
             .description {
                 margin-right: 2rem;
                 text-align: justify;
+                white-space: pre-wrap;
                 width: 50%;
                 @media screen and (max-width: $desktop-small) {
                     margin-right: 0;
