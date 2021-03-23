@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, Input, ViewChild, ElementRef, OnInit, ChangeDetectorRef } from '@angular/core';
 import { WindowSizeDetector } from '../services/window-size-detector.service';
 
-const HORIZONTAL_PHOTO_MAX_WIDTH = 750;
+const HORIZONTAL_PHOTO_MAX_WIDTH_TO_HEIGHT_RATIO = 1.2;
 
 @Component({
   selector: 'perfect-gallery',
@@ -54,7 +54,8 @@ export class GalleryComponent implements OnInit {
   }
 
   determineCurrentPhotoLayout() {
-    this.isCurrentPhotoVertical = this.isPhotoVertical(this.currentPhoto.nativeElement as HTMLImageElement);
+    this.isCurrentPhotoVertical =
+      this.isPhotoVertical(this.currentPhoto.nativeElement as HTMLImageElement);
   }
 
   isPreviousPhotoAvailable() {
@@ -85,6 +86,10 @@ export class GalleryComponent implements OnInit {
     this.currentPhotoUrl = this.photoUrls[index];
   }
 
+  isNextPhotosButtonHidden(): boolean {
+    return this.carouselEndIndex === this.photoUrls.length - 1 || this.photoUrls.length <= this.numberOfPhotosInCarousel;
+  }
+
   private computePhotosInCarousel(startIndex: number) {
     this.carouselStartIndex = startIndex;
     this.carouselEndIndex = startIndex + this.numberOfPhotosInCarousel - 1;
@@ -97,7 +102,7 @@ export class GalleryComponent implements OnInit {
   }
 
   isPhotoVertical(photo: HTMLImageElement): boolean {
-    return photo.naturalWidth < HORIZONTAL_PHOTO_MAX_WIDTH
+    return photo.naturalWidth / photo.naturalHeight < HORIZONTAL_PHOTO_MAX_WIDTH_TO_HEIGHT_RATIO;
   }
 
   loadNextPhotos() {

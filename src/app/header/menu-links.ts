@@ -45,7 +45,7 @@ export const ABOUT_US_LINKS: MenuLink[] = [
     },
     {
         title: 'Aktualności',
-        route: '/aktualnosci',
+        route: '/aktualności',
     },
 ];
 
@@ -80,7 +80,7 @@ export const ALL_LINKS: MenuLink[] = [
     },
     {
         title: 'Aktualności',
-        route: '/aktualnosci',
+        route: '/aktualności',
     },
     {
         title: 'Kontakt',

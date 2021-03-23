@@ -42,7 +42,7 @@
         </div>
         <div
             class="carousel-button"
-            [class.hidden]="carouselEndIndex === photoUrls.length - 1"
+            [class.hidden]="isNextPhotosButtonHidden()"
             (click)="loadNextPhotos()">
             <i class="pi pi-angle-double-right"></i>
         </div>

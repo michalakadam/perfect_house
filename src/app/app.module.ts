@@ -49,6 +49,7 @@ import { PhotovoltaicsComponent } from './photovoltaics/photovoltaics.component'
 import { GalleryComponent } from './shared/gallery/gallery.component';
 import { UrlSanitizer } from './shared/pipes/url-sanitizer';
 import { StringDecoder } from './shared/pipes/string-decoder';
+import { NewsFeedComponent } from './news-feed/news-feed.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { StringDecoder } from './shared/pipes/string-decoder';
     ValuesComponent,
     PhotovoltaicsComponent,
     GalleryComponent,
+    NewsFeedComponent,
   ],
   imports: [
     AppRoutingModule,

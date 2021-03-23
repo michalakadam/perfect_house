@@ -12,6 +12,7 @@ import { ManagementComponent } from './management/management.component';
 import { UnderConstructionComponent } from './under-construction/under-construction.component';
 import { ValuesComponent } from './values/values.component';
 import { PhotovoltaicsComponent } from './photovoltaics/photovoltaics.component';
+import { NewsFeedComponent } from './news-feed/news-feed.component';
 
 
 const routes: Routes = [
@@ -41,14 +42,14 @@ const routes: Routes = [
     },
   },
   {
-    path: 'zarzadzanie',
+    path: 'zarządzanie',
     component: ManagementComponent,
     data: {
       title: 'Zarządzanie nieruchomościami',
     },
   },
   {
-    path: 'wartosci',
+    path: 'wartości',
     component: ValuesComponent,
     data: {
       title: 'Nasze wartości',
@@ -71,8 +72,8 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'aktualnosci',
-    component: UnderConstructionComponent,
+    path: 'aktualności',
+    component: NewsFeedComponent,
     data: {
       title: 'Aktualności',
     },
