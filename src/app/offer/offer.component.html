@@ -75,7 +75,7 @@
                 </div>
             </div>
         </div>
-        <div class="description-details" *ngIf="!windowSizeDetector.isWindowSmallerThanMobile">
+        <div class="description-details" *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall">
             <div class="description">
                 {{ offer.description | decodeString }}
             </div>
@@ -83,13 +83,17 @@
                 <ng-container *ngTemplateOutlet="details"></ng-container>
             </div>
         </div>
-        <div class="description-details-responsive" *ngIf="windowSizeDetector.isWindowSmallerThanMobile">
+        <div class="description-details-responsive" *ngIf="windowSizeDetector.isWindowSmallerThanDesktopSmall">
             <p-tabView>
                 <p-tabPanel header="Opis">
-                    {{ offer.description }}
+                    <div class="description">
+                        {{ offer.description }}
+                    </div>
                 </p-tabPanel>
                 <p-tabPanel header="Szczegóły">
-                    <ng-container *ngTemplateOutlet="details"></ng-container>
+                    <div class="details">
+                        <ng-container *ngTemplateOutlet="details"></ng-container>
+                    </div>
                 </p-tabPanel>
             </p-tabView>
         </div>

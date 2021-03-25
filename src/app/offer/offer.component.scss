@@ -6,12 +6,6 @@
     height: 100%;
     margin: 0 auto 2rem;
     max-width: 1200px;
-    @media screen and (max-width: $tablet) {
-        width: 500px;
-    }
-    @media screen and (max-width: $mobile) {
-        width: 300px;
-    }
 
     .card {
         @include perfect-box; 
@@ -110,16 +104,23 @@
 
     .bottom-container {
         padding-top: .01rem;
+        width: 100%;
 
         .basic-info {
             h2 {
                 margin-bottom: .5rem;
+                @media screen and (max-width: $tablet) {
+                    text-align: center;
+                }
             }
 
             .location {
                 align-items: center;
                 color: $font-light-grey;
                 display: flex;
+                @media screen and (max-width: $tablet) {
+                    justify-content: center;
+                }
 
                 i {
                     margin-right: 3px;
@@ -132,6 +133,12 @@
                 position: relative;
                 text-align: right;
                 top: -4.4rem;
+                @media screen and (max-width: $tablet) {
+                    float: initial;
+                    position: initial;
+                    text-align: center;
+                    top: 0;
+                }
 
                 .price {
                     color: $light-green;
@@ -162,96 +169,124 @@
             top: -2rem;
             position: relative;
             width: 100%;
-            @media screen and (max-width: $desktop-small) {
-                flex-direction: column;
-            }
-
-            .description {
-                margin-right: 3rem;
-                margin-bottom: -2rem;
-                text-align: justify;
-                white-space: pre-line;
-                width: 60%;
-                @media screen and (max-width: $desktop-small) {
-                    margin-right: 0;
-                }
-            }
-
-            .details {
-                display: flex;
-                flex-direction: column;
-                width: 40%;
-
-                .field {
-                    border-bottom: 1px dashed $font-light-grey;
-                    display: flex;
-                    justify-content: space-between;
-                    margin-bottom: .25rem;
-                    padding-bottom: .25rem;
-                    width: 100%;
-
-                    &.last {
-                        border-bottom: initial;
-                    }
-
-                    .field-name {
-                        font-weight: 700;
-                        max-width: 200px;
-                        overflow: hidden;
-                        white-space: nowrap;
-                        text-overflow: ellipsis;
-                    }
-
-                    .field-value {
-                        max-width: 220px;
-                        overflow: hidden;
-                        text-align: right;
-                    }
-
-                    .unit {
-                        margin-left: -0.25rem;
-                    }
-                }
-            }
         }
 
         .description-details-responsive {
-            margin-left: 0px;
-            text-align: justify;
-            width: 850px;
-            
-            @media screen and (max-width: $desktop-large) {
-                width: 750px;
-            }
-            @media screen and (max-width: $desktop-medium) {
-                width: 600px;
-            }
-            @media screen and (max-width: $desktop-small) {
-                width: unset;
+            margin: 1rem auto 0;
+            width: 98%;
+            @media screen and (max-width: $mobile-large) {
+                width: 100%;
             }
 
             p-TabView { 
-                ::ng-deep .p-tabview .p-tabview-nav { 
-                    li.p-highlight .p-tabview-nav-link {
-                        border-color: $light-green;
-                        color: $dark-green;
+                ::ng-deep .p-tabview { 
+                     .p-tabview-nav li {
+                        width: 80px;
+                    
+                        &.p-highlight .p-tabview-nav-link {
+                            color: $font-grey;
+                            border-color: $light-green;
+                        }
+                        
+                        &:not(.p-highlight):not(.p-disabled):hover .p-tabview-nav-link {
+                            color: $font-grey;
+                            border-color: $light-green;
+                        }
+
+                        .p-tabview-nav-link {
+                            padding: 1rem 0;
+                            
+                            &:not(.p-disabled):focus {
+                                box-shadow: unset;
+                            }
+
+                            .p-tabview-title {
+                                margin: 0 auto;
+                            }
+                        }
                     }
 
-                    li .p-tabview-nav-link:not(.p-disabled):focus {
-                        box-shadow: unset;
-                    }
-                    
-                    li:not(.p-highlight):not(.p-disabled):hover .p-tabview-nav-link {
-                        border-color:#dee2e6;
-                        color: $dark-green;
+                    .p-tabview-panels {
+                        padding: 1rem 0;
                     }
                 }            
             } 
         }  
 
+        .description {
+            margin-right: 3rem;
+            margin-bottom: -2rem;
+            text-align: justify;
+            white-space: pre-line;
+            width: 55%;
+            @media screen and (max-width: $desktop-medium) {
+                width: 50%;
+            }
+            @media screen and (max-width: $desktop-small) {
+                margin-right: 0;
+                width: 100%;
+            }
+        }
+
+        .details {
+            display: flex;
+            flex-direction: column;
+            width: 40%;
+            @media screen and (max-width: $desktop-medium) {
+                width: 50%;
+            }
+            @media screen and (max-width: $desktop-small) {
+                width: 100%;
+            }
+
+            .field {
+                border-bottom: 1px dashed $font-light-grey;
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: .25rem;
+                padding-bottom: .25rem;
+                width: 100%;
+
+                &.last {
+                    border-bottom: initial;
+                }
+
+                .field-name {
+                    font-weight: 700;
+                    max-width: 210px;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    @media screen and (max-width: $desktop-small) {
+                        max-width: initial;
+                    }
+                }
+
+                .field-value {
+                    max-width: 235px;
+                    overflow: hidden;
+                    text-align: right;
+                    @media screen and (max-width: $desktop-small) {
+                        max-width: initial;
+                    }
+                }
+
+                .unit {
+                    margin-left: -0.25rem;
+                }
+            }
+        }
+
         .legal-note {
             color: $font-light-grey;
             font-size: 10.5px;
+            @media screen and (max-width: $desktop-small) {
+                margin: 0 auto;
+                width: 98%;
+            }
+            @media screen and (max-width: $mobile-large) {
+                width: 100%;
+            }
         }
     }
 }
