@@ -43,8 +43,6 @@ export class OffersConverter {
                 price: this.convertToNumber(offer.Cena),
                 pricePerSquareMeter:this.convertToField(
                     'Cena za m²', this.convertToNumber(offer.CenaM2), 'zł'),
-                pricePerUsableSquareMeter: this.convertToField(
-                    'Cena za m² pow. użytkowej', this.convertToNumber(offer.CenaM2PowUzytk?.text), 'zł'),
                 rentPrice: this.convertToField(
                     'Czynsz najmu', this.convertToNumber(offer.CzynszLetni?.text), 'zł'),
                 grossRentPricePerSquareMeter: this.convertToField(
@@ -68,8 +66,8 @@ export class OffersConverter {
                 postalCode: offer.KodPocztowy?.text || '',
                 street: offer.Ulica || '',
                 location: offer.Polozenie?.text || '',
-                mapLatitude: offer.MapSzerokoscGeogr || '',
-                mapLongtitude: offer.MapDlugoscGeogr || '',
+                lattitude: offer.MapSzerokoscGeogr ? this.convertToNumber(offer.MapSzerokoscGeogr.replace(',', '.')) : undefined,
+                longitude: offer.MapDlugoscGeogr ? this.convertToNumber(offer.MapDlugoscGeogr?.replace(',', '.')) : undefined,
                 publicTransport: this.convertToArray(offer.Komunikacja?.lista),
                 // Sasiedztwo?.lista is always a single element object.
                 neighbourhood: this.convertToField(
@@ -80,8 +78,6 @@ export class OffersConverter {
                     'Powierzchnia', this.convertToNumber(offer.PowierzchniaCalkowita), 'm²'),
                 landArea: this.convertToField(
                     'Powierzchnia działki', this.convertToNumber(offer.PowierzchniaDzialki?.text), 'm²'),
-                usableArea: this.convertToField(
-                    'Powierzchnia użytkowa', this.convertToNumber(offer.PowierzchniaUzytkowa?.text), 'm²'),
                 terraceArea: this.convertToField(
                     'Powierzchnia balkonu', this.convertToNumber(offer.PowierzchniaTarasBalkon?.text), 'm²'),
                 officeArea: this.convertToField('Powierzchnia biurowa', this.convertToNumber(
@@ -191,6 +187,7 @@ export class OffersConverter {
     }
 
     private convertToField<T>(displayName: string, value: T, unit?: string): OfferField<T> {
+        
         return {displayName, value, unit};
     }
 

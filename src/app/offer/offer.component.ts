@@ -8,7 +8,7 @@ import { Offer, OfferField } from '../shared/models';
 import { AgentsDao } from 'src/app/shared/services/agents-dao.service';
 import { Agent } from 'src/app/shared/models';
 import { SnackbarService } from '../shared/services/snackbar.service';
-import { WindowSizeDetector } from '../shared/services/window-size-detector.service'
+import { WindowSizeDetector } from '../shared/services/window-size-detector.service';
 
 @Component({
   selector: 'perfect-offer',
@@ -20,6 +20,11 @@ export class OfferComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   offer: Offer;
   definedOfferFields: OfferField<any>[] = [];
+  isGalleryActive = true;
+  isMapButtonVisible = false;
+  isMapActive = false;
+  isVirtualVisitButtonVisible = false;
+  isVirtualVisitActive = false;
 
   constructor(readonly agentsDao: AgentsDao,
     readonly windowSizeDetector: WindowSizeDetector,
@@ -52,6 +57,7 @@ export class OfferComponent implements OnInit, OnDestroy {
       if (this.offer) {
         this.titleService.setTitle(this.offer.title);
         this.definedOfferFields = this.computeDefinedOfferFields();
+        this.computeButtonsVisibility();
         this.changeDetector.detectChanges();
       } else {
         this.handleNonexistentOffer(symbol);
@@ -71,6 +77,15 @@ export class OfferComponent implements OnInit, OnDestroy {
       this.handleNonexistentOffer(offerNumber + '');
     }
   }
+
+  private computeButtonsVisibility() {
+    if (this.offer.lattitude && this.offer.longitude) {
+      this.isMapButtonVisible = true;
+    }
+    if (this.offer.virtualVisitUrl) {
+      this.isVirtualVisitButtonVisible = true;
+    }
+  }
   
   private handleNonexistentOffer(symbol = '') {
     setTimeout(() => {
@@ -80,7 +95,14 @@ export class OfferComponent implements OnInit, OnDestroy {
   }
 
   private computeDefinedOfferFields(): OfferField<any>[] {
-    return Object.values(this.offer).filter(value => this.isDefinedOfferField(value)); 
+    const symbolField = {displayName: 'Symbol oferty', value: this.offer.symbol};
+
+    return [
+      symbolField,
+      ...Object.values(this.offer)
+        .filter(value => this.isDefinedOfferField(value))
+        .filter(field => field.displayName !== 'Cena za m²'),
+    ]; 
   }
 
   private isDefinedOfferField(value: any): boolean {
@@ -90,7 +112,7 @@ export class OfferComponent implements OnInit, OnDestroy {
   // Because of https://stackoverflow.com/a/46703380/11212568 instanceof
   // does not work on interface.
   private isOfferField(value: any): boolean {
-    return value.hasOwnProperty('displayName') && value.hasOwnProperty('value');
+    return value && value.hasOwnProperty('displayName') && value.hasOwnProperty('value');
   }
 
   private isDefined(value: any): boolean {
@@ -100,12 +122,46 @@ export class OfferComponent implements OnInit, OnDestroy {
     return !!value;  
   }
 
+  isBoolean(value: any): boolean {
+    return typeof value === 'boolean';
+  }
+
   navigateToAgentPage(agent: Agent) {
     this.router.navigate(['/ludzie/' + this.computeAgentLink(agent.fullName)]);
   }
 
   computeAgentLink(agentFullName: string): string {
     return agentFullName.toLowerCase().split(' ').join('-');
+  }
+
+  showGallery() {
+    if (!this.isGalleryActive) {
+      this.isGalleryActive = true;
+      this.isMapActive = false;
+      this.isVirtualVisitActive = false;
+    }
+  }
+
+  showMap() {
+    if (!this.isMapActive) {
+      this.isGalleryActive = false;
+      this.isMapActive = true;
+      this.isVirtualVisitActive = false;
+    }
+  }
+
+  showVirtualVisit() {
+    if (!this.isVirtualVisitActive) {
+      this.isGalleryActive = false;
+      this.isMapActive = false;
+      this.isVirtualVisitActive = true;
+    }
+  }
+
+  computePhotoUrls() {
+    const photoUrlPrefix = '/offers/';
+
+    return this.offer.photos.map(photo => photoUrlPrefix + photo);
   }
 
   ngOnDestroy() {

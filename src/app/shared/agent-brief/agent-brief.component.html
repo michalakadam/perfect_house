@@ -18,7 +18,7 @@
                 <mat-icon><i class="fas fa-phone-square-alt"></i></mat-icon>
                 {{ agent.mobile }}
             </a>
-            <div class="license" *ngIf="agent.licenseNumber">
+            <div class="license" *ngIf="agent.licenseNumber && isLicenseNumberVisible">
                 <span class="title">
                     Numer licencji:
                 </span>

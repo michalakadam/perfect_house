@@ -4,7 +4,7 @@ import { Observable, Subject } from 'rxjs';
 // Variables describing possible window sizes must match those from src/variables.scss
 export const DESKTOP_LARGE = 1470;
 export const DESKTOP_MEDIUM = 1240;
-export const DESKTOP_SMALL = 960;
+export const DESKTOP_SMALL = 1010;
 export const TABLET = 760;
 export const MOBILE_LARGE = 640;
 export const MOBILE = 480;

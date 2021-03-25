@@ -1,6 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { AgentsDao } from 'src/app/shared/services/agents-dao.service';
 import { Agent } from '../shared/models';
 

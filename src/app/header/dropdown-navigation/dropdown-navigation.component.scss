@@ -14,7 +14,7 @@
         height: 40px;
         .link {
             cursor: pointer;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
             height: 100%;
             line-height: 44px;
@@ -22,10 +22,10 @@
             padding-left: 22px;
             width: 118.9%;
             @media screen and (max-width: $desktop-large) {
-                font-size: 18px;
+                font-size: 16px;
             }
             @media screen and (max-width: $desktop-medium) {
-                font-size: 16px;
+                font-size: 14px;
             }
             @media screen and (max-width: $mobile-small) {
                 font-size: 12px;

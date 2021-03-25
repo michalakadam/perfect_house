@@ -35,12 +35,12 @@
             border-radius: 3px;
             cursor: pointer;
             outline: none;
-            max-height: 45px;
+            max-height: 42px;
             @media screen and (max-width: $desktop-large) {
-                max-height: 42px;
+                max-height: 40px;
             }
             @media screen and (max-width: $desktop-medium) {
-                max-height: 39px;
+                max-height: 38px;
             }
             @media screen and (max-width: $desktop-small) {
                 max-height: 36px;
@@ -49,14 +49,14 @@
 
         a {
             color: $font-grey;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
             margin-right: 4px;
             @media screen and (max-width: $desktop-large) {
-                font-size: 18px;
+                font-size: 16px;
             }
             @media screen and (max-width: $desktop-medium) {
-                font-size: 16px;
+                font-size: 14px;
             }
             @media screen and (max-width: $desktop-small) {
                 margin-right: 7px;

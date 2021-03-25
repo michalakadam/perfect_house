@@ -10,6 +10,9 @@ import { OffersComponent } from './offers/offers.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ManagementComponent } from './management/management.component';
 import { UnderConstructionComponent } from './under-construction/under-construction.component';
+import { ValuesComponent } from './values/values.component';
+import { PhotovoltaicsComponent } from './photovoltaics/photovoltaics.component';
+import { NewsFeedComponent } from './news-feed/news-feed.component';
 
 
 const routes: Routes = [
@@ -39,15 +42,15 @@ const routes: Routes = [
     },
   },
   {
-    path: 'zarzadzanie',
+    path: 'zarządzanie',
     component: ManagementComponent,
     data: {
       title: 'Zarządzanie nieruchomościami',
     },
   },
   {
-    path: 'wartosci',
-    component: UnderConstructionComponent,
+    path: 'wartości',
+    component: ValuesComponent,
     data: {
       title: 'Nasze wartości',
     }
@@ -69,8 +72,8 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'aktualnosci',
-    component: UnderConstructionComponent,
+    path: 'aktualności',
+    component: NewsFeedComponent,
     data: {
       title: 'Aktualności',
     },
@@ -91,7 +94,7 @@ const routes: Routes = [
   },
   {
     path: 'fotowoltaika',
-    component: UnderConstructionComponent,
+    component: PhotovoltaicsComponent,
     data: {
       title: 'Fotowoltaika',
     },

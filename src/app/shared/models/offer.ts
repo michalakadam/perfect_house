@@ -31,7 +31,6 @@ export interface Offer {
 
     price: number;
     pricePerSquareMeter: OfferField<number>;
-    pricePerUsableSquareMeter: OfferField<number>;
     rentPrice: OfferField<number>;
     grossRentPricePerSquareMeter: OfferField<number>;
     netRentPricePerSquareMeter: OfferField<number>;
@@ -49,15 +48,14 @@ export interface Offer {
     postalCode: string;
     street: string;
     location: string;
-    mapLongtitude: string;
-    mapLatitude: string;
+    longitude: number;
+    lattitude: number;
     publicTransport: string[];
     neighbourhood: OfferField<string>;
     accessRoad: OfferField<string>;
 
     totalArea: OfferField<number>;
     landArea: OfferField<number>;
-    usableArea: OfferField<number>;
     terraceArea: OfferField<number>;
     officeArea: OfferField<number>;
     officeBuildingArea: OfferField<number>;

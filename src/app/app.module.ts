@@ -15,7 +15,6 @@ import { OffersComponent } from './offers/offers.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { NavigationComponent } from './header/navigation/navigation.component';
@@ -41,11 +40,17 @@ import { SliderModule } from 'primeng/slider';
 import { GalleriaModule } from 'primeng/galleria';
 import { InputWithSliderComponent } from './offers/search-tool/input-with-slider/input-with-slider.component';
 import { CarouselModule } from 'primeng/carousel';
-import { MatCardModule } from '@angular/material/card';
 import { OfferDetailsComponent } from 'src/app/offer/offer-details/offer-details.component';
 import { UnderConstructionComponent } from './under-construction/under-construction.component';
 import { TabViewModule } from 'primeng/tabview';
 import { GroupedDropdownComponent } from './offers/search-tool/grouped-dropdown/grouped-dropdown.component';
+import { ValuesComponent } from './values/values.component';
+import { PhotovoltaicsComponent } from './photovoltaics/photovoltaics.component';
+import { GalleryComponent } from './shared/gallery/gallery.component';
+import { UrlSanitizer } from './shared/pipes/url-sanitizer';
+import { StringDecoder } from './shared/pipes/string-decoder';
+import { NewsFeedComponent } from './news-feed/news-feed.component';
+import { StarRatingComponent } from './offer/star-rating/star-rating.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +65,8 @@ import { GroupedDropdownComponent } from './offers/search-tool/grouped-dropdown/
     MapComponent,
     NavigationComponent,
     NumberPrettifier,
+    UrlSanitizer,
+    StringDecoder,
     OfferCardComponent,
     OffersComponent,
     PageNotFoundComponent,
@@ -79,6 +86,11 @@ import { GroupedDropdownComponent } from './offers/search-tool/grouped-dropdown/
     OfferDetailsComponent,
     UnderConstructionComponent,
     GroupedDropdownComponent,
+    ValuesComponent,
+    PhotovoltaicsComponent,
+    GalleryComponent,
+    NewsFeedComponent,
+    StarRatingComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -95,11 +107,9 @@ import { GroupedDropdownComponent } from './offers/search-tool/grouped-dropdown/
     MatDividerModule,
     MatIconModule,
     MatListModule,
-    MatSidenavModule,
     PaginatorModule,
     SelectButtonModule,
     SliderModule,
-    MatCardModule,
     TabViewModule,
   ],
   bootstrap: [

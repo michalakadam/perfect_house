@@ -1,137 +1,291 @@
 @import "~src/variables.scss";
 @import "~src/mixins.scss";
 
-.image-container {
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-width: 100%;
-    height: 30vw;
-    position: relative;
-    @media screen and (max-width: $desktop-large) {
-        height:40vw;
-    }
-    @media screen and (max-width: $desktop-small) {
-        height:50vw;
-    }
-    @media screen and (max-width: $tablet) {
-        height: 70vw;
-    }
-    @media screen and (max-width: $mobile) {
-        height: 90vw;
-    }
-    @media screen and (max-width: $mobile-small) {
-        height: 100vw;
-    }
-
-    .button-icon-container {
-        @include responsive-page;
-        align-items: center;
-        bottom: 0;
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 1rem;
-        left: 0;
-        position: absolute;
-        right: 0;
-
-        .gallery-button { 
-            @include perfect-button;
-            ::ng-deep .p-button.p-component.p-ripple {
-                padding: 10px 20px;
-            }
-        }
-
-        .number-icon-container { 
-            align-items: center;
-            color: white;
-            display: flex;
-            font-size: 1.8rem;
-            justify-content: space-between;
-            width: 4rem;    
-            
-            .mat-icon {
-                font-size: 1.8rem;
-                height: 1.8rem;
-                width: 1.8rem;
-            }
-        }
-    }
-}
-
 .component-container {
     @include responsive-page;
     height: 100%;
-    margin: 30px auto;
-    max-width: 1200px;
-    @media screen and (max-width: $tablet) {
-        width: 500px;
-    }
-    @media screen and (max-width: $mobile) {
-        width: 300px;
-    }
+    margin: 0 auto 2rem;
 
     .card {
         @include perfect-box; 
-        margin: 20px auto;
-        padding: 25px;
+        margin: 1rem auto;
+        padding: 1.5rem;
         width: 100%;
     }
 
-    .basic-info-card {
-        .price {
-            color: $dark-green;
-            float: right;
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            margin-right: 10px;
-            text-align: right;
-
-            .client-price {
-                color: $font-grey;
-                font-size: 16px;
-            }
-        }
-    }
-
-    .agent-brief { 
-        cursor: pointer;
-        margin-right: 0px;
-        max-height: 376px;
-        padding: 25px 0;
-        width: 255px;
-        @media screen and (max-width: $desktop-small) {
-            margin-right: 20px;
-            max-height: 376px;
-            padding: 25px 0;
-        }
-        @media screen and (max-width: $mobile-large) {
-            margin-right: 20px;
-            max-height: 376px;
-            padding: 25px 0;
-        }
-    }
-
-    .description-details-agent-container {
+    .misc-agent-container {
         display: flex;
+        height: 715px;
         justify-content: space-between;
-        width: 100%;
+        @media screen and (max-width: $desktop-large) {
+            height: 627px;
+        }
+        @media screen and (max-width: $desktop-medium) {
+            height: 514px;
+        }
         @media screen and (max-width: $desktop-small) {
             flex-direction: column;
         }
-    
-        .description-details {
-            margin-right: 1rem;
 
-            .description {
-                margin-bottom: 1rem;
+        .misc-container {
+            height: 100%;
+            margin: 0;
+            margin-right: 1rem;
+            overflow: hidden;
+            padding: 0;
+            @media screen and (max-width: $desktop-small) {
+                width: 100%;
+                height: 60vw;
             }
 
-            .details {
-                display: grid;
-                gap: 1rem;
-                grid-template-columns: repeat(2, 1fr);
+            perfect-map {
+                ::ng-deep .map {
+                    height: 715px;
+                    @media screen and (max-width: $desktop-large) {
+                        height: 627px;
+                    }
+                    @media screen and (max-width: $desktop-medium) {
+                        height: 514px;
+                    }
+
+                    .ol-viewport canvas {
+                        border-radius: 15px;
+                        @media screen and (max-width: $desktop-small) {
+                            border-radius: 10px;
+                        }
+                    }
+                }
+            }
+
+            embed {
+                border-radius: 15px;
+                height: 100%;
+                width: 100%;
+                @media screen and (max-width: $desktop-small) {
+                    border-radius: 10px;
+                }
+            }
+        }
+
+        .agent-buttons-container {
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            margin-left: auto;
+            width: 323px;
+            @media screen and (max-width: $desktop-small) {
+                flex-direction: row;
+                justify-content: space-evenly;
+                margin-left: 0;
+                width: 100%;
+            }
+            @media screen and (max-width: $mobile) {
+                flex-direction: column;
+                margin: 0 auto;
+                width: 100%;
+            }
+
+            .agent-brief { 
+            }
+            
+            .p-button-rounded {
+                background-color: white;
+                border: 1px solid white;
+                color: $dark-green;
+                font-weight: 700; 
+                height: 2.75rem;
+                margin: 0 auto 1rem;
+                width: 13rem;
+                @media screen and (max-width: $desktop-small) {
+                    width: 10rem;
+                }
+
+                &:not(.p-disabled):not(.p-highlight):hover {
+                    border-color: $dark-green;
+                }
+
+                &:last-of-type {
+                    margin-bottom: 0;
+                }
+            }
+
+            .selected {
+                background-color: $light-green;
+                border: 1px solid $light-green;
+                color: $dark-green;
+            }
+        }
+    }
+
+
+    .bottom-container {
+        padding-top: .01rem;
+        width: 100%;
+
+        .basic-info {
+            h2 {
+                margin-bottom: .5rem;
+                @media screen and (max-width: $tablet) {
+                    text-align: center;
+                }
+            }
+
+            .location {
+                align-items: center;
+                color: $font-light-grey;
+                display: flex;
+                @media screen and (max-width: $tablet) {
+                    justify-content: center;
+                }
+
+                i {
+                    margin-right: 3px;
+                }
+            }
+
+            .price-container {
+                float: right;
+                font-weight: 700;
+                position: relative;
+                text-align: right;
+                top: -4.4rem;
+                @media screen and (max-width: $tablet) {
+                    float: initial;
+                    position: initial;
+                    text-align: center;
+                    top: 0;
+                }
+
+                .price {
+                    color: $light-green;
+                    font-size: 2rem;
+
+                    .client-price {
+                        color: $font-grey;
+                        font-size: 16px;
+                        position: relative;
+                        top: -0.3rem;
+                    }
+                }
+
+                .price-per-meter {
+                    color: $font-light-grey;
+                    margin-top: 5px;
+
+                    &.hidden {
+                        visibility: hidden;
+                    }
+                }
+            }
+        }
+
+        .description-details {
+            display: flex;
+            justify-content: space-between;
+            top: -2rem;
+            position: relative;
+            width: 100%;
+        }
+
+        .description-details-responsive {
+            margin: 1rem auto 0;
+            width: 98%;
+            @media screen and (max-width: $mobile-large) {
+                width: 100%;
+            }
+
+            p-TabView { 
+                ::ng-deep .p-tabview { 
+                     .p-tabview-nav li {
+                        width: 80px;
+                    
+                        &.p-highlight .p-tabview-nav-link {
+                            color: $font-grey;
+                            border-color: $light-green;
+                        }
+                        
+                        &:not(.p-highlight):not(.p-disabled):hover .p-tabview-nav-link {
+                            color: $font-grey;
+                            border-color: $light-green;
+                        }
+
+                        .p-tabview-nav-link {
+                            padding: 1rem 0;
+                            
+                            &:not(.p-disabled):focus {
+                                box-shadow: unset;
+                            }
+
+                            .p-tabview-title {
+                                margin: 0 auto;
+                            }
+                        }
+                    }
+
+                    .p-tabview-panels {
+                        padding: 1rem 0;
+                    }
+                }            
+            } 
+        }  
+
+        .description {
+            margin-right: 3rem;
+            margin-bottom: -2rem;
+            text-align: justify;
+            white-space: pre-line;
+            width: 55%;
+            @media screen and (max-width: $desktop-medium) {
+                width: 50%;
+            }
+            @media screen and (max-width: $desktop-small) {
+                margin-right: 0;
+                width: 100%;
+            }
+        }
+
+        .details {
+            display: flex;
+            flex-direction: column;
+            width: 40%;
+            @media screen and (max-width: $desktop-medium) {
+                width: 50%;
+            }
+            @media screen and (max-width: $desktop-small) {
+                width: 100%;
+            }
+
+            .field {
+                border-bottom: 1px dashed $font-light-grey;
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: .25rem;
+                padding-bottom: .25rem;
+                width: 100%;
+
+                &.last {
+                    border-bottom: initial;
+                }
+
+                .field-name {
+                    font-weight: 700;
+                    max-width: 210px;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    @media screen and (max-width: $desktop-small) {
+                        max-width: initial;
+                    }
+                }
+
+                .field-value {
+                    max-width: 235px;
+                    overflow: hidden;
+                    text-align: right;
+                    @media screen and (max-width: $desktop-small) {
+                        max-width: initial;
+                    }
+                }
 
                 .unit {
                     margin-left: -0.25rem;
@@ -139,38 +293,27 @@
             }
         }
 
-        .description-details-responsive {
-            margin-left: 0px;
-            text-align: justify;
-            width: 850px;
-            
-            @media screen and (max-width: $desktop-large) {
-                width: 750px;
-            }
-            @media screen and (max-width: $desktop-medium) {
-                width: 600px;
-            }
+        .legal-note {
+            color: $font-light-grey;
+            font-size: 10.5px;
             @media screen and (max-width: $desktop-small) {
-                width: unset;
+                margin: 0 auto;
+                width: 98%;
             }
-    
-            p-TabView { 
-                ::ng-deep .p-tabview .p-tabview-nav { 
-                    li.p-highlight .p-tabview-nav-link {
-                        border-color: $light-green;
-                        color: $dark-green;
-                    }
+            @media screen and (max-width: $mobile-large) {
+                width: 100%;
+            }
+        }
+    }
 
-                    li .p-tabview-nav-link:not(.p-disabled):focus {
-                        box-shadow: unset;
-                    }
-                    
-                    li:not(.p-highlight):not(.p-disabled):hover .p-tabview-nav-link {
-                        border-color:#dee2e6;
-                        color: $dark-green;
-                    }
-                }            
-            } 
-        }  
+    .agent-brief {
+        cursor: pointer;
+        margin-top: 0;
+        max-height: 376px;
+        padding: 25px 0;
+        @media screen and (max-width: $desktop-small) {
+            margin: 0 auto;
+            width: 280px;
+        }
     }
 }
