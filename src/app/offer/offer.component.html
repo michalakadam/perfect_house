@@ -15,7 +15,7 @@
             <embed *ngIf="isVirtualVisitActive" type="text/html" [src]="offer.virtualVisitUrl | safe">
         </div>
         <div class="agent-buttons-container">
-            <div class="card agent-brief">
+            <div class="card agent-brief" *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall">
                 <perfect-agent-brief *ngIf="agentsDao.getAgentById(offer.agentId) as agent"
                     [agent]="agent"
                     bigger
@@ -104,6 +104,16 @@
                 od właściciela, może podlegać aktualizacji i nie stanowi oferty określonej w art. 66 i następnych K.C.
             </p>
         </div>
+    </div>
+
+    <div class="card agent-brief" *ngIf="windowSizeDetector.isWindowSmallerThanDesktopSmall">
+        <perfect-agent-brief *ngIf="agentsDao.getAgentById(offer.agentId) as agent"
+            [agent]="agent"
+            bigger
+            contactInfoVisible
+            vertical
+            (click)="navigateToAgentPage(agent)">
+        </perfect-agent-brief>
     </div>
 </div>
 
