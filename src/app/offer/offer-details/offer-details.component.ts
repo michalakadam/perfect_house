@@ -10,13 +10,8 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 })
 
 export class OfferDetailsComponent {
-  isOnOfferPage = false;
   
   @Input() offer: Offer;
-  @Input()
-  set onOfferPage(value: boolean) {
-    this.isOnOfferPage = coerceBooleanProperty(value);
-  }
 
   exists(value: any): boolean {
     if (typeof value === 'number') {

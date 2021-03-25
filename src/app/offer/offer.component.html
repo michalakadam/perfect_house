@@ -55,15 +55,25 @@
     </div>
     <div class="card bottom-container">
         <div class="basic-info">
-            <div class="price" *ngIf="offer.price > -1">
-                <span *ngIf="offer.price > 1">
-                    {{ offer.price | prettifyNumber:'zł' }}
-                </span>
-                <span class="client-price" *ngIf="offer.price === 1">
-                    Zaproponuj cenę!
-                </span>
+            <h2>{{ offer.title }}</h2> 
+            <div class="location">
+                <i class="pi pi-map-marker"></i>
+                <span>{{ offer.fullLocation }},&nbsp;</span>
+                <span>{{ offer.voivodeship }}</span>
             </div>
-            <perfect-offer-details onOfferPage [offer]="offer"></perfect-offer-details>
+            <div class="price-container" *ngIf="offer.price > -1">
+                <div class="price">
+                    <span *ngIf="offer.price > 1">
+                        {{ offer.price | prettifyNumber:'zł' }}
+                    </span>
+                    <span class="client-price" *ngIf="offer.price === 1">
+                        Zaproponuj cenę!
+                    </span>
+                </div>
+                <div class="price-per-meter" [class.hidden]="!offer.pricePerSquareMeter.value">
+                    {{ offer.pricePerSquareMeter.value | prettifyNumber:'zł/m²' }}
+                </div>
+            </div>
         </div>
         <div class="description-details" *ngIf="!windowSizeDetector.isWindowSmallerThanMobile">
             <div class="description">

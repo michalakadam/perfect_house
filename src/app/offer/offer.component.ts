@@ -10,13 +10,6 @@ import { Agent } from 'src/app/shared/models';
 import { SnackbarService } from '../shared/services/snackbar.service';
 import { WindowSizeDetector } from '../shared/services/window-size-detector.service';
 
-const DUPLICATED_OFFER_FIELDS = [
-  'Cena za m²',
-  'Powierzchnia',
-  'Piętro',
-  'Liczba pokoi',
-];
-
 @Component({
   selector: 'perfect-offer',
   templateUrl: './offer.component.html',
@@ -104,9 +97,11 @@ export class OfferComponent implements OnInit, OnDestroy {
   private computeDefinedOfferFields(): OfferField<any>[] {
     const symbolField = {displayName: 'Symbol oferty', value: this.offer.symbol};
 
-    return [symbolField, ...Object.values(this.offer)
-      .filter(value => this.isDefinedOfferField(value))
-      .filter(field => !DUPLICATED_OFFER_FIELDS.includes(field.displayName))
+    return [
+      symbolField,
+      ...Object.values(this.offer)
+        .filter(value => this.isDefinedOfferField(value))
+        .filter(field => field.displayName !== 'Cena za m²'),
     ]; 
   }
 
