@@ -50,6 +50,7 @@ import { GalleryComponent } from './shared/gallery/gallery.component';
 import { UrlSanitizer } from './shared/pipes/url-sanitizer';
 import { StringDecoder } from './shared/pipes/string-decoder';
 import { NewsFeedComponent } from './news-feed/news-feed.component';
+import { StarRatingComponent } from './offer/star-rating/star-rating.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { NewsFeedComponent } from './news-feed/news-feed.component';
     PhotovoltaicsComponent,
     GalleryComponent,
     NewsFeedComponent,
+    StarRatingComponent,
   ],
   imports: [
     AppRoutingModule,

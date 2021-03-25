@@ -107,13 +107,17 @@
     <div *ngFor="let field of definedOfferFields; let last = last">
         <div class="field" *ngIf="field.value" [class.last]="last">
             <span class="field-name">{{ field.displayName }}:</span>
-            <span class="field-value" *ngIf="field.value !== true; else booleanField">
+            <span class="field-value" *ngIf="!isBoolean(field.value) && field.displayName !== 'Standard'">
                 {{ field.value }}
                 <span class="unit" *ngIf="field.unit">{{ field.unit }}</span>
             </span>
-            <ng-template #booleanField>
+            <perfect-star-rating *ngIf="field.displayName === 'Standard'"
+                [score]="field.value"
+                outOf=5>
+            </perfect-star-rating>
+            <span class="field-value" *ngIf="field.value === true">
                 jest
-            </ng-template>
+            </span>
         </div>
     </div>
 </ng-template>

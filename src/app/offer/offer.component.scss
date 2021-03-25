@@ -132,9 +132,6 @@
                 position: relative;
                 text-align: right;
                 top: -4.4rem;
-                @media screen and (max-width: $desktop-large) {
-                    margin-right: 2.7rem;
-                }
 
                 .price {
                     color: $dark-green;

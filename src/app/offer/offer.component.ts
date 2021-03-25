@@ -122,6 +122,10 @@ export class OfferComponent implements OnInit, OnDestroy {
     return !!value;  
   }
 
+  isBoolean(value: any): boolean {
+    return typeof value === 'boolean';
+  }
+
   navigateToAgentPage(agent: Agent) {
     this.router.navigate(['/ludzie/' + this.computeAgentLink(agent.fullName)]);
   }
