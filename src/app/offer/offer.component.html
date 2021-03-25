@@ -83,14 +83,27 @@
                 </p-tabPanel>
             </p-tabView>
         </div>
+        <div class="legal-note">
+            <h4>Nota prawna</h4>
+            <p>
+                Opis oferty zawarty na stronie internetowej sporządzany jest na podstawie oględzin nieruchomości oraz informacji uzyskanych
+                od właściciela, może podlegać aktualizacji i nie stanowi oferty określonej w art. 66 i następnych K.C.
+            </p>
+        </div>
     </div>
 </div>
 
 <ng-template #details>
-    <div *ngFor="let field of definedOfferFields">
-        <div *ngIf="field.value">
-            {{ field.displayName }}: {{ field.value }}
-            <span class="unit" *ngIf="field.unit">{{ field.unit }}</span>
+    <div *ngFor="let field of definedOfferFields; let last = last">
+        <div class="field" *ngIf="field.value" [class.last]="last">
+            <span class="field-name">{{ field.displayName }}:</span>
+            <span class="field-value" *ngIf="field.value !== true; else booleanField">
+                {{ field.value }}
+                <span class="unit" *ngIf="field.unit">{{ field.unit }}</span>
+            </span>
+            <ng-template #booleanField>
+                jest
+            </ng-template>
         </div>
     </div>
 </ng-template>

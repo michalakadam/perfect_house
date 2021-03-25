@@ -31,7 +31,6 @@ export interface Offer {
 
     price: number;
     pricePerSquareMeter: OfferField<number>;
-    pricePerUsableSquareMeter: OfferField<number>;
     rentPrice: OfferField<number>;
     grossRentPricePerSquareMeter: OfferField<number>;
     netRentPricePerSquareMeter: OfferField<number>;
@@ -57,7 +56,6 @@ export interface Offer {
 
     totalArea: OfferField<number>;
     landArea: OfferField<number>;
-    usableArea: OfferField<number>;
     terraceArea: OfferField<number>;
     officeArea: OfferField<number>;
     officeBuildingArea: OfferField<number>;

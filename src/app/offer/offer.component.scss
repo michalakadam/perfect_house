@@ -145,10 +145,10 @@
             }
 
             .description {
-                margin-right: 2rem;
+                margin-right: 3rem;
                 text-align: justify;
                 white-space: pre-line;
-                width: 50%;
+                width: 60%;
                 @media screen and (max-width: $desktop-small) {
                     margin-right: 0;
                 }
@@ -157,10 +157,37 @@
             .details {
                 display: flex;
                 flex-direction: column;
-                width: 50%;
+                width: 40%;
 
-                .unit {
-                    margin-left: -0.25rem;
+                .field {
+                    border-bottom: 1px dashed $font-light-grey;
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: .25rem;
+                    padding-bottom: .25rem;
+                    width: 100%;
+
+                    &.last {
+                        border-bottom: initial;
+                    }
+
+                    .field-name {
+                        font-weight: 700;
+                        max-width: 200px;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                    }
+
+                    .field-value {
+                        max-width: 220px;
+                        overflow: hidden;
+                        text-align: right;
+                    }
+
+                    .unit {
+                        margin-left: -0.25rem;
+                    }
                 }
             }
         }
@@ -198,5 +225,10 @@
                 }            
             } 
         }  
+
+        .legal-note {
+            color: $font-light-grey;
+            font-size: 10.5px;
+        }
     }
 }
