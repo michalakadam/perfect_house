@@ -26,9 +26,9 @@ export class OffersConverter {
                 number: this.convertToNumber(offer.Nr),
                 symbol: offer.Symbol || '',
                 status: offer.Status || '',
-                legalStatus: this.convertToField('Stan prawny', offer.StanPrawny || ''),
                 standard: this.convertToField('Standard', this.convertToNumber(offer.Standard?.text)),
-                isAlarmSet: this.convertToField('Alarm', this.convertToBoolean(offer.Alarm?.text)),
+                // StanLokaluLista is always a single element object.
+                premiseState: this.convertToField('Stan lokalu', offer.StanLokaluLista?.text || ''),
                 isExclusive: this.convertToBoolean(offer.Wylacznosc),
                 isForRent: this.convertToBoolean(offer.Wynajem),
                 photos: this.convertPhotos(this.convertToArray(offer.Zdjecia.Foto)),
@@ -39,6 +39,7 @@ export class OffersConverter {
                 updateDate: offer.DataEdycji?.text || '',
                 expirationDate: offer.DataWaznosci || '',
                 virtualVisitUrl: offer.WirtualnaWizyta?.Url || '',
+                legalStatus: this.convertToField('Stan prawny', offer.StanPrawny || ''),
                 
                 price: this.convertToNumber(offer.Cena),
                 pricePerSquareMeter:this.convertToField(
@@ -142,6 +143,7 @@ export class OffersConverter {
                     'Sieć komputerowa', this.convertToBoolean(offer.SiecKomputerowa?.text)),
                 securityType: this.convertToField('Dozór budynku', offer.DozorBudynkuLista?.text || ''),
                 entrance: this.convertToField('Wejście', offer.Wejscie?.text || ''),
+                isAlarmSet: this.convertToField('Alarm', this.convertToBoolean(offer.Alarm?.text)),
 
                 isFloorDustFree: this.convertToField(
                     'Posadzka niepyląca', this.convertToBoolean(offer.PosadzkaNiepylaca?.text)),
@@ -162,8 +164,6 @@ export class OffersConverter {
                 isGoodsLiftAvailable: this.convertToField(
                     'Winda towarowa', this.convertToBoolean(offer.WindaTowarowa?.text)),
 
-                // StanLokaluLista is always a single element object.
-                premiseState: this.convertToField('Stan lokalu', offer.StanLokaluLista?.text || ''),
                 premiseType: this.convertToField('Rodzaj lokalu', offer.RodzajLokalu?.text || ''),
                 premiseBackRoomArea: this.convertToField(
                     'Powierzchnia zaplecza', this.convertToNumber(offer.PowierzchniaZaplecza?.text), 'm²'),
