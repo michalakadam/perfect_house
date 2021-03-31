@@ -22,22 +22,23 @@
             @include perfect-box;
             float: right;
             margin-left: -476px;
-            padding: 1rem 1rem 2rem;
+            padding: 1rem 1rem 2rem 2rem;
             position: relative;
             top: 200px;
-            width: 475px;
+            width: 440px;
             @media screen and (max-width: $desktop-large) {
                 top: 175px;
-                width: 430px;
+                width: 400px;
             }
             @media screen and (max-width: $desktop-small) {
                 float: initial;
                 margin: 2rem auto;
                 position: unset;
                 top: unset;
-                width: 390px;
+                width: 365px;
             }
             @media screen and (max-width: $mobile) {
+                padding-left: 1rem;
                 width: 224px;
             }
 
