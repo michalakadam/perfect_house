@@ -40,7 +40,7 @@ import { SliderModule } from 'primeng/slider';
 import { GalleriaModule } from 'primeng/galleria';
 import { InputWithSliderComponent } from './offers/search-tool/input-with-slider/input-with-slider.component';
 import { CarouselModule } from 'primeng/carousel';
-import { OfferDetailsComponent } from 'src/app/offer/offer-details/offer-details.component';
+import { OfferDetailsComponent } from 'src/app/offers/offer-card/offer-details/offer-details.component';
 import { UnderConstructionComponent } from './under-construction/under-construction.component';
 import { TabViewModule } from 'primeng/tabview';
 import { GroupedDropdownComponent } from './offers/search-tool/grouped-dropdown/grouped-dropdown.component';
