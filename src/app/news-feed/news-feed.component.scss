@@ -16,7 +16,10 @@
             width: 81%;
         }
         @media screen and (max-width: $desktop-medium) {
-            width: 78%
+            width: 78%;
+        }
+        @media screen and (max-width: $desktop-medium) {
+            width: 100%;
         }
 
         .date {
@@ -48,6 +51,7 @@
             font-style: italic;
             font-weight: 700;
             line-height: 2rem;
+            margin-bottom: 1rem;
             text-align: center;
         }
     }
