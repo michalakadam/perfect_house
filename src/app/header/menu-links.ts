@@ -14,7 +14,7 @@ export const MENU_LINKS: MenuLink[] = [
     },
     {
         title: 'Zarządzanie nieruchomościami',
-        route: '/zarzadzanie',
+        route: '/zarządzanie',
     },
     {
         title: 'Dla deweloperów',
@@ -37,7 +37,7 @@ export const MENU_LINKS: MenuLink[] = [
 export const ABOUT_US_LINKS: MenuLink[] = [
     {
         title: 'Nasze wartości',
-        route: '/wartosci',
+        route: '/wartości',
     },
     {
         title: 'Ludzie',
@@ -60,7 +60,7 @@ export const ALL_LINKS: MenuLink[] = [
     },
     {
         title: 'Zarządzanie nieruchomościami',
-        route: '/zarzadzanie',
+        route: '/zarządzanie',
     },
     {
         title: 'Dla deweloperów',
@@ -72,7 +72,7 @@ export const ALL_LINKS: MenuLink[] = [
     },
     {
         title: 'Nasze wartości',
-        route: '/wartosci',
+        route: '/wartości',
     },
     {
         title: 'Ludzie',

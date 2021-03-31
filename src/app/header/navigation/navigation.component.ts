@@ -3,7 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MENU_LINKS } from 'src/app/header/menu-links';
 
-const ABOUT_US_LINKS = ['/ludzie', '/aktualności', '/wartosci'];
+const ABOUT_US_LINKS = ['/ludzie', '/aktualności', '/wartości'];
 
 @Component({
   selector: 'perfect-navigation',

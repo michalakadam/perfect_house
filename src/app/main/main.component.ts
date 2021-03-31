@@ -52,11 +52,11 @@ export class MainComponent implements OnDestroy {
 
   openUrl(image) {
     if (image.previewImageSrc.includes('zarzadzanie')) {
-      this.router.navigate(['zarzadzanie']);
+      this.router.navigate(['zarządzanie']);
       return;
     }
     if (image.previewImageSrc.includes('poznansku')) {
-      this.router.navigate(['wartosci']);
+      this.router.navigate(['wartości']);
       return;
     }
 

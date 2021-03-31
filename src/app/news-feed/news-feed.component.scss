@@ -16,7 +16,12 @@
             width: 81%;
         }
         @media screen and (max-width: $desktop-medium) {
-            width: 78%
+            width: 78%;
+        }
+        @media screen and (max-width: $desktop-small) {
+            overflow: hidden;
+            padding: 0 1rem 1rem;
+            width: 100%;
         }
 
         .date {
@@ -28,14 +33,20 @@
         .gallery-container {
             margin-top: 1rem;
             height: 715px;
-            width: 912px;
+            width: 100%;
             @media screen and (max-width: $desktop-large) {
                 height: 627px;
-                width: 800px;
             }
             @media screen and (max-width: $desktop-medium) {
                 height: 514px;
-                width: 656px;
+            }
+            @media screen and (max-width: $desktop-small) {
+                height: 445px;
+                margin-left: -3%;
+                width: 106.5%;
+            }
+            @media screen and (max-width: $mobile-small) {
+                height: 368px;
             }
         }
 
@@ -48,6 +59,7 @@
             font-style: italic;
             font-weight: 700;
             line-height: 2rem;
+            margin-bottom: 1rem;
             text-align: center;
         }
     }
