@@ -20,7 +20,7 @@ export class GalleryComponent implements OnInit {
   carouselEndIndex: number;
   @ViewChild('current') currentPhoto: ElementRef;
 
-  constructor(private readonly windowSizeDetector: WindowSizeDetector,
+  constructor(readonly windowSizeDetector: WindowSizeDetector,
     private readonly changeDetector: ChangeDetectorRef) {
       this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
         this.computeNumberOfPhotosInCarousel();

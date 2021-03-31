@@ -23,7 +23,7 @@
             (click)="loadNextPhoto()">
         </button>
     </div>
-    <div class="carousel-container">
+    <div class="carousel-container" *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall">
         <div
             class="carousel-button" 
             [class.hidden]="carouselStartIndex === 0"

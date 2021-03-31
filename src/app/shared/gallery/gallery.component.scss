@@ -21,6 +21,9 @@
         @media screen and (max-width: $desktop-medium) {
             height: 436px;
         }
+        @media screen and (max-width: $desktop-small) {
+            height: 100%;
+        }
 
         .photo {
             align-items: center;
@@ -41,6 +44,11 @@
                     height: 100%;
                     width: initial;
                 }
+
+                @media screen and (max-width: $tablet) {
+                    height: 100%;
+                    object-fit: cover;
+                }
             }
         }
 
@@ -49,6 +57,7 @@
             background-color: $light-green;
             border: initial;
             color: $dark-green;
+            top: -53%;
             z-index: 10;
 
             &:focus {
@@ -67,14 +76,27 @@
 
             &:nth-of-type(1) {
                 left: 2%;
-                top: -53%;
+                @media screen and (max-width: $tablet) {
+
+                }
             }
 
             &:nth-of-type(2) {
-                left: 90%;
-                top: -53%;
+                right: -90%;
                 @media screen and (max-width: $desktop-medium) {
-                    left: 88%;
+                    right: -88%;
+                }
+                @media screen and (max-width: $desktop-small) {
+                    right: -91%;
+                }
+                @media screen and (max-width: $tablet) {
+                    right: -86%;
+                }
+                @media screen and (max-width: $mobile) {
+                    right: -84%;
+                }
+                @media screen and (max-width: $mobile-small) {
+                    right: -80%;
                 }
             }
         }
