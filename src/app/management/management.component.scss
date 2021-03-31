@@ -1,8 +1,11 @@
 @import "~src/variables.scss";
 @import "~src/mixins.scss";
 
+.image-container {
+    @include screen-wide-image;
+}
+
 .component-container {
-    
     @include article-page;
 
     h2 {
@@ -17,24 +20,19 @@
 
         .contact {
             @include perfect-box;
-            left: 50%;
-            margin-left: 115px;
+            float: right;
+            margin-left: -476px;
             padding: 1rem 1rem 2rem;
-            position: absolute;
-            top: 490px; 
+            position: relative;
+            top: 200px;
             width: 475px;
             @media screen and (max-width: $desktop-large) {
-                margin-left: 100px;
-                top: 440px;
+                top: 175px;
                 width: 430px;
             }
-            @media screen and (max-width: $desktop-medium) {
-                margin-left: 30px;
-                top: 465px;
-            }
             @media screen and (max-width: $desktop-small) {
+                float: initial;
                 margin: 2rem auto;
-                left: unset;
                 position: unset;
                 top: unset;
                 width: 390px;
