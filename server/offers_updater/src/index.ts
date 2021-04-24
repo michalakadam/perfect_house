@@ -1,6 +1,6 @@
 import {getRemovedOffers} from './file_reader.js';
 // import types
-import {MongoClient, MongoClientOptions, MongoError} from 'mongodb';
+import {MongoClient, MongoClientOptions, MongoError, Collection} from 'mongodb';
 //import functionality
 import connect from 'mongodb';
 const {MongoClient: Mongo} = connect;
@@ -19,4 +19,15 @@ Mongo.connect(DB_URL, CONNECTION_CONFIG, (err: MongoError, client: MongoClient) 
     }
     const db = client.db(DB_NAME);
     const offersCollection = db.collection(OFFERS_COLLECTION_NAME);
+
+    removeOffers(offersCollection);
 });
+
+function removeOffers(collection: Collection) {
+    const removedOffers = getRemovedOffers();
+    if (removedOffers && removedOffers.length) {
+        for (const offer of removedOffers) {
+            collection.deleteOne({ID: offer['ID']})
+        }
+    }
+}
