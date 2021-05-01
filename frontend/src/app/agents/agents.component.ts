@@ -11,7 +11,6 @@ import { Agent } from '../shared/models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AgentsComponent {
-
   constructor(readonly agentsDao: AgentsDao, private readonly router: Router) {}
 
   navigateToAgentPage(agent: Agent) {

@@ -1,4 +1,10 @@
-import { Component, ChangeDetectionStrategy, Input, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  ChangeDetectorRef,
+  OnDestroy,
+} from '@angular/core';
 import { WindowSizeDetector } from 'src/app/shared/services/window-size-detector.service';
 import { Agent } from '../models';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
@@ -42,12 +48,16 @@ export class AgentBriefComponent implements OnDestroy {
     this.isLicenseNumberVisible = coerceBooleanProperty(value);
   }
 
-  constructor(readonly windowSizeDetector: WindowSizeDetector,
-    readonly changeDetector: ChangeDetectorRef) {
-      this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
+  constructor(
+    readonly windowSizeDetector: WindowSizeDetector,
+    readonly changeDetector: ChangeDetectorRef
+  ) {
+    this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(
+      () => {
         this.changeDetector.detectChanges();
-      });
-    }
+      }
+    );
+  }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();

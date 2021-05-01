@@ -1,11 +1,29 @@
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  OnInit,
+  ChangeDetectorRef,
+  OnDestroy,
+} from '@angular/core';
 import { OffersDao } from 'src/app/shared/services/offers-dao.service';
 import { WindowSizeDetector } from 'src/app/shared/services/window-size-detector.service';
-import { AVAILABLE_ESTATE_TYPES, EstateType, OffersFilters, DEFAULT_FILTERS } from 'src/app/shared/models';
+import {
+  AVAILABLE_ESTATE_TYPES,
+  EstateType,
+  OffersFilters,
+  DEFAULT_FILTERS,
+} from 'src/app/shared/models';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { DropdownGroup, DropdownValue } from './grouped-dropdown/grouped-dropdown.component';
+import {
+  DropdownGroup,
+  DropdownValue,
+} from './grouped-dropdown/grouped-dropdown.component';
 
 const AVAILABLE_TRANSACTIONS = [
   {
@@ -73,7 +91,7 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   isMpzpAvailable: boolean;
 
   priceRange: number[];
-  
+
   onMainPage = false;
   @Input()
   set mainPage(value: boolean) {
@@ -84,24 +102,30 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   @Output() openOffer = new EventEmitter<string>();
   @Output() advancedToggled = new EventEmitter();
 
-  constructor(readonly offersDao: OffersDao,
+  constructor(
+    readonly offersDao: OffersDao,
     readonly windowSizeDetector: WindowSizeDetector,
-    private readonly changeDetector: ChangeDetectorRef) {
-    this.subscription.add(this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
-      this.changeDetector.detectChanges();
-    }));
-  }
-
-  ngOnInit() {
-    this.subscription.add(this.inputSubject.asObservable()
-      .pipe(debounceTime(1000))
-      .subscribe(() => {
-        this.applyFiltersIgnoringPrice();
+    private readonly changeDetector: ChangeDetectorRef
+  ) {
+    this.subscription.add(
+      this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
+        this.changeDetector.detectChanges();
       })
     );
   }
 
-  onInputProvided(){
+  ngOnInit() {
+    this.subscription.add(
+      this.inputSubject
+        .asObservable()
+        .pipe(debounceTime(1000))
+        .subscribe(() => {
+          this.applyFiltersIgnoringPrice();
+        })
+    );
+  }
+
+  onInputProvided() {
     this.inputSubject.next();
   }
 
@@ -120,17 +144,29 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
     this.isByTheSea = this.filters.isByTheSea;
     this.isNoCommission = this.filters.isNoCommission;
     this.isVirtualVisitAvailable = this.filters.isVirtualVisitAvailable;
-    this.priceFrom = this.filters.priceFrom > -1 ?
-      this.computeFieldValue(this.filters.priceFrom) :
-      this.computeFieldValue(this.offersDao.getLowestPriceForCurrentSearch());
-    this.priceTo = this.filters.priceTo > -1 ?
-      this.computeFieldValue(this.filters.priceTo) :
-      this.computeFieldValue(this.offersDao.getHighestPriceForCurrentSearch());
-    this.pricePerSquareMeterFrom = this.computeFieldValue(this.filters.pricePerSquareMeterFrom);
-    this.pricePerSquareMeterTo = this.computeFieldValue(this.filters.pricePerSquareMeterTo);
+    this.priceFrom =
+      this.filters.priceFrom > -1
+        ? this.computeFieldValue(this.filters.priceFrom)
+        : this.computeFieldValue(
+            this.offersDao.getLowestPriceForCurrentSearch()
+          );
+    this.priceTo =
+      this.filters.priceTo > -1
+        ? this.computeFieldValue(this.filters.priceTo)
+        : this.computeFieldValue(
+            this.offersDao.getHighestPriceForCurrentSearch()
+          );
+    this.pricePerSquareMeterFrom = this.computeFieldValue(
+      this.filters.pricePerSquareMeterFrom
+    );
+    this.pricePerSquareMeterTo = this.computeFieldValue(
+      this.filters.pricePerSquareMeterTo
+    );
     this.areaFrom = this.computeFieldValue(this.filters.areaFrom);
     this.areaTo = this.computeFieldValue(this.filters.areaTo);
-    this.numberOfRoomsFrom = this.computeFieldValue(this.filters.numberOfRoomsFrom);
+    this.numberOfRoomsFrom = this.computeFieldValue(
+      this.filters.numberOfRoomsFrom
+    );
     this.numberOfRoomsTo = this.computeFieldValue(this.filters.numberOfRoomsTo);
     this.floorFrom = this.computeFieldValue(this.filters.floorFrom);
     this.floorTo = this.computeFieldValue(this.filters.floorTo);
@@ -139,7 +175,7 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
     this.isTerraceAvailable = this.filters.isTerraceAvailable;
     this.isBasementAvailable = this.filters.isBasementAvailable;
     this.isMpzpAvailable = this.filters.isMpzpAvailable;
-    
+
     this.changeDetector.detectChanges();
   }
 
@@ -151,18 +187,23 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
       this.estateTypesWithSubtypes.push({
         displayName: estateType.displayName.toLowerCase(),
         values: subtypes,
-        isVisible: !!subtypes.find(subtype => subtype.isSelected),
-        isSelected: estateType.displayName.toLowerCase() === this.filters.estateType.toLowerCase(),          
-      });   
+        isVisible: !!subtypes.find((subtype) => subtype.isSelected),
+        isSelected:
+          estateType.displayName.toLowerCase() ===
+          this.filters.estateType.toLowerCase(),
+      });
     }
   }
 
-  private getEstateSubtypesForDropdown(estateType: EstateType): DropdownValue[] {
-    const subtypes = estateType.displayName === 'mieszkanie' ? 
-        this.offersDao.getBuildingTypesForEstateType(estateType.queryName) :
-        this.offersDao.getEstateSubtypesForEstateType(estateType.queryName); 
+  private getEstateSubtypesForDropdown(
+    estateType: EstateType
+  ): DropdownValue[] {
+    const subtypes =
+      estateType.displayName === 'mieszkanie'
+        ? this.offersDao.getBuildingTypesForEstateType(estateType.queryName)
+        : this.offersDao.getEstateSubtypesForEstateType(estateType.queryName);
 
-    return subtypes.map(subtype => {
+    return subtypes.map((subtype) => {
       return {
         displayName: subtype,
         isSelected: subtype === this.filters.estateSubtype,
@@ -178,24 +219,30 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
       this.voivodeshipsWithCounties.push({
         displayName: voivodeship,
         values: counties,
-        isVisible: !!counties.find(county => county.isSelected),
-        isSelected: this.filters.voivodeship.toLowerCase() === voivodeship.toLowerCase(),
+        isVisible: !!counties.find((county) => county.isSelected),
+        isSelected:
+          this.filters.voivodeship.toLowerCase() === voivodeship.toLowerCase(),
       });
     }
   }
 
   private getCountiesForDropdown(voivodeship: string): DropdownValue[] {
-    return this.offersDao.getCountiesForVoivodeship(voivodeship).map(county => {
-      return {
-        displayName: county,
-        isSelected: this.filters.county === county,
-      }
-    });
+    return this.offersDao
+      .getCountiesForVoivodeship(voivodeship)
+      .map((county) => {
+        return {
+          displayName: county,
+          isSelected: this.filters.county === county,
+        };
+      });
   }
 
   isOptionalElementVisible() {
-    return !this.windowSizeDetector.isWindowSmallerThanDesktopSmall ||
-      this.windowSizeDetector.isWindowSmallerThanDesktopSmall && this.showAdvanced;
+    return (
+      !this.windowSizeDetector.isWindowSmallerThanDesktopSmall ||
+      (this.windowSizeDetector.isWindowSmallerThanDesktopSmall &&
+        this.showAdvanced)
+    );
   }
 
   private computeFieldValue(value: number): string {
@@ -238,22 +285,32 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
       this.openOffer.emit(this.symbol);
       return;
     }
-    if (this.computeFilterNumericValue(this.priceFrom) ===
-      this.offersDao.getLowestPriceForCurrentSearch()) {
-        this.priceFrom = '-1';
+    if (
+      this.computeFilterNumericValue(this.priceFrom) ===
+      this.offersDao.getLowestPriceForCurrentSearch()
+    ) {
+      this.priceFrom = '-1';
     }
-    if (this.computeFilterNumericValue(this.priceTo) ===
-      this.offersDao.getHighestPriceForCurrentSearch()) {
-        this.priceTo = '-1';
+    if (
+      this.computeFilterNumericValue(this.priceTo) ===
+      this.offersDao.getHighestPriceForCurrentSearch()
+    ) {
+      this.priceTo = '-1';
     }
-    
+
     const filters: OffersFilters = {
-      estateType: this.getSelectedDropdownGroupName(this.estateTypesWithSubtypes),
-      estateSubtype: this.getSelectedDropdownValueName(this.estateTypesWithSubtypes),
+      estateType: this.getSelectedDropdownGroupName(
+        this.estateTypesWithSubtypes
+      ),
+      estateSubtype: this.getSelectedDropdownValueName(
+        this.estateTypesWithSubtypes
+      ),
       isForRent: this.isForRent,
       isPrimaryMarket: this.marketToggleValues.indexOf(0) > -1,
       isSecondaryMarket: this.marketToggleValues.indexOf(1) > -1,
-      voivodeship: this.getSelectedDropdownGroupName(this.voivodeshipsWithCounties),
+      voivodeship: this.getSelectedDropdownGroupName(
+        this.voivodeshipsWithCounties
+      ),
       county: this.getSelectedDropdownValueName(this.voivodeshipsWithCounties),
       location: this.location,
       isInvestment: this.isInvestment,
@@ -262,8 +319,12 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
       isVirtualVisitAvailable: this.isVirtualVisitAvailable,
       priceFrom: this.computeFilterNumericValue(this.priceFrom),
       priceTo: this.computeFilterNumericValue(this.priceTo),
-      pricePerSquareMeterFrom: this.computeFilterNumericValue(this.pricePerSquareMeterFrom),
-      pricePerSquareMeterTo: this.computeFilterNumericValue(this.pricePerSquareMeterTo),
+      pricePerSquareMeterFrom: this.computeFilterNumericValue(
+        this.pricePerSquareMeterFrom
+      ),
+      pricePerSquareMeterTo: this.computeFilterNumericValue(
+        this.pricePerSquareMeterTo
+      ),
       areaFrom: this.computeFilterNumericValue(this.areaFrom),
       areaTo: this.computeFilterNumericValue(this.areaTo),
       numberOfRoomsFrom: this.computeFilterNumericValue(this.numberOfRoomsFrom),
@@ -282,11 +343,14 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private getSelectedDropdownGroupName(groups: DropdownGroup[]): string {
-    return groups.find(group => group.isSelected)?.displayName || '';
+    return groups.find((group) => group.isSelected)?.displayName || '';
   }
 
   private getSelectedDropdownValueName(groups: DropdownGroup[]): string {
-    return groups.flatMap(group => group.values).find(value => value.isSelected)?.displayName || '';
+    return (
+      groups.flatMap((group) => group.values).find((value) => value.isSelected)
+        ?.displayName || ''
+    );
   }
 
   computeFilterNumericValue(value: string): number {

@@ -1,4 +1,11 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef, Output, EventEmitter, OnDestroy } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Output,
+  EventEmitter,
+  OnDestroy,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { WindowSizeDetector } from 'src/app/shared/services/window-size-detector.service';
 
@@ -17,10 +24,13 @@ export class HeaderComponent implements OnDestroy {
 
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,
-    private readonly changeDetector: ChangeDetectorRef) {
-    this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
-      this.changeDetector.detectChanges();
-    });
+    private readonly changeDetector: ChangeDetectorRef
+  ) {
+    this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(
+      () => {
+        this.changeDetector.detectChanges();
+      }
+    );
   }
 
   ngOnDestroy() {

@@ -3,18 +3,25 @@ import { Sorting } from '../models';
 import { Offer } from 'models';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OffersSorter {
-
   sortOffers(offers: Offer[], sorting: Sorting): Offer[] {
     if (sorting.isAscending) {
-      return offers.sort((a, b) => this.compareByPropertyAsc(sorting.propertyName, a, b));
+      return offers.sort((a, b) =>
+        this.compareByPropertyAsc(sorting.propertyName, a, b)
+      );
     }
-    return offers.sort((a, b) => this.compareByPropertyDesc(sorting.propertyName, a, b));
+    return offers.sort((a, b) =>
+      this.compareByPropertyDesc(sorting.propertyName, a, b)
+    );
   }
 
-  private compareByPropertyAsc(propertyName: string, offerA: Offer, offerB: Offer): number {
+  private compareByPropertyAsc(
+    propertyName: string,
+    offerA: Offer,
+    offerB: Offer
+  ): number {
     if (offerA[propertyName] < offerB[propertyName]) {
       return -1;
     }
@@ -24,7 +31,11 @@ export class OffersSorter {
     return 0;
   }
 
-  private compareByPropertyDesc(propertyName: string, offerA: Offer, offerB: Offer): number {
+  private compareByPropertyDesc(
+    propertyName: string,
+    offerA: Offer,
+    offerB: Offer
+  ): number {
     if (offerA[propertyName] > offerB[propertyName]) {
       return -1;
     }

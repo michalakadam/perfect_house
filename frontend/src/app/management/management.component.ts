@@ -1,8 +1,14 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  OnDestroy,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AgentsDao } from '../shared/services/agents-dao.service';
 import { WindowSizeDetector } from '../shared/services/window-size-detector.service';
-import { Agent } from '../shared/models';4
+import { Agent } from '../shared/models';
+4;
 
 const AGENT_RESPONSIBLE_ID = 20202;
 
@@ -20,13 +26,17 @@ export class ManagementComponent implements OnDestroy {
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,
     readonly agentsDao: AgentsDao,
-    private readonly changeDetector: ChangeDetectorRef) {
-      this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
+    private readonly changeDetector: ChangeDetectorRef
+  ) {
+    this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(
+      () => {
         this.changeDetector.detectChanges();
-      });
+      }
+    );
 
-      this.agentResponsibleForManagement =
-        this.agentsDao.getAgentById(AGENT_RESPONSIBLE_ID);
+    this.agentResponsibleForManagement = this.agentsDao.getAgentById(
+      AGENT_RESPONSIBLE_ID
+    );
   }
 
   ngOnDestroy() {

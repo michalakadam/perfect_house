@@ -1,4 +1,9 @@
-import { Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  OnInit,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { OnDestroy } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -26,27 +31,33 @@ export class OfferComponent implements OnInit, OnDestroy {
   isVirtualVisitButtonVisible = false;
   isVirtualVisitActive = false;
 
-  constructor(readonly agentsDao: AgentsDao,
+  constructor(
+    readonly agentsDao: AgentsDao,
     readonly windowSizeDetector: WindowSizeDetector,
     private readonly route: ActivatedRoute,
     private readonly changeDetector: ChangeDetectorRef,
     private readonly router: Router,
     private readonly titleService: Title,
     private readonly offersDao: OffersDao,
-    private readonly snackbarService: SnackbarService) {
-      this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
+    private readonly snackbarService: SnackbarService
+  ) {
+    this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(
+      () => {
         this.changeDetector.detectChanges();
-      });
-    }
+      }
+    );
+  }
 
   ngOnInit() {
-    this.subscription.add(this.route.params.subscribe((params: Params) => {
+    this.subscription.add(
+      this.route.params.subscribe((params: Params) => {
         if (params.symbol) {
           this.loadOffer(params.symbol);
-        } else  {
+        } else {
           this.handleNonexistentOffer();
-        }    
-      }));
+        }
+      })
+    );
   }
 
   private loadOffer(symbol: string) {
@@ -86,23 +97,26 @@ export class OfferComponent implements OnInit, OnDestroy {
       this.isVirtualVisitButtonVisible = true;
     }
   }
-  
+
   private handleNonexistentOffer(symbol = '') {
     setTimeout(() => {
       this.snackbarService.open(`Oferta ${symbol} nie istnieje.`);
-    }, 500)
+    }, 500);
     this.router.navigate(['/oferty']);
   }
 
   private computeDefinedOfferFields(): OfferField<any>[] {
-    const symbolField = {displayName: 'Symbol oferty', value: this.offer.symbol};
+    const symbolField = {
+      displayName: 'Symbol oferty',
+      value: this.offer.symbol,
+    };
 
     return [
       symbolField,
       ...Object.values(this.offer)
-        .filter(value => this.isDefinedOfferField(value))
-        .filter(field => field.displayName !== 'Cena za m²'),
-    ]; 
+        .filter((value) => this.isDefinedOfferField(value))
+        .filter((field) => field.displayName !== 'Cena za m²'),
+    ];
   }
 
   private isDefinedOfferField(value: any): boolean {
@@ -112,14 +126,18 @@ export class OfferComponent implements OnInit, OnDestroy {
   // Because of https://stackoverflow.com/a/46703380/11212568 instanceof
   // does not work on interface.
   private isOfferField(value: any): boolean {
-    return value && value.hasOwnProperty('displayName') && value.hasOwnProperty('value');
+    return (
+      value &&
+      value.hasOwnProperty('displayName') &&
+      value.hasOwnProperty('value')
+    );
   }
 
   private isDefined(value: any): boolean {
     if (typeof value === 'number') {
-    return value > -1;
+      return value > -1;
     }
-    return !!value;  
+    return !!value;
   }
 
   isBoolean(value: any): boolean {
@@ -161,7 +179,7 @@ export class OfferComponent implements OnInit, OnDestroy {
   computePhotoUrls() {
     const photoUrlPrefix = '/offers/';
 
-    return this.offer.photos.map(photo => photoUrlPrefix + photo);
+    return this.offer.photos.map((photo) => photoUrlPrefix + photo);
   }
 
   ngOnDestroy() {

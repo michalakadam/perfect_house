@@ -1,4 +1,12 @@
-import { Component, ChangeDetectionStrategy, Input, ViewChild, ElementRef, OnInit, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  ViewChild,
+  ElementRef,
+  OnInit,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { WindowSizeDetector } from '../services/window-size-detector.service';
 
 const HORIZONTAL_PHOTO_MAX_WIDTH_TO_HEIGHT_RATIO = 1.2;
@@ -20,17 +28,19 @@ export class GalleryComponent implements OnInit {
   carouselEndIndex: number;
   @ViewChild('current') currentPhoto: ElementRef;
 
-  constructor(readonly windowSizeDetector: WindowSizeDetector,
-    private readonly changeDetector: ChangeDetectorRef) {
-      this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
-        this.computeNumberOfPhotosInCarousel();
+  constructor(
+    readonly windowSizeDetector: WindowSizeDetector,
+    private readonly changeDetector: ChangeDetectorRef
+  ) {
+    this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
+      this.computeNumberOfPhotosInCarousel();
 
-        if (this.currentPhotoIndex > -1) {
-          this.initializeCarousel();
-          this.changeDetector.detectChanges();
-        }
-      });
-    }
+      if (this.currentPhotoIndex > -1) {
+        this.initializeCarousel();
+        this.changeDetector.detectChanges();
+      }
+    });
+  }
 
   ngOnInit() {
     this.computeNumberOfPhotosInCarousel();
@@ -54,8 +64,9 @@ export class GalleryComponent implements OnInit {
   }
 
   determineCurrentPhotoLayout() {
-    this.isCurrentPhotoVertical =
-      this.isPhotoVertical(this.currentPhoto.nativeElement as HTMLImageElement);
+    this.isCurrentPhotoVertical = this.isPhotoVertical(
+      this.currentPhoto.nativeElement as HTMLImageElement
+    );
   }
 
   isPreviousPhotoAvailable() {
@@ -63,7 +74,10 @@ export class GalleryComponent implements OnInit {
   }
 
   isNextPhotoAvailable() {
-    return this.currentPhotoIndex !== -1 && this.currentPhotoIndex < this.photoUrls.length - 1;
+    return (
+      this.currentPhotoIndex !== -1 &&
+      this.currentPhotoIndex < this.photoUrls.length - 1
+    );
   }
 
   loadPreviousPhoto() {
@@ -87,13 +101,19 @@ export class GalleryComponent implements OnInit {
   }
 
   isNextPhotosButtonHidden(): boolean {
-    return this.carouselEndIndex === this.photoUrls.length - 1 || this.photoUrls.length <= this.numberOfPhotosInCarousel;
+    return (
+      this.carouselEndIndex === this.photoUrls.length - 1 ||
+      this.photoUrls.length <= this.numberOfPhotosInCarousel
+    );
   }
 
   private computePhotosInCarousel(startIndex: number) {
     this.carouselStartIndex = startIndex;
     this.carouselEndIndex = startIndex + this.numberOfPhotosInCarousel - 1;
-    this.photosInCarousel = [...this.photoUrls].splice(startIndex, this.numberOfPhotosInCarousel);
+    this.photosInCarousel = [...this.photoUrls].splice(
+      startIndex,
+      this.numberOfPhotosInCarousel
+    );
   }
 
   selectPhoto(photoUrl) {
@@ -102,20 +122,30 @@ export class GalleryComponent implements OnInit {
   }
 
   isPhotoVertical(photo: HTMLImageElement): boolean {
-    return photo.naturalWidth / photo.naturalHeight < HORIZONTAL_PHOTO_MAX_WIDTH_TO_HEIGHT_RATIO;
+    return (
+      photo.naturalWidth / photo.naturalHeight <
+      HORIZONTAL_PHOTO_MAX_WIDTH_TO_HEIGHT_RATIO
+    );
   }
 
   loadNextPhotos() {
-    const runningOutOfPhotos = this.photoUrls.length <= this.carouselEndIndex + this.numberOfPhotosInCarousel;
-    const startIndex = runningOutOfPhotos ? this.photoUrls.length - this.numberOfPhotosInCarousel : this.carouselEndIndex + 1;
+    const runningOutOfPhotos =
+      this.photoUrls.length <=
+      this.carouselEndIndex + this.numberOfPhotosInCarousel;
+    const startIndex = runningOutOfPhotos
+      ? this.photoUrls.length - this.numberOfPhotosInCarousel
+      : this.carouselEndIndex + 1;
 
     this.computePhotosInCarousel(startIndex);
     this.updateCurrentPhoto(this.carouselStartIndex);
   }
 
   loadPreviousPhotos() {
-    const runningOutOfPhotos = this.carouselStartIndex - this.numberOfPhotosInCarousel < 0;
-    const startIndex = runningOutOfPhotos ? 0 : this.carouselStartIndex - this.numberOfPhotosInCarousel;
+    const runningOutOfPhotos =
+      this.carouselStartIndex - this.numberOfPhotosInCarousel < 0;
+    const startIndex = runningOutOfPhotos
+      ? 0
+      : this.carouselStartIndex - this.numberOfPhotosInCarousel;
 
     this.computePhotosInCarousel(startIndex);
     this.updateCurrentPhoto(this.carouselStartIndex);

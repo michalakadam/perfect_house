@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "pretty": "prettier --write \"./**/*.{ts,json}\" --single-quote"
   },
   "private": true,
   "dependencies": {
@@ -21,6 +22,7 @@
     "@angular/platform-browser-dynamic": "~11.2.7",
     "@angular/router": "~11.2.7",
     "models": "file:../shared",
+    "prettier": "^2.2.1",
     "primeicons": "^4.1.0",
     "primeng": "^11.1.0-rc.1",
     "rxjs": "~6.6.7",

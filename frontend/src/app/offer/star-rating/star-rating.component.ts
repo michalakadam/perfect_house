@@ -1,4 +1,9 @@
-import { Component, ChangeDetectionStrategy, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  OnInit,
+} from '@angular/core';
 
 @Component({
   selector: 'perfect-star-rating',
@@ -13,7 +18,11 @@ export class StarRatingComponent implements OnInit {
   empty: number[] = [];
 
   ngOnInit() {
-    this.filled = Array(this.score).fill(0).map((x, i) => i);
-    this.empty = Array(this.outOf - this.score).fill(0).map((x, i) => i);
+    this.filled = Array(this.score)
+      .fill(0)
+      .map((x, i) => i);
+    this.empty = Array(this.outOf - this.score)
+      .fill(0)
+      .map((x, i) => i);
   }
 }

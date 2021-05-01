@@ -1,4 +1,10 @@
-import { Component, ChangeDetectionStrategy, Input, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  ChangeDetectorRef,
+  OnDestroy,
+} from '@angular/core';
 import { AgentsDao } from 'src/app/shared/services/agents-dao.service';
 import { Offer } from 'models';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
@@ -21,12 +27,16 @@ export class OfferCardComponent implements OnDestroy {
     this.displaySmaller = coerceBooleanProperty(value);
   }
 
-  constructor (readonly agentsDao: AgentsDao,
-    readonly windowSizeDetector: WindowSizeDetector, 
-    private readonly changeDetector: ChangeDetectorRef) {
-    this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
-      this.changeDetector.detectChanges();
-    });
+  constructor(
+    readonly agentsDao: AgentsDao,
+    readonly windowSizeDetector: WindowSizeDetector,
+    private readonly changeDetector: ChangeDetectorRef
+  ) {
+    this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(
+      () => {
+        this.changeDetector.detectChanges();
+      }
+    );
   }
 
   ngOnDestroy() {

@@ -112,9 +112,6 @@ import { StarRatingComponent } from './offer/star-rating/star-rating.component';
     SliderModule,
     TabViewModule,
   ],
-  bootstrap: [
-    AppComponent,
-  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}

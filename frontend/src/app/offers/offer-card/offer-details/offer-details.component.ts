@@ -8,15 +8,13 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
   styleUrls: ['./offer-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
 export class OfferDetailsComponent {
-  
   @Input() offer: Offer;
 
   exists(value: any): boolean {
     if (typeof value === 'number') {
       return value > -1;
     }
-    return !!value;  
+    return !!value;
   }
 }
