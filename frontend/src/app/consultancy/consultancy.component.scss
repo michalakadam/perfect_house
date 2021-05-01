@@ -1,9 +1,9 @@
-@import "~src/mixins.scss";
+@import '~src/mixins.scss';
 
 .image-container {
-    @include screen-wide-image;
+  @include screen-wide-image;
 }
 
-.component-container { 
-    @include article-page;
+.component-container {
+  @include article-page;
 }

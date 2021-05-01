@@ -1,21 +1,26 @@
 <div class="top-buttons-container">
-    <button mat-icon-button
-        id="sideNavToggleButton"
-        *ngIf="windowSizeDetector.isWindowSmallerThanDesktopSmall"
-        (click)="sideMenuToggled.emit()">
-        <mat-icon>menu</mat-icon>
-    </button>
-    <img src="/assets/LOGO_ORYGINALNE.png" [routerLink]="['/']">
-    <a href="tel:+48514753514">
-        <mat-icon><i class="fas fa-phone-square-alt"></i></mat-icon>
-        <span class="phone-number"
-            *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall">
-            514 753 514
-        </span>
-    </a>
+  <button
+    mat-icon-button
+    id="sideNavToggleButton"
+    *ngIf="windowSizeDetector.isWindowSmallerThanDesktopSmall"
+    (click)="sideMenuToggled.emit()"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <img src="/assets/LOGO_ORYGINALNE.png" [routerLink]="['/']" />
+  <a href="tel:+48514753514">
+    <mat-icon><i class="fas fa-phone-square-alt"></i></mat-icon>
+    <span
+      class="phone-number"
+      *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall"
+    >
+      514 753 514
+    </span>
+  </a>
 </div>
 
 <perfect-navigation
-    *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall"
-    (aboutUsToggled)="aboutUsOptionsToggled.emit()">
+  *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall"
+  (aboutUsToggled)="aboutUsOptionsToggled.emit()"
+>
 </perfect-navigation>

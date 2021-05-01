@@ -1,161 +1,161 @@
-@import "~src/variables.scss";
-@import "~src/mixins.scss";
+@import '~src/variables.scss';
+@import '~src/mixins.scss';
 
 .component-container {
-    @include perfect-box;
-    display: flex;
-    height: 25vw;
-    margin: 20px auto;
-    min-height: 265px;
-    max-height: 365px;
-    width: 100%;
-    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  @include perfect-box;
+  display: flex;
+  height: 25vw;
+  margin: 20px auto;
+  min-height: 265px;
+  max-height: 365px;
+  width: 100%;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 
-    &:hover {
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  &:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     cursor: pointer;
-    }
+  }
 
-    .picture {
-        background-position: left top;
-        background-repeat: no-repeat;
-        background-size: cover;
-        border-bottom-left-radius: 15px;
-        border-top-left-radius: 15px;
-        width: 50%;
-    }
+  .picture {
+    background-position: left top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+    width: 50%;
+  }
 
-    .details-container {
+  .details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 15px;
+    width: 47%;
+
+    .details {
+      h4 {
         display: flex;
-        flex-direction: column;
         justify-content: space-between;
-        margin: 0 15px;
-        width: 47%;
+        margin-bottom: 10px;
 
-        .details {
-            h4 {
-                display: flex;
-                justify-content: space-between;
-                margin-bottom: 10px;
-
-                .description {
-                    color: $font-light-grey;
-                }
-
-                .offer-number {
-                    margin-right: 12px;
-                }
-            }
-
-            .location {
-                align-items: center;
-                color: $font-light-grey;
-                display: flex;
-                margin-bottom: 15px;
-                margin-left: -3px;
-
-                i {
-                    margin-right: 3px;
-                }
-
-                span {
-                    font-weight: 700;
-                }
-            }
-
-            .details-row {
-                margin-bottom: 15px;
-
-                .key-value-pair {
-                    &:first-of-type {
-                        display: inline-block;
-                        width: 250px;
-                        @media screen and (max-width: $desktop-large) {
-                            width: 235px;
-                        }
-                        @media screen and (max-width: $desktop-medium) {
-                            width: 220px;
-                        }
-                    }
-
-                    .key {
-                        font-weight: 700;
-                    }
-                }    
-            }
+        .description {
+          color: $font-light-grey;
         }
 
-        .bottom-row {
-            align-items: center;
-            display: flex;
-            justify-content: space-between;
-
-            .phone {
-                cursor: pointer;
-                font-size: 14px;
-                margin-bottom: 14px;
-                
-                p-button {
-                    @include perfect-button;
-                }
-            }
-
-            .price {
-                color: $dark-green;
-                font-size: 2.5rem;
-                font-weight: 700;
-                margin-bottom: 15px;
-                margin-right: 10px;
-                text-align: right;
-
-                .client-price {
-                    color: $font-grey;
-                    font-size: 16px;
-                }
-            }
+        .offer-number {
+          margin-right: 12px;
         }
+      }
+
+      .location {
+        align-items: center;
+        color: $font-light-grey;
+        display: flex;
+        margin-bottom: 15px;
+        margin-left: -3px;
+
+        i {
+          margin-right: 3px;
+        }
+
+        span {
+          font-weight: 700;
+        }
+      }
+
+      .details-row {
+        margin-bottom: 15px;
+
+        .key-value-pair {
+          &:first-of-type {
+            display: inline-block;
+            width: 250px;
+            @media screen and (max-width: $desktop-large) {
+              width: 235px;
+            }
+            @media screen and (max-width: $desktop-medium) {
+              width: 220px;
+            }
+          }
+
+          .key {
+            font-weight: 700;
+          }
+        }
+      }
     }
+
+    .bottom-row {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+
+      .phone {
+        cursor: pointer;
+        font-size: 14px;
+        margin-bottom: 14px;
+
+        p-button {
+          @include perfect-button;
+        }
+      }
+
+      .price {
+        color: $dark-green;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        margin-right: 10px;
+        text-align: right;
+
+        .client-price {
+          color: $font-grey;
+          font-size: 16px;
+        }
+      }
+    }
+  }
 }
 
 .smaller-container {
-    flex-direction: column;
-    font-size: 12px !important;
-    height: unset;
-    min-height: unset;
-    max-height: unset;
-    max-width: 316px;
-    min-width: 316px;
+  flex-direction: column;
+  font-size: 12px !important;
+  height: unset;
+  min-height: unset;
+  max-height: unset;
+  max-width: 316px;
+  min-width: 316px;
 
-    .picture {
-        border-bottom-left-radius: 0;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        height: 200px;
-        width: 100%;
+  .picture {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 200px;
+    width: 100%;
+  }
+
+  .details-container {
+    min-height: 277px;
+    width: 275px;
+
+    .details {
+      h4 {
+        width: 300px;
+      }
     }
 
-    .details-container {
-        min-height: 277px;
-        width: 275px;
-
-        .details {
-            h4 {
-                width: 300px;
-            }
+    .bottom-row {
+      width: 297px;
+      .phone {
+        p-button {
+          ::ng-deep .p-button {
+            font-size: 12px !important;
+          }
         }
-
-        .bottom-row {
-            width: 297px;
-            .phone {
-                p-button {
-                    ::ng-deep .p-button {
-                        font-size: 12px !important;
-                    }
-                }
-            }
-            .price {
-                font-size: 24px;
-            }
-        }
+      }
+      .price {
+        font-size: 24px;
+      }
     }
+  }
 }

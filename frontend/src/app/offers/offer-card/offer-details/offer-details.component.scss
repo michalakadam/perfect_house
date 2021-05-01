@@ -1,30 +1,30 @@
-@import "~src/variables.scss";
+@import '~src/variables.scss';
 
-.component-container { 
-    .location {
-        align-items: center;
-        color: $font-light-grey;
-        display: flex;
-        margin-bottom: 16px;
-        margin-left: -3px;
+.component-container {
+  .location {
+    align-items: center;
+    color: $font-light-grey;
+    display: flex;
+    margin-bottom: 16px;
+    margin-left: -3px;
 
-        i {
-            margin-right: 3px;
-        }
+    i {
+      margin-right: 3px;
     }
+  }
 
-    .pairs-container {
-        display: grid;
-        gap: 0.75rem;
-        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  .pairs-container {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
 
-        .key-value-pair {
-            display: block;
-            width: unset;
+    .key-value-pair {
+      display: block;
+      width: unset;
 
-            .key {
-                font-weight: 700;
-            }
-        }    
+      .key {
+        font-weight: 700;
+      }
     }
+  }
 }

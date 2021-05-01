@@ -1,13 +1,14 @@
 <div class="component-container">
-    <perfect-agent-brief
-        [agent]="agent"
-        bigger
-        contactInfoVisible
-        licenseNumberVisible
-        vertical>
-    </perfect-agent-brief>
+  <perfect-agent-brief
+    [agent]="agent"
+    bigger
+    contactInfoVisible
+    licenseNumberVisible
+    vertical
+  >
+  </perfect-agent-brief>
 
-    <div *ngIf="agent.description" class="description">
-        {{ agent.description }}
-    </div>
+  <div *ngIf="agent.description" class="description">
+    {{ agent.description }}
+  </div>
 </div>

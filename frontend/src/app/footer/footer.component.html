@@ -1,106 +1,145 @@
 <div class="links-container">
-    <perfect-footer-links-section
-        [headerTitle]="'Na wynajem'"
-        [showResponsiveView]="windowSizeDetector.isWindowSmallerThanMobileLarge"
-        [isSectionOpen]="isRentalSectionOpen"
-        (sectionToggled)="toggleRentalSectionOpen()">
-            <div class="link"
-                (click)="loadOffers({estateType: 'mieszkanie', isForRent: true})">
-                Mieszkania
-            </div>
-            <div class="link"
-                (click)="loadOffers({estateType: 'dom', isForRent: true})">
-                Domy
-            </div>
-            <div class="link"
-                (click)="loadOffers({estateType: 'działka', isForRent: true})">
-                Działki
-            </div>
-            <div class="link"
-                (click)="loadOffers({estateType: 'lokal', isForRent: true})">
-                Lokale
-            </div>
-            <div class="link"
-                (click)="loadOffers({estateType: 'hala', isForRent: true})">
-                Hale
-            </div>
-            <div class="link"
-                (click)="loadOffers({estateType: 'obiekt', isForRent: true})">
-                Obiekty
-            </div>
-    </perfect-footer-links-section>
-    <perfect-footer-links-section
-        [headerTitle]="'Na sprzedaż'"
-        [showResponsiveView]="windowSizeDetector.isWindowSmallerThanMobileLarge"
-        [isSectionOpen]="isSaleSectionOpen"
-        (sectionToggled)="toggleSaleSectionOpen()">
-            <div class="link"
-                (click)="loadOffers({estateType: 'mieszkanie', isForRent: false})">
-                Mieszkania
-            </div>
-            <div class="link"
-                (click)="loadOffers({estateType: 'dom', isForRent: false})">
-                Domy
-            </div>
-            <div class="link"
-                (click)="loadOffers({estateType: 'działka', isForRent: false})">
-                Działki
-            </div>
-            <div class="link"
-                (click)="loadOffers({estateType: 'lokal', isForRent: false})">
-                Lokale
-            </div>
-            <div class="link"
-                (click)="loadOffers({estateType: 'hala', isForRent: false})">
-                Hale
-            </div>
-            <div class="link"
-                (click)="loadOffers({estateType: 'obiekt', isForRent: false})">
-                Obiekty
-            </div>
-    </perfect-footer-links-section>
-    <perfect-footer-links-section
-        [headerTitle]="'Inne oferty'"
-        [showResponsiveView]="windowSizeDetector.isWindowSmallerThanMobileLarge"
-        [isSectionOpen]="isOtherSectionOpen"
-        (sectionToggled)="toggleOtherSectionOpen()">
-        <div class="link" (click)="loadOffers({isInvestment: true})">
-            Inwestycyjne
-        </div>
-        <div class="link" (click)="loadOffers({isByTheSea: true})">
-            Nad Bałtykiem
-        </div>
-        <div class="link" (click)="loadOffers({isNoCommission: true})">
-            Bez prowizji
-        </div>
-        <div class="link" (click)="loadOffers({isVirtualVisitAvailable: true})">
-            Z wirtualną wizytą
-        </div>
-    </perfect-footer-links-section>
-    <section>
-        <h4>Kontakt</h4>
-        <address>
-            <div>Biuro nieruchomości Perfect House</div>
-            <div>ul. Klin 17/2, 60-602 Poznań</div>
-            <div>biuro@e-perfecthouse.pl</div>
-            <div>61 296 03 95, 514 753 514</div>
-        </address>
-        <div class="icons-container">
-            <a target="_blank" href="https://www.facebook.com/perfecthousepoznan" rel="noopener noreferrer">
-                <mat-icon><i class="fab fa-facebook-square"></i></mat-icon>
-            </a>
-            <a target="_blank" href="https://www.instagram.com/perfecthousepoznan" rel="noopener noreferrer">
-                <mat-icon><i class="fab fa-instagram-square"></i></mat-icon>
-            </a>
-            <a target="_blank" href="mailto:biuro@e-perfecthouse.pl" rel="noopener noreferrer">
-                <mat-icon><i class="fas fa-envelope-square"></i></mat-icon>
-            </a>
-        </div>
-    </section>
+  <perfect-footer-links-section
+    [headerTitle]="'Na wynajem'"
+    [showResponsiveView]="windowSizeDetector.isWindowSmallerThanMobileLarge"
+    [isSectionOpen]="isRentalSectionOpen"
+    (sectionToggled)="toggleRentalSectionOpen()"
+  >
+    <div
+      class="link"
+      (click)="loadOffers({ estateType: 'mieszkanie', isForRent: true })"
+    >
+      Mieszkania
+    </div>
+    <div
+      class="link"
+      (click)="loadOffers({ estateType: 'dom', isForRent: true })"
+    >
+      Domy
+    </div>
+    <div
+      class="link"
+      (click)="loadOffers({ estateType: 'działka', isForRent: true })"
+    >
+      Działki
+    </div>
+    <div
+      class="link"
+      (click)="loadOffers({ estateType: 'lokal', isForRent: true })"
+    >
+      Lokale
+    </div>
+    <div
+      class="link"
+      (click)="loadOffers({ estateType: 'hala', isForRent: true })"
+    >
+      Hale
+    </div>
+    <div
+      class="link"
+      (click)="loadOffers({ estateType: 'obiekt', isForRent: true })"
+    >
+      Obiekty
+    </div>
+  </perfect-footer-links-section>
+  <perfect-footer-links-section
+    [headerTitle]="'Na sprzedaż'"
+    [showResponsiveView]="windowSizeDetector.isWindowSmallerThanMobileLarge"
+    [isSectionOpen]="isSaleSectionOpen"
+    (sectionToggled)="toggleSaleSectionOpen()"
+  >
+    <div
+      class="link"
+      (click)="loadOffers({ estateType: 'mieszkanie', isForRent: false })"
+    >
+      Mieszkania
+    </div>
+    <div
+      class="link"
+      (click)="loadOffers({ estateType: 'dom', isForRent: false })"
+    >
+      Domy
+    </div>
+    <div
+      class="link"
+      (click)="loadOffers({ estateType: 'działka', isForRent: false })"
+    >
+      Działki
+    </div>
+    <div
+      class="link"
+      (click)="loadOffers({ estateType: 'lokal', isForRent: false })"
+    >
+      Lokale
+    </div>
+    <div
+      class="link"
+      (click)="loadOffers({ estateType: 'hala', isForRent: false })"
+    >
+      Hale
+    </div>
+    <div
+      class="link"
+      (click)="loadOffers({ estateType: 'obiekt', isForRent: false })"
+    >
+      Obiekty
+    </div>
+  </perfect-footer-links-section>
+  <perfect-footer-links-section
+    [headerTitle]="'Inne oferty'"
+    [showResponsiveView]="windowSizeDetector.isWindowSmallerThanMobileLarge"
+    [isSectionOpen]="isOtherSectionOpen"
+    (sectionToggled)="toggleOtherSectionOpen()"
+  >
+    <div class="link" (click)="loadOffers({ isInvestment: true })">
+      Inwestycyjne
+    </div>
+    <div class="link" (click)="loadOffers({ isByTheSea: true })">
+      Nad Bałtykiem
+    </div>
+    <div class="link" (click)="loadOffers({ isNoCommission: true })">
+      Bez prowizji
+    </div>
+    <div class="link" (click)="loadOffers({ isVirtualVisitAvailable: true })">
+      Z wirtualną wizytą
+    </div>
+  </perfect-footer-links-section>
+  <section>
+    <h4>Kontakt</h4>
+    <address>
+      <div>Biuro nieruchomości Perfect House</div>
+      <div>ul. Klin 17/2, 60-602 Poznań</div>
+      <div>biuro@e-perfecthouse.pl</div>
+      <div>61 296 03 95, 514 753 514</div>
+    </address>
+    <div class="icons-container">
+      <a
+        target="_blank"
+        href="https://www.facebook.com/perfecthousepoznan"
+        rel="noopener noreferrer"
+      >
+        <mat-icon><i class="fab fa-facebook-square"></i></mat-icon>
+      </a>
+      <a
+        target="_blank"
+        href="https://www.instagram.com/perfecthousepoznan"
+        rel="noopener noreferrer"
+      >
+        <mat-icon><i class="fab fa-instagram-square"></i></mat-icon>
+      </a>
+      <a
+        target="_blank"
+        href="mailto:biuro@e-perfecthouse.pl"
+        rel="noopener noreferrer"
+      >
+        <mat-icon><i class="fas fa-envelope-square"></i></mat-icon>
+      </a>
+    </div>
+  </section>
 </div>
 <mat-divider></mat-divider>
 <div class="legal-info">
-    Agencja nieruchomości Perfect House © 2021.
-    <span *ngIf="windowSizeDetector.isWindowSmallerThanMobile"><br/></span>
-    Wszelkie prawa zastrzeżone.
+  Agencja nieruchomości Perfect House © 2021.
+  <span *ngIf="windowSizeDetector.isWindowSmallerThanMobile"><br /></span>
+  Wszelkie prawa zastrzeżone.
 </div>

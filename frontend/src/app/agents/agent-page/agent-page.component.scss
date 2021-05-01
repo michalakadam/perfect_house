@@ -1,48 +1,48 @@
-@import "~src/variables.scss";
-@import "~src/mixins.scss";
+@import '~src/variables.scss';
+@import '~src/mixins.scss';
 
-.component-container { 
-    @include responsive-page;
-    display: flex;
-    justify-content: space-between;
-    margin: 50px auto;
+.component-container {
+  @include responsive-page;
+  display: flex;
+  justify-content: space-between;
+  margin: 50px auto;
+  @media screen and (max-width: $desktop-small) {
+    margin: 20px auto;
+  }
+  @media screen and (max-width: $mobile-large) {
+    flex-direction: column;
+  }
+
+  & > * {
+    @include perfect-box;
+    margin: 0 25px;
+    padding: 25px;
     @media screen and (max-width: $desktop-small) {
-        margin: 20px auto;
+      margin: 0;
     }
     @media screen and (max-width: $mobile-large) {
-        flex-direction: column;
+      flex-direction: column;
+      margin: 0 auto;
+      width: 300px;
     }
+  }
 
-    & > * {
-        @include perfect-box;
-        margin: 0 25px;
-        padding: 25px;
-        @media screen and (max-width: $desktop-small) {
-            margin: 0;
-        }
-        @media screen and (max-width: $mobile-large) {
-            flex-direction: column;
-            margin: 0 auto;
-            width: 300px;
-        }
+  perfect-agent-brief {
+    max-height: 420px;
+    @media screen and (max-width: $desktop-small) {
+      margin-right: 20px;
+      max-height: 376px;
+      padding: 25px 0;
     }
+    @media screen and (max-width: $mobile-large) {
+      margin-bottom: 20px;
+      margin-right: auto;
+      padding: 25px;
+    }
+  }
 
-    perfect-agent-brief {
-        max-height: 420px;
-        @media screen and (max-width: $desktop-small) {
-            margin-right: 20px;
-            max-height: 376px;
-            padding: 25px 0;
-        }
-        @media screen and (max-width: $mobile-large) {
-            margin-bottom: 20px;
-            margin-right: auto;
-            padding: 25px;
-        }
-    }
-
-    .description {
-        line-height: 1.6em;
-        text-align: justify;
-    }
+  .description {
+    line-height: 1.6em;
+    text-align: justify;
+  }
 }

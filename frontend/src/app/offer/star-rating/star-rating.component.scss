@@ -1,11 +1,11 @@
-@import "~src/variables.scss";
+@import '~src/variables.scss';
 
 .component-container {
-    display: flex;
-    justify-content: space-evenly;
-    width: 100px;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100px;
 
-    i {
-        color: $light-green;
-    }
+  i {
+    color: $light-green;
+  }
 }

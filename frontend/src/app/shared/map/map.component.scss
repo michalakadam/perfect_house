@@ -1,15 +1,15 @@
-@import "~src/variables.scss";
+@import '~src/variables.scss';
 
 .map {
-    ::ng-deep .ol-viewport {
-        max-height: 750px;
-        min-height: 300px;
-        pointer-events: none;
+  ::ng-deep .ol-viewport {
+    max-height: 750px;
+    min-height: 300px;
+    pointer-events: none;
 
-        .ol-control button {
-            background-color: $light-green;
-            color: $dark-green;
-            pointer-events: initial;
-        }
+    .ol-control button {
+      background-color: $light-green;
+      color: $dark-green;
+      pointer-events: initial;
     }
+  }
 }

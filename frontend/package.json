@@ -7,7 +7,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "pretty": "prettier --write \"./**/*.{ts,json}\" --single-quote"
+    "pretty": "prettier --write . --single-quote"
   },
   "private": true,
   "dependencies": {
@@ -22,7 +22,6 @@
     "@angular/platform-browser-dynamic": "~11.2.7",
     "@angular/router": "~11.2.7",
     "models": "file:../shared",
-    "prettier": "^2.2.1",
     "primeicons": "^4.1.0",
     "primeng": "^11.1.0-rc.1",
     "rxjs": "~6.6.7",
@@ -45,6 +44,7 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "prettier": "^2.2.1",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",

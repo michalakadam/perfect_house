@@ -1,46 +1,45 @@
-@import "~src/variables.scss";
-@import "~src/mixins.scss";
+@import '~src/variables.scss';
+@import '~src/mixins.scss';
 
-.component-container { 
+.component-container {
+  @include responsive-page;
 
-    @include responsive-page;
+  .title {
+    text-align: center;
+  }
 
-    .title { 
-        text-align: center;
+  .list-of-agents {
+    align-items: center;
+    display: grid;
+    gap: 30px 50px;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    margin: 40px auto;
+    @media screen and (max-width: $desktop-small) {
+      gap: 20px 10px;
+      margin: 20px auto;
     }
-    
-    .list-of-agents {
-        align-items: center;
-        display: grid;
-        gap: 30px 50px;
-        grid-template-columns: repeat(3, 1fr);
-        justify-items: center;
-        margin: 40px auto;
-        @media screen and (max-width: $desktop-small) {
-            gap: 20px 10px;
-            margin: 20px auto;
-        }
+    @media screen and (max-width: $tablet) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media screen and (max-width: $mobile) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+    perfect-agent-brief {
+      cursor: pointer;
+
+      &:first-of-type {
+        grid-column-start: 1;
+        grid-column-end: 4;
+
         @media screen and (max-width: $tablet) {
-           grid-template-columns: repeat(2, 1fr);
+          grid-column-end: 3;
         }
         @media screen and (max-width: $mobile) {
-           grid-template-columns: repeat(1, 1fr);
+          grid-column-end: initial;
         }
-
-        perfect-agent-brief {
-            cursor: pointer;
-
-            &:first-of-type {
-                grid-column-start: 1;
-                grid-column-end: 4; 
-
-                @media screen and (max-width: $tablet) {
-                    grid-column-end: 3;
-                }
-                @media screen and (max-width: $mobile) {
-                    grid-column-end: initial;
-                }
-            }
-        }
+      }
     }
+  }
 }

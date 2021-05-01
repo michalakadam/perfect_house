@@ -1,20 +1,31 @@
 <mat-nav-list>
-    <mat-list-item *ngFor="let link of links"
-        [ngClass]="{'about-us-link': !isSideNavigation}">
-        <span *ngIf="link.route !== '/oferty'"
-            class="link"
-            [routerLink]="link.route"
-            routerLinkActive="active-link"
-            [routerLinkActiveOptions]="{exact: true}"
-            tabindex="0"
-            role="button"
-            aria-pressed="false">{{link.title}}</span>
-        <span *ngIf="link.route === '/oferty'"
-            class="link"
-            [routerLink]="[link.route, {page: 1, sorting: 'creationDate_descending'}]"
-            routerLinkActive="active-link"
-            tabindex="0"
-            role="button"
-            aria-pressed="false">{{link.title}}</span>
-    </mat-list-item>
+  <mat-list-item
+    *ngFor="let link of links"
+    [ngClass]="{ 'about-us-link': !isSideNavigation }"
+  >
+    <span
+      *ngIf="link.route !== '/oferty'"
+      class="link"
+      [routerLink]="link.route"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+      tabindex="0"
+      role="button"
+      aria-pressed="false"
+      >{{ link.title }}</span
+    >
+    <span
+      *ngIf="link.route === '/oferty'"
+      class="link"
+      [routerLink]="[
+        link.route,
+        { page: 1, sorting: 'creationDate_descending' }
+      ]"
+      routerLinkActive="active-link"
+      tabindex="0"
+      role="button"
+      aria-pressed="false"
+      >{{ link.title }}</span
+    >
+  </mat-list-item>
 </mat-nav-list>

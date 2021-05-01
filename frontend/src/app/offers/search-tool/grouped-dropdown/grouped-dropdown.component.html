@@ -1,54 +1,68 @@
-<div class="component-container" [ngClass]="{'selected': !!selected}" tabindex="0">
-    <div class="component-label" *ngIf="selected">
-        <span *ngIf="!hideGroupNameWhenValueSelected">
-            {{ placeholder }}
+<div
+  class="component-container"
+  [ngClass]="{ selected: !!selected }"
+  tabindex="0"
+>
+  <div class="component-label" *ngIf="selected">
+    <span *ngIf="!hideGroupNameWhenValueSelected">
+      {{ placeholder }}
+    </span>
+    <span *ngIf="hideGroupNameWhenValueSelected && isGroupSelected">
+      {{ groupLabel }}
+    </span>
+    <span *ngIf="hideGroupNameWhenValueSelected && isValueSelected">
+      {{ valueLabel }}
+    </span>
+  </div>
+  <div class="selected-container">
+    <span class="label-container" (click)="toggleDropdownVisibility()">
+      <div *ngIf="!selected" class="placeholder">
+        {{ placeholder }}
+      </div>
+      <div *ngIf="selected" class="selected">
+        {{ selected }}
+      </div>
+    </span>
+    <span
+      class="icon-container"
+      *ngIf="!selected"
+      (click)="toggleDropdownVisibility()"
+    >
+      <i class="pi pi-chevron-down"></i>
+    </span>
+    <span class="icon-container" *ngIf="selected" (click)="deselectAll()">
+      <i class="pi pi-times"></i>
+    </span>
+  </div>
+  <div class="dropdown" *ngIf="isDropdownVisible">
+    <div class="group-container" *ngFor="let group of groupsWithValues">
+      <div class="label-container">
+        <span
+          class="label"
+          [class.selected]="group.isSelected"
+          (click)="groupSelected(group)"
+        >
+          {{ group.displayName }}
         </span>
-        <span *ngIf="hideGroupNameWhenValueSelected && isGroupSelected">
-            {{ groupLabel }}
+        <span
+          class="icon-container"
+          *ngIf="group.values.length"
+          (click)="toggleGroupVisibility(group)"
+        >
+          <i class="pi pi-chevron-down" *ngIf="!group.isVisible"></i>
+          <i class="pi pi-chevron-up" *ngIf="group.isVisible"></i>
         </span>
-        <span *ngIf="hideGroupNameWhenValueSelected && isValueSelected">
-            {{ valueLabel }}
-        </span>
-    </div>
-    <div class="selected-container">
-        <span class="label-container" (click)="toggleDropdownVisibility()">
-            <div *ngIf="!selected" class="placeholder">
-                {{ placeholder }}
-            </div>
-            <div *ngIf="selected" class="selected">
-                {{ selected }}
-            </div>
-        </span>
-        <span class="icon-container" *ngIf="!selected" (click)="toggleDropdownVisibility()">
-            <i class="pi pi-chevron-down"></i>
-        </span>
-        <span class="icon-container" *ngIf="selected" (click)="deselectAll()">
-            <i class="pi pi-times"></i>
-        </span>
-    </div>
-    <div class="dropdown" *ngIf="isDropdownVisible">
-        <div class="group-container" *ngFor="let group of groupsWithValues">
-            <div class="label-container">
-                <span class="label"
-                    [class.selected]="group.isSelected"
-                    (click)="groupSelected(group)">
-                    {{ group.displayName }}
-                </span>
-                <span class="icon-container"
-                    *ngIf="group.values.length"
-                    (click)="toggleGroupVisibility(group)">
-                    <i class="pi pi-chevron-down" *ngIf="!group.isVisible"></i>
-                    <i class="pi pi-chevron-up" *ngIf="group.isVisible"></i>
-                </span>
-            </div>
-            <div class="values-container" *ngIf="group.isVisible">
-                <div class="value"
-                    *ngFor="let value of group.values"
-                    [class.selected]="value.isSelected"
-                    (click)="valueSelected(group, value)">
-                    {{ value.displayName }}
-                </div>
-            </div>
+      </div>
+      <div class="values-container" *ngIf="group.isVisible">
+        <div
+          class="value"
+          *ngFor="let value of group.values"
+          [class.selected]="value.isSelected"
+          (click)="valueSelected(group, value)"
+        >
+          {{ value.displayName }}
         </div>
+      </div>
     </div>
+  </div>
 </div>

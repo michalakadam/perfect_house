@@ -1,38 +1,38 @@
-@import "../node_modules/primeicons/primeicons.css";
-@import "../node_modules/primeng/resources/primeng.min.css";
-@import "~src/variables.scss";
-
+@import '../node_modules/primeicons/primeicons.css';
+@import '../node_modules/primeng/resources/primeng.min.css';
+@import '~src/variables.scss';
 
 html {
-    font-size: 16px;
+  font-size: 16px;
+  height: 100%;
+  @media screen and (max-width: $desktop-large) {
+    font-size: 14px;
+  }
+  @media screen and (max-width: $desktop-small) {
+    font-size: 12px;
+  }
+
+  body {
+    color: $font-grey;
+    font-family: 'Open Sans', sans-serif;
     height: 100%;
-    @media screen and (max-width: $desktop-large) {
-        font-size: 14px;
+    margin: 0;
+    overflow-x: hidden;
+
+    div,
+    span {
+      -webkit-touch-callout: none;
+      -webkit-tap-highlight-color: transparent;
+
+      &:focus {
+        outline: 0;
+      }
     }
-    @media screen and (max-width: $desktop-small) {
-        font-size: 12px;
+
+    a {
+      color: unset;
+      cursor: pointer;
+      text-decoration: none;
     }
-
-    body {
-        color: $font-grey;
-        font-family: 'Open Sans', sans-serif;
-        height: 100%;
-        margin: 0;
-        overflow-x: hidden;
-
-        div, span {
-            -webkit-touch-callout: none;
-            -webkit-tap-highlight-color: transparent;
-
-            &:focus {
-                outline: 0;
-            }
-        }
-
-        a {
-            color: unset;
-            cursor: pointer;
-            text-decoration: none;
-        }
-    }
+  }
 }

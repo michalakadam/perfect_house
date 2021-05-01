@@ -1,29 +1,29 @@
-@import "~src/variables.scss";
-@import "~src/mixins.scss";
+@import '~src/variables.scss';
+@import '~src/mixins.scss';
 
 .component-container {
-    align-items: center;
-    display: flex;
-    font-weight: 700;
-    justify-content: space-between;
-    width: 100%;
-    
-    .offers-counter {
-        width: 96x;
+  align-items: center;
+  display: flex;
+  font-weight: 700;
+  justify-content: space-between;
+  width: 100%;
 
-        .title {
-            color: $font-light-grey;
-        }
+  .offers-counter {
+    width: 96x;
+
+    .title {
+      color: $font-light-grey;
+    }
+  }
+
+  .sorter {
+    .title {
+      color: $font-light-grey;
+      margin-right: 3px;
     }
 
-    .sorter {
-        .title {
-            color: $font-light-grey;
-            margin-right: 3px;
-        }
-
-        p-dropdown {
-            @include perfect-dropdown;
-        }
+    p-dropdown {
+      @include perfect-dropdown;
     }
+  }
 }

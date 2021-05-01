@@ -1,129 +1,135 @@
-@import "~src/variables.scss";
-@import "~src/mixins.scss";
+@import '~src/variables.scss';
+@import '~src/mixins.scss';
 
 $prime-light-grey: #ced4da;
 
 @mixin icon-container {
-    align-items: center;
-    color: #6c757d;
-    display: flex;
-    justify-content: center;
-    min-width: 2rem;
+  align-items: center;
+  color: #6c757d;
+  display: flex;
+  justify-content: center;
+  min-width: 2rem;
 }
 
 .component-container {
+  background-color: white;
+  border: 1px solid $prime-light-grey;
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
+  width: 12.9rem;
+
+  &:hover {
+    border-color: $light-green;
+  }
+
+  &:focus {
+    border-color: $dark-green;
+    box-shadow: 0 0 0 0.2rem $light-green;
+  }
+
+  &.selected {
+    @media screen and (max-width: $desktop-small) {
+      margin-top: 1rem;
+    }
+  }
+
+  .component-label {
+    bottom: 2.3rem;
+    color: #6c757d;
+    padding-left: 7px;
+    position: absolute;
+  }
+
+  .selected-container {
+    display: flex;
+
+    .label-container {
+      flex: 1 1 auto;
+      height: calc(2rem + 2px);
+      padding: 0.4rem 0 0.6rem 0.5rem;
+      overflow: hidden;
+
+      .placeholder {
+        color: $font-light-grey;
+      }
+
+      .selected {
+        font-weight: 700;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+
+    .icon-container {
+      @include icon-container;
+    }
+  }
+
+  .dropdown {
+    @include perfect-box;
     background-color: white;
-    border: 1px solid $prime-light-grey;
-    border-radius: 3px;
-    cursor: pointer;
-    position: relative;
+    border-radius: 0 0 3px 3px;
+    margin-left: -1px;
+    margin-top: 1.5px;
+    overflow-x: hidden;
+    position: absolute;
     width: 12.9rem;
 
-    &:hover {
-        border-color: $light-green;
-    }
+    .group-container {
+      display: flex;
+      flex-direction: column;
 
-    &:focus {
-        border-color: $dark-green;
-        box-shadow: 0 0 0 0.2rem $light-green;
-    }
-
-    &.selected {
-        @media screen and (max-width: $desktop-small) {
-            margin-top: 1rem;
-        }
-    }
-
-    .component-label {
-        bottom: 2.3rem;
-        color: #6c757d;
-        padding-left: 7px;
-        position: absolute;
-    }
-
-    .selected-container {
+      .label-container {
         display: flex;
 
-        .label-container {
-            flex: 1 1 auto;
-            height: calc(2rem + 2px);
-            padding: 0.4rem 0 0.6rem 0.5rem;
-            overflow: hidden;
+        &:not(:first-of-type) {
+          border-top: 1px solid $prime-light-grey;
+        }
 
-            .placeholder {
-                color: $font-light-grey;
-            }
+        .label {
+          flex: 1 1 auto;
+          font-weight: 700;
+          height: 2.5rem;
+          overflow: hidden;
+          padding: 0.6rem 0 0.6rem 0.75rem;
+          text-overflow: ellipsis;
+          white-space: nowrap;
 
-            .selected {
-                font-weight: 700;
-                overflow: hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-            }
+          &.selected,
+          &:hover {
+            background-color: $light-green;
+            background: linear-gradient(
+              90deg,
+              rgba(180, 228, 52, 1) 95%,
+              rgba(255, 255, 255, 1) 100%
+            );
+            color: $font-white;
+          }
         }
 
         .icon-container {
-            @include icon-container;
+          @include icon-container;
+
+          &:hover {
+            color: $light-green;
+          }
         }
-    }
+      }
 
-    .dropdown {
-        @include perfect-box;
-        background-color: white;
-        border-radius: 0 0 3px 3px;
-        margin-left: -1px;
-        margin-top: 1.5px;
-        overflow-x: hidden;
-        position: absolute;
-        width: 12.9rem;
+      .value {
+        height: 2rem;
+        overflow: hidden;
+        padding: 0.4rem 0.4rem 0.4rem 1rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
 
-        .group-container {
-            display: flex;
-            flex-direction: column;
-
-            .label-container {
-                display: flex;
-
-                &:not(:first-of-type) {
-                    border-top: 1px solid $prime-light-grey;
-                }
-
-                .label {
-                    flex: 1 1 auto;
-                    font-weight: 700;
-                    height: 2.5rem;
-                    overflow: hidden;
-                    padding: 0.6rem 0 0.6rem 0.75rem;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-
-                    &.selected, &:hover {
-                        background-color: $light-green;
-                        background: linear-gradient(90deg, rgba(180,228,52,1) 95%, rgba(255,255,255,1) 100%);
-                        color: $font-white;
-                    }
-                }
-
-                .icon-container {
-                    @include icon-container;
-
-                    &:hover {
-                        color: $light-green;
-                    }
-                }
-            }
-
-            .value {
-                height: 2rem;
-                overflow: hidden;
-                padding: 0.4rem 0.4rem 0.4rem 1rem;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-
-                &.selected, &:hover {
-                    color: $light-green;
-                }
-            }
+        &.selected,
+        &:hover {
+          color: $light-green;
         }
+      }
     }
+  }
 }

@@ -1,137 +1,167 @@
 <div class="component-container">
-    <div class="misc-agent-container">
-        <div class="card misc-container">
-            <perfect-gallery
-                *ngIf="isGalleryActive"
-                [photoUrls]="computePhotoUrls()">
-            </perfect-gallery>
+  <div class="misc-agent-container">
+    <div class="card misc-container">
+      <perfect-gallery *ngIf="isGalleryActive" [photoUrls]="computePhotoUrls()">
+      </perfect-gallery>
 
-            <perfect-map
-                *ngIf="isMapActive"
-                [lattitude]="offer.lattitude"
-                [longitude]="offer.longitude">
-            </perfect-map>
+      <perfect-map
+        *ngIf="isMapActive"
+        [lattitude]="offer.lattitude"
+        [longitude]="offer.longitude"
+      >
+      </perfect-map>
 
-            <embed *ngIf="isVirtualVisitActive" type="text/html" [src]="offer.virtualVisitUrl | safe">
-        </div>
-        <div class="agent-buttons-container">
-            <div class="card agent-brief" *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall">
-                <perfect-agent-brief *ngIf="agentsDao.getAgentById(offer.agentId) as agent"
-                    [agent]="agent"
-                    bigger
-                    contactInfoVisible
-                    vertical
-                    (click)="navigateToAgentPage(agent)">
-                </perfect-agent-brief>
-            </div>
-            <button
-                *ngIf="isMapButtonVisible || isVirtualVisitButtonVisible"
-                pButton pRipple
-                type="button"
-                label="Zdjęcia"
-                class="p-button-rounded p-button-raised"
-                [class.selected]="isGalleryActive"
-                (click)="showGallery()">
-            </button>
-            <button
-                *ngIf="isMapButtonVisible"
-                pButton pRipple
-                type="button"
-                label="Mapa"
-                class="p-button-rounded p-button-raised"
-                [class.selected]="isMapActive"
-                (click)="showMap()">
-            </button>
-            <button
-                *ngIf="isVirtualVisitButtonVisible"
-                pButton pRipple
-                type="button" 
-                label="Wirtualna wizyta"
-                class="p-button-rounded p-button-raised"
-                [class.selected]="isVirtualVisitActive"
-                (click)="showVirtualVisit()">
-            </button>
-        </div>
+      <embed
+        *ngIf="isVirtualVisitActive"
+        type="text/html"
+        [src]="offer.virtualVisitUrl | safe"
+      />
     </div>
-    <div class="card bottom-container">
-        <div class="basic-info">
-            <h2>{{ offer.title }}</h2> 
-            <div class="location">
-                <i class="pi pi-map-marker"></i>
-                <span>{{ offer.fullLocation }},&nbsp;</span>
-                <span>{{ offer.voivodeship }}</span>
-            </div>
-            <div class="price-container" *ngIf="offer.price > -1">
-                <div class="price">
-                    <span *ngIf="offer.price > 1">
-                        {{ offer.price | prettifyNumber:'zł' }}
-                    </span>
-                    <span class="client-price" *ngIf="offer.price === 1">
-                        Zaproponuj cenę!
-                    </span>
-                </div>
-                <div class="price-per-meter" [class.hidden]="!offer.pricePerSquareMeter.value">
-                    {{ offer.pricePerSquareMeter.value | prettifyNumber:'zł/m²' }}
-                </div>
-            </div>
-        </div>
-        <div class="description-details" *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall">
-            <div class="description">
-                {{ offer.description | decodeString }}
-            </div>
-            <div class="details">
-                <ng-container *ngTemplateOutlet="details"></ng-container>
-            </div>
-        </div>
-        <div class="description-details-responsive" *ngIf="windowSizeDetector.isWindowSmallerThanDesktopSmall">
-            <p-tabView>
-                <p-tabPanel header="Opis">
-                    <div class="description">
-                        {{ offer.description }}
-                    </div>
-                </p-tabPanel>
-                <p-tabPanel header="Szczegóły">
-                    <div class="details">
-                        <ng-container *ngTemplateOutlet="details"></ng-container>
-                    </div>
-                </p-tabPanel>
-            </p-tabView>
-        </div>
-        <div class="legal-note">
-            <h4>Nota prawna</h4>
-            <p>
-                Opis oferty zawarty na stronie internetowej sporządzany jest na podstawie oględzin nieruchomości oraz informacji uzyskanych
-                od właściciela, może podlegać aktualizacji i nie stanowi oferty określonej w art. 66 i następnych K.C.
-            </p>
-        </div>
-    </div>
-
-    <div class="card agent-brief" *ngIf="windowSizeDetector.isWindowSmallerThanDesktopSmall">
-        <perfect-agent-brief *ngIf="agentsDao.getAgentById(offer.agentId) as agent"
-            [agent]="agent"
-            bigger
-            contactInfoVisible
-            vertical
-            (click)="navigateToAgentPage(agent)">
+    <div class="agent-buttons-container">
+      <div
+        class="card agent-brief"
+        *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall"
+      >
+        <perfect-agent-brief
+          *ngIf="agentsDao.getAgentById(offer.agentId) as agent"
+          [agent]="agent"
+          bigger
+          contactInfoVisible
+          vertical
+          (click)="navigateToAgentPage(agent)"
+        >
         </perfect-agent-brief>
+      </div>
+      <button
+        *ngIf="isMapButtonVisible || isVirtualVisitButtonVisible"
+        pButton
+        pRipple
+        type="button"
+        label="Zdjęcia"
+        class="p-button-rounded p-button-raised"
+        [class.selected]="isGalleryActive"
+        (click)="showGallery()"
+      ></button>
+      <button
+        *ngIf="isMapButtonVisible"
+        pButton
+        pRipple
+        type="button"
+        label="Mapa"
+        class="p-button-rounded p-button-raised"
+        [class.selected]="isMapActive"
+        (click)="showMap()"
+      ></button>
+      <button
+        *ngIf="isVirtualVisitButtonVisible"
+        pButton
+        pRipple
+        type="button"
+        label="Wirtualna wizyta"
+        class="p-button-rounded p-button-raised"
+        [class.selected]="isVirtualVisitActive"
+        (click)="showVirtualVisit()"
+      ></button>
     </div>
+  </div>
+  <div class="card bottom-container">
+    <div class="basic-info">
+      <h2>{{ offer.title }}</h2>
+      <div class="location">
+        <i class="pi pi-map-marker"></i>
+        <span>{{ offer.fullLocation }},&nbsp;</span>
+        <span>{{ offer.voivodeship }}</span>
+      </div>
+      <div class="price-container" *ngIf="offer.price > -1">
+        <div class="price">
+          <span *ngIf="offer.price > 1">
+            {{ offer.price | prettifyNumber: 'zł' }}
+          </span>
+          <span class="client-price" *ngIf="offer.price === 1">
+            Zaproponuj cenę!
+          </span>
+        </div>
+        <div
+          class="price-per-meter"
+          [class.hidden]="!offer.pricePerSquareMeter.value"
+        >
+          {{ offer.pricePerSquareMeter.value | prettifyNumber: 'zł/m²' }}
+        </div>
+      </div>
+    </div>
+    <div
+      class="description-details"
+      *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall"
+    >
+      <div class="description">
+        {{ offer.description | decodeString }}
+      </div>
+      <div class="details">
+        <ng-container *ngTemplateOutlet="details"></ng-container>
+      </div>
+    </div>
+    <div
+      class="description-details-responsive"
+      *ngIf="windowSizeDetector.isWindowSmallerThanDesktopSmall"
+    >
+      <p-tabView>
+        <p-tabPanel header="Opis">
+          <div class="description">
+            {{ offer.description }}
+          </div>
+        </p-tabPanel>
+        <p-tabPanel header="Szczegóły">
+          <div class="details">
+            <ng-container *ngTemplateOutlet="details"></ng-container>
+          </div>
+        </p-tabPanel>
+      </p-tabView>
+    </div>
+    <div class="legal-note">
+      <h4>Nota prawna</h4>
+      <p>
+        Opis oferty zawarty na stronie internetowej sporządzany jest na
+        podstawie oględzin nieruchomości oraz informacji uzyskanych od
+        właściciela, może podlegać aktualizacji i nie stanowi oferty określonej
+        w art. 66 i następnych K.C.
+      </p>
+    </div>
+  </div>
+
+  <div
+    class="card agent-brief"
+    *ngIf="windowSizeDetector.isWindowSmallerThanDesktopSmall"
+  >
+    <perfect-agent-brief
+      *ngIf="agentsDao.getAgentById(offer.agentId) as agent"
+      [agent]="agent"
+      bigger
+      contactInfoVisible
+      vertical
+      (click)="navigateToAgentPage(agent)"
+    >
+    </perfect-agent-brief>
+  </div>
 </div>
 
 <ng-template #details>
-    <div *ngFor="let field of definedOfferFields; let last = last">
-        <div class="field" *ngIf="field.value" [class.last]="last">
-            <span class="field-name">{{ field.displayName }}:</span>
-            <span class="field-value" *ngIf="!isBoolean(field.value) && field.displayName !== 'Standard'">
-                {{ field.value }}
-                <span class="unit" *ngIf="field.unit">{{ field.unit }}</span>
-            </span>
-            <perfect-star-rating *ngIf="field.displayName === 'Standard'"
-                [score]="field.value"
-                outOf=5>
-            </perfect-star-rating>
-            <span class="field-value" *ngIf="field.value === true">
-                jest
-            </span>
-        </div>
+  <div *ngFor="let field of definedOfferFields; let last = last">
+    <div class="field" *ngIf="field.value" [class.last]="last">
+      <span class="field-name">{{ field.displayName }}:</span>
+      <span
+        class="field-value"
+        *ngIf="!isBoolean(field.value) && field.displayName !== 'Standard'"
+      >
+        {{ field.value }}
+        <span class="unit" *ngIf="field.unit">{{ field.unit }}</span>
+      </span>
+      <perfect-star-rating
+        *ngIf="field.displayName === 'Standard'"
+        [score]="field.value"
+        outOf="5"
+      >
+      </perfect-star-rating>
+      <span class="field-value" *ngIf="field.value === true"> jest </span>
     </div>
+  </div>
 </ng-template>
