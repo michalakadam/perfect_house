@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-
-import { Offer, OfferField, Room } from '../models';
+import { Offer, OfferField, Room } from 'models';
 
 const DESCRIPTION_TO_BE_REPLACED = "Oferta wysłana z systemu Galactica Virgo";
 

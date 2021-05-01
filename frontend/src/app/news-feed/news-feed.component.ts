@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 const PHOTO_URL_PREFIX = '/assets/newsfeed/';
 const convertPhotoNameToUrl = (name: string): string => PHOTO_URL_PREFIX + name;

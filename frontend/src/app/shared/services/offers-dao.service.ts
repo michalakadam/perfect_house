@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import * as rawOffers from "src/offers/offers.json";
-import { OffersFilters, Offer, Sorting, AVAILABLE_SORTINGS } from '../models';
+import { OffersFilters, Sorting, AVAILABLE_SORTINGS } from '../models';
+import { Offer } from 'models';
 import { OffersConverter } from './offers-converter.service';
 import { OffersFilter } from './offers-filter.service';
 import { OffersSorter } from './offers-sorter.service';

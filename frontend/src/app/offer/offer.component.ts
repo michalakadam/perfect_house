@@ -4,7 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { OffersDao } from '../shared/services/offers-dao.service';
-import { Offer, OfferField } from '../shared/models';
+import { Offer, OfferField } from 'models';
 import { AgentsDao } from 'src/app/shared/services/agents-dao.service';
 import { Agent } from 'src/app/shared/models';
 import { SnackbarService } from '../shared/services/snackbar.service';

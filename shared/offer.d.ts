@@ -10,8 +10,8 @@ export interface Offer {
     description: string;
     additionalDescription: string;
     additionalRemarks: string;
-    releaseDate: string,
-    releaseDateTitle: string,
+    releaseDate: string;
+    releaseDateTitle: string;
     number: number;
     symbol: string;
     status: string;
@@ -19,16 +19,15 @@ export interface Offer {
     standard: OfferField<number>;
     isAlarmSet: OfferField<boolean>;
     isExclusive: boolean;
-    isForRent: boolean
+    isForRent: boolean;
     photos: string[];
     isNoCommission: boolean;
     isAvailableOnFacebook: boolean;
-    parentOfferId: number,
+    parentOfferId: number;
     creationDate: string;
     updateDate: string;
     expirationDate: string;
     virtualVisitUrl: string;
-
     price: number;
     pricePerSquareMeter: OfferField<number>;
     rentPrice: OfferField<number>;
@@ -38,7 +37,6 @@ export interface Offer {
     depositType: OfferField<string>;
     additionalFees: string[];
     garagePrice: OfferField<number>;
-
     country: string;
     voivodeship: string;
     county: string;
@@ -53,17 +51,15 @@ export interface Offer {
     publicTransport: string[];
     neighbourhood: OfferField<string>;
     accessRoad: OfferField<string>;
-
     totalArea: OfferField<number>;
     landArea: OfferField<number>;
     terraceArea: OfferField<number>;
     officeArea: OfferField<number>;
     officeBuildingArea: OfferField<number>;
     floorArea: OfferField<number>;
-
     garage: OfferField<string>;
     buildingName: OfferField<string>;
-    gasConnectionDetails: OfferField<string>; 
+    gasConnectionDetails: OfferField<string>;
     numberOfRooms: OfferField<number>;
     numberOfBedrooms: OfferField<number>;
     numberOfTerraces: OfferField<number>;
@@ -71,8 +67,8 @@ export interface Offer {
     floor: OfferField<number>;
     floorHeight: OfferField<number>;
     isBasementAvailable: OfferField<boolean>;
-    sewageConnectionDetails: OfferField<string>; 
-    burden: OfferField<string>,
+    sewageConnectionDetails: OfferField<string>;
+    burden: OfferField<string>;
     heatingType: OfferField<string>;
     windowsType: OfferField<string>;
     isMarketPrimary: boolean;
@@ -85,7 +81,7 @@ export interface Offer {
     yearBuilt: OfferField<number>;
     isTerraceAvailable: OfferField<boolean>;
     flatSetUp: OfferField<string>;
-    waterConnectionDetails: OfferField<string>; 
+    waterConnectionDetails: OfferField<string>;
     roomsHeight: OfferField<number>;
     isParkingAvailable: OfferField<boolean>;
     isFenceAvailable: OfferField<boolean>;
@@ -98,7 +94,6 @@ export interface Offer {
     entrance: OfferField<string>;
     noiseLevel: OfferField<string>;
     constructionTechnology: OfferField<string>;
-    // Fields related to halls:
     isFloorDustFree: OfferField<boolean>;
     isLoadingRampAvailable: OfferField<boolean>;
     warehouseArea: OfferField<number>;
@@ -108,12 +103,10 @@ export interface Offer {
     isTruckParkingAvailable: OfferField<boolean>;
     isGantryAvailable: OfferField<boolean>;
     isGoodsLiftAvailable: OfferField<boolean>;
-    // Fields related to premises:
     premiseState: OfferField<string>;
     premiseType: OfferField<string>;
     premiseBackRoomArea: OfferField<number>;
     premiseSalesRoomArea: OfferField<number>;
-    // Fields related to land lots:
     mpzp: OfferField<string>;
     mpzpInfo: OfferField<string>;
     landLotUse: OfferField<string>;

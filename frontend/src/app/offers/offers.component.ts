@@ -3,7 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { OffersDao } from '../shared/services/offers-dao.service';
 import { SnackbarService } from '../shared/services/snackbar.service';
-import { Offer, Sorting, AVAILABLE_SORTINGS, DEFAULT_FILTERS, OffersFilters } from '../shared/models';
+import { Sorting, AVAILABLE_SORTINGS, DEFAULT_FILTERS, OffersFilters } from '../shared/models';
+import { Offer } from 'models';
 import { AgentsDao } from '../shared/services/agents-dao.service';
 import { WindowSizeDetector } from '../shared/services/window-size-detector.service';
 

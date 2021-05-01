@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
-import { Offer } from 'src/app/shared/models';
+import { Offer } from 'models';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Component({

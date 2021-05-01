@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { AgentsDao } from 'src/app/shared/services/agents-dao.service';
-import { Offer } from 'src/app/shared/models';
+import { Offer } from 'models';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { WindowSizeDetector } from 'src/app/shared/services/window-size-detector.service';
 import { Subscription } from 'rxjs';
