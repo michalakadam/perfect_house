@@ -8,7 +8,8 @@
     "start": "npm run build:live",
     "build": "tsc -p .",
     "build:live": "nodemon --watch 'src/**/*.ts' --exec node --loader ts-node/esm src/index.ts",
-    "test": "jasmine-ts --config=jasmine.json"
+    "test": "jasmine-ts --config=jasmine.json",
+    "postinstall": "ngcc"
   },
   "keywords": [],
   "author": "Adam Michalak <adam.michalak.dev@gmail.com>",
