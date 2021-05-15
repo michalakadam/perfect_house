@@ -2,8 +2,8 @@ import { existsSync, readFileSync } from 'fs';
 import { PartialOffer } from './models';
 
 const OFFERS_FOLDER = '/home/adam/Documents/oferty/temp/';
-const REMOVED_FILE_PATH = OFFERS_FOLDER + 'removed.json';
-const MODIFIED_FILE_PATH = OFFERS_FOLDER + 'offers.json';
+const REMOVED_FILE_PATH = OFFERS_FOLDER + 'removed_many.json';
+const MODIFIED_FILE_PATH = OFFERS_FOLDER + 'offers_many.json';
 const REMOVED_PROPERTY_NAME = 'Usuniete';
 const MODIFIED_PROPERTY_NAME = 'Oferty';
 

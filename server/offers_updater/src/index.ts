@@ -3,8 +3,11 @@ import {getModifiedOffers, getRemovedOffers} from './file_reader.js';
 import {MongoClient, MongoClientOptions, MongoError, Collection, FilterQuery} from 'mongodb';
 //import functionality
 import connect from 'mongodb';
-import {PartialOffer} from './models/partial_offer.js';
 const {MongoClient: Mongo} = connect;
+import moment from 'moment';
+
+import {PartialOffer} from './models/partial_offer.js';
+import {log} from './logger.js';
 
 const DB_URL = 'mongodb://127.0.0.1:27017';
 const CONNECTION_CONFIG: MongoClientOptions = {
@@ -19,7 +22,8 @@ interface IdFilterQuery {
 }
 
 Mongo.connect(DB_URL, CONNECTION_CONFIG, (err: MongoError, client: MongoClient) => {
-    catchError(err);
+    log(moment().format('YYYY-MM-DD HH:mm:ss'));
+    log('Established connection with the database.', err);
     const db = client.db(DB_NAME);
     const offersCollection = db.collection(OFFERS_COLLECTION_NAME);
 
@@ -28,15 +32,20 @@ Mongo.connect(DB_URL, CONNECTION_CONFIG, (err: MongoError, client: MongoClient) 
 });
 
 function removeOffers(collection: Collection) {
-    removeOffersFromDb(collection, getRemovedOffers())
+    const removedOffers = getRemovedOffers();
+    
+    log(`Removing ${removedOffers.length} deleted offers.`);
+    removeOffersFromDb(collection, removedOffers);
 }
 
 function updateOffers(collection: Collection) {
     const modifiedOffers = getModifiedOffers();
 
+    log(`Removing ${modifiedOffers.length} modified offers.`);
     removeOffersFromDb(collection, modifiedOffers);
     // Db operations are asynchronous, removal needs to take place before adding.
     setTimeout(() => {
+        log(`Adding ${modifiedOffers.length} modified offers.`);
         addOffersToDb(collection, modifiedOffers);
     }, 5000);
 }
@@ -48,25 +57,19 @@ function removeOffersFromDb(collection: Collection, offers: PartialOffer[]) {
         };
 
         collection.deleteMany(filter, (err, result) => {
-            catchError(err);
+            log(`${result.deletedCount} offers removed from the database.`, err);
         });
     }
 }
 
 function addOffersToDb(collection: Collection, offers: PartialOffer[]) {
     if (offers?.length) {
-        collection.insertMany(offers, (err, results) => {
-            catchError(err);
+        collection.insertMany(offers, (err, result) => {
+            log(`${result.insertedCount} offers added to the database.`, err);
         });
     }   
 }
 
 function getOffersIds(offers: PartialOffer[]) {
     return offers.map((offer) => offer.ID);
-}
-
-function catchError(err: MongoError) {
-    if (err) {
-        console.warn(err);
-    }
 }
