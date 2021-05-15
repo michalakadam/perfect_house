@@ -1,8 +1,9 @@
-import {getRemovedOffersIds} from './file_reader.js';
+import {getModifiedOffers, getRemovedOffers} from './file_reader.js';
 // import types
 import {MongoClient, MongoClientOptions, MongoError, Collection, FilterQuery} from 'mongodb';
 //import functionality
 import connect from 'mongodb';
+import {PartialOffer} from './models/partial_offer.js';
 const {MongoClient: Mongo} = connect;
 
 const DB_URL = 'mongodb://127.0.0.1:27017';
@@ -23,16 +24,45 @@ Mongo.connect(DB_URL, CONNECTION_CONFIG, (err: MongoError, client: MongoClient) 
     const offersCollection = db.collection(OFFERS_COLLECTION_NAME);
 
     removeOffers(offersCollection);
+    updateOffers(offersCollection);
 });
 
 function removeOffers(collection: Collection) {
-    const removedOffersIds = getRemovedOffersIds();
-    if (removedOffersIds?.length) {
-        const filter: FilterQuery<IdFilterQuery> = {ID: {$in: removedOffersIds}};
-        collection.deleteMany(filter, (err) => {
+    removeOffersFromDb(collection, getRemovedOffers())
+}
+
+function updateOffers(collection: Collection) {
+    const modifiedOffers = getModifiedOffers();
+
+    removeOffersFromDb(collection, modifiedOffers);
+    // Db operations are asynchronous, removal needs to take place before adding.
+    setTimeout(() => {
+        addOffersToDb(collection, modifiedOffers);
+    }, 5000);
+}
+
+function removeOffersFromDb(collection: Collection, offers: PartialOffer[]) {
+    if (offers?.length) {
+        const filter: FilterQuery<IdFilterQuery> = {
+            ID: {$in: getOffersIds(offers)},
+        };
+
+        collection.deleteMany(filter, (err, result) => {
             catchError(err);
         });
     }
+}
+
+function addOffersToDb(collection: Collection, offers: PartialOffer[]) {
+    if (offers?.length) {
+        collection.insertMany(offers, (err, results) => {
+            catchError(err);
+        });
+    }   
+}
+
+function getOffersIds(offers: PartialOffer[]) {
+    return offers.map((offer) => offer.ID);
 }
 
 function catchError(err: MongoError) {

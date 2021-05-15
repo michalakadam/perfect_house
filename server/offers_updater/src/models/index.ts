@@ -1,1 +1,1 @@
-export * from './removed_offer'
+export * from './partial_offer'

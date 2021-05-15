@@ -8,15 +8,14 @@
     "start": "npm run build:live",
     "build": "tsc -p .",
     "build:live": "nodemon --watch 'src/**/*.ts' --exec node --loader ts-node/esm src/index.ts",
-    "test": "jasmine-ts --config=jasmine.json",
-    "postinstall": "ngcc"
+    "test": "jasmine-ts --config=jasmine.json"
   },
   "keywords": [],
   "author": "Adam Michalak <adam.michalak.dev@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "@types/mongodb": "^3.6.12",
-    "@types/node": "^14.14.41",
+    "@types/node": "^14.14.45",
     "nodemon": "^2.0.7",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
