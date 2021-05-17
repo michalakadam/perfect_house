@@ -22,7 +22,7 @@ interface IdFilterQuery {
 }
 
 Mongo.connect(DB_URL, CONNECTION_CONFIG, (err: MongoError, client: MongoClient) => {
-    log(moment().format('YYYY-MM-DD HH:mm:ss'));
+    log('===== ' + moment().format('YYYY-MM-DD HH:mm:ss') + ' =====');
     log('Established connection with the database.', err);
     const db = client.db(DB_NAME);
     const offersCollection = db.collection(OFFERS_COLLECTION_NAME);
@@ -57,7 +57,7 @@ function removeOffersFromDb(collection: Collection, offers: PartialOffer[]) {
         };
 
         collection.deleteMany(filter, (err, result) => {
-            log(`${result.deletedCount} offers removed from the database.`, err);
+            log(`${result.deletedCount} offers removed from the database with IDs: ${getOffersIds(offers)}.`, err);
         });
     }
 }
@@ -65,7 +65,7 @@ function removeOffersFromDb(collection: Collection, offers: PartialOffer[]) {
 function addOffersToDb(collection: Collection, offers: PartialOffer[]) {
     if (offers?.length) {
         collection.insertMany(offers, (err, result) => {
-            log(`${result.insertedCount} offers added to the database.`, err);
+            log(`${result.insertedCount} offers added to the database with _ids: ${JSON.stringify(result.insertedIds)}`, err);
         });
     }   
 }
