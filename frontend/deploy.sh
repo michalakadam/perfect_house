@@ -3,7 +3,7 @@
 git checkout master
 git pull origin master
 
-ng build --prod
+ng build --configuration production
 # Remove test data so that does not override prod data.
 rm -r ~/Documents/perfecthouse/dist/perfecthouse/agents
 rm -r ~/Documents/perfecthouse/dist/perfecthouse/offers
