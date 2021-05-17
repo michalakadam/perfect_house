@@ -1,26 +1,28 @@
 <div class="component-container">
-    <div class="offers-counter">
-        <span class="title"> 
-            <span *ngIf="windowSizeDetector.isWindowSmallerThanDesktopSmall; else fullTitle">
-                ofert: 
-            </span>
-            <ng-template #fullTitle>
-                liczba ofert: 
-            </ng-template>
-        </span>
-        <span>
-            {{ offersQuantity }}
-        </span>
-    </div>
-    <div class="sorter">
-        <span class="title">
-            sortuj po:
-        </span>
-        <p-dropdown
-            [options]="availableSortings" 
-            [(ngModel)]="selectedSorting" 
-            optionLabel="displayName"
-            scrollHeight="250px"
-            (onChange)="sortingChanged.emit($event.value)"></p-dropdown>
-    </div>
+  <div class="offers-counter">
+    <span class="title">
+      <span
+        *ngIf="
+          windowSizeDetector.isWindowSmallerThanDesktopSmall;
+          else fullTitle
+        "
+      >
+        ofert:
+      </span>
+      <ng-template #fullTitle> liczba ofert: </ng-template>
+    </span>
+    <span>
+      {{ offersQuantity }}
+    </span>
+  </div>
+  <div class="sorter">
+    <span class="title"> sortuj po: </span>
+    <p-dropdown
+      [options]="availableSortings"
+      [(ngModel)]="selectedSorting"
+      optionLabel="displayName"
+      scrollHeight="250px"
+      (onChange)="sortingChanged.emit($event.value)"
+    ></p-dropdown>
+  </div>
 </div>

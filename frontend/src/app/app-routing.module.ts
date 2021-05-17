@@ -14,7 +14,6 @@ import { ValuesComponent } from './values/values.component';
 import { PhotovoltaicsComponent } from './photovoltaics/photovoltaics.component';
 import { NewsFeedComponent } from './news-feed/news-feed.component';
 
-
 const routes: Routes = [
   {
     path: '',
@@ -53,7 +52,7 @@ const routes: Routes = [
     component: ValuesComponent,
     data: {
       title: 'Nasze wartości',
-    }
+    },
   },
   {
     path: 'ludzie',
@@ -109,12 +108,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(
-    routes, {
+  imports: [
+    RouterModule.forRoot(routes, {
       relativeLinkResolution: 'legacy',
       scrollPositionRestoration: 'enabled',
-    },
-  )],
+    }),
+  ],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

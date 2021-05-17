@@ -1,189 +1,188 @@
-@import "~src/variables.scss";
+@import '~src/variables.scss';
 
 .hidden {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 .component-container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: space-between;
-    margin: 0 auto;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 100%;
 
-    .photo-with-buttons-container {
-        height: 610px;
+  .photo-with-buttons-container {
+    height: 610px;
+    width: 100%;
+    @media screen and (max-width: $desktop-large) {
+      height: 533px;
+    }
+    @media screen and (max-width: $desktop-medium) {
+      height: 436px;
+    }
+    @media screen and (max-width: $desktop-small) {
+      height: 100%;
+    }
+
+    .photo {
+      align-items: center;
+      cursor: pointer;
+      display: flex;
+      height: 100%;
+      overflow: hidden;
+      width: 100%;
+
+      img {
+        display: block;
+        margin: 0 auto;
+        object-fit: contain;
         width: 100%;
-        @media screen and (max-width: $desktop-large) {
-            height: 533px;
+        z-index: 0;
+
+        &.vertical {
+          height: 100%;
+          width: initial;
         }
+
+        @media screen and (max-width: $tablet) {
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+
+    button {
+      position: relative;
+      background-color: $light-green;
+      border: initial;
+      color: $dark-green;
+      top: -53%;
+      z-index: 10;
+
+      &:focus {
+        background-color: $light-green;
+        box-shadow: initial;
+      }
+
+      &:hover {
+        box-shadow: 0 0 0 1px $dark-green;
+      }
+
+      ::ng-deep .pi {
+        font-size: 16px;
+        font-weight: 700;
+      }
+
+      &:nth-of-type(1) {
+        left: 2%;
+        @media screen and (max-width: $tablet) {
+        }
+      }
+
+      &:nth-of-type(2) {
+        right: -90%;
         @media screen and (max-width: $desktop-medium) {
-            height: 436px;
+          right: -88%;
         }
         @media screen and (max-width: $desktop-small) {
-            height: 100%;
+          right: -91%;
         }
-
-        .photo {
-            align-items: center;
-            cursor: pointer;
-            display: flex;
-            height: 100%;
-            overflow: hidden;
-            width: 100%;
-
-            img {
-                display: block;
-                margin: 0 auto;
-                object-fit: contain;
-                width: 100%;
-                z-index: 0;
-
-                &.vertical {
-                    height: 100%;
-                    width: initial;
-                }
-
-                @media screen and (max-width: $tablet) {
-                    height: 100%;
-                    object-fit: cover;
-                }
-            }
+        @media screen and (max-width: $tablet) {
+          right: -86%;
         }
-
-        button {
-            position: relative;
-            background-color: $light-green;
-            border: initial;
-            color: $dark-green;
-            top: -53%;
-            z-index: 10;
-
-            &:focus {
-                background-color: $light-green;
-                box-shadow: initial;
-            }
-
-            &:hover {
-                box-shadow: 0 0 0 1px $dark-green;
-            }
-
-            ::ng-deep .pi {
-                font-size: 16px;
-                font-weight: 700;
-            }
-
-            &:nth-of-type(1) {
-                left: 2%;
-                @media screen and (max-width: $tablet) {
-
-                }
-            }
-
-            &:nth-of-type(2) {
-                right: -90%;
-                @media screen and (max-width: $desktop-medium) {
-                    right: -88%;
-                }
-                @media screen and (max-width: $desktop-small) {
-                    right: -91%;
-                }
-                @media screen and (max-width: $tablet) {
-                    right: -86%;
-                }
-                @media screen and (max-width: $mobile) {
-                    right: -84%;
-                }
-                @media screen and (max-width: $mobile-small) {
-                    right: -80%;
-                }
-            }
+        @media screen and (max-width: $mobile) {
+          right: -84%;
         }
+        @media screen and (max-width: $mobile-small) {
+          right: -80%;
+        }
+      }
+    }
+  }
+
+  .carousel-container {
+    cursor: pointer;
+    display: flex;
+    height: 82px;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    width: 100%;
+    @media screen and (max-width: $desktop-large) {
+      margin-bottom: 6px;
+    }
+    @media screen and (max-width: $desktop-medium) {
+      border-top: 2px solid white;
+      height: 78px;
+      margin-bottom: 2px;
     }
 
-    .carousel-container {
-        cursor: pointer;
+    .carousel-button {
+      align-items: center;
+      background-color: $light-green;
+      color: $dark-green;
+      display: flex;
+      font-weight: 700;
+      height: 106px;
+      margin: -12px auto 0;
+      width: 1.5rem;
+      @media screen and (max-width: $desktop-large) {
+        height: 94px;
+        margin-top: -6px;
+      }
+      @media screen and (max-width: $desktop-medium) {
+        height: 80px;
+        margin-top: -2px;
+      }
+
+      &:hover {
+        box-shadow: 0 0 0 1px $dark-green;
+      }
+
+      i {
+        margin: 0 auto;
+      }
+    }
+
+    .photos-container {
+      display: flex;
+      justify-content: space-evenly;
+      width: 100%;
+
+      .photo-container {
+        align-items: center;
         display: flex;
-        height: 82px;
-        justify-content: space-between;
-        margin-bottom: 12px;
-        width: 100%;
-        @media screen and (max-width: $desktop-large) {
-            margin-bottom: 6px;
-        }
+        max-height: 100%;
+        overflow: hidden;
+        max-width: 112px;
         @media screen and (max-width: $desktop-medium) {
-            border-top: 2px solid white;
-            height: 78px;
-            margin-bottom: 2px;
+          width: 99px;
         }
 
-        .carousel-button {
-            align-items: center;
-            background-color: $light-green;
-            color: $dark-green;
-            display: flex;
-            font-weight: 700;
-            height: 106px;
-            margin: -12px auto 0;
-            width: 1.5rem;
-            @media screen and (max-width: $desktop-large) {
-                height: 94px;
-                margin-top: -6px;
-            }
+        &:last-of-type {
+          margin-right: 0;
+        }
+
+        img {
+          display: block;
+          margin: 0 auto;
+          object-fit: cover;
+          width: 100%;
+
+          &.vertical {
+            height: 100%;
+            width: initial;
             @media screen and (max-width: $desktop-medium) {
-                height: 80px;
-                margin-top: -2px;
+              height: 95%;
             }
+          }
 
-            &:hover {
-                box-shadow: 0 0 0 1px $dark-green;
-            }
-
-            i {
-                margin: 0 auto;
-            }
+          &.selected {
+            outline: 3px solid $light-green;
+            outline-offset: -3px;
+          }
         }
-
-        .photos-container {
-            display: flex;
-            justify-content: space-evenly;
-            width: 100%;
-
-            .photo-container {
-                align-items: center;
-                display: flex;
-                max-height: 100%;
-                overflow: hidden;
-                max-width: 112px;
-                @media screen and (max-width: $desktop-medium) {
-                    width: 99px;
-                }
-
-                &:last-of-type {
-                    margin-right: 0;
-                }
-
-                img {
-                    display: block;
-                    margin: 0 auto;
-                    object-fit: cover;
-                    width: 100%;
-
-                    &.vertical {
-                        height: 100%;
-                        width: initial;
-                        @media screen and (max-width: $desktop-medium) {
-                            height: 95%;
-                        }
-                    }
-
-                    &.selected {
-                        outline: 3px solid $light-green;
-                        outline-offset: -3px;
-                    }
-                }
-            }
-        }
+      }
     }
+  }
 }

@@ -1,4 +1,6 @@
-<p-paginator #paginator
-    [rows]="offersPerPage"
-    [totalRecords]="totalOffersQuantity"
-    (onPageChange)="pageChanged.emit($event.page)"></p-paginator>
+<p-paginator
+  #paginator
+  [rows]="offersPerPage"
+  [totalRecords]="totalOffersQuantity"
+  (onPageChange)="pageChanged.emit($event.page)"
+></p-paginator>

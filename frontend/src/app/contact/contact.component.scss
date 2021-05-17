@@ -1,110 +1,110 @@
-@import "~src/variables.scss";
-@import "~src/mixins.scss";
+@import '~src/variables.scss';
+@import '~src/mixins.scss';
 
 .component-container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    .map-container {
-        @media screen and (max-width: $desktop-small) {
-            order: 1;
-        }
+  .map-container {
+    @media screen and (max-width: $desktop-small) {
+      order: 1;
+    }
+  }
+
+  .contact-info {
+    @include perfect-box;
+    background-color: rgba(255, 255, 255, 0.85);
+    left: 53px;
+    padding: 20px;
+    position: absolute;
+    top: 218px;
+    width: 322px;
+    z-index: 10;
+    @media screen and (max-width: $desktop-large) {
+      left: 47px;
+      top: 200px;
+      width: 287px;
+    }
+    @media screen and (max-width: $desktop-medium) {
+      left: 40px;
+      top: 187px;
+    }
+    @media screen and (max-width: $desktop-small) {
+      @include responsive-page;
+      background-color: white;
+      margin: 0 auto 20px;
+      order: 0;
+      position: unset;
+      z-index: 0;
     }
 
-    .contact-info {
-        @include perfect-box;
-        background-color: rgba(255, 255, 255, 0.85);
-        left: 53px;
-        padding: 20px;
-        position: absolute;
-        top: 218px;
-        width: 322px;
-        z-index: 10;
-        @media screen and (max-width: $desktop-large) {
-            left: 47px;
-            top: 200px;
-            width: 287px;
-        }
-        @media screen and (max-width: $desktop-medium) {
-            left: 40px;
-            top: 187px;
-        }
-        @media screen and (max-width: $desktop-small) {
-            @include responsive-page;
-            background-color: white;
-            margin: 0 auto 20px;
-            order: 0;
-            position: unset;
-            z-index: 0;
-        }
-
-        h2 {
-            margin: 0;
-        }
-
-        address {
-            display: flex;
-            flex-direction: column;
-            font-style: unset;
-            line-height: 2rem;
-            margin-top: 10px;
-
-            div:first-of-type {
-                font-weight: 700;
-
-                .name {
-                    color: $light-green;
-                }
-            }
-
-            a {
-                font-style: italic;
-            }
-        }
-
-        .icons-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 5px;
-            width: 120px;
-
-            a {
-                mat-icon {
-                    font-size: 32px !important;
-                }
-            }
-        }
+    h2 {
+      margin: 0;
     }
-    
-    .info {
-        @include responsive-page;
-        margin-top: 10px;
-        text-align: justify;
-        @media screen and (max-width: $desktop-small) {
-            order: 2;
+
+    address {
+      display: flex;
+      flex-direction: column;
+      font-style: unset;
+      line-height: 2rem;
+      margin-top: 10px;
+
+      div:first-of-type {
+        font-weight: 700;
+
+        .name {
+          color: $light-green;
         }
+      }
 
-        .header {
-            display: flex;
-
-            .toggle {
-                cursor: pointer;
-                margin: auto 0;
-                min-width: 70px;
-                text-align: center;
-            }
-        }
-
-        .content {
-            mat-divider {
-                margin-bottom: 20px;
-                margin-top: -12px;
-            }
-
-            ul {
-                list-style-type: none;
-                padding-inline-start: 1rem;
-            }
-        }
+      a {
+        font-style: italic;
+      }
     }
+
+    .icons-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 5px;
+      width: 120px;
+
+      a {
+        mat-icon {
+          font-size: 32px !important;
+        }
+      }
+    }
+  }
+
+  .info {
+    @include responsive-page;
+    margin-top: 10px;
+    text-align: justify;
+    @media screen and (max-width: $desktop-small) {
+      order: 2;
+    }
+
+    .header {
+      display: flex;
+
+      .toggle {
+        cursor: pointer;
+        margin: auto 0;
+        min-width: 70px;
+        text-align: center;
+      }
+    }
+
+    .content {
+      mat-divider {
+        margin-bottom: 20px;
+        margin-top: -12px;
+      }
+
+      ul {
+        list-style-type: none;
+        padding-inline-start: 1rem;
+      }
+    }
+  }
 }

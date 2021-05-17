@@ -1,131 +1,132 @@
-@import "~src/variables.scss";
-@import "~src/mixins.scss";
+@import '~src/variables.scss';
+@import '~src/mixins.scss';
 
 .component-container {
-    width: 100%;
+  width: 100%;
 
-    p-galleria {
-        ::ng-deep .p-galleria .p-galleria-indicators {
-            display: none;
-        }
+  p-galleria {
+    ::ng-deep .p-galleria .p-galleria-indicators {
+      display: none;
+    }
+  }
+
+  .search-tool-background {
+    background-color: rgba(255, 255, 255, 0.925);
+    bottom: 223px;
+    padding: 20px 0 10px;
+    position: relative;
+    @media screen and (max-width: $desktop-large) {
+      bottom: 196px;
+      padding: 10px 0 0;
+    }
+    @media screen and (max-width: $desktop-medium) {
+      background-color: white;
+      bottom: unset;
+      margin-top: 10px;
+    }
+    @media screen and (max-width: $desktop-small) {
+      margin-top: 20px;
+      padding: unset;
     }
 
-    .search-tool-background {
-        background-color: rgba(255, 255, 255, .925);
-        bottom: 223px;
-        padding: 20px 0 10px;
-        position: relative;
-        @media screen and (max-width: $desktop-large) {
-            bottom: 196px;
-            padding: 10px 0 0;
-        }
-        @media screen and (max-width: $desktop-medium) {
-            background-color: white;
-            bottom: unset;
-            margin-top: 10px;
-        }
-        @media screen and (max-width: $desktop-small) {
-            margin-top: 20px;
-            padding: unset;
+    .search-tool-container {
+      margin: 0 auto;
+      width: 1120px;
+      @media screen and (max-width: $desktop-large) {
+        width: 990px;
+      }
+      @media screen and (max-width: $desktop-medium) {
+        @include responsive-page;
+        @include perfect-box;
+        padding: 5px 15px 0;
+      }
+      @media screen and (max-width: $desktop-small) {
+        border-radius: 0;
+        box-shadow: unset;
+      }
+      @media screen and (max-width: $mobile-small) {
+        padding: 5px 0 0;
+      }
+    }
+  }
+
+  .space-for-advanced {
+    bottom: 296px;
+    @media screen and (max-width: $desktop-large) {
+      bottom: 262px;
+    }
+    @media screen and (max-width: $desktop-medium) {
+      bottom: unset;
+    }
+  }
+
+  .carousel-container {
+    bottom: 208px;
+    margin: 0 auto -200px;
+    position: relative;
+    width: 97%;
+    @media screen and (max-width: $desktop-large) {
+      bottom: 196px;
+    }
+    @media screen and (max-width: $desktop-medium) {
+      bottom: unset;
+      margin-bottom: 0;
+      position: initial;
+      width: 85%;
+    }
+    @media screen and (max-width: $desktop-small) {
+      margin-top: -10px;
+      width: 95%;
+    }
+    @media screen and (max-width: $tablet) {
+      width: 85%;
+    }
+    @media screen and (max-width: $mobile) {
+      width: 100%;
+    }
+
+    p-carousel {
+      ::ng-deep .p-carousel {
+        .p-carousel-indicators {
+          display: none;
         }
 
-        .search-tool-container {
-            margin: 0 auto;
-            width: 1120px;
-            @media screen and (max-width: $desktop-large) {
-                width: 990px;
+        .p-carousel-content {
+          .p-carousel-prev,
+          .p-carousel-next {
+            background-color: $light-green;
+            color: $dark-green;
+
+            &:focus {
+              background-color: $light-green;
+              box-shadow: initial;
             }
-            @media screen and (max-width: $desktop-medium) {
-                @include responsive-page;
-                @include perfect-box;
-                padding: 5px 15px 0;
+
+            &:hover {
+              background-color: $light-green;
+              box-shadow: 0 0 0 0.2rem $dark-green;
+            }
+
+            .pi {
+              font-size: 1.2rem;
+              padding-bottom: 2px;
             }
             @media screen and (max-width: $desktop-small) {
-                border-radius: 0;
-                box-shadow: unset;
+              display: none;
             }
-            @media screen and (max-width: $mobile-small) {
-                padding: 5px 0 0;
-            }
+          }
         }
+      }
     }
+  }
 
-    .space-for-advanced {
-        bottom: 296px;
-        @media screen and (max-width: $desktop-large) {
-            bottom: 262px;
-        }
-        @media screen and (max-width: $desktop-medium) {
-            bottom: unset;
-        }
+  .move-to-advanced {
+    bottom: 281px;
+    @media screen and (max-width: $desktop-large) {
+      bottom: 262px;
     }
-
-    .carousel-container {
-        bottom: 208px;
-        margin: 0 auto -200px;
-        position: relative;
-        width: 97%;
-        @media screen and (max-width: $desktop-large) {
-            bottom: 196px;
-        }
-        @media screen and (max-width: $desktop-medium) {
-            bottom: unset;
-            margin-bottom: 0;
-            position: initial;
-            width: 85%;
-        }
-        @media screen and (max-width: $desktop-small) {
-            margin-top: -10px;
-            width: 95%;
-        }
-        @media screen and (max-width: $tablet) {
-            width: 85%;
-        }
-        @media screen and (max-width: $mobile) {
-            width: 100%;
-        }
-
-        p-carousel {
-            ::ng-deep .p-carousel {
-                .p-carousel-indicators {
-                    display: none;
-                }
-
-                .p-carousel-content {
-                    .p-carousel-prev, .p-carousel-next {
-                        background-color: $light-green;
-                        color: $dark-green;
-
-                        &:focus {
-                            background-color: $light-green;
-                            box-shadow: initial;
-                        }
-
-                        &:hover {
-                            background-color: $light-green;
-                            box-shadow: 0 0 0 0.2rem $dark-green;
-                        }
-
-                        .pi {
-                            font-size: 1.2rem;
-                            padding-bottom: 2px;
-                        }
-                        @media screen and (max-width: $desktop-small) {
-                            display: none;
-                        }
-                    }
-                }
-            }
-        }
+    @media screen and (max-width: $desktop-medium) {
+      bottom: unset;
     }
-
-    .move-to-advanced {
-        bottom: 281px;
-        @media screen and (max-width: $desktop-large) {
-            bottom: 262px;
-        }
-        @media screen and (max-width: $desktop-medium) {
-            bottom: unset;
-        }
-    }
+  }
 }

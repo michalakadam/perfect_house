@@ -1,53 +1,53 @@
-@import "~src/variables.scss";
+@import '~src/variables.scss';
 
 :host {
-    background-color: $dark-green;
-    color: $font-white;
+  background-color: $dark-green;
+  color: $font-white;
+  display: flex;
+  flex-direction: column;
+  margin-top: 14px;
+  padding-bottom: 15px;
+
+  .links-container {
     display: flex;
-    flex-direction: column;
+    justify-content: space-evenly;
+    margin: 0 auto 20px;
+    width: 800px;
+    @media screen and (max-width: $desktop-small) {
+      margin: unset;
+      margin-bottom: 20px;
+      width: unset;
+    }
+    @media screen and (max-width: $mobile-large) {
+      flex-direction: column;
+      margin-left: 24px;
+    }
+
+    .link {
+      cursor: pointer;
+    }
+
+    address {
+      font-style: unset;
+    }
+
+    .icons-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 5px;
+      width: 120px;
+
+      a {
+        mat-icon {
+          font-size: 32px !important;
+        }
+      }
+    }
+  }
+
+  .legal-info {
+    font-size: 10px;
     margin-top: 14px;
-    padding-bottom: 15px;
-
-    .links-container {
-        display: flex;
-        justify-content: space-evenly;
-        margin: 0 auto 20px;
-        width: 800px;
-        @media screen and (max-width: $desktop-small) {
-            margin: unset;
-            margin-bottom: 20px;
-            width: unset;
-        }
-        @media screen and (max-width: $mobile-large) {
-            flex-direction: column;
-            margin-left: 24px;
-        }
-
-        .link {
-            cursor: pointer;
-        }
-
-        address {
-            font-style: unset;
-        }
-
-        .icons-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 5px;
-            width: 120px;
-
-            a {
-                mat-icon {
-                    font-size: 32px !important;
-                }
-            }
-        }
-    }
-
-    .legal-info {
-        font-size: 10px;
-        margin-top: 14px;
-        text-align: center;
-    }
+    text-align: center;
+  }
 }

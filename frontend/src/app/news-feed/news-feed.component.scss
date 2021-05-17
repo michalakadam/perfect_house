@@ -1,66 +1,66 @@
-@import "~src/variables.scss";
-@import "~src/mixins.scss";
+@import '~src/variables.scss';
+@import '~src/mixins.scss';
 
 .component-container {
-    @include responsive-page;
+  @include responsive-page;
 
-    .news {
-        @include perfect-box;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin: 0 auto 2rem;
-        padding: 0 2rem 1rem;
-        width: 83%;
-        @media screen and (max-width: $desktop-large) {
-            width: 81%;
-        }
-        @media screen and (max-width: $desktop-medium) {
-            width: 78%;
-        }
-        @media screen and (max-width: $desktop-small) {
-            overflow: hidden;
-            padding: 0 1rem 1rem;
-            width: 100%;
-        }
-
-        .date {
-            color: $font-light-grey;
-            font-weight: 700;
-            margin-top: -0.5rem;
-        }
-
-        .gallery-container {
-            margin-top: 1rem;
-            height: 715px;
-            width: 100%;
-            @media screen and (max-width: $desktop-large) {
-                height: 627px;
-            }
-            @media screen and (max-width: $desktop-medium) {
-                height: 514px;
-            }
-            @media screen and (max-width: $desktop-small) {
-                height: 445px;
-                margin-left: -3%;
-                width: 106.5%;
-            }
-            @media screen and (max-width: $mobile-small) {
-                height: 368px;
-            }
-        }
-
-        p {
-            text-align: justify;
-        }
-
-        .poem {
-            color: $font-light-grey;
-            font-style: italic;
-            font-weight: 700;
-            line-height: 2rem;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
+  .news {
+    @include perfect-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto 2rem;
+    padding: 0 2rem 1rem;
+    width: 83%;
+    @media screen and (max-width: $desktop-large) {
+      width: 81%;
     }
+    @media screen and (max-width: $desktop-medium) {
+      width: 78%;
+    }
+    @media screen and (max-width: $desktop-small) {
+      overflow: hidden;
+      padding: 0 1rem 1rem;
+      width: 100%;
+    }
+
+    .date {
+      color: $font-light-grey;
+      font-weight: 700;
+      margin-top: -0.5rem;
+    }
+
+    .gallery-container {
+      margin-top: 1rem;
+      height: 715px;
+      width: 100%;
+      @media screen and (max-width: $desktop-large) {
+        height: 627px;
+      }
+      @media screen and (max-width: $desktop-medium) {
+        height: 514px;
+      }
+      @media screen and (max-width: $desktop-small) {
+        height: 445px;
+        margin-left: -3%;
+        width: 106.5%;
+      }
+      @media screen and (max-width: $mobile-small) {
+        height: 368px;
+      }
+    }
+
+    p {
+      text-align: justify;
+    }
+
+    .poem {
+      color: $font-light-grey;
+      font-style: italic;
+      font-weight: 700;
+      line-height: 2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+  }
 }

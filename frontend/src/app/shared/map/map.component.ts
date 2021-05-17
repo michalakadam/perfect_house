@@ -1,4 +1,9 @@
-import { Component, ChangeDetectionStrategy, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  OnInit,
+} from '@angular/core';
 
 declare let ol: any;
 
@@ -18,11 +23,11 @@ export class MapComponent implements OnInit {
   ngOnInit() {
     this.map = new ol.Map({
       target: 'map',
-      layers: [new ol.layer.Tile({source: new ol.source.OSM()})],
+      layers: [new ol.layer.Tile({ source: new ol.source.OSM() })],
       view: new ol.View({
         center: ol.proj.fromLonLat([this.longitude, this.lattitude]),
         zoom: 15,
-      })
+      }),
     });
 
     if (this.lattitude && this.longitude) {
@@ -33,16 +38,20 @@ export class MapComponent implements OnInit {
   addPoint(lat: number, lng: number) {
     let vectorLayer = new ol.layer.Vector({
       source: new ol.source.Vector({
-        features: [new ol.Feature({
-          geometry: new ol.geom.Point(ol.proj.transform([lng, lat], 'EPSG:4326', 'EPSG:3857')),
-        })],
+        features: [
+          new ol.Feature({
+            geometry: new ol.geom.Point(
+              ol.proj.transform([lng, lat], 'EPSG:4326', 'EPSG:3857')
+            ),
+          }),
+        ],
       }),
       style: new ol.style.Style({
         image: new ol.style.Icon({
           anchor: [0.5, 0.7],
-          anchorXUnits: "fraction",
-          anchorYUnits: "fraction",
-          src: "/assets/pin.png",
+          anchorXUnits: 'fraction',
+          anchorYUnits: 'fraction',
+          src: '/assets/pin.png',
         }),
       }),
     });

@@ -1,93 +1,93 @@
-@import "~src/variables.scss";
-@import "~src/mixins.scss";
+@import '~src/variables.scss';
+@import '~src/mixins.scss';
 
 :host {
+  display: flex;
+  flex-direction: column;
+  margin: 22px 0;
+  text-align: center;
+  @media screen and (max-width: $desktop-small) {
+    margin: 14px 0;
+  }
+
+  .top-buttons-container {
+    @include responsive-page;
+    align-items: center;
     display: flex;
-    flex-direction: column;
-    margin: 22px 0;
-    text-align: center;
-    @media screen and (max-width: $desktop-small) {
-        margin: 14px 0;
+    justify-content: space-between;
+
+    button {
+      background-color: $light-green;
+      border-radius: 3px;
+      display: block;
+      height: 26px;
+      margin-left: 7px;
+      margin-top: 1px;
+      width: 26px;
+
+      mat-icon {
+        color: $dark-green;
+        line-height: 11px;
+      }
     }
 
-    .top-buttons-container {
-        @include responsive-page;
-        align-items: center;
-        display: flex;
-        justify-content: space-between;
-
-        button {
-            background-color: $light-green;
-            border-radius: 3px;
-            display: block;
-            height: 26px;
-            margin-left: 7px;
-            margin-top: 1px;
-            width: 26px;
-
-            mat-icon {
-                color: $dark-green;
-                line-height: 11px;
-            }
-        }
-
-        img {
-            border-radius: 3px;
-            cursor: pointer;
-            outline: none;
-            max-height: 42px;
-            @media screen and (max-width: $desktop-large) {
-                max-height: 40px;
-            }
-            @media screen and (max-width: $desktop-medium) {
-                max-height: 38px;
-            }
-            @media screen and (max-width: $desktop-small) {
-                max-height: 36px;
-            }
-        }
-
-        a {
-            color: $font-grey;
-            font-size: 18px;
-            font-weight: 600;
-            margin-right: 4px;
-            @media screen and (max-width: $desktop-large) {
-                font-size: 16px;
-            }
-            @media screen and (max-width: $desktop-medium) {
-                font-size: 14px;
-            }
-            @media screen and (max-width: $desktop-small) {
-                margin-right: 7px;
-            }
-
-            mat-icon {
-                padding-right: 10px;
-                font-size: 30px;
-
-                i {
-                    color: $light-green;
-                }
-
-                &::after {	
-                    background-color: $dark-green;	
-                    content: "";	
-                    display: block;	
-                    height: 20px;	
-                    position: relative;	
-                    right: -4px;	
-                    top: -25px;	
-                    width: 20px;	
-                    z-index: -1;	
-                }
-            }
-
-            .phone-number {
-                bottom: 6px;
-                left: 5px;
-                position: relative;
-            }
-        }
+    img {
+      border-radius: 3px;
+      cursor: pointer;
+      outline: none;
+      max-height: 42px;
+      @media screen and (max-width: $desktop-large) {
+        max-height: 40px;
+      }
+      @media screen and (max-width: $desktop-medium) {
+        max-height: 38px;
+      }
+      @media screen and (max-width: $desktop-small) {
+        max-height: 36px;
+      }
     }
+
+    a {
+      color: $font-grey;
+      font-size: 18px;
+      font-weight: 600;
+      margin-right: 4px;
+      @media screen and (max-width: $desktop-large) {
+        font-size: 16px;
+      }
+      @media screen and (max-width: $desktop-medium) {
+        font-size: 14px;
+      }
+      @media screen and (max-width: $desktop-small) {
+        margin-right: 7px;
+      }
+
+      mat-icon {
+        padding-right: 10px;
+        font-size: 30px;
+
+        i {
+          color: $light-green;
+        }
+
+        &::after {
+          background-color: $dark-green;
+          content: '';
+          display: block;
+          height: 20px;
+          position: relative;
+          right: -4px;
+          top: -25px;
+          width: 20px;
+          z-index: -1;
+        }
+      }
+
+      .phone-number {
+        bottom: 6px;
+        left: 5px;
+        position: relative;
+      }
+    }
+  }
 }

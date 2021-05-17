@@ -1,29 +1,32 @@
 <div class="component-container">
-    <div class="slider-title">
-        <span>{{ title }}: </span>
-        <perfect-input
-            type='number'
-            [defaultValue]="lowerDefault"
-            [(value)]="lower"
-            [isRemovable]=false
-            (valueChange)="updateLowerValue($event)">
-        </perfect-input>
-        <span>-</span>
-        <perfect-input
-            type='number'
-            [defaultValue]="higherDefault"
-            [(value)]="higher"
-            [isRemovable]=false
-            (valueChange)="updateHigherValue($event)">
-        </perfect-input>
-    </div>
-    <p-slider
-        [(ngModel)]="range"
-        [range]="true"
-        [min]="minValue"
-        [max]="maxValue"
-        [step]=1000
-        (onChange)="updateValues($event.values)"
-        (onSlideEnd)="slidingIsOver.emit()">
-    </p-slider>
+  <div class="slider-title">
+    <span>{{ title }}: </span>
+    <perfect-input
+      type="number"
+      [defaultValue]="lowerDefault"
+      [(value)]="lower"
+      [isRemovable]="false"
+      (valueChange)="updateLowerValue($event)"
+    >
+    </perfect-input>
+    <span>-</span>
+    <perfect-input
+      type="number"
+      [defaultValue]="higherDefault"
+      [(value)]="higher"
+      [isRemovable]="false"
+      (valueChange)="updateHigherValue($event)"
+    >
+    </perfect-input>
+  </div>
+  <p-slider
+    [(ngModel)]="range"
+    [range]="true"
+    [min]="minValue"
+    [max]="maxValue"
+    [step]="1000"
+    (onChange)="updateValues($event.values)"
+    (onSlideEnd)="slidingIsOver.emit()"
+  >
+  </p-slider>
 </div>

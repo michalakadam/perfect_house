@@ -1,4 +1,13 @@
-import { Component, Input, ChangeDetectionStrategy, HostListener, Output, EventEmitter, OnInit, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  Input,
+  ChangeDetectionStrategy,
+  HostListener,
+  Output,
+  EventEmitter,
+  OnInit,
+  ChangeDetectorRef,
+} from '@angular/core';
 
 export interface DropdownGroup {
   displayName: string;
@@ -26,8 +35,8 @@ export class GroupedDropdownComponent implements OnInit {
   valueLabel = '';
   isGroupSelected = false;
   isValueSelected = false;
-  
-  @Input()placeholder = '';
+
+  @Input() placeholder = '';
   @Input() hideGroupNameWhenValueSelected = false;
   @Input() valueNamePrefix = '';
 
@@ -42,7 +51,9 @@ export class GroupedDropdownComponent implements OnInit {
 
   set groups(val: DropdownGroup[]) {
     this.groupsWithValues = val;
-    const selectedGroup = this.groupsWithValues.find(group => group.isSelected);
+    const selectedGroup = this.groupsWithValues.find(
+      (group) => group.isSelected
+    );
     this.selected = selectedGroup ? this.computeSelected(selectedGroup) : '';
   }
 
@@ -73,11 +84,13 @@ export class GroupedDropdownComponent implements OnInit {
   }
 
   private computeIsValueSelected(): boolean {
-    return !!this.groups.flatMap(group => group.values).find(value => value.isSelected);
+    return !!this.groups
+      .flatMap((group) => group.values)
+      .find((value) => value.isSelected);
   }
 
   private computeIsGroupSelected(): boolean {
-    return !!this.groups.find(group => group.isSelected);
+    return !!this.groups.find((group) => group.isSelected);
   }
 
   toggleDropdownVisibility() {
@@ -85,8 +98,9 @@ export class GroupedDropdownComponent implements OnInit {
   }
 
   toggleGroupVisibility(group: DropdownGroup) {
-    const otherGroups = this.groupsWithValues
-      .filter(g => g.displayName !== group.displayName)
+    const otherGroups = this.groupsWithValues.filter(
+      (g) => g.displayName !== group.displayName
+    );
 
     for (const group of otherGroups) {
       group.isVisible = false;
@@ -113,13 +127,13 @@ export class GroupedDropdownComponent implements OnInit {
   }
 
   private computeSelected(group: DropdownGroup) {
-    const selectedValue = group.values.find(value => value.isSelected);
+    const selectedValue = group.values.find((value) => value.isSelected);
     if (!selectedValue) {
       return group.displayName;
     }
-    return this.hideGroupNameWhenValueSelected ?
-      selectedValue.displayName : group.displayName + '/' + selectedValue.displayName;
-
+    return this.hideGroupNameWhenValueSelected
+      ? selectedValue.displayName
+      : group.displayName + '/' + selectedValue.displayName;
   }
 
   private select(group: DropdownGroup, value?: DropdownValue) {

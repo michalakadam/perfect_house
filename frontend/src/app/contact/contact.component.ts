@@ -4,7 +4,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
  * - informacje kontaktowe
  * - mapę pokazującą lokalizację biura
  * - formularz, poprzez który klient może skontaktować się z biurem
-*/
+ */
 @Component({
   selector: 'perfect-contact',
   templateUrl: './contact.component.html',
@@ -13,7 +13,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 })
 export class ContactComponent {
   officeLattitude = 52.4183375;
-  officeLongitude = 16.9129350;
+  officeLongitude = 16.912935;
   isInfoOpen = false;
 
   toggleInfoOpen() {

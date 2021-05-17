@@ -16,14 +16,17 @@ export class AgentPageComponent implements OnDestroy {
 
   agent: Agent;
 
-  constructor(private readonly route: ActivatedRoute,
+  constructor(
+    private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly titleService: Title,
-    private readonly agentsDao: AgentsDao) {
+    private readonly agentsDao: AgentsDao
+  ) {
     this.subscription = this.route.params.subscribe((params: Params) => {
       if (params.agent) {
-        const fullName = params.agent.includes('ilek-nowak') ?
-          'Magdalena Ilek-Nowak' : params.agent.split('-').join(' ');
+        const fullName = params.agent.includes('ilek-nowak')
+          ? 'Magdalena Ilek-Nowak'
+          : params.agent.split('-').join(' ');
         this.agent = this.agentsDao.getAgentByFullName(fullName);
         if (this.agent) {
           this.titleService.setTitle(this.agent.fullName);
@@ -32,7 +35,7 @@ export class AgentPageComponent implements OnDestroy {
         }
       } else {
         this.router.navigate(['/strona-nie-istnieje']);
-      }    
+      }
     });
   }
 

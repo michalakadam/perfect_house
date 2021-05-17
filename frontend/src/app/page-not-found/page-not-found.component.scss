@@ -1,36 +1,37 @@
- @import "~src/variables.scss";
+@import '~src/variables.scss';
 
 :host {
-    // background image source: https://unsplash.com/photos/Vwdq_KoW74E
-    background: url('/assets/page-not-found-background.jpeg') no-repeat center center fixed;
-    background-size: cover;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    font-weight: 700;
+  // background image source: https://unsplash.com/photos/Vwdq_KoW74E
+  background: url('/assets/page-not-found-background.jpeg') no-repeat center
+    center fixed;
+  background-size: cover;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-weight: 700;
+  height: 68.7vh;
+  justify-content: center;
+  margin-bottom: -14px;
+  text-align: center;
+  @media screen and (max-width: $desktop-small) {
+    height: 73.5vh;
+  }
+  @media screen and (max-width: $mobile-large) {
     height: 68.7vh;
-    justify-content: center;
-    margin-bottom: -14px;
-    text-align: center;
-    @media screen and (max-width: $desktop-small) {
-        height: 73.5vh;
-    }
+  }
+
+  .error-code {
+    font-size: 96px;
     @media screen and (max-width: $mobile-large) {
-        height: 68.7vh;
+      font-size: 64px;
     }
+  }
 
-    .error-code {
-        font-size: 96px;
-        @media screen and (max-width: $mobile-large) {
-            font-size: 64px;
-        }
+  .error-message {
+    font-size: 24px;
+    margin-top: 20px;
+    @media screen and (max-width: $mobile-large) {
+      font-size: 16px;
     }
-
-    .error-message {
-        font-size: 24px;
-        margin-top: 20px;
-        @media screen and (max-width: $mobile-large) {
-            font-size: 16px;
-        }
-    }
+  }
 }

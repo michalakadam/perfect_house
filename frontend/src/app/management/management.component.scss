@@ -1,110 +1,110 @@
-@import "~src/variables.scss";
-@import "~src/mixins.scss";
+@import '~src/variables.scss';
+@import '~src/mixins.scss';
 
 .image-container {
-    @include screen-wide-image;
+  @include screen-wide-image;
 }
 
 .component-container {
-    @include article-page;
+  @include article-page;
 
-    h2 {
-        text-align: left;
+  h2 {
+    text-align: left;
+    @media screen and (max-width: $mobile) {
+      text-align: center;
+    }
+  }
+
+  main {
+    margin-bottom: 0;
+
+    .contact {
+      @include perfect-box;
+      float: right;
+      margin-left: -476px;
+      padding: 1rem 1rem 2rem 2rem;
+      position: relative;
+      top: 200px;
+      width: 440px;
+      @media screen and (max-width: $desktop-large) {
+        top: 175px;
+        width: 400px;
+      }
+      @media screen and (max-width: $desktop-small) {
+        float: initial;
+        margin: 2rem auto;
+        position: unset;
+        top: unset;
+        width: 365px;
+      }
+      @media screen and (max-width: $mobile) {
+        padding-left: 1rem;
+        width: 224px;
+      }
+
+      h2 {
+        margin-block-start: 0;
+        @media screen and (max-width: $mobile-small) {
+          text-align: center;
+        }
+      }
+
+      perfect-agent-brief {
+        ::ng-deep .component-container {
+          width: 450px;
+          @media screen and (max-width: $mobile) {
+            width: unset;
+          }
+        }
+      }
+    }
+
+    .section-title {
+      align-items: center;
+      display: flex;
+      margin-bottom: -1rem;
+      margin-top: -1rem;
+
+      .title {
+        @media screen and (max-width: $desktop-small) {
+          order: 2;
+        }
+      }
+
+      img {
+        height: 7rem;
+        margin-left: 1rem;
+        width: 7rem;
+        @media screen and (max-width: $desktop-small) {
+          margin-left: 0;
+          margin-right: 1rem;
+          order: 1;
+        }
         @media screen and (max-width: $mobile) {
-            text-align: center;
+          margin-right: 0;
         }
+      }
     }
 
-    main {
-        margin-bottom: 0;
+    .top-list {
+      list-style-type: none;
+      padding-inline-start: 0;
 
-        .contact {
-            @include perfect-box;
-            float: right;
-            margin-left: -476px;
-            padding: 1rem 1rem 2rem 2rem;
-            position: relative;
-            top: 200px;
-            width: 440px;
-            @media screen and (max-width: $desktop-large) {
-                top: 175px;
-                width: 400px;
-            }
-            @media screen and (max-width: $desktop-small) {
-                float: initial;
-                margin: 2rem auto;
-                position: unset;
-                top: unset;
-                width: 365px;
-            }
-            @media screen and (max-width: $mobile) {
-                padding-left: 1rem;
-                width: 224px;
-            }
+      .list-section-title {
+        font-weight: 700;
+        margin-top: 1rem;
 
-            h2 {
-                margin-block-start: 0;
-                @media screen and (max-width: $mobile-small) {
-                    text-align: center;
-                }
-            }
-
-            perfect-agent-brief {
-                ::ng-deep .component-container {
-                    width: 450px;
-                    @media screen and (max-width: $mobile) {
-                        width: unset;
-                    }
-                }
-            }
+        &:first-of-type {
+          margin-top: unset;
         }
+      }
 
-        .section-title {
-            align-items: center;
-            display: flex;
-            margin-bottom: -1rem;
-            margin-top: -1rem;
-
-            .title {
-                @media screen and (max-width: $desktop-small) {
-                    order: 2;
-                }
-            }
-
-            img {
-                height: 7rem;
-                margin-left: 1rem;
-                width: 7rem;
-                @media screen and (max-width: $desktop-small) {
-                    margin-left: 0;
-                    margin-right: 1rem;
-                    order: 1;
-                }
-                @media screen and (max-width: $mobile) {
-                    margin-right: 0;
-                }
-            }
+      ul {
+        list-style-type: disc;
+        @media screen and (max-width: $desktop-small) {
+          padding-inline-start: 30px;
         }
-
-        .top-list {
-            list-style-type: none;
-            padding-inline-start: 0;
-
-            .list-section-title {
-                font-weight: 700;
-                margin-top: 1rem;
-
-                &:first-of-type {
-                    margin-top: unset;
-                }
-            }
-
-            ul {
-                list-style-type: disc;
-                @media screen and (max-width: $desktop-small) {
-                    padding-inline-start: 30px;
-                }
-            }
-        }
+      }
     }
+  }
 }

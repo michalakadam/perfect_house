@@ -1,4 +1,9 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  OnDestroy,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DEFAULT_PARAMETERS } from '../offers/offers.component';
@@ -21,16 +26,19 @@ export class FooterComponent implements OnDestroy {
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,
     private readonly changeDetector: ChangeDetectorRef,
-    private readonly router: Router) {
-    this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
-      this.changeDetector.detectChanges();
-    });
+    private readonly router: Router
+  ) {
+    this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(
+      () => {
+        this.changeDetector.detectChanges();
+      }
+    );
   }
 
   toggleRentalSectionOpen() {
     this.isRentalSectionOpen = !this.isRentalSectionOpen;
     if (this.isRentalSectionOpen) {
-      this.isSaleSectionOpen = false; 
+      this.isSaleSectionOpen = false;
       this.isOtherSectionOpen = false;
     }
   }
@@ -50,10 +58,10 @@ export class FooterComponent implements OnDestroy {
       this.isSaleSectionOpen = false;
     }
   }
-  
+
   loadOffers(params: any) {
     window.scrollTo(0, 0);
-    this.router.navigate(['oferty', {...DEFAULT_PARAMETERS, ...params}]);
+    this.router.navigate(['oferty', { ...DEFAULT_PARAMETERS, ...params }]);
   }
 
   ngOnDestroy() {

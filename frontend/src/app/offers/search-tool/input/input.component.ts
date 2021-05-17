@@ -1,4 +1,14 @@
-import { Component, Input, ChangeDetectionStrategy, ViewChild, ElementRef, Output, EventEmitter, HostListener, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  Input,
+  ChangeDetectionStrategy,
+  ViewChild,
+  ElementRef,
+  Output,
+  EventEmitter,
+  HostListener,
+  ChangeDetectorRef,
+} from '@angular/core';
 
 @Component({
   selector: 'perfect-input',
@@ -9,7 +19,7 @@ import { Component, Input, ChangeDetectionStrategy, ViewChild, ElementRef, Outpu
 export class InputComponent {
   @Input() lhsIcon = '';
   @Input() title = '';
-  @Input() type = 'text'
+  @Input() type = 'text';
   @Input() defaultValue = '';
   @Input() isRemovable = true;
   @Input() options: string[] = [];
@@ -22,7 +32,7 @@ export class InputComponent {
   inFocus = false;
 
   @Input()
-  get value(){
+  get value() {
     return this.inputValue;
   }
 
@@ -33,7 +43,7 @@ export class InputComponent {
     }
     this.valueChange.emit(this.inputValue);
   }
-  
+
   @ViewChild('input') input: ElementRef;
 
   @HostListener('click', ['$event'])
@@ -67,10 +77,12 @@ export class InputComponent {
   }
 
   filterOptions(currentValue: string): string[] {
-    return this.options.filter(option => {
+    return this.options.filter((option) => {
       const optionSplitted = option.toLowerCase().split(', ');
-      return optionSplitted[0]?.startsWith(currentValue.toLowerCase()) ||
+      return (
+        optionSplitted[0]?.startsWith(currentValue.toLowerCase()) ||
         optionSplitted[1]?.startsWith(currentValue.toLowerCase())
+      );
     });
   }
 
@@ -84,8 +96,7 @@ export class InputComponent {
     const filteredOptions = this.filterOptions(value);
     if (!value.length || !filteredOptions.length) {
       this.isDropdownVisible = false;
-    }
-    else if (value.length && filteredOptions.length) {
+    } else if (value.length && filteredOptions.length) {
       this.isDropdownVisible = true;
     }
   }

@@ -1,4 +1,10 @@
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 
 enum PositionOnScale {
   LOWER,
@@ -13,33 +19,33 @@ enum PositionOnScale {
 })
 export class InputWithSliderComponent {
   @Input() title = '';
-  @Input() 
-    public set lowerDefaultValue(value: number) {
-      this.lowerDefault = value;
-      this.minValue = value;
+  @Input()
+  public set lowerDefaultValue(value: number) {
+    this.lowerDefault = value;
+    this.minValue = value;
+  }
+  @Input()
+  public set higherDefaultValue(value: number) {
+    this.higherDefault = value;
+    this.maxValue = value;
+  }
+  @Input()
+  public set lowerValue(value: number) {
+    if (value === -1) {
+      value = this.lowerDefault;
     }
-  @Input() 
-    public set higherDefaultValue(value: number) {
-      this.higherDefault = value;
-      this.maxValue = value;
+    this.lower = value;
+    this.updateRange();
+  }
+  @Input()
+  public set higherValue(value: number) {
+    if (value === -1) {
+      value = this.higherDefault;
     }
-  @Input() 
-    public set lowerValue(value: number) {
-      if (value === -1) {
-        value = this.lowerDefault;
-      }
-      this.lower = value;
-      this.updateRange();
-    }
-  @Input() 
-    public set higherValue(value: number) {
-      if (value === -1) {
-        value = this.higherDefault;
-      }
-      this.higher = value;
-      this.updateRange();
-    }
-  
+    this.higher = value;
+    this.updateRange();
+  }
+
   lower = 0;
   higher = 0;
   lowerDefault = 0;
@@ -67,7 +73,10 @@ export class InputWithSliderComponent {
     return value ? Number(value) : -1;
   }
 
-  private computeValue(value: number, positionOnScale: PositionOnScale): number {
+  private computeValue(
+    value: number,
+    positionOnScale: PositionOnScale
+  ): number {
     if (value < this.minValue) {
       return this.minValue;
     }

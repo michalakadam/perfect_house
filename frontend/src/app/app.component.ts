@@ -4,7 +4,12 @@ import { trigger, style, animate, transition } from '@angular/animations';
 import { PrimeNGConfig } from 'primeng/api';
 import { ABOUT_US_LINKS, ALL_LINKS } from './header/menu-links';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, NavigationEnd, Router, RouterState } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Router,
+  RouterState,
+} from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -12,25 +17,19 @@ import { Subscription } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   animations: [
-    trigger(
-      'openCloseSideNavAnimation', 
-      [
-        transition(
-          ':enter', 
-          [
-            style({ height: 0, width: 0, opacity: 0 }),
-            animate('0.1s ease-out', style({ height: 225, width: 200, opacity: 1 })),
-          ],
+    trigger('openCloseSideNavAnimation', [
+      transition(':enter', [
+        style({ height: 0, width: 0, opacity: 0 }),
+        animate(
+          '0.1s ease-out',
+          style({ height: 225, width: 200, opacity: 1 })
         ),
-        transition(
-          ':leave', 
-          [
-            style({ height: 225, width: 200, opacity: 1 }),
-            animate('0.1s ease-in', style({ height: 0, width: 0, opacity: 0 })),
-          ],
-        ),
-      ],
-    ),
+      ]),
+      transition(':leave', [
+        style({ height: 225, width: 200, opacity: 1 }),
+        animate('0.1s ease-in', style({ height: 0, width: 0, opacity: 0 })),
+      ]),
+    ]),
   ],
 })
 export class AppComponent implements OnInit, OnDestroy {
@@ -41,16 +40,22 @@ export class AppComponent implements OnInit, OnDestroy {
   allLinks = ALL_LINKS;
   aboutUsLinks = ABOUT_US_LINKS;
 
-  constructor(readonly windowSizeDetector: WindowSizeDetector,
-    private readonly titleService: Title, private readonly router: Router,
-    private readonly primengConfig: PrimeNGConfig) {
-      this. subscription = router.events.subscribe(event => {
-        if(event instanceof NavigationEnd) {
-          if (!this.isUrlTitleComputedInComponent(event.url)) {
-            const title = this.getTitle(router.routerState, router.routerState.root).join(' - ');
-            this.titleService.setTitle(title);
-          }
+  constructor(
+    readonly windowSizeDetector: WindowSizeDetector,
+    private readonly titleService: Title,
+    private readonly router: Router,
+    private readonly primengConfig: PrimeNGConfig
+  ) {
+    this.subscription = router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        if (!this.isUrlTitleComputedInComponent(event.url)) {
+          const title = this.getTitle(
+            router.routerState,
+            router.routerState.root
+          ).join(' - ');
+          this.titleService.setTitle(title);
         }
+      }
     });
   }
 
@@ -64,37 +69,39 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   isUrlTitleComputedInComponent(url: string): boolean {
-    return url.startsWith('/ludzie/') && url.length > 8 || url.includes('oferta');
+    return (
+      (url.startsWith('/ludzie/') && url.length > 8) || url.includes('oferta')
+    );
   }
 
   // Collect title data properties from all child routes.
   getTitle(state, parent: ActivatedRoute) {
     const data = [];
-    if(parent && parent.snapshot.data && parent.snapshot.data.title) {
+    if (parent && parent.snapshot.data && parent.snapshot.data.title) {
       data.push(parent.snapshot.data.title);
     }
-    if(state && parent) {
-      data.push(... this.getTitle(state, state.firstChild(parent)));
+    if (state && parent) {
+      data.push(...this.getTitle(state, state.firstChild(parent)));
     }
     return data;
   }
 
   @HostListener('window:resize', ['$event'])
   onResize() {
-      this.windowSizeDetector.windowSizeChanged(window.innerWidth);
+    this.windowSizeDetector.windowSizeChanged(window.innerWidth);
   }
 
   toggleSideMenuVisibility() {
     this.isSideMenuVisible = !this.isSideMenuVisible;
   }
-  
+
   toggleAboutUsOptionsVisibility() {
     if (!this.isAboutUsOptionsVisible) {
-      setTimeout(() => this.isAboutUsOptionsVisible = true, 100);
+      setTimeout(() => (this.isAboutUsOptionsVisible = true), 100);
     }
   }
 
-  /** 
+  /**
    * Closes side navigation when any element on the page is clicked
    * except for button that toggles side navigation.
    * @param event is of type MouseEvent but it has to be marked as any
@@ -103,15 +110,17 @@ export class AppComponent implements OnInit, OnDestroy {
    */
   @HostListener('document:click', ['$event'])
   onClick(event: any) {
-    if (this.windowSizeDetector.isWindowSmallerThanDesktopSmall && this.isSideMenuVisible) {
+    if (
+      this.windowSizeDetector.isWindowSmallerThanDesktopSmall &&
+      this.isSideMenuVisible
+    ) {
       const isSideNavButtonClicked = event.path
-        .map(element => element.id)
+        .map((element) => element.id)
         .includes('sideNavToggleButton');
       if (!isSideNavButtonClicked) {
         this.isSideMenuVisible = false;
       }
-    }
-    else if (this.isAboutUsOptionsVisible) {
+    } else if (this.isAboutUsOptionsVisible) {
       this.isAboutUsOptionsVisible = false;
     }
   }

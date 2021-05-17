@@ -1,36 +1,45 @@
-<div class="component-container"
-    [ngClass]="{'smaller-container':displaySmaller || windowSizeDetector.isWindowSmallerThanDesktopSmall}">
-    <div class="picture"
-        style="background-image: url('/offers/{{ offer.photos[0] }}');"></div>
-    <div class="details-container">
-        <div class="details">
-            <h4>
-                <div class="description">
-                    <span>{{ offer.estateType }} na &nbsp;</span>
-                    <span *ngIf="offer.isForRent; else sale">wynajem</span>
-                    <ng-template #sale>sprzedaż</ng-template>
-                    <span>:</span>
-                </div>
-                <div class="offer-number">
-                    {{offer.symbol}}
-                </div>
-            </h4>
-            <perfect-offer-details [offer]="offer"></perfect-offer-details>
+<div
+  class="component-container"
+  [ngClass]="{
+    'smaller-container':
+      displaySmaller || windowSizeDetector.isWindowSmallerThanDesktopSmall
+  }"
+>
+  <div
+    class="picture"
+    style="background-image: url('offers/{{ offer.photos[0] }}');"
+  ></div>
+  <div class="details-container">
+    <div class="details">
+      <h4>
+        <div class="description">
+          <span>{{ offer.estateType }} na &nbsp;</span>
+          <span *ngIf="offer.isForRent; else sale">wynajem</span>
+          <ng-template #sale>sprzedaż</ng-template>
+          <span>:</span>
         </div>
-        <div class="bottom-row">
-            <a class="phone"
-                href="tel:{{ phoneNumber }}"
-                *ngIf="agentsDao.getAgentById(offer.agentId).mobile as phoneNumber">
-                <p-button [label]="phoneNumber" icon="fas fa-phone-alt"></p-button>
-            </a>
-            <div class="price" *ngIf="offer.price > -1">
-                <span *ngIf="offer.price > 1">
-                    {{ offer.price | prettifyNumber:'zł' }}
-                </span>
-                <span class="client-price" *ngIf="offer.price === 1">
-                    Zaproponuj cenę!
-                </span>
-            </div>
+        <div class="offer-number">
+          {{ offer.symbol }}
         </div>
+      </h4>
+      <perfect-offer-details [offer]="offer"></perfect-offer-details>
     </div>
+    <div class="bottom-row">
+      <a
+        class="phone"
+        href="tel:{{ phoneNumber }}"
+        *ngIf="agentsDao.getAgentById(offer.agentId).mobile as phoneNumber"
+      >
+        <p-button [label]="phoneNumber" icon="fas fa-phone-alt"></p-button>
+      </a>
+      <div class="price" *ngIf="offer.price > -1">
+        <span *ngIf="offer.price > 1">
+          {{ offer.price | prettifyNumber: 'zł' }}
+        </span>
+        <span class="client-price" *ngIf="offer.price === 1">
+          Zaproponuj cenę!
+        </span>
+      </div>
+    </div>
+  </div>
 </div>

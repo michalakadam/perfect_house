@@ -1,128 +1,128 @@
-@import "~src/variables.scss";
+@import '~src/variables.scss';
 
 @mixin responsive-page {
-    margin: 0 auto;
-    width: 1178px;
-    @media screen and (max-width: $desktop-large) {
-        width: 1064px;
-    }
-    @media screen and (max-width: $desktop-medium) {
-        width: 920px;
-    }
-    @media screen and (max-width: $desktop-small) {
-        width: 90%;
-    }
-    @media screen and (max-width: $mobile) {
-        width: 98%;
-    }
+  margin: 0 auto;
+  width: 1178px;
+  @media screen and (max-width: $desktop-large) {
+    width: 1064px;
+  }
+  @media screen and (max-width: $desktop-medium) {
+    width: 920px;
+  }
+  @media screen and (max-width: $desktop-small) {
+    width: 90%;
+  }
+  @media screen and (max-width: $mobile) {
+    width: 98%;
+  }
 }
 
-@mixin article-page { 
-    @include responsive-page;
-    text-align: justify;
+@mixin article-page {
+  @include responsive-page;
+  text-align: justify;
 
-    main {
-        margin-block-end: 50px;
-        margin-block-start: 0px;
-    }
+  main {
+    margin-block-end: 50px;
+    margin-block-start: 0px;
+  }
 }
 
 @mixin perfect-box {
-    border-radius: 15px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    z-index: 10;
-    @media screen and (max-width: $desktop-small) {
-        border-radius: 10px;
-    }
+  border-radius: 15px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  z-index: 10;
+  @media screen and (max-width: $desktop-small) {
+    border-radius: 10px;
+  }
 }
 
 @mixin perfect-dropdown {
-    ::ng-deep .p-dropdown {
-        &:not(.p-disabled){
-            &:hover {
-                border-color: $light-green;
-            }
+  ::ng-deep .p-dropdown {
+    &:not(.p-disabled) {
+      &:hover {
+        border-color: $light-green;
+      }
 
-            &.p-focus {
-                box-shadow: 0 0 0 0.2rem $light-green;
-                border-color: $dark-green;
-            }
-        }
-
-        .p-inputtext {
-            font-weight: 700;
-        }
-
-        .p-dropdown-items .p-dropdown-item {
-            font-weight: 700;
-
-            &.p-highlight {
-                background: $light-green;
-                color: $dark-green;
-            }
-        }
+      &.p-focus {
+        box-shadow: 0 0 0 0.2rem $light-green;
+        border-color: $dark-green;
+      }
     }
+
+    .p-inputtext {
+      font-weight: 700;
+    }
+
+    .p-dropdown-items .p-dropdown-item {
+      font-weight: 700;
+
+      &.p-highlight {
+        background: $light-green;
+        color: $dark-green;
+      }
+    }
+  }
 }
 
 @mixin perfect-button {
-    ::ng-deep .p-button {
-        background-color: $light-green;
-        border: 1px solid $light-green;
-        color: $dark-green;
+  ::ng-deep .p-button {
+    background-color: $light-green;
+    border: 1px solid $light-green;
+    color: $dark-green;
 
-        &.p-highlight {
-            border-color: $dark-green;
-        }
-
-        &:not(.p-disabled):not(.p-highlight):hover {
-            border-color: $dark-green;
-        }
-
-        &:focus {
-            box-shadow: unset;
-        }
-
-        .p-button-label {
-            font-weight: 700;
-        }
+    &.p-highlight {
+      border-color: $dark-green;
     }
+
+    &:not(.p-disabled):not(.p-highlight):hover {
+      border-color: $dark-green;
+    }
+
+    &:focus {
+      box-shadow: unset;
+    }
+
+    .p-button-label {
+      font-weight: 700;
+    }
+  }
 }
 
 @mixin perfect-toggle-button {
-    ::ng-deep .p-buttonset .p-button {
-        &.p-highlight {
-            background-color: $light-green;
-            color: $dark-green;
-            border-color: $dark-green;
-        }
-
-        &:not(.p-disabled):not(.p-highlight):hover {
-            background-color: white;
-            border-color: $light-green;
-        }
-
-        &:not(:last-child) {
-            border-right: 1px solid $dark-green;
-        }
-
-        &:focus {
-            box-shadow: unset;
-        }
-
-        .p-button-label {
-            font-weight: 700;
-        }
+  ::ng-deep .p-buttonset .p-button {
+    &.p-highlight {
+      background-color: $light-green;
+      color: $dark-green;
+      border-color: $dark-green;
     }
+
+    &:not(.p-disabled):not(.p-highlight):hover {
+      background-color: white;
+      border-color: $light-green;
+    }
+
+    &:not(:last-child) {
+      border-right: 1px solid $dark-green;
+    }
+
+    &:focus {
+      box-shadow: unset;
+    }
+
+    .p-button-label {
+      font-weight: 700;
+    }
+  }
 }
 
 @mixin screen-wide-image {
-    img {
-        max-width: 100%;
+  img {
+    max-width: 100%;
 
-        @media screen and (max-width: $desktop-small) {
-            height: 60vw;
-            object-fit: cover;
-            object-position: center;
-        }
+    @media screen and (max-width: $desktop-small) {
+      height: 60vw;
+      object-fit: cover;
+      object-position: center;
     }
+  }
 }

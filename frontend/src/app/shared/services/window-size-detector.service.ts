@@ -12,37 +12,37 @@ export const MOBILE_SMALL = 400;
 
 /** Exposes flags describing current window width. */
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class WindowSizeDetector {
-    private readonly windowSizeChangedSubject = new Subject();
+  private readonly windowSizeChangedSubject = new Subject();
 
-    readonly windowSizeChanged$: Observable<unknown>;
-    isWindowSmallerThanDesktopLarge: boolean;
-    isWindowSmallerThanDesktopMedium: boolean;
-    isWindowSmallerThanDesktopSmall: boolean;
-    isWindowSmallerThanTablet: boolean;
-    isWindowSmallerThanMobileLarge: boolean;
-    isWindowSmallerThanMobile: boolean;
-    isWindowSmallerThanMobileSmall: boolean;
+  readonly windowSizeChanged$: Observable<unknown>;
+  isWindowSmallerThanDesktopLarge: boolean;
+  isWindowSmallerThanDesktopMedium: boolean;
+  isWindowSmallerThanDesktopSmall: boolean;
+  isWindowSmallerThanTablet: boolean;
+  isWindowSmallerThanMobileLarge: boolean;
+  isWindowSmallerThanMobile: boolean;
+  isWindowSmallerThanMobileSmall: boolean;
 
-    constructor() {
-        this.windowSizeChanged$ = this.windowSizeChangedSubject.asObservable();
-        this.updateWindowSizeFlags(window.innerWidth);
-    }
+  constructor() {
+    this.windowSizeChanged$ = this.windowSizeChangedSubject.asObservable();
+    this.updateWindowSizeFlags(window.innerWidth);
+  }
 
-    windowSizeChanged(windowSize: number) {
-        this.updateWindowSizeFlags(windowSize);
-        this.windowSizeChangedSubject.next();
-    }
+  windowSizeChanged(windowSize: number) {
+    this.updateWindowSizeFlags(windowSize);
+    this.windowSizeChangedSubject.next();
+  }
 
-    private updateWindowSizeFlags(windowSize: number) {
-        this.isWindowSmallerThanDesktopLarge = windowSize < DESKTOP_LARGE;
-        this.isWindowSmallerThanDesktopMedium = windowSize < DESKTOP_MEDIUM;
-        this.isWindowSmallerThanDesktopSmall = windowSize < DESKTOP_SMALL;
-        this.isWindowSmallerThanTablet = windowSize < TABLET;
-        this.isWindowSmallerThanMobileLarge = windowSize < MOBILE_LARGE;
-        this.isWindowSmallerThanMobile = windowSize < MOBILE;
-        this.isWindowSmallerThanMobileSmall = windowSize < MOBILE_SMALL;
-    }
+  private updateWindowSizeFlags(windowSize: number) {
+    this.isWindowSmallerThanDesktopLarge = windowSize < DESKTOP_LARGE;
+    this.isWindowSmallerThanDesktopMedium = windowSize < DESKTOP_MEDIUM;
+    this.isWindowSmallerThanDesktopSmall = windowSize < DESKTOP_SMALL;
+    this.isWindowSmallerThanTablet = windowSize < TABLET;
+    this.isWindowSmallerThanMobileLarge = windowSize < MOBILE_LARGE;
+    this.isWindowSmallerThanMobile = windowSize < MOBILE;
+    this.isWindowSmallerThanMobileSmall = windowSize < MOBILE_SMALL;
+  }
 }

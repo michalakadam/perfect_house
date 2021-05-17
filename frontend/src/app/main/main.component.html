@@ -1,52 +1,63 @@
 <div class="component-container">
-    <p-galleria
-        [(value)]="images"
-        [numVisible]="3"
-        [circular]="true"
-        [autoPlay]="true"
-        [transitionInterval]="5000"
-        [showThumbnails]="false"
-        [showIndicators]="true"
-        [changeItemOnIndicatorHover]="true"> 
-        <ng-template pTemplate="item" let-item>
-            <img [src]="item.previewImageSrc"
-                style="width: 100%; display: block; cursor: pointer"
-                (click)="openUrl(item)"/>
-        </ng-template>
-        <ng-template pTemplate="thumbnail" let-item>
-            <div class="p-grid p-nogutter p-justify-center">
-                <img [src]="item.thumbnailImageSrc" style="display: block;" />
-            </div>
-        </ng-template>
-    </p-galleria>
+  <p-galleria
+    [(value)]="images"
+    [numVisible]="3"
+    [circular]="true"
+    [autoPlay]="true"
+    [transitionInterval]="5000"
+    [showThumbnails]="false"
+    [showIndicators]="true"
+    [changeItemOnIndicatorHover]="true"
+  >
+    <ng-template pTemplate="item" let-item>
+      <img
+        [src]="item.previewImageSrc"
+        style="width: 100%; display: block; cursor: pointer"
+        (click)="openUrl(item)"
+      />
+    </ng-template>
+    <ng-template pTemplate="thumbnail" let-item>
+      <div class="p-grid p-nogutter p-justify-center">
+        <img [src]="item.thumbnailImageSrc" style="display: block" />
+      </div>
+    </ng-template>
+  </p-galleria>
 
-    <div class="search-tool-background"
-        [ngClass]="{'space-for-advanced':advancedVisible}">
-        <div class="search-tool-container">
-            <perfect-search-tool
-                mainPage 
-                (searchOffers)="loadOffers($event)"
-                (openOffer)="loadOffer($event)"
-                (advancedToggled)=toggleAdvancedVisible()>
-            </perfect-search-tool>
-        </div>
+  <div
+    class="search-tool-background"
+    [ngClass]="{ 'space-for-advanced': advancedVisible }"
+  >
+    <div class="search-tool-container">
+      <perfect-search-tool
+        mainPage
+        (searchOffers)="loadOffers($event)"
+        (openOffer)="loadOffer($event)"
+        (advancedToggled)="toggleAdvancedVisible()"
+      >
+      </perfect-search-tool>
     </div>
+  </div>
 
-    <div class="carousel-container"
-        [ngClass]="{'move-to-advanced':advancedVisible}">
-        <p-carousel [value]="offersDao.getOffersForCarousel()"
-            styleClass="custom-carousel"
-            [numVisible]="computeOffersVisible()"
-            [numScroll]="1"
-            [circular]="true"
-            [autoplayInterval]="5000">
-            <ng-template let-offer pTemplate="item">
-                <perfect-offer-card
-                    [offer]="offer"
-                    inCarousel
-                    (click)=loadOffer(offer.symbol)>
-                </perfect-offer-card>
-            </ng-template>
-        </p-carousel>
-    </div>
+  <div
+    class="carousel-container"
+    [ngClass]="{ 'move-to-advanced': advancedVisible }"
+  >
+    <p-carousel
+      [value]="offersDao.getOffersForCarousel()"
+      styleClass="custom-carousel"
+      [numVisible]="computeOffersVisible()"
+      [numScroll]="1"
+      [circular]="true"
+      [autoplayInterval]="5000"
+    >
+      <ng-template let-offer pTemplate="item">
+        <perfect-offer-card
+          [offer]="offer"
+          inCarousel
+          (click)="loadOffer(offer.symbol)"
+        >
+        </perfect-offer-card>
+      </ng-template>
+    </p-carousel>
+  </div>
 </div>
