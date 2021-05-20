@@ -1,6 +1,6 @@
 #!/bin/bash
 
-domain_folder_path=/home/adam/Documents/oferty
+domain_folder_path=/home/perfect/domains/perfect.stronazen.pl
 ftp_folder_path=$domain_folder_path/public_ftp
 
 # https://serverfault.com/a/103569

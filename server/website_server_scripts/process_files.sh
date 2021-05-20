@@ -1,6 +1,6 @@
 #!/bin/bash
 
-domain_folder_path=/home/adam/Documents/oferty
+domain_folder_path=/home/perfect/domains/perfect.stronazen.pl
 temp_folder_path=$domain_folder_path/temp
 # There are many patterns for offers jpg file names.
 offer_jpgs_path=$temp_folder_path/*.jpg
