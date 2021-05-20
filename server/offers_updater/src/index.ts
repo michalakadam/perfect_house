@@ -1,10 +1,12 @@
 import {getModifiedOffers, getRemovedOffers} from './file_reader.js';
 // import types
-import {MongoClient, MongoClientOptions, MongoError, Collection, FilterQuery} from 'mongodb';
+import {MongoClient, MongoClientOptions, MongoError, Collection, FilterQuery, Db} from 'mongodb';
 //import functionality
 import connect from 'mongodb';
 const {MongoClient: Mongo} = connect;
 import moment from 'moment';
+import {Subject} from 'rxjs';
+import {take} from 'rxjs/operators';
 
 import {PartialOffer} from './models/partial_offer.js';
 import {log} from './logger.js';
@@ -21,15 +23,19 @@ interface IdFilterQuery {
     ID: string;
 }
 
+const dbUpdateComplete = new Subject<void>();
+const removalComplete = new Subject<void>();
+
 Mongo.connect(DB_URL, CONNECTION_CONFIG, (err: MongoError, client: MongoClient) => {
     log('===== ' + moment().format('YYYY-MM-DD HH:mm:ss') + ' =====');
     log('Established connection with the database.', err);
     const db = client.db(DB_NAME);
     const offersCollection = db.collection(OFFERS_COLLECTION_NAME);
 
+    removalComplete.pipe(take(1)).subscribe(() => updateOffers(offersCollection));
+    dbUpdateComplete.pipe(take(1)).subscribe(() => client.close());
     removeOffers(offersCollection);
-    updateOffers(offersCollection);
-});
+    });
 
 function removeOffers(collection: Collection) {
     const removedOffers = getRemovedOffers();
@@ -41,13 +47,12 @@ function removeOffers(collection: Collection) {
 function updateOffers(collection: Collection) {
     const modifiedOffers = getModifiedOffers();
 
-    log(`Removing ${modifiedOffers.length} modified offers.`);
-    removeOffersFromDb(collection, modifiedOffers);
-    // Db operations are asynchronous, removal needs to take place before adding.
-    setTimeout(() => {
+    removalComplete.pipe(take(1)).subscribe(() => {
         log(`Adding ${modifiedOffers.length} modified offers.`);
         addOffersToDb(collection, modifiedOffers);
-    }, 5000);
+    });
+    log(`Removing ${modifiedOffers.length} modified offers.`);
+    removeOffersFromDb(collection, modifiedOffers);
 }
 
 function removeOffersFromDb(collection: Collection, offers: PartialOffer[]) {
@@ -58,6 +63,7 @@ function removeOffersFromDb(collection: Collection, offers: PartialOffer[]) {
 
         collection.deleteMany(filter, (err, result) => {
             log(`${result.deletedCount} offers removed from the database with IDs: ${getOffersIds(offers)}.`, err);
+            removalComplete.next();
         });
     }
 }
@@ -66,6 +72,7 @@ function addOffersToDb(collection: Collection, offers: PartialOffer[]) {
     if (offers?.length) {
         collection.insertMany(offers, (err, result) => {
             log(`${result.insertedCount} offers added to the database with _ids: ${JSON.stringify(result.insertedIds)}`, err);
+            dbUpdateComplete.next();
         });
     }   
 }
