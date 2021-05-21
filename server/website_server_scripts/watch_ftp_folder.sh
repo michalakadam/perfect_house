@@ -39,7 +39,7 @@ do
     check_file_copied_fully  
     unzip $ftp_folder_path/$offers_file_name -d $domain_folder_path/temp
     mv $ftp_folder_path/$offers_file_name $domain_folder_path/offers_archive/$offers_file_name
-    $domain_folder_path/backend/process_files.sh $log_file_path
+    $domain_folder_path/process_files.sh $log_file_path
   fi
-  sleep 10
+  sleep 60
 done

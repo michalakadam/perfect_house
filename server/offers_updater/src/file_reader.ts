@@ -1,9 +1,9 @@
 import { existsSync, readFileSync } from 'fs';
 import { PartialOffer } from './models';
 
-const OFFERS_FOLDER = '/home/adam/Documents/oferty/temp/';
-const REMOVED_FILE_PATH = OFFERS_FOLDER + 'removed_many.json';
-const MODIFIED_FILE_PATH = OFFERS_FOLDER + 'offers_many.json';
+const OFFERS_FOLDER ='/root/perfect/temp/';
+const REMOVED_FILE_PATH = OFFERS_FOLDER + 'removed.json';
+const MODIFIED_FILE_PATH = OFFERS_FOLDER + 'offers.json';
 const REMOVED_PROPERTY_NAME = 'Usuniete';
 const MODIFIED_PROPERTY_NAME = 'Oferty';
 
@@ -27,7 +27,15 @@ function getOffers(filePath: string, propertyName: string): PartialOffer[] {
 }
 
 function getOffersFromFile(filePath: string, propertyName: string)  {
-    return JSON.parse(readFileSync(filePath, 'utf-8'))[propertyName]?.['Oferta'];
+    let result = JSON.parse('');
+    try {
+        if (existsSync(filePath)) {
+            result = JSON.parse(readFileSync(filePath, 'utf-8'))[propertyName]?.['Oferta'];
+        }
+    } catch(err) {
+        console.error(err)
+    }
+    return result;
 }
 
 // When converting xml to json single element is converted to object instead of array.

@@ -13,6 +13,8 @@ function backup_offers {
 }
 
 cd $offers_updater_path
-npm run start
+node --loader ts-node/esm src/index.ts
 mv updater.log $logs_path/$updater_log_file_name
+rm $project_folder_path/temp/offers.json
+rm $project_folder_path/temp/removed.json
 backup_offers

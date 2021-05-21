@@ -65,6 +65,8 @@ function removeOffersFromDb(collection: Collection, offers: PartialOffer[]) {
             log(`${result.deletedCount} offers removed from the database with IDs: ${getOffersIds(offers)}.`, err);
             removalComplete.next();
         });
+    } else {
+        removalComplete.next();
     }
 }
 
@@ -74,7 +76,9 @@ function addOffersToDb(collection: Collection, offers: PartialOffer[]) {
             log(`${result.insertedCount} offers added to the database with _ids: ${JSON.stringify(result.insertedIds)}`, err);
             dbUpdateComplete.next();
         });
-    }   
+    } else {
+        dbUpdateComplete.next();
+    } 
 }
 
 function getOffersIds(offers: PartialOffer[]) {
