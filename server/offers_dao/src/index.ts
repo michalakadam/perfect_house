@@ -1,8 +1,19 @@
 import { OffersConverter } from './offers-converter';
 import { OffersDao } from './offers_dao';
-import { take } from 'rxjs/operators'
+import { take } from 'rxjs/operators';
+import { Request, Response } from 'express';
 
-new OffersDao().listOffers().pipe(take(1)).subscribe((offers: any[]) => {
-    console.log(`Received ${offers.length} offers!`);
-    const convertedOffers = new OffersConverter().convertToReadableOffers(offers);
-});
+const express = require('express');
+const app = express();
+const port = 3000;
+const helmet = require('helmet');
+const offersDao = new OffersDao();
+
+app.get('/offers', (req: Request, res: Response) => {
+    offersDao.listOffers().pipe(take(1)).subscribe((offers: any[]) => {
+        res.json(new OffersConverter().convertToReadableOffers(offers));
+    });
+})
+
+app.use(helmet());
+app.listen(port, '51.77.195.170');
