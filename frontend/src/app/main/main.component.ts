@@ -8,7 +8,11 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { OffersDao } from '../shared/services/offers-dao.service';
 import { WindowSizeDetector } from '../shared/services/window-size-detector.service';
-import { DEFAULT_FILTERS, GalleryPhoto, OffersFilters } from '../shared/models';
+import {
+  DEFAULT_FILTERS,
+  GalleryPhoto,
+  OffersFilters,
+} from 'src/app/shared/models';
 import { DEFAULT_PARAMETERS } from '../offers/offers.component';
 
 const IMAGES: GalleryPhoto[] = [

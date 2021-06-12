@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Sorting } from '../models';
-import { Offer } from 'models';
+import { Offer, Sorting } from '../models';
 
 @Injectable({
   providedIn: 'root',

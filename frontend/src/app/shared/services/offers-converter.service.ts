@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Offer, OfferField, Room } from 'models';
+import { Offer, OfferField, Room } from 'src/app/shared/models';
 
 const DESCRIPTION_TO_BE_REPLACED = 'Oferta wysłana z systemu Galactica Virgo';
 
@@ -415,7 +415,8 @@ export class OffersConverter {
     if (typeof booleanAsString === 'object') {
       booleanAsString = booleanAsString.text;
     }
-    const possibleTrueValues = /^(True|jest|Jest|tak|Tak|1|mały|średni|duży|loggia)$/;
+    const possibleTrueValues =
+      /^(True|jest|Jest|tak|Tak|1|mały|średni|duży|loggia)$/;
 
     return !!booleanAsString.match(possibleTrueValues);
   }

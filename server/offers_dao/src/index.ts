@@ -13,7 +13,13 @@ app.get('/offers', (req: Request, res: Response) => {
     offersDao.listOffers().pipe(take(1)).subscribe((offers: any[]) => {
         res.json(new OffersConverter().convertToReadableOffers(offers));
     });
-})
+});
+
+app.use((req: Request, res: Response) => {
+    res.type('text/plain');
+    res.status(404);
+    res.send('404 - Not Found');
+});
 
 app.use(helmet());
 app.listen(port, '51.77.195.170');

@@ -7,7 +7,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "pretty": "prettier --write . --single-quote"
+    "prettify": "prettier --write . --single-quote"
   },
   "private": true,
   "dependencies": {
@@ -21,7 +21,6 @@
     "@angular/platform-browser": "^12.0.0",
     "@angular/platform-browser-dynamic": "^12.0.0",
     "@angular/router": "^12.0.0",
-    "models": "file:../shared",
     "primeicons": "^4.1.0",
     "primeng": "^11.4.2",
     "rxjs": "~6.6.7",

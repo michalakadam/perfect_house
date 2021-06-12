@@ -7,7 +7,7 @@ import {
 import { Subscription } from 'rxjs';
 import { AgentsDao } from '../shared/services/agents-dao.service';
 import { WindowSizeDetector } from '../shared/services/window-size-detector.service';
-import { Agent } from '../shared/models';
+import { Agent } from 'src/app/shared/models';
 4;
 
 const AGENT_RESPONSIBLE_ID = 20202;
@@ -34,9 +34,8 @@ export class ManagementComponent implements OnDestroy {
       }
     );
 
-    this.agentResponsibleForManagement = this.agentsDao.getAgentById(
-      AGENT_RESPONSIBLE_ID
-    );
+    this.agentResponsibleForManagement =
+      this.agentsDao.getAgentById(AGENT_RESPONSIBLE_ID);
   }
 
   ngOnDestroy() {

@@ -13,9 +13,9 @@ import {
   Sorting,
   AVAILABLE_SORTINGS,
   DEFAULT_FILTERS,
+  Offer,
   OffersFilters,
-} from '../shared/models';
-import { Offer } from 'models';
+} from 'src/app/shared/models';
 import { AgentsDao } from '../shared/services/agents-dao.service';
 import { WindowSizeDetector } from '../shared/services/window-size-detector.service';
 
