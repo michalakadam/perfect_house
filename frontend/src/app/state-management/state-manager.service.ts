@@ -8,4 +8,6 @@ export class StateManager {
   constructor(private offersApiCaller: OffersApiCaller) {}
 
   offers$ = this.offersApiCaller.offers$;
+
+  isLoading$ = this.offersApiCaller.isLoading$;
 }
