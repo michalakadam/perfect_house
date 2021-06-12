@@ -1,33 +1,35 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
+import { StateManager } from "src/app/state-management/state-manager.service";
+import { take } from "rxjs/operators";
 
-import * as rawOffers from 'src/offers/offers.json';
-import { Offer, OffersFilters, Sorting, AVAILABLE_SORTINGS } from '../models';
-import { OffersConverter } from './offers-converter.service';
-import { OffersFilter } from './offers-filter.service';
-import { OffersSorter } from './offers-sorter.service';
+import { Offer, OffersFilters, Sorting, AVAILABLE_SORTINGS } from "../models";
+import { OffersFilter } from "./offers-filter.service";
+import { OffersSorter } from "./offers-sorter.service";
 
 const OFFERS_PER_PAGE = 50;
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class OffersDao {
-  private allOffers: Offer[];
+  private allOffers: Offer[] = [];
   private currentSearchOffers: Offer[];
   private currentSearchOffersSortedByPriceAsc: Offer[];
   private offersForCarousel: Offer[];
 
   constructor(
-    private readonly offersConverter: OffersConverter,
+    private readonly stateManager: StateManager,
     private readonly offersSorter: OffersSorter,
     private readonly offersFilter: OffersFilter
   ) {
-    this.allOffers = this.offersConverter.convertToReadableOffers(
-      rawOffers.Oferty.Oferta
-    );
+    this.stateManager.offers$.subscribe((offers: Offer[]) => {
+      console.log(offers);
+      this.allOffers = offers;
+      this.initializeOffersForTheMainPage();
+    });
   }
 
-  initializeOffersForTheMainPage() {
+  private initializeOffersForTheMainPage() {
     this.currentSearchOffers = this.allOffers;
     this.currentSearchOffersSortedByPriceAsc = this.sortCurrentOffersByPrice();
     this.offersForCarousel = this.computeOffersForCarousel();
@@ -62,12 +64,12 @@ export class OffersDao {
     return this.offersSorter.sortOffers(
       [...this.currentSearchOffers],
       AVAILABLE_SORTINGS.find(
-        (sorting) => sorting.displayName === 'cenie rosnąco'
+        (sorting) => sorting.displayName === "cenie rosnąco"
       )
     );
   }
 
-  computeOffersForCarousel(): Offer[] {
+  private computeOffersForCarousel(): Offer[] {
     return this.shuffleOffers(
       this.allOffers.filter((offer) => offer.isExclusive)
     );
@@ -139,7 +141,7 @@ export class OffersDao {
 
     const gminy = offers
       .map((offer) => offer.city)
-      .filter((city) => city.includes('(gmina)'))
+      .filter((city) => city.includes("(gmina)"))
       .filter(this.onlyUnique)
       .sort(this.sortAlphabetically);
     const cities = offers
@@ -154,7 +156,7 @@ export class OffersDao {
     return this.allOffers
       .map((offer) => offer.voivodeship)
       .filter(this.onlyUnique)
-      .filter((v) => !v.includes('Attyka') && !v.includes('Costa'))
+      .filter((v) => !v.includes("Attyka") && !v.includes("Costa"))
       .sort(this.sortAlphabetically);
   }
 
@@ -172,27 +174,31 @@ export class OffersDao {
   }
 
   sortAlphabetically(a: string, b: string): number {
-    return a.localeCompare(b, 'pl');
+    return a.localeCompare(b, "pl");
   }
 
   getEstateSubtypesForEstateType(estateType: string): string[] {
-    return this.allOffers
-      .filter((offer) => offer.estateType === estateType)
-      .flatMap((offer) => offer.estateSubtypes)
-      .filter(this.onlyUnique)
-      .filter(Boolean)
-      .map((subtype) =>
-        subtype.toLowerCase().replace('_', ' ').replace(' - ', '-')
-      )
-      .sort(this.sortAlphabetically);
+    return this.allOffers.length
+      ? this.allOffers
+          .filter((offer) => offer.estateType === estateType)
+          .flatMap((offer) => offer.estateSubtypes)
+          .filter(this.onlyUnique)
+          .filter(Boolean)
+          .map((subtype) =>
+            subtype.toLowerCase().replace("_", " ").replace(" - ", "-")
+          )
+          .sort(this.sortAlphabetically)
+      : [];
   }
 
   getBuildingTypesForEstateType(estateType: string): string[] {
-    return this.allOffers
-      .filter((offer) => offer.estateType === estateType)
-      .map((offer) => offer.buildingType.value)
-      .filter(this.onlyUnique)
-      .filter(Boolean)
-      .sort(this.sortAlphabetically);
+    return this.allOffers.length
+      ? this.allOffers
+          .filter((offer) => offer.estateType === estateType)
+          .map((offer) => offer.buildingType.value)
+          .filter(this.onlyUnique)
+          .filter(Boolean)
+          .sort(this.sortAlphabetically)
+      : [];
   }
 }

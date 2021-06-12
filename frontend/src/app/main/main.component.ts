@@ -3,45 +3,45 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   OnDestroy,
-} from '@angular/core';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { OffersDao } from '../shared/services/offers-dao.service';
-import { WindowSizeDetector } from '../shared/services/window-size-detector.service';
+} from "@angular/core";
+import { Router } from "@angular/router";
+import { Subscription } from "rxjs";
+import { OffersDao } from "../shared/services/offers-dao.service";
+import { WindowSizeDetector } from "../shared/services/window-size-detector.service";
 import {
   DEFAULT_FILTERS,
   GalleryPhoto,
   OffersFilters,
-} from 'src/app/shared/models';
-import { DEFAULT_PARAMETERS } from '../offers/offers.component';
+} from "src/app/shared/models";
+import { DEFAULT_PARAMETERS } from "../offers/offers.component";
 
 const IMAGES: GalleryPhoto[] = [
   {
-    previewImageSrc: '/assets/dla_ciebie.jpg',
-    thumbnailImageSrc: '/assets/dla_ciebie.jpg',
-    title: 'Sprawdź nasze oferty dla Ciebie.',
+    previewImageSrc: "/assets/dla_ciebie.jpg",
+    thumbnailImageSrc: "/assets/dla_ciebie.jpg",
+    title: "Sprawdź nasze oferty dla Ciebie.",
   },
   {
-    previewImageSrc: '/assets/nad_morzem.jpg',
-    thumbnailImageSrc: '/assets/nad_morzem.jpg',
-    title: 'Zobacz inwestycje nad morzem.',
+    previewImageSrc: "/assets/nad_morzem.jpg",
+    thumbnailImageSrc: "/assets/nad_morzem.jpg",
+    title: "Zobacz inwestycje nad morzem.",
   },
   {
-    previewImageSrc: '/assets/po_poznansku.jpg',
-    thumbnailImageSrc: '/assets/po_poznansku.jpg',
-    title: 'Sprawdź nasze oferty dla Ciebie.',
+    previewImageSrc: "/assets/po_poznansku.jpg",
+    thumbnailImageSrc: "/assets/po_poznansku.jpg",
+    title: "Sprawdź nasze oferty dla Ciebie.",
   },
   {
-    previewImageSrc: '/assets/zarzadzanie.jpg',
-    thumbnailImageSrc: '/assets/zarzadzanie.jpg',
-    title: 'Zobacz, jakie proste może być zarządzanie nieruchomościami.',
+    previewImageSrc: "/assets/zarzadzanie.jpg",
+    thumbnailImageSrc: "/assets/zarzadzanie.jpg",
+    title: "Zobacz, jakie proste może być zarządzanie nieruchomościami.",
   },
 ];
 /** Strona główna. */
 @Component({
-  selector: 'perfect-main',
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss'],
+  selector: "perfect-main",
+  templateUrl: "./main.component.html",
+  styleUrls: ["./main.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainComponent implements OnDestroy {
@@ -56,7 +56,6 @@ export class MainComponent implements OnDestroy {
     readonly windowSizeDetector: WindowSizeDetector,
     readonly changeDetector: ChangeDetectorRef
   ) {
-    this.offersDao.initializeOffersForTheMainPage();
     this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(
       () => {
         this.changeDetector.detectChanges();
@@ -65,25 +64,25 @@ export class MainComponent implements OnDestroy {
   }
 
   openUrl(image) {
-    if (image.previewImageSrc.includes('zarzadzanie')) {
-      this.router.navigate(['zarządzanie']);
+    if (image.previewImageSrc.includes("zarzadzanie")) {
+      this.router.navigate(["zarządzanie"]);
       return;
     }
-    if (image.previewImageSrc.includes('poznansku')) {
-      this.router.navigate(['wartości']);
+    if (image.previewImageSrc.includes("poznansku")) {
+      this.router.navigate(["wartości"]);
       return;
     }
 
     let params = {};
-    if (image.title.includes('morze')) {
+    if (image.title.includes("morze")) {
       params = { isByTheSea: true };
     }
-    this.router.navigate(['oferty', params]);
+    this.router.navigate(["oferty", params]);
   }
 
   loadOffers(filters: OffersFilters) {
     this.router.navigate([
-      'oferty',
+      "oferty",
       { ...DEFAULT_PARAMETERS, ...this.computeFiltersParameters(filters) },
     ]);
   }
@@ -102,7 +101,7 @@ export class MainComponent implements OnDestroy {
   }
 
   loadOffer(symbol: string) {
-    this.router.navigate(['oferta', symbol]);
+    this.router.navigate(["oferta", symbol]);
   }
 
   toggleAdvancedVisible() {
