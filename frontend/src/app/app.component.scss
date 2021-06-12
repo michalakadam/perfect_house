@@ -1,9 +1,17 @@
-@import '~src/variables.scss';
+@import "~src/variables.scss";
 
 :host {
   display: flex;
   flex-direction: column;
   min-height: 100%;
+
+  .removed {
+    display: none;
+  }
+
+  .hidden {
+    visibility: hidden;
+  }
 
   .side-navigation {
     height: 378px;

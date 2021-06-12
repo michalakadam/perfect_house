@@ -23,7 +23,6 @@ export class OffersDao {
     private readonly offersFilter: OffersFilter
   ) {
     this.stateManager.offers$.subscribe((offers: Offer[]) => {
-      console.log(offers);
       this.allOffers = offers;
       this.initializeOffersForTheMainPage();
     });

@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { StateManagementModule } from "./state-management.module";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable, BehaviorSubject, Subject, throwError } from "rxjs";
-import { catchError, retry, take } from "rxjs/operators";
+import { catchError, retry } from "rxjs/operators";
 import { Offer } from "src/app/shared/models";
 import { SnackbarService } from "../shared/services/snackbar.service";
 
@@ -16,8 +16,8 @@ export class OffersApiCaller {
   private offers = new Subject<Offer[]>();
   private isLoading = new BehaviorSubject<boolean>(true);
 
-  offers$: Observable<Offer[]> = this.offers.asObservable();
-  isLoading$: Observable<boolean>;
+  offers$: Observable<Offer[]> = this.offers;
+  isLoading$: Observable<boolean> = this.isLoading;
 
   constructor(
     private httpClient: HttpClient,
@@ -25,10 +25,12 @@ export class OffersApiCaller {
   ) {
     this.httpClient
       .get<Offer[]>(this.offersApiUrl)
-      .pipe(take(1), retry(3), catchError(this.handleError))
+      .pipe(retry(3), catchError(this.handleError))
       .subscribe((offers: Offer[]) => {
         this.offers.next(offers);
-        this.isLoading.next(false);
+        setTimeout(() => {
+          this.isLoading.next(false);
+        }, 1000);
       });
   }
 

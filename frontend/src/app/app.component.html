@@ -1,23 +1,26 @@
-<perfect-header
-  (sideMenuToggled)="toggleSideMenuVisibility()"
-  (aboutUsOptionsToggled)="toggleAboutUsOptionsVisibility()"></perfect-header>
-<perfect-dropdown-navigation
-  *ngIf="isSideMenuVisible"
-  class="side-navigation"
-  sideNavigation
-  [links]="allLinks"
-  [@openCloseSideNavAnimation]></perfect-dropdown-navigation>
+<perfect-loading-spinner [class.removed]="(stateManager.isLoading$ | async) === false"></perfect-loading-spinner>
 
-<perfect-dropdown-navigation
-  *ngIf="isAboutUsOptionsVisible"
-  class="about-us-navigation"
-  [links]="aboutUsLinks"></perfect-dropdown-navigation>
+<div [class.hidden]="stateManager.isLoading$ | async">
+	<perfect-header
+		(sideMenuToggled)="toggleSideMenuVisibility()"
+		(aboutUsOptionsToggled)="toggleAboutUsOptionsVisibility()"></perfect-header>
+	<perfect-dropdown-navigation
+		*ngIf="isSideMenuVisible"
+		class="side-navigation"
+		sideNavigation
+		[links]="allLinks"
+		[@openCloseSideNavAnimation]></perfect-dropdown-navigation>
 
-<div
-  class="router-outlet-container"
-  [style.opacity]="isSideMenuVisible || isAboutUsOptionsVisible ? 0.3 : 1"
->
-  <router-outlet></router-outlet>
+	<perfect-dropdown-navigation
+		*ngIf="isAboutUsOptionsVisible"
+		class="about-us-navigation"
+		[links]="aboutUsLinks"></perfect-dropdown-navigation>
+
+	<div
+		class="router-outlet-container"
+		[style.opacity]="isSideMenuVisible || isAboutUsOptionsVisible ? 0.3 : 1">
+		<router-outlet></router-outlet>
+	</div>
+
+	<perfect-footer></perfect-footer>
 </div>
-
-<perfect-footer></perfect-footer>

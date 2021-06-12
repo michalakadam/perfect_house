@@ -1,0 +1,45 @@
+@import "~src/variables.scss";
+
+:host {
+  width: 100%;
+
+  .spinner-container {
+    width: 100px;
+    height: 100px;
+    margin: 250px auto;
+
+    img {
+      height: 100%;
+      width: 100%;
+      -webkit-animation: scale-out 2.75s infinite ease-in-out;
+      animation: scale-out 2.75s infinite ease-in-out;
+    }
+  }
+
+  @-webkit-keyframes scale-out {
+    0% {
+      -webkit-transform: scale(0.75);
+    }
+    50% {
+      -webkit-transform: scale(1);
+    }
+    100% {
+      -webkit-transform: scale(0.75);
+    }
+  }
+
+  @keyframes scale-out {
+    0% {
+      -webkit-transform: scale(0.75);
+      transform: scale(0.75);
+    }
+    50% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+    100% {
+      -webkit-transform: scale(0.75);
+      transform: scale(0.75);
+    }
+  }
+}
