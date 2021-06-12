@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "description": " Node program performing CUD operations on mongo db with real estate offers.",
   "main": "src/index.ts",
-  "type": "module",
   "scripts": {
-    "start": "node --loader ts-node/esm src/index.ts",
-    "test": "jasmine-ts --config=jasmine.json"
+    "start": "tsc -p . && node dist/index.js"
   },
   "keywords": [],
   "author": "Adam Michalak <adam.michalak.dev@gmail.com>",
