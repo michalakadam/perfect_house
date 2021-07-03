@@ -1,7 +1,11 @@
-<div class="component-container">
+<div class="component-container" *ngIf="offersStateManager.currentSearchOffers$ | async as offers">
   <div class="tools-container">
     <perfect-search-tool
       [filters]="currentFilters"
+			[rawVoivodeshipsWithCounties]="offersStateManager.voivodeshipsWithCounties$ | async"
+			[rawEstateTypesWithSubtypes]="offersStateManager.estateTypesWithSubtypes$ | async"
+			[lowestPriceForCurrentSearch]="offersStateManager.lowestPriceForCurrentSearch$ | async"
+			[highestPriceForCurrentSearch]="offersStateManager.highestPriceForCurrentSearch$ | async"
       (searchOffers)="loadNewResults(0, currentSorting, $event)"
       (openOffer)="loadOffer($event)"
     >
@@ -9,16 +13,16 @@
 
     <div class="other-tools-container">
       <perfect-sorting-tool
-        [offersQuantity]="offersDao.getOffersQuantity()"
+        [offersQuantity]="offers.length"
         [selectedSorting]="currentSorting"
         (sortingChanged)="loadNewResults(currentPage, $event, currentFilters)"
       >
       </perfect-sorting-tool>
 
-      <div class="top-paginator" *ngIf="isPaginatorVisible">
+      <div class="top-paginator" *ngIf="(offersStateManager.numberOfPages$ | async) > 0">
         <perfect-paginator
-          [offersPerPage]="offersDao.getOffersPerPage()"
-          [totalOffersQuantity]="offersDao.getOffersQuantity()"
+          [offersPerPage]="offersPerPage"
+          [totalOffersQuantity]="offers.length"
           [selectedPage]="currentPage"
           (pageChanged)="loadNewResults($event, currentSorting, currentFilters)"
         >
@@ -29,10 +33,7 @@
 
   <div
     class="no-offers-prompt"
-    *ngIf="
-      offersDao.getOffersQuantity() === 0 &&
-      agentsDao.getAgentById(1155) as agent
-    "
+    *ngIf="offers.length === 0 && agentsDao.getAgentById(1155) as agent"
   >
     <perfect-agent-brief
       *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall"
@@ -68,10 +69,10 @@
 
   <div class="bottom-paginator">
     <perfect-paginator
-      *ngIf="isPaginatorVisible"
+       *ngIf="(offersStateManager.numberOfPages$ | async) > 0"
       class="bottom-paginator"
-      [offersPerPage]="offersDao.getOffersPerPage()"
-      [totalOffersQuantity]="offersDao.getOffersQuantity()"
+      [offersPerPage]="offersPerPage"
+      [totalOffersQuantity]="offers.length"
       [selectedPage]="currentPage"
       (pageChanged)="loadNewResults($event, currentSorting, currentFilters)"
     >

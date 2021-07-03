@@ -1,39 +1,57 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import { listOffersSuccess, listOffersError, listOffers } from "./actions";
+import {
+  listOffersSuccess,
+  listOffersError,
+  listOffers,
+  searchOffers,
+} from "./actions";
 import { Offer } from "src/app/shared/models";
-import { computeMainPageOffers } from "./helper-functions";
+import {
+  computeCurrentSearchOffers,
+  computeMainPageOffers,
+} from "./state-helper-functions";
 
 export const featureName = "offers";
 
 export interface OffersState {
   isLoading: boolean;
-  offers: Offer[];
+  allOffers: Offer[];
   mainPageOffers: Offer[];
+  currentSearchOffers: Offer[];
 }
 
 const initialState: OffersState = {
   isLoading: true,
-  offers: [],
+  allOffers: [],
   mainPageOffers: [],
+  currentSearchOffers: [],
 };
 
 const offersReducer = createReducer(
   initialState,
   on(listOffers, (state) => ({
     ...state,
-    isLoading: true,
-    offers: [],
-    mainPageOffers: [],
+    ...initialState,
   })),
   on(listOffersSuccess, (state, { offers }) => ({
     ...state,
     isLoading: false,
-    offers,
+    allOffers: offers,
     mainPageOffers: computeMainPageOffers(offers),
+    currentSearchOffers: offers,
   })),
   on(listOffersError, (state) => ({
     ...state,
     isLoading: false,
+  })),
+  on(searchOffers, (state, { page, sorting, filters }) => ({
+    ...state,
+    currentSearchOffers: computeCurrentSearchOffers(
+      page,
+      sorting,
+      filters,
+      state.allOffers
+    ),
   }))
 );
 

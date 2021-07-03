@@ -37,9 +37,7 @@
       class="location-input"
       lhsIcon="pi pi-map-marker"
       title="lokalizacja"
-      [options]="
-        offersDao.getDistinctLocations(filters.voivodeship, filters.county)
-      "
+      [options]="offersStateManager.distinctLocations$(filters.voivodeship, filters.county) | async"
       [(value)]="location"
       (readyForSearch)="applyFiltersIgnoringPrice()"
     >
@@ -109,8 +107,8 @@
     <perfect-input-with-slider
       class="price-slider"
       title="cena"
-      [lowerDefaultValue]="offersDao.getLowestPriceForCurrentSearch()"
-      [higherDefaultValue]="offersDao.getHighestPriceForCurrentSearch()"
+      [lowerDefaultValue]="lowestPriceForCurrentSearch"
+      [higherDefaultValue]="highestPriceForCurrentSearch"
       [lowerValue]="computeFilterNumericValue(priceFrom)"
       [higherValue]="computeFilterNumericValue(priceTo)"
       (valuesChanged)="updatePrices($event)"

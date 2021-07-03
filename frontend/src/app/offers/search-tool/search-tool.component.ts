@@ -8,59 +8,52 @@ import {
   OnInit,
   ChangeDetectorRef,
   OnDestroy,
-} from '@angular/core';
-import { OffersDao } from 'src/app/shared/services/offers-dao.service';
-import { WindowSizeDetector } from 'src/app/shared/services/window-size-detector.service';
-import {
-  AVAILABLE_ESTATE_TYPES,
-  EstateType,
-  OffersFilters,
-  DEFAULT_FILTERS,
-} from 'src/app/shared/models';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Subject, Subscription } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+} from "@angular/core";
+import { WindowSizeDetector } from "src/app/shared/services/window-size-detector.service";
+import { OffersFilters, DEFAULT_FILTERS } from "src/app/shared/models";
+import { coerceBooleanProperty } from "@angular/cdk/coercion";
+import { Subject, Subscription } from "rxjs";
+import { debounceTime } from "rxjs/operators";
 import {
   DropdownGroup,
   DropdownValue,
-} from './grouped-dropdown/grouped-dropdown.component';
+} from "./grouped-dropdown/grouped-dropdown.component";
+import { OffersStateManager } from "../state-management/state-manager.service";
 
 const AVAILABLE_TRANSACTIONS = [
   {
-    label: 'sprzedaż',
+    label: "sprzedaż",
     value: false,
   },
   {
-    label: 'wynajem',
+    label: "wynajem",
     value: true,
   },
 ];
 
 const AVAILABLE_MARKETS = [
   {
-    label: 'pierwotny',
+    label: "pierwotny",
     value: 0,
   },
   {
-    label: 'wtórny',
+    label: "wtórny",
     value: 1,
   },
 ];
 
 @Component({
-  selector: 'perfect-search-tool',
-  templateUrl: './search-tool.component.html',
-  styleUrls: ['./search-tool.component.scss'],
+  selector: "perfect-search-tool",
+  templateUrl: "./search-tool.component.html",
+  styleUrls: ["./search-tool.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   private inputSubject = new Subject();
   private subscription = new Subscription();
 
-  availableEstateTypes = AVAILABLE_ESTATE_TYPES;
   availableTransactions = AVAILABLE_TRANSACTIONS;
   availableMarkets = AVAILABLE_MARKETS;
-  availableVoivodeships = [];
   showAdvanced = false;
 
   estateTypesWithSubtypes: DropdownGroup[] = [];
@@ -73,7 +66,7 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   isByTheSea: boolean;
   isNoCommission: boolean;
   isVirtualVisitAvailable: boolean;
-  symbol = '';
+  symbol = "";
   priceFrom: string;
   priceTo: string;
   pricePerSquareMeterFrom: string;
@@ -98,13 +91,56 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
     this.onMainPage = coerceBooleanProperty(value);
   }
   @Input() filters: OffersFilters = DEFAULT_FILTERS;
+  @Input()
+  set rawVoivodeshipsWithCounties(value: Map<string, string[]>) {
+    this.voivodeshipsWithCounties = this.convertToDropdownGroups(
+      value,
+      "voivodeship",
+      "county"
+    );
+  }
+  @Input()
+  set rawEstateTypesWithSubtypes(value: Map<string, string[]>) {
+    this.estateTypesWithSubtypes = this.convertToDropdownGroups(
+      value,
+      "estateType",
+      "estateSubtype"
+    );
+  }
+  @Input() lowestPriceForCurrentSearch = 0;
+  @Input() highestPriceForCurrentSearch = 0;
   @Output() searchOffers = new EventEmitter<OffersFilters>();
   @Output() openOffer = new EventEmitter<string>();
   @Output() advancedToggled = new EventEmitter();
 
+  private convertToDropdownGroups(
+    typesWithSubtypes: Map<string, string[]>,
+    typeSelector: string,
+    subtypeSelector: string
+  ): DropdownGroup[] {
+    const convertToDropdownValue = (subtype: string) => ({
+      displayName: subtype,
+      isSelected: this.filters[subtypeSelector] === subtype,
+    });
+    const dropdownGroups = [];
+
+    for (let [type, subtypes] of typesWithSubtypes) {
+      const dropdownSubtypes = subtypes.map(convertToDropdownValue);
+
+      dropdownGroups.push({
+        displayName: type,
+        values: dropdownSubtypes,
+        isVisible: !!dropdownSubtypes.find((subtype) => subtype.isSelected),
+        isSelected:
+          this.filters[typeSelector].toLowerCase() === type.toLowerCase(),
+      });
+    }
+    return dropdownGroups;
+  }
+
   constructor(
-    readonly offersDao: OffersDao,
     readonly windowSizeDetector: WindowSizeDetector,
+    readonly offersStateManager: OffersStateManager,
     private readonly changeDetector: ChangeDetectorRef
   ) {
     this.subscription.add(
@@ -130,8 +166,6 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges() {
-    this.computeEstateTypesWithSubtypes();
-    this.computeVoivodeshipsWithCounties();
     this.location = this.filters.location;
     this.isForRent = this.filters.isForRent;
     if (this.filters.isPrimaryMarket) {
@@ -147,15 +181,11 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
     this.priceFrom =
       this.filters.priceFrom > -1
         ? this.computeFieldValue(this.filters.priceFrom)
-        : this.computeFieldValue(
-            this.offersDao.getLowestPriceForCurrentSearch()
-          );
+        : this.computeFieldValue(this.lowestPriceForCurrentSearch);
     this.priceTo =
       this.filters.priceTo > -1
         ? this.computeFieldValue(this.filters.priceTo)
-        : this.computeFieldValue(
-            this.offersDao.getHighestPriceForCurrentSearch()
-          );
+        : this.computeFieldValue(this.highestPriceForCurrentSearch);
     this.pricePerSquareMeterFrom = this.computeFieldValue(
       this.filters.pricePerSquareMeterFrom
     );
@@ -179,64 +209,6 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
     this.changeDetector.detectChanges();
   }
 
-  private computeEstateTypesWithSubtypes() {
-    this.estateTypesWithSubtypes = [];
-    for (const estateType of this.availableEstateTypes) {
-      const subtypes = this.getEstateSubtypesForDropdown(estateType);
-
-      this.estateTypesWithSubtypes.push({
-        displayName: estateType.displayName.toLowerCase(),
-        values: subtypes,
-        isVisible: !!subtypes.find((subtype) => subtype.isSelected),
-        isSelected:
-          estateType.displayName.toLowerCase() ===
-          this.filters.estateType.toLowerCase(),
-      });
-    }
-  }
-
-  private getEstateSubtypesForDropdown(
-    estateType: EstateType
-  ): DropdownValue[] {
-    const subtypes =
-      estateType.displayName === 'mieszkanie'
-        ? this.offersDao.getBuildingTypesForEstateType(estateType.queryName)
-        : this.offersDao.getEstateSubtypesForEstateType(estateType.queryName);
-
-    return subtypes.map((subtype) => {
-      return {
-        displayName: subtype,
-        isSelected: subtype === this.filters.estateSubtype,
-      };
-    });
-  }
-
-  private computeVoivodeshipsWithCounties() {
-    this.voivodeshipsWithCounties = [];
-    for (const voivodeship of this.offersDao.getAvailableVoivodeships()) {
-      const counties = this.getCountiesForDropdown(voivodeship);
-
-      this.voivodeshipsWithCounties.push({
-        displayName: voivodeship,
-        values: counties,
-        isVisible: !!counties.find((county) => county.isSelected),
-        isSelected:
-          this.filters.voivodeship.toLowerCase() === voivodeship.toLowerCase(),
-      });
-    }
-  }
-
-  private getCountiesForDropdown(voivodeship: string): DropdownValue[] {
-    return this.offersDao
-      .getCountiesForVoivodeship(voivodeship)
-      .map((county) => {
-        return {
-          displayName: county,
-          isSelected: this.filters.county === county,
-        };
-      });
-  }
-
   isOptionalElementVisible() {
     return (
       !this.windowSizeDetector.isWindowSmallerThanDesktopSmall ||
@@ -246,7 +218,7 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private computeFieldValue(value: number): string {
-    return value === -1 ? '' : '' + value;
+    return value === -1 ? "" : "" + value;
   }
 
   toggleAdvancedVisibility() {
@@ -266,8 +238,8 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
     if (this.onMainPage) {
       return;
     }
-    this.priceFrom = '-1';
-    this.priceTo = '-1';
+    this.priceFrom = "-1";
+    this.priceTo = "-1";
 
     this.search();
   }
@@ -287,15 +259,15 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
     }
     if (
       this.computeFilterNumericValue(this.priceFrom) ===
-      this.offersDao.getLowestPriceForCurrentSearch()
+      this.lowestPriceForCurrentSearch
     ) {
-      this.priceFrom = '-1';
+      this.priceFrom = "-1";
     }
     if (
       this.computeFilterNumericValue(this.priceTo) ===
-      this.offersDao.getHighestPriceForCurrentSearch()
+      this.highestPriceForCurrentSearch
     ) {
-      this.priceTo = '-1';
+      this.priceTo = "-1";
     }
 
     const filters: OffersFilters = {
@@ -343,13 +315,13 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private getSelectedDropdownGroupName(groups: DropdownGroup[]): string {
-    return groups.find((group) => group.isSelected)?.displayName || '';
+    return groups.find((group) => group.isSelected)?.displayName || "";
   }
 
   private getSelectedDropdownValueName(groups: DropdownGroup[]): string {
     return (
       groups.flatMap((group) => group.values).find((value) => value.isSelected)
-        ?.displayName || ''
+        ?.displayName || ""
     );
   }
 
