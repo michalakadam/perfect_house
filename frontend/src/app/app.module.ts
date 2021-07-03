@@ -51,8 +51,10 @@ import { UrlSanitizer } from "./shared/pipes/url-sanitizer";
 import { StringDecoder } from "./shared/pipes/string-decoder";
 import { NewsFeedComponent } from "./news-feed/news-feed.component";
 import { StarRatingComponent } from "./offer/star-rating/star-rating.component";
-import { StateManagementModule } from "./state-management/state-management.module";
-import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { StateManagementModule } from "./offers/state-management/state-management.module";
+import { LoadingSpinnerComponent } from "./loading-spinner/loading-spinner.component";
+import { StoreModule } from "@ngrx/store";
+import { EffectsModule } from "@ngrx/effects";
 
 @NgModule({
   declarations: [
@@ -115,6 +117,8 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
     SliderModule,
     TabViewModule,
     StateManagementModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
   ],
   bootstrap: [AppComponent],
 })

@@ -39,11 +39,12 @@
   </div>
 
   <div
+		*ngIf="offersStateManager.offersForMainPage$ | async as carouselOffers"
     class="carousel-container"
     [ngClass]="{ 'move-to-advanced': advancedVisible }"
   >
     <p-carousel
-      [value]="offersDao.getOffersForCarousel()"
+      [value]="carouselOffers"
       styleClass="custom-carousel"
       [numVisible]="computeOffersVisible()"
       [numScroll]="1"

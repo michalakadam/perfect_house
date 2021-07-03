@@ -1,6 +1,6 @@
-<perfect-loading-spinner [class.removed]="(stateManager.isLoading$ | async) === false"></perfect-loading-spinner>
+<perfect-loading-spinner [class.removed]="(offersStateManager.isLoading$ | async) === false"></perfect-loading-spinner>
 
-<div [class.hidden]="stateManager.isLoading$ | async">
+<div [class.hidden]="offersStateManager.isLoading$ | async">
 	<perfect-header
 		(sideMenuToggled)="toggleSideMenuVisibility()"
 		(aboutUsOptionsToggled)="toggleAboutUsOptionsVisibility()"></perfect-header>

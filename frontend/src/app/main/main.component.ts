@@ -6,7 +6,6 @@ import {
 } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
-import { OffersDao } from "../shared/services/offers-dao.service";
 import { WindowSizeDetector } from "../shared/services/window-size-detector.service";
 import {
   DEFAULT_FILTERS,
@@ -14,6 +13,7 @@ import {
   OffersFilters,
 } from "src/app/shared/models";
 import { DEFAULT_PARAMETERS } from "../offers/offers.component";
+import { OffersStateManager } from "../offers/state-management/state-manager.service";
 
 const IMAGES: GalleryPhoto[] = [
   {
@@ -51,8 +51,8 @@ export class MainComponent implements OnDestroy {
   advancedVisible = false;
 
   constructor(
-    readonly offersDao: OffersDao,
     private readonly router: Router,
+    readonly offersStateManager: OffersStateManager,
     readonly windowSizeDetector: WindowSizeDetector,
     readonly changeDetector: ChangeDetectorRef
   ) {

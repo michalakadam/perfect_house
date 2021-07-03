@@ -12,7 +12,7 @@ import { ABOUT_US_LINKS, ALL_LINKS } from "./header/menu-links";
 import { Title } from "@angular/platform-browser";
 import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { Subscription } from "rxjs";
-import { StateManager } from "./state-management/state-manager.service";
+import { OffersStateManager } from "./offers/state-management/state-manager.service";
 
 @Component({
   selector: "perfect-root",
@@ -44,7 +44,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,
-    readonly stateManager: StateManager,
+    readonly offersStateManager: OffersStateManager,
     private readonly titleService: Title,
     private readonly router: Router,
     private readonly changeDetector: ChangeDetectorRef,

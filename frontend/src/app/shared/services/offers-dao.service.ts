@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { StateManager } from "src/app/state-management/state-manager.service";
+import { OffersStateManager } from "src/app/offers/state-management/state-manager.service";
 import { take } from "rxjs/operators";
 
 import { Offer, OffersFilters, Sorting, AVAILABLE_SORTINGS } from "../models";
@@ -15,23 +15,18 @@ export class OffersDao {
   private allOffers: Offer[] = [];
   private currentSearchOffers: Offer[];
   private currentSearchOffersSortedByPriceAsc: Offer[];
-  private offersForCarousel: Offer[];
 
   constructor(
-    private readonly stateManager: StateManager,
+    private readonly offersStateManager: OffersStateManager,
     private readonly offersSorter: OffersSorter,
     private readonly offersFilter: OffersFilter
   ) {
-    this.stateManager.offers$.subscribe((offers: Offer[]) => {
+    this.offersStateManager.offers$.subscribe((offers: Offer[]) => {
       this.allOffers = offers;
-      this.initializeOffersForTheMainPage();
+      this.currentSearchOffers = this.allOffers;
+      this.currentSearchOffersSortedByPriceAsc =
+        this.sortCurrentOffersByPrice();
     });
-  }
-
-  private initializeOffersForTheMainPage() {
-    this.currentSearchOffers = this.allOffers;
-    this.currentSearchOffersSortedByPriceAsc = this.sortCurrentOffersByPrice();
-    this.offersForCarousel = this.computeOffersForCarousel();
   }
 
   list(page: number, sorting: Sorting, filters: OffersFilters): Offer[] {
@@ -66,24 +61,6 @@ export class OffersDao {
         (sorting) => sorting.displayName === "cenie rosnąco"
       )
     );
-  }
-
-  private computeOffersForCarousel(): Offer[] {
-    return this.shuffleOffers(
-      this.allOffers.filter((offer) => offer.isExclusive)
-    );
-  }
-
-  private shuffleOffers(offers: Offer[]): Offer[] {
-    for (let i = offers.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [offers[i], offers[j]] = [offers[j], offers[i]];
-    }
-    return offers;
-  }
-
-  getOffersForCarousel(): Offer[] {
-    return this.offersForCarousel;
   }
 
   getOffersQuantity(): number {
