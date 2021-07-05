@@ -17,7 +17,6 @@ import {
 import { AgentsDao } from "../shared/services/agents-dao.service";
 import { WindowSizeDetector } from "../shared/services/window-size-detector.service";
 import { OffersStateManager } from "./state-management/state-manager.service";
-import { OFFERS_PER_PAGE } from "../shared/constants";
 
 const FIRST_PAGE_NUMBER = 1;
 const DEFAULT_SORTING_STRINGIFIED = "creationDate_descending";
@@ -42,7 +41,6 @@ export class OffersComponent implements OnDestroy {
   currentFilters = DEFAULT_FILTERS;
   isSnackbarVisible = false;
   snackbarContent = "";
-  offersPerPage = OFFERS_PER_PAGE;
 
   constructor(
     readonly agentsDao: AgentsDao,
@@ -75,7 +73,7 @@ export class OffersComponent implements OnDestroy {
             { ...DEFAULT_PARAMETERS, ...params },
           ]);
         } else {
-          this.loadOffersForCurrentParameters;
+          this.loadOffersForCurrentParameters(params);
         }
       })
     );

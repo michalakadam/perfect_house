@@ -18,6 +18,7 @@ export interface OffersState {
   allOffers: Offer[];
   mainPageOffers: Offer[];
   currentSearchOffers: Offer[];
+  currentPage: number;
 }
 
 const initialState: OffersState = {
@@ -25,6 +26,7 @@ const initialState: OffersState = {
   allOffers: [],
   mainPageOffers: [],
   currentSearchOffers: [],
+  currentPage: 0,
 };
 
 const offersReducer = createReducer(
@@ -47,11 +49,11 @@ const offersReducer = createReducer(
   on(searchOffers, (state, { page, sorting, filters }) => ({
     ...state,
     currentSearchOffers: computeCurrentSearchOffers(
-      page,
       sorting,
       filters,
       state.allOffers
     ),
+    currentPage: page,
   }))
 );
 

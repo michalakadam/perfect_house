@@ -55,6 +55,7 @@ import { StateManagementModule } from "./offers/state-management/state-managemen
 import { LoadingSpinnerComponent } from "./loading-spinner/loading-spinner.component";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 
 @NgModule({
   declarations: [
@@ -118,6 +119,9 @@ import { EffectsModule } from "@ngrx/effects";
     TabViewModule,
     StateManagementModule,
     StoreModule.forRoot({}),
+    StoreDevtoolsModule.instrument({
+      autoPause: true, // Pauses recording actions and state changes when the extension window is not open
+    }),
     EffectsModule.forRoot([]),
   ],
   bootstrap: [AppComponent],

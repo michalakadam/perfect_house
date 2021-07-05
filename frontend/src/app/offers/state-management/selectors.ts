@@ -6,6 +6,7 @@ import { sortOffers } from "./sorting-helper-functions";
 import {
   computeDistinctLocations,
   computeEstateTypesWithSubtypes,
+  computeOffersForCurrentPage,
   computeVoivodeshipsWithCounties,
 } from "./state-helper-functions";
 
@@ -16,7 +17,7 @@ export const getIsLoading = createSelector(
   (state: OffersState) => state.isLoading
 );
 
-export const getAllOffers = createSelector(
+const getAllOffers = createSelector(
   selectOffersState,
   (state: OffersState) => state.allOffers
 );
@@ -26,9 +27,27 @@ export const getOffersForMainPage = createSelector(
   (state: OffersState) => state.mainPageOffers
 );
 
-export const getCurrentSearchOffers = createSelector(
+const getCurrentSearchOffers = createSelector(
   selectOffersState,
   (state: OffersState) => state.currentSearchOffers
+);
+
+export const getCurrentSearchOffersQuantity = createSelector(
+  getCurrentSearchOffers,
+  (currentSearchOffers: Offer[]) => currentSearchOffers.length
+);
+
+export const getCurrentPageNumber = createSelector(
+  selectOffersState,
+  (state: OffersState) => state.currentPage
+);
+
+export const getOffersForCurrentPage = createSelector(
+  getCurrentSearchOffers,
+  getCurrentPageNumber,
+  (currentSearchOffers: Offer[], currentPage: number) => {
+    return computeOffersForCurrentPage(currentSearchOffers, currentPage);
+  }
 );
 
 const getCurrentSearchOffersSortedByPriceAsc = createSelector(

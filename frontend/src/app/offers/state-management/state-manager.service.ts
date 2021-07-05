@@ -13,16 +13,18 @@ export class OffersStateManager {
     this.store.dispatch(listOffers());
   }
 
-  offers$: Observable<Offer[]> = this.store.select(selectors.getAllOffers);
-
   isLoading$: Observable<boolean> = this.store.select(selectors.getIsLoading);
 
   offersForMainPage$: Observable<Offer[]> = this.store.select(
     selectors.getOffersForMainPage
   );
 
-  currentSearchOffers$: Observable<Offer[]> = this.store.select(
-    selectors.getCurrentSearchOffers
+  offersForCurrentPage$: Observable<Offer[]> = this.store.select(
+    selectors.getOffersForCurrentPage
+  );
+
+  currentSearchOffersQuantity$: Observable<number> = this.store.select(
+    selectors.getCurrentSearchOffersQuantity
   );
 
   lowestPriceForCurrentSearch$: Observable<number> = this.store.select(

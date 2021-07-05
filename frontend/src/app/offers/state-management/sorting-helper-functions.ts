@@ -39,3 +39,7 @@ const compareByPropertyDesc = (
   }
   return 0;
 };
+
+export const sortAlphabetically = (a: string, b: string): number => {
+  return a.localeCompare(b, "pl");
+};

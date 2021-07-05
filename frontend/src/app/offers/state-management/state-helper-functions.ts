@@ -11,7 +11,7 @@ import {
   filterOffers,
   filterOffersByPrice,
 } from "./filter-helper-functions";
-import { sortOffers } from "./sorting-helper-functions";
+import { sortAlphabetically, sortOffers } from "./sorting-helper-functions";
 
 export const computeMainPageOffers = (offers: Offer[]) => {
   const shuffleOffers = (offers: Offer[]): Offer[] => {
@@ -26,7 +26,6 @@ export const computeMainPageOffers = (offers: Offer[]) => {
 };
 
 export const computeCurrentSearchOffers = (
-  page: number,
   sorting: Sorting,
   filters: OffersFilters,
   allOffers: Offer[]
@@ -37,17 +36,17 @@ export const computeCurrentSearchOffers = (
   );
   // Filtering by price needs to be done at the end in order to retrieve price slider
   // min/max value properly.
-  currentSearchOffers = filterOffersByPrice(currentSearchOffers, filters);
+  return filterOffersByPrice(currentSearchOffers, filters);
+};
+
+export const computeOffersForCurrentPage = (offers: Offer[], page: number) => {
   const startIndex = page * OFFERS_PER_PAGE;
-  return currentSearchOffers.slice(startIndex, startIndex + OFFERS_PER_PAGE);
+
+  return offers.slice(startIndex, startIndex + OFFERS_PER_PAGE);
 };
 
 export const onlyUnique = (value, index, self) => {
   return self.indexOf(value) === index;
-};
-
-export const sortAlphabetically = (a: string, b: string): number => {
-  return a.localeCompare(b, "pl");
 };
 
 export const computeDistinctLocations = (

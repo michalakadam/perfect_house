@@ -118,7 +118,7 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
     typeSelector: string,
     subtypeSelector: string
   ): DropdownGroup[] {
-    const convertToDropdownValue = (subtype: string) => ({
+    const convertToDropdownValue = (subtype: string): DropdownValue => ({
       displayName: subtype,
       isSelected: this.filters[subtypeSelector] === subtype,
     });

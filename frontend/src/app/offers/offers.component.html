@@ -1,4 +1,4 @@
-<div class="component-container" *ngIf="offersStateManager.currentSearchOffers$ | async as offers">
+<div class="component-container" *ngIf="offersStateManager.offersForCurrentPage$ | async as offers">
   <div class="tools-container">
     <perfect-search-tool
       [filters]="currentFilters"
@@ -11,9 +11,9 @@
     >
     </perfect-search-tool>
 
-    <div class="other-tools-container">
+    <div class="other-tools-container" *ngIf="offersStateManager.currentSearchOffersQuantity$ | async as offersQuantity">
       <perfect-sorting-tool
-        [offersQuantity]="offers.length"
+        [offersQuantity]="offersQuantity"
         [selectedSorting]="currentSorting"
         (sortingChanged)="loadNewResults(currentPage, $event, currentFilters)"
       >
@@ -21,8 +21,7 @@
 
       <div class="top-paginator" *ngIf="(offersStateManager.numberOfPages$ | async) > 0">
         <perfect-paginator
-          [offersPerPage]="offersPerPage"
-          [totalOffersQuantity]="offers.length"
+					[totalOffersQuantity]="offersQuantity"
           [selectedPage]="currentPage"
           (pageChanged)="loadNewResults($event, currentSorting, currentFilters)"
         >
@@ -71,8 +70,7 @@
     <perfect-paginator
        *ngIf="(offersStateManager.numberOfPages$ | async) > 0"
       class="bottom-paginator"
-      [offersPerPage]="offersPerPage"
-      [totalOffersQuantity]="offers.length"
+      [totalOffersQuantity]="offersStateManager.currentSearchOffersQuantity$ | async"
       [selectedPage]="currentPage"
       (pageChanged)="loadNewResults($event, currentSorting, currentFilters)"
     >
