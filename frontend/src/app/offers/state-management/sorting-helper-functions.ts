@@ -3,11 +3,11 @@ import { Offer, Sorting } from "src/app/shared/models";
 
 export const sortOffers = (offers: Offer[], sorting: Sorting): Offer[] => {
   if (sorting.isAscending) {
-    return offers.sort((a, b) =>
+    return [...offers].sort((a, b) =>
       compareByPropertyAsc(sorting.propertyName, a, b)
     );
   }
-  return offers.sort((a, b) =>
+  return [...offers].sort((a, b) =>
     compareByPropertyDesc(sorting.propertyName, a, b)
   );
 };
