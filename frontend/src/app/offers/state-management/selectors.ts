@@ -105,14 +105,14 @@ export const getOfferByNumber = (number: number) =>
   });
 
 export const getVoivodeshipsWithCounties = createSelector(
-  getCurrentSearchOffers,
+  getAllOffers,
   (currentSearchOffers: Offer[]) => {
     return computeVoivodeshipsWithCounties(currentSearchOffers);
   }
 );
 
 export const getEstateTypesWithSubtypes = createSelector(
-  getCurrentSearchOffers,
+  getAllOffers,
   (currentSearchOffers: Offer[]) => {
     return computeEstateTypesWithSubtypes(currentSearchOffers);
   }

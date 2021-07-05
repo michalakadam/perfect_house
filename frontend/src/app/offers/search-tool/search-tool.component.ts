@@ -244,11 +244,9 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   applyFilters() {
-    if (this.onMainPage) {
-      return;
+    if (!this.onMainPage) {
+      this.search();
     }
-
-    this.search();
   }
 
   search() {
