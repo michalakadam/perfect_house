@@ -1,11 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Offer, OfferField, Room } from 'models';
+import { Offer, OfferField, Room } from './models';
 
 const DESCRIPTION_TO_BE_REPLACED = 'Oferta wysłana z systemu Galactica Virgo';
 
-@Injectable({
-  providedIn: 'root',
-})
 export class OffersConverter {
   convertToReadableOffers(rawOffers: any[]): Offer[] {
     return rawOffers.map((offer) => {
@@ -38,7 +34,7 @@ export class OffersConverter {
         ),
         isExclusive: this.convertToBoolean(offer.Wylacznosc),
         isForRent: this.convertToBoolean(offer.Wynajem),
-        photos: this.convertPhotos(this.convertToArray(offer.Zdjecia.Foto)),
+        photos: this.convertPhotos(this.convertToArray(offer.Zdjecia?.Foto)),
         isNoCommission: this.convertToBoolean(offer.ZeroProwizji),
         isAvailableOnFacebook: this.convertToBoolean(
           offer.PublikacjaFacebook?.text
@@ -501,7 +497,7 @@ export class OffersConverter {
     const containsNumber = /\d/;
     if (containsNumber.test(floor)) {
       // Removes leter p following floor number.
-      return Number(floor.match(/\d+/)[0]);
+      return Number(floor.match(/\d+/)![0]);
     } else if (floor.toLowerCase().includes('parter')) {
       return 0;
     }

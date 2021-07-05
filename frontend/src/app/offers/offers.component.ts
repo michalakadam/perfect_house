@@ -2,52 +2,58 @@ import {
   Component,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  OnInit,
   OnDestroy,
-} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { OffersDao } from '../shared/services/offers-dao.service';
-import { SnackbarService } from '../shared/services/snackbar.service';
+} from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Subscription } from "rxjs";
+import { SnackbarService } from "../shared/services/snackbar.service";
 import {
   Sorting,
   AVAILABLE_SORTINGS,
   DEFAULT_FILTERS,
+  Offer,
   OffersFilters,
-} from '../shared/models';
-import { Offer } from 'models';
-import { AgentsDao } from '../shared/services/agents-dao.service';
-import { WindowSizeDetector } from '../shared/services/window-size-detector.service';
+  DEFAULT_SORTING,
+} from "src/app/shared/models";
+import { AgentsDao } from "../shared/services/agents-dao.service";
+import { WindowSizeDetector } from "../shared/services/window-size-detector.service";
+import { OffersStateManager } from "./state-management/state-manager.service";
+
+const computeSortingParameter = (sorting: Sorting): string => {
+  return (
+    sorting.propertyName +
+    "_" +
+    (sorting.isAscending ? "ascending" : "descending")
+  );
+};
 
 const FIRST_PAGE_NUMBER = 1;
-const DEFAULT_SORTING_STRINGIFIED = 'creationDate_descending';
 export const DEFAULT_PARAMETERS = {
   page: FIRST_PAGE_NUMBER,
-  sorting: DEFAULT_SORTING_STRINGIFIED,
+  sorting: computeSortingParameter(DEFAULT_SORTING),
 };
 
 /** Strona wyświetla oferty nieruchomości oferując możliwość ich zaawansowanego wyszukiwania. */
 @Component({
-  selector: 'perfect-offers',
-  templateUrl: './offers.component.html',
-  styleUrls: ['./offers.component.scss'],
+  selector: "perfect-offers",
+  templateUrl: "./offers.component.html",
+  styleUrls: ["./offers.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OffersComponent implements OnInit, OnDestroy {
+export class OffersComponent implements OnDestroy {
   private subscription = new Subscription();
 
   offers: Offer[];
   currentPage: number;
   currentSorting: Sorting;
   currentFilters = DEFAULT_FILTERS;
-  isPaginatorVisible = true;
   isSnackbarVisible = false;
-  snackbarContent = '';
+  snackbarContent = "";
 
   constructor(
-    readonly offersDao: OffersDao,
     readonly agentsDao: AgentsDao,
     readonly windowSizeDetector: WindowSizeDetector,
+    readonly offersStateManager: OffersStateManager,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly changeDetector: ChangeDetectorRef,
@@ -56,17 +62,22 @@ export class OffersComponent implements OnInit, OnDestroy {
     this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
       this.changeDetector.detectChanges();
     });
-  }
-
-  ngOnInit() {
+    this.subscription.add(
+      this.snackbarService.open$.subscribe((message) => {
+        this.openSnackbar(message);
+        setTimeout(() => {
+          this.closeSnackbar();
+        }, 3000);
+      })
+    );
     this.subscription.add(
       this.route.params.subscribe((params) => {
         if (
-          !params.hasOwnProperty('page') ||
-          !params.hasOwnProperty('sorting')
+          !params.hasOwnProperty("page") ||
+          !params.hasOwnProperty("sorting")
         ) {
           this.router.navigate([
-            'oferty',
+            "oferty",
             { ...DEFAULT_PARAMETERS, ...params },
           ]);
         } else {
@@ -74,13 +85,11 @@ export class OffersComponent implements OnInit, OnDestroy {
         }
       })
     );
-
     this.subscription.add(
-      this.snackbarService.open$.subscribe((message) => {
-        this.openSnackbar(message);
-        setTimeout(() => {
-          this.closeSnackbar();
-        }, 3000);
+      this.offersStateManager.numberOfPages$.subscribe((numberOfPages) => {
+        if (this.currentPage > numberOfPages) {
+          this.loadNewResults(0, this.currentSorting, this.currentFilters);
+        }
       })
     );
   }
@@ -92,7 +101,7 @@ export class OffersComponent implements OnInit, OnDestroy {
   }
 
   private closeSnackbar() {
-    this.snackbarContent = '';
+    this.snackbarContent = "";
     this.isSnackbarVisible = false;
     this.changeDetector.detectChanges();
   }
@@ -103,19 +112,13 @@ export class OffersComponent implements OnInit, OnDestroy {
     this.currentFilters = this.computeFiltersFromParams(params);
 
     if (this.currentPage < 0 || !this.currentSorting) {
-      this.router.navigate(['/strona-nie-istnieje']);
+      this.router.navigate(["/strona-nie-istnieje"]);
     }
-    this.offers = this.offersDao.list(
+    this.offersStateManager.search(
       this.currentPage,
       this.currentSorting,
       this.currentFilters
     );
-
-    if (this.currentPage > this.offersDao.getNumberOfPages()) {
-      this.loadNewResults(0, this.currentSorting, this.currentFilters);
-    }
-    this.isPaginatorVisible = this.offersDao.getNumberOfPages() > 0;
-    this.changeDetector.detectChanges();
   }
 
   private computePageNumberFromParams(page: string): number {
@@ -123,8 +126,8 @@ export class OffersComponent implements OnInit, OnDestroy {
   }
 
   private computeSortingFromParams(sortingStringified: string): Sorting {
-    const propertyName = sortingStringified.split('_')[0];
-    const isAscending = sortingStringified.split('_')[1] === 'ascending';
+    const propertyName = sortingStringified.split("_")[0];
+    const isAscending = sortingStringified.split("_")[1] === "ascending";
 
     return AVAILABLE_SORTINGS.find(
       (sorting) =>
@@ -138,8 +141,8 @@ export class OffersComponent implements OnInit, OnDestroy {
 
     for (const property in DEFAULT_FILTERS) {
       let value = params[property];
-      if (value === 'true' || value === 'false') {
-        value = value === 'true';
+      if (value === "true" || value === "false") {
+        value = value === "true";
       }
       if (params.hasOwnProperty(property)) {
         filters = { ...filters, [property]: value };
@@ -152,11 +155,11 @@ export class OffersComponent implements OnInit, OnDestroy {
     if (!this.isSearchTheSameAsCurrentOne(page, sorting, filters)) {
       const params = {
         page: page + 1,
-        sorting: this.computeSortingParameter(sorting),
+        sorting: computeSortingParameter(sorting),
         ...this.computeFiltersParameters(filters),
       };
 
-      this.router.navigate(['oferty', params]);
+      this.router.navigate(["oferty", params]);
     }
   }
 
@@ -169,14 +172,6 @@ export class OffersComponent implements OnInit, OnDestroy {
       page === this.currentPage &&
       JSON.stringify(sorting) === JSON.stringify(this.currentSorting) &&
       JSON.stringify(filters) === JSON.stringify(this.currentFilters)
-    );
-  }
-
-  private computeSortingParameter(sorting: Sorting): string {
-    return (
-      sorting.propertyName +
-      '_' +
-      (sorting.isAscending ? 'ascending' : 'descending')
     );
   }
 
@@ -194,7 +189,7 @@ export class OffersComponent implements OnInit, OnDestroy {
   }
 
   loadOffer(symbol: string) {
-    this.router.navigate(['oferta', symbol]);
+    this.router.navigate(["oferta", symbol]);
   }
 
   trackById(index: number, offer: Offer) {

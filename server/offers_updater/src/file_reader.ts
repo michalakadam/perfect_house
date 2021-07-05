@@ -1,36 +1,46 @@
-import { existsSync, readFileSync } from 'fs';
-import { PartialOffer } from './models';
+import { existsSync, readFileSync } from "fs";
+import { PartialOffer } from "./models";
 
-const OFFERS_FOLDER = '/home/adam/Documents/oferty/temp/';
-const REMOVED_FILE_PATH = OFFERS_FOLDER + 'removed_many.json';
-const MODIFIED_FILE_PATH = OFFERS_FOLDER + 'offers_many.json';
-const REMOVED_PROPERTY_NAME = 'Usuniete';
-const MODIFIED_PROPERTY_NAME = 'Oferty';
+const OFFERS_FOLDER = "/root/perfect/temp/";
+const REMOVED_FILE_PATH = OFFERS_FOLDER + "removed.json";
+const MODIFIED_FILE_PATH = OFFERS_FOLDER + "offers.json";
+const REMOVED_PROPERTY_NAME = "Usuniete";
+const MODIFIED_PROPERTY_NAME = "Oferty";
 
 export const getRemovedOffers = (): PartialOffer[] => {
-    return getOffers(REMOVED_FILE_PATH, REMOVED_PROPERTY_NAME);
-}
+  return getOffers(REMOVED_FILE_PATH, REMOVED_PROPERTY_NAME);
+};
 
 export const getModifiedOffers = (): PartialOffer[] => {
-    return getOffers(MODIFIED_FILE_PATH, MODIFIED_PROPERTY_NAME);
-}
+  return getOffers(MODIFIED_FILE_PATH, MODIFIED_PROPERTY_NAME);
+};
 
 function getOffers(filePath: string, propertyName: string): PartialOffer[] {
-    if (existsSync(filePath)) {
-        const offers = getOffersFromFile(filePath, propertyName);
+  if (existsSync(filePath)) {
+    const offers = getOffersFromFile(filePath, propertyName);
 
-        if (offers) {
-            return enforceArray(offers);
-        }     
+    if (offers) {
+      return enforceArray(offers);
     }
-    return [];
+  }
+  return [];
 }
 
-function getOffersFromFile(filePath: string, propertyName: string)  {
-    return JSON.parse(readFileSync(filePath, 'utf-8'))[propertyName]?.['Oferta'];
+function getOffersFromFile(filePath: string, propertyName: string) {
+  let result = undefined;
+  try {
+    if (existsSync(filePath)) {
+      result = JSON.parse(readFileSync(filePath, "utf-8"))[propertyName]?.[
+        "Oferta"
+      ];
+    }
+  } catch (err) {
+    console.error(err);
+  }
+  return result;
 }
 
 // When converting xml to json single element is converted to object instead of array.
-function enforceArray(offers: PartialOffer|PartialOffer[]): PartialOffer[] {
-    return Array.isArray(offers) ? offers : [offers];
+function enforceArray(offers: PartialOffer | PartialOffer[]): PartialOffer[] {
+  return Array.isArray(offers) ? offers : [offers];
 }

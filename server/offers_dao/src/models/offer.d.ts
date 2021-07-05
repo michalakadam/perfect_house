@@ -46,8 +46,8 @@ export interface Offer {
     postalCode: string;
     street: string;
     location: string;
-    longitude: number;
-    lattitude: number;
+    longitude: number|undefined;
+    lattitude: number|undefined;
     publicTransport: string[];
     neighbourhood: OfferField<string>;
     accessRoad: OfferField<string>;

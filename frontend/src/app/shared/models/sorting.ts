@@ -4,40 +4,47 @@ export interface Sorting {
   isAscending: boolean;
 }
 
+export const DEFAULT_SORTING = {
+  displayName: "dacie dodania",
+  propertyName: "creationDate",
+  isAscending: false,
+};
+
 export const AVAILABLE_SORTINGS = [
+  DEFAULT_SORTING,
   {
-    displayName: 'dacie dodania',
-    propertyName: 'creationDate',
+    displayName: "dacie dodania",
+    propertyName: "creationDate",
     isAscending: false,
   },
   {
-    displayName: 'cenie rosnąco',
-    propertyName: 'price',
+    displayName: "cenie rosnąco",
+    propertyName: "price",
     isAscending: true,
   },
   {
-    displayName: 'cenie malejąco',
-    propertyName: 'price',
+    displayName: "cenie malejąco",
+    propertyName: "price",
     isAscending: false,
   },
   {
-    displayName: 'cenie za m² rosnąco',
-    propertyName: 'pricePerSquareMeter',
+    displayName: "cenie za m² rosnąco",
+    propertyName: "pricePerSquareMeter",
     isAscending: true,
   },
   {
-    displayName: 'cenie za m² malejąco',
-    propertyName: 'pricePerSquareMeter',
+    displayName: "cenie za m² malejąco",
+    propertyName: "pricePerSquareMeter",
     isAscending: false,
   },
   {
-    displayName: 'powierzchni rosnąco',
-    propertyName: 'totalArea',
+    displayName: "powierzchni rosnąco",
+    propertyName: "totalArea",
     isAscending: true,
   },
   {
-    displayName: 'powierzchni malejąco',
-    propertyName: 'totalArea',
+    displayName: "powierzchni malejąco",
+    propertyName: "totalArea",
     isAscending: false,
   },
 ];

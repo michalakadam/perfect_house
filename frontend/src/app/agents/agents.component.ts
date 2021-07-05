@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AgentsDao } from 'src/app/shared/services/agents-dao.service';
-import { Agent } from '../shared/models';
+import { Agent } from 'src/app/shared/models';
 
 /** Wyświetla matrycę agentów. */
 @Component({
