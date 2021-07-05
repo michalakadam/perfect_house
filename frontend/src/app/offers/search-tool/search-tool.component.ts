@@ -94,18 +94,16 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   @Input()
   set rawVoivodeshipsWithCounties(value: Map<string, string[]>) {
     this.voivodeshipsWithCounties = this.convertToDropdownGroups(
-      value,
       "voivodeship",
       "county"
-    );
+    )(value);
   }
   @Input()
   set rawEstateTypesWithSubtypes(value: Map<string, string[]>) {
     this.estateTypesWithSubtypes = this.convertToDropdownGroups(
-      value,
       "estateType",
       "estateSubtype"
-    );
+    )(value);
   }
   @Input() lowestPriceForCurrentSearch = 0;
   @Input() highestPriceForCurrentSearch = 0;
@@ -114,28 +112,29 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   @Output() advancedToggled = new EventEmitter();
 
   private convertToDropdownGroups(
-    typesWithSubtypes: Map<string, string[]>,
     typeSelector: string,
     subtypeSelector: string
-  ): DropdownGroup[] {
-    const convertToDropdownValue = (subtype: string): DropdownValue => ({
-      displayName: subtype,
-      isSelected: this.filters[subtypeSelector] === subtype,
-    });
-    const dropdownGroups = [];
-
-    for (let [type, subtypes] of typesWithSubtypes) {
-      const dropdownSubtypes = subtypes.map(convertToDropdownValue);
-
-      dropdownGroups.push({
-        displayName: type,
-        values: dropdownSubtypes,
-        isVisible: !!dropdownSubtypes.find((subtype) => subtype.isSelected),
-        isSelected:
-          this.filters[typeSelector].toLowerCase() === type.toLowerCase(),
+  ) {
+    return (typesWithSubtypes: Map<string, string[]>): DropdownGroup[] => {
+      const convertToDropdownValue = (subtype: string): DropdownValue => ({
+        displayName: subtype,
+        isSelected: this.filters[subtypeSelector] === subtype,
       });
-    }
-    return dropdownGroups;
+      const dropdownGroups = [];
+
+      for (let [type, subtypes] of typesWithSubtypes) {
+        const dropdownSubtypes = subtypes.map(convertToDropdownValue);
+
+        dropdownGroups.push({
+          displayName: type,
+          values: dropdownSubtypes,
+          isVisible: !!dropdownSubtypes.find((subtype) => subtype.isSelected),
+          isSelected:
+            this.filters[typeSelector].toLowerCase() === type.toLowerCase(),
+        });
+      }
+      return dropdownGroups;
+    };
   }
 
   constructor(
