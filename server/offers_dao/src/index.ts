@@ -3,15 +3,21 @@ import { OffersDao } from "./offers_dao";
 import { take } from "rxjs/operators";
 import { Request, Response } from "express";
 
+const fs = require("fs");
 const express = require("express");
+const https = require("https");
 const app = express();
 const cors = require("cors");
 const helmet = require("helmet");
 
 const PORT_NUMBER = 3000;
 const offersDao = new OffersDao();
-var corsOptions = {
+const corsOptions = {
   origin: ["https://perfect.stronazen.pl", "http://localhost:4200"],
+};
+const credentials = {
+  key: fs.readFileSync("sslcert/key.pem", "utf8"),
+  cert: fs.readFileSync("sslcert/cert.pem", "utf8"),
 };
 
 app.use(helmet());
@@ -32,4 +38,4 @@ app.use((req: Request, res: Response) => {
   res.send("404 - Not Found");
 });
 
-app.listen(PORT_NUMBER, "51.77.195.170");
+https.createServer(credentials, app).listen(PORT_NUMBER, "51.77.195.170");
