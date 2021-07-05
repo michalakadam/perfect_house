@@ -5,7 +5,7 @@ import {
   listOffers,
   searchOffers,
 } from "./actions";
-import { Offer } from "src/app/shared/models";
+import { DEFAULT_FILTERS, DEFAULT_SORTING, Offer } from "src/app/shared/models";
 import {
   computeCurrentSearchOffers,
   computeMainPageOffers,
@@ -40,7 +40,11 @@ const offersReducer = createReducer(
     isLoading: false,
     allOffers: offers,
     mainPageOffers: computeMainPageOffers(offers),
-    currentSearchOffers: offers,
+    currentSearchOffers: computeCurrentSearchOffers(
+      DEFAULT_SORTING,
+      DEFAULT_FILTERS,
+      offers
+    ),
   })),
   on(listOffersError, (state) => ({
     ...state,

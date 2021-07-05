@@ -13,16 +13,24 @@ import {
   DEFAULT_FILTERS,
   Offer,
   OffersFilters,
+  DEFAULT_SORTING,
 } from "src/app/shared/models";
 import { AgentsDao } from "../shared/services/agents-dao.service";
 import { WindowSizeDetector } from "../shared/services/window-size-detector.service";
 import { OffersStateManager } from "./state-management/state-manager.service";
 
+const computeSortingParameter = (sorting: Sorting): string => {
+  return (
+    sorting.propertyName +
+    "_" +
+    (sorting.isAscending ? "ascending" : "descending")
+  );
+};
+
 const FIRST_PAGE_NUMBER = 1;
-const DEFAULT_SORTING_STRINGIFIED = "creationDate_descending";
 export const DEFAULT_PARAMETERS = {
   page: FIRST_PAGE_NUMBER,
-  sorting: DEFAULT_SORTING_STRINGIFIED,
+  sorting: computeSortingParameter(DEFAULT_SORTING),
 };
 
 /** Strona wyświetla oferty nieruchomości oferując możliwość ich zaawansowanego wyszukiwania. */
@@ -147,7 +155,7 @@ export class OffersComponent implements OnDestroy {
     if (!this.isSearchTheSameAsCurrentOne(page, sorting, filters)) {
       const params = {
         page: page + 1,
-        sorting: this.computeSortingParameter(sorting),
+        sorting: computeSortingParameter(sorting),
         ...this.computeFiltersParameters(filters),
       };
 
@@ -164,14 +172,6 @@ export class OffersComponent implements OnDestroy {
       page === this.currentPage &&
       JSON.stringify(sorting) === JSON.stringify(this.currentSorting) &&
       JSON.stringify(filters) === JSON.stringify(this.currentFilters)
-    );
-  }
-
-  private computeSortingParameter(sorting: Sorting): string {
-    return (
-      sorting.propertyName +
-      "_" +
-      (sorting.isAscending ? "ascending" : "descending")
     );
   }
 
