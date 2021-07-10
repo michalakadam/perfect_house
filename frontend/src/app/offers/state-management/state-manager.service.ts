@@ -2,7 +2,12 @@ import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Offer, OffersFilters, Sorting } from "src/app/shared/models";
 import { Observable } from "rxjs";
-import { listOffers, searchOffers } from "./actions";
+import {
+  listOffers,
+  updateFilters,
+  updatePageNumber,
+  updateSorting,
+} from "./actions";
 import * as selectors from "./selectors";
 
 @Injectable({
@@ -14,6 +19,10 @@ export class OffersStateManager {
   }
 
   isLoading$: Observable<boolean> = this.store.select(selectors.getIsLoading);
+
+  isSearching$: Observable<boolean> = this.store.select(
+    selectors.getIsSearching
+  );
 
   offersForMainPage$: Observable<Offer[]> = this.store.select(
     selectors.getOffersForMainPage
@@ -34,6 +43,12 @@ export class OffersStateManager {
   highestPriceForCurrentSearch$: Observable<number> = this.store.select(
     selectors.getHighestPriceForCurrentSearch
   );
+
+  pageNumber$: Observable<number> = this.store.select(selectors.getPageNumber);
+
+  sorting$: Observable<Sorting> = this.store.select(selectors.getSorting);
+
+  filters$: Observable<OffersFilters> = this.store.select(selectors.getFilters);
 
   numberOfPages$: Observable<number> = this.store.select(
     selectors.getNumberOfPages
@@ -62,7 +77,15 @@ export class OffersStateManager {
     return this.store.select(selectors.getOfferByNumber(number));
   }
 
-  search(page: number, sorting: Sorting, filters: OffersFilters) {
-    this.store.dispatch(searchOffers({ page, sorting, filters }));
+  updatePageNumber(pageNumber: number) {
+    this.store.dispatch(updatePageNumber({ pageNumber }));
+  }
+
+  updateSorting(sorting: Sorting) {
+    this.store.dispatch(updateSorting({ sorting }));
+  }
+
+  updateFilters(filters: OffersFilters) {
+    this.store.dispatch(updateFilters({ filters }));
   }
 }

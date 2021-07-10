@@ -1,6 +1,6 @@
 import { RouterStateSnapshot } from "@angular/router";
 import { RouterStateSerializer } from "@ngrx/router-store";
-import { PerfectRoute } from "./route";
+import { PerfectRoute } from "./models";
 
 export class RouterSerializer implements RouterStateSerializer<PerfectRoute> {
   serialize(routerState: RouterStateSnapshot): PerfectRoute {

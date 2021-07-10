@@ -118,13 +118,13 @@ import { RouterStateManagementModule } from "./router/state-management/state-man
     SelectButtonModule,
     SliderModule,
     TabViewModule,
-    OffersStateManagementModule,
-    RouterStateManagementModule,
     StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument({
       autoPause: true, // Pauses recording actions and state changes when the extension window is not open
     }),
     EffectsModule.forRoot([]),
+    OffersStateManagementModule,
+    RouterStateManagementModule,
   ],
   bootstrap: [AppComponent],
 })

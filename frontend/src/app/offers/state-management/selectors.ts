@@ -1,20 +1,27 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { OFFERS_PER_PAGE } from "src/app/shared/constants";
 import { AVAILABLE_SORTINGS, Offer } from "src/app/shared/models";
-import { featureName as offersFeatureName, OffersState } from "./reducers";
+import { OffersState } from "./reducers";
 import { sortOffers } from "./sorting-helper-functions";
 import {
   computeDistinctLocations,
   computeEstateTypesWithSubtypes,
+  computeNumberOfPages,
   computeOffersForCurrentPage,
   computeVoivodeshipsWithCounties,
 } from "./state-helper-functions";
+import { stateKey } from "./reducers";
 
-const selectOffersState = createFeatureSelector<OffersState>(offersFeatureName);
+const selectOffersState = createFeatureSelector<OffersState>(stateKey);
 
 export const getIsLoading = createSelector(
   selectOffersState,
   (state: OffersState) => state.isLoading
+);
+
+export const getIsSearching = createSelector(
+  selectOffersState,
+  (state: OffersState) => state.isSearching
 );
 
 const getAllOffers = createSelector(
@@ -37,16 +44,26 @@ export const getCurrentSearchOffersQuantity = createSelector(
   (currentSearchOffers: Offer[]) => currentSearchOffers.length
 );
 
-export const getCurrentPageNumber = createSelector(
+export const getPageNumber = createSelector(
   selectOffersState,
-  (state: OffersState) => state.currentPage
+  (state: OffersState) => state.pageNumber
+);
+
+export const getSorting = createSelector(
+  selectOffersState,
+  (state: OffersState) => state.sorting
+);
+
+export const getFilters = createSelector(
+  selectOffersState,
+  (state: OffersState) => state.filters
 );
 
 export const getOffersForCurrentPage = createSelector(
   getCurrentSearchOffers,
-  getCurrentPageNumber,
-  (currentSearchOffers: Offer[], currentPage: number) => {
-    return computeOffersForCurrentPage(currentSearchOffers, currentPage);
+  getPageNumber,
+  (currentSearchOffers: Offer[], pageNumber: number) => {
+    return computeOffersForCurrentPage(currentSearchOffers, pageNumber);
   }
 );
 
@@ -81,11 +98,7 @@ export const getHighestPriceForCurrentSearch = createSelector(
 export const getNumberOfPages = createSelector(
   getCurrentSearchOffers,
   (currentSearchOffers: Offer[]) => {
-    const offersOverPageSize = currentSearchOffers.length / OFFERS_PER_PAGE;
-
-    return currentSearchOffers.length % OFFERS_PER_PAGE === 0
-      ? offersOverPageSize - 1
-      : Math.trunc(offersOverPageSize);
+    return computeNumberOfPages(currentSearchOffers);
   }
 );
 

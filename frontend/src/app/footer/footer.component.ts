@@ -6,7 +6,6 @@ import {
 } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
-import { DEFAULT_PARAMETERS } from "../offers/offers.component";
 import { WindowSizeDetector } from "../shared/services/window-size-detector.service";
 
 /** Stopka strony. Zawiera przydatne linki, informacje kontaktowe i logo firmy. */
@@ -59,10 +58,10 @@ export class FooterComponent implements OnDestroy {
     }
   }
 
-  loadOffers(params: any) {
+  loadOffers(queryParams: any) {
     window.scrollTo(0, 0);
     this.router.navigate(["oferty"], {
-      queryParams: { ...DEFAULT_PARAMETERS, ...params },
+      queryParams,
     });
   }
 
