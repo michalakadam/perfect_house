@@ -76,10 +76,9 @@ export class OffersComponent implements OnDestroy {
           !params.hasOwnProperty("page") ||
           !params.hasOwnProperty("sorting")
         ) {
-          this.router.navigate([
-            "oferty",
-            { ...DEFAULT_PARAMETERS, ...params },
-          ]);
+          this.router.navigate(["oferty"], {
+            queryParams: { ...DEFAULT_PARAMETERS, ...params },
+          });
         } else {
           this.loadOffersForCurrentParameters(params);
         }
@@ -159,7 +158,7 @@ export class OffersComponent implements OnDestroy {
         ...this.computeFiltersParameters(filters),
       };
 
-      this.router.navigate(["oferty", params]);
+      this.router.navigate(["oferty"], { queryParams: params });
     }
   }
 

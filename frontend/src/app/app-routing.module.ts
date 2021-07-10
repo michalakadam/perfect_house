@@ -1,108 +1,108 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { AgentPageComponent } from './agents/agent-page/agent-page.component';
-import { AgentsComponent } from './agents/agents.component';
-import { ConsultancyComponent } from './consultancy/consultancy.component';
-import { ContactComponent } from './contact/contact.component';
-import { MainComponent } from './main/main.component';
-import { OfferComponent } from './offer/offer.component';
-import { OffersComponent } from './offers/offers.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { ManagementComponent } from './management/management.component';
-import { UnderConstructionComponent } from './under-construction/under-construction.component';
-import { ValuesComponent } from './values/values.component';
-import { PhotovoltaicsComponent } from './photovoltaics/photovoltaics.component';
-import { NewsFeedComponent } from './news-feed/news-feed.component';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+import { AgentPageComponent } from "./agents/agent-page/agent-page.component";
+import { AgentsComponent } from "./agents/agents.component";
+import { ConsultancyComponent } from "./consultancy/consultancy.component";
+import { ContactComponent } from "./contact/contact.component";
+import { MainComponent } from "./main/main.component";
+import { OfferComponent } from "./offer/offer.component";
+import { OffersComponent } from "./offers/offers.component";
+import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
+import { ManagementComponent } from "./management/management.component";
+import { UnderConstructionComponent } from "./under-construction/under-construction.component";
+import { ValuesComponent } from "./values/values.component";
+import { PhotovoltaicsComponent } from "./photovoltaics/photovoltaics.component";
+import { NewsFeedComponent } from "./news-feed/news-feed.component";
 
 const routes: Routes = [
   {
-    path: '',
+    path: "",
     component: MainComponent,
     data: {
-      title: 'Perfect House',
+      title: "Perfect House",
     },
   },
   {
-    path: 'oferty',
+    path: "oferty",
     component: OffersComponent,
     data: {
-      title: 'Oferty',
+      title: "Oferty",
     },
   },
   {
-    path: 'oferta/:symbol',
+    path: "oferta/:symbol",
     component: OfferComponent,
   },
   {
-    path: 'doradztwo-kredytowe',
+    path: "doradztwo-kredytowe",
     component: ConsultancyComponent,
     data: {
-      title: 'Doradztwo kredytowe',
+      title: "Doradztwo kredytowe",
     },
   },
   {
-    path: 'zarządzanie',
+    path: "zarządzanie",
     component: ManagementComponent,
     data: {
-      title: 'Zarządzanie nieruchomościami',
+      title: "Zarządzanie nieruchomościami",
     },
   },
   {
-    path: 'wartości',
+    path: "wartości",
     component: ValuesComponent,
     data: {
-      title: 'Nasze wartości',
+      title: "Nasze wartości",
     },
   },
   {
-    path: 'ludzie',
+    path: "ludzie",
     children: [
       {
-        path: '',
+        path: "",
         component: AgentsComponent,
         data: {
-          title: 'Ludzie',
+          title: "Ludzie",
         },
       },
       {
-        path: ':agent',
+        path: ":agent",
         component: AgentPageComponent,
       },
     ],
   },
   {
-    path: 'aktualności',
+    path: "aktualności",
     component: NewsFeedComponent,
     data: {
-      title: 'Aktualności',
+      title: "Aktualności",
     },
   },
   {
-    path: 'kontakt',
+    path: "kontakt",
     component: ContactComponent,
     data: {
-      title: 'Kontakt',
+      title: "Kontakt",
     },
   },
   {
-    path: 'deweloperzy',
+    path: "deweloperzy",
     component: UnderConstructionComponent,
     data: {
-      title: 'Dla deweloperów',
+      title: "Dla deweloperów",
     },
   },
   {
-    path: 'fotowoltaika',
+    path: "fotowoltaika",
     component: PhotovoltaicsComponent,
     data: {
-      title: 'Fotowoltaika',
+      title: "Fotowoltaika",
     },
   },
   {
-    path: '**',
+    path: "**",
     component: PageNotFoundComponent,
     data: {
-      title: '404',
+      title: "404",
     },
   },
 ];
@@ -110,8 +110,8 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
-      relativeLinkResolution: 'legacy',
-      scrollPositionRestoration: 'enabled',
+      relativeLinkResolution: "legacy",
+      scrollPositionRestoration: "enabled",
     }),
   ],
   exports: [RouterModule],

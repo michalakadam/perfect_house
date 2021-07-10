@@ -14,4 +14,4 @@ import * as offers from "./reducers";
     EffectsModule.forFeature([OffersEffects]),
   ],
 })
-export class StateManagementModule {}
+export class OffersStateManagementModule {}
