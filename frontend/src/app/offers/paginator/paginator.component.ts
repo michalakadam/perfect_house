@@ -16,6 +16,7 @@ import { OFFERS_PER_PAGE } from "src/app/shared/constants";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PaginatorComponent {
+  private currentPage = -1;
   offersPerPage = OFFERS_PER_PAGE;
   @Input() totalOffersQuantity = 0;
   @Input()
@@ -27,6 +28,13 @@ export class PaginatorComponent {
   @ViewChild("paginator", { static: true }) paginator: Paginator;
 
   private updateCurrentPage(currentPage: number): void {
+    this.currentPage = currentPage;
     setTimeout(() => this.paginator.changePage(currentPage));
+  }
+
+  checkPageChanged(updatedPage: number) {
+    if (updatedPage !== this.currentPage) {
+      this.pageChanged.emit(updatedPage);
+    }
   }
 }
