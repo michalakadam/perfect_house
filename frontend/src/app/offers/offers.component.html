@@ -15,7 +15,7 @@
       <perfect-sorting-tool
         [offersQuantity]="offersQuantity"
         [selectedSorting]="offersStateManager.sorting$ | async"
-        (sortingChanged)="offersStateManager.updateFilters($event)"
+        (sortingChanged)="offersStateManager.updateSorting($event)"
       >
       </perfect-sorting-tool>
 
