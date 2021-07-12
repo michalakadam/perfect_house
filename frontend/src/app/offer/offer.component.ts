@@ -68,6 +68,8 @@ export class OfferComponent implements OnInit, OnDestroy {
         .offerBySymbol$(symbol)
         .pipe(take(1))
         .subscribe((offer) => {
+          console.log(offer);
+          console.log(symbol);
           if (offer) {
             this.offer = offer;
             this.titleService.setTitle(this.offer.title);
