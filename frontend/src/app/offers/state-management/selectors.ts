@@ -1,6 +1,10 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { OFFERS_PER_PAGE } from "src/app/shared/constants";
-import { AVAILABLE_SORTINGS, Offer } from "src/app/shared/models";
+import {
+  AVAILABLE_SORTINGS,
+  Offer,
+  OffersFilters,
+} from "src/app/shared/models";
 import { OffersState } from "./reducers";
 import { sortOffers } from "./sorting-helper-functions";
 import {
@@ -11,6 +15,7 @@ import {
   computeVoivodeshipsWithCounties,
 } from "./state-helper-functions";
 import { stateKey } from "./reducers";
+import { filterOffers } from "./filter-helper-functions";
 
 const selectOffersState = createFeatureSelector<OffersState>(stateKey);
 
@@ -68,10 +73,11 @@ export const getOffersForCurrentPage = createSelector(
 );
 
 const getCurrentSearchOffersSortedByPriceAsc = createSelector(
-  getCurrentSearchOffers,
-  (currentSearchOffers: Offer[]) => {
+  getAllOffers,
+  getFilters,
+  (allOffers: Offer[], filters: OffersFilters) => {
     return sortOffers(
-      currentSearchOffers,
+      filterOffers(allOffers, filters),
       AVAILABLE_SORTINGS.find(
         (sorting) => sorting.displayName === "cenie rosnąco"
       )
@@ -82,7 +88,7 @@ const getCurrentSearchOffersSortedByPriceAsc = createSelector(
 export const getLowestPriceForCurrentSearch = createSelector(
   getCurrentSearchOffersSortedByPriceAsc,
   (offersSortedByPriceAsc: Offer[]) => {
-    return offersSortedByPriceAsc.length ? offersSortedByPriceAsc[0].price : 0;
+    return offersSortedByPriceAsc.length ? offersSortedByPriceAsc[0].price : -1;
   }
 );
 
@@ -91,7 +97,7 @@ export const getHighestPriceForCurrentSearch = createSelector(
   (offersSortedByPriceAsc: Offer[]) => {
     return offersSortedByPriceAsc.length
       ? offersSortedByPriceAsc[offersSortedByPriceAsc.length - 1].price
-      : 0;
+      : -1;
   }
 );
 

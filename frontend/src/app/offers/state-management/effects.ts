@@ -74,7 +74,7 @@ export class OffersEffects {
     this.snackbarService.open(LIST_OFFERS_ERROR_MESSAGE);
     if (error.status === 0) {
       // A client-side or network error occurred.
-      console.error(`An error occurred: ${error.error}`);
+      console.error(`An error occurred: ${JSON.stringify(error.error)}`);
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong.

@@ -37,8 +37,6 @@ export const computeCurrentSearchOffers = (
     filterOffers(allOffers, filters),
     sorting
   );
-  // Filtering by price needs to be done at the end in order to retrieve price slider
-  // min/max value properly.
   return filterOffersByPrice(currentSearchOffers, filters);
 };
 
