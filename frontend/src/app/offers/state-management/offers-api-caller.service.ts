@@ -4,7 +4,7 @@ import { Observable } from "rxjs";
 import { retry } from "rxjs/operators";
 import { Offer } from "src/app/shared/models";
 
-const OFFERS_API_URL = "https://51.77.195.170:3000/offers";
+const OFFERS_API_URL = "https://adam-michalak.site/perfect/offers";
 
 @Injectable({
   providedIn: "root",
