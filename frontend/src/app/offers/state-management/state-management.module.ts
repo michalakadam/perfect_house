@@ -10,8 +10,8 @@ import * as offers from "./reducers";
   imports: [
     CommonModule,
     HttpClientModule,
-    StoreModule.forFeature(offers.featureName, offers.reducer),
+    StoreModule.forFeature(offers.stateKey, offers.reducer),
     EffectsModule.forFeature([OffersEffects]),
   ],
 })
-export class StateManagementModule {}
+export class OffersStateManagementModule {}

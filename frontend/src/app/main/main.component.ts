@@ -12,7 +12,6 @@ import {
   GalleryPhoto,
   OffersFilters,
 } from "src/app/shared/models";
-import { DEFAULT_PARAMETERS } from "../offers/offers.component";
 import { OffersStateManager } from "../offers/state-management/state-manager.service";
 
 const IMAGES: GalleryPhoto[] = [
@@ -77,14 +76,15 @@ export class MainComponent implements OnDestroy {
     if (image.title.includes("morze")) {
       params = { isByTheSea: true };
     }
-    this.router.navigate(["oferty", params]);
+    this.router.navigate(["oferty"], { queryParams: params });
   }
 
   loadOffers(filters: OffersFilters) {
-    this.router.navigate([
-      "oferty",
-      { ...DEFAULT_PARAMETERS, ...this.computeFiltersParameters(filters) },
-    ]);
+    this.router.navigate(["oferty"], {
+      queryParams: {
+        ...this.computeFiltersParameters(filters),
+      },
+    });
   }
 
   private computeFiltersParameters(filters: OffersFilters) {

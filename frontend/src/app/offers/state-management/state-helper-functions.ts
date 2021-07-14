@@ -3,6 +3,8 @@ import {
   Sorting,
   OffersFilters,
   AVAILABLE_ESTATE_TYPES,
+  AVAILABLE_SORTINGS,
+  DEFAULT_FILTERS,
 } from "src/app/shared/models";
 import { OFFERS_PER_PAGE } from "src/app/shared/constants";
 import {
@@ -12,6 +14,7 @@ import {
   filterOffersByPrice,
 } from "./filter-helper-functions";
 import { sortAlphabetically, sortOffers } from "./sorting-helper-functions";
+import { Params } from "@angular/router";
 
 export const computeMainPageOffers = (offers: Offer[]) => {
   const shuffleOffers = (offers: Offer[]): Offer[] => {
@@ -34,8 +37,6 @@ export const computeCurrentSearchOffers = (
     filterOffers(allOffers, filters),
     sorting
   );
-  // Filtering by price needs to be done at the end in order to retrieve price slider
-  // min/max value properly.
   return filterOffersByPrice(currentSearchOffers, filters);
 };
 
@@ -144,4 +145,68 @@ const computeEstateSubtypesForEstateType = (
       subtype.toLowerCase().replace("_", " ").replace(" - ", "-")
     )
     .sort(sortAlphabetically);
+};
+
+export const extractPageNumberFromParams = (queryParams: Params): number => {
+  const pageParamConverted = Number(queryParams.page);
+  const isValidPageNumber =
+    !Number.isNaN(pageParamConverted) && pageParamConverted > 0;
+
+  return isValidPageNumber ? pageParamConverted - 1 : 0;
+};
+
+export const extractSortingFromParams = (queryParams: Params): Sorting => {
+  const sortingStringified = queryParams.sorting;
+  const propertyName = sortingStringified.split("_")[0];
+  const isAscending = sortingStringified.split("_")[1] === "ascending";
+
+  return AVAILABLE_SORTINGS.find(
+    (sorting) =>
+      sorting.propertyName === propertyName &&
+      sorting.isAscending === isAscending
+  );
+};
+
+export const extractFiltersFromParams = (
+  queryParams: Params
+): OffersFilters => {
+  let filters = DEFAULT_FILTERS;
+
+  for (const property in DEFAULT_FILTERS) {
+    let value = queryParams[property];
+    if (value === "true" || value === "false") {
+      value = value === "true";
+    }
+    if (queryParams.hasOwnProperty(property)) {
+      filters = { ...filters, [property]: value };
+    }
+  }
+  return filters;
+};
+
+export const computeNumberOfPages = (offers: Offer[]): number => {
+  return offers.length % OFFERS_PER_PAGE === 0
+    ? offers.length / OFFERS_PER_PAGE - 1
+    : Math.trunc(offers.length / OFFERS_PER_PAGE);
+};
+
+export const convertToSortingParameter = (sorting: Sorting): string => {
+  return (
+    sorting.propertyName +
+    "_" +
+    (sorting.isAscending ? "ascending" : "descending")
+  );
+};
+
+export const convertToFiltersParameters = (filters: OffersFilters) => {
+  let filtersParameters = {};
+  for (let property in filters) {
+    if (filters[property] !== DEFAULT_FILTERS[property]) {
+      filtersParameters = {
+        ...filtersParameters,
+        [property]: filters[property],
+      };
+    }
+  }
+  return filtersParameters;
 };

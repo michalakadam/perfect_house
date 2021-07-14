@@ -51,11 +51,12 @@ import { UrlSanitizer } from "./shared/pipes/url-sanitizer";
 import { StringDecoder } from "./shared/pipes/string-decoder";
 import { NewsFeedComponent } from "./news-feed/news-feed.component";
 import { StarRatingComponent } from "./offer/star-rating/star-rating.component";
-import { StateManagementModule } from "./offers/state-management/state-management.module";
+import { OffersStateManagementModule } from "./offers/state-management/state-management.module";
 import { LoadingSpinnerComponent } from "./loading-spinner/loading-spinner.component";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { RouterStateManagementModule } from "./router/state-management/state-management.module";
 
 @NgModule({
   declarations: [
@@ -117,12 +118,13 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
     SelectButtonModule,
     SliderModule,
     TabViewModule,
-    StateManagementModule,
     StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument({
       autoPause: true, // Pauses recording actions and state changes when the extension window is not open
     }),
     EffectsModule.forRoot([]),
+    OffersStateManagementModule,
+    RouterStateManagementModule,
   ],
   bootstrap: [AppComponent],
 })

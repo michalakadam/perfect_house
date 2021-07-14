@@ -3,30 +3,50 @@ import {
   listOffersSuccess,
   listOffersError,
   listOffers,
-  searchOffers,
+  updateSearchParams,
+  updatePageNumber,
+  updateSorting,
+  updateFilters,
+  navigateToOffersPage,
 } from "./actions";
-import { DEFAULT_FILTERS, DEFAULT_SORTING, Offer } from "src/app/shared/models";
+import {
+  DEFAULT_FILTERS,
+  DEFAULT_SORTING,
+  Offer,
+  OffersFilters,
+  Sorting,
+} from "src/app/shared/models";
 import {
   computeCurrentSearchOffers,
   computeMainPageOffers,
+  computeNumberOfPages,
+  extractFiltersFromParams,
+  extractPageNumberFromParams,
+  extractSortingFromParams,
 } from "./state-helper-functions";
 
-export const featureName = "offers";
+export const stateKey = "offers";
 
 export interface OffersState {
   isLoading: boolean;
+  isSearching: boolean;
   allOffers: Offer[];
   mainPageOffers: Offer[];
   currentSearchOffers: Offer[];
-  currentPage: number;
+  pageNumber: number;
+  sorting: Sorting;
+  filters: OffersFilters;
 }
 
 const initialState: OffersState = {
   isLoading: true,
+  isSearching: true,
   allOffers: [],
   mainPageOffers: [],
   currentSearchOffers: [],
-  currentPage: 0,
+  pageNumber: 0,
+  sorting: DEFAULT_SORTING,
+  filters: DEFAULT_FILTERS,
 };
 
 const offersReducer = createReducer(
@@ -50,14 +70,28 @@ const offersReducer = createReducer(
     ...state,
     isLoading: false,
   })),
-  on(searchOffers, (state, { page, sorting, filters }) => ({
-    ...state,
-    currentSearchOffers: computeCurrentSearchOffers(
+  on(updateSearchParams, (state, { queryParams }) => {
+    const pageNumber = extractPageNumberFromParams(queryParams);
+    const sorting = extractSortingFromParams(queryParams);
+    const filters = extractFiltersFromParams(queryParams);
+    const currentSearchOffers = computeCurrentSearchOffers(
       sorting,
       filters,
       state.allOffers
-    ),
-    currentPage: page,
+    );
+    return {
+      ...state,
+      isSearching: false,
+      currentSearchOffers,
+      pageNumber:
+        pageNumber > computeNumberOfPages(currentSearchOffers) ? 0 : pageNumber,
+      sorting,
+      filters,
+    };
+  }),
+  on(navigateToOffersPage, (state) => ({
+    ...state,
+    isSearching: true,
   }))
 );
 

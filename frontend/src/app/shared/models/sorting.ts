@@ -13,11 +13,6 @@ export const DEFAULT_SORTING = {
 export const AVAILABLE_SORTINGS = [
   DEFAULT_SORTING,
   {
-    displayName: "dacie dodania",
-    propertyName: "creationDate",
-    isAscending: false,
-  },
-  {
     displayName: "cenie rosnąco",
     propertyName: "price",
     isAscending: true,

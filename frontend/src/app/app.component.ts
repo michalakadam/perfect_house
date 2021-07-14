@@ -11,7 +11,8 @@ import { PrimeNGConfig } from "primeng/api";
 import { ABOUT_US_LINKS, ALL_LINKS } from "./header/menu-links";
 import { Title } from "@angular/platform-browser";
 import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
-import { Subscription } from "rxjs";
+import { interval, Subscription, of } from "rxjs";
+import { delayWhen } from "rxjs/operators";
 import { OffersStateManager } from "./offers/state-management/state-manager.service";
 
 @Component({
@@ -41,6 +42,10 @@ export class AppComponent implements OnInit, OnDestroy {
   isAboutUsOptionsVisible = false;
   allLinks = ALL_LINKS;
   aboutUsLinks = ABOUT_US_LINKS;
+  // Give time for router outlet to render its contents.
+  isLoadingWithSlightDelay$ = this.offersStateManager.isLoading$.pipe(
+    delayWhen((isLoading) => (isLoading ? of(isLoading) : interval(250)))
+  );
 
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,

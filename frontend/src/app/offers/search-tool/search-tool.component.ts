@@ -307,7 +307,6 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
       isMpzpAvailable: this.isMpzpAvailable,
     };
 
-    this.filters = filters;
     this.searchOffers.emit(filters);
   }
 

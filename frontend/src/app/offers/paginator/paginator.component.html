@@ -2,5 +2,5 @@
   #paginator
   [rows]="offersPerPage"
   [totalRecords]="totalOffersQuantity"
-  (onPageChange)="pageChanged.emit($event.page)"
+  (onPageChange)="checkPageChanged($event.page)"
 ></p-paginator>

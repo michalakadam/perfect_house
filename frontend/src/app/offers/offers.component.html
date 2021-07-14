@@ -1,12 +1,12 @@
 <div class="component-container" *ngIf="offersStateManager.offersForCurrentPage$ | async as offers">
   <div class="tools-container">
     <perfect-search-tool
-      [filters]="currentFilters"
+      [filters]="offersStateManager.filters$ | async"
 			[rawVoivodeshipsWithCounties]="offersStateManager.voivodeshipsWithCounties$ | async"
 			[rawEstateTypesWithSubtypes]="offersStateManager.estateTypesWithSubtypes$ | async"
 			[lowestPriceForCurrentSearch]="offersStateManager.lowestPriceForCurrentSearch$ | async"
 			[highestPriceForCurrentSearch]="offersStateManager.highestPriceForCurrentSearch$ | async"
-      (searchOffers)="loadNewResults(0, currentSorting, $event)"
+      (searchOffers)="offersStateManager.updateFilters($event)"
       (openOffer)="loadOffer($event)"
     >
     </perfect-search-tool>
@@ -14,16 +14,16 @@
     <div class="other-tools-container" *ngIf="offersStateManager.currentSearchOffersQuantity$ | async as offersQuantity">
       <perfect-sorting-tool
         [offersQuantity]="offersQuantity"
-        [selectedSorting]="currentSorting"
-        (sortingChanged)="loadNewResults(currentPage, $event, currentFilters)"
+        [selectedSorting]="offersStateManager.sorting$ | async"
+        (sortingChanged)="offersStateManager.updateSorting($event)"
       >
       </perfect-sorting-tool>
 
       <div class="top-paginator" *ngIf="(offersStateManager.numberOfPages$ | async) > 0">
         <perfect-paginator
 					[totalOffersQuantity]="offersQuantity"
-          [selectedPage]="currentPage"
-          (pageChanged)="loadNewResults($event, currentSorting, currentFilters)"
+          [selectedPage]="offersStateManager.pageNumber$ | async"
+          (pageChanged)="offersStateManager.updatePageNumber($event)"
         >
         </perfect-paginator>
       </div>
@@ -60,19 +60,18 @@
     </div>
   </div>
 
-  <perfect-offer-card
-    *ngFor="let offer of offers; trackBy: trackById"
-    [offer]="offer"
-    (click)="loadOffer(offer.symbol)"
-  ></perfect-offer-card>
+	<perfect-offer-card
+		*ngFor="let offer of offers; trackBy: trackById"
+		[offer]="offer"
+		(click)="loadOffer(offer.symbol)"></perfect-offer-card>
 
   <div class="bottom-paginator">
     <perfect-paginator
        *ngIf="(offersStateManager.numberOfPages$ | async) > 0"
       class="bottom-paginator"
       [totalOffersQuantity]="offersStateManager.currentSearchOffersQuantity$ | async"
-      [selectedPage]="currentPage"
-      (pageChanged)="loadNewResults($event, currentSorting, currentFilters)"
+      [selectedPage]="offersStateManager.pageNumber$ | async"
+      (pageChanged)="offersStateManager.updatePageNumber($event)"
     >
     </perfect-paginator>
   </div>

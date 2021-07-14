@@ -9,6 +9,9 @@ export const filterOffers = (
   offers: Offer[],
   filters: OffersFilters
 ): Offer[] => {
+  if (!filters) {
+    return offers;
+  }
   if (filters.estateType) {
     offers = filterByEstateType(offers, filters.estateType);
     if (filters.estateSubtype) {
@@ -187,6 +190,9 @@ export const filterOffersByPrice = (
   offers: Offer[],
   filters: OffersFilters
 ): Offer[] => {
+  if (!filters) {
+    return offers;
+  }
   if (filters.priceFrom > -1) {
     offers = offers.filter((offer) => offer.price >= filters.priceFrom);
   }
