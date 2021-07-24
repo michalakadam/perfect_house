@@ -55,7 +55,6 @@ import { OffersStateManagementModule } from "./offers/state-management/state-man
 import { LoadingSpinnerComponent } from "./loading-spinner/loading-spinner.component";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
-import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { RouterStateManagementModule } from "./router/state-management/state-management.module";
 
 @NgModule({
@@ -119,9 +118,6 @@ import { RouterStateManagementModule } from "./router/state-management/state-man
     SliderModule,
     TabViewModule,
     StoreModule.forRoot({}),
-    StoreDevtoolsModule.instrument({
-      autoPause: true, // Pauses recording actions and state changes when the extension window is not open
-    }),
     EffectsModule.forRoot([]),
     OffersStateManagementModule,
     RouterStateManagementModule,
