@@ -1,6 +1,6 @@
 <perfect-loading-spinner [class.removed]="(isLoadingWithSlightDelay$ | async) === false"></perfect-loading-spinner>
 
-<div [class.hidden]="isLoadingWithSlightDelay$ | async">
+<div class="content-container" [class.hidden]="isLoadingWithSlightDelay$ | async">
 	<perfect-header
 		(sideMenuToggled)="toggleSideMenuVisibility()"
 		(aboutUsOptionsToggled)="toggleAboutUsOptionsVisibility()"></perfect-header>
