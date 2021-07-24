@@ -4,9 +4,6 @@ import {
   listOffersError,
   listOffers,
   updateSearchParams,
-  updatePageNumber,
-  updateSorting,
-  updateFilters,
   navigateToOffersPage,
 } from "./actions";
 import {
