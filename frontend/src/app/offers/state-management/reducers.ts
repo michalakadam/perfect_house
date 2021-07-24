@@ -4,9 +4,6 @@ import {
   listOffersError,
   listOffers,
   updateSearchParams,
-  updatePageNumber,
-  updateSorting,
-  updateFilters,
   navigateToOffersPage,
 } from "./actions";
 import {
@@ -61,8 +58,8 @@ const offersReducer = createReducer(
     allOffers: offers,
     mainPageOffers: computeMainPageOffers(offers),
     currentSearchOffers: computeCurrentSearchOffers(
-      DEFAULT_SORTING,
-      DEFAULT_FILTERS,
+      state.sorting,
+      state.filters,
       offers
     ),
   })),

@@ -45,8 +45,7 @@ export const filterOffers = (
     );
   }
   if (filters.isByTheSea) {
-    // TODO: find out which flag is used in Galactica for this kind of offers.
-    return [];
+    offers = offers.filter((offer) => offer.isByTheSea);
   }
   if (filters.isNoCommission) {
     offers = offers.filter((offer) => offer.isNoCommission);
