@@ -52,7 +52,7 @@ import { StringDecoder } from "./shared/pipes/string-decoder";
 import { NewsFeedComponent } from "./news-feed/news-feed.component";
 import { StarRatingComponent } from "./offer/star-rating/star-rating.component";
 import { OffersStateManagementModule } from "./offers/state-management/state-management.module";
-import { LoadingSpinnerComponent } from "./loading-spinner/loading-spinner.component";
+import { LoadingSpinnerComponent } from "./shared/loading-spinner/loading-spinner.component";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 import { RouterStateManagementModule } from "./router/state-management/state-management.module";
