@@ -56,6 +56,7 @@ import { LoadingSpinnerComponent } from "./shared/loading-spinner/loading-spinne
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 import { RouterStateManagementModule } from "./router/state-management/state-management.module";
+import { AgentsStateManagementModule } from "./agents/state-management/state-management.module";
 
 @NgModule({
   declarations: [
@@ -121,6 +122,7 @@ import { RouterStateManagementModule } from "./router/state-management/state-man
     EffectsModule.forRoot([]),
     OffersStateManagementModule,
     RouterStateManagementModule,
+    AgentsStateManagementModule,
   ],
   bootstrap: [AppComponent],
 })

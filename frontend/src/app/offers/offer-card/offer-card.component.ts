@@ -4,17 +4,17 @@ import {
   Input,
   ChangeDetectorRef,
   OnDestroy,
-} from '@angular/core';
-import { AgentsDao } from 'src/app/shared/services/agents-dao.service';
-import { Offer } from 'src/app/shared/models';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { WindowSizeDetector } from 'src/app/shared/services/window-size-detector.service';
-import { Subscription } from 'rxjs';
+} from "@angular/core";
+import { Offer } from "src/app/shared/models";
+import { coerceBooleanProperty } from "@angular/cdk/coercion";
+import { WindowSizeDetector } from "src/app/shared/services/window-size-detector.service";
+import { Subscription } from "rxjs";
+import { AgentsStateManager } from "src/app/agents/state-management/state-manager.service";
 
 @Component({
-  selector: 'perfect-offer-card',
-  templateUrl: './offer-card.component.html',
-  styleUrls: ['./offer-card.component.scss'],
+  selector: "perfect-offer-card",
+  templateUrl: "./offer-card.component.html",
+  styleUrls: ["./offer-card.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OfferCardComponent implements OnDestroy {
@@ -28,7 +28,7 @@ export class OfferCardComponent implements OnDestroy {
   }
 
   constructor(
-    readonly agentsDao: AgentsDao,
+    readonly agentsStateManager: AgentsStateManager,
     readonly windowSizeDetector: WindowSizeDetector,
     private readonly changeDetector: ChangeDetectorRef
   ) {

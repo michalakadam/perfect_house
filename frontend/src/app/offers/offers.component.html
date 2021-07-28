@@ -32,7 +32,7 @@
 
   <div
     class="no-offers-prompt"
-    *ngIf="offers.length === 0 && agentsDao.getAgentById(1155) as agent"
+    *ngIf="offers.length === 0 && agentsStateManager.agentById$(1155) | async as agent"
   >
     <perfect-agent-brief
       *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall"

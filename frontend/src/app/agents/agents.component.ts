@@ -1,24 +1,27 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { Router } from '@angular/router';
-import { AgentsDao } from 'src/app/shared/services/agents-dao.service';
-import { Agent } from 'src/app/shared/models';
+import { Component, ChangeDetectionStrategy } from "@angular/core";
+import { Router } from "@angular/router";
+import { Agent } from "src/app/shared/models";
+import { AgentsStateManager } from "./state-management/state-manager.service";
 
 /** Wyświetla matrycę agentów. */
 @Component({
-  selector: 'perfect-agents',
-  templateUrl: './agents.component.html',
-  styleUrls: ['./agents.component.scss'],
+  selector: "perfect-agents",
+  templateUrl: "./agents.component.html",
+  styleUrls: ["./agents.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AgentsComponent {
-  constructor(readonly agentsDao: AgentsDao, private readonly router: Router) {}
+  constructor(
+    readonly agentsStateManager: AgentsStateManager,
+    private readonly router: Router
+  ) {}
 
   navigateToAgentPage(agent: Agent) {
-    this.router.navigate(['/ludzie/' + this.computeAgentLink(agent.fullName)]);
+    this.router.navigate(["/ludzie/", this.computeAgentLink(agent.fullName)]);
   }
 
   computeAgentLink(agentFullName: string): string {
-    return agentFullName.toLowerCase().split(' ').join('-');
+    return agentFullName.toLowerCase().split(" ").join("-");
   }
 
   trackById(index: number, agent: Agent) {

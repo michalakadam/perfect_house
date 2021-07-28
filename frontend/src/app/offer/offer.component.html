@@ -23,7 +23,7 @@
         *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall"
       >
         <perfect-agent-brief
-          *ngIf="agentsDao.getAgentById(offer.agentId) as agent"
+          *ngIf="agentsStateManager.agentById$(offer.agentId) | async as agent"
           [agent]="agent"
           bigger
           contactInfoVisible
@@ -133,7 +133,7 @@
     *ngIf="windowSizeDetector.isWindowSmallerThanDesktopSmall"
   >
     <perfect-agent-brief
-      *ngIf="agentsDao.getAgentById(offer.agentId) as agent"
+      *ngIf="agentsStateManager.agentById$(offer.agentId) | async as agent"
       [agent]="agent"
       bigger
       contactInfoVisible

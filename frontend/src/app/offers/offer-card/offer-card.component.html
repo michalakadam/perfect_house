@@ -28,7 +28,7 @@
       <a
         class="phone"
         href="tel:{{ phoneNumber }}"
-        *ngIf="agentsDao.getAgentById(offer.agentId).mobile as phoneNumber"
+        *ngIf="(agentsStateManager.agentById$(offer.agentId) | async).mobile as phoneNumber"
       >
         <p-button [label]="phoneNumber" icon="fas fa-phone-alt"></p-button>
       </a>

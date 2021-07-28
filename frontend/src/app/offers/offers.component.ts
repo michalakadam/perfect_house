@@ -8,9 +8,9 @@ import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { SnackbarService } from "../shared/services/snackbar.service";
 import { Offer } from "src/app/shared/models";
-import { AgentsDao } from "../shared/services/agents-dao.service";
 import { WindowSizeDetector } from "../shared/services/window-size-detector.service";
 import { OffersStateManager } from "./state-management/state-manager.service";
+import { AgentsStateManager } from "../agents/state-management/state-manager.service";
 
 /** Strona wyświetla oferty nieruchomości oferując możliwość ich zaawansowanego wyszukiwania. */
 @Component({
@@ -26,7 +26,7 @@ export class OffersComponent implements OnDestroy {
   snackbarContent = "";
 
   constructor(
-    readonly agentsDao: AgentsDao,
+    readonly agentsStateManager: AgentsStateManager,
     readonly windowSizeDetector: WindowSizeDetector,
     readonly offersStateManager: OffersStateManager,
     private readonly router: Router,

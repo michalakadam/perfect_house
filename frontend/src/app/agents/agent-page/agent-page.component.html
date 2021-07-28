@@ -1,4 +1,4 @@
-<div class="component-container">
+<div class="component-container" *ngIf="agentsStateManager.currentAgent$ | async as agent; else spinner">
   <perfect-agent-brief
     [agent]="agent"
     bigger
@@ -12,3 +12,7 @@
     {{ agent.description }}
   </div>
 </div>
+
+<ng-template #spinner>
+	<perfect-loading-spinner></perfect-loading-spinner>
+</ng-template>

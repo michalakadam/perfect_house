@@ -1,5 +1,4 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { OFFERS_PER_PAGE } from "src/app/shared/constants";
 import {
   AVAILABLE_SORTINGS,
   Offer,

@@ -3,29 +3,28 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   OnDestroy,
-} from '@angular/core';
-import { Subscription } from 'rxjs';
-import { AgentsDao } from '../shared/services/agents-dao.service';
-import { WindowSizeDetector } from '../shared/services/window-size-detector.service';
-import { Agent } from 'src/app/shared/models';
+} from "@angular/core";
+import { Subscription } from "rxjs";
+import { WindowSizeDetector } from "../shared/services/window-size-detector.service";
+import { AgentsStateManager } from "../agents/state-management/state-manager.service";
 4;
 
-const AGENT_RESPONSIBLE_ID = 20202;
+const AGENT_RESPONSIBLE_FOR_MANAGEMENT_ID = 20202;
 
 /** Kontener strony 'Zarządzanie nieruchomościami'. */
 @Component({
-  selector: 'perfect-management',
-  templateUrl: './management.component.html',
-  styleUrls: ['./management.component.scss'],
+  selector: "perfect-management",
+  templateUrl: "./management.component.html",
+  styleUrls: ["./management.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ManagementComponent implements OnDestroy {
   private subscription: Subscription;
-  agentResponsibleForManagement: Agent;
+  agentResponsibleForManagementId = AGENT_RESPONSIBLE_FOR_MANAGEMENT_ID;
 
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,
-    readonly agentsDao: AgentsDao,
+    readonly agentsStateManager: AgentsStateManager,
     private readonly changeDetector: ChangeDetectorRef
   ) {
     this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(
@@ -33,9 +32,6 @@ export class ManagementComponent implements OnDestroy {
         this.changeDetector.detectChanges();
       }
     );
-
-    this.agentResponsibleForManagement =
-      this.agentsDao.getAgentById(AGENT_RESPONSIBLE_ID);
   }
 
   ngOnDestroy() {

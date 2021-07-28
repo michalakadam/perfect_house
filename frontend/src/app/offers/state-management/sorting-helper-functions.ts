@@ -1,4 +1,3 @@
-import { Injectable } from "@angular/core";
 import { Offer, Sorting } from "src/app/shared/models";
 
 export const sortOffers = (offers: Offer[], sorting: Sorting): Offer[] => {
