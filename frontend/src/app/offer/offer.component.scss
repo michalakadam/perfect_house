@@ -184,7 +184,10 @@
         .price-per-meter {
           color: $font-light-grey;
           margin-top: 5px;
-          /*  */
+
+          &.hidden {
+            visibility: hidden;
+          }
         }
       }
     }

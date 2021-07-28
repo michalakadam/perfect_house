@@ -4,6 +4,10 @@
 .component-container {
   @include responsive-page;
 
+  .hidden {
+    visibility: hidden;
+  }
+
   .agent-info {
     @include responsive-page;
     display: flex;

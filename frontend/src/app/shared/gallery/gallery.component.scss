@@ -8,6 +8,10 @@
   margin: 0 auto;
   width: 100%;
 
+  .hidden {
+    visibility: hidden;
+  }
+
   .photo-with-buttons-container {
     height: 610px;
     width: 100%;
