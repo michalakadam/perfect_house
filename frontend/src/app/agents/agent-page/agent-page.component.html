@@ -1,16 +1,37 @@
-<div class="component-container" *ngIf="agentsStateManager.currentAgent$ | async as agent; else spinner">
+<div class="agent-container" *ngIf="agentsStateManager.currentAgent$ | async as agent; else spinner">
+	<button
+		pButton
+		pRipple
+		type="button"
+		icon="pi pi-chevron-left"
+		class="p-button-rounded"
+		[class.hidden]="(agentsStateManager.isPreviousAgentAvailable$ | async) === false"
+		*ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall"
+		(click)="agentsStateManager.loadPreviousAgent()">
+	</button>
+
   <perfect-agent-brief
     [agent]="agent"
     bigger
     contactInfoVisible
     licenseNumberVisible
-    vertical
-  >
+    vertical>
   </perfect-agent-brief>
 
   <div *ngIf="agent.description" class="description">
     {{ agent.description }}
   </div>
+
+	<button
+		pButton
+		pRipple
+		type="button"
+		icon="pi pi-chevron-right"
+		class="p-button-rounded"
+		[class.hidden]="(agentsStateManager.isNextAgentAvailable$ | async) === false"
+		*ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall"
+		(click)="agentsStateManager.loadNextAgent()">
+	</button>
 </div>
 
 <ng-template #spinner>

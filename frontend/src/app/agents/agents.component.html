@@ -7,7 +7,7 @@
       *ngFor="let agent of agentsStateManager.agents$ | async; trackBy: trackById"
       vertical
       [agent]="agent"
-      (click)="navigateToAgentPage(agent)"
+      (click)="agentsStateManager.openAgentPage(agent.fullName)"
     >
     </perfect-agent-brief>
   </div>

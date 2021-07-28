@@ -11,18 +11,7 @@ import { AgentsStateManager } from "./state-management/state-manager.service";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AgentsComponent {
-  constructor(
-    readonly agentsStateManager: AgentsStateManager,
-    private readonly router: Router
-  ) {}
-
-  navigateToAgentPage(agent: Agent) {
-    this.router.navigate(["/ludzie/", this.computeAgentLink(agent.fullName)]);
-  }
-
-  computeAgentLink(agentFullName: string): string {
-    return agentFullName.toLowerCase().split(" ").join("-");
-  }
+  constructor(readonly agentsStateManager: AgentsStateManager) {}
 
   trackById(index: number, agent: Agent) {
     return agent.id;

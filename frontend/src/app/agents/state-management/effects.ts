@@ -1,7 +1,13 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { map, mergeMap, first, withLatestFrom, debounce } from "rxjs/operators";
-import { listAgentsSuccess, LIST_AGENTS, loadCurrentAgent } from "./actions";
+import {
+  listAgentsSuccess,
+  LIST_AGENTS,
+  loadCurrentAgent,
+  LOAD_NEXT_AGENT,
+  LOAD_PREVIOUS_AGENT,
+} from "./actions";
 import { AgentsDao } from "./agents-dao.service";
 import * as agentsSelectors from "./selectors";
 import * as routerSelectors from "src/app/router/state-management/selectors";
@@ -11,6 +17,7 @@ import { Title } from "@angular/platform-browser";
 import { Params } from "@angular/router";
 import {
   AGENT_PAGE_NAVIGATED,
+  openAgentPage,
   pageNotFound,
 } from "src/app/router/state-management/actions";
 import { Action } from "@ngrx/store";
@@ -70,6 +77,40 @@ export class AgentsEffects {
         }
         return pageNotFound();
       })
+    )
+  );
+
+  loadPreviousAgent = createEffect(() =>
+    this.actions$.pipe(
+      ofType(LOAD_PREVIOUS_AGENT),
+      withLatestFrom(
+        this.store.select(agentsSelectors.getAgents),
+        this.store.select(agentsSelectors.getCurrentAgentIndex),
+        (action: Action, agents: Agent[], currentAgentIndex: number) => ({
+          agents,
+          currentAgentIndex,
+        })
+      ),
+      map(({ agents, currentAgentIndex }) =>
+        openAgentPage({ agentFullName: agents[--currentAgentIndex].fullName })
+      )
+    )
+  );
+
+  loadNextAgent = createEffect(() =>
+    this.actions$.pipe(
+      ofType(LOAD_NEXT_AGENT),
+      withLatestFrom(
+        this.store.select(agentsSelectors.getAgents),
+        this.store.select(agentsSelectors.getCurrentAgentIndex),
+        (action: Action, agents: Agent[], currentAgentIndex: number) => ({
+          agents,
+          currentAgentIndex,
+        })
+      ),
+      map(({ agents, currentAgentIndex }) =>
+        openAgentPage({ agentFullName: agents[++currentAgentIndex].fullName })
+      )
     )
   );
 }

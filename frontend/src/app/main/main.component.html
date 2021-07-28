@@ -7,14 +7,12 @@
     [transitionInterval]="5000"
     [showThumbnails]="false"
     [showIndicators]="true"
-    [changeItemOnIndicatorHover]="true"
-  >
+    [changeItemOnIndicatorHover]="true">
     <ng-template pTemplate="item" let-item>
       <img
         [src]="item.previewImageSrc"
         style="width: 100%; display: block; cursor: pointer"
-        (click)="openUrl(item)"
-      />
+        (click)="openUrl(item)"/>
     </ng-template>
     <ng-template pTemplate="thumbnail" let-item>
       <div class="p-grid p-nogutter p-justify-center">
@@ -25,8 +23,7 @@
 
   <div
     class="search-tool-background"
-    [ngClass]="{ 'space-for-advanced': advancedVisible }"
-  >
+    [ngClass]="{ 'space-for-advanced': advancedVisible }">
     <div class="search-tool-container">
       <perfect-search-tool
         mainPage
@@ -36,8 +33,7 @@
 				[highestPriceForCurrentSearch]="offersStateManager.highestPriceForCurrentSearch$ | async"
         (searchOffers)="loadOffers($event)"
         (openOffer)="loadOffer($event)"
-        (advancedToggled)="toggleAdvancedVisible()"
-      >
+        (advancedToggled)="toggleAdvancedVisible()">
       </perfect-search-tool>
     </div>
   </div>
@@ -45,22 +41,19 @@
   <div
 		*ngIf="offersStateManager.offersForMainPage$ | async as carouselOffers"
     class="carousel-container"
-    [ngClass]="{ 'move-to-advanced': advancedVisible }"
-  >
+    [ngClass]="{ 'move-to-advanced': advancedVisible }">
     <p-carousel
       [value]="carouselOffers"
       styleClass="custom-carousel"
       [numVisible]="computeOffersVisible()"
       [numScroll]="1"
       [circular]="true"
-      [autoplayInterval]="5000"
-    >
+      [autoplayInterval]="5000">
       <ng-template let-offer pTemplate="item">
         <perfect-offer-card
           [offer]="offer"
           inCarousel
-          (click)="loadOffer(offer.symbol)"
-        >
+          (click)="loadOffer(offer.symbol)">
         </perfect-offer-card>
       </ng-template>
     </p-carousel>

@@ -2,7 +2,11 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { map, filter, tap } from "rxjs/operators";
 import { RouterNavigatedAction, ROUTER_NAVIGATED } from "@ngrx/router-store";
-import { offersPageNavigated, PAGE_NOT_FOUND } from "./actions";
+import {
+  offersPageNavigated,
+  OPEN_AGENT_PAGE,
+  PAGE_NOT_FOUND,
+} from "./actions";
 import { Router } from "@angular/router";
 import { NAVIGATE_TO_OFFERS_PAGE } from "src/app/offers/state-management/actions";
 import { agentPageNavigated } from "./actions";
@@ -61,4 +65,22 @@ export class RouterEffects {
       })
     )
   );
+
+  redirectToAgentPage = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(OPEN_AGENT_PAGE),
+        tap(({ agentFullName }) => {
+          this.router.navigate([
+            "/ludzie/",
+            convertAgentNameToUrlSuffix(agentFullName),
+          ]);
+        })
+      ),
+    { dispatch: false }
+  );
 }
+
+const convertAgentNameToUrlSuffix = (fullName: string) => {
+  return fullName.toLowerCase().split(" ").join("-");
+};
