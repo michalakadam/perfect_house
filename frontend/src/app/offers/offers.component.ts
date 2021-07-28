@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   OnDestroy,
+  Input,
 } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
@@ -11,6 +12,7 @@ import { Offer } from "src/app/shared/models";
 import { WindowSizeDetector } from "../shared/services/window-size-detector.service";
 import { OffersStateManager } from "./state-management/state-manager.service";
 import { AgentsStateManager } from "../agents/state-management/state-manager.service";
+import { coerceBooleanProperty } from "@angular/cdk/coercion";
 
 /** Strona wyświetla oferty nieruchomości oferując możliwość ich zaawansowanego wyszukiwania. */
 @Component({
@@ -22,6 +24,11 @@ import { AgentsStateManager } from "../agents/state-management/state-manager.ser
 export class OffersComponent implements OnDestroy {
   private subscription = new Subscription();
 
+  isSearchAvailable = true;
+  @Input()
+  set disableSearch(value: boolean) {
+    this.isSearchAvailable = !coerceBooleanProperty(value);
+  }
   isSnackbarVisible = false;
   snackbarContent = "";
 

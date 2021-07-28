@@ -5,6 +5,7 @@ import {
   OnDestroy,
 } from "@angular/core";
 import { Subscription } from "rxjs";
+import { OffersStateManager } from "src/app/offers/state-management/state-manager.service";
 import { WindowSizeDetector } from "src/app/shared/services/window-size-detector.service";
 import { AgentsStateManager } from "../state-management/state-manager.service";
 
@@ -19,6 +20,7 @@ export class AgentPageComponent implements OnDestroy {
 
   constructor(
     readonly agentsStateManager: AgentsStateManager,
+    readonly offersStateManager: OffersStateManager,
     readonly windowSizeDetector: WindowSizeDetector,
     private readonly changeDetector: ChangeDetectorRef
   ) {

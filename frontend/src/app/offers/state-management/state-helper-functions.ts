@@ -28,6 +28,10 @@ export const computeMainPageOffers = (offers: Offer[]) => {
   return shuffleOffers(offers.filter((offer) => offer.isExclusive));
 };
 
+export const computeAgentOffers = (offers: Offer[], agentId: number) => {
+  return offers.filter((offer) => offer.agentId === agentId);
+};
+
 export const computeCurrentSearchOffers = (
   sorting: Sorting,
   filters: OffersFilters,

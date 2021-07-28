@@ -1,10 +1,10 @@
 @import "~src/variables.scss";
 @import "~src/mixins.scss";
 
-:host {
+.component-container {
   @include responsive-page;
 
-  .agent-container {
+  .agent-info {
     @include responsive-page;
     display: flex;
     justify-content: space-between;
@@ -54,7 +54,7 @@
       border: initial;
       border-radius: 50%;
       color: $dark-green;
-      margin-top: 12%;
+      margin-top: 13%;
 
       @media screen and (max-width: $desktop-large) {
         margin-top: 14%;
