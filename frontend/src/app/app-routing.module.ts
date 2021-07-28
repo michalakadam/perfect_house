@@ -56,19 +56,15 @@ const routes: Routes = [
   },
   {
     path: "ludzie",
-    children: [
-      {
-        path: "",
-        component: AgentsComponent,
-        data: {
-          title: "Ludzie",
-        },
-      },
-      {
-        path: ":agent",
-        component: AgentPageComponent,
-      },
-    ],
+    component: AgentsComponent,
+    data: {
+      title: "Ludzie",
+    },
+  },
+  // Router state does not recognize params of a child route.
+  {
+    path: "ludzie/:agent",
+    component: AgentPageComponent,
   },
   {
     path: "aktualności",
@@ -110,7 +106,6 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
-      // relativeLinkResolution: "legacy",
       scrollPositionRestoration: "enabled",
     }),
   ],

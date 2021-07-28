@@ -15,7 +15,6 @@ import {
   UPDATE_SORTING,
   UPDATE_FILTERS,
   searchParamsIdentical,
-  updateFilters,
 } from "./actions";
 import { OFFERS_PAGE_NAVIGATED } from "src/app/router/state-management/actions";
 import { Action, Store } from "@ngrx/store";

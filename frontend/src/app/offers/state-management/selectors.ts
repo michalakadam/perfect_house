@@ -1,5 +1,4 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { OFFERS_PER_PAGE } from "src/app/shared/constants";
 import {
   AVAILABLE_SORTINGS,
   Offer,
@@ -8,6 +7,7 @@ import {
 import { OffersState } from "./reducers";
 import { sortOffers } from "./sorting-helper-functions";
 import {
+  computeAgentOffers,
   computeDistinctLocations,
   computeEstateTypesWithSubtypes,
   computeNumberOfPages,
@@ -121,6 +121,11 @@ export const getOfferBySymbol = (symbol: string) =>
 export const getOfferByNumber = (number: number) =>
   createSelector(getAllOffers, (allOffers: Offer[]) => {
     return allOffers.find((offer) => offer.number === number);
+  });
+
+export const getOffersCountByAgentId = (agentId: number) =>
+  createSelector(getAllOffers, (offers: Offer[]) => {
+    return computeAgentOffers(offers, agentId).length;
   });
 
 export const getVoivodeshipsWithCounties = createSelector(

@@ -14,6 +14,7 @@ import {
   Sorting,
 } from "src/app/shared/models";
 import {
+  computeAgentOffers,
   computeCurrentSearchOffers,
   computeMainPageOffers,
   computeNumberOfPages,
@@ -21,6 +22,7 @@ import {
   extractPageNumberFromParams,
   extractSortingFromParams,
 } from "./state-helper-functions";
+import { loadCurrentAgent } from "src/app/agents/state-management/actions";
 
 export const stateKey = "offers";
 
@@ -89,6 +91,17 @@ const offersReducer = createReducer(
   on(navigateToOffersPage, (state) => ({
     ...state,
     isSearching: true,
+  })),
+  on(loadCurrentAgent, (state, { agent }) => ({
+    ...state,
+    isSearching: false,
+    currentSearchOffers: computeAgentOffers(
+      state.allOffers,
+      parseInt(agent.id)
+    ),
+    pageNumber: 0,
+    sorting: DEFAULT_SORTING,
+    filters: DEFAULT_FILTERS,
   }))
 );
 

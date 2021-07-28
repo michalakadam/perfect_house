@@ -3,14 +3,16 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   OnDestroy,
+  Input,
 } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { SnackbarService } from "../shared/services/snackbar.service";
 import { Offer } from "src/app/shared/models";
-import { AgentsDao } from "../shared/services/agents-dao.service";
 import { WindowSizeDetector } from "../shared/services/window-size-detector.service";
 import { OffersStateManager } from "./state-management/state-manager.service";
+import { AgentsStateManager } from "../agents/state-management/state-manager.service";
+import { coerceBooleanProperty } from "@angular/cdk/coercion";
 
 /** Strona wyświetla oferty nieruchomości oferując możliwość ich zaawansowanego wyszukiwania. */
 @Component({
@@ -22,11 +24,16 @@ import { OffersStateManager } from "./state-management/state-manager.service";
 export class OffersComponent implements OnDestroy {
   private subscription = new Subscription();
 
+  isSearchAvailable = true;
+  @Input()
+  set disableSearch(value: boolean) {
+    this.isSearchAvailable = !coerceBooleanProperty(value);
+  }
   isSnackbarVisible = false;
   snackbarContent = "";
 
   constructor(
-    readonly agentsDao: AgentsDao,
+    readonly agentsStateManager: AgentsStateManager,
     readonly windowSizeDetector: WindowSizeDetector,
     readonly offersStateManager: OffersStateManager,
     private readonly router: Router,

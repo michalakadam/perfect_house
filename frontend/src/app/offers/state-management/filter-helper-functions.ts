@@ -1,4 +1,3 @@
-import { Injectable } from "@angular/core";
 import {
   AVAILABLE_ESTATE_TYPES,
   Offer,

@@ -19,7 +19,7 @@
     <div class="contact">
       <h2>Zapytaj o ofertę:</h2>
       <perfect-agent-brief
-        [agent]="agentResponsibleForManagement"
+        [agent]="agentsStateManager.agentById$(agentResponsibleForManagementId) | async"
         contactInfoVisible
         licenseNumberVisible
       ></perfect-agent-brief>

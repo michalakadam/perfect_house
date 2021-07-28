@@ -4,10 +4,10 @@
   </header>
   <div class="list-of-agents">
     <perfect-agent-brief
-      *ngFor="let agent of agentsDao.listAgents(); trackBy: trackById"
+      *ngFor="let agent of agentsStateManager.agents$ | async; trackBy: trackById"
       vertical
       [agent]="agent"
-      (click)="navigateToAgentPage(agent)"
+      (click)="agentsStateManager.openAgentPage(agent.fullName)"
     >
     </perfect-agent-brief>
   </div>

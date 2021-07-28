@@ -7,29 +7,26 @@
       <perfect-map
         *ngIf="isMapActive"
         [lattitude]="offer.lattitude"
-        [longitude]="offer.longitude"
-      >
+        [longitude]="offer.longitude">
       </perfect-map>
 
       <embed
         *ngIf="isVirtualVisitActive"
         type="text/html"
-        [src]="offer.virtualVisitUrl | safe"
-      />
+        [src]="offer.virtualVisitUrl | safe"/>
     </div>
     <div class="agent-buttons-container">
       <div
         class="card agent-brief"
-        *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall"
-      >
+        *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall">
         <perfect-agent-brief
-          *ngIf="agentsDao.getAgentById(offer.agentId) as agent"
+          *ngIf="agentsStateManager.agentById$(offer.agentId) | async as agent"
           [agent]="agent"
           bigger
           contactInfoVisible
           vertical
-          (click)="navigateToAgentPage(agent)"
-        >
+					[offersCount]="offersStateManager.offersCountByAgentId$(agent.id) | async"
+          (click)="navigateToAgentPage(agent)">
         </perfect-agent-brief>
       </div>
       <button
@@ -40,8 +37,7 @@
         label="Zdjęcia"
         class="p-button-rounded p-button-raised"
         [class.selected]="isGalleryActive"
-        (click)="showGallery()"
-      ></button>
+        (click)="showGallery()"></button>
       <button
         *ngIf="isMapButtonVisible"
         pButton
@@ -50,8 +46,7 @@
         label="Mapa"
         class="p-button-rounded p-button-raised"
         [class.selected]="isMapActive"
-        (click)="showMap()"
-      ></button>
+        (click)="showMap()"></button>
       <button
         *ngIf="isVirtualVisitButtonVisible"
         pButton
@@ -60,8 +55,7 @@
         label="Wirtualna wizyta"
         class="p-button-rounded p-button-raised"
         [class.selected]="isVirtualVisitActive"
-        (click)="showVirtualVisit()"
-      ></button>
+        (click)="showVirtualVisit()"></button>
     </div>
   </div>
   <div class="card bottom-container">
@@ -83,16 +77,14 @@
         </div>
         <div
           class="price-per-meter"
-          [class.hidden]="!offer.pricePerSquareMeter.value"
-        >
+          [class.hidden]="!offer.pricePerSquareMeter.value">
           {{ offer.pricePerSquareMeter.value | prettifyNumber: 'zł/m²' }}
         </div>
       </div>
     </div>
     <div
       class="description-details"
-      *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall"
-    >
+      *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall">
       <div class="description">
         {{ offer.description | decodeString }}
       </div>
@@ -102,8 +94,7 @@
     </div>
     <div
       class="description-details-responsive"
-      *ngIf="windowSizeDetector.isWindowSmallerThanDesktopSmall"
-    >
+      *ngIf="windowSizeDetector.isWindowSmallerThanDesktopSmall">
       <p-tabView>
         <p-tabPanel header="Opis">
           <div class="description">
@@ -130,16 +121,15 @@
 
   <div
     class="card agent-brief"
-    *ngIf="windowSizeDetector.isWindowSmallerThanDesktopSmall"
-  >
+    *ngIf="windowSizeDetector.isWindowSmallerThanDesktopSmall">
     <perfect-agent-brief
-      *ngIf="agentsDao.getAgentById(offer.agentId) as agent"
+      *ngIf="agentsStateManager.agentById$(offer.agentId) | async as agent"
       [agent]="agent"
       bigger
       contactInfoVisible
       vertical
-      (click)="navigateToAgentPage(agent)"
-    >
+			[offersCount]="offersStateManager.offersCountByAgentId$(agent.id) | async"
+      (click)="navigateToAgentPage(agent)">
     </perfect-agent-brief>
   </div>
 </div>
@@ -150,16 +140,14 @@
       <span class="field-name">{{ field.displayName }}:</span>
       <span
         class="field-value"
-        *ngIf="!isBoolean(field.value) && field.displayName !== 'Standard'"
-      >
+        *ngIf="!isBoolean(field.value) && field.displayName !== 'Standard'">
         {{ field.value }}
         <span class="unit" *ngIf="field.unit">{{ field.unit }}</span>
       </span>
       <perfect-star-rating
         *ngIf="field.displayName === 'Standard'"
         [score]="field.value"
-        outOf="5"
-      >
+        outOf="5">
       </perfect-star-rating>
       <span class="field-value" *ngIf="field.value === true"> jest </span>
     </div>

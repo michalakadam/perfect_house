@@ -77,6 +77,12 @@ export class OffersStateManager {
     return this.store.select(selectors.getOfferByNumber(number));
   }
 
+  offersCountByAgentId$(agentId: string): Observable<number> {
+    return this.store.select(
+      selectors.getOffersCountByAgentId(parseInt(agentId))
+    );
+  }
+
   updatePageNumber(pageNumber: number) {
     this.store.dispatch(updatePageNumber({ pageNumber }));
   }

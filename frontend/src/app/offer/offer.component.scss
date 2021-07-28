@@ -1,5 +1,5 @@
-@import '~src/variables.scss';
-@import '~src/mixins.scss';
+@import "~src/variables.scss";
+@import "~src/mixins.scss";
 
 .component-container {
   @include responsive-page;
@@ -184,10 +184,7 @@
         .price-per-meter {
           color: $font-light-grey;
           margin-top: 5px;
-
-          &.hidden {
-            visibility: hidden;
-          }
+          /*  */
         }
       }
     }

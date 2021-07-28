@@ -1,6 +1,6 @@
-@import '../node_modules/primeicons/primeicons.css';
-@import '../node_modules/primeng/resources/primeng.min.css';
-@import '~src/variables.scss';
+@import "../node_modules/primeicons/primeicons.css";
+@import "../node_modules/primeng/resources/primeng.min.css";
+@import "~src/variables.scss";
 
 html {
   font-size: 16px;
@@ -14,7 +14,7 @@ html {
 
   body {
     color: $font-grey;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     height: 100%;
     margin: 0;
     overflow-x: hidden;
@@ -33,6 +33,10 @@ html {
       color: unset;
       cursor: pointer;
       text-decoration: none;
+    }
+
+    .hidden {
+      visibility: hidden;
     }
   }
 }

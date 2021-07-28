@@ -1,14 +1,47 @@
-<div class="component-container">
-  <perfect-agent-brief
-    [agent]="agent"
-    bigger
-    contactInfoVisible
-    licenseNumberVisible
-    vertical
-  >
-  </perfect-agent-brief>
+<div class="component-container" *ngIf="agentsStateManager.currentAgent$ | async as agent; else spinner">
+	<div class="agent-info">
+		<button
+			pButton
+			pRipple
+			type="button"
+			icon="pi pi-chevron-left"
+			class="p-button-rounded"
+			[class.hidden]="(agentsStateManager.isPreviousAgentAvailable$ | async) === false"
+			*ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall"
+			(click)="agentsStateManager.loadPreviousAgent()">
+		</button>
 
-  <div *ngIf="agent.description" class="description">
-    {{ agent.description }}
-  </div>
+		<perfect-agent-brief
+			[agent]="agent"
+			bigger
+			contactInfoVisible
+			licenseNumberVisible
+			vertical>
+		</perfect-agent-brief>
+
+		<div *ngIf="agent.description" class="description">
+			{{ agent.description }}
+		</div>
+
+		<button
+			pButton
+			pRipple
+			type="button"
+			icon="pi pi-chevron-right"
+			class="p-button-rounded"
+			[class.hidden]="(agentsStateManager.isNextAgentAvailable$ | async) === false"
+			*ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall"
+			(click)="agentsStateManager.loadNextAgent()">
+		</button>
+	</div>
+
+	<ng-container *ngIf="(offersStateManager.currentSearchOffersQuantity$ | async) > 0">
+		<h3 *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall">Oferty agenta:</h3>
+		<perfect-offers disableSearch></perfect-offers>
+	</ng-container>
 </div>
+
+
+<ng-template #spinner>
+	<perfect-loading-spinner></perfect-loading-spinner>
+</ng-template>

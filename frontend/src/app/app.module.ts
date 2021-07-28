@@ -52,11 +52,11 @@ import { StringDecoder } from "./shared/pipes/string-decoder";
 import { NewsFeedComponent } from "./news-feed/news-feed.component";
 import { StarRatingComponent } from "./offer/star-rating/star-rating.component";
 import { OffersStateManagementModule } from "./offers/state-management/state-management.module";
-import { LoadingSpinnerComponent } from "./loading-spinner/loading-spinner.component";
+import { LoadingSpinnerComponent } from "./shared/loading-spinner/loading-spinner.component";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
-import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { RouterStateManagementModule } from "./router/state-management/state-management.module";
+import { AgentsStateManagementModule } from "./agents/state-management/state-management.module";
 
 @NgModule({
   declarations: [
@@ -119,12 +119,10 @@ import { RouterStateManagementModule } from "./router/state-management/state-man
     SliderModule,
     TabViewModule,
     StoreModule.forRoot({}),
-    StoreDevtoolsModule.instrument({
-      autoPause: true, // Pauses recording actions and state changes when the extension window is not open
-    }),
     EffectsModule.forRoot([]),
     OffersStateManagementModule,
     RouterStateManagementModule,
+    AgentsStateManagementModule,
   ],
   bootstrap: [AppComponent],
 })

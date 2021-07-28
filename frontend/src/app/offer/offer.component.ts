@@ -10,10 +10,10 @@ import { ActivatedRoute, Params, Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { take } from "rxjs/operators";
 import { Agent, Offer, OfferField } from "src/app/shared/models";
-import { AgentsDao } from "src/app/shared/services/agents-dao.service";
 import { SnackbarService } from "../shared/services/snackbar.service";
 import { WindowSizeDetector } from "../shared/services/window-size-detector.service";
 import { OffersStateManager } from "../offers/state-management/state-manager.service";
+import { AgentsStateManager } from "../agents/state-management/state-manager.service";
 
 @Component({
   selector: "perfect-offer",
@@ -32,14 +32,14 @@ export class OfferComponent implements OnInit, OnDestroy {
   isVirtualVisitActive = false;
 
   constructor(
-    readonly agentsDao: AgentsDao,
     readonly windowSizeDetector: WindowSizeDetector,
+    readonly agentsStateManager: AgentsStateManager,
+    readonly offersStateManager: OffersStateManager,
     private readonly route: ActivatedRoute,
     private readonly changeDetector: ChangeDetectorRef,
     private readonly router: Router,
     private readonly titleService: Title,
-    private readonly snackbarService: SnackbarService,
-    private readonly offersStateManager: OffersStateManager
+    private readonly snackbarService: SnackbarService
   ) {
     this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(
       () => {
