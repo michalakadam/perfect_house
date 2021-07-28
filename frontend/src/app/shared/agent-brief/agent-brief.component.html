@@ -6,12 +6,14 @@
       (!windowSizeDetector.isWindowSmallerThanDesktopLarge && isVertical),
     'vertical-component-container':
       isVertical || windowSizeDetector.isWindowSmallerThanMobile
-  }"
->
+  }">
+	<div class="offers-count" *ngIf="offersCount > 0">
+		<div>{{offersCount}}</div>
+		<div>ofert</div>
+	</div>
   <div
     class="agent-photo"
-    style="background-image: url('/agents/{{ agent.photoFileName }}');"
-  ></div>
+    style="background-image: url('/agents/{{ agent.photoFileName }}');"></div>
   <div class="agent-info-container" *ngIf="!isOnlyPhotoVisible">
     <h3 class="full-name">
       {{ agent.fullName }}
@@ -30,8 +32,7 @@
       </a>
       <div
         class="license"
-        *ngIf="agent.licenseNumber && isLicenseNumberVisible"
-      >
+        *ngIf="agent.licenseNumber && isLicenseNumberVisible">
         <span class="title"> Numer licencji: </span>
         {{ agent.licenseNumber }}
       </div>

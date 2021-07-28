@@ -34,12 +34,12 @@ export class OfferComponent implements OnInit, OnDestroy {
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,
     readonly agentsStateManager: AgentsStateManager,
+    readonly offersStateManager: OffersStateManager,
     private readonly route: ActivatedRoute,
     private readonly changeDetector: ChangeDetectorRef,
     private readonly router: Router,
     private readonly titleService: Title,
-    private readonly snackbarService: SnackbarService,
-    private readonly offersStateManager: OffersStateManager
+    private readonly snackbarService: SnackbarService
   ) {
     this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(
       () => {

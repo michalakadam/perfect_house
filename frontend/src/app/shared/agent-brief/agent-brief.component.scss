@@ -1,8 +1,36 @@
-@import '~src/variables.scss';
+@import "~src/variables.scss";
 
 .component-container {
   display: flex;
   width: 375px;
+
+  .offers-count {
+    background-color: $light-green;
+    height: 50px;
+    position: relative;
+    left: 50%;
+    margin-bottom: -70px;
+    margin-top: 20px;
+    padding-right: 4px;
+    padding-top: 2px;
+    text-align: right;
+    top: 0;
+    width: 50.5%;
+
+    @media screen and (max-width: $desktop-large) {
+      padding-top: 4px;
+      width: 50%;
+    }
+    @media screen and (max-width: $desktop-small) {
+      padding-right: 12px;
+      padding-top: 8px;
+      width: 56.5%;
+    }
+
+    div:first-of-type {
+      font-weight: 700;
+    }
+  }
 
   .agent-photo {
     background-size: cover;
@@ -11,6 +39,7 @@
     border-radius: 50%;
     height: 120px;
     width: 120px;
+    z-index: 10;
   }
 
   .agent-info-container {

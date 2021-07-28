@@ -4,17 +4,17 @@ import {
   Input,
   ChangeDetectorRef,
   OnDestroy,
-} from '@angular/core';
-import { WindowSizeDetector } from 'src/app/shared/services/window-size-detector.service';
-import { Agent } from '../models';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Subscription } from 'rxjs';
+} from "@angular/core";
+import { WindowSizeDetector } from "src/app/shared/services/window-size-detector.service";
+import { Agent } from "../models";
+import { coerceBooleanProperty } from "@angular/cdk/coercion";
+import { Subscription } from "rxjs";
 
 /** Awatar pracownika. Zawiera zdjęcie, imię i nazwisko oraz tytuł zawodowy. */
 @Component({
-  selector: 'perfect-agent-brief',
-  templateUrl: './agent-brief.component.html',
-  styleUrls: ['./agent-brief.component.scss'],
+  selector: "perfect-agent-brief",
+  templateUrl: "./agent-brief.component.html",
+  styleUrls: ["./agent-brief.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AgentBriefComponent implements OnDestroy {
@@ -27,6 +27,7 @@ export class AgentBriefComponent implements OnDestroy {
   isLicenseNumberVisible = false;
 
   @Input() agent: Agent;
+  @Input() offersCount = 0;
   @Input()
   set contactInfoVisible(value: boolean) {
     this.isContactInfoVisible = coerceBooleanProperty(value);
