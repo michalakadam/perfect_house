@@ -60,7 +60,7 @@
 		[offer]="offer"
 		(click)="loadOffer(offer.symbol)"></perfect-offer-card>
 
-  <div class="bottom-paginator">
+  <div class="bottom-paginator" *ngIf="isSearchAvailable">
     <perfect-paginator
        *ngIf="(offersStateManager.numberOfPages$ | async) > 0"
       class="bottom-paginator"
