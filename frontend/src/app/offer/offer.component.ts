@@ -1,19 +1,15 @@
 import {
   Component,
   ChangeDetectionStrategy,
-  OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
 import { OnDestroy } from "@angular/core";
-import { Title } from "@angular/platform-browser";
-import { ActivatedRoute, Params, Router } from "@angular/router";
 import { Subscription } from "rxjs";
-import { take } from "rxjs/operators";
 import { Agent, Offer, OfferField } from "src/app/shared/models";
-import { SnackbarService } from "../shared/services/snackbar.service";
 import { WindowSizeDetector } from "../shared/services/window-size-detector.service";
 import { OffersStateManager } from "../offers/state-management/state-manager.service";
 import { AgentsStateManager } from "../agents/state-management/state-manager.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "perfect-offer",
@@ -21,25 +17,20 @@ import { AgentsStateManager } from "../agents/state-management/state-manager.ser
   styleUrls: ["./offer.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OfferComponent implements OnInit, OnDestroy {
+export class OfferComponent implements OnDestroy {
   private subscription: Subscription;
   offer: Offer;
   definedOfferFields: OfferField<any>[] = [];
   isGalleryActive = true;
-  isMapButtonVisible = false;
   isMapActive = false;
-  isVirtualVisitButtonVisible = false;
   isVirtualVisitActive = false;
 
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,
     readonly agentsStateManager: AgentsStateManager,
     readonly offersStateManager: OffersStateManager,
-    private readonly route: ActivatedRoute,
     private readonly changeDetector: ChangeDetectorRef,
-    private readonly router: Router,
-    private readonly titleService: Title,
-    private readonly snackbarService: SnackbarService
+    private readonly router: Router
   ) {
     this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(
       () => {
@@ -48,80 +39,18 @@ export class OfferComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnInit() {
-    this.subscription.add(
-      this.route.params.subscribe((params: Params) => {
-        if (params.symbol) {
-          this.loadOffer(params.symbol);
-        } else {
-          this.handleNonexistentOffer();
-        }
-      })
-    );
-  }
-
-  private loadOffer(symbol: string) {
-    if (this.consistsOnlyOfNumbers(symbol)) {
-      this.reloadOfferUsingSymbol(Number(symbol));
-    } else {
-      this.offersStateManager
-        .offerBySymbol$(symbol)
-        .pipe(take(1))
-        .subscribe((offer) => {
-          if (offer) {
-            this.offer = offer;
-            this.titleService.setTitle(this.offer.title);
-            this.definedOfferFields = this.computeDefinedOfferFields();
-            this.computeButtonsVisibility();
-            this.changeDetector.detectChanges();
-          } else {
-            this.handleNonexistentOffer(symbol);
-          }
-        });
+  computeDefinedOfferFields(offer: Offer): OfferField<any>[] {
+    if (!offer) {
+      return [];
     }
-  }
-
-  private consistsOnlyOfNumbers(symbol: string) {
-    return /^\d+$/.test(symbol);
-  }
-
-  private reloadOfferUsingSymbol(offerNumber: number) {
-    this.offersStateManager
-      .offerByNumber$(offerNumber)
-      .subscribe(({ symbol }) => {
-        if (symbol) {
-          this.router.navigate(["oferta", symbol]);
-        } else {
-          this.handleNonexistentOffer(offerNumber + "");
-        }
-      });
-  }
-
-  private computeButtonsVisibility() {
-    if (this.offer.lattitude && this.offer.longitude) {
-      this.isMapButtonVisible = true;
-    }
-    if (this.offer.virtualVisitUrl) {
-      this.isVirtualVisitButtonVisible = true;
-    }
-  }
-
-  private handleNonexistentOffer(symbol = "") {
-    setTimeout(() => {
-      this.snackbarService.open(`Oferta ${symbol} nie istnieje.`);
-    }, 500);
-    this.router.navigate(["/oferty"]);
-  }
-
-  private computeDefinedOfferFields(): OfferField<any>[] {
     const symbolField = {
       displayName: "Symbol oferty",
-      value: this.offer.symbol,
+      value: offer.symbol,
     };
 
     return [
       symbolField,
-      ...Object.values(this.offer)
+      ...Object.values(offer)
         .filter((value) => this.isDefinedOfferField(value))
         .filter((field) => field.displayName !== "Cena za m²"),
     ];
@@ -184,10 +113,10 @@ export class OfferComponent implements OnInit, OnDestroy {
     }
   }
 
-  computePhotoUrls() {
+  computePhotoUrls(offer: Offer) {
     const photoUrlPrefix = "/offers/";
 
-    return this.offer.photos.map((photo) => photoUrlPrefix + photo);
+    return offer.photos.map((photo) => photoUrlPrefix + photo);
   }
 
   ngOnDestroy() {

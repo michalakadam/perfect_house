@@ -26,6 +26,10 @@ export class OffersStateManager {
     selectors.getIsSearching
   );
 
+  currentOffer$: Observable<Offer> = this.store.select(
+    selectors.getCurrentOffer
+  );
+
   isPreviousOfferAvailable$: Observable<boolean> = this.store.select(
     selectors.getIsPreviousOfferAvailable
   );

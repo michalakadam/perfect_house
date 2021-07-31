@@ -6,12 +6,12 @@ import { Offer, OffersFilters, Sorting } from "src/app/shared/models";
 export const LIST_OFFERS = "[Offers] List";
 export const LIST_OFFERS_SUCCESS = "[Offers] List Success";
 export const LIST_OFFERS_ERROR = "[Offers] List Error";
-export const NAVIGATE_TO_OFFERS_PAGE = "[Offers] Load page with offers";
 export const UPDATE_SEARCH_PARAMS = "[Offers] Update search params";
 export const UPDATE_PAGE_NUMBER = "[Offers] Update page number";
 export const UPDATE_SORTING = "[Offers] Update sorting";
 export const UPDATE_FILTERS = "[Offers] Update filters";
 export const SEARCH_PARAMS_IDENTICAL = "[Offers] Search params did not change";
+export const LOAD_CURRENT_OFFER = "[Offers] Load current offer";
 export const LOAD_PREVIOUS_OFFER = "[Offers] Load previous offer";
 export const LOAD_NEXT_OFFER = "[Offers] Load next offer";
 
@@ -22,10 +22,6 @@ export const listOffersSuccess = createAction(
   props<{ offers: Offer[] }>()
 );
 export const listOffersError = createAction(LIST_OFFERS_ERROR);
-export const navigateToOffersPage = createAction(
-  NAVIGATE_TO_OFFERS_PAGE,
-  props<{ queryParams: Params }>()
-);
 export const updateSearchParams = createAction(
   UPDATE_SEARCH_PARAMS,
   props<{ queryParams: Params }>()
@@ -45,5 +41,9 @@ export const updateFilters = createAction(
   props<{ filters: OffersFilters }>()
 );
 export const searchParamsIdentical = createAction(SEARCH_PARAMS_IDENTICAL);
+export const loadCurrentOffer = createAction(
+  LOAD_CURRENT_OFFER,
+  props<{ offer: Offer }>()
+);
 export const loadPreviousOffer = createAction(LOAD_PREVIOUS_OFFER);
 export const loadNextOffer = createAction(LOAD_NEXT_OFFER);

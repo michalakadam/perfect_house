@@ -1,7 +1,7 @@
-<div class="component-container">
+<div class="component-container" *ngIf="offersStateManager.currentOffer$ | async as offer; else spinner">
   <div class="misc-agent-container">
     <div class="card misc-container">
-      <perfect-gallery *ngIf="isGalleryActive" [photoUrls]="computePhotoUrls()">
+      <perfect-gallery *ngIf="isGalleryActive" [photoUrls]="computePhotoUrls(offer)">
       </perfect-gallery>
 
       <perfect-map
@@ -48,7 +48,7 @@
         </perfect-agent-brief>
       </div>
       <button
-        *ngIf="isMapButtonVisible || isVirtualVisitButtonVisible"
+        *ngIf="offer.lattitude && offer.longitude || offer.virtualVisitUrl"
         pButton
         pRipple
         type="button"
@@ -57,7 +57,7 @@
         [class.selected]="isGalleryActive"
         (click)="showGallery()"></button>
       <button
-        *ngIf="isMapButtonVisible"
+        *ngIf="offer.lattitude && offer.longitude"
         pButton
         pRipple
         type="button"
@@ -66,7 +66,7 @@
         [class.selected]="isMapActive"
         (click)="showMap()"></button>
       <button
-        *ngIf="isVirtualVisitButtonVisible"
+        *ngIf="offer.virtualVisitUrl"
         pButton
         pRipple
         type="button"
@@ -152,22 +152,28 @@
   </div>
 </div>
 
+<ng-template #spinner>
+	<perfect-loading-spinner></perfect-loading-spinner>
+</ng-template>
+
 <ng-template #details>
-  <div *ngFor="let field of definedOfferFields; let last = last">
-    <div class="field" *ngIf="field.value" [class.last]="last">
-      <span class="field-name">{{ field.displayName }}:</span>
-      <span
-        class="field-value"
-        *ngIf="!isBoolean(field.value) && field.displayName !== 'Standard'">
-        {{ field.value }}
-        <span class="unit" *ngIf="field.unit">{{ field.unit }}</span>
-      </span>
-      <perfect-star-rating
-        *ngIf="field.displayName === 'Standard'"
-        [score]="field.value"
-        outOf="5">
-      </perfect-star-rating>
-      <span class="field-value" *ngIf="field.value === true"> jest </span>
-    </div>
-  </div>
+	<ng-container *ngIf="offersStateManager.currentOffer$ | async as offer">
+		<div *ngFor="let field of computeDefinedOfferFields(offer); let last = last">
+			<div class="field" *ngIf="field.value" [class.last]="last">
+				<span class="field-name">{{ field.displayName }}:</span>
+				<span
+					class="field-value"
+					*ngIf="!isBoolean(field.value) && field.displayName !== 'Standard'">
+					{{ field.value }}
+					<span class="unit" *ngIf="field.unit">{{ field.unit }}</span>
+				</span>
+				<perfect-star-rating
+					*ngIf="field.displayName === 'Standard'"
+					[score]="field.value"
+					outOf="5">
+				</perfect-star-rating>
+				<span class="field-value" *ngIf="field.value === true"> jest </span>
+			</div>
+		</div>
+	</ng-container>
 </ng-template>
