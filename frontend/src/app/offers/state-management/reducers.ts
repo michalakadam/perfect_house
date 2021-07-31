@@ -32,6 +32,7 @@ export interface OffersState {
   allOffers: Offer[];
   mainPageOffers: Offer[];
   currentSearchOffers: Offer[];
+  currentOffer: Offer;
   pageNumber: number;
   sorting: Sorting;
   filters: OffersFilters;
@@ -43,6 +44,7 @@ const initialState: OffersState = {
   allOffers: [],
   mainPageOffers: [],
   currentSearchOffers: [],
+  currentOffer: null,
   pageNumber: 0,
   sorting: DEFAULT_SORTING,
   filters: DEFAULT_FILTERS,

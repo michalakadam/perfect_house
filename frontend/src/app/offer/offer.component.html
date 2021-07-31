@@ -16,6 +16,24 @@
         [src]="offer.virtualVisitUrl | safe"/>
     </div>
     <div class="agent-buttons-container">
+			<div class="navigation-buttons-container"
+				*ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall && offersStateManager.currentSearchOffersQuantity$ | async">
+				<button
+					type="button"
+					pButton
+					icon="pi pi-angle-left"
+					label="poprzednia"
+					[class.hidden]="(offersStateManager.isPreviousOfferAvailable$ | async) === false"
+					(click)="offersStateManager.loadPreviousOffer()"></button>
+				<button
+					type="button"
+					pButton
+					icon="pi pi-angle-right"
+					label="kolejna"
+					iconPos="right"
+					[class.hidden]="(offersStateManager.isNextOfferAvailable$ | async) === false"
+					(click)="offersStateManager.loadNextOffer()"></button>
+			</div>
       <div
         class="card agent-brief"
         *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall">

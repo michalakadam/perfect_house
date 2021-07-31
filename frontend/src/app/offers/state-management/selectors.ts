@@ -141,3 +141,17 @@ export const getEstateTypesWithSubtypes = createSelector(
     return computeEstateTypesWithSubtypes(currentSearchOffers);
   }
 );
+
+export const getIsPreviousOfferAvailable = createSelector(
+  getCurrentSearchOffers,
+  (currentSearchOffers: Offer[]) => {
+    return true;
+  }
+);
+
+export const getIsNextOfferAvailable = createSelector(
+  getCurrentSearchOffers,
+  (currentSearchOffers: Offer[]) => {
+    return true;
+  }
+);

@@ -97,6 +97,39 @@
         margin: 0 auto;
       }
 
+      .navigation-buttons-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 16px;
+        width: 100%;
+
+        .hidden {
+          visibility: hidden;
+        }
+
+        ::ng-deep button.p-button {
+          background-color: initial;
+          border: initial;
+          color: inherit;
+
+          &.p-highlight {
+            border-color: $dark-green;
+          }
+
+          &:not(.p-disabled):not(.p-highlight):hover {
+            border-color: $dark-green;
+          }
+
+          &:focus {
+            box-shadow: unset;
+          }
+
+          .p-button-label {
+            font-weight: 700;
+          }
+        }
+      }
+
       .p-button-rounded {
         background-color: white;
         border: 1px solid white;

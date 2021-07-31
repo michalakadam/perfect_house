@@ -4,6 +4,8 @@ import { Offer, OffersFilters, Sorting } from "src/app/shared/models";
 import { Observable } from "rxjs";
 import {
   listOffers,
+  loadNextOffer,
+  loadPreviousOffer,
   updateFilters,
   updatePageNumber,
   updateSorting,
@@ -22,6 +24,14 @@ export class OffersStateManager {
 
   isSearching$: Observable<boolean> = this.store.select(
     selectors.getIsSearching
+  );
+
+  isPreviousOfferAvailable$: Observable<boolean> = this.store.select(
+    selectors.getIsPreviousOfferAvailable
+  );
+
+  isNextOfferAvailable$: Observable<boolean> = this.store.select(
+    selectors.getIsNextOfferAvailable
   );
 
   offersForMainPage$: Observable<Offer[]> = this.store.select(
@@ -93,5 +103,13 @@ export class OffersStateManager {
 
   updateFilters(filters: OffersFilters) {
     this.store.dispatch(updateFilters({ filters }));
+  }
+
+  loadPreviousOffer() {
+    this.store.dispatch(loadPreviousOffer());
+  }
+
+  loadNextOffer() {
+    this.store.dispatch(loadNextOffer());
   }
 }
