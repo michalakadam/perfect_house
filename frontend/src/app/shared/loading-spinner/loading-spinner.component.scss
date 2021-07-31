@@ -4,9 +4,11 @@
   width: 100%;
 
   .spinner-container {
-    width: 100px;
     height: 100px;
-    margin: 250px auto;
+    left: calc(50% - 50px);
+    position: absolute;
+    top: 25%;
+    width: 100px;
 
     img {
       height: 100%;

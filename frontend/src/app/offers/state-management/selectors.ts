@@ -29,7 +29,12 @@ export const getIsSearching = createSelector(
   (state: OffersState) => state.isSearching
 );
 
-const getAllOffers = createSelector(
+export const getCurrentOffer = createSelector(
+  selectOffersState,
+  (state: OffersState) => state.currentOffer
+);
+
+export const getAllOffers = createSelector(
   selectOffersState,
   (state: OffersState) => state.allOffers
 );
@@ -39,7 +44,7 @@ export const getOffersForMainPage = createSelector(
   (state: OffersState) => state.mainPageOffers
 );
 
-const getCurrentSearchOffers = createSelector(
+export const getCurrentSearchOffers = createSelector(
   selectOffersState,
   (state: OffersState) => state.currentSearchOffers
 );
@@ -139,5 +144,36 @@ export const getEstateTypesWithSubtypes = createSelector(
   getAllOffers,
   (currentSearchOffers: Offer[]) => {
     return computeEstateTypesWithSubtypes(currentSearchOffers);
+  }
+);
+
+export const getCurrentOfferIndex = createSelector(
+  getCurrentSearchOffers,
+  getCurrentOffer,
+  (currentSearchOffers: Offer[], currentOffer: Offer) => {
+    if (!currentSearchOffers.length || !currentOffer?.symbol) {
+      return -1;
+    }
+    return currentSearchOffers
+      .map((offer) => offer.symbol)
+      .indexOf(currentOffer.symbol);
+  }
+);
+
+export const getIsPreviousOfferAvailable = createSelector(
+  getCurrentOfferIndex,
+  (currentOfferIndex: number) => {
+    return currentOfferIndex > 0;
+  }
+);
+
+export const getIsNextOfferAvailable = createSelector(
+  getCurrentOfferIndex,
+  getCurrentSearchOffersQuantity,
+  (currentOfferIndex: number, currentSearchOffersQuantity: number) => {
+    return (
+      currentOfferIndex !== -1 &&
+      currentOfferIndex < currentSearchOffersQuantity - 1
+    );
   }
 );

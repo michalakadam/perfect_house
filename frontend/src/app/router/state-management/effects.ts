@@ -3,14 +3,17 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { map, filter, tap } from "rxjs/operators";
 import { RouterNavigatedAction, ROUTER_NAVIGATED } from "@ngrx/router-store";
 import {
+  agentPageNavigated,
+  offerPageNavigated,
   offersPageNavigated,
   OPEN_AGENT_PAGE,
+  OPEN_OFFERS_PAGE,
+  OPEN_OFFER_PAGE,
   PAGE_NOT_FOUND,
 } from "./actions";
 import { Router } from "@angular/router";
-import { NAVIGATE_TO_OFFERS_PAGE } from "src/app/offers/state-management/actions";
-import { agentPageNavigated } from "./actions";
 
+const OFFER_PAGE_PREFIX = "/oferta";
 const OFFERS_PAGE_PREFIX = "/oferty";
 const AGENTS_PAGE_PREFIX = "/ludzie";
 
@@ -45,9 +48,32 @@ export class RouterEffects {
   navigateToOffersPage = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(NAVIGATE_TO_OFFERS_PAGE),
+        ofType(OPEN_OFFERS_PAGE),
         tap(({ queryParams }) => {
           this.router.navigate(["oferty"], { queryParams });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  isOfferPageNavigated = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ROUTER_NAVIGATED),
+      filter((action: RouterNavigatedAction) =>
+        isPage(action.payload.routerState.url, OFFER_PAGE_PREFIX)
+      ),
+      map(() => {
+        return offerPageNavigated();
+      })
+    )
+  );
+
+  redirectToOfferPage = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(OPEN_OFFER_PAGE),
+        tap(({ offerSymbol }) => {
+          this.router.navigate(["/oferta/", offerSymbol]);
         })
       ),
     { dispatch: false }
@@ -56,10 +82,9 @@ export class RouterEffects {
   isAgentPageNavigated = createEffect(() =>
     this.actions$.pipe(
       ofType(ROUTER_NAVIGATED),
-      filter((action: RouterNavigatedAction) => {
-        const url = action.payload.routerState.url;
-        return url.startsWith(AGENTS_PAGE_PREFIX) && url !== AGENTS_PAGE_PREFIX;
-      }),
+      filter((action: RouterNavigatedAction) =>
+        isPage(action.payload.routerState.url, AGENTS_PAGE_PREFIX)
+      ),
       map(() => {
         return agentPageNavigated();
       })
@@ -80,6 +105,10 @@ export class RouterEffects {
     { dispatch: false }
   );
 }
+
+const isPage = (url, urlPrefix: string) => {
+  return url.startsWith(urlPrefix) && url !== urlPrefix;
+};
 
 const convertAgentNameToUrlSuffix = (fullName: string) => {
   return fullName.toLowerCase().split(" ").join("-");

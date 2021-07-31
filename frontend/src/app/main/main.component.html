@@ -53,7 +53,7 @@
         <perfect-offer-card
           [offer]="offer"
           inCarousel
-          (click)="loadOffer(offer.symbol)">
+          (click)="offersStateManager.openMainPageOffer(offer.symbol)">
         </perfect-offer-card>
       </ng-template>
     </p-carousel>

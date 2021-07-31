@@ -4,7 +4,8 @@ import {
   listOffersError,
   listOffers,
   updateSearchParams,
-  navigateToOffersPage,
+  loadCurrentOffer,
+  openMainPageOffer,
 } from "./actions";
 import {
   DEFAULT_FILTERS,
@@ -23,6 +24,10 @@ import {
   extractSortingFromParams,
 } from "./state-helper-functions";
 import { loadCurrentAgent } from "src/app/agents/state-management/actions";
+import {
+  openOfferPage,
+  openOffersPage,
+} from "src/app/router/state-management/actions";
 
 export const stateKey = "offers";
 
@@ -32,6 +37,7 @@ export interface OffersState {
   allOffers: Offer[];
   mainPageOffers: Offer[];
   currentSearchOffers: Offer[];
+  currentOffer: Offer;
   pageNumber: number;
   sorting: Sorting;
   filters: OffersFilters;
@@ -43,6 +49,7 @@ const initialState: OffersState = {
   allOffers: [],
   mainPageOffers: [],
   currentSearchOffers: [],
+  currentOffer: null,
   pageNumber: 0,
   sorting: DEFAULT_SORTING,
   filters: DEFAULT_FILTERS,
@@ -59,11 +66,6 @@ const offersReducer = createReducer(
     isLoading: false,
     allOffers: offers,
     mainPageOffers: computeMainPageOffers(offers),
-    currentSearchOffers: computeCurrentSearchOffers(
-      state.sorting,
-      state.filters,
-      offers
-    ),
   })),
   on(listOffersError, (state) => ({
     ...state,
@@ -88,7 +90,7 @@ const offersReducer = createReducer(
       filters,
     };
   }),
-  on(navigateToOffersPage, (state) => ({
+  on(openOffersPage, (state) => ({
     ...state,
     isSearching: true,
   })),
@@ -102,6 +104,18 @@ const offersReducer = createReducer(
     pageNumber: 0,
     sorting: DEFAULT_SORTING,
     filters: DEFAULT_FILTERS,
+  })),
+  on(openMainPageOffer, (state) => ({
+    ...state,
+    currentSearchOffers: state.mainPageOffers,
+  })),
+  on(openOfferPage, (state) => ({
+    ...state,
+    currentOffer: null,
+  })),
+  on(loadCurrentOffer, (state, { offer }) => ({
+    ...state,
+    currentOffer: offer,
   }))
 );
 
