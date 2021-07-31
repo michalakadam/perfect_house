@@ -11,6 +11,7 @@ export const UPDATE_PAGE_NUMBER = "[Offers] Update page number";
 export const UPDATE_SORTING = "[Offers] Update sorting";
 export const UPDATE_FILTERS = "[Offers] Update filters";
 export const SEARCH_PARAMS_IDENTICAL = "[Offers] Search params did not change";
+export const OPEN_MAIN_PAGE_OFFER = "[Offers] Open main page offer";
 export const LOAD_CURRENT_OFFER = "[Offers] Load current offer";
 export const LOAD_PREVIOUS_OFFER = "[Offers] Load previous offer";
 export const LOAD_NEXT_OFFER = "[Offers] Load next offer";
@@ -41,6 +42,10 @@ export const updateFilters = createAction(
   props<{ filters: OffersFilters }>()
 );
 export const searchParamsIdentical = createAction(SEARCH_PARAMS_IDENTICAL);
+export const openMainPageOffer = createAction(
+  OPEN_MAIN_PAGE_OFFER,
+  props<{ offerSymbol: string }>()
+);
 export const loadCurrentOffer = createAction(
   LOAD_CURRENT_OFFER,
   props<{ offer: Offer }>()

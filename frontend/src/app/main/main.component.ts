@@ -100,10 +100,6 @@ export class MainComponent implements OnDestroy {
     return filtersParameters;
   }
 
-  loadOffer(symbol: string) {
-    this.router.navigate(["oferta", symbol]);
-  }
-
   toggleAdvancedVisible() {
     this.advancedVisible = !this.advancedVisible;
   }

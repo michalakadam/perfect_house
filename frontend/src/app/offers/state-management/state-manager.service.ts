@@ -6,6 +6,7 @@ import {
   listOffers,
   loadNextOffer,
   loadPreviousOffer,
+  openMainPageOffer,
   updateFilters,
   updatePageNumber,
   updateSorting,
@@ -107,6 +108,10 @@ export class OffersStateManager {
 
   updateFilters(filters: OffersFilters) {
     this.store.dispatch(updateFilters({ filters }));
+  }
+
+  openMainPageOffer(offerSymbol: string) {
+    this.store.dispatch(openMainPageOffer({ offerSymbol }));
   }
 
   loadPreviousOffer() {

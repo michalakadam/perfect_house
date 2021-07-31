@@ -5,6 +5,7 @@ import {
   listOffers,
   updateSearchParams,
   loadCurrentOffer,
+  openMainPageOffer,
 } from "./actions";
 import {
   DEFAULT_FILTERS,
@@ -103,6 +104,10 @@ const offersReducer = createReducer(
     pageNumber: 0,
     sorting: DEFAULT_SORTING,
     filters: DEFAULT_FILTERS,
+  })),
+  on(openMainPageOffer, (state) => ({
+    ...state,
+    currentSearchOffers: state.mainPageOffers,
   })),
   on(openOfferPage, (state) => ({
     ...state,

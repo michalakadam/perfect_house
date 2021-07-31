@@ -25,6 +25,7 @@ import {
   LOAD_PREVIOUS_OFFER,
   LOAD_NEXT_OFFER,
   LIST_OFFERS_SUCCESS,
+  OPEN_MAIN_PAGE_OFFER,
 } from "./actions";
 import {
   offersPageNavigated,
@@ -223,6 +224,15 @@ export class OffersEffects {
           });
         }
         return updateSearchParams({ queryParams });
+      })
+    )
+  );
+
+  openOfferFromMainPage = createEffect(() =>
+    this.actions$.pipe(
+      ofType(OPEN_MAIN_PAGE_OFFER),
+      map(({ offerSymbol }) => {
+        return openOfferPage({ offerSymbol });
       })
     )
   );
