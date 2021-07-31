@@ -4,29 +4,29 @@ import {
   Input,
   ViewChild,
   ElementRef,
-  OnInit,
+  OnChanges,
   ChangeDetectorRef,
-} from '@angular/core';
-import { WindowSizeDetector } from '../services/window-size-detector.service';
+} from "@angular/core";
+import { WindowSizeDetector } from "../services/window-size-detector.service";
 
 const HORIZONTAL_PHOTO_MAX_WIDTH_TO_HEIGHT_RATIO = 1.2;
 
 @Component({
-  selector: 'perfect-gallery',
-  templateUrl: './gallery.component.html',
-  styleUrls: ['./gallery.component.scss'],
+  selector: "perfect-gallery",
+  templateUrl: "./gallery.component.html",
+  styleUrls: ["./gallery.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GalleryComponent implements OnInit {
+export class GalleryComponent implements OnChanges {
   @Input() photoUrls: string[] = [];
   photosInCarousel: string[] = [];
-  currentPhotoUrl = '';
+  currentPhotoUrl = "";
   currentPhotoIndex = -1;
   isCurrentPhotoVertical = false;
   numberOfPhotosInCarousel = 7;
   carouselStartIndex: number;
   carouselEndIndex: number;
-  @ViewChild('current') currentPhoto: ElementRef;
+  @ViewChild("current") currentPhoto: ElementRef;
 
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,
@@ -42,7 +42,7 @@ export class GalleryComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnChanges() {
     this.computeNumberOfPhotosInCarousel();
     this.initializeCarousel();
   }

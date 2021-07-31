@@ -22,8 +22,12 @@ import {
   UPDATE_FILTERS,
   searchParamsIdentical,
   loadCurrentOffer,
+  LOAD_PREVIOUS_OFFER,
+  LOAD_NEXT_OFFER,
+  LIST_OFFERS_SUCCESS,
 } from "./actions";
 import {
+  offersPageNavigated,
   OFFERS_PAGE_NAVIGATED,
   OFFER_PAGE_NAVIGATED,
   openOfferPage,
@@ -102,6 +106,21 @@ export class OffersEffects {
       );
     }
   }
+
+  // When offers' page is navigated to directly, router events are fired
+  // before offers are loaded and as a result currentSearchOffers are empty.
+  updateCurrentSearchOffersOnOffersLoadSuccess = createEffect(() =>
+    this.actions$.pipe(
+      ofType(LIST_OFFERS_SUCCESS),
+      withLatestFrom(this.store.select(routerSelectors.getUrl)),
+      map(([action, url]: [Action, string]) => {
+        if (url.startsWith("/oferty")) {
+          return offersPageNavigated();
+        }
+        return searchParamsIdentical();
+      })
+    )
+  );
 
   loadOffersForUpdatedPageNumber = createEffect(() =>
     this.actions$.pipe(
@@ -253,6 +272,44 @@ export class OffersEffects {
           }
         }
         return pageNotFound();
+      })
+    )
+  );
+
+  loadPreviousOffer = createEffect(() =>
+    this.actions$.pipe(
+      ofType(LOAD_PREVIOUS_OFFER),
+      withLatestFrom(
+        this.store.select(offersSelectors.getCurrentSearchOffers),
+        this.store.select(offersSelectors.getCurrentOfferIndex),
+        (action: Action, offers: Offer[], currentOfferIndex: number) => ({
+          offers,
+          currentOfferIndex,
+        })
+      ),
+      map(({ offers, currentOfferIndex }) => {
+        return openOfferPage({
+          offerSymbol: offers[currentOfferIndex - 1].symbol,
+        });
+      })
+    )
+  );
+
+  loadNextOffer = createEffect(() =>
+    this.actions$.pipe(
+      ofType(LOAD_NEXT_OFFER),
+      withLatestFrom(
+        this.store.select(offersSelectors.getCurrentSearchOffers),
+        this.store.select(offersSelectors.getCurrentOfferIndex),
+        (action: Action, offers: Offer[], currentOfferIndex: number) => ({
+          offers,
+          currentOfferIndex,
+        })
+      ),
+      map(({ offers, currentOfferIndex }) => {
+        return openOfferPage({
+          offerSymbol: offers[currentOfferIndex + 1].symbol,
+        });
       })
     )
   );

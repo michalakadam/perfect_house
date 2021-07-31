@@ -23,7 +23,10 @@ import {
   extractSortingFromParams,
 } from "./state-helper-functions";
 import { loadCurrentAgent } from "src/app/agents/state-management/actions";
-import { openOffersPage } from "src/app/router/state-management/actions";
+import {
+  openOfferPage,
+  openOffersPage,
+} from "src/app/router/state-management/actions";
 
 export const stateKey = "offers";
 
@@ -62,11 +65,6 @@ const offersReducer = createReducer(
     isLoading: false,
     allOffers: offers,
     mainPageOffers: computeMainPageOffers(offers),
-    currentSearchOffers: computeCurrentSearchOffers(
-      state.sorting,
-      state.filters,
-      offers
-    ),
   })),
   on(listOffersError, (state) => ({
     ...state,
@@ -105,6 +103,10 @@ const offersReducer = createReducer(
     pageNumber: 0,
     sorting: DEFAULT_SORTING,
     filters: DEFAULT_FILTERS,
+  })),
+  on(openOfferPage, (state) => ({
+    ...state,
+    currentOffer: null,
   })),
   on(loadCurrentOffer, (state, { offer }) => ({
     ...state,
