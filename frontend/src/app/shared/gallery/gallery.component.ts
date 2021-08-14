@@ -4,7 +4,6 @@ import {
   Input,
   ViewChild,
   ElementRef,
-  OnChanges,
   ChangeDetectorRef,
 } from "@angular/core";
 import { WindowSizeDetector } from "../services/window-size-detector.service";
@@ -17,8 +16,16 @@ const HORIZONTAL_PHOTO_MAX_WIDTH_TO_HEIGHT_RATIO = 1.2;
   styleUrls: ["./gallery.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GalleryComponent implements OnChanges {
-  @Input() photoUrls: string[] = [];
+export class GalleryComponent {
+  private photos: string[] = [];
+  @Input()
+  public set photoUrls(value: string[]) {
+    if (value?.length) {
+      this.photos = value;
+      this.computeNumberOfPhotosInCarousel();
+      this.initializeCarousel();
+    }
+  }
   photosInCarousel: string[] = [];
   currentPhotoUrl = "";
   currentPhotoIndex = -1;
@@ -42,11 +49,6 @@ export class GalleryComponent implements OnChanges {
     });
   }
 
-  ngOnChanges() {
-    this.computeNumberOfPhotosInCarousel();
-    this.initializeCarousel();
-  }
-
   private computeNumberOfPhotosInCarousel() {
     if (!this.windowSizeDetector.isWindowSmallerThanDesktopLarge) {
       this.numberOfPhotosInCarousel = 7;
@@ -58,7 +60,7 @@ export class GalleryComponent implements OnChanges {
   }
 
   private initializeCarousel() {
-    this.currentPhotoUrl = this.photoUrls[0];
+    this.currentPhotoUrl = this.photos[0];
     this.currentPhotoIndex = 0;
     this.computePhotosInCarousel(0);
   }
@@ -76,7 +78,7 @@ export class GalleryComponent implements OnChanges {
   isNextPhotoAvailable() {
     return (
       this.currentPhotoIndex !== -1 &&
-      this.currentPhotoIndex < this.photoUrls.length - 1
+      this.currentPhotoIndex < this.photos.length - 1
     );
   }
 
@@ -97,20 +99,20 @@ export class GalleryComponent implements OnChanges {
 
   private updateCurrentPhoto(index: number) {
     this.currentPhotoIndex = index;
-    this.currentPhotoUrl = this.photoUrls[index];
+    this.currentPhotoUrl = this.photos[index];
   }
 
   isNextPhotosButtonHidden(): boolean {
     return (
-      this.carouselEndIndex === this.photoUrls.length - 1 ||
-      this.photoUrls.length <= this.numberOfPhotosInCarousel
+      this.carouselEndIndex === this.photos.length - 1 ||
+      this.photos.length <= this.numberOfPhotosInCarousel
     );
   }
 
   private computePhotosInCarousel(startIndex: number) {
     this.carouselStartIndex = startIndex;
     this.carouselEndIndex = startIndex + this.numberOfPhotosInCarousel - 1;
-    this.photosInCarousel = [...this.photoUrls].splice(
+    this.photosInCarousel = [...this.photos].splice(
       startIndex,
       this.numberOfPhotosInCarousel
     );
@@ -118,7 +120,7 @@ export class GalleryComponent implements OnChanges {
 
   selectPhoto(photoUrl) {
     this.currentPhotoUrl = photoUrl;
-    this.currentPhotoIndex = this.photoUrls.indexOf(photoUrl);
+    this.currentPhotoIndex = this.photos.indexOf(photoUrl);
   }
 
   isPhotoVertical(photo: HTMLImageElement): boolean {
@@ -130,10 +132,10 @@ export class GalleryComponent implements OnChanges {
 
   loadNextPhotos() {
     const runningOutOfPhotos =
-      this.photoUrls.length <=
+      this.photos.length <=
       this.carouselEndIndex + this.numberOfPhotosInCarousel;
     const startIndex = runningOutOfPhotos
-      ? this.photoUrls.length - this.numberOfPhotosInCarousel
+      ? this.photos.length - this.numberOfPhotosInCarousel
       : this.carouselEndIndex + 1;
 
     this.computePhotosInCarousel(startIndex);
