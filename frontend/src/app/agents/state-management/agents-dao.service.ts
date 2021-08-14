@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 
-import * as rawAgents from "src/agents/agents.json";
+import { default as rawAgents } from "src/agents/agents.json";
 import { Agent } from "../../shared/models";
 import { AgentsConverter } from "./agents-converter.service";
 import { Observable, ReplaySubject } from "rxjs";
