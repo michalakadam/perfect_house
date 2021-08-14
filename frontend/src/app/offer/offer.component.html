@@ -23,7 +23,7 @@
 					pButton
 					icon="pi pi-angle-left"
 					label="poprzednia"
-					[class.hidden]="(offersStateManager.isPreviousOfferAvailable$ | async) === false"
+					[disabled]="(offersStateManager.isPreviousOfferAvailable$ | async) === false"
 					(click)="offersStateManager.loadPreviousOffer()"></button>
 				<button
 					type="button"
