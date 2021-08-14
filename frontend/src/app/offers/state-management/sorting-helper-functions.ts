@@ -16,10 +16,12 @@ const compareByPropertyAsc = (
   offerA: Offer,
   offerB: Offer
 ): number => {
-  if (offerA[propertyName] < offerB[propertyName]) {
+  const propertyA = getPropertyValue(offerA, propertyName);
+  const propertyB = getPropertyValue(offerB, propertyName);
+  if (propertyA < propertyB) {
     return -1;
   }
-  if (offerA[propertyName] > offerB[propertyName]) {
+  if (propertyA > propertyB) {
     return 1;
   }
   return 0;
@@ -30,14 +32,24 @@ const compareByPropertyDesc = (
   offerA: Offer,
   offerB: Offer
 ): number => {
-  if (offerA[propertyName] > offerB[propertyName]) {
+  const propertyA = getPropertyValue(offerA, propertyName);
+  const propertyB = getPropertyValue(offerB, propertyName);
+  if (propertyA > propertyB) {
     return -1;
   }
-  if (offerA[propertyName] < offerB[propertyName]) {
+  if (propertyA < propertyB) {
     return 1;
   }
   return 0;
 };
+
+const getPropertyValue = (offer: Offer, propertyName: string) => {
+  const offerFieldPropertyNames = ['pricePerSquareMeter', 'totalArea'];
+  if (offerFieldPropertyNames.includes(propertyName)) {
+    return offer[propertyName].value;
+  }
+  return offer[propertyName];
+}
 
 export const sortAlphabetically = (a: string, b: string): number => {
   return a.localeCompare(b, "pl");

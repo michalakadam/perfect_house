@@ -79,6 +79,10 @@ export class MainComponent implements OnDestroy {
     this.router.navigate(["oferty"], { queryParams: params });
   }
 
+  loadOffer(symbol: string) {
+    this.router.navigate(["oferta", symbol]);
+  }
+
   loadOffers(filters: OffersFilters) {
     this.router.navigate(["oferty"], {
       queryParams: {
