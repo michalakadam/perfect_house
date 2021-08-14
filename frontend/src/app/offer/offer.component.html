@@ -1,7 +1,7 @@
-<div class="component-container" *ngIf="offersStateManager.currentOffer$ | async as offer; else spinner">
+<div class="component-container" *ngIf="(offersStateManager.isCurrentOfferLoading$ | async) === false; else spinner">
   <div class="misc-agent-container">
     <div class="card misc-container">
-      <perfect-gallery *ngIf="isGalleryActive" [photoUrls]="computePhotoUrls(offer)">
+      <perfect-gallery *ngIf="isGalleryActive" [photoUrls]="photoUrls">
       </perfect-gallery>
 
       <perfect-map
@@ -158,7 +158,7 @@
 
 <ng-template #details>
 	<ng-container *ngIf="offersStateManager.currentOffer$ | async as offer">
-		<div *ngFor="let field of computeDefinedOfferFields(offer); let last = last">
+		<div *ngFor="let field of definedOfferFields; let last = last">
 			<div class="field" *ngIf="field.value" [class.last]="last">
 				<span class="field-name">{{ field.displayName }}:</span>
 				<span

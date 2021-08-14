@@ -29,6 +29,11 @@ export const getIsSearching = createSelector(
   (state: OffersState) => state.isSearching
 );
 
+export const getIsCurrentOfferLoading = createSelector(
+  selectOffersState,
+  (state: OffersState) => !state.currentOffer
+);
+
 export const getCurrentOffer = createSelector(
   selectOffersState,
   (state: OffersState) => state.currentOffer

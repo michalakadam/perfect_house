@@ -27,6 +27,8 @@ export class OffersStateManager {
     selectors.getIsSearching
   );
 
+  isCurrentOfferLoading$: Observable<boolean> = this.store.select(selectors.getIsCurrentOfferLoading);
+
   currentOffer$: Observable<Offer> = this.store.select(
     selectors.getCurrentOffer
   );

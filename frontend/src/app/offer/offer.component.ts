@@ -21,6 +21,7 @@ export class OfferComponent implements OnDestroy {
   private subscription: Subscription;
   offer: Offer;
   definedOfferFields: OfferField<any>[] = [];
+  photoUrls: string[] = [];
   isGalleryActive = true;
   isMapActive = false;
   isVirtualVisitActive = false;
@@ -37,6 +38,11 @@ export class OfferComponent implements OnDestroy {
         this.changeDetector.detectChanges();
       }
     );
+    this.subscription.add(this.offersStateManager.currentOffer$.subscribe((offer: Offer) => {
+      this.offer = offer;
+      this.definedOfferFields = this.computeDefinedOfferFields(offer);
+      this.photoUrls = this.computePhotoUrls(offer);
+    }));
   }
 
   computeDefinedOfferFields(offer: Offer): OfferField<any>[] {
@@ -116,7 +122,7 @@ export class OfferComponent implements OnDestroy {
   computePhotoUrls(offer: Offer) {
     const photoUrlPrefix = "/offers/";
 
-    return offer.photos.map((photo) => photoUrlPrefix + photo);
+    return offer ? offer.photos.map((photo) => photoUrlPrefix + photo) : [];
   }
 
   ngOnDestroy() {
