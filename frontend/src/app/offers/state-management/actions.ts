@@ -12,6 +12,7 @@ export const UPDATE_SORTING = "[Offers] Update sorting";
 export const UPDATE_FILTERS = "[Offers] Update filters";
 export const SEARCH_PARAMS_IDENTICAL = "[Offers] Search params did not change";
 export const OPEN_MAIN_PAGE_OFFER = "[Offers] Open main page offer";
+export const OFFER_AVAILABLE_FOR_OFFER_PAGE = "[Offers] Offer available for offer page"
 export const LOAD_CURRENT_OFFER = "[Offers] Load current offer";
 export const LOAD_PREVIOUS_OFFER = "[Offers] Load previous offer";
 export const LOAD_NEXT_OFFER = "[Offers] Load next offer";
@@ -46,6 +47,7 @@ export const openMainPageOffer = createAction(
   OPEN_MAIN_PAGE_OFFER,
   props<{ offerSymbol: string }>()
 );
+export const loadOfferPage = createAction(OFFER_AVAILABLE_FOR_OFFER_PAGE);
 export const loadCurrentOffer = createAction(
   LOAD_CURRENT_OFFER,
   props<{ offer: Offer }>()
