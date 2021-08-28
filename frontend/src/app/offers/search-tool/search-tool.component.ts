@@ -91,51 +91,13 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
     this.onMainPage = coerceBooleanProperty(value);
   }
   @Input() filters: OffersFilters = DEFAULT_FILTERS;
-  @Input()
-  set rawVoivodeshipsWithCounties(value: Map<string, string[]>) {
-    this.voivodeshipsWithCounties = this.convertToDropdownGroups(
-      "voivodeship",
-      "county"
-    )(value);
-  }
-  @Input()
-  set rawEstateTypesWithSubtypes(value: Map<string, string[]>) {
-    this.estateTypesWithSubtypes = this.convertToDropdownGroups(
-      "estateType",
-      "estateSubtype"
-    )(value);
-  }
+  @Input() rawEstateTypesWithSubtypes: Map<string, string[]>;
+  @Input() rawVoivodeshipsWithCounties: Map<string, string[]>;
   @Input() lowestPriceForCurrentSearch = 0;
   @Input() highestPriceForCurrentSearch = 0;
   @Output() searchOffers = new EventEmitter<OffersFilters>();
   @Output() openOffer = new EventEmitter<string>();
   @Output() advancedToggled = new EventEmitter();
-
-  private convertToDropdownGroups(
-    typeSelector: string,
-    subtypeSelector: string
-  ) {
-    return (typesWithSubtypes: Map<string, string[]>): DropdownGroup[] => {
-      const convertToDropdownValue = (subtype: string): DropdownValue => ({
-        displayName: subtype,
-        isSelected: this.filters[subtypeSelector] === subtype,
-      });
-      const dropdownGroups = [];
-
-      for (let [type, subtypes] of typesWithSubtypes) {
-        const dropdownSubtypes = subtypes.map(convertToDropdownValue);
-
-        dropdownGroups.push({
-          displayName: type,
-          values: dropdownSubtypes,
-          isVisible: !!dropdownSubtypes.find((subtype) => subtype.isSelected),
-          isSelected:
-            this.filters[typeSelector].toLowerCase() === type.toLowerCase(),
-        });
-      }
-      return dropdownGroups;
-    };
-  }
 
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,
@@ -165,47 +127,86 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges() {
-    this.location = this.filters.location;
-    this.isForRent = this.filters.isForRent;
-    if (this.filters.isPrimaryMarket) {
-      this.marketToggleValues.push(0);
+    if (this.filters) {
+      if (this.rawEstateTypesWithSubtypes) {
+        this.estateTypesWithSubtypes = this.convertToDropdownGroups(
+          "estateType",
+          "estateSubtype"
+        )(this.rawEstateTypesWithSubtypes);
+      }
+      if (this.rawVoivodeshipsWithCounties) {
+        this.voivodeshipsWithCounties = this.convertToDropdownGroups(
+          "voivodeship",
+          "county"
+        )(this.rawVoivodeshipsWithCounties);
+      }
+      this.location = this.filters.location;
+      this.isForRent = this.filters.isForRent;
+      if (this.filters.isPrimaryMarket) {
+        this.marketToggleValues.push(0);
+      }
+      if (this.filters.isSecondaryMarket) {
+        this.marketToggleValues.push(1);
+      }
+      this.isInvestment = this.filters.isInvestment;
+      this.isByTheSea = this.filters.isByTheSea;
+      this.isNoCommission = this.filters.isNoCommission;
+      this.isVirtualVisitAvailable = this.filters.isVirtualVisitAvailable;
+      this.priceFrom =
+        this.filters.priceFrom > -1
+          ? this.computeFieldValue(this.filters.priceFrom)
+          : this.computeFieldValue(this.lowestPriceForCurrentSearch);
+      this.priceTo =
+        this.filters.priceTo > -1
+          ? this.computeFieldValue(this.filters.priceTo)
+          : this.computeFieldValue(this.highestPriceForCurrentSearch);
+      this.pricePerSquareMeterFrom = this.computeFieldValue(
+        this.filters.pricePerSquareMeterFrom
+      );
+      this.pricePerSquareMeterTo = this.computeFieldValue(
+        this.filters.pricePerSquareMeterTo
+      );
+      this.areaFrom = this.computeFieldValue(this.filters.areaFrom);
+      this.areaTo = this.computeFieldValue(this.filters.areaTo);
+      this.numberOfRoomsFrom = this.computeFieldValue(
+        this.filters.numberOfRoomsFrom
+      );
+      this.numberOfRoomsTo = this.computeFieldValue(this.filters.numberOfRoomsTo);
+      this.floorFrom = this.computeFieldValue(this.filters.floorFrom);
+      this.floorTo = this.computeFieldValue(this.filters.floorTo);
+      this.isElevatorAvailable = this.filters.isElevatorAvailable;
+      this.isParkingAvailable = this.filters.isParkingAvailable;
+      this.isTerraceAvailable = this.filters.isTerraceAvailable;
+      this.isBasementAvailable = this.filters.isBasementAvailable;
+      this.isMpzpAvailable = this.filters.isMpzpAvailable;
     }
-    if (this.filters.isSecondaryMarket) {
-      this.marketToggleValues.push(1);
-    }
-    this.isInvestment = this.filters.isInvestment;
-    this.isByTheSea = this.filters.isByTheSea;
-    this.isNoCommission = this.filters.isNoCommission;
-    this.isVirtualVisitAvailable = this.filters.isVirtualVisitAvailable;
-    this.priceFrom =
-      this.filters.priceFrom > -1
-        ? this.computeFieldValue(this.filters.priceFrom)
-        : this.computeFieldValue(this.lowestPriceForCurrentSearch);
-    this.priceTo =
-      this.filters.priceTo > -1
-        ? this.computeFieldValue(this.filters.priceTo)
-        : this.computeFieldValue(this.highestPriceForCurrentSearch);
-    this.pricePerSquareMeterFrom = this.computeFieldValue(
-      this.filters.pricePerSquareMeterFrom
-    );
-    this.pricePerSquareMeterTo = this.computeFieldValue(
-      this.filters.pricePerSquareMeterTo
-    );
-    this.areaFrom = this.computeFieldValue(this.filters.areaFrom);
-    this.areaTo = this.computeFieldValue(this.filters.areaTo);
-    this.numberOfRoomsFrom = this.computeFieldValue(
-      this.filters.numberOfRoomsFrom
-    );
-    this.numberOfRoomsTo = this.computeFieldValue(this.filters.numberOfRoomsTo);
-    this.floorFrom = this.computeFieldValue(this.filters.floorFrom);
-    this.floorTo = this.computeFieldValue(this.filters.floorTo);
-    this.isElevatorAvailable = this.filters.isElevatorAvailable;
-    this.isParkingAvailable = this.filters.isParkingAvailable;
-    this.isTerraceAvailable = this.filters.isTerraceAvailable;
-    this.isBasementAvailable = this.filters.isBasementAvailable;
-    this.isMpzpAvailable = this.filters.isMpzpAvailable;
-
     this.changeDetector.detectChanges();
+  }
+
+  private convertToDropdownGroups(
+    typeSelector: string,
+    subtypeSelector: string
+  ) {
+    return (typesWithSubtypes: Map<string, string[]>): DropdownGroup[] => {
+      const convertToDropdownValue = (subtype: string): DropdownValue => ({
+        displayName: subtype,
+        isSelected: this.filters[subtypeSelector] === subtype,
+      });
+      const dropdownGroups = [];
+
+      for (let [type, subtypes] of typesWithSubtypes) {
+        const dropdownSubtypes = subtypes.map(convertToDropdownValue);
+
+        dropdownGroups.push({
+          displayName: type,
+          values: dropdownSubtypes,
+          isVisible: !!dropdownSubtypes.find((subtype) => subtype.isSelected),
+          isSelected:
+            this.filters[typeSelector].toLowerCase() === type.toLowerCase(),
+        });
+      }
+      return dropdownGroups;
+    };
   }
 
   isOptionalElementVisible() {

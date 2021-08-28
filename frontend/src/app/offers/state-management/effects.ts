@@ -6,7 +6,6 @@ import {
   mergeMap,
   catchError,
   withLatestFrom,
-  tap,
   debounce,
 } from "rxjs/operators";
 import { OffersApiCaller } from "./offers-api-caller.service";
