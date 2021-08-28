@@ -4,8 +4,10 @@ import {
   ChangeDetectorRef,
   OnDestroy,
 } from "@angular/core";
-import { Router } from "@angular/router";
+import { Store } from "@ngrx/store";
 import { Subscription } from "rxjs";
+import { DEFAULT_QUERY_PARAMETERS } from "../offers/state-management/effects";
+import { openOffersPage } from "../router/state-management/actions";
 import { WindowSizeDetector } from "../shared/services/window-size-detector.service";
 
 /** Stopka strony. Zawiera przydatne linki, informacje kontaktowe i logo firmy. */
@@ -25,7 +27,7 @@ export class FooterComponent implements OnDestroy {
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,
     private readonly changeDetector: ChangeDetectorRef,
-    private readonly router: Router
+    private readonly store: Store,
   ) {
     this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(
       () => {
@@ -60,9 +62,7 @@ export class FooterComponent implements OnDestroy {
 
   loadOffers(queryParams: any) {
     window.scrollTo(0, 0);
-    this.router.navigate(["oferty"], {
-      queryParams,
-    });
+    this.store.dispatch(openOffersPage({queryParams: {...DEFAULT_QUERY_PARAMETERS, ...queryParams}}))
   }
 
   ngOnDestroy() {

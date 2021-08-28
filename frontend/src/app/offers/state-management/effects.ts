@@ -6,8 +6,7 @@ import {
   mergeMap,
   catchError,
   withLatestFrom,
-  tap,
-  debounce,
+  delay,
 } from "rxjs/operators";
 import { OffersApiCaller } from "./offers-api-caller.service";
 import { SnackbarService } from "../../shared/services/snackbar.service";
@@ -26,8 +25,11 @@ import {
   LOAD_NEXT_OFFER,
   LIST_OFFERS_SUCCESS,
   OPEN_MAIN_PAGE_OFFER,
+  loadOfferPage,
+  OFFER_AVAILABLE_FOR_OFFER_PAGE,
 } from "./actions";
 import {
+  offerPageNavigated,
   offersPageNavigated,
   OFFERS_PAGE_NAVIGATED,
   OFFER_PAGE_NAVIGATED,
@@ -237,19 +239,23 @@ export class OffersEffects {
     )
   );
 
+  checkOfferAvailableForOfferPage = createEffect(() => 
+      this.actions$.pipe(
+        ofType(OFFER_PAGE_NAVIGATED),
+        delay(500),
+        withLatestFrom(this.store.select(offersSelectors.getIsLoading)),
+        map(([action, isLoading]: [Action, boolean]) => isLoading ? offerPageNavigated() : loadOfferPage()),
+      )
+  );
+
   loadOfferForOfferPageFromUrl = createEffect(() =>
     this.actions$.pipe(
-      ofType(OFFER_PAGE_NAVIGATED),
-      withLatestFrom(this.store.select(offersSelectors.getIsLoading)),
-      // Offers list is not available when offer page is open directly.
-      debounce(([action, isLoading]: [Action, boolean]) =>
-        isLoading ? timer(2000) : EMPTY
-      ),
+      ofType(OFFER_AVAILABLE_FOR_OFFER_PAGE),
       withLatestFrom(
         this.store.select(routerSelectors.getParams),
         this.store.select(offersSelectors.getAllOffers),
         (
-          [action, isLoading]: [Action, boolean],
+          action: Action,
           params: Params,
           offers: Offer[]
         ) => ({
