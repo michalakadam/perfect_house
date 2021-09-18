@@ -22,7 +22,12 @@ function copy_offer_jpgs {
 
 function extract_offers_xml {
   if [[ -z "$(grep --max-count=1 "<Oferty />" $offers_xml_path)" ]]; then
-    sed -n '/<Oferty/{n;:a;p;n;/<\/Oferty>/!ba;}' $offers_xml_path > $domain_folder_path/to_be_converted/offers.xml
+    sed -n '/<Oferty/{n
+      :a
+      p
+      n
+      /<\/Oferty>/!ba
+      }' $offers_xml_path > $domain_folder_path/to_be_converted/offers.xml
     sed -i '1s/^/<Oferty>\n/' $domain_folder_path/to_be_converted/offers.xml
     echo "</Oferty>" >> $domain_folder_path/to_be_converted/offers.xml 
   fi
@@ -30,7 +35,12 @@ function extract_offers_xml {
 
 function extract_removed_xml {
   if [[ -z "$(grep --max-count=1 "<Usuniete />" $offers_xml_path)" ]]; then
-    sed -n '/<Usuniete/{n;:a;p;n;/<\/Usuniete>/!ba;}' $offers_xml_path > $domain_folder_path/to_be_converted/removed.xml
+    sed -n '/<Usuniete/{n
+      :a
+      p
+      n
+      /<\/Usuniete>/!ba
+      }' $offers_xml_path > $domain_folder_path/to_be_converted/removed.xml
     sed -i '1s/^/<Usuniete>\n/' $domain_folder_path/to_be_converted/removed.xml
     echo "</Usuniete>" >> $domain_folder_path/to_be_converted/removed.xml 
   fi
