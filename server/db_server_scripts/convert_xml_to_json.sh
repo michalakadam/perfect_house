@@ -12,10 +12,12 @@ exec 1>$log_file_path 2>&1
 
 unzip $perfect_folder_path/temp/to_be_converted.zip -d $perfect_folder_path/temp/
 rm $perfect_folder_path/temp/to_be_converted.zip
+
 if [[ -f $perfect_folder_path/temp/to_be_converted/offers.xml ]]; then
-  cat $perfect_folder_path/temp/to_be_converted/offers.xml | xq . | sed 's/\"@/\"/; s/\"#/\"/' > $perfect_folder_path/temp/offers.json
+  cat $perfect_folder_path/temp/to_be_converted/offers.xml | xq . | sed -e 's/"@/"/' -e 's/"#/"/' > $perfect_folder_path/temp/offers.json
   rm $perfect_folder_path/temp/to_be_converted/offers.xml
 fi
+
 if [[ -f $perfect_folder_path/temp/to_be_converted/removed.xml ]]; then
   cat $perfect_folder_path/temp/to_be_converted/removed.xml | xq . | sed 's/\"@/\"/' > $perfect_folder_path/temp/removed.json
   rm $perfect_folder_path/temp/to_be_converted/removed.xml
