@@ -17,17 +17,13 @@ function store_file_sizes_for_comparison {
   new_size=$(wc --bytes < $offers_file_path)
 }
 
-while true
-do 
-  offers_file_name="$(ls $ftp_folder_path)"
+offers_file_name="$(ls $ftp_folder_path)"
 
-  if [[ ! -z "$offers_file_name" ]]; then
-    offers_file_path=$ftp_folder_path/$offers_file_name
-    
-    check_file_copied_fully  
-    unzip $ftp_folder_path/$offers_file_name -d $domain_folder_path/temp
-    mv $ftp_folder_path/$offers_file_name $domain_folder_path/offers_archive/$offers_file_name
-    $domain_folder_path/process_files.sh
-  fi
-  sleep 60
-done
+if [[ ! -z "$offers_file_name" ]]; then
+  offers_file_path=$ftp_folder_path/$offers_file_name
+  
+  check_file_copied_fully  
+  unzip $ftp_folder_path/$offers_file_name -d $domain_folder_path/temp
+  mv $ftp_folder_path/$offers_file_name $domain_folder_path/offers_archive/$offers_file_name
+  $domain_folder_path/process_files.sh
+fi
