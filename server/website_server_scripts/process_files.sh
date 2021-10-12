@@ -5,7 +5,6 @@ temp_folder_path=$domain_folder_path/temp
 # There are many patterns for offers jpg file names.
 offer_jpgs_path=$temp_folder_path/*.jpg
 offers_xml_path=$temp_folder_path/oferty.xml
-server_credentials=root@51.77.195.170
 
 function copy_offer_jpgs {
   set -- $offer_jpgs_path
@@ -44,9 +43,3 @@ copy_offer_jpgs
 extract_offers_xml
 extract_removed_xml
 rm $offers_xml_path
-
-zip $temp_folder_path/to_be_converted.zip to_be_converted/*
-rm $domain_folder_path/to_be_converted/*
-scp $temp_folder_path/to_be_converted.zip $server_credentials:/root/perfect/temp
-rm $temp_folder_path/to_be_converted.zip
-ssh $server_credentials '/root/perfect/convert_xml_to_json.sh'
