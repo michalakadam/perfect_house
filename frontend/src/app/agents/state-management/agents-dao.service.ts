@@ -7,8 +7,6 @@ import { Observable, ReplaySubject } from "rxjs";
 
 const CEO_ID = "1155";
 
-const MAGDA_PROFILE_FOR_MANAGEMENT_ID = "20202";
-
 @Injectable({
   providedIn: "root",
 })
@@ -19,7 +17,6 @@ export class AgentsDao {
     this.agents.next(
       this.agentsConverter
         .convertToReadableAgents(rawAgents.Agenci.Agent)
-        .filter((agent) => agent.id !== MAGDA_PROFILE_FOR_MANAGEMENT_ID)
         .sort((a, b) => this.sortAgents(a, b))
     );
   }
