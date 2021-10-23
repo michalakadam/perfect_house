@@ -9,7 +9,6 @@ import { OfferComponent } from "./offer/offer.component";
 import { OffersComponent } from "./offers/offers.component";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { ManagementComponent } from "./management/management.component";
-import { UnderConstructionComponent } from "./under-construction/under-construction.component";
 import { ValuesComponent } from "./values/values.component";
 import { NewsFeedComponent } from "./news-feed/news-feed.component";
 
@@ -77,13 +76,6 @@ const routes: Routes = [
     component: ContactComponent,
     data: {
       title: "Kontakt",
-    },
-  },
-  {
-    path: "deweloperzy",
-    component: UnderConstructionComponent,
-    data: {
-      title: "Dla deweloperów",
     },
   },
   {

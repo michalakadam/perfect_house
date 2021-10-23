@@ -2,19 +2,19 @@
 
 nav {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   font-size: 18px;
   font-weight: 600;
   margin: 18px auto 0;
-  width: 1274px;
+  width: 1180px;
   text-align: center;
   @media screen and (max-width: $desktop-large) {
     font-size: 16px;
-    width: 1156px;
+    width: 1064px;
   }
   @media screen and (max-width: $desktop-medium) {
     font-size: 14px;
-    width: 994px;
+    width: 920px;
   }
 
   .link {
