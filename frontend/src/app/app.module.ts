@@ -45,7 +45,6 @@ import { UnderConstructionComponent } from "./under-construction/under-construct
 import { TabViewModule } from "primeng/tabview";
 import { GroupedDropdownComponent } from "./offers/search-tool/grouped-dropdown/grouped-dropdown.component";
 import { ValuesComponent } from "./values/values.component";
-import { PhotovoltaicsComponent } from "./photovoltaics/photovoltaics.component";
 import { GalleryComponent } from "./shared/gallery/gallery.component";
 import { UrlSanitizer } from "./shared/pipes/url-sanitizer";
 import { StringDecoder } from "./shared/pipes/string-decoder";
@@ -93,7 +92,6 @@ import { AgentsStateManagementModule } from "./agents/state-management/state-man
     UnderConstructionComponent,
     GroupedDropdownComponent,
     ValuesComponent,
-    PhotovoltaicsComponent,
     GalleryComponent,
     NewsFeedComponent,
     StarRatingComponent,

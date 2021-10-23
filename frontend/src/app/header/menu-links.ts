@@ -21,10 +21,6 @@ export const MENU_LINKS: MenuLink[] = [
     route: '/deweloperzy',
   },
   {
-    title: 'Fotowoltaika',
-    route: '/fotowoltaika',
-  },
-  {
     title: 'O nas',
     route: '/o_nas',
   },
@@ -65,10 +61,6 @@ export const ALL_LINKS: MenuLink[] = [
   {
     title: 'Dla deweloperów',
     route: '/deweloperzy',
-  },
-  {
-    title: 'Fotowoltaika',
-    route: '/fotowoltaika',
   },
   {
     title: 'Nasze wartości',
