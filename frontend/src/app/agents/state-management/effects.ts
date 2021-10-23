@@ -54,7 +54,7 @@ export class AgentsEffects {
       ),
       withLatestFrom(
         this.store.select(routerSelectors.getParams),
-        this.store.select(agentsSelectors.getAgents),
+        this.store.select(agentsSelectors.getUniqueAgents),
         (
           [action, isLoading]: [Action, boolean],
           params: Params,
@@ -84,7 +84,7 @@ export class AgentsEffects {
     this.actions$.pipe(
       ofType(LOAD_PREVIOUS_AGENT),
       withLatestFrom(
-        this.store.select(agentsSelectors.getAgents),
+        this.store.select(agentsSelectors.getUniqueAgents),
         this.store.select(agentsSelectors.getCurrentAgentIndex),
         (action: Action, agents: Agent[], currentAgentIndex: number) => ({
           agents,
@@ -101,7 +101,7 @@ export class AgentsEffects {
     this.actions$.pipe(
       ofType(LOAD_NEXT_AGENT),
       withLatestFrom(
-        this.store.select(agentsSelectors.getAgents),
+        this.store.select(agentsSelectors.getUniqueAgents),
         this.store.select(agentsSelectors.getCurrentAgentIndex),
         (action: Action, agents: Agent[], currentAgentIndex: number) => ({
           agents,

@@ -24,11 +24,14 @@
       margin-left: -476px;
       padding: 1rem 1rem 2rem 2rem;
       position: relative;
-      top: 200px;
+      top: 274px;
       width: 440px;
       @media screen and (max-width: $desktop-large) {
-        top: 175px;
+        top: 244px;
         width: 400px;
+      }
+      @media screen and (max-width: $desktop-large) {
+        top: 224px;
       }
       @media screen and (max-width: $desktop-small) {
         float: initial;

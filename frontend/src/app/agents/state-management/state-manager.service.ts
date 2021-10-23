@@ -14,7 +14,7 @@ export class AgentsStateManager {
     this.store.dispatch(listAgents());
   }
 
-  agents$: Observable<Agent[]> = this.store.select(selectors.getAgents);
+  agents$: Observable<Agent[]> = this.store.select(selectors.getUniqueAgents);
 
   currentAgent$: Observable<Agent> = this.store.select(
     selectors.getCurrentAgent

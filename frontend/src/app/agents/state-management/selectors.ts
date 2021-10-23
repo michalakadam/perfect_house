@@ -2,6 +2,8 @@ import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { Agent } from "src/app/shared/models";
 import { AgentsState, stateKey } from "./reducers";
 
+const MAGDA_PROFILE_FOR_MANAGEMENT_ID = "20202";
+
 const selectAgentsState = createFeatureSelector<AgentsState>(stateKey);
 
 export const getIsLoading = createSelector(
@@ -9,9 +11,14 @@ export const getIsLoading = createSelector(
   (state: AgentsState) => state.isLoading
 );
 
-export const getAgents = createSelector(
+export const getAllAgents = createSelector(
   selectAgentsState,
   (state: AgentsState) => state.agents
+);
+
+export const getUniqueAgents = createSelector(
+  selectAgentsState,
+  (state: AgentsState) => state.agents.filter(agent => agent.id !== MAGDA_PROFILE_FOR_MANAGEMENT_ID)
 );
 
 export const getCurrentAgent = createSelector(
@@ -20,12 +27,12 @@ export const getCurrentAgent = createSelector(
 );
 
 export const getAgentById = (id: number) =>
-  createSelector(getAgents, (agents: Agent[]) => {
+  createSelector(getAllAgents, (agents: Agent[]) => {
     return agents.find((agent) => agent.id === "" + id);
   });
 
 export const getCurrentAgentIndex = createSelector(
-  getAgents,
+  getUniqueAgents,
   getCurrentAgent,
   (agents: Agent[], currentAgent: Agent) => {
     if (currentAgent) {
@@ -43,7 +50,7 @@ export const getIsPreviousAgentAvailable = createSelector(
 );
 
 export const getIsNextAgentAvailable = createSelector(
-  getAgents,
+  getUniqueAgents,
   getCurrentAgentIndex,
   (agents: Agent[], index: number) => {
     return index < agents.length - 1;
