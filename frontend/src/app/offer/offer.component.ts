@@ -42,6 +42,9 @@ export class OfferComponent implements OnDestroy {
       this.offer = offer;
       this.definedOfferFields = this.computeDefinedOfferFields(offer);
       this.photoUrls = this.computePhotoUrls(offer);
+      this.isGalleryActive = true;
+      this.isMapActive = false;
+      this.isVirtualVisitActive = false;
     }));
   }
 
