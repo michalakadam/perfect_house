@@ -22,11 +22,11 @@
       {{ agent.position }}
     </h4>
     <div class="contact-info" *ngIf="isContactInfoVisible">
-      <a href="mailto:{{ agent.mail }}">
+      <a href="mailto:{{ agent.mail }}" (click)="$event.stopPropagation();">
         <mat-icon><i class="fas fa-envelope-square"></i></mat-icon>
         {{ agent.mail }}
       </a>
-      <a href="tel:{{ agent.mobile }}">
+      <a href="tel:{{ agent.mobile }}" (click)="$event.stopPropagation();">
         <mat-icon><i class="fas fa-phone-square-alt"></i></mat-icon>
         {{ agent.mobile }}
       </a>
