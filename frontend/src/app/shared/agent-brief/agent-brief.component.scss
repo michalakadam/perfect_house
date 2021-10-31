@@ -11,13 +11,14 @@
     left: 50%;
     margin-bottom: -70px;
     margin-top: 20px;
-    padding-right: 4px;
+    padding-right: 8px;
     padding-top: 2px;
     text-align: right;
     top: 0;
-    width: 50.5%;
+    width: 52%;
 
     @media screen and (max-width: $desktop-large) {
+      padding-right: 4px;
       padding-top: 4px;
       width: 50%;
     }

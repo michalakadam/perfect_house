@@ -30,6 +30,24 @@ const SHROOMS_PHOTO_NAMES = [
   'grzybobranie_10.jpg',
   'grzybobranie_11.jpg',
 ];
+const PODCHODY_PHOTO_NAMES = [
+  'podchody_1.jpg',
+  'podchody_2.jpg',
+  'podchody_3.jpg',
+  'podchody_4.jpg',
+  'podchody_5.jpg',
+  'podchody_6.jpg',
+];
+const SHROOMS_2021_PHOTO_NAMES = [
+  'grzybobranie_2021_1.jpg',
+  'grzybobranie_2021_2.jpg',
+  'grzybobranie_2021_3.jpg',
+  'grzybobranie_2021_4.jpg',
+  'grzybobranie_2021_5.jpg',
+  'grzybobranie_2021_6.jpg',
+  'grzybobranie_2021_7.jpg',
+  'grzybobranie_2021_8.jpg',
+];
 
 @Component({
   selector: 'perfect-news-feed',
@@ -41,4 +59,6 @@ export class NewsFeedComponent {
   seaPhotoUrls = SEA_PHOTO_NAMES.map(convertPhotoNameToUrl);
   bowlingPhotoUrls = BOWLING_PHOTO_NAMES.map(convertPhotoNameToUrl);
   shroomsPhotoUrls = SHROOMS_PHOTO_NAMES.map(convertPhotoNameToUrl);
+  podchodyPhotoUrls = PODCHODY_PHOTO_NAMES.map(convertPhotoNameToUrl);
+  shrooms2021PhotoUrls = SHROOMS_2021_PHOTO_NAMES.map(convertPhotoNameToUrl);
 }
