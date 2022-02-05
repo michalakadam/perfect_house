@@ -55,6 +55,7 @@ import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 import { RouterStateManagementModule } from "./router/state-management/state-management.module";
 import { AgentsStateManagementModule } from "./agents/state-management/state-management.module";
+import { EcoHousesComponent } from './eco-houses/eco-houses.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { AgentsStateManagementModule } from "./agents/state-management/state-man
     NewsFeedComponent,
     StarRatingComponent,
     LoadingSpinnerComponent,
+    EcoHousesComponent,
   ],
   imports: [
     AppRoutingModule,

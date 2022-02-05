@@ -17,6 +17,10 @@ export const MENU_LINKS: MenuLink[] = [
     route: '/zarządzanie',
   },
   {
+    title: 'Nowoczesne eco domy',
+    route: '/eco-domy',
+  },
+  {
     title: 'O nas',
     route: '/o_nas',
   },
@@ -53,6 +57,10 @@ export const ALL_LINKS: MenuLink[] = [
   {
     title: 'Zarządzanie nieruchomościami',
     route: '/zarządzanie',
+  },
+  {
+    title: 'Nowoczesne eco domy',
+    route: '/eco-domy',
   },
   {
     title: 'Nasze wartości',

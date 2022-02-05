@@ -8,7 +8,7 @@ offers_updater_path=$project_folder_path/offers_updater
 
 function backup_offers {
     mongoexport --db perfecthouse --collection offers --pretty --out $archived_offers_path
-    scp $archived_offers_path perfect@2.57.137.38:/home/perfect/offers_archive/$offers_file_name
+    scp $archived_offers_path perfect@2.57.137.38:/home/perfect/domains/perfect.stronazen.pl/public_html/offers
     rm $archived_offers_path
 }
 

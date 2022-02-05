@@ -45,3 +45,5 @@ Thumbs.db
 src/agents
 src/offers
 
+# Ignore Mac DS_Store files
+**/.DS_Store

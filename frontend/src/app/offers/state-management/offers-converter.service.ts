@@ -1,9 +1,14 @@
-import { Offer, OfferField, Room } from "./models";
+import { Injectable } from '@angular/core';
+import { Offer, OfferField, Room } from 'src/app/shared/models';
 
 const DESCRIPTION_TO_BE_REPLACED = "Oferta wysłana z systemu Galactica Virgo";
 
+@Injectable({
+  providedIn: 'root'
+})
 export class OffersConverter {
-  convertToReadableOffers(rawOffers: any[]): Offer[] {
+
+   convertToReadableOffers(rawOffers: any[]): Offer[] {
     return rawOffers.map((offer) => {
       return {
         id: this.convertToNumber(offer.ID),

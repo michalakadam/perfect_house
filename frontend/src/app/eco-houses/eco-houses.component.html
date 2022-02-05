@@ -1,0 +1,65 @@
+<div class="image-container">
+  <img src="/assets/eco_domy.jpg" />
+</div>
+<div class="component-container">
+  <header>
+    <h1>Nowoczesne eco domy</h1>
+    <mat-divider></mat-divider>
+  </header>
+  <main>
+    <div class="contact">
+      <h2>Zapytaj o ofertę:</h2>
+      <perfect-agent-brief
+        [agent]="agentsStateManager.agentById$(agentResponsibleForEcoHousesId) | async"
+        contactInfoVisible
+        licenseNumberVisible>
+      </perfect-agent-brief>
+    </div>
+
+    <p>
+      Budujemy domy. Zaufanie już zbudowaliśmy.
+    </p>
+    <p>
+      Od 25 lat budujemy domy jednorodzinne w technologii murowanej.
+      W tym czasie postawiliśmy już prawie 300 domów w Wielkopolsce oraz we Wrocławiu.
+      Dzięki stosowanym rozwiązaniom i technologiom domy są energooszczędne, a co za tym idzie, tanie w utrzymaniu.
+      Wyznaczamy nowe kierunki w budownictwie i podnosimy cały czas standardy - z szacunku do energii.
+      <br>
+      Podchodzimy do budowy kompleksowo - od projektu, aż po wybudowanie domu do stanu deweloperskiego.
+      Posiadamy bogatą bibliotekę własnych projektów domów parterowych oraz piętrowych - od 77 mkw do 270 mkw.
+      Realizujemy także budowy na podstawie indywidualnych projektów.
+      <br>
+      To, za co cenią nas Klienci to spokój, który zapewniamy im podczas realizacji inwestycji.
+      Mamy stałe ekipy fachowców, z którymi współpracujemy od wielu lat i wiemy, że możemy na nich polegać.
+    </p>
+    <p>
+      W ramach standardu energooszczędnego, który jest dla nas podstawowym standardem, oferujemy m.in.:
+    </p>
+    <ul>
+      <li>ciepły fundament</li>
+      <li>wymurowanie ścian nośnych oraz ścianek działowych z bloczków silikatowych SILKA</li>
+      <li>okna oraz drzwi zewnętrzne o parametrach pasywnych</li>
+      <li>szczelny montaż stolarki</li>
+      <li>ocieplenie posadzki oraz ścian grafitowym styropianem</li>
+      <li>ocieplenie sufitu wełną skalną o grubości 30 cm lub zamiennie 20 cm pianą natryskową</li>
+    </ul>
+    <p>
+      Stosujemy także takie rozwiązania jak fotowoltaika, rekuperacja czy pompy ciepła.
+    </p>
+    <p>
+      Dodatkowo, w cenie budowy gwarantujemy:
+    </p>
+    <ul>
+      <li>ogrodzenie budowy</li>
+      <li>wywóz odpadów z placu budowy</li>
+      <li>toaletę budowlaną.</li>
+    </ul>
+    <p>
+      <strong>Zapewniamy 5-letnią gwarancję na wszystkie wykonane przez nas prace.</strong>
+    </p>
+    <div class="gallery-container">
+      <perfect-gallery [photoUrls]="housesPhotoUrls"></perfect-gallery>
+    </div>
+  </main>
+</div>
+

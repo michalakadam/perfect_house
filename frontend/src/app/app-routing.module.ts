@@ -11,6 +11,7 @@ import { PageNotFoundComponent } from "./page-not-found/page-not-found.component
 import { ManagementComponent } from "./management/management.component";
 import { ValuesComponent } from "./values/values.component";
 import { NewsFeedComponent } from "./news-feed/news-feed.component";
+import { EcoHousesComponent } from "./eco-houses/eco-houses.component";
 
 const routes: Routes = [
   {
@@ -43,6 +44,13 @@ const routes: Routes = [
     component: ManagementComponent,
     data: {
       title: "Zarządzanie nieruchomościami",
+    },
+  },
+  {
+    path: "eco-domy",
+    component: EcoHousesComponent,
+    data: {
+      title: "Nowoczesne eco domy"
     },
   },
   {

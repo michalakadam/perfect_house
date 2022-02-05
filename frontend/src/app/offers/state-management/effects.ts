@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { EMPTY, of as observableOf, timer } from "rxjs";
+import { of as observableOf } from "rxjs";
 import {
   map,
   mergeMap,
@@ -8,7 +8,7 @@ import {
   withLatestFrom,
   delay,
 } from "rxjs/operators";
-import { OffersApiCaller } from "./offers-api-caller.service";
+import { OffersDao } from "./offers-dao.service";
 import { SnackbarService } from "../../shared/services/snackbar.service";
 import { HttpErrorResponse } from "@angular/common/http";
 import {
@@ -75,7 +75,7 @@ export const DEFAULT_QUERY_PARAMETERS = {
 export class OffersEffects {
   constructor(
     private actions$: Actions,
-    private offersApiCaller: OffersApiCaller,
+    private offersDao: OffersDao,
     private snackbarService: SnackbarService,
     private readonly titleService: Title,
     private store: Store
@@ -85,7 +85,7 @@ export class OffersEffects {
     this.actions$.pipe(
       ofType(LIST_OFFERS),
       mergeMap(() =>
-        this.offersApiCaller.loadOffers().pipe(
+        this.offersDao.loadOffers().pipe(
           map((offers) => listOffersSuccess({ offers })),
           catchError((error: HttpErrorResponse) => {
             this.handleError(error);
@@ -239,7 +239,7 @@ export class OffersEffects {
     )
   );
 
-  checkOfferAvailableForOfferPage = createEffect(() => 
+  checkOfferAvailableForOfferPage = createEffect(() =>
       this.actions$.pipe(
         ofType(OFFER_PAGE_NAVIGATED),
         delay(500),
