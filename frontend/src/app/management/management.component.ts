@@ -7,7 +7,6 @@ import {
 import { Subscription } from "rxjs";
 import { WindowSizeDetector } from "../shared/services/window-size-detector.service";
 import { AgentsStateManager } from "../agents/state-management/state-manager.service";
-4;
 
 const AGENT_RESPONSIBLE_FOR_MANAGEMENT_ID = 20202;
 
