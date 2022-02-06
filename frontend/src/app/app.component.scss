@@ -14,7 +14,7 @@
   min-height: 100%;
 
   .side-navigation {
-    height: 296px;
+    height: 336px;
     left: 10%;
     position: absolute;
     top: 60px;
@@ -25,16 +25,16 @@
     height: 142px;
     position: absolute;
     left: 50%;
-    margin-left: 364px;
+    margin-left: 430px;
     top: 115px;
     width: 180px;
     @media screen and (max-width: $desktop-large) {
-      margin-left: 330px;
+      margin-left: 384px;
       top: 110px;
       width: 164px;
     }
     @media screen and (max-width: $desktop-medium) {
-      margin-left: 284px;
+      margin-left: 334px;
       top: 105px;
       width: 148px;
     }
