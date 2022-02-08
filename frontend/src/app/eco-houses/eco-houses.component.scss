@@ -7,6 +7,12 @@
 .component-container {
   @include article-page;
 
+  h1 {
+    @media screen and (max-width: $desktop-small) {
+      text-align: left;
+    }
+  }
+
   .contact {
     @include perfect-box;
     float: right;
