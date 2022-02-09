@@ -1,16 +1,19 @@
 import { Injectable } from "@angular/core";
-import { Observable, of as observableOf } from "rxjs";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
 import { Offer } from "src/app/shared/models";
-import { default as rawOffers } from "src/offers/offers.json";
 import { OffersConverter } from "./offers-converter.service";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root",
 })
 export class OffersDao {
-  constructor(private offersConverter: OffersConverter) {}
+  constructor(private httpClient: HttpClient, private offersConverter: OffersConverter) {}
 
   loadOffers(): Observable<Offer[]> {
-    return observableOf(this.offersConverter.convertToReadableOffers(rawOffers));
+    // Not reading offers.json directly from filesystem to prevent caching issues.
+    return this.httpClient.get("offers/offers.json").pipe(
+      map((rawOffers: any[]) => this.offersConverter.convertToReadableOffers(rawOffers)));
   }
 }
