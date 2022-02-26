@@ -257,6 +257,8 @@
         !windowSizeDetector.isWindowSmallerThanDesktopSmall || showAdvanced
       "
       title="symbol / numer oferty"
+      enterActivated
+      (enterPressed)="search()"
       [(value)]="symbol"
     >
     </perfect-input>

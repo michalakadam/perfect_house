@@ -8,6 +8,7 @@
     [type]="type"
     pInputText
     [(ngModel)]="value"
+    (keydown)="isEnterPressed($event)"
     (input)="computeDropdownVisibility(inputValue)"
   />
   <label class="label" *ngIf="title" for="input">
