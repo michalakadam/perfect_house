@@ -9,6 +9,7 @@ import {
   HostListener,
   ChangeDetectorRef,
 } from '@angular/core';
+import { coerceBooleanProperty } from "@angular/cdk/coercion";
 
 @Component({
   selector: 'perfect-input',
@@ -26,10 +27,17 @@ export class InputComponent {
 
   @Output() valueChange = new EventEmitter<string>();
   @Output() readyForSearch = new EventEmitter();
+  @Output() enterPressed = new EventEmitter();
 
   isDropdownVisible = false;
   inputValue: string;
   inFocus = false;
+  isEnterActivated = false;
+
+  @Input()
+  set enterActivated(value: boolean) {
+    this.isEnterActivated = coerceBooleanProperty(value);
+  }
 
   @Input()
   get value() {
@@ -103,5 +111,11 @@ export class InputComponent {
 
   computeIndex(i: number): number {
     return ++i;
+  }
+
+  isEnterPressed(event) {
+    if(this.isEnterActivated && event.key === 'Enter') {
+      this.enterPressed.emit();
+    }
   }
 }

@@ -16,24 +16,33 @@
         [src]="offer.virtualVisitUrl | safe"/>
     </div>
     <div class="agent-buttons-container">
-			<div class="navigation-buttons-container"
-				*ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall && offersStateManager.currentSearchOffersQuantity$ | async">
-				<button
-					type="button"
-					pButton
-					icon="pi pi-angle-left"
-					label="poprzednia"
-					[disabled]="(offersStateManager.isPreviousOfferAvailable$ | async) === false"
-					(click)="offersStateManager.loadPreviousOffer()"></button>
-				<button
-					type="button"
-					pButton
-					icon="pi pi-angle-right"
-					label="kolejna"
-					iconPos="right"
-					[class.hidden]="(offersStateManager.isNextOfferAvailable$ | async) === false"
-					(click)="offersStateManager.loadNextOffer()"></button>
-			</div>
+      <div class="navigation-search-container">
+        <div class="navigation-buttons-container"
+          *ngIf="offersStateManager.currentSearchOffersQuantity$ | async">
+          <button
+            type="button"
+            pButton
+            icon="pi pi-angle-left"
+            label="poprzednia"
+            [disabled]="(offersStateManager.isPreviousOfferAvailable$ | async) === false"
+            (click)="offersStateManager.loadPreviousOffer()"></button>
+          <button
+            type="button"
+            pButton
+            icon="pi pi-angle-right"
+            label="kolejna"
+            iconPos="right"
+            [class.hidden]="(offersStateManager.isNextOfferAvailable$ | async) === false"
+            (click)="offersStateManager.loadNextOffer()"></button>
+        </div>
+        <perfect-input
+          class="symbol-input"
+          title="przejdź do innej oferty"
+          enterActivated
+          (enterPressed)="openOffer()"
+          [(value)]="offerSearchSymbol">
+        </perfect-input>
+      </div>
       <div
         class="card agent-brief"
         *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall">
@@ -47,33 +56,35 @@
           (click)="navigateToAgentPage(agent)">
         </perfect-agent-brief>
       </div>
-      <button
-        *ngIf="offer.lattitude && offer.longitude || offer.virtualVisitUrl"
-        pButton
-        pRipple
-        type="button"
-        label="Zdjęcia"
-        class="p-button-rounded p-button-raised"
-        [class.selected]="isGalleryActive"
-        (click)="showGallery()"></button>
-      <button
-        *ngIf="offer.lattitude && offer.longitude"
-        pButton
-        pRipple
-        type="button"
-        label="Mapa"
-        class="p-button-rounded p-button-raised"
-        [class.selected]="isMapActive"
-        (click)="showMap()"></button>
-      <button
-        *ngIf="offer.virtualVisitUrl"
-        pButton
-        pRipple
-        type="button"
-        label="Wirtualna wizyta"
-        class="p-button-rounded p-button-raised"
-        [class.selected]="isVirtualVisitActive"
-        (click)="showVirtualVisit()"></button>
+      <div class="buttons-container">
+        <button
+          *ngIf="offer.lattitude && offer.longitude || offer.virtualVisitUrl"
+          pButton
+          pRipple
+          type="button"
+          label="Zdjęcia"
+          class="p-button-rounded p-button-raised"
+          [class.selected]="isGalleryActive"
+          (click)="showGallery()"></button>
+        <button
+          *ngIf="offer.lattitude && offer.longitude"
+          pButton
+          pRipple
+          type="button"
+          label="Mapa"
+          class="p-button-rounded p-button-raised"
+          [class.selected]="isMapActive"
+          (click)="showMap()"></button>
+        <button
+          *ngIf="offer.virtualVisitUrl"
+          pButton
+          pRipple
+          type="button"
+          label="Wirtualna wizyta"
+          class="p-button-rounded p-button-raised"
+          [class.selected]="isVirtualVisitActive"
+          (click)="showVirtualVisit()"></button>
+      </div>
     </div>
   </div>
   <div class="card bottom-container">

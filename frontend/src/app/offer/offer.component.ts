@@ -25,6 +25,7 @@ export class OfferComponent implements OnDestroy {
   isGalleryActive = true;
   isMapActive = false;
   isVirtualVisitActive = false;
+  offerSearchSymbol = '';
 
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,
@@ -126,6 +127,10 @@ export class OfferComponent implements OnDestroy {
     const photoUrlPrefix = "/offers/";
 
     return offer ? offer.photos.map((photo) => photoUrlPrefix + photo) : [];
+  }
+
+  openOffer() {
+    this.router.navigate(["oferta", this.offerSearchSymbol]);
   }
 
   ngOnDestroy() {

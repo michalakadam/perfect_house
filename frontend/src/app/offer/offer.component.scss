@@ -82,14 +82,13 @@
     }
 
     .agent-buttons-container {
+      align-items: center;
       display: flex;
       flex-direction: column;
       margin: 0;
       margin-left: auto;
       width: 323px;
       @media screen and (max-width: $desktop-small) {
-        flex-direction: row;
-        justify-content: space-evenly;
         margin-left: 0;
         width: 100%;
       }
@@ -97,62 +96,107 @@
         margin: 0 auto;
       }
 
-      .navigation-buttons-container {
+      .navigation-search-container {
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
+        justify-content: center;
         margin-bottom: 16px;
-        width: 100%;
-
-        .hidden {
-          visibility: hidden;
+        @media screen and (max-width: $desktop-medium) {
+          width: 250px;
+        }
+        @media screen and (max-width: $desktop-small) {
+          align-items: center;
+          flex-direction: row-reverse;
+          justify-content: space-evenly;
+          margin-bottom: 1rem;
+          margin-top: 2rem;
+          width: 100%;
         }
 
-        ::ng-deep button.p-button {
-          background-color: initial;
-          border: initial;
-          color: inherit;
+        .navigation-buttons-container {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 16px;
+          width: 100%;
+          @media screen and (max-width: $desktop-small) {
+            align-items: center;
+            margin-bottom: unset;
+            max-width: 200px;
+            width: unset;
+          }
 
-          &.p-highlight {
-            border-color: $dark-green;
+          .hidden {
+            visibility: hidden;
+          }
+
+          ::ng-deep button.p-button {
+            background-color: initial;
+            border: initial;
+            color: inherit;
+
+            &.p-highlight {
+              border-color: $dark-green;
+            }
+
+            &:not(.p-disabled):not(.p-highlight):hover {
+              border-color: $dark-green;
+            }
+
+            &:focus {
+              box-shadow: unset;
+            }
+
+            .p-button-label {
+              font-weight: 700;
+            }
+          }
+        }
+
+        .symbol-input {
+          margin: 0 auto;
+          @media screen and (max-width: $desktop-small) {
+            margin: unset;
+          }
+        }
+      }
+
+      .buttons-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        @media screen and (max-width: $desktop-small) {
+          flex-direction: row;
+          justify-content: space-evenly;
+        }
+
+        .p-button-rounded {
+          background-color: white;
+          border: 1px solid white;
+          color: $dark-green;
+          font-weight: 700;
+          height: 2.75rem;
+          margin: 0 auto 1rem;
+          width: 13rem;
+          @media screen and (max-width: $desktop-medium) {
+            height: 2rem;
+            margin-bottom: 0.5rem;
+          }
+          @media screen and (max-width: $desktop-small) {
+            height: 2.75rem;
+            margin: 1rem;
+            width: 10rem;
+          }
+          @media screen and (max-width: $mobile-small) {
+            width: initial;
           }
 
           &:not(.p-disabled):not(.p-highlight):hover {
             border-color: $dark-green;
           }
 
-          &:focus {
-            box-shadow: unset;
+          &:last-of-type {
+            margin-bottom: 0;
           }
-
-          .p-button-label {
-            font-weight: 700;
-          }
-        }
-      }
-
-      .p-button-rounded {
-        background-color: white;
-        border: 1px solid white;
-        color: $dark-green;
-        font-weight: 700;
-        height: 2.75rem;
-        margin: 0 auto 1rem;
-        width: 13rem;
-        @media screen and (max-width: $desktop-small) {
-          margin-bottom: 0;
-          margin-top: 1rem;
-          width: 10rem;
-        }
-        @media screen and (max-width: $mobile-small) {
-          width: initial;
-        }
-
-        &:not(.p-disabled):not(.p-highlight):hover {
-          border-color: $dark-green;
-        }
-
-        &:last-of-type {
-          margin-bottom: 0;
         }
       }
 
@@ -356,7 +400,7 @@
     cursor: pointer;
     margin-top: 0;
     max-height: 376px;
-    padding: 25px 0;
+    padding: 1rem 0;
     @media screen and (max-width: $desktop-small) {
       padding: 2rem 1.2rem;
       margin: 0 auto;
