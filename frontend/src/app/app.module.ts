@@ -1,4 +1,5 @@
-import { BrowserModule } from "@angular/platform-browser";
+import { BrowserModule, HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from "@angular/platform-browser";
+import * as Hammer from 'hammerjs';
 import { NgModule } from "@angular/core";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -57,6 +58,12 @@ import { RouterStateManagementModule } from "./router/state-management/state-man
 import { AgentsStateManagementModule } from "./agents/state-management/state-management.module";
 import { EcoHousesComponent } from './eco-houses/eco-houses.component';
 
+export class MyHammerConfig extends HammerGestureConfig {
+  overrides = <any>{
+    swipe: { direction: Hammer.DIRECTION_ALL },
+  };
+}
+
 @NgModule({
   declarations: [
     AgentBriefComponent,
@@ -104,6 +111,7 @@ import { EcoHousesComponent } from './eco-houses/eco-houses.component';
     DropdownModule,
     FormsModule,
     GalleriaModule,
+    HammerModule,
     InputTextModule,
     MatButtonModule,
     MatDividerModule,
@@ -119,6 +127,7 @@ import { EcoHousesComponent } from './eco-houses/eco-houses.component';
     RouterStateManagementModule,
     AgentsStateManagementModule,
   ],
+  providers: [{ provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

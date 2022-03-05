@@ -1,6 +1,6 @@
 <div class="component-container">
   <div class="photo-with-buttons-container">
-    <div class="photo">
+    <div class="photo" (swipeleft)="loadNextPhoto()" (swiperight)="loadPreviousPhoto()">
       <img
         #current
         [src]="currentPhotoUrl"

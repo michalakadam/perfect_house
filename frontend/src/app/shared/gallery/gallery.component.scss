@@ -45,7 +45,7 @@
           width: initial;
         }
 
-        @media screen and (max-width: $tablet) {
+        @media screen and (max-width: $desktop-small) {
           height: 100%;
           object-fit: cover;
         }
@@ -76,8 +76,10 @@
 
       &:nth-of-type(1) {
         left: 2%;
-        @media screen and (max-width: $tablet) {
-        }
+      }
+
+      @media screen and (max-width: $desktop-small) {
+        display: none;
       }
 
       &:nth-of-type(2) {

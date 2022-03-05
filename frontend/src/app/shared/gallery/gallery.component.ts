@@ -83,6 +83,9 @@ export class GalleryComponent {
   }
 
   loadPreviousPhoto() {
+    if (this.currentPhotoIndex === 0) {
+      return;
+    }
     const previousPhotoIndex = this.currentPhotoIndex - 1;
     if (previousPhotoIndex < this.carouselStartIndex) {
       this.loadPreviousPhotos();
@@ -91,6 +94,9 @@ export class GalleryComponent {
   }
 
   loadNextPhoto() {
+    if (this.currentPhotoIndex === this.photos.length -1) {
+      return;
+    }
     this.updateCurrentPhoto(this.currentPhotoIndex + 1);
     if (this.currentPhotoIndex > this.carouselEndIndex) {
       this.loadNextPhotos();
@@ -139,7 +145,7 @@ export class GalleryComponent {
       : this.carouselEndIndex + 1;
 
     this.computePhotosInCarousel(startIndex);
-    this.updateCurrentPhoto(this.carouselStartIndex);
+    this.updateCurrentPhoto(runningOutOfPhotos ? this.currentPhotoIndex : this.carouselStartIndex);
   }
 
   loadPreviousPhotos() {

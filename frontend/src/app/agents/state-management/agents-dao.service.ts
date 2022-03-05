@@ -1,9 +1,10 @@
 import { Injectable } from "@angular/core";
 
-import { default as rawAgents } from "src/agents/agents.json";
 import { Agent } from "../../shared/models";
 import { AgentsConverter } from "./agents-converter.service";
-import { Observable, ReplaySubject } from "rxjs";
+import { Observable } from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import { map } from "rxjs/operators";
 
 const CEO_ID = "1155";
 
@@ -11,13 +12,15 @@ const CEO_ID = "1155";
   providedIn: "root",
 })
 export class AgentsDao {
-  private readonly agents = new ReplaySubject<Agent[]>(1);
+  private agents: Observable<Agent[]>;
 
-  constructor(private readonly agentsConverter: AgentsConverter) {
-    this.agents.next(
-      this.agentsConverter
-        .convertToReadableAgents(rawAgents.Agenci.Agent)
+  constructor(private httpClient: HttpClient, private readonly agentsConverter: AgentsConverter) {
+    // Not reading agents.json directly from filesystem to prevent caching issues.
+    this.agents = this.httpClient.get("agents/agents.json").pipe(
+      map((rawAgents: any[]) => this.agentsConverter
+        .convertToReadableAgents(rawAgents)
         .sort((a, b) => this.sortAgents(a, b))
+      )
     );
   }
 

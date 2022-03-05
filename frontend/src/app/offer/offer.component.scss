@@ -28,12 +28,16 @@
     }
     @media screen and (max-width: $desktop-small) {
       flex-direction: column;
+      height: 72vw;
     }
     @media screen and (max-width: $tablet) {
-      height: 445px;
+      height: 78vw;
+    }
+    @media screen and (max-width: $mobile) {
+      height: 88vw;
     }
     @media screen and (max-width: $mobile-small) {
-      height: 436px;
+      height: 92vw;
     }
 
     .misc-container {
@@ -56,10 +60,10 @@
             height: 514px;
           }
           @media screen and (max-width: $desktop-small) {
-            height: 445px;
+            height: 60vw;
           }
-          @media screen and (max-width: $mobile-small) {
-            height: 368px;
+          @media screen and (max-width: $tablet) {
+            height: 62vw;
           }
 
           .ol-viewport canvas {

@@ -25,6 +25,7 @@ import {
 } from "./state-helper-functions";
 import { loadCurrentAgent } from "src/app/agents/state-management/actions";
 import {
+  offerPageNavigated,
   openOfferPage,
   openOffersPage,
 } from "src/app/router/state-management/actions";
@@ -109,7 +110,7 @@ const offersReducer = createReducer(
     ...state,
     currentSearchOffers: state.mainPageOffers,
   })),
-  on(openOfferPage, (state) => ({
+  on(openOfferPage, offerPageNavigated, (state) => ({
     ...state,
     currentOffer: null,
   })),
