@@ -131,6 +131,7 @@ export class OfferComponent implements OnDestroy {
 
   openOffer() {
     this.router.navigate(["oferta", this.offerSearchSymbol]);
+    this.offerSearchSymbol = '';
   }
 
   ngOnDestroy() {

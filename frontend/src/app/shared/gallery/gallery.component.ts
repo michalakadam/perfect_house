@@ -145,7 +145,7 @@ export class GalleryComponent {
       : this.carouselEndIndex + 1;
 
     this.computePhotosInCarousel(startIndex);
-    this.updateCurrentPhoto(this.carouselStartIndex);
+    this.updateCurrentPhoto(runningOutOfPhotos ? this.currentPhotoIndex : this.carouselStartIndex);
   }
 
   loadPreviousPhotos() {
