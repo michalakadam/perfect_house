@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Input,
   OnInit,
+  OnDestroy,
 } from '@angular/core';
 
 declare let ol: any;
@@ -21,18 +22,21 @@ export class MapComponent implements OnInit {
   map: any;
 
   ngOnInit() {
-    this.map = new ol.Map({
-      target: 'map',
-      layers: [new ol.layer.Tile({ source: new ol.source.OSM() })],
-      view: new ol.View({
-        center: ol.proj.fromLonLat([this.longitude, this.lattitude]),
-        zoom: 15,
-      }),
-    });
+    // Initialize map asynchronously to avoid map not loading on consecutive pages.
+    setTimeout(() => {
+      this.map = new ol.Map({
+        target: 'map',
+        layers: [new ol.layer.Tile({ source: new ol.source.OSM() })],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([this.longitude, this.lattitude]),
+          zoom: 15,
+        }),
+      });
 
-    if (this.lattitude && this.longitude) {
-      this.addPoint(this.lattitude, this.longitude);
-    }
+      if (this.lattitude && this.longitude) {
+        this.addPoint(this.lattitude, this.longitude);
+      }
+    });
   }
 
   addPoint(lat: number, lng: number) {
