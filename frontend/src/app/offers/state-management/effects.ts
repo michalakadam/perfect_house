@@ -287,7 +287,7 @@ export class OffersEffects {
             return loadCurrentOffer({ offer });
           }
         }
-        return pageNotFound();
+        return  openOffersPage({ queryParams: DEFAULT_QUERY_PARAMETERS });
       })
     )
   );
