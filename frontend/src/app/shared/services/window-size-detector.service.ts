@@ -15,7 +15,7 @@ export const MOBILE_SMALL = 400;
   providedIn: 'root',
 })
 export class WindowSizeDetector {
-  private readonly windowSizeChangedSubject = new Subject();
+  private readonly windowSizeChangedSubject = new Subject<void>();
 
   readonly windowSizeChanged$: Observable<unknown>;
   isWindowSmallerThanDesktopLarge: boolean;

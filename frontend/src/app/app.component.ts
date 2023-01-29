@@ -15,6 +15,8 @@ import { interval, Subscription, of } from "rxjs";
 import { delayWhen } from "rxjs/operators";
 import { OffersStateManager } from "./offers/state-management/state-manager.service";
 
+const sideNavId = "sideNavToggleButton";
+
 @Component({
   selector: "perfect-root",
   templateUrl: "./app.component.html",
@@ -110,22 +112,13 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  /**
-   * Closes side navigation when any element on the page is clicked
-   * except for button that toggles side navigation.
-   * @param event is of type MouseEvent but it has to be marked as any
-   * because TS uses default MouseEvent interface, not Angular one.
-   * 'path' property does not exist on a default MouseEvent.
-   */
   @HostListener("document:click", ["$event"])
   onClick(event: any) {
     if (
       this.windowSizeDetector.isWindowSmallerThanDesktopSmall &&
-      this.isSideMenuVisible
+      this.isSideMenuVisible && !!event?.target
     ) {
-      const isSideNavButtonClicked = event.path
-        .map((element) => element.id)
-        .includes("sideNavToggleButton");
+      const isSideNavButtonClicked = event.target.id === sideNavId || event.target.offsetParent?.id === sideNavId;
       if (!isSideNavButtonClicked) {
         this.isSideMenuVisible = false;
       }

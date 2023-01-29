@@ -49,7 +49,7 @@ const AVAILABLE_MARKETS = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
-  private inputSubject = new Subject();
+  private inputSubject = new Subject<void>();
   private subscription = new Subscription();
 
   availableTransactions = AVAILABLE_TRANSACTIONS;
