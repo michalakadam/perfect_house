@@ -2,21 +2,6 @@
   "Agenci": {
     "Agent": [
       {
-        "ID": "21998",
-        "KluczAPP": "43673476",
-        "Nazwa": "Wiktor Kasperuk - Doradca ds. Nieruchomości",
-        "Imie": "Wiktor",
-        "Nazwisko": "Kasperuk",
-        "DzialFunkcja": "agent",
-        "PlikFoto": "user_21998.jpg",
-        "Telefon": "61 296 03 95",
-        "Komorka": "514 753 514",
-        "Email": "biuro@e-perfecthouse.pl",
-        "Oddzial": "244",
-        "OdpowiedzialnyNazwa": "Michał Dziarmaga",
-        "OdpowiedzialnyNrLicencji": "6902"
-      },
-      {
         "ID": "20029",
         "KluczAPP": "43673476",
         "Nazwa": "Karolina Silska - Doradca ds. nieruchomości",
