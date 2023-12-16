@@ -10,6 +10,203 @@
     }
   }
 
+  .new-customer-prompt {
+    position: absolute;
+    top: 165px;
+    right: 40px;
+    background-color: rgba(0, 0, 0, 0.4);
+    height: 600px;
+    width: 400px;
+
+    @media screen and (max-width: $desktop-huge) {
+      height: 27vw;
+      right: 30px;
+      top: 160px;
+    }
+    @media screen and (max-width: $desktop-large) {
+      height: 24vw;
+    }
+    @media screen and (max-width: $desktop-medium) {
+      height: 37vw;
+    }
+    @media screen and (max-width: $desktop-small) {
+      top: 90px;
+      right: 24px;
+      width: 350px;
+    }
+    @media screen and (max-width: $tablet) {
+      top: 87px;
+      width: 275px;
+    }
+    @media screen and (max-width: $mobile-large) {
+      left: 5%;
+      height: 30vw;
+      width: 86%;
+      top: 130px;
+    }
+    @media screen and (max-width: $mobile) {
+      top: 115px;
+      left: 3%;
+      width: 94%;
+    }
+    @media screen and (max-width: $mobile-small) {
+      top: 105px;
+    }
+
+    .green-frame {
+      border: 2px solid $light-green;
+      position: absolute;
+      top: 2%;
+      left: 3%;
+      height: 96%;
+      width: 94%;
+
+      @media screen and (max-width: $desktop-large) {
+        left: 2%;
+        width: 96%;
+      }
+      @media screen and (max-width: $tablet) {
+        top: 2.5%;
+        height: 95%
+      }
+      @media screen and (max-width: $mobile-large) {
+        left: 1%;
+        width: 98%;
+      }
+    }
+
+    .content {
+      color: $font-white;
+      font-weight: bold;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      padding: 11% 10.5%;
+
+      @media screen and (max-width: $desktop-huge) {
+        padding-top: 2vw;
+      }
+      @media screen and (max-width: $desktop-small) {
+        padding: 8% 11%;
+      }
+      @media screen and (max-width: $tablet) {
+        padding: 7% 8%;
+      }
+      @media screen and (max-width: $mobile-large) {
+        padding: 3% 4%;
+      }
+      @media screen and (max-width: $mobile-large) {
+        padding: 3% 4%;
+      }
+      @media screen and (max-width: $mobile) {
+        padding: 2% 5%;
+      }
+      @media screen and (max-width: $mobile) {
+        padding: 1% 4%;
+      }
+
+      .title {
+        font-size: 36px;
+
+        @media screen and (max-width: $desktop-large) {
+          font-size: 25px;
+        }
+        @media screen and (max-width: $desktop-medium) {
+          font-size: 30px;
+        }
+        @media screen and (max-width: $desktop-small) {
+          font-size: 20px;
+        }
+        @media screen and (max-width: $tablet) {
+          font-size: 18px;
+        }
+        @media screen and (max-width: $mobile-large) {
+          font-size: 16px;
+        }
+      }
+
+      .buttons {
+        & > * {
+          display: flex;
+          justify-content: space-between;
+          font-size: 20px;
+          margin-top: 4rem;
+
+          @media screen and (max-width: $desktop-huge) {
+            margin-top: 1.5vw;
+          }
+          @media screen and (max-width: $desktop-large) {
+            font-size: 18px;
+            margin-top: 1vw;
+          }
+          @media screen and (max-width: $desktop-medium) {
+            font-size: 20px;
+            margin-top: 1.75rem;
+          }
+          @media screen and (max-width: $desktop-small) {
+            font-size: 16px;
+            margin-top: 1rem;
+          }
+          @media screen and (max-width: $mobile-large) {
+            justify-content: flex-start;
+            margin-top: 0.5vw;
+          }
+        }
+
+        .icon {
+          height: 78px;
+          padding-right: 2rem;
+          padding-top: 6px;
+
+          @media screen and (max-width: $tablet) {
+            height: 60px;
+          }
+          @media screen and (max-width: $mobile-large) {
+            height: 48px;
+          }
+          @media screen and (max-width: $mobile) {
+            padding-right: 1.5rem;
+          }
+        }
+
+        .button-content {
+
+          @media screen and (max-width: $desktop-large) {
+            margin-top: 0.4rem;
+          }
+          @media screen and (max-width: $desktop-medium) {
+            margin-top: 0;
+          }
+          @media screen and (max-width: $desktop-small) {
+            margin-top: 0.8rem;
+          }
+          @media screen and (max-width: $tablet) {
+            font-size: 14px;
+            margin-top: 0.4rem;
+          }
+          @media screen and (max-width: $mobile-large) {
+            font-size: 12px;
+            margin-top: 1.5rem;
+          }
+          @media screen and (max-width: $mobile) {
+            font-size: 14px;
+            margin-top: 0.6rem;
+          }
+
+          &.second {
+            
+            @media screen and (max-width: $mobile) {
+              width: 230px;
+            }
+            @media screen and (max-width: $mobile-small) {
+              width: unset;
+            }
+          }
+        }
+      }
+    }
+  }
+
   .search-tool-background {
     background-color: rgba(255, 255, 255, 0.925);
     bottom: 223px;

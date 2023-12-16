@@ -21,6 +21,30 @@
     </ng-template>
   </p-galleria>
 
+  <div class="new-customer-prompt">
+    <div class="green-frame"></div>
+
+    <div class="content">
+      <div *ngIf="!windowSizeDetector.isWindowSmallerThanMobile" class="title">
+        Chcesz SPRZEDAĆ lub ZNALEŹĆ nieruchomość?
+      </div>
+      <div class="buttons">
+        <div class="sell-rent">
+          <img class="icon" src="assets/house_icon.png">
+          <div class="button-content first">
+            SPRZEDAMY/ WYNAJMIEMY Twoją nieruchomość!
+          </div>
+        </div>
+        <div class="search">
+          <img class="icon" src="assets/loop_icon.png">
+          <div class="button-content second">
+            POSZUKAMY nieruchomości dla Ciebie!
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div
     class="search-tool-background"
     [ngClass]="{ 'space-for-advanced': advancedVisible }">
