@@ -31,13 +31,13 @@
         Chcesz SPRZEDAĆ lub ZNALEŹĆ nieruchomość?
       </div>
       <div class="buttons">
-        <div class="button sell-rent">
+        <div class="button sell-rent" [routerLink]="['/kontakt/formularz', FormType.SPRZEDAM]">
           <img class="icon first" />
           <div class="button-content first">
             SPRZEDAMY/ WYNAJMIEMY Twoją nieruchomość!
           </div>
         </div>
-        <div class="button search">
+        <div class="button search" [routerLink]="['/kontakt/formularz', FormType.SZUKAM]">
           <img class="icon second" />
           <div class="button-content second">
             POSZUKAMY nieruchomości dla Ciebie!

@@ -1,0 +1,58 @@
+<div class="component-container">
+  <div *ngIf="typ === ContactFormType.SPRZEDAM; else searchTitle">
+    <h1>CHCĘ <strong>SPRZEDAĆ/WYNAJĄĆ</strong> NIERUCHOMOŚĆ</h1>
+  </div>
+  <ng-template #searchTitle>
+    <h1><strong>SZUKAM</strong> NIERUCHOMOŚCI</h1>
+  </ng-template>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="inputs-container">
+      <div class="inputs-subcontainer" formGroupName="personalData">
+        <h2>Moje dane:</h2>
+        <div class="field">
+          <input type="text" formControlName="name" id="fullname">
+          <label for="fullname">IMIĘ I NAZWISKO</label>
+        </div>
+        <input type="tel" formControlName="phoneNumber" placeholder="NUMER TELEFONU">
+        <input type="email" formControlName="email" placeholder="ADRES E-MAIL">
+      </div>
+
+      <div class="inputs-subcontainer" formGroupName="propertyDetails">
+        <div *ngIf="typ === ContactFormType.SPRZEDAM; else searchSubtitle">
+          <h2>Moja nieruchomość:</h2>
+        </div>
+        <ng-template #searchSubtitle>
+          <h2>Poszukiwana nieruchomość:</h2>
+        </ng-template>
+        <input *ngIf="typ === ContactFormType.SZUKAM" type="text" formControlName="advertisementType" placeholder="RODZAJ OGŁOSZENIA">
+        <input type="text" formControlName="propertyType" placeholder="RODZAJ NIERUCHOMOŚCI">
+        <input type="text" formControlName="region" placeholder="WOJEWÓDZTWO">
+        <input type="text" formControlName="city" placeholder="MIASTO">
+        <input type="text" formControlName="district" placeholder="DZIELNICA">
+        <div class="inputs-next-to-each-other">
+          <input *ngIf="typ === ContactFormType.SZUKAM" type="text" formControlName="priceFrom" placeholder="CENA OD">
+          <input *ngIf="typ === ContactFormType.SZUKAM" type="text" formControlName="priceTo" placeholder="CENA DO">
+        </div>
+        <div class="inputs-next-to-each-other">
+          <input *ngIf="typ === ContactFormType.SZUKAM" type="text" formControlName="areaFrom" placeholder="POWIERZCHNIA OD">
+          <input *ngIf="typ === ContactFormType.SZUKAM" type="text" formControlName="areaTo" placeholder="POWIERZCHNIA DO">
+        </div>
+        <input *ngIf="typ === ContactFormType.SPRZEDAM" type="text" formControlName="price" placeholder="CENA">
+        <input *ngIf="typ === ContactFormType.SPRZEDAM" type="text" formControlName="area" placeholder="POWIERZCHNIA">
+        <input *ngIf="typ === ContactFormType.SPRZEDAM" type="text" formControlName="advertisementType" placeholder="RODZAJ OGŁOSZENIA">
+      </div>
+    </div>
+
+    <label>
+      <mat-radio-group formControlName="consent">
+        <mat-radio-button [value]="true" color="primary"></mat-radio-button>
+      </mat-radio-group>
+      Wyrażam zgodę na przetwarzanie podanych przeze mnie danych osobowych. Administratorem danych jest Firma Infinity.
+      Mam prawo dostępu do swoich danych i ich poprawiania. Podanie danych jest dobrowolne.
+      Dane zbierane są w celu marketingowym oraz w celu realizowania i wykonania zawartej umowy
+      lub do podjęcia działań na Twoje żądanie przed zawarciem umowy.
+    </label>
+    <button type="submit" [disabled]="!form.valid">Wyślij</button>
+  </form>
+</div>

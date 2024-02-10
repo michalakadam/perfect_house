@@ -12,6 +12,7 @@ import { ManagementComponent } from './management/management.component';
 import { ValuesComponent } from './values/values.component';
 import { NewsFeedComponent } from './news-feed/news-feed.component';
 import { EcoHousesComponent } from './eco-houses/eco-houses.component';
+import { ContactFormComponent } from './contact/contact-form/contact-form.component';
 
 const routes: Routes = [
   {
@@ -85,6 +86,13 @@ const routes: Routes = [
     data: {
       title: 'Kontakt',
     },
+  },
+  {
+    path: 'kontakt/formularz/:typ',
+    component: ContactFormComponent,
+    data: {
+      title: 'Formularz kontaktowy',
+    }
   },
   {
     path: '**',

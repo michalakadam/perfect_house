@@ -13,6 +13,7 @@ import {
   OffersFilters,
 } from 'src/app/shared/models';
 import { OffersStateManager } from '../offers/state-management/state-manager.service';
+import { ContactFormType } from '../contact/contact-form/contact-form.component';
 
 const IMAGES: GalleryPhoto[] = [
   {
@@ -123,4 +124,6 @@ export class MainComponent implements OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
+
+  protected readonly FormType = ContactFormType;
 }

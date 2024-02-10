@@ -33,7 +33,7 @@ import { SortingToolComponent } from './offers/sorting-tool/sorting-tool.compone
 import { DropdownModule } from 'primeng/dropdown';
 import { SearchToolComponent } from './offers/search-tool/search-tool.component';
 import { InputTextModule } from 'primeng/inputtext';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { ButtonModule } from 'primeng/button';
 import { AgentsComponent } from './agents/agents.component';
@@ -62,6 +62,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { RouterStateManagementModule } from './router/state-management/state-management.module';
 import { AgentsStateManagementModule } from './agents/state-management/state-management.module';
 import { EcoHousesComponent } from './eco-houses/eco-houses.component';
+import { ContactFormComponent } from './contact/contact-form/contact-form.component';
+import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -105,6 +107,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     StarRatingComponent,
     LoadingSpinnerComponent,
     EcoHousesComponent,
+    ContactFormComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -131,6 +134,9 @@ export class MyHammerConfig extends HammerGestureConfig {
     OffersStateManagementModule,
     RouterStateManagementModule,
     AgentsStateManagementModule,
+    ReactiveFormsModule,
+    MatRadioGroup,
+    MatRadioButton,
   ],
   providers: [{ provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig }],
   bootstrap: [AppComponent],
