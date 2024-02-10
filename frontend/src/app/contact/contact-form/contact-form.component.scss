@@ -42,9 +42,18 @@
           }
         }
 
-        h2 {
-          font-weight: 500;
-          margin-top: 0;
+        .text-with-image {
+          display: flex;
+          align-items: center;
+
+          .icon {
+            margin-right: 1rem;
+            margin-bottom: 1rem;
+          }
+          h2 {
+            font-weight: 500;
+            margin-top: 0;
+          }
         }
 
         // Heavily inspired by https://css-tricks.com/float-labels-css/
@@ -54,7 +63,8 @@
           height: 60px;
 
           // Add a transition to the label and input.
-          label, input {
+          label,
+          input {
             transition: all 0.2s;
             touch-action: manipulation;
           }

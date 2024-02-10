@@ -9,9 +9,17 @@
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="inputs-container">
       <div class="inputs-subcontainer" formGroupName="personalData">
-        <h2>Moje dane:</h2>
+        <div class="text-with-image">
+          <img src="assets/ludzik.png" alt="Icon" class="icon">
+          <h2>Moje dane:</h2>
+        </div>
         <div class="field">
-          <input type="text" formControlName="name" id="fullname" placeholder=""/>
+          <input
+            type="text"
+            formControlName="name"
+            id="fullname"
+            placeholder=""
+          />
           <label for="fullname">IMIĘ I NAZWISKO</label>
         </div>
         <div class="field">
@@ -35,12 +43,15 @@
       </div>
 
       <div class="inputs-subcontainer" formGroupName="propertyDetails">
-        <div *ngIf="typ === ContactFormType.SPRZEDAM; else searchSubtitle">
-          <h2>Moja nieruchomość:</h2>
+        <div class="text-with-image">
+          <img src="assets/lupka.png" alt="Icon" class="icon">
+          <div *ngIf="typ === ContactFormType.SPRZEDAM; else searchSubtitle">
+              <h2>Moja nieruchomość:</h2>
+          </div>
+          <ng-template #searchSubtitle>
+            <h2>Poszukiwana nieruchomość:</h2>
+          </ng-template>
         </div>
-        <ng-template #searchSubtitle>
-          <h2>Poszukiwana nieruchomość:</h2>
-        </ng-template>
         <div class="field" *ngIf="typ === ContactFormType.SZUKAM">
           <input
             type="text"
@@ -60,7 +71,12 @@
           <label for="propertyType">RODZAJ NIERUCHOMOŚCI</label>
         </div>
         <div class="field">
-          <input type="text" formControlName="region" id="region" placeholder="" />
+          <input
+            type="text"
+            formControlName="region"
+            id="region"
+            placeholder=""
+          />
           <label for="region">WOJEWÓDZTWO</label>
         </div>
         <div class="field">
@@ -68,10 +84,18 @@
           <label for="city">MIASTO</label>
         </div>
         <div class="field">
-          <input type="text" formControlName="district" id="district" placeholder="" />
+          <input
+            type="text"
+            formControlName="district"
+            id="district"
+            placeholder=""
+          />
           <label for="district">DZIELNICA</label>
         </div>
-        <div class="inputs-next-to-each-other" *ngIf="typ === ContactFormType.SZUKAM">
+        <div
+          class="inputs-next-to-each-other"
+          *ngIf="typ === ContactFormType.SZUKAM"
+        >
           <div class="field">
             <input
               type="text"
@@ -91,7 +115,10 @@
             <label for="priceTo">CENA DO</label>
           </div>
         </div>
-        <div class="inputs-next-to-each-other" *ngIf="typ === ContactFormType.SZUKAM">
+        <div
+          class="inputs-next-to-each-other"
+          *ngIf="typ === ContactFormType.SZUKAM"
+        >
           <div class="field">
             <input
               type="text"
@@ -121,12 +148,7 @@
           <label for="price">CENA</label>
         </div>
         <div class="field" *ngIf="typ === ContactFormType.SPRZEDAM">
-          <input
-            type="text"
-            formControlName="area"
-            id="area"
-            placeholder=""
-          />
+          <input type="text" formControlName="area" id="area" placeholder="" />
           <label for="area">POWIERZCHNIA</label>
         </div>
         <div class="field" *ngIf="typ === ContactFormType.SPRZEDAM">
