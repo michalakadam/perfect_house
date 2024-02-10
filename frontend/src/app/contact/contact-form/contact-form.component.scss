@@ -19,9 +19,18 @@
       display: flex;
       justify-content: space-between;
 
+      @media screen and (max-width: $desktop-small) {
+        flex-direction: column;
+        align-content: center;
+      }
+
       .inputs-subcontainer {
         width: 50%;
         padding: 2rem;
+
+        @media screen and (max-width: $desktop-small) {
+          width: 100%;
+        }
 
         &:first-of-type {
           background-color: #f4f4f4;
@@ -38,20 +47,49 @@
           margin-top: 0;
         }
 
-        mat-form-field {
-          margin: 10px 0;
-          width: 100%;
-        }
+        // Heavily inspired by https://css-tricks.com/float-labels-css/
+        .field {
+          display: flex;
+          flex-flow: column-reverse;
+          height: 60px;
 
-        input {
-          width: 100%;
-          padding: 10px;
-          margin: 10px 0;
-          border: none;
-          border-bottom: 2px solid $light-green;
+          // Add a transition to the label and input.
+          label, input {
+            transition: all 0.2s;
+            touch-action: manipulation;
+          }
 
-          &:focus {
-            outline: none;
+          input {
+            border: none;
+            border-bottom: 2px solid $light-green;
+            padding: 0;
+            width: 100%;
+          }
+
+          input:focus {
+            outline: 0;
+          }
+
+          /**
+          * Translate down and scale the label up to cover the placeholder,
+          * when following an input (with placeholder-shown support).
+          * Also make sure the label is only on one row, at max 2/3rds of the
+          * field—to make sure it scales properly and doesn't wrap.
+          */
+          input:placeholder-shown + label {
+            cursor: text;
+            transform-origin: left bottom;
+            transform: translate(0, 0.9rem) scale(1);
+          }
+          /**
+          * When the element is focused, remove the label transform.
+          * Also, do this when the placeholder is _not_ shown, i.e. when
+          * there's something in the input at all.
+          */
+          input:not(:placeholder-shown) + label,
+          input:focus + label {
+            transform: translate(0, -0.2rem) scale(1);
+            cursor: pointer;
           }
         }
 
@@ -60,8 +98,12 @@
           justify-content: space-between;
           width: 100%;
 
-          input:first-of-type {
-            margin-right: 1rem;
+          .field {
+            width: 100%;
+
+            &:first-of-type {
+              margin-right: 1rem;
+            }
           }
         }
       }
@@ -73,6 +115,11 @@
       font-size: 12px;
       color: $font-light-grey;
       margin-top: 2rem;
+
+      @media screen and (max-width: $desktop-small) {
+        align-self: center;
+        width: 95%;
+      }
 
       mat-radio-group {
         color: $light-green;

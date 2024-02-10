@@ -92,7 +92,7 @@ const routes: Routes = [
     component: ContactFormComponent,
     data: {
       title: 'Formularz kontaktowy',
-    }
+    },
   },
   {
     path: '**',

@@ -11,7 +11,7 @@ export enum ContactFormType {
   selector: 'perfect-contact-form',
   templateUrl: './contact-form.component.html',
   styleUrl: './contact-form.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactFormComponent {
   readonly ContactFormType = ContactFormType;
@@ -19,8 +19,11 @@ export class ContactFormComponent {
   typ: ContactFormType = ContactFormType.SZUKAM;
   form: FormGroup;
 
-  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder) {
-    this.route.params.subscribe(params => {
+  constructor(
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
+  ) {
+    this.route.params.subscribe((params) => {
       this.typ = params['typ'];
     });
 
@@ -28,7 +31,7 @@ export class ContactFormComponent {
       personalData: this.formBuilder.group({
         name: ['', Validators.required],
         phoneNumber: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email]]
+        email: ['', [Validators.required, Validators.email]],
       }),
       propertyDetails: this.formBuilder.group({
         advertisementType: [''],
@@ -41,7 +44,7 @@ export class ContactFormComponent {
         priceTo: [''],
         area: [''],
         areaFrom: [''],
-        areaTo: ['']
+        areaTo: [''],
       }),
       consent: [false, Validators.requiredTrue],
     });
