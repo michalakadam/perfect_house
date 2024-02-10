@@ -10,7 +10,7 @@
     <div class="inputs-container">
       <div class="inputs-subcontainer" formGroupName="personalData">
         <div class="text-with-image">
-          <img src="assets/ludzik.png" alt="Icon" class="icon">
+          <img src="assets/ludzik.png" alt="Icon" class="icon" />
           <h2>Moje dane:</h2>
         </div>
         <div class="field">
@@ -44,9 +44,9 @@
 
       <div class="inputs-subcontainer" formGroupName="propertyDetails">
         <div class="text-with-image">
-          <img src="assets/lupka.png" alt="Icon" class="icon">
+          <img src="assets/lupka.png" alt="Icon" class="icon" />
           <div *ngIf="typ === ContactFormType.SPRZEDAM; else searchSubtitle">
-              <h2>Moja nieruchomość:</h2>
+            <h2>Moja nieruchomość:</h2>
           </div>
           <ng-template #searchSubtitle>
             <h2>Poszukiwana nieruchomość:</h2>
