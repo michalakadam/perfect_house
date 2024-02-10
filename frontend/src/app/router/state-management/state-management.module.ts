@@ -1,12 +1,12 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { StoreModule } from "@ngrx/store";
-import { routerReducer, StoreRouterConnectingModule } from "@ngrx/router-store";
-import { RouterSerializer } from "./serializer";
-import { EffectsModule } from "@ngrx/effects";
-import { RouterEffects } from "./effects";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { StoreModule } from '@ngrx/store';
+import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { RouterSerializer } from './serializer';
+import { EffectsModule } from '@ngrx/effects';
+import { RouterEffects } from './effects';
 
-export const stateKey = "router";
+export const stateKey = 'router';
 
 @NgModule({
   imports: [

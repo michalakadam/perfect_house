@@ -1,4 +1,10 @@
-<div class="component-container" *ngIf="(offersStateManager.isCurrentOfferLoading$ | async) === false; else spinner">
+<div
+  class="component-container"
+  *ngIf="
+    (offersStateManager.isCurrentOfferLoading$ | async) === false;
+    else spinner
+  "
+>
   <div class="misc-agent-container">
     <div class="card misc-container">
       <perfect-gallery *ngIf="isGalleryActive" [photoUrls]="photoUrls">
@@ -7,65 +13,81 @@
       <perfect-map
         *ngIf="isMapActive"
         [lattitude]="offer.lattitude"
-        [longitude]="offer.longitude">
+        [longitude]="offer.longitude"
+      >
       </perfect-map>
 
       <embed
         *ngIf="isVirtualVisitActive"
         type="text/html"
-        [src]="offer.virtualVisitUrl | safe"/>
+        [src]="offer.virtualVisitUrl | safe"
+      />
     </div>
     <div class="agent-buttons-container">
       <div class="navigation-search-container">
-        <div class="navigation-buttons-container"
-          *ngIf="offersStateManager.currentSearchOffersQuantity$ | async">
+        <div
+          class="navigation-buttons-container"
+          *ngIf="offersStateManager.currentSearchOffersQuantity$ | async"
+        >
           <button
             type="button"
             pButton
             icon="pi pi-angle-left"
             label="poprzednia"
-            [disabled]="(offersStateManager.isPreviousOfferAvailable$ | async) === false"
-            (click)="offersStateManager.loadPreviousOffer()"></button>
+            [disabled]="
+              (offersStateManager.isPreviousOfferAvailable$ | async) === false
+            "
+            (click)="offersStateManager.loadPreviousOffer()"
+          ></button>
           <button
             type="button"
             pButton
             icon="pi pi-angle-right"
             label="kolejna"
             iconPos="right"
-            [class.hidden]="(offersStateManager.isNextOfferAvailable$ | async) === false"
-            (click)="offersStateManager.loadNextOffer()"></button>
+            [class.hidden]="
+              (offersStateManager.isNextOfferAvailable$ | async) === false
+            "
+            (click)="offersStateManager.loadNextOffer()"
+          ></button>
         </div>
         <perfect-input
           class="symbol-input"
           title="przejdź do innej oferty"
           enterActivated
           (enterPressed)="openOffer()"
-          [(value)]="offerSearchSymbol">
+          [(value)]="offerSearchSymbol"
+        >
         </perfect-input>
       </div>
       <div
         class="card agent-brief"
-        *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall">
+        *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall"
+      >
         <perfect-agent-brief
           *ngIf="agentsStateManager.agentById$(offer.agentId) | async as agent"
           [agent]="agent"
           bigger
           contactInfoVisible
           vertical
-					[offersCount]="offersStateManager.offersCountByAgentId$(agent.id) | async"
-          (click)="navigateToAgentPage(agent)">
+          [offersCount]="
+            offersStateManager.offersCountByAgentId$(agent.id) | async
+          "
+          (click)="navigateToAgentPage(agent)"
+        >
         </perfect-agent-brief>
       </div>
       <div class="buttons-container">
         <button
-          *ngIf="offer.lattitude && offer.longitude || offer.virtualVisitUrl"
+          *ngIf="(offer.lattitude && offer.longitude) || offer.virtualVisitUrl"
           pButton
           pRipple
           type="button"
           label="Zdjęcia"
           class="p-button-rounded p-button-raised"
           [class.selected]="isGalleryActive"
-          (click)="showGallery()"></button>
+          (click)="showGallery()"
+        ></button>
         <button
           *ngIf="offer.lattitude && offer.longitude"
           pButton
@@ -74,7 +96,8 @@
           label="Mapa"
           class="p-button-rounded p-button-raised"
           [class.selected]="isMapActive"
-          (click)="showMap()"></button>
+          (click)="showMap()"
+        ></button>
         <button
           *ngIf="offer.virtualVisitUrl"
           pButton
@@ -83,7 +106,8 @@
           label="Wirtualna wizyta"
           class="p-button-rounded p-button-raised"
           [class.selected]="isVirtualVisitActive"
-          (click)="showVirtualVisit()"></button>
+          (click)="showVirtualVisit()"
+        ></button>
       </div>
     </div>
   </div>
@@ -106,14 +130,16 @@
         </div>
         <div
           class="price-per-meter"
-          [class.hidden]="!offer.pricePerSquareMeter.value">
+          [class.hidden]="!offer.pricePerSquareMeter.value"
+        >
           {{ offer.pricePerSquareMeter.value | prettifyNumber: 'zł/m²' }}
         </div>
       </div>
     </div>
     <div
       class="description-details"
-      *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall">
+      *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall"
+    >
       <div class="description">
         {{ offer.description | decodeString }}
       </div>
@@ -123,7 +149,8 @@
     </div>
     <div
       class="description-details-responsive"
-      *ngIf="windowSizeDetector.isWindowSmallerThanDesktopSmall">
+      *ngIf="windowSizeDetector.isWindowSmallerThanDesktopSmall"
+    >
       <p-tabView>
         <p-tabPanel header="Opis">
           <div class="description">
@@ -150,41 +177,45 @@
 
   <div
     class="card agent-brief"
-    *ngIf="windowSizeDetector.isWindowSmallerThanDesktopSmall">
+    *ngIf="windowSizeDetector.isWindowSmallerThanDesktopSmall"
+  >
     <perfect-agent-brief
       *ngIf="agentsStateManager.agentById$(offer.agentId) | async as agent"
       [agent]="agent"
       bigger
       contactInfoVisible
       vertical
-			[offersCount]="offersStateManager.offersCountByAgentId$(agent.id) | async"
-      (click)="navigateToAgentPage(agent)">
+      [offersCount]="offersStateManager.offersCountByAgentId$(agent.id) | async"
+      (click)="navigateToAgentPage(agent)"
+    >
     </perfect-agent-brief>
   </div>
 </div>
 
 <ng-template #spinner>
-	<perfect-loading-spinner></perfect-loading-spinner>
+  <perfect-loading-spinner></perfect-loading-spinner>
 </ng-template>
 
 <ng-template #details>
-	<ng-container *ngIf="offersStateManager.currentOffer$ | async as offer">
-		<div *ngFor="let field of definedOfferFields; let last = last">
-			<div class="field" *ngIf="field.value" [class.last]="last">
-				<span class="field-name">{{ field.displayName }}:</span>
-				<span
-					class="field-value"
-					*ngIf="!isBoolean(field.value) && field.displayName !== 'Standard'">
-					{{ field.value }}
-					<span class="unit" *ngIf="field.unit">{{ field.unit }}</span>
-				</span>
-				<perfect-star-rating
-					*ngIf="field.displayName === 'Standard'"
-					[score]="field.value"
-					outOf="5">
-				</perfect-star-rating>
-				<span class="field-value" *ngIf="field.value === true"> jest </span>
-			</div>
-		</div>
-	</ng-container>
+  <ng-container *ngIf="offersStateManager.currentOffer$ | async as offer">
+    <div *ngFor="let field of definedOfferFields; let last = last">
+      <div class="field" *ngIf="field.value" [class.last]="last">
+        <span class="field-name">{{ field.displayName }}:</span>
+        <span
+          class="field-value"
+          *ngIf="!isBoolean(field.value) && field.displayName !== 'Standard'"
+        >
+          {{ field.value }}
+          <span class="unit" *ngIf="field.unit">{{ field.unit }}</span>
+        </span>
+        <perfect-star-rating
+          *ngIf="field.displayName === 'Standard'"
+          [score]="field.value"
+          outOf="5"
+        >
+        </perfect-star-rating>
+        <span class="field-value" *ngIf="field.value === true"> jest </span>
+      </div>
+    </div>
+  </ng-container>
 </ng-template>

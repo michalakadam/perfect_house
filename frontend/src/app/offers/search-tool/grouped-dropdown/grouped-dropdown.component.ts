@@ -52,7 +52,7 @@ export class GroupedDropdownComponent implements OnInit {
   set groups(val: DropdownGroup[]) {
     this.groupsWithValues = val;
     const selectedGroup = this.groupsWithValues.find(
-      (group) => group.isSelected
+      (group) => group.isSelected,
     );
     this.selected = selectedGroup ? this.computeSelected(selectedGroup) : '';
   }
@@ -99,7 +99,7 @@ export class GroupedDropdownComponent implements OnInit {
 
   toggleGroupVisibility(group: DropdownGroup) {
     const otherGroups = this.groupsWithValues.filter(
-      (g) => g.displayName !== group.displayName
+      (g) => g.displayName !== group.displayName,
     );
 
     for (const group of otherGroups) {

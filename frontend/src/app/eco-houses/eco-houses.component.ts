@@ -1,4 +1,9 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  OnDestroy,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AgentsStateManager } from '../agents/state-management/state-manager.service';
 import { WindowSizeDetector } from '../shared/services/window-size-detector.service';
@@ -29,12 +34,12 @@ export class EcoHousesComponent implements OnDestroy {
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,
     readonly agentsStateManager: AgentsStateManager,
-    private readonly changeDetector: ChangeDetectorRef
+    private readonly changeDetector: ChangeDetectorRef,
   ) {
     this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(
       () => {
         this.changeDetector.detectChanges();
-      }
+      },
     );
   }
 

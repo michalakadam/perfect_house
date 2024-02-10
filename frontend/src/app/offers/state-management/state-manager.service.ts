@@ -1,7 +1,7 @@
-import { Injectable } from "@angular/core";
-import { Store } from "@ngrx/store";
-import { Offer, OffersFilters, Sorting } from "src/app/shared/models";
-import { Observable } from "rxjs";
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Offer, OffersFilters, Sorting } from 'src/app/shared/models';
+import { Observable } from 'rxjs';
 import {
   listOffers,
   loadNextOffer,
@@ -10,11 +10,11 @@ import {
   updateFilters,
   updatePageNumber,
   updateSorting,
-} from "./actions";
-import * as selectors from "./selectors";
+} from './actions';
+import * as selectors from './selectors';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class OffersStateManager {
   constructor(private store: Store) {
@@ -24,41 +24,43 @@ export class OffersStateManager {
   isLoading$: Observable<boolean> = this.store.select(selectors.getIsLoading);
 
   isSearching$: Observable<boolean> = this.store.select(
-    selectors.getIsSearching
+    selectors.getIsSearching,
   );
 
-  isCurrentOfferLoading$: Observable<boolean> = this.store.select(selectors.getIsCurrentOfferLoading);
+  isCurrentOfferLoading$: Observable<boolean> = this.store.select(
+    selectors.getIsCurrentOfferLoading,
+  );
 
   currentOffer$: Observable<Offer> = this.store.select(
-    selectors.getCurrentOffer
+    selectors.getCurrentOffer,
   );
 
   isPreviousOfferAvailable$: Observable<boolean> = this.store.select(
-    selectors.getIsPreviousOfferAvailable
+    selectors.getIsPreviousOfferAvailable,
   );
 
   isNextOfferAvailable$: Observable<boolean> = this.store.select(
-    selectors.getIsNextOfferAvailable
+    selectors.getIsNextOfferAvailable,
   );
 
   offersForMainPage$: Observable<Offer[]> = this.store.select(
-    selectors.getOffersForMainPage
+    selectors.getOffersForMainPage,
   );
 
   offersForCurrentPage$: Observable<Offer[]> = this.store.select(
-    selectors.getOffersForCurrentPage
+    selectors.getOffersForCurrentPage,
   );
 
   currentSearchOffersQuantity$: Observable<number> = this.store.select(
-    selectors.getCurrentSearchOffersQuantity
+    selectors.getCurrentSearchOffersQuantity,
   );
 
   lowestPriceForCurrentSearch$: Observable<number> = this.store.select(
-    selectors.getLowestPriceForCurrentSearch
+    selectors.getLowestPriceForCurrentSearch,
   );
 
   highestPriceForCurrentSearch$: Observable<number> = this.store.select(
-    selectors.getHighestPriceForCurrentSearch
+    selectors.getHighestPriceForCurrentSearch,
   );
 
   pageNumber$: Observable<number> = this.store.select(selectors.getPageNumber);
@@ -68,7 +70,7 @@ export class OffersStateManager {
   filters$: Observable<OffersFilters> = this.store.select(selectors.getFilters);
 
   numberOfPages$: Observable<number> = this.store.select(
-    selectors.getNumberOfPages
+    selectors.getNumberOfPages,
   );
 
   voivodeshipsWithCounties$: Observable<Map<string, string[]>> =
@@ -79,10 +81,10 @@ export class OffersStateManager {
 
   distinctLocations$(
     voivodeship: string,
-    county: string
+    county: string,
   ): Observable<string[]> {
     return this.store.select(
-      selectors.getDistinctLocations(voivodeship, county)
+      selectors.getDistinctLocations(voivodeship, county),
     );
   }
 
@@ -96,7 +98,7 @@ export class OffersStateManager {
 
   offersCountByAgentId$(agentId: string): Observable<number> {
     return this.store.select(
-      selectors.getOffersCountByAgentId(parseInt(agentId))
+      selectors.getOffersCountByAgentId(parseInt(agentId)),
     );
   }
 

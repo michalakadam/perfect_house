@@ -4,17 +4,17 @@ import {
   Input,
   ChangeDetectorRef,
   OnDestroy,
-} from "@angular/core";
-import { WindowSizeDetector } from "src/app/shared/services/window-size-detector.service";
-import { Agent } from "../models";
-import { coerceBooleanProperty } from "@angular/cdk/coercion";
-import { Subscription } from "rxjs";
+} from '@angular/core';
+import { WindowSizeDetector } from 'src/app/shared/services/window-size-detector.service';
+import { Agent } from '../models';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { Subscription } from 'rxjs';
 
 /** Awatar pracownika. Zawiera zdjęcie, imię i nazwisko oraz tytuł zawodowy. */
 @Component({
-  selector: "perfect-agent-brief",
-  templateUrl: "./agent-brief.component.html",
-  styleUrls: ["./agent-brief.component.scss"],
+  selector: 'perfect-agent-brief',
+  templateUrl: './agent-brief.component.html',
+  styleUrls: ['./agent-brief.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AgentBriefComponent implements OnDestroy {
@@ -51,12 +51,12 @@ export class AgentBriefComponent implements OnDestroy {
 
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,
-    readonly changeDetector: ChangeDetectorRef
+    readonly changeDetector: ChangeDetectorRef,
   ) {
     this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(
       () => {
         this.changeDetector.detectChanges();
-      }
+      },
     );
   }
 

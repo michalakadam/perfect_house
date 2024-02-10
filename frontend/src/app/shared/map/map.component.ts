@@ -45,7 +45,7 @@ export class MapComponent implements OnInit {
         features: [
           new ol.Feature({
             geometry: new ol.geom.Point(
-              ol.proj.transform([lng, lat], 'EPSG:4326', 'EPSG:3857')
+              ol.proj.transform([lng, lat], 'EPSG:4326', 'EPSG:3857'),
             ),
           }),
         ],

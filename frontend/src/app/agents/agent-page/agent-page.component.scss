@@ -1,5 +1,5 @@
-@import "src/variables.scss";
-@import "src/mixins.scss";
+@import 'variables.scss';
+@import 'mixins.scss';
 
 .component-container {
   @include responsive-page;

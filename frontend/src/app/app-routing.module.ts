@@ -1,96 +1,96 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-import { AgentPageComponent } from "./agents/agent-page/agent-page.component";
-import { AgentsComponent } from "./agents/agents.component";
-import { ConsultancyComponent } from "./consultancy/consultancy.component";
-import { ContactComponent } from "./contact/contact.component";
-import { MainComponent } from "./main/main.component";
-import { OfferComponent } from "./offer/offer.component";
-import { OffersComponent } from "./offers/offers.component";
-import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
-import { ManagementComponent } from "./management/management.component";
-import { ValuesComponent } from "./values/values.component";
-import { NewsFeedComponent } from "./news-feed/news-feed.component";
-import { EcoHousesComponent } from "./eco-houses/eco-houses.component";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { AgentPageComponent } from './agents/agent-page/agent-page.component';
+import { AgentsComponent } from './agents/agents.component';
+import { ConsultancyComponent } from './consultancy/consultancy.component';
+import { ContactComponent } from './contact/contact.component';
+import { MainComponent } from './main/main.component';
+import { OfferComponent } from './offer/offer.component';
+import { OffersComponent } from './offers/offers.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ManagementComponent } from './management/management.component';
+import { ValuesComponent } from './values/values.component';
+import { NewsFeedComponent } from './news-feed/news-feed.component';
+import { EcoHousesComponent } from './eco-houses/eco-houses.component';
 
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: MainComponent,
     data: {
-      title: "Perfect House",
+      title: 'Perfect House',
     },
   },
   {
-    path: "oferty",
+    path: 'oferty',
     component: OffersComponent,
     data: {
-      title: "Oferty",
+      title: 'Oferty',
     },
   },
   {
-    path: "oferta/:symbol",
+    path: 'oferta/:symbol',
     component: OfferComponent,
   },
   {
-    path: "doradztwo-kredytowe",
+    path: 'doradztwo-kredytowe',
     component: ConsultancyComponent,
     data: {
-      title: "Doradztwo kredytowe",
+      title: 'Doradztwo kredytowe',
     },
   },
   {
-    path: "zarządzanie",
+    path: 'zarządzanie',
     component: ManagementComponent,
     data: {
-      title: "Zarządzanie nieruchomościami",
+      title: 'Zarządzanie nieruchomościami',
     },
   },
   {
-    path: "eco-domy",
+    path: 'eco-domy',
     component: EcoHousesComponent,
     data: {
-      title: "Nowoczesne eco domy"
+      title: 'Nowoczesne eco domy',
     },
   },
   {
-    path: "wartości",
+    path: 'wartości',
     component: ValuesComponent,
     data: {
-      title: "Nasze wartości",
+      title: 'Nasze wartości',
     },
   },
   {
-    path: "ludzie",
+    path: 'ludzie',
     component: AgentsComponent,
     data: {
-      title: "Ludzie",
+      title: 'Ludzie',
     },
   },
   // Router state does not recognize params of a child route.
   {
-    path: "ludzie/:agent",
+    path: 'ludzie/:agent',
     component: AgentPageComponent,
   },
   {
-    path: "aktualności",
+    path: 'aktualności',
     component: NewsFeedComponent,
     data: {
-      title: "Aktualności",
+      title: 'Aktualności',
     },
   },
   {
-    path: "kontakt",
+    path: 'kontakt',
     component: ContactComponent,
     data: {
-      title: "Kontakt",
+      title: 'Kontakt',
     },
   },
   {
-    path: "**",
+    path: '**',
     component: PageNotFoundComponent,
     data: {
-      title: "404",
+      title: '404',
     },
   },
 ];
@@ -98,7 +98,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
-      scrollPositionRestoration: "enabled",
+      scrollPositionRestoration: 'enabled',
     }),
   ],
   exports: [RouterModule],

@@ -37,7 +37,12 @@
       class="location-input"
       lhsIcon="pi pi-map-marker"
       title="lokalizacja"
-      [options]="offersStateManager.distinctLocations$(filters.voivodeship, filters.county) | async"
+      [options]="
+        offersStateManager.distinctLocations$(
+          filters.voivodeship,
+          filters.county
+        ) | async
+      "
       [(value)]="location"
       (readyForSearch)="applyFiltersIgnoringPrice()"
     >

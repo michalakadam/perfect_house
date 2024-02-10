@@ -1,8 +1,8 @@
-import { Action, createReducer, on } from "@ngrx/store";
-import { Agent } from "src/app/shared/models";
-import { listAgents, listAgentsSuccess, loadCurrentAgent } from "./actions";
+import { Action, createReducer, on } from '@ngrx/store';
+import { Agent } from 'src/app/shared/models';
+import { listAgents, listAgentsSuccess, loadCurrentAgent } from './actions';
 
-export const stateKey = "agents";
+export const stateKey = 'agents';
 
 export interface AgentsState {
   isLoading: boolean;
@@ -30,7 +30,7 @@ const agentsReducer = createReducer(
   on(loadCurrentAgent, (state, { agent }) => ({
     ...state,
     currentAgent: agent,
-  }))
+  })),
 );
 
 export function reducer(state: AgentsState | undefined, action: Action) {

@@ -9,7 +9,7 @@ import {
   HostListener,
   ChangeDetectorRef,
 } from '@angular/core';
-import { coerceBooleanProperty } from "@angular/cdk/coercion";
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Component({
   selector: 'perfect-input',
@@ -114,7 +114,7 @@ export class InputComponent {
   }
 
   isEnterPressed(event) {
-    if(this.isEnterActivated && event.key === 'Enter') {
+    if (this.isEnterActivated && event.key === 'Enter') {
       this.enterPressed.emit();
     }
   }

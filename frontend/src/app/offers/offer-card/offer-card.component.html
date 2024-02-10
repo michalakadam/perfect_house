@@ -24,10 +24,11 @@
       </h4>
       <perfect-offer-details [offer]="offer"></perfect-offer-details>
     </div>
-    <div class="bottom-row" *ngIf="(agentsStateManager.agentById$(offer.agentId) | async) as agent">
-      <a
-        class="phone"
-        href="tel:{{ agent.mobile }}">
+    <div
+      class="bottom-row"
+      *ngIf="agentsStateManager.agentById$(offer.agentId) | async as agent"
+    >
+      <a class="phone" href="tel:{{ agent.mobile }}">
         <p-button [label]="agent.mobile" icon="fas fa-phone-alt"></p-button>
       </a>
       <div class="price" *ngIf="offer.price > -1">

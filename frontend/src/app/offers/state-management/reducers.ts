@@ -1,4 +1,4 @@
-import { Action, createReducer, on } from "@ngrx/store";
+import { Action, createReducer, on } from '@ngrx/store';
 import {
   listOffersSuccess,
   listOffersError,
@@ -6,14 +6,14 @@ import {
   updateSearchParams,
   loadCurrentOffer,
   openMainPageOffer,
-} from "./actions";
+} from './actions';
 import {
   DEFAULT_FILTERS,
   DEFAULT_SORTING,
   Offer,
   OffersFilters,
   Sorting,
-} from "src/app/shared/models";
+} from 'src/app/shared/models';
 import {
   computeAgentOffers,
   computeCurrentSearchOffers,
@@ -22,15 +22,15 @@ import {
   extractFiltersFromParams,
   extractPageNumberFromParams,
   extractSortingFromParams,
-} from "./state-helper-functions";
-import { loadCurrentAgent } from "src/app/agents/state-management/actions";
+} from './state-helper-functions';
+import { loadCurrentAgent } from 'src/app/agents/state-management/actions';
 import {
   offerPageNavigated,
   openOfferPage,
   openOffersPage,
-} from "src/app/router/state-management/actions";
+} from 'src/app/router/state-management/actions';
 
-export const stateKey = "offers";
+export const stateKey = 'offers';
 
 export interface OffersState {
   isLoading: boolean;
@@ -79,7 +79,7 @@ const offersReducer = createReducer(
     const currentSearchOffers = computeCurrentSearchOffers(
       sorting,
       filters,
-      state.allOffers
+      state.allOffers,
     );
     return {
       ...state,
@@ -100,7 +100,7 @@ const offersReducer = createReducer(
     isSearching: false,
     currentSearchOffers: computeAgentOffers(
       state.allOffers,
-      parseInt(agent.id)
+      parseInt(agent.id),
     ),
     pageNumber: 0,
     sorting: DEFAULT_SORTING,
@@ -117,7 +117,7 @@ const offersReducer = createReducer(
   on(loadCurrentOffer, (state, { offer }) => ({
     ...state,
     currentOffer: offer,
-  }))
+  })),
 );
 
 export function reducer(state: OffersState | undefined, action: Action) {

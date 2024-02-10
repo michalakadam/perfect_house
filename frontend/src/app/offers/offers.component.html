@@ -1,27 +1,50 @@
-<div class="component-container" *ngIf="offersStateManager.offersForCurrentPage$ | async as offers">
+<div
+  class="component-container"
+  *ngIf="offersStateManager.offersForCurrentPage$ | async as offers"
+>
   <div class="tools-container" *ngIf="isSearchAvailable">
     <perfect-search-tool
       [filters]="offersStateManager.filters$ | async"
-			[rawVoivodeshipsWithCounties]="offersStateManager.voivodeshipsWithCounties$ | async"
-			[rawEstateTypesWithSubtypes]="offersStateManager.estateTypesWithSubtypes$ | async"
-			[lowestPriceForCurrentSearch]="offersStateManager.lowestPriceForCurrentSearch$ | async"
-			[highestPriceForCurrentSearch]="offersStateManager.highestPriceForCurrentSearch$ | async"
+      [rawVoivodeshipsWithCounties]="
+        offersStateManager.voivodeshipsWithCounties$ | async
+      "
+      [rawEstateTypesWithSubtypes]="
+        offersStateManager.estateTypesWithSubtypes$ | async
+      "
+      [lowestPriceForCurrentSearch]="
+        offersStateManager.lowestPriceForCurrentSearch$ | async
+      "
+      [highestPriceForCurrentSearch]="
+        offersStateManager.highestPriceForCurrentSearch$ | async
+      "
       (searchOffers)="offersStateManager.updateFilters($event)"
-      (openOffer)="loadOffer($event)">
+      (openOffer)="loadOffer($event)"
+    >
     </perfect-search-tool>
 
-    <div class="other-tools-container" *ngIf="offersStateManager.currentSearchOffersQuantity$ | async as offersQuantity">
+    <div
+      class="other-tools-container"
+      *ngIf="
+        offersStateManager.currentSearchOffersQuantity$
+          | async as offersQuantity
+      "
+    >
       <perfect-sorting-tool
         [offersQuantity]="offersQuantity"
         [selectedSorting]="offersStateManager.sorting$ | async"
-        (sortingChanged)="offersStateManager.updateSorting($event)">
+        (sortingChanged)="offersStateManager.updateSorting($event)"
+      >
       </perfect-sorting-tool>
 
-      <div class="top-paginator" *ngIf="(offersStateManager.numberOfPages$ | async) > 0">
+      <div
+        class="top-paginator"
+        *ngIf="(offersStateManager.numberOfPages$ | async) > 0"
+      >
         <perfect-paginator
-					[totalOffersQuantity]="offersQuantity"
+          [totalOffersQuantity]="offersQuantity"
           [selectedPage]="offersStateManager.pageNumber$ | async"
-          (pageChanged)="offersStateManager.updatePageNumber($event)">
+          (pageChanged)="offersStateManager.updatePageNumber($event)"
+        >
         </perfect-paginator>
       </div>
     </div>
@@ -29,12 +52,17 @@
 
   <div
     class="no-offers-prompt"
-    *ngIf="offers.length === 0 && agentsStateManager.agentById$(1155) | async as agent">
+    *ngIf="
+      offers.length === 0 && agentsStateManager.agentById$(1155)
+        | async as agent
+    "
+  >
     <perfect-agent-brief
       *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall"
       [agent]="agent"
       onlyPhoto
-      bigger>
+      bigger
+    >
     </perfect-agent-brief>
     <div class="prompt">
       <h2>Brak ofert spełniających podane kryteria.</h2>
@@ -55,18 +83,22 @@
     </div>
   </div>
 
-	<perfect-offer-card
-		*ngFor="let offer of offers; trackBy: trackById"
-		[offer]="offer"
-		(click)="loadOffer(offer.symbol)"></perfect-offer-card>
+  <perfect-offer-card
+    *ngFor="let offer of offers; trackBy: trackById"
+    [offer]="offer"
+    (click)="loadOffer(offer.symbol)"
+  ></perfect-offer-card>
 
   <div class="bottom-paginator" *ngIf="isSearchAvailable">
     <perfect-paginator
-       *ngIf="(offersStateManager.numberOfPages$ | async) > 0"
+      *ngIf="(offersStateManager.numberOfPages$ | async) > 0"
       class="bottom-paginator"
-      [totalOffersQuantity]="offersStateManager.currentSearchOffersQuantity$ | async"
+      [totalOffersQuantity]="
+        offersStateManager.currentSearchOffersQuantity$ | async
+      "
       [selectedPage]="offersStateManager.pageNumber$ | async"
-      (pageChanged)="offersStateManager.updatePageNumber($event)">
+      (pageChanged)="offersStateManager.updatePageNumber($event)"
+    >
     </perfect-paginator>
   </div>
 </div>

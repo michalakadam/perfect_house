@@ -1,7 +1,7 @@
-import { Injectable } from "@angular/core";
-import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { map, filter, tap } from "rxjs/operators";
-import { RouterNavigatedAction, ROUTER_NAVIGATED } from "@ngrx/router-store";
+import { Injectable } from '@angular/core';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { map, filter, tap } from 'rxjs/operators';
+import { RouterNavigatedAction, ROUTER_NAVIGATED } from '@ngrx/router-store';
 import {
   agentPageNavigated,
   offerPageNavigated,
@@ -10,18 +10,18 @@ import {
   OPEN_OFFERS_PAGE,
   OPEN_OFFER_PAGE,
   PAGE_NOT_FOUND,
-} from "./actions";
-import { Router } from "@angular/router";
+} from './actions';
+import { Router } from '@angular/router';
 
-const OFFER_PAGE_PREFIX = "/oferta";
-const OFFERS_PAGE_PREFIX = "/oferty";
-const AGENTS_PAGE_PREFIX = "/ludzie";
+const OFFER_PAGE_PREFIX = '/oferta';
+const OFFERS_PAGE_PREFIX = '/oferty';
+const AGENTS_PAGE_PREFIX = '/ludzie';
 
 @Injectable()
 export class RouterEffects {
   constructor(
     private readonly actions$: Actions,
-    private readonly router: Router
+    private readonly router: Router,
   ) {}
 
   navigateToPageNotFound = createEffect(
@@ -29,20 +29,20 @@ export class RouterEffects {
       this.actions$.pipe(
         ofType(PAGE_NOT_FOUND),
         tap(() => {
-          this.router.navigate(["/strona-nie-istnieje"]);
-        })
+          this.router.navigate(['/strona-nie-istnieje']);
+        }),
       ),
-    { dispatch: false }
+    { dispatch: false },
   );
 
   isOffersPageNavigated = createEffect(() =>
     this.actions$.pipe(
       ofType(ROUTER_NAVIGATED),
       filter((action: RouterNavigatedAction) =>
-        action.payload.routerState.url.startsWith(OFFERS_PAGE_PREFIX)
+        action.payload.routerState.url.startsWith(OFFERS_PAGE_PREFIX),
       ),
-      map((action: RouterNavigatedAction) => offersPageNavigated())
-    )
+      map((action: RouterNavigatedAction) => offersPageNavigated()),
+    ),
   );
 
   navigateToOffersPage = createEffect(
@@ -50,22 +50,22 @@ export class RouterEffects {
       this.actions$.pipe(
         ofType(OPEN_OFFERS_PAGE),
         tap(({ queryParams }) => {
-          this.router.navigate(["oferty"], { queryParams });
-        })
+          this.router.navigate(['oferty'], { queryParams });
+        }),
       ),
-    { dispatch: false }
+    { dispatch: false },
   );
 
   isOfferPageNavigated = createEffect(() =>
     this.actions$.pipe(
       ofType(ROUTER_NAVIGATED),
       filter((action: RouterNavigatedAction) =>
-        isPage(action.payload.routerState.url, OFFER_PAGE_PREFIX)
+        isPage(action.payload.routerState.url, OFFER_PAGE_PREFIX),
       ),
       map(() => {
         return offerPageNavigated();
-      })
-    )
+      }),
+    ),
   );
 
   redirectToOfferPage = createEffect(
@@ -73,22 +73,22 @@ export class RouterEffects {
       this.actions$.pipe(
         ofType(OPEN_OFFER_PAGE),
         tap(({ offerSymbol }) => {
-          this.router.navigate(["/oferta/", offerSymbol]);
-        })
+          this.router.navigate(['/oferta/', offerSymbol]);
+        }),
       ),
-    { dispatch: false }
+    { dispatch: false },
   );
 
   isAgentPageNavigated = createEffect(() =>
     this.actions$.pipe(
       ofType(ROUTER_NAVIGATED),
       filter((action: RouterNavigatedAction) =>
-        isPage(action.payload.routerState.url, AGENTS_PAGE_PREFIX)
+        isPage(action.payload.routerState.url, AGENTS_PAGE_PREFIX),
       ),
       map(() => {
         return agentPageNavigated();
-      })
-    )
+      }),
+    ),
   );
 
   redirectToAgentPage = createEffect(
@@ -97,12 +97,12 @@ export class RouterEffects {
         ofType(OPEN_AGENT_PAGE),
         tap(({ agentFullName }) => {
           this.router.navigate([
-            "/ludzie/",
+            '/ludzie/',
             convertAgentNameToUrlSuffix(agentFullName),
           ]);
-        })
+        }),
       ),
-    { dispatch: false }
+    { dispatch: false },
   );
 }
 
@@ -111,5 +111,5 @@ const isPage = (url, urlPrefix: string) => {
 };
 
 const convertAgentNameToUrlSuffix = (fullName: string) => {
-  return fullName.toLowerCase().split(" ").join("-");
+  return fullName.toLowerCase().split(' ').join('-');
 };

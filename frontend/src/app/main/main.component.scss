@@ -1,5 +1,5 @@
-@import 'src/variables.scss';
-@import 'src/mixins.scss';
+@import 'variables.scss';
+@import 'mixins.scss';
 
 .component-container {
   width: 100%;
@@ -67,7 +67,7 @@
       }
       @media screen and (max-width: $tablet) {
         top: 2.5%;
-        height: 95%
+        height: 95%;
       }
       @media screen and (max-width: $mobile-large) {
         left: 1%;
@@ -188,13 +188,12 @@
               content: url('/assets/house_icon.png');
             }
 
-           &.second {
-             content: url('/assets/loop_icon.png');
-           }
+            &.second {
+              content: url('/assets/loop_icon.png');
+            }
           }
 
           .button-content {
-
             @media screen and (max-width: $desktop-large) {
               margin-top: 0.4rem;
             }
@@ -218,7 +217,6 @@
             }
 
             &.second {
-
               @media screen and (max-width: $mobile) {
                 width: 230px;
               }

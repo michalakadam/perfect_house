@@ -1,4 +1,4 @@
-@import 'src/variables.scss';
+@import 'variables.scss';
 
 @mixin responsive-page {
   margin: 0 auto;
@@ -29,7 +29,9 @@
 
 @mixin perfect-box {
   border-radius: 15px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow:
+    0 3px 6px rgba(0, 0, 0, 0.16),
+    0 3px 6px rgba(0, 0, 0, 0.23);
   z-index: 10;
   @media screen and (max-width: $desktop-small) {
     border-radius: 10px;
