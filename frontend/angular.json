@@ -37,9 +37,7 @@
               "node_modules/primeicons/primeicons.css"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "src"
-              ]
+              "includePaths": ["src"]
             },
             "scripts": []
           },
