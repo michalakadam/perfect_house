@@ -3,7 +3,7 @@
     <perfect-grouped-dropdown
       placeholder="typ nieruchomości"
       [(groups)]="estateTypesWithSubtypes"
-      (onChange)="applyFiltersIgnoringPrice()"
+      (dropdownChange)="applyFiltersIgnoringPrice()"
     >
     </perfect-grouped-dropdown>
 
@@ -29,7 +29,7 @@
       placeholder="województwo/powiat"
       [(groups)]="voivodeshipsWithCounties"
       hideGroupNameWhenValueSelected="true"
-      (onChange)="applyFiltersIgnoringPrice()"
+      (dropdownChange)="applyFiltersIgnoringPrice()"
     >
     </perfect-grouped-dropdown>
 

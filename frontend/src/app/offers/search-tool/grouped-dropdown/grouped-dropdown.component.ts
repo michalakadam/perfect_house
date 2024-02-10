@@ -40,7 +40,7 @@ export class GroupedDropdownComponent implements OnInit {
   @Input() hideGroupNameWhenValueSelected = false;
   @Input() valueNamePrefix = '';
 
-  @Output() onChange = new EventEmitter<DropdownGroup[]>();
+  @Output() dropdownChange = new EventEmitter<DropdownGroup[]>();
 
   groupsWithValues: DropdownGroup[] = [];
 
@@ -114,7 +114,7 @@ export class GroupedDropdownComponent implements OnInit {
     this.isDropdownVisible = false;
     this.isGroupSelected = true;
     this.isValueSelected = false;
-    this.onChange.emit();
+    this.dropdownChange.emit();
   }
 
   valueSelected(group: DropdownGroup, value: DropdownValue) {
@@ -123,7 +123,7 @@ export class GroupedDropdownComponent implements OnInit {
     this.isDropdownVisible = false;
     this.isGroupSelected = false;
     this.isValueSelected = true;
-    this.onChange.emit();
+    this.dropdownChange.emit();
   }
 
   private computeSelected(group: DropdownGroup) {
@@ -164,6 +164,6 @@ export class GroupedDropdownComponent implements OnInit {
     this.isDropdownVisible = false;
     this.isGroupSelected = false;
     this.isValueSelected = false;
-    this.onChange.emit();
+    this.dropdownChange.emit();
   }
 }
