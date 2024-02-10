@@ -128,3 +128,11 @@
     }
   }
 }
+@mixin resized-mat-icon($size) {
+  height: $size;
+  width: $size;
+  font-size: $size;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

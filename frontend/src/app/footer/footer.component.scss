@@ -1,4 +1,5 @@
 @import 'variables.scss';
+@import 'mixins.scss';
 
 :host {
   background-color: $dark-green;
@@ -38,7 +39,7 @@
 
       a {
         mat-icon {
-          font-size: 32px !important;
+          @include resized-mat-icon(32px);
         }
       }
     }

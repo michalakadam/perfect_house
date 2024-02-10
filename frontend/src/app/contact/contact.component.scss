@@ -70,7 +70,7 @@
 
       a {
         mat-icon {
-          font-size: 32px !important;
+          @include resized-mat-icon(32px);
         }
       }
     }
