@@ -3,7 +3,7 @@
     *ngFor="let link of links"
     [ngClass]="{ 'about-us-link': !isSideNavigation }"
   >
-    <span
+    <a
       *ngIf="link.route !== '/oferty'"
       class="link"
       [routerLink]="link.route"
@@ -12,9 +12,9 @@
       tabindex="0"
       role="button"
       aria-pressed="false"
-      >{{ link.title }}</span
+      >{{ link.title }}</a
     >
-    <span
+    <a
       *ngIf="link.route === '/oferty'"
       class="link"
       [routerLink]="[
@@ -25,7 +25,7 @@
       tabindex="0"
       role="button"
       aria-pressed="false"
-      >{{ link.title }}</span
+      >{{ link.title }}</a
     >
   </mat-list-item>
 </mat-nav-list>
