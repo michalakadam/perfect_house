@@ -10,17 +10,27 @@
     left: 40px;
   }
 
-  mat-list-item {
+  div {
     height: 40px;
+    padding-left: 22px;
+
+    &:first-of-type {
+      margin-top: 6px;
+    }
+
+    &.active-link:not(.about-us-link) {
+      background-color: $light-green;
+      color: $font-white;
+      font-weight: 700;
+      height: 100%;
+      width: 100%;
+    }
+
     .link {
       cursor: pointer;
       font-size: 18px;
       font-weight: 600;
-      height: 100%;
       line-height: 44px;
-      margin: 0 -16px;
-      padding-left: 22px;
-      width: 118.9%;
       @media screen and (max-width: $desktop-large) {
         font-size: 16px;
       }
@@ -30,12 +40,6 @@
       @media screen and (max-width: $mobile-small) {
         font-size: 12px;
       }
-    }
-
-    .active-link {
-      background-color: $light-green;
-      color: $font-white;
-      font-weight: 700;
     }
   }
 

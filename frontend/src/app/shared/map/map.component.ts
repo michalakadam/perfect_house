@@ -3,7 +3,6 @@ import {
   ChangeDetectionStrategy,
   Input,
   OnInit,
-  OnDestroy,
 } from '@angular/core';
 
 declare let ol: any;

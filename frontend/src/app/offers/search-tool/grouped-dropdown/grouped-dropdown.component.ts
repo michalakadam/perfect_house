@@ -6,7 +6,6 @@ import {
   Output,
   EventEmitter,
   OnInit,
-  ChangeDetectorRef,
 } from '@angular/core';
 
 export interface DropdownGroup {
@@ -57,7 +56,7 @@ export class GroupedDropdownComponent implements OnInit {
     this.selected = selectedGroup ? this.computeSelected(selectedGroup) : '';
   }
 
-  constructor(private readonly changeDetector: ChangeDetectorRef) {}
+  constructor() {}
 
   ngOnInit() {
     if (this.placeholder.includes('/')) {

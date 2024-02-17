@@ -1,5 +1,4 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { Router } from '@angular/router';
 import { Agent } from 'src/app/shared/models';
 import { AgentsStateManager } from './state-management/state-manager.service';
 

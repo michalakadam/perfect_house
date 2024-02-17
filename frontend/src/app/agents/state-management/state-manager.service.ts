@@ -14,19 +14,21 @@ export class AgentsStateManager {
     this.store.dispatch(listAgents());
   }
 
-  agents$: Observable<Agent[]> = this.store.select(selectors.getUniqueAgents);
+  get agents$(): Observable<Agent[]> {
+    return this.store.select(selectors.getUniqueAgents);
+  }
 
-  currentAgent$: Observable<Agent> = this.store.select(
-    selectors.getCurrentAgent,
-  );
+  get currentAgent$(): Observable<Agent> {
+    return this.store.select(selectors.getCurrentAgent);
+  }
 
-  isPreviousAgentAvailable$: Observable<boolean> = this.store.select(
-    selectors.getIsPreviousAgentAvailable,
-  );
+  get isPreviousAgentAvailable$(): Observable<boolean> {
+    return this.store.select(selectors.getIsPreviousAgentAvailable);
+  }
 
-  isNextAgentAvailable$: Observable<boolean> = this.store.select(
-    selectors.getIsNextAgentAvailable,
-  );
+  get isNextAgentAvailable$(): Observable<boolean> {
+    return this.store.select(selectors.getIsNextAgentAvailable);
+  }
 
   agentById$(id: number): Observable<Agent> {
     return this.store.select(selectors.getAgentById(id));

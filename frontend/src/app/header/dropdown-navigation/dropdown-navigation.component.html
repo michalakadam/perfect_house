@@ -1,6 +1,7 @@
-<mat-nav-list>
-  <mat-list-item
+<nav>
+  <div
     *ngFor="let link of links"
+    routerLinkActive="active-link"
     [ngClass]="{ 'about-us-link': !isSideNavigation }"
   >
     <a
@@ -27,5 +28,5 @@
       aria-pressed="false"
       >{{ link.title }}</a
     >
-  </mat-list-item>
-</mat-nav-list>
+  </div>
+</nav>

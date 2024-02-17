@@ -1,6 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Offer } from 'src/app/shared/models';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Component({
   selector: 'perfect-offer-details',

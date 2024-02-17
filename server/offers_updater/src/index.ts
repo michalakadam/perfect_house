@@ -6,7 +6,6 @@ import {
   MongoError,
   Collection,
   FilterQuery,
-  Db,
 } from "mongodb";
 //import functionality
 import connect from "mongodb";

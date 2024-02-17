@@ -37,6 +37,9 @@
               "node_modules/primeng/resources/themes/saga-blue/theme.css",
               "node_modules/primeicons/primeicons.css"
             ],
+            "optimization": {
+              "fonts": false
+            },
             "stylePreprocessorOptions": {
               "includePaths": ["src"]
             },

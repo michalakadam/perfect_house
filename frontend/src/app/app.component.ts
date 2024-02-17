@@ -1,10 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  HostListener,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { WindowSizeDetector } from 'src/app/shared/services/window-size-detector.service';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { PrimeNGConfig } from 'primeng/api';
@@ -53,9 +47,8 @@ export class AppComponent implements OnInit, OnDestroy {
     readonly windowSizeDetector: WindowSizeDetector,
     readonly offersStateManager: OffersStateManager,
     private readonly titleService: Title,
-    private readonly router: Router,
-    private readonly changeDetector: ChangeDetectorRef,
     private readonly primengConfig: PrimeNGConfig,
+    router: Router,
   ) {
     this.subscription = router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {

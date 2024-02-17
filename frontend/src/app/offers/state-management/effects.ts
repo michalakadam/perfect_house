@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of as observableOf } from 'rxjs';
+import { of as observableOf, skip } from 'rxjs';
 import {
   map,
   mergeMap,
@@ -35,7 +35,6 @@ import {
   OFFER_PAGE_NAVIGATED,
   openOfferPage,
   openOffersPage,
-  pageNotFound,
 } from 'src/app/router/state-management/actions';
 import { Action, Store } from '@ngrx/store';
 import * as routerSelectors from 'src/app/router/state-management/selectors';

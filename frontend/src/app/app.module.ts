@@ -21,7 +21,6 @@ import { OffersComponent } from './offers/offers.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { NavigationComponent } from './header/navigation/navigation.component';
 import { DropdownNavigationComponent } from './header/dropdown-navigation/dropdown-navigation.component';
@@ -64,6 +63,7 @@ import { AgentsStateManagementModule } from './agents/state-management/state-man
 import { EcoHousesComponent } from './eco-houses/eco-houses.component';
 import { ContactFormComponent } from './contact/contact-form/contact-form.component';
 import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -124,7 +124,6 @@ export class MyHammerConfig extends HammerGestureConfig {
     MatButtonModule,
     MatDividerModule,
     MatIconModule,
-    MatListModule,
     PaginatorModule,
     SelectButtonModule,
     SliderModule,
