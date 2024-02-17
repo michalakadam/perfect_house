@@ -129,6 +129,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     SliderModule,
     TabViewModule,
     StoreModule.forRoot({}),
+    StoreDevtoolsModule.instrument({ maxAge: 25 }),
     EffectsModule.forRoot([]),
     OffersStateManagementModule,
     RouterStateManagementModule,

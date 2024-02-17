@@ -21,7 +21,7 @@ import {
   pageNotFound,
 } from 'src/app/router/state-management/actions';
 import { Action } from '@ngrx/store';
-import { EMPTY, timer } from 'rxjs';
+import { timer } from 'rxjs';
 
 @Injectable()
 export class AgentsEffects {
@@ -50,7 +50,7 @@ export class AgentsEffects {
       withLatestFrom(this.store.select(agentsSelectors.getIsLoading)),
       // Agents list is not available when agent page is open directly.
       debounce(([action, isLoading]: [Action, boolean]) =>
-        isLoading ? timer(2000) : EMPTY,
+        isLoading ? timer(2000) : timer(0),
       ),
       withLatestFrom(
         this.store.select(routerSelectors.getParams),
