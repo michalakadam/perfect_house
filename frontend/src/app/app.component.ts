@@ -1,4 +1,10 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  OnDestroy,
+  OnInit,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { WindowSizeDetector } from 'src/app/shared/services/window-size-detector.service';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { PrimeNGConfig } from 'primeng/api';
@@ -8,6 +14,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { interval, Subscription, of } from 'rxjs';
 import { delayWhen } from 'rxjs/operators';
 import { OffersStateManager } from './offers/state-management/state-manager.service';
+import { SnackbarService } from './shared/services/snackbar.service';
 
 const sideNavId = 'sideNavToggleButton';
 
@@ -42,12 +49,16 @@ export class AppComponent implements OnInit, OnDestroy {
   isLoadingWithSlightDelay$ = this.offersStateManager.isLoading$.pipe(
     delayWhen((isLoading) => (isLoading ? of(isLoading) : interval(250))),
   );
+  isSnackbarVisible = false;
+  snackbarContent = '';
 
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,
     readonly offersStateManager: OffersStateManager,
     private readonly titleService: Title,
     private readonly primengConfig: PrimeNGConfig,
+    private readonly snackbarService: SnackbarService,
+    private readonly changeDetector: ChangeDetectorRef,
     router: Router,
   ) {
     this.subscription = router.events.subscribe((event) => {
@@ -61,6 +72,26 @@ export class AppComponent implements OnInit, OnDestroy {
         }
       }
     });
+    this.subscription.add(
+      this.snackbarService.open$.subscribe((message) => {
+        this.openSnackbar(message);
+        setTimeout(() => {
+          this.closeSnackbar();
+        }, 3000);
+      }),
+    );
+  }
+
+  private openSnackbar(message: string) {
+    this.snackbarContent = message;
+    this.isSnackbarVisible = true;
+    this.changeDetector.detectChanges();
+  }
+
+  private closeSnackbar() {
+    this.snackbarContent = '';
+    this.isSnackbarVisible = false;
+    this.changeDetector.detectChanges();
   }
 
   ngOnInit() {
