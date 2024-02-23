@@ -1,16 +1,16 @@
-import { Injectable } from "@angular/core";
-import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { of as observableOf } from "rxjs";
+import { Injectable } from '@angular/core';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { of as observableOf, skip } from 'rxjs';
 import {
   map,
   mergeMap,
   catchError,
   withLatestFrom,
   delay,
-} from "rxjs/operators";
-import { OffersDao } from "./offers-dao.service";
-import { SnackbarService } from "../../shared/services/snackbar.service";
-import { HttpErrorResponse } from "@angular/common/http";
+} from 'rxjs/operators';
+import { OffersDao } from './offers-dao.service';
+import { SnackbarService } from '../../shared/services/snackbar.service';
+import { HttpErrorResponse } from '@angular/common/http';
 import {
   listOffersSuccess,
   listOffersError,
@@ -27,7 +27,7 @@ import {
   OPEN_MAIN_PAGE_OFFER,
   loadOfferPage,
   OFFER_AVAILABLE_FOR_OFFER_PAGE,
-} from "./actions";
+} from './actions';
 import {
   offerPageNavigated,
   offersPageNavigated,
@@ -35,34 +35,33 @@ import {
   OFFER_PAGE_NAVIGATED,
   openOfferPage,
   openOffersPage,
-  pageNotFound,
-} from "src/app/router/state-management/actions";
-import { Action, Store } from "@ngrx/store";
-import * as routerSelectors from "src/app/router/state-management/selectors";
-import * as offersSelectors from "./selectors";
-import { Params } from "@angular/router";
+} from 'src/app/router/state-management/actions';
+import { Action, Store } from '@ngrx/store';
+import * as routerSelectors from 'src/app/router/state-management/selectors';
+import * as offersSelectors from './selectors';
+import { Params } from '@angular/router';
 import {
   DEFAULT_SORTING,
   Offer,
   OffersFilters,
   Sorting,
-} from "src/app/shared/models";
+} from 'src/app/shared/models';
 import {
   convertToFiltersParameters,
   convertToSortingParameter,
-} from "./state-helper-functions";
-import { Title } from "@angular/platform-browser";
+} from './state-helper-functions';
+import { Title } from '@angular/platform-browser';
 
 const LIST_OFFERS_ERROR_MESSAGE =
-  "Wystąpił niespodziewany błąd w trakcie ładowania ofert.";
+  'Wystąpił niespodziewany błąd w trakcie ładowania ofert.';
 
 const FIRST_PAGE_NUMBER = 1;
 
 const computeSortingParameter = (sorting: Sorting): string => {
   return (
     sorting.propertyName +
-    "_" +
-    (sorting.isAscending ? "ascending" : "descending")
+    '_' +
+    (sorting.isAscending ? 'ascending' : 'descending')
   );
 };
 
@@ -78,7 +77,7 @@ export class OffersEffects {
     private offersDao: OffersDao,
     private snackbarService: SnackbarService,
     private readonly titleService: Title,
-    private store: Store
+    private store: Store,
   ) {}
 
   loadOffers = createEffect(() =>
@@ -90,10 +89,10 @@ export class OffersEffects {
           catchError((error: HttpErrorResponse) => {
             this.handleError(error);
             return observableOf(listOffersError());
-          })
-        )
-      )
-    )
+          }),
+        ),
+      ),
+    ),
   );
 
   private handleError(error: HttpErrorResponse) {
@@ -105,7 +104,7 @@ export class OffersEffects {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong.
       console.error(
-        `Backend returned code ${error.status}, ` + `body was: ${error.error}`
+        `Backend returned code ${error.status}, ` + `body was: ${error.error}`,
       );
     }
   }
@@ -117,12 +116,12 @@ export class OffersEffects {
       ofType(LIST_OFFERS_SUCCESS),
       withLatestFrom(this.store.select(routerSelectors.getUrl)),
       map(([action, url]: [Action, string]) => {
-        if (url.startsWith("/oferty")) {
+        if (url.startsWith('/oferty')) {
           return offersPageNavigated();
         }
         return searchParamsIdentical();
-      })
-    )
+      }),
+    ),
   );
 
   loadOffersForUpdatedPageNumber = createEffect(() =>
@@ -136,21 +135,21 @@ export class OffersEffects {
           { pageNumber: updatedPageNumber },
           currentPageNumber,
           sorting,
-          filters
+          filters,
         ) => ({
           updatedPageNumber,
           currentPageNumber,
           sorting,
           filters,
-        })
+        }),
       ),
       map(({ updatedPageNumber, currentPageNumber, sorting, filters }) => {
         if (updatedPageNumber === currentPageNumber) {
           return searchParamsIdentical();
         }
         return this.navigate(updatedPageNumber, sorting, filters);
-      })
-    )
+      }),
+    ),
   );
 
   loadOffersForUpdatedSorting = createEffect(() =>
@@ -165,15 +164,15 @@ export class OffersEffects {
           pageNumber,
           currentSorting,
           filters,
-        })
+        }),
       ),
       map(({ updatedSorting, pageNumber, currentSorting, filters }) => {
         if (JSON.stringify(updatedSorting) === JSON.stringify(currentSorting)) {
           return searchParamsIdentical();
         }
         return this.navigate(pageNumber, updatedSorting, filters);
-      })
-    )
+      }),
+    ),
   );
 
   loadOffersForUpdatedFilters = createEffect(() =>
@@ -188,21 +187,21 @@ export class OffersEffects {
           pageNumber,
           sorting,
           currentFilters,
-        })
+        }),
       ),
       map(({ updatedFilters, pageNumber, sorting, currentFilters }) => {
         if (JSON.stringify(updatedFilters) === JSON.stringify(currentFilters)) {
           return searchParamsIdentical();
         }
         return this.navigate(pageNumber, sorting, updatedFilters);
-      })
-    )
+      }),
+    ),
   );
 
   private navigate(
     pageNumber: number,
     sorting: Sorting,
-    filters: OffersFilters
+    filters: OffersFilters,
   ): Action {
     const queryParams = {
       page: pageNumber + 1,
@@ -218,16 +217,16 @@ export class OffersEffects {
       withLatestFrom(this.store.select(routerSelectors.getQueryParams)),
       map(([action, queryParams]: [Action, Params]) => {
         const paramsMissing =
-          !queryParams.hasOwnProperty("page") ||
-          !queryParams.hasOwnProperty("sorting");
+          !queryParams.hasOwnProperty('page') ||
+          !queryParams.hasOwnProperty('sorting');
         if (paramsMissing) {
           return openOffersPage({
             queryParams: { ...DEFAULT_QUERY_PARAMETERS, ...queryParams },
           });
         }
         return updateSearchParams({ queryParams });
-      })
-    )
+      }),
+    ),
   );
 
   openOfferFromMainPage = createEffect(() =>
@@ -235,17 +234,19 @@ export class OffersEffects {
       ofType(OPEN_MAIN_PAGE_OFFER),
       map(({ offerSymbol }) => {
         return openOfferPage({ offerSymbol });
-      })
-    )
+      }),
+    ),
   );
 
   checkOfferAvailableForOfferPage = createEffect(() =>
-      this.actions$.pipe(
-        ofType(OFFER_PAGE_NAVIGATED),
-        delay(500),
-        withLatestFrom(this.store.select(offersSelectors.getIsLoading)),
-        map(([action, isLoading]: [Action, boolean]) => isLoading ? offerPageNavigated() : loadOfferPage()),
-      )
+    this.actions$.pipe(
+      ofType(OFFER_PAGE_NAVIGATED),
+      delay(500),
+      withLatestFrom(this.store.select(offersSelectors.getIsLoading)),
+      map(([action, isLoading]: [Action, boolean]) =>
+        isLoading ? offerPageNavigated() : loadOfferPage(),
+      ),
+    ),
   );
 
   loadOfferForOfferPageFromUrl = createEffect(() =>
@@ -254,14 +255,10 @@ export class OffersEffects {
       withLatestFrom(
         this.store.select(routerSelectors.getParams),
         this.store.select(offersSelectors.getAllOffers),
-        (
-          action: Action,
-          params: Params,
-          offers: Offer[]
-        ) => ({
+        (action: Action, params: Params, offers: Offer[]) => ({
           params,
           offers,
-        })
+        }),
       ),
       map(({ params, offers }) => {
         const consistsOnlyOfNumbers = (symbol) => /^\d+$/.test(symbol);
@@ -269,14 +266,14 @@ export class OffersEffects {
         if (params.symbol) {
           if (consistsOnlyOfNumbers(params.symbol)) {
             const offer = offers.find(
-              (offer) => offer.number === Number(params.symbol)
+              (offer) => offer.number === Number(params.symbol),
             );
             if (offer?.symbol) {
               return openOfferPage({ offerSymbol: offer.symbol });
             }
             setTimeout(() => {
               this.snackbarService.open(
-                `Oferta ${params.symbol} nie istnieje.`
+                `Oferta ${params.symbol} nie istnieje.`,
               );
             }, 500);
             return openOffersPage({ queryParams: DEFAULT_QUERY_PARAMETERS });
@@ -287,9 +284,9 @@ export class OffersEffects {
             return loadCurrentOffer({ offer });
           }
         }
-        return  openOffersPage({ queryParams: DEFAULT_QUERY_PARAMETERS });
-      })
-    )
+        return openOffersPage({ queryParams: DEFAULT_QUERY_PARAMETERS });
+      }),
+    ),
   );
 
   loadPreviousOffer = createEffect(() =>
@@ -301,14 +298,14 @@ export class OffersEffects {
         (action: Action, offers: Offer[], currentOfferIndex: number) => ({
           offers,
           currentOfferIndex,
-        })
+        }),
       ),
       map(({ offers, currentOfferIndex }) => {
         return openOfferPage({
           offerSymbol: offers[currentOfferIndex - 1].symbol,
         });
-      })
-    )
+      }),
+    ),
   );
 
   loadNextOffer = createEffect(() =>
@@ -320,13 +317,13 @@ export class OffersEffects {
         (action: Action, offers: Offer[], currentOfferIndex: number) => ({
           offers,
           currentOfferIndex,
-        })
+        }),
       ),
       map(({ offers, currentOfferIndex }) => {
         return openOfferPage({
           offerSymbol: offers[currentOfferIndex + 1].symbol,
         });
-      })
-    )
+      }),
+    ),
   );
 }

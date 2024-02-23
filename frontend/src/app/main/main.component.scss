@@ -1,5 +1,5 @@
-@import 'src/variables.scss';
-@import 'src/mixins.scss';
+@import 'variables.scss';
+@import 'mixins.scss';
 
 .component-container {
   width: 100%;
@@ -67,7 +67,7 @@
       }
       @media screen and (max-width: $tablet) {
         top: 2.5%;
-        height: 95%
+        height: 95%;
       }
       @media screen and (max-width: $mobile-large) {
         left: 1%;
@@ -153,53 +153,76 @@
           }
         }
 
-        .icon {
-          height: 78px;
-          padding-right: 2rem;
-          padding-top: 6px;
+        .button {
+          position: relative;
+          z-index: 9999;
+          &:hover {
+            color: $light-green;
+            cursor: pointer;
 
-          @media screen and (max-width: $tablet) {
-            height: 60px;
-          }
-          @media screen and (max-width: $mobile-large) {
-            height: 48px;
-          }
-          @media screen and (max-width: $mobile) {
-            padding-right: 1.5rem;
-          }
-        }
-
-        .button-content {
-
-          @media screen and (max-width: $desktop-large) {
-            margin-top: 0.4rem;
-          }
-          @media screen and (max-width: $desktop-medium) {
-            margin-top: 0;
-          }
-          @media screen and (max-width: $desktop-small) {
-            margin-top: 0.8rem;
-          }
-          @media screen and (max-width: $tablet) {
-            font-size: 14px;
-            margin-top: 0.4rem;
-          }
-          @media screen and (max-width: $mobile-large) {
-            font-size: 12px;
-            margin-top: 1.5rem;
-          }
-          @media screen and (max-width: $mobile) {
-            font-size: 14px;
-            margin-top: 0.6rem;
-          }
-
-          &.second {
-            
-            @media screen and (max-width: $mobile) {
-              width: 230px;
+            .icon.first {
+              content: url('/assets/house_icon_green.png');
             }
-            @media screen and (max-width: $mobile-small) {
-              width: unset;
+
+            .icon.second {
+              content: url('/assets/loop_icon_green.png');
+            }
+          }
+
+          .icon {
+            height: 78px;
+            padding-right: 2rem;
+            padding-top: 6px;
+
+            @media screen and (max-width: $tablet) {
+              height: 60px;
+            }
+            @media screen and (max-width: $mobile-large) {
+              height: 48px;
+            }
+            @media screen and (max-width: $mobile) {
+              padding-right: 1.5rem;
+            }
+
+            &.first {
+              content: url('/assets/house_icon.png');
+            }
+
+            &.second {
+              content: url('/assets/loop_icon.png');
+            }
+          }
+
+          .button-content {
+            @media screen and (max-width: $desktop-large) {
+              margin-top: 0.4rem;
+            }
+            @media screen and (max-width: $desktop-medium) {
+              margin-top: 0;
+            }
+            @media screen and (max-width: $desktop-small) {
+              margin-top: 0.8rem;
+            }
+            @media screen and (max-width: $tablet) {
+              font-size: 14px;
+              margin-top: 0.4rem;
+            }
+            @media screen and (max-width: $mobile-large) {
+              font-size: 12px;
+              margin-top: 1.5rem;
+            }
+            @media screen and (max-width: $mobile) {
+              font-size: 14px;
+              margin-top: 0.6rem;
+            }
+
+            &.second {
+              @media screen and (max-width: $mobile) {
+                width: 230px;
+              }
+              @media screen and (max-width: $mobile-small) {
+                width: unset;
+              }
             }
           }
         }

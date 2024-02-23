@@ -28,7 +28,7 @@ export class NavigationComponent implements OnDestroy {
 
   constructor(
     private readonly router: Router,
-    private readonly changeDetector: ChangeDetectorRef
+    private readonly changeDetector: ChangeDetectorRef,
   ) {
     this.subscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {

@@ -1,0 +1,12 @@
+{
+  "name": "perfecthouse",
+  "version": "1.1.0",
+  "author": {
+    "name": "Adam Michalak",
+    "email": "adam.michalak.dev@gmail.com",
+    "url": "https://adam-michalak.site"
+  },
+  "devDependencies": {
+    "husky": "^9.0.10"
+  }
+}

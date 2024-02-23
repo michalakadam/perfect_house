@@ -5,16 +5,16 @@ import {
   AVAILABLE_ESTATE_TYPES,
   AVAILABLE_SORTINGS,
   DEFAULT_FILTERS,
-} from "src/app/shared/models";
-import { OFFERS_PER_PAGE } from "src/app/shared/constants";
+} from 'src/app/shared/models';
+import { OFFERS_PER_PAGE } from 'src/app/shared/constants';
 import {
   filterByCounty,
   filterByVoivodeship,
   filterOffers,
   filterOffersByPrice,
-} from "./filter-helper-functions";
-import { sortAlphabetically, sortOffers } from "./sorting-helper-functions";
-import { Params } from "@angular/router";
+} from './filter-helper-functions';
+import { sortAlphabetically, sortOffers } from './sorting-helper-functions';
+import { Params } from '@angular/router';
 
 export const computeMainPageOffers = (offers: Offer[]) => {
   const shuffleOffers = (offers: Offer[]): Offer[] => {
@@ -35,11 +35,11 @@ export const computeAgentOffers = (offers: Offer[], agentId: number) => {
 export const computeCurrentSearchOffers = (
   sorting: Sorting,
   filters: OffersFilters,
-  allOffers: Offer[]
+  allOffers: Offer[],
 ) => {
   let currentSearchOffers = sortOffers(
     filterOffers(allOffers, filters),
-    sorting
+    sorting,
   );
   return filterOffersByPrice(currentSearchOffers, filters);
 };
@@ -57,7 +57,7 @@ export const onlyUnique = (value, index, self) => {
 export const computeDistinctLocations = (
   offers: Offer[],
   voivodeship: string,
-  county: string
+  county: string,
 ): string[] => {
   if (voivodeship) {
     offers = filterByVoivodeship(offers, voivodeship);
@@ -68,7 +68,7 @@ export const computeDistinctLocations = (
 
   const gminy = offers
     .map((offer) => offer.city)
-    .filter((city) => city.includes("(gmina)"))
+    .filter((city) => city.includes('(gmina)'))
     .filter(onlyUnique)
     .sort(sortAlphabetically);
   const cities = offers
@@ -80,7 +80,7 @@ export const computeDistinctLocations = (
 };
 
 export const computeVoivodeshipsWithCounties = (
-  offers: Offer[]
+  offers: Offer[],
 ): Map<string, string[]> => {
   const result = new Map<string, string[]>();
   for (const voivodeship of computeAvailableVoivodeships(offers)) {
@@ -93,13 +93,13 @@ const computeAvailableVoivodeships = (offers: Offer[]): string[] => {
   return offers
     .map((offer) => offer.voivodeship)
     .filter(onlyUnique)
-    .filter((v) => !v.includes("Attyka") && !v.includes("Costa"))
+    .filter((v) => !v.includes('Attyka') && !v.includes('Costa'))
     .sort(sortAlphabetically);
 };
 
 const computeCountiesForVoivodeship = (
   offers: Offer[],
-  voivodeship: string
+  voivodeship: string,
 ): string[] => {
   return offers
     .filter((offer) => offer.voivodeship === voivodeship)
@@ -110,15 +110,15 @@ const computeCountiesForVoivodeship = (
 };
 
 export const computeEstateTypesWithSubtypes = (
-  offers: Offer[]
+  offers: Offer[],
 ): Map<string, string[]> => {
   const result = new Map<string, string[]>();
   for (const estateType of AVAILABLE_ESTATE_TYPES) {
     result.set(
       estateType.displayName,
-      estateType.displayName === "mieszkanie"
+      estateType.displayName === 'mieszkanie'
         ? computeBuildingTypesForEstateType(offers, estateType.queryName)
-        : computeEstateSubtypesForEstateType(offers, estateType.queryName)
+        : computeEstateSubtypesForEstateType(offers, estateType.queryName),
     );
   }
   return result;
@@ -126,7 +126,7 @@ export const computeEstateTypesWithSubtypes = (
 
 const computeBuildingTypesForEstateType = (
   offers: Offer[],
-  estateType: string
+  estateType: string,
 ): string[] => {
   return offers
     .filter((offer) => offer.estateType === estateType)
@@ -138,7 +138,7 @@ const computeBuildingTypesForEstateType = (
 
 const computeEstateSubtypesForEstateType = (
   offers: Offer[],
-  estateType: string
+  estateType: string,
 ): string[] => {
   return offers
     .filter((offer) => offer.estateType === estateType)
@@ -146,7 +146,7 @@ const computeEstateSubtypesForEstateType = (
     .filter(onlyUnique)
     .filter(Boolean)
     .map((subtype) =>
-      subtype.toLowerCase().replace("_", " ").replace(" - ", "-")
+      subtype.toLowerCase().replace('_', ' ').replace(' - ', '-'),
     )
     .sort(sortAlphabetically);
 };
@@ -161,25 +161,25 @@ export const extractPageNumberFromParams = (queryParams: Params): number => {
 
 export const extractSortingFromParams = (queryParams: Params): Sorting => {
   const sortingStringified = queryParams.sorting;
-  const propertyName = sortingStringified.split("_")[0];
-  const isAscending = sortingStringified.split("_")[1] === "ascending";
+  const propertyName = sortingStringified.split('_')[0];
+  const isAscending = sortingStringified.split('_')[1] === 'ascending';
 
   return AVAILABLE_SORTINGS.find(
     (sorting) =>
       sorting.propertyName === propertyName &&
-      sorting.isAscending === isAscending
+      sorting.isAscending === isAscending,
   );
 };
 
 export const extractFiltersFromParams = (
-  queryParams: Params
+  queryParams: Params,
 ): OffersFilters => {
   let filters = DEFAULT_FILTERS;
 
   for (const property in DEFAULT_FILTERS) {
     let value = queryParams[property];
-    if (value === "true" || value === "false") {
-      value = value === "true";
+    if (value === 'true' || value === 'false') {
+      value = value === 'true';
     }
     if (queryParams.hasOwnProperty(property)) {
       filters = { ...filters, [property]: value };
@@ -197,8 +197,8 @@ export const computeNumberOfPages = (offers: Offer[]): number => {
 export const convertToSortingParameter = (sorting: Sorting): string => {
   return (
     sorting.propertyName +
-    "_" +
-    (sorting.isAscending ? "ascending" : "descending")
+    '_' +
+    (sorting.isAscending ? 'ascending' : 'descending')
   );
 };
 

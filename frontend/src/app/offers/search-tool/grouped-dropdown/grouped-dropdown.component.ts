@@ -6,7 +6,6 @@ import {
   Output,
   EventEmitter,
   OnInit,
-  ChangeDetectorRef,
 } from '@angular/core';
 
 export interface DropdownGroup {
@@ -40,7 +39,7 @@ export class GroupedDropdownComponent implements OnInit {
   @Input() hideGroupNameWhenValueSelected = false;
   @Input() valueNamePrefix = '';
 
-  @Output() onChange = new EventEmitter<DropdownGroup[]>();
+  @Output() dropdownChange = new EventEmitter<DropdownGroup[]>();
 
   groupsWithValues: DropdownGroup[] = [];
 
@@ -52,12 +51,12 @@ export class GroupedDropdownComponent implements OnInit {
   set groups(val: DropdownGroup[]) {
     this.groupsWithValues = val;
     const selectedGroup = this.groupsWithValues.find(
-      (group) => group.isSelected
+      (group) => group.isSelected,
     );
     this.selected = selectedGroup ? this.computeSelected(selectedGroup) : '';
   }
 
-  constructor(private readonly changeDetector: ChangeDetectorRef) {}
+  constructor() {}
 
   ngOnInit() {
     if (this.placeholder.includes('/')) {
@@ -99,7 +98,7 @@ export class GroupedDropdownComponent implements OnInit {
 
   toggleGroupVisibility(group: DropdownGroup) {
     const otherGroups = this.groupsWithValues.filter(
-      (g) => g.displayName !== group.displayName
+      (g) => g.displayName !== group.displayName,
     );
 
     for (const group of otherGroups) {
@@ -114,7 +113,7 @@ export class GroupedDropdownComponent implements OnInit {
     this.isDropdownVisible = false;
     this.isGroupSelected = true;
     this.isValueSelected = false;
-    this.onChange.emit();
+    this.dropdownChange.emit();
   }
 
   valueSelected(group: DropdownGroup, value: DropdownValue) {
@@ -123,7 +122,7 @@ export class GroupedDropdownComponent implements OnInit {
     this.isDropdownVisible = false;
     this.isGroupSelected = false;
     this.isValueSelected = true;
-    this.onChange.emit();
+    this.dropdownChange.emit();
   }
 
   private computeSelected(group: DropdownGroup) {
@@ -164,6 +163,6 @@ export class GroupedDropdownComponent implements OnInit {
     this.isDropdownVisible = false;
     this.isGroupSelected = false;
     this.isValueSelected = false;
-    this.onChange.emit();
+    this.dropdownChange.emit();
   }
 }

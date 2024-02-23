@@ -3,7 +3,7 @@
     <perfect-grouped-dropdown
       placeholder="typ nieruchomości"
       [(groups)]="estateTypesWithSubtypes"
-      (onChange)="applyFiltersIgnoringPrice()"
+      (dropdownChange)="applyFiltersIgnoringPrice()"
     >
     </perfect-grouped-dropdown>
 
@@ -29,7 +29,7 @@
       placeholder="województwo/powiat"
       [(groups)]="voivodeshipsWithCounties"
       hideGroupNameWhenValueSelected="true"
-      (onChange)="applyFiltersIgnoringPrice()"
+      (dropdownChange)="applyFiltersIgnoringPrice()"
     >
     </perfect-grouped-dropdown>
 
@@ -37,7 +37,12 @@
       class="location-input"
       lhsIcon="pi pi-map-marker"
       title="lokalizacja"
-      [options]="offersStateManager.distinctLocations$(filters.voivodeship, filters.county) | async"
+      [options]="
+        offersStateManager.distinctLocations$(
+          filters.voivodeship,
+          filters.county
+        ) | async
+      "
       [(value)]="location"
       (readyForSearch)="applyFiltersIgnoringPrice()"
     >

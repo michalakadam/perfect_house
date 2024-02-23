@@ -26,12 +26,12 @@ export class SortingToolComponent implements OnDestroy {
 
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,
-    readonly changeDetector: ChangeDetectorRef
+    readonly changeDetector: ChangeDetectorRef,
   ) {
     this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(
       () => {
         this.changeDetector.detectChanges();
-      }
+      },
     );
   }
 

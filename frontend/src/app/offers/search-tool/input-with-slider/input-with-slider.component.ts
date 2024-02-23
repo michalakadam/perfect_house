@@ -4,7 +4,7 @@ import {
   Input,
   Output,
   EventEmitter,
-} from "@angular/core";
+} from '@angular/core';
 
 enum PositionOnScale {
   LOWER,
@@ -12,13 +12,13 @@ enum PositionOnScale {
 }
 
 @Component({
-  selector: "perfect-input-with-slider",
-  templateUrl: "./input-with-slider.component.html",
-  styleUrls: ["./input-with-slider.component.scss"],
+  selector: 'perfect-input-with-slider',
+  templateUrl: './input-with-slider.component.html',
+  styleUrls: ['./input-with-slider.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputWithSliderComponent {
-  @Input() title = "";
+  @Input() title = '';
   @Input()
   public set lowerDefaultValue(value: number) {
     this.lowerDefault = value;
@@ -75,7 +75,7 @@ export class InputWithSliderComponent {
 
   private computeValue(
     value: number,
-    positionOnScale: PositionOnScale
+    positionOnScale: PositionOnScale,
   ): number {
     if (value < this.minValue) {
       return this.minValue;

@@ -3,18 +3,18 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   OnDestroy,
-} from "@angular/core";
-import { Store } from "@ngrx/store";
-import { Subscription } from "rxjs";
-import { DEFAULT_QUERY_PARAMETERS } from "../offers/state-management/effects";
-import { openOffersPage } from "../router/state-management/actions";
-import { WindowSizeDetector } from "../shared/services/window-size-detector.service";
+} from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import { DEFAULT_QUERY_PARAMETERS } from '../offers/state-management/effects';
+import { openOffersPage } from '../router/state-management/actions';
+import { WindowSizeDetector } from '../shared/services/window-size-detector.service';
 
 /** Stopka strony. Zawiera przydatne linki, informacje kontaktowe i logo firmy. */
 @Component({
-  selector: "perfect-footer",
-  templateUrl: "./footer.component.html",
-  styleUrls: ["./footer.component.scss"],
+  selector: 'perfect-footer',
+  templateUrl: './footer.component.html',
+  styleUrls: ['./footer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent implements OnDestroy {
@@ -32,7 +32,7 @@ export class FooterComponent implements OnDestroy {
     this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(
       () => {
         this.changeDetector.detectChanges();
-      }
+      },
     );
   }
 
@@ -62,7 +62,11 @@ export class FooterComponent implements OnDestroy {
 
   loadOffers(queryParams: any) {
     window.scrollTo(0, 0);
-    this.store.dispatch(openOffersPage({queryParams: {...DEFAULT_QUERY_PARAMETERS, ...queryParams}}))
+    this.store.dispatch(
+      openOffersPage({
+        queryParams: { ...DEFAULT_QUERY_PARAMETERS, ...queryParams },
+      }),
+    );
   }
 
   ngOnDestroy() {

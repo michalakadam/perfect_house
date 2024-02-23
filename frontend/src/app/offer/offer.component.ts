@@ -2,19 +2,19 @@ import {
   Component,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-} from "@angular/core";
-import { OnDestroy } from "@angular/core";
-import { Subscription } from "rxjs";
-import { Agent, Offer, OfferField } from "src/app/shared/models";
-import { WindowSizeDetector } from "../shared/services/window-size-detector.service";
-import { OffersStateManager } from "../offers/state-management/state-manager.service";
-import { AgentsStateManager } from "../agents/state-management/state-manager.service";
-import { Router } from "@angular/router";
+} from '@angular/core';
+import { OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Agent, Offer, OfferField } from 'src/app/shared/models';
+import { WindowSizeDetector } from '../shared/services/window-size-detector.service';
+import { OffersStateManager } from '../offers/state-management/state-manager.service';
+import { AgentsStateManager } from '../agents/state-management/state-manager.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: "perfect-offer",
-  templateUrl: "./offer.component.html",
-  styleUrls: ["./offer.component.scss"],
+  selector: 'perfect-offer',
+  templateUrl: './offer.component.html',
+  styleUrls: ['./offer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OfferComponent implements OnDestroy {
@@ -32,21 +32,23 @@ export class OfferComponent implements OnDestroy {
     readonly agentsStateManager: AgentsStateManager,
     readonly offersStateManager: OffersStateManager,
     private readonly changeDetector: ChangeDetectorRef,
-    private readonly router: Router
+    private readonly router: Router,
   ) {
     this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(
       () => {
         this.changeDetector.detectChanges();
-      }
+      },
     );
-    this.subscription.add(this.offersStateManager.currentOffer$.subscribe((offer: Offer) => {
-      this.offer = offer;
-      this.definedOfferFields = this.computeDefinedOfferFields(offer);
-      this.photoUrls = this.computePhotoUrls(offer);
-      this.isGalleryActive = true;
-      this.isMapActive = false;
-      this.isVirtualVisitActive = false;
-    }));
+    this.subscription.add(
+      this.offersStateManager.currentOffer$.subscribe((offer: Offer) => {
+        this.offer = offer;
+        this.definedOfferFields = this.computeDefinedOfferFields(offer);
+        this.photoUrls = this.computePhotoUrls(offer);
+        this.isGalleryActive = true;
+        this.isMapActive = false;
+        this.isVirtualVisitActive = false;
+      }),
+    );
   }
 
   computeDefinedOfferFields(offer: Offer): OfferField<any>[] {
@@ -54,7 +56,7 @@ export class OfferComponent implements OnDestroy {
       return [];
     }
     const symbolField = {
-      displayName: "Symbol oferty",
+      displayName: 'Symbol oferty',
       value: offer.symbol,
     };
 
@@ -62,7 +64,7 @@ export class OfferComponent implements OnDestroy {
       symbolField,
       ...Object.values(offer)
         .filter((value) => this.isDefinedOfferField(value))
-        .filter((field) => field.displayName !== "Cena za m²"),
+        .filter((field) => field.displayName !== 'Cena za m²'),
     ];
   }
 
@@ -75,28 +77,28 @@ export class OfferComponent implements OnDestroy {
   private isOfferField(value: any): boolean {
     return (
       value &&
-      value.hasOwnProperty("displayName") &&
-      value.hasOwnProperty("value")
+      value.hasOwnProperty('displayName') &&
+      value.hasOwnProperty('value')
     );
   }
 
   private isDefined(value: any): boolean {
-    if (typeof value === "number") {
+    if (typeof value === 'number') {
       return value > -1;
     }
     return !!value;
   }
 
   isBoolean(value: any): boolean {
-    return typeof value === "boolean";
+    return typeof value === 'boolean';
   }
 
   navigateToAgentPage(agent: Agent) {
-    this.router.navigate(["/ludzie/" + this.computeAgentLink(agent.fullName)]);
+    this.router.navigate(['/ludzie/' + this.computeAgentLink(agent.fullName)]);
   }
 
   computeAgentLink(agentFullName: string): string {
-    return agentFullName.toLowerCase().split(" ").join("-");
+    return agentFullName.toLowerCase().split(' ').join('-');
   }
 
   showGallery() {
@@ -124,13 +126,13 @@ export class OfferComponent implements OnDestroy {
   }
 
   computePhotoUrls(offer: Offer) {
-    const photoUrlPrefix = "/offers/";
+    const photoUrlPrefix = '/offers/';
 
     return offer ? offer.photos.map((photo) => photoUrlPrefix + photo) : [];
   }
 
   openOffer() {
-    this.router.navigate(["oferta", this.offerSearchSymbol]);
+    this.router.navigate(['oferta', this.offerSearchSymbol]);
     this.offerSearchSymbol = '';
   }
 

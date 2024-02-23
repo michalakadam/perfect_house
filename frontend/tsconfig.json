@@ -13,12 +13,14 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "target": "es2015",
+    // https://angular.schule/blog/2022-11-use-define-for-class-fields
+    "useDefineForClassFields": false,
+    "target": "es2022",
     "typeRoots": ["node_modules/@types"],
     "lib": ["es2019", "dom"]
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true,
+    "strictInjectionParameters": true
   }
 }

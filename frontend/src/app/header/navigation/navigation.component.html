@@ -1,6 +1,6 @@
 <nav>
   <span class="link-container" *ngFor="let link of links">
-    <span
+    <a
       *ngIf="link.route !== '/o_nas' && link.route !== '/oferty'"
       class="link"
       [routerLink]="link.route"
@@ -9,9 +9,9 @@
       tabindex="0"
       role="button"
       aria-pressed="false"
-      >{{ link.title }}</span
+      >{{ link.title }}</a
     >
-    <span
+    <a
       *ngIf="link.route === '/o_nas'"
       class="link"
       [ngClass]="{ 'active-link': isAboutUsActive }"
@@ -19,9 +19,9 @@
       tabindex="0"
       role="button"
       aria-pressed="false"
-      >{{ link.title }}</span
+      >{{ link.title }}</a
     >
-    <span
+    <a
       *ngIf="link.route === '/oferty'"
       class="link"
       [routerLink]="[
@@ -32,7 +32,7 @@
       tabindex="0"
       role="button"
       aria-pressed="false"
-      >{{ link.title }}</span
+      >{{ link.title }}</a
     >
   </span>
 </nav>

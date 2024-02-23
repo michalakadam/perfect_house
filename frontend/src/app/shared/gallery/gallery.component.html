@@ -1,11 +1,16 @@
 <div class="component-container">
   <div class="photo-with-buttons-container">
-    <div class="photo" (swipeleft)="loadNextPhoto()" (swiperight)="loadPreviousPhoto()">
+    <div
+      class="photo"
+      (swipeleft)="loadNextPhoto()"
+      (swiperight)="loadPreviousPhoto()"
+    >
       <img
         #current
         [src]="currentPhotoUrl"
         [class.vertical]="isCurrentPhotoVertical"
-        (load)="determineCurrentPhotoLayout()"/>
+        (load)="determineCurrentPhotoLayout()"
+      />
     </div>
     <button
       pButton
@@ -14,8 +19,8 @@
       icon="pi pi-chevron-left"
       class="p-button-rounded"
       [class.hidden]="!isPreviousPhotoAvailable()"
-      (click)="loadPreviousPhoto()">
-		</button>
+      (click)="loadPreviousPhoto()"
+    ></button>
     <button
       pButton
       pRipple
@@ -23,34 +28,39 @@
       icon="pi pi-chevron-right"
       class="p-button-rounded"
       [class.hidden]="!isNextPhotoAvailable()"
-      (click)="loadNextPhoto()">
-		</button>
+      (click)="loadNextPhoto()"
+    ></button>
   </div>
   <div
     class="carousel-container"
-    *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall">
+    *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall"
+  >
     <div
       class="carousel-button"
       [class.hidden]="carouselStartIndex === 0"
-      (click)="loadPreviousPhotos()">
+      (click)="loadPreviousPhotos()"
+    >
       <i class="pi pi-angle-double-left"></i>
     </div>
     <div class="photos-container">
       <div
         *ngFor="let photoUrl of photosInCarousel"
         class="photo-container"
-        (click)="selectPhoto(photoUrl)">
+        (click)="selectPhoto(photoUrl)"
+      >
         <img
           #photo
           [src]="photoUrl"
           [class.selected]="photoUrl === currentPhotoUrl"
-          [class.vertical]="isPhotoVertical(photo)"/>
+          [class.vertical]="isPhotoVertical(photo)"
+        />
       </div>
     </div>
     <div
       class="carousel-button"
       [class.hidden]="isNextPhotosButtonHidden()"
-      (click)="loadNextPhotos()">
+      (click)="loadNextPhotos()"
+    >
       <i class="pi pi-angle-double-right"></i>
     </div>
   </div>

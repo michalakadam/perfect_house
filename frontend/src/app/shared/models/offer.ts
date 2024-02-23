@@ -1,5 +1,5 @@
-import { OfferField } from "./offer-field";
-import { Room } from "./room";
+import { OfferField } from './offer-field';
+import { Room } from './room';
 
 export interface Offer {
   id: number;

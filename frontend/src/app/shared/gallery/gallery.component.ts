@@ -5,15 +5,15 @@ import {
   ViewChild,
   ElementRef,
   ChangeDetectorRef,
-} from "@angular/core";
-import { WindowSizeDetector } from "../services/window-size-detector.service";
+} from '@angular/core';
+import { WindowSizeDetector } from '../services/window-size-detector.service';
 
 const HORIZONTAL_PHOTO_MAX_WIDTH_TO_HEIGHT_RATIO = 1.2;
 
 @Component({
-  selector: "perfect-gallery",
-  templateUrl: "./gallery.component.html",
-  styleUrls: ["./gallery.component.scss"],
+  selector: 'perfect-gallery',
+  templateUrl: './gallery.component.html',
+  styleUrls: ['./gallery.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GalleryComponent {
@@ -27,17 +27,17 @@ export class GalleryComponent {
     }
   }
   photosInCarousel: string[] = [];
-  currentPhotoUrl = "";
+  currentPhotoUrl = '';
   currentPhotoIndex = -1;
   isCurrentPhotoVertical = false;
   numberOfPhotosInCarousel = 7;
   carouselStartIndex: number;
   carouselEndIndex: number;
-  @ViewChild("current") currentPhoto: ElementRef;
+  @ViewChild('current') currentPhoto: ElementRef;
 
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,
-    private readonly changeDetector: ChangeDetectorRef
+    private readonly changeDetector: ChangeDetectorRef,
   ) {
     this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
       this.computeNumberOfPhotosInCarousel();
@@ -67,7 +67,7 @@ export class GalleryComponent {
 
   determineCurrentPhotoLayout() {
     this.isCurrentPhotoVertical = this.isPhotoVertical(
-      this.currentPhoto.nativeElement as HTMLImageElement
+      this.currentPhoto.nativeElement as HTMLImageElement,
     );
   }
 
@@ -94,7 +94,7 @@ export class GalleryComponent {
   }
 
   loadNextPhoto() {
-    if (this.currentPhotoIndex === this.photos.length -1) {
+    if (this.currentPhotoIndex === this.photos.length - 1) {
       return;
     }
     this.updateCurrentPhoto(this.currentPhotoIndex + 1);
@@ -120,7 +120,7 @@ export class GalleryComponent {
     this.carouselEndIndex = startIndex + this.numberOfPhotosInCarousel - 1;
     this.photosInCarousel = [...this.photos].splice(
       startIndex,
-      this.numberOfPhotosInCarousel
+      this.numberOfPhotosInCarousel,
     );
   }
 
@@ -145,7 +145,9 @@ export class GalleryComponent {
       : this.carouselEndIndex + 1;
 
     this.computePhotosInCarousel(startIndex);
-    this.updateCurrentPhoto(runningOutOfPhotos ? this.currentPhotoIndex : this.carouselStartIndex);
+    this.updateCurrentPhoto(
+      runningOutOfPhotos ? this.currentPhotoIndex : this.carouselStartIndex,
+    );
   }
 
   loadPreviousPhotos() {

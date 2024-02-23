@@ -2,11 +2,11 @@ import {
   AVAILABLE_ESTATE_TYPES,
   Offer,
   OffersFilters,
-} from "src/app/shared/models";
+} from 'src/app/shared/models';
 
 export const filterOffers = (
   offers: Offer[],
-  filters: OffersFilters
+  filters: OffersFilters,
 ): Offer[] => {
   if (!filters) {
     return offers;
@@ -17,7 +17,7 @@ export const filterOffers = (
       offers = filterByEstateSubtype(
         offers,
         filters.estateType,
-        filters.estateSubtype
+        filters.estateSubtype,
       );
     }
   }
@@ -25,7 +25,7 @@ export const filterOffers = (
   offers = filterByMarketType(
     offers,
     filters.isPrimaryMarket,
-    filters.isSecondaryMarket
+    filters.isSecondaryMarket,
   );
   if (filters.voivodeship) {
     offers = filterByVoivodeship(offers, filters.voivodeship);
@@ -40,7 +40,7 @@ export const filterOffers = (
     offers = offers.filter(
       (offer) =>
         offer.estateSubtypes &&
-        offer.estateSubtypes.indexOf("inwestycyjna") > -1
+        offer.estateSubtypes.indexOf('inwestycyjna') > -1,
     );
   }
   if (filters.isByTheSea) {
@@ -55,18 +55,18 @@ export const filterOffers = (
   if (filters.pricePerSquareMeterFrom > -1) {
     offers = offers.filter(
       (offer) =>
-        offer.pricePerSquareMeter.value >= filters.pricePerSquareMeterFrom
+        offer.pricePerSquareMeter.value >= filters.pricePerSquareMeterFrom,
     );
   }
   if (filters.pricePerSquareMeterTo > -1) {
     offers = offers.filter(
       (offer) =>
-        offer.pricePerSquareMeter.value <= filters.pricePerSquareMeterTo
+        offer.pricePerSquareMeter.value <= filters.pricePerSquareMeterTo,
     );
   }
   if (filters.areaFrom > -1) {
     offers = offers.filter(
-      (offer) => offer.totalArea.value >= filters.areaFrom
+      (offer) => offer.totalArea.value >= filters.areaFrom,
     );
   }
   if (filters.areaTo > -1) {
@@ -74,12 +74,12 @@ export const filterOffers = (
   }
   if (filters.numberOfRoomsFrom > -1) {
     offers = offers.filter(
-      (offer) => offer.numberOfRooms.value >= filters.numberOfRoomsFrom
+      (offer) => offer.numberOfRooms.value >= filters.numberOfRoomsFrom,
     );
   }
   if (filters.numberOfRoomsTo > -1) {
     offers = offers.filter(
-      (offer) => offer.numberOfRooms.value <= filters.numberOfRoomsTo
+      (offer) => offer.numberOfRooms.value <= filters.numberOfRoomsTo,
     );
   }
   if (filters.floorFrom > -1) {
@@ -96,7 +96,7 @@ export const filterOffers = (
       (offer) =>
         offer.isParkingAvailable.value ||
         !!offer.garage.value ||
-        offer.isTruckParkingAvailable.value
+        offer.isTruckParkingAvailable.value,
     );
   }
   if (filters.isTerraceAvailable) {
@@ -114,7 +114,7 @@ export const filterOffers = (
 
 const filterByEstateType = (offers: Offer[], estateType: string): Offer[] => {
   const estate = AVAILABLE_ESTATE_TYPES.find(
-    (estate) => estate.displayName === estateType
+    (estate) => estate.displayName === estateType,
   );
 
   return estate
@@ -125,13 +125,13 @@ const filterByEstateType = (offers: Offer[], estateType: string): Offer[] => {
 const filterByEstateSubtype = (
   offers: Offer[],
   estateType: string,
-  estateSubtype: string
+  estateSubtype: string,
 ): Offer[] => {
-  if (estateType === "mieszkanie") {
+  if (estateType === 'mieszkanie') {
     return offers.filter((offer) => offer.buildingType.value === estateSubtype);
   }
   return offers.filter(
-    (offer) => offer.estateSubtypes.indexOf(estateSubtype) > -1
+    (offer) => offer.estateSubtypes.indexOf(estateSubtype) > -1,
   );
 };
 
@@ -142,7 +142,7 @@ const filterByTransactionType = (offers: Offer[], isForRent): Offer[] => {
 const filterByMarketType = (
   offers: Offer[],
   isPrimaryMarket: boolean,
-  isSecondaryMarket: boolean
+  isSecondaryMarket: boolean,
 ): Offer[] => {
   if (isPrimaryMarket && isSecondaryMarket) {
     return offers;
@@ -158,35 +158,35 @@ const filterByMarketType = (
 
 export const filterByVoivodeship = (
   offers: Offer[],
-  voivodeship: string
+  voivodeship: string,
 ): Offer[] => {
   return offers.filter(
-    (offer) => offer.voivodeship.toLowerCase() === voivodeship.toLowerCase()
+    (offer) => offer.voivodeship.toLowerCase() === voivodeship.toLowerCase(),
   );
 };
 
 export const filterByCounty = (offers: Offer[], county: string): Offer[] => {
   return offers.filter(
-    (offer) => offer.county.toLowerCase() === county.toLowerCase()
+    (offer) => offer.county.toLowerCase() === county.toLowerCase(),
   );
 };
 
 const filterByLocation = (offers: Offer[], location: string): Offer[] => {
-  if (location.includes(",")) {
+  if (location.includes(',')) {
     return offers.filter(
-      (offer) => offer.fullLocation.toLowerCase() === location.toLowerCase()
+      (offer) => offer.fullLocation.toLowerCase() === location.toLowerCase(),
     );
   }
   return offers.filter(
     (offer) =>
       offer.city.toLowerCase() === location.toLowerCase() ||
-      offer.district.toLowerCase() === location.toLowerCase()
+      offer.district.toLowerCase() === location.toLowerCase(),
   );
 };
 
 export const filterOffersByPrice = (
   offers: Offer[],
-  filters: OffersFilters
+  filters: OffersFilters,
 ): Offer[] => {
   if (!filters) {
     return offers;

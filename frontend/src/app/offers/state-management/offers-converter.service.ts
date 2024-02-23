@@ -1,396 +1,395 @@
 import { Injectable } from '@angular/core';
 import { Offer, OfferField, Room } from 'src/app/shared/models';
 
-const DESCRIPTION_TO_BE_REPLACED = "Oferta wysłana z systemu Galactica Virgo";
+const DESCRIPTION_TO_BE_REPLACED = 'Oferta wysłana z systemu Galactica Virgo';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OffersConverter {
-
-   convertToReadableOffers(rawOffers: any[]): Offer[] {
+  convertToReadableOffers(rawOffers: any[]): Offer[] {
     return rawOffers.map((offer) => {
       return {
         id: this.convertToNumber(offer.ID),
-        estateType: this.computeEstateType(offer.Przedmiot || ""),
+        estateType: this.computeEstateType(offer.Przedmiot || ''),
         estateSubtypes: this.computeEstateSubtypes(offer),
         agentId: this.convertToNumber(offer.Agent),
-        title: offer.TytulOferty || "",
-        description: (offer.UwagiOpis || "").replace(
+        title: offer.TytulOferty || '',
+        description: (offer.UwagiOpis || '').replace(
           DESCRIPTION_TO_BE_REPLACED,
-          ""
+          '',
         ),
-        additionalDescription: offer.DodatkowyOpis || "",
-        additionalRemarks: offer.UwagiOpis || "",
-        releaseDate: offer.TerminWydaniaData?.text || "",
+        additionalDescription: offer.DodatkowyOpis || '',
+        additionalRemarks: offer.UwagiOpis || '',
+        releaseDate: offer.TerminWydaniaData?.text || '',
         // TerminWydaniaLista is always a single element object.
-        releaseDateTitle: offer.TerminWydaniaLista?.text || "",
+        releaseDateTitle: offer.TerminWydaniaLista?.text || '',
         number: this.convertToNumber(offer.Nr),
-        symbol: offer.Symbol || "",
-        status: offer.Status || "",
+        symbol: offer.Symbol || '',
+        status: offer.Status || '',
         standard: this.convertToField(
-          "Standard",
-          this.convertToNumber(offer.Standard?.text)
+          'Standard',
+          this.convertToNumber(offer.Standard?.text),
         ),
         // StanLokaluLista is always a single element object.
         premiseState: this.convertToField(
-          "Stan lokalu",
-          offer.StanLokaluLista?.text || ""
+          'Stan lokalu',
+          offer.StanLokaluLista?.text || '',
         ),
         isExclusive: this.convertToBoolean(offer.Wylacznosc),
         isForRent: this.convertToBoolean(offer.Wynajem),
         photos: this.convertPhotos(this.convertToArray(offer.Zdjecia?.Foto)),
         isNoCommission: this.convertToBoolean(offer.ZeroProwizji),
         isAvailableOnFacebook: this.convertToBoolean(
-          offer.PublikacjaFacebook?.text
+          offer.PublikacjaFacebook?.text,
         ),
         parentOfferId: this.convertToNumber(offer.OfertaBazowa?.text),
-        creationDate: offer.DataWprowadzenia || "",
-        updateDate: offer.DataEdycji?.text || "",
-        expirationDate: offer.DataWaznosci || "",
-        virtualVisitUrl: offer.WirtualnaWizyta?.Url || "",
-        legalStatus: this.convertToField("Stan prawny", offer.StanPrawny || ""),
+        creationDate: offer.DataWprowadzenia || '',
+        updateDate: offer.DataEdycji?.text || '',
+        expirationDate: offer.DataWaznosci || '',
+        virtualVisitUrl: offer.WirtualnaWizyta?.Url || '',
+        legalStatus: this.convertToField('Stan prawny', offer.StanPrawny || ''),
 
         price: this.convertToNumber(offer.Cena),
         pricePerSquareMeter: this.convertToField(
-          "Cena za m²",
+          'Cena za m²',
           this.convertToNumber(offer.CenaM2),
-          "zł"
+          'zł',
         ),
         rentPrice: this.convertToField(
-          "Czynsz najmu",
+          'Czynsz najmu',
           this.convertToNumber(offer.CzynszLetni?.text),
-          "zł"
+          'zł',
         ),
         grossRentPricePerSquareMeter: this.convertToField(
-          "Czynsz najmu brutto za m²",
+          'Czynsz najmu brutto za m²',
           this.convertToNumber(offer.CzynszNajmuBrutto_m2?.text),
-          "zł"
+          'zł',
         ),
         netRentPricePerSquareMeter: this.convertToField(
-          "Czynsz najmu netto za m²",
+          'Czynsz najmu netto za m²',
           this.convertToNumber(offer.CzynszNajmuNetto_m2?.text),
-          "zł"
+          'zł',
         ),
         deposit: this.convertToField(
-          "Kaucja",
+          'Kaucja',
           this.convertToNumber(offer.Kaucja?.text),
-          "zł"
+          'zł',
         ),
         depositType: this.convertToField(
-          "Typ kaucji",
-          offer.TypKaucji?.text || ""
+          'Typ kaucji',
+          offer.TypKaucji?.text || '',
         ),
         additionalFees: this.convertToArray(
           offer.DodatkoweOplatyWCzynszu?.lista ||
-            offer.DodatkoweOplatyWgLicznikow?.lista
+            offer.DodatkoweOplatyWgLicznikow?.lista,
         ),
         garagePrice: this.convertToField(
-          "Cena garażu",
+          'Cena garażu',
           this.convertToNumber(offer.CenaGarazu?.text),
-          "zł"
+          'zł',
         ),
 
-        country: offer.Kraj?.text || "",
-        voivodeship: offer.Wojewodztwo || "",
-        county: this.computeCounty(offer.Powiat || ""),
-        city: this.computeCity(offer.Lokalizacja || ""),
-        district: offer.Dzielnica || offer.Rejon || "",
+        country: offer.Kraj?.text || '',
+        voivodeship: offer.Wojewodztwo || '',
+        county: this.computeCounty(offer.Powiat || ''),
+        city: this.computeCity(offer.Lokalizacja || ''),
+        district: offer.Dzielnica || offer.Rejon || '',
         fullLocation: this.computeFullLocation(
-          this.computeCity(offer.Lokalizacja || ""),
-          offer.Dzielnica || offer.Rejon || ""
+          this.computeCity(offer.Lokalizacja || ''),
+          offer.Dzielnica || offer.Rejon || '',
         ),
-        postalCode: offer.KodPocztowy?.text || "",
-        street: offer.Ulica || "",
-        location: offer.Polozenie?.text || "",
+        postalCode: offer.KodPocztowy?.text || '',
+        street: offer.Ulica || '',
+        location: offer.Polozenie?.text || '',
         lattitude: offer.MapSzerokoscGeogr
-          ? this.convertToNumber(offer.MapSzerokoscGeogr.replace(",", "."))
+          ? this.convertToNumber(offer.MapSzerokoscGeogr.replace(',', '.'))
           : undefined,
         longitude: offer.MapDlugoscGeogr
-          ? this.convertToNumber(offer.MapDlugoscGeogr?.replace(",", "."))
+          ? this.convertToNumber(offer.MapDlugoscGeogr?.replace(',', '.'))
           : undefined,
         isByTheSea: offer.Kategorie?.lista
-          ? offer.Kategorie.lista === "Nad morzem"
+          ? offer.Kategorie.lista === 'Nad morzem'
           : false,
         publicTransport: this.convertToArray(offer.Komunikacja?.lista),
         // Sasiedztwo?.lista is always a single element object.
         neighbourhood: this.convertToField(
-          "Sąsiedztwo",
-          offer.Otoczenie?.text || offer.Sasiedztwo?.lista || ""
+          'Sąsiedztwo',
+          offer.Otoczenie?.text || offer.Sasiedztwo?.lista || '',
         ),
-        accessRoad: this.convertToField("Dojazd", offer.Dojazd?.text || ""),
+        accessRoad: this.convertToField('Dojazd', offer.Dojazd?.text || ''),
 
         totalArea: this.convertToField(
-          "Powierzchnia",
+          'Powierzchnia',
           this.convertToNumber(offer.PowierzchniaCalkowita),
-          "m²"
+          'm²',
         ),
         landArea: this.convertToField(
-          "Powierzchnia działki",
+          'Powierzchnia działki',
           this.convertToNumber(offer.PowierzchniaDzialki?.text),
-          "m²"
+          'm²',
         ),
         terraceArea: this.convertToField(
-          "Powierzchnia balkonu",
+          'Powierzchnia balkonu',
           this.convertToNumber(offer.PowierzchniaTarasBalkon?.text),
-          "m²"
+          'm²',
         ),
         officeArea: this.convertToField(
-          "Powierzchnia biurowa",
+          'Powierzchnia biurowa',
           this.convertToNumber(
             offer.PowierzchniaBiurowa?.text ||
-              offer.PowierzchniaPomieszczenBiurowychDo?.text
+              offer.PowierzchniaPomieszczenBiurowychDo?.text,
           ),
-          "m²"
+          'm²',
         ),
         officeBuildingArea: this.convertToField(
-          "Powierzchnia biurowca",
+          'Powierzchnia biurowca',
           this.convertToNumber(offer.PowierzchniaBiurowca?.text),
-          "m²"
+          'm²',
         ),
         floorArea: this.convertToField(
-          "Powierzchnia kondygnacji",
+          'Powierzchnia kondygnacji',
           this.convertToNumber(offer.PowierzchniaKondygnacji?.text),
-          "m²"
+          'm²',
         ),
 
         rooms: this.convertRooms(
-          this.convertToArray(offer.Pomieszczenia?.Pomieszczenie)
+          this.convertToArray(offer.Pomieszczenia?.Pomieszczenie),
         ),
         numberOfRooms: this.convertToField(
-          "Liczba pokoi",
-          this.convertToNumber(offer.IloscPokoi)
+          'Liczba pokoi',
+          this.convertToNumber(offer.IloscPokoi),
         ),
         roomsHeight: this.convertToField(
-          "Wysokość pomieszczeń",
+          'Wysokość pomieszczeń',
           this.convertToNumber(offer.WysokoscPomieszczen),
-          "m"
+          'm',
         ),
         floor: this.convertToField(
-          "Piętro",
-          this.convertFloor(offer.Pietro || "")
+          'Piętro',
+          this.convertFloor(offer.Pietro || ''),
         ),
         numberOfFloors: this.convertToField(
-          "Liczba pięter",
+          'Liczba pięter',
           this.convertToNumber(
-            offer.IloscKondygnacji || offer.IloscPieter?.text || ""
-          )
+            offer.IloscKondygnacji || offer.IloscPieter?.text || '',
+          ),
         ),
         floorHeight: this.convertToField(
-          "Wysokość kondygnacji",
+          'Wysokość kondygnacji',
           this.convertToNumber(offer.WysokoscKondygnacji?.text),
-          "m"
+          'm',
         ),
         isBasementAvailable: this.convertToField(
-          "Piwnica",
-          this.convertToBoolean(offer.Piwnica)
+          'Piwnica',
+          this.convertToBoolean(offer.Piwnica),
         ),
         numberOfBedrooms: this.convertToField(
-          "Liczba sypialni",
-          this.convertToNumber(offer.IloscSypialni?.text)
+          'Liczba sypialni',
+          this.convertToNumber(offer.IloscSypialni?.text),
         ),
         numberOfTerraces: this.convertToField(
-          "Liczba balkonów",
-          this.convertToNumber(offer.IloscBalkonow?.text)
+          'Liczba balkonów',
+          this.convertToNumber(offer.IloscBalkonow?.text),
         ),
-        noiseLevel: this.convertToField("Głośność", offer.Glosnosc?.text || ""),
+        noiseLevel: this.convertToField('Głośność', offer.Glosnosc?.text || ''),
         isTerraceAvailable: this.convertToField(
-          "Balkon",
-          this.convertToBoolean(offer.Balkon?.text)
+          'Balkon',
+          this.convertToBoolean(offer.Balkon?.text),
         ),
         buildingType: this.convertToField(
-          "Rodzaj obiektu",
-          offer.RodzajBudynku || offer.RodzajObiektu?.text || ""
+          'Rodzaj obiektu',
+          offer.RodzajBudynku || offer.RodzajObiektu?.text || '',
         ),
         officeBuildingCategory: this.convertToField(
-          "Rodzaj biurowca",
-          offer.KategoriaBiurowca?.text || ""
+          'Rodzaj biurowca',
+          offer.KategoriaBiurowca?.text || '',
         ),
         flatType: this.convertToField(
-          "Rodzaj mieszkania",
-          offer.RodzajMieszkania?.text || ""
+          'Rodzaj mieszkania',
+          offer.RodzajMieszkania?.text || '',
         ),
-        gasConnectionDetails: this.convertToField("Gaz", offer.Gaz?.text || ""),
+        gasConnectionDetails: this.convertToField('Gaz', offer.Gaz?.text || ''),
         sewageConnectionDetails: this.convertToField(
-          "Kanalizacja",
-          offer.Kanalizacja?.text || ""
+          'Kanalizacja',
+          offer.Kanalizacja?.text || '',
         ),
         waterConnectionDetails: this.convertToField(
-          "Woda",
-          offer.Woda?.text || ""
+          'Woda',
+          offer.Woda?.text || '',
         ),
         electricityConnectionDetails: this.convertToField(
-          "Prąd",
-          offer.Prad?.text || ""
+          'Prąd',
+          offer.Prad?.text || '',
         ),
         garage: this.convertToField(
-          "Garaż",
-          offer.Garaz?.text || offer.GarazMieszkanie?.text || ""
+          'Garaż',
+          offer.Garaz?.text || offer.GarazMieszkanie?.text || '',
         ),
         isParkingAvailable: this.convertToField(
-          "Parking",
+          'Parking',
           this.convertToBoolean(
-            offer.WlasnyParking || offer.MozliwoscParkowania?.text
-          )
+            offer.WlasnyParking || offer.MozliwoscParkowania?.text,
+          ),
         ),
         isElevatorAvailable: this.convertToField(
-          "Winda",
-          this.convertToBoolean(offer.WindaJest?.text)
+          'Winda',
+          this.convertToBoolean(offer.WindaJest?.text),
         ),
         isFenceAvailable: this.convertToField(
-          "Ogrodzenie",
-          this.convertToBoolean(offer.Ogrodzenie)
+          'Ogrodzenie',
+          this.convertToBoolean(offer.Ogrodzenie),
         ),
         isMarketPrimary: this.convertToBoolean(offer.Pierwotny),
         acquisitionType: this.convertToField(
-          "Podstawa nabycia",
-          offer.PodstawaNabycia?.text || ""
+          'Podstawa nabycia',
+          offer.PodstawaNabycia?.text || '',
         ),
-        burden: this.convertToField("Obciążenia", offer.Obciazenia?.text || ""),
+        burden: this.convertToField('Obciążenia', offer.Obciazenia?.text || ''),
         // UsytuowanieLista is always a single element object.
         flatSetUp: this.convertToField(
-          "Usytuowanie",
-          offer.UsytuowanieLista?.text || ""
+          'Usytuowanie',
+          offer.UsytuowanieLista?.text || '',
         ),
         yearBuilt: this.convertToField(
-          "Rok budowy",
-          this.convertToNumber(offer.RokBudowy?.text)
+          'Rok budowy',
+          this.convertToNumber(offer.RokBudowy?.text),
         ),
         constructionTechnology: this.convertToField(
-          "Technologia budowlana",
-          offer.TechnologiaBudowlana || ""
+          'Technologia budowlana',
+          offer.TechnologiaBudowlana || '',
         ),
         // Okna is always a single element object.
-        windowsType: this.convertToField("Okna", offer.Okna?.text || ""),
+        windowsType: this.convertToField('Okna', offer.Okna?.text || ''),
         heatingType: this.convertToField(
-          "Ogrzewanie",
-          offer.Ogrzewanie?.text || ""
+          'Ogrzewanie',
+          offer.Ogrzewanie?.text || '',
         ),
         isAccessible: this.convertToField(
-          "Udogodnienia dla niepełnosprawnych",
-          this.convertToBoolean(offer.Niepelnosprawni?.text)
+          'Udogodnienia dla niepełnosprawnych',
+          this.convertToBoolean(offer.Niepelnosprawni?.text),
         ),
         buildingName: this.convertToField(
-          "Nazwa obiektu",
-          offer.NazwaObiektu || ""
+          'Nazwa obiektu',
+          offer.NazwaObiektu || '',
         ),
         minimumRentingPeriodInMonths: this.convertToField(
-          "Minimalny okres najmu",
-          this.convertToNumber(offer.MinOkresNajmu?.text)
+          'Minimalny okres najmu',
+          this.convertToNumber(offer.MinOkresNajmu?.text),
         ),
         isReceptionAvailable: this.convertToField(
-          "Recepcja",
-          this.convertToBoolean(offer.Recepcja?.text)
+          'Recepcja',
+          this.convertToBoolean(offer.Recepcja?.text),
         ),
         isComputerNetworkAvailable: this.convertToField(
-          "Sieć komputerowa",
-          this.convertToBoolean(offer.SiecKomputerowa?.text)
+          'Sieć komputerowa',
+          this.convertToBoolean(offer.SiecKomputerowa?.text),
         ),
         securityType: this.convertToField(
-          "Dozór budynku",
-          offer.DozorBudynkuLista?.text || ""
+          'Dozór budynku',
+          offer.DozorBudynkuLista?.text || '',
         ),
-        entrance: this.convertToField("Wejście", offer.Wejscie?.text || ""),
+        entrance: this.convertToField('Wejście', offer.Wejscie?.text || ''),
         isAlarmSet: this.convertToField(
-          "Alarm",
-          this.convertToBoolean(offer.Alarm?.text)
+          'Alarm',
+          this.convertToBoolean(offer.Alarm?.text),
         ),
 
         isFloorDustFree: this.convertToField(
-          "Posadzka niepyląca",
-          this.convertToBoolean(offer.PosadzkaNiepylaca?.text)
+          'Posadzka niepyląca',
+          this.convertToBoolean(offer.PosadzkaNiepylaca?.text),
         ),
         isLoadingRampAvailable: this.convertToField(
-          "Rampa rozładunkowa",
-          this.convertToBoolean(offer.RampaRozladunkowa?.text)
+          'Rampa rozładunkowa',
+          this.convertToBoolean(offer.RampaRozladunkowa?.text),
         ),
         warehouseArea: this.convertToField(
-          "Powierzchnia pomieszczeń magazynowych",
+          'Powierzchnia pomieszczeń magazynowych',
           this.convertToNumber(offer.PowierzchniaPomieszczenMagazynowych?.text),
-          "m²"
+          'm²',
         ),
         warehouseYardArea: this.convertToField(
-          "Powierzchnia placu utwardzanego",
+          'Powierzchnia placu utwardzanego',
           this.convertToNumber(offer.PowierzchniaPlacuUtwardzonego?.text),
-          "m²"
+          'm²',
         ),
         isYardHardened: this.convertToField(
-          "Plac utwardzany",
-          this.convertToBoolean(offer.PlacUtwardzany?.text)
+          'Plac utwardzany',
+          this.convertToBoolean(offer.PlacUtwardzany?.text),
         ),
         isManeuveringAreaAvailable: this.convertToField(
-          "Plac manewrowy",
-          this.convertToBoolean(offer.PlacManewrowy?.text)
+          'Plac manewrowy',
+          this.convertToBoolean(offer.PlacManewrowy?.text),
         ),
         isTruckParkingAvailable: this.convertToField(
-          "Parking dla TIR-ów",
-          this.convertToBoolean(offer.ParkowanieTir?.text)
+          'Parking dla TIR-ów',
+          this.convertToBoolean(offer.ParkowanieTir?.text),
         ),
         isGantryAvailable: this.convertToField(
-          "Suwnica",
-          this.convertToBoolean(offer.Suwnica?.text)
+          'Suwnica',
+          this.convertToBoolean(offer.Suwnica?.text),
         ),
         isGoodsLiftAvailable: this.convertToField(
-          "Winda towarowa",
-          this.convertToBoolean(offer.WindaTowarowa?.text)
+          'Winda towarowa',
+          this.convertToBoolean(offer.WindaTowarowa?.text),
         ),
 
         premiseType: this.convertToField(
-          "Rodzaj lokalu",
-          offer.RodzajLokalu?.text || ""
+          'Rodzaj lokalu',
+          offer.RodzajLokalu?.text || '',
         ),
         premiseBackRoomArea: this.convertToField(
-          "Powierzchnia zaplecza",
+          'Powierzchnia zaplecza',
           this.convertToNumber(offer.PowierzchniaZaplecza?.text),
-          "m²"
+          'm²',
         ),
         premiseSalesRoomArea: this.convertToField(
-          "Powierzchnia hali sprzedażowej",
+          'Powierzchnia hali sprzedażowej',
           this.convertToNumber(offer.PowierzchniaHaliSprzedazy?.text),
-          "m²"
+          'm²',
         ),
 
-        mpzp: this.convertToField("MPZP", offer.MPZP?.text || ""),
+        mpzp: this.convertToField('MPZP', offer.MPZP?.text || ''),
         mpzpInfo: this.convertToField(
-          "Informacja o MPZP",
-          offer.MPZPInformacja?.text || ""
+          'Informacja o MPZP',
+          offer.MPZPInformacja?.text || '',
         ),
         landLotUse: this.convertToField(
-          "Zagospodarowanie",
-          offer.ZagospodarowanieDzialki?.text || ""
+          'Zagospodarowanie',
+          offer.ZagospodarowanieDzialki?.text || '',
         ),
         landLotDetailedSize: this.convertToField(
-          "Wymiary",
-          offer.WymiaryDzialki?.text || ""
+          'Wymiary',
+          offer.WymiaryDzialki?.text || '',
         ),
         landLotConstructionConditions: this.convertToField(
-          "Warunki zabudowy",
-          offer.WarunkiZabudowy?.text || ""
+          'Warunki zabudowy',
+          offer.WarunkiZabudowy?.text || '',
         ),
         landLotForm: this.convertToField(
-          "Ukształtowanie terenu",
-          offer.UksztaltowanieDzialki?.text || ""
+          'Ukształtowanie terenu',
+          offer.UksztaltowanieDzialki?.text || '',
         ),
         landLotFrontLineWidth: this.convertToField(
-          "Szerokość frontu działki",
+          'Szerokość frontu działki',
           this.convertToNumber(offer.SzerokoscFrontuDzialki?.text),
-          "m"
+          'm',
         ),
         landLotShape: this.convertToField(
-          "Kształt działki",
-          offer.KsztaltDzialki?.text || ""
+          'Kształt działki',
+          offer.KsztaltDzialki?.text || '',
         ),
         landLotLegalStatus: this.convertToField(
-          "Stan prawny gruntu",
-          offer.StanPrawnyGruntu || ""
+          'Stan prawny gruntu',
+          offer.StanPrawnyGruntu || '',
         ),
         landLotFenceType: this.convertToField(
-          "Ogrodzenie",
-          offer.OgrodzenieDzialki?.text || ""
+          'Ogrodzenie',
+          offer.OgrodzenieDzialki?.text || '',
         ),
         landLotBuildings: this.convertToField(
-          "Zabudowa",
-          offer.ZabudowaDzialki?.text || ""
+          'Zabudowa',
+          offer.ZabudowaDzialki?.text || '',
         ),
       };
     });
@@ -399,7 +398,7 @@ export class OffersConverter {
   private convertToField<T>(
     displayName: string,
     value: T,
-    unit?: string
+    unit?: string,
   ): OfferField<T> {
     return { displayName, value, unit };
   }
@@ -416,7 +415,7 @@ export class OffersConverter {
     if (!booleanAsString) {
       return false;
     }
-    if (typeof booleanAsString === "object") {
+    if (typeof booleanAsString === 'object') {
       booleanAsString = booleanAsString.text;
     }
     const possibleTrueValues =
@@ -427,7 +426,7 @@ export class OffersConverter {
 
   private convertToNumber(numberAsString: string | undefined): number {
     if (numberAsString) {
-      numberAsString = numberAsString.replace(",", ".");
+      numberAsString = numberAsString.replace(',', '.');
     }
     return Number.isNaN(Number(numberAsString)) ? -1 : Number(numberAsString);
   }
@@ -436,30 +435,30 @@ export class OffersConverter {
     if (!offer.Przedmiot) {
       return [];
     }
-    if (offer.Przedmiot === "Dom" && offer.RodzajDomu?.text) {
+    if (offer.Przedmiot === 'Dom' && offer.RodzajDomu?.text) {
       return [offer.RodzajDomu.text];
     }
-    if (offer.Przedmiot === "Mieszkanie" && offer.RodzajMieszkania?.text) {
+    if (offer.Przedmiot === 'Mieszkanie' && offer.RodzajMieszkania?.text) {
       return [offer.RodzajMieszkania.text];
     }
-    if (offer.Przedmiot === "Dzialka" && offer.PrzeznaczenieDzialkiSet?.lista) {
+    if (offer.Przedmiot === 'Dzialka' && offer.PrzeznaczenieDzialkiSet?.lista) {
       return Array.isArray(offer.PrzeznaczenieDzialkiSet.lista)
         ? [...offer.PrzeznaczenieDzialkiSet.lista]
         : [offer.PrzeznaczenieDzialkiSet.lista];
     }
-    if (offer.Przedmiot === "Lokal" && offer.PrzeznaczenieLokalu?.lista) {
+    if (offer.Przedmiot === 'Lokal' && offer.PrzeznaczenieLokalu?.lista) {
       return Array.isArray(offer.PrzeznaczenieLokalu.lista)
         ? [...offer.PrzeznaczenieLokalu.lista]
         : [offer.PrzeznaczenieLokalu.lista];
     }
-    if (offer.Przedmiot === "Biurowiec" && offer.RodzajObiektu?.text) {
+    if (offer.Przedmiot === 'Biurowiec' && offer.RodzajObiektu?.text) {
       return [offer.RodzajObiektu.text];
     }
     return [];
   }
 
   private convertPhotos(rawPhotos: any[]): string[] {
-    return rawPhotos.map((rawPhoto) => "ofe_" + rawPhoto.ID + ".jpg");
+    return rawPhotos.map((rawPhoto) => 'ofe_' + rawPhoto.ID + '.jpg');
   }
 
   private convertRooms(rawRooms: any[]): Room[] {
@@ -476,28 +475,28 @@ export class OffersConverter {
 
   private computeCounty(county: string): string {
     // Counties named after cities end with m..
-    if (county.includes("m.")) {
-      return "";
+    if (county.includes('m.')) {
+      return '';
     }
     return county;
   }
 
   private computeCity(location: string): string {
-    return location.replace("(gw)", "(gmina)");
+    return location.replace('(gw)', '(gmina)');
   }
 
   private computeFullLocation(city: string, district: string) {
-    city = city.replace(" (gmina)", "");
+    city = city.replace(' (gmina)', '');
     const isDistrictAvailable = district && district !== city;
-    return city + (isDistrictAvailable ? ", " + district : "");
+    return city + (isDistrictAvailable ? ', ' + district : '');
   }
 
   private computeEstateType(estateType: string): string {
-    if (estateType === "Dzialka") {
-      return "Działka";
+    if (estateType === 'Dzialka') {
+      return 'Działka';
     }
-    if (estateType === "Biurowiec") {
-      return "Obiekt";
+    if (estateType === 'Biurowiec') {
+      return 'Obiekt';
     }
     return estateType;
   }
@@ -507,7 +506,7 @@ export class OffersConverter {
     if (containsNumber.test(floor)) {
       // Removes leter p following floor number.
       return Number(floor.match(/\d+/)![0]);
-    } else if (floor.toLowerCase().includes("parter")) {
+    } else if (floor.toLowerCase().includes('parter')) {
       return 0;
     }
     return -1;

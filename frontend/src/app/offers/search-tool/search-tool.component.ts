@@ -8,44 +8,44 @@ import {
   OnInit,
   ChangeDetectorRef,
   OnDestroy,
-} from "@angular/core";
-import { WindowSizeDetector } from "src/app/shared/services/window-size-detector.service";
-import { OffersFilters, DEFAULT_FILTERS } from "src/app/shared/models";
-import { coerceBooleanProperty } from "@angular/cdk/coercion";
-import { Subject, Subscription } from "rxjs";
-import { debounceTime } from "rxjs/operators";
+} from '@angular/core';
+import { WindowSizeDetector } from 'src/app/shared/services/window-size-detector.service';
+import { OffersFilters, DEFAULT_FILTERS } from 'src/app/shared/models';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { Subject, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import {
   DropdownGroup,
   DropdownValue,
-} from "./grouped-dropdown/grouped-dropdown.component";
-import { OffersStateManager } from "../state-management/state-manager.service";
+} from './grouped-dropdown/grouped-dropdown.component';
+import { OffersStateManager } from '../state-management/state-manager.service';
 
 const AVAILABLE_TRANSACTIONS = [
   {
-    label: "sprzedaż",
+    label: 'sprzedaż',
     value: false,
   },
   {
-    label: "wynajem",
+    label: 'wynajem',
     value: true,
   },
 ];
 
 const AVAILABLE_MARKETS = [
   {
-    label: "pierwotny",
+    label: 'pierwotny',
     value: 0,
   },
   {
-    label: "wtórny",
+    label: 'wtórny',
     value: 1,
   },
 ];
 
 @Component({
-  selector: "perfect-search-tool",
-  templateUrl: "./search-tool.component.html",
-  styleUrls: ["./search-tool.component.scss"],
+  selector: 'perfect-search-tool',
+  templateUrl: './search-tool.component.html',
+  styleUrls: ['./search-tool.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
@@ -66,7 +66,7 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   isByTheSea: boolean;
   isNoCommission: boolean;
   isVirtualVisitAvailable: boolean;
-  symbol = "";
+  symbol = '';
   priceFrom: string;
   priceTo: string;
   pricePerSquareMeterFrom: string;
@@ -102,12 +102,12 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,
     readonly offersStateManager: OffersStateManager,
-    private readonly changeDetector: ChangeDetectorRef
+    private readonly changeDetector: ChangeDetectorRef,
   ) {
     this.subscription.add(
       this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
         this.changeDetector.detectChanges();
-      })
+      }),
     );
   }
 
@@ -118,7 +118,7 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
         .pipe(debounceTime(1000))
         .subscribe(() => {
           this.applyFiltersIgnoringPrice();
-        })
+        }),
     );
   }
 
@@ -130,14 +130,14 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
     if (this.filters) {
       if (this.rawEstateTypesWithSubtypes) {
         this.estateTypesWithSubtypes = this.convertToDropdownGroups(
-          "estateType",
-          "estateSubtype"
+          'estateType',
+          'estateSubtype',
         )(this.rawEstateTypesWithSubtypes);
       }
       if (this.rawVoivodeshipsWithCounties) {
         this.voivodeshipsWithCounties = this.convertToDropdownGroups(
-          "voivodeship",
-          "county"
+          'voivodeship',
+          'county',
         )(this.rawVoivodeshipsWithCounties);
       }
       this.location = this.filters.location;
@@ -161,17 +161,19 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
           ? this.computeFieldValue(this.filters.priceTo)
           : this.computeFieldValue(this.highestPriceForCurrentSearch);
       this.pricePerSquareMeterFrom = this.computeFieldValue(
-        this.filters.pricePerSquareMeterFrom
+        this.filters.pricePerSquareMeterFrom,
       );
       this.pricePerSquareMeterTo = this.computeFieldValue(
-        this.filters.pricePerSquareMeterTo
+        this.filters.pricePerSquareMeterTo,
       );
       this.areaFrom = this.computeFieldValue(this.filters.areaFrom);
       this.areaTo = this.computeFieldValue(this.filters.areaTo);
       this.numberOfRoomsFrom = this.computeFieldValue(
-        this.filters.numberOfRoomsFrom
+        this.filters.numberOfRoomsFrom,
       );
-      this.numberOfRoomsTo = this.computeFieldValue(this.filters.numberOfRoomsTo);
+      this.numberOfRoomsTo = this.computeFieldValue(
+        this.filters.numberOfRoomsTo,
+      );
       this.floorFrom = this.computeFieldValue(this.filters.floorFrom);
       this.floorTo = this.computeFieldValue(this.filters.floorTo);
       this.isElevatorAvailable = this.filters.isElevatorAvailable;
@@ -185,7 +187,7 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
 
   private convertToDropdownGroups(
     typeSelector: string,
-    subtypeSelector: string
+    subtypeSelector: string,
   ) {
     return (typesWithSubtypes: Map<string, string[]>): DropdownGroup[] => {
       const convertToDropdownValue = (subtype: string): DropdownValue => ({
@@ -218,7 +220,7 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private computeFieldValue(value: number): string {
-    return value === -1 ? "" : "" + value;
+    return value === -1 ? '' : '' + value;
   }
 
   toggleAdvancedVisibility() {
@@ -238,8 +240,8 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
     if (this.onMainPage) {
       return;
     }
-    this.priceFrom = "-1";
-    this.priceTo = "-1";
+    this.priceFrom = '-1';
+    this.priceTo = '-1';
 
     this.search();
   }
@@ -259,27 +261,27 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
       this.computeFilterNumericValue(this.priceFrom) ===
       this.lowestPriceForCurrentSearch
     ) {
-      this.priceFrom = "-1";
+      this.priceFrom = '-1';
     }
     if (
       this.computeFilterNumericValue(this.priceTo) ===
       this.highestPriceForCurrentSearch
     ) {
-      this.priceTo = "-1";
+      this.priceTo = '-1';
     }
 
     const filters: OffersFilters = {
       estateType: this.getSelectedDropdownGroupName(
-        this.estateTypesWithSubtypes
+        this.estateTypesWithSubtypes,
       ),
       estateSubtype: this.getSelectedDropdownValueName(
-        this.estateTypesWithSubtypes
+        this.estateTypesWithSubtypes,
       ),
       isForRent: this.isForRent,
       isPrimaryMarket: this.marketToggleValues.indexOf(0) > -1,
       isSecondaryMarket: this.marketToggleValues.indexOf(1) > -1,
       voivodeship: this.getSelectedDropdownGroupName(
-        this.voivodeshipsWithCounties
+        this.voivodeshipsWithCounties,
       ),
       county: this.getSelectedDropdownValueName(this.voivodeshipsWithCounties),
       location: this.location,
@@ -290,10 +292,10 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
       priceFrom: this.computeFilterNumericValue(this.priceFrom),
       priceTo: this.computeFilterNumericValue(this.priceTo),
       pricePerSquareMeterFrom: this.computeFilterNumericValue(
-        this.pricePerSquareMeterFrom
+        this.pricePerSquareMeterFrom,
       ),
       pricePerSquareMeterTo: this.computeFilterNumericValue(
-        this.pricePerSquareMeterTo
+        this.pricePerSquareMeterTo,
       ),
       areaFrom: this.computeFilterNumericValue(this.areaFrom),
       areaTo: this.computeFilterNumericValue(this.areaTo),
@@ -312,13 +314,13 @@ export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private getSelectedDropdownGroupName(groups: DropdownGroup[]): string {
-    return groups.find((group) => group.isSelected)?.displayName || "";
+    return groups.find((group) => group.isSelected)?.displayName || '';
   }
 
   private getSelectedDropdownValueName(groups: DropdownGroup[]): string {
     return (
       groups.flatMap((group) => group.values).find((value) => value.isSelected)
-        ?.displayName || ""
+        ?.displayName || ''
     );
   }
 

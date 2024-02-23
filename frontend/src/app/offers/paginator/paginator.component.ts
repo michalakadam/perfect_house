@@ -5,14 +5,14 @@ import {
   Output,
   EventEmitter,
   ViewChild,
-} from "@angular/core";
-import { Paginator } from "primeng/paginator";
-import { OFFERS_PER_PAGE } from "src/app/shared/constants";
+} from '@angular/core';
+import { Paginator } from 'primeng/paginator';
+import { OFFERS_PER_PAGE } from 'src/app/shared/constants';
 
 @Component({
-  selector: "perfect-paginator",
-  templateUrl: "./paginator.component.html",
-  styleUrls: ["./paginator.component.scss"],
+  selector: 'perfect-paginator',
+  templateUrl: './paginator.component.html',
+  styleUrls: ['./paginator.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PaginatorComponent {
@@ -25,7 +25,7 @@ export class PaginatorComponent {
   }
   @Output() pageChanged = new EventEmitter<number>();
 
-  @ViewChild("paginator", { static: true }) paginator: Paginator;
+  @ViewChild('paginator', { static: true }) paginator: Paginator;
 
   private updateCurrentPage(currentPage: number): void {
     this.currentPage = currentPage;

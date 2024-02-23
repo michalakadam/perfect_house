@@ -1,4 +1,4 @@
-@import 'src/variables.scss';
+@import 'variables.scss';
 
 @mixin responsive-page {
   margin: 0 auto;
@@ -29,7 +29,9 @@
 
 @mixin perfect-box {
   border-radius: 15px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow:
+    0 3px 6px rgba(0, 0, 0, 0.16),
+    0 3px 6px rgba(0, 0, 0, 0.23);
   z-index: 10;
   @media screen and (max-width: $desktop-small) {
     border-radius: 10px;
@@ -117,7 +119,11 @@
 
 @mixin screen-wide-image {
   img {
-    max-width: 100%;
+    min-width: 100%;
+    @media screen and (max-width: $desktop-huge) {
+      max-width: 100%;
+      min-width: unset;
+    }
 
     @media screen and (max-width: $desktop-small) {
       height: 60vw;
@@ -125,4 +131,12 @@
       object-position: center;
     }
   }
+}
+@mixin resized-mat-icon($size) {
+  height: $size;
+  width: $size;
+  font-size: $size;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

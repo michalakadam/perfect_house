@@ -3,18 +3,18 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   OnDestroy,
-} from "@angular/core";
-import { Subscription } from "rxjs";
-import { WindowSizeDetector } from "../shared/services/window-size-detector.service";
-import { AgentsStateManager } from "../agents/state-management/state-manager.service";
+} from '@angular/core';
+import { Subscription } from 'rxjs';
+import { WindowSizeDetector } from '../shared/services/window-size-detector.service';
+import { AgentsStateManager } from '../agents/state-management/state-manager.service';
 
 const AGENT_RESPONSIBLE_FOR_MANAGEMENT_ID = 20202;
 
 /** Kontener strony 'Zarządzanie nieruchomościami'. */
 @Component({
-  selector: "perfect-management",
-  templateUrl: "./management.component.html",
-  styleUrls: ["./management.component.scss"],
+  selector: 'perfect-management',
+  templateUrl: './management.component.html',
+  styleUrls: ['./management.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ManagementComponent implements OnDestroy {
@@ -24,12 +24,12 @@ export class ManagementComponent implements OnDestroy {
   constructor(
     readonly windowSizeDetector: WindowSizeDetector,
     readonly agentsStateManager: AgentsStateManager,
-    private readonly changeDetector: ChangeDetectorRef
+    private readonly changeDetector: ChangeDetectorRef,
   ) {
     this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(
       () => {
         this.changeDetector.detectChanges();
-      }
+      },
     );
   }
 
