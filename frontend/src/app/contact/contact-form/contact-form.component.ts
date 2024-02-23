@@ -18,7 +18,7 @@ export enum ContactFormType {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactFormComponent implements OnDestroy {
-  private subscription = new Subscription();
+  private subscription: Subscription;
   readonly ContactFormType = ContactFormType;
 
   typ: ContactFormType = ContactFormType.SZUKAM;
@@ -31,7 +31,7 @@ export class ContactFormComponent implements OnDestroy {
     private snackbarService: SnackbarService,
     private router: Router,
   ) {
-    this.route.params.subscribe((params) => {
+    this.subscription = this.route.params.subscribe((params) => {
       this.typ = params['typ'];
     });
 
