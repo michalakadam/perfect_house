@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Input,
+  OnDestroy,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { SnackbarService } from '../shared/services/snackbar.service';
@@ -11,6 +12,7 @@ import { WindowSizeDetector } from '../shared/services/window-size-detector.serv
 import { OffersStateManager } from './state-management/state-manager.service';
 import { AgentsStateManager } from '../agents/state-management/state-manager.service';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { Subscription } from 'rxjs';
 
 /** Strona wyświetla oferty nieruchomości oferując możliwość ich zaawansowanego wyszukiwania. */
 @Component({
@@ -19,7 +21,8 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
   styleUrls: ['./offers.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OffersComponent {
+export class OffersComponent implements OnDestroy {
+  private subscription: Subscription;
   isSearchAvailable = true;
   @Input()
   set disableSearch(value: boolean) {
@@ -33,9 +36,11 @@ export class OffersComponent {
     private readonly router: Router,
     private readonly changeDetector: ChangeDetectorRef,
   ) {
-    this.windowSizeDetector.windowSizeChanged$.subscribe(() => {
-      this.changeDetector.detectChanges();
-    });
+    this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(
+      () => {
+        this.changeDetector.detectChanges();
+      },
+    );
   }
 
   loadOffer(symbol: string) {
@@ -44,5 +49,9 @@ export class OffersComponent {
 
   trackById(index: number, offer: Offer) {
     return offer.id;
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
