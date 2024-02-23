@@ -35,7 +35,10 @@
           class="button sell-rent"
           [routerLink]="['/kontakt/formularz', FormType.SPRZEDAM]"
         >
-          <img class="icon first" />
+          <img
+            class="icon first"
+            *ngIf="!windowSizeDetector.isWindowSmallerThanMobileSmall"
+          />
           <div class="button-content first">
             SPRZEDAMY/ WYNAJMIEMY Twoją nieruchomość!
           </div>
@@ -44,7 +47,10 @@
           class="button search"
           [routerLink]="['/kontakt/formularz', FormType.SZUKAM]"
         >
-          <img class="icon second" />
+          <img
+            class="icon second"
+            *ngIf="!windowSizeDetector.isWindowSmallerThanMobileSmall"
+          />
           <div class="button-content second">
             POSZUKAMY nieruchomości dla Ciebie!
           </div>
