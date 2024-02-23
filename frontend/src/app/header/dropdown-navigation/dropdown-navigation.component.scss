@@ -15,7 +15,7 @@
     padding-left: 22px;
 
     &:first-of-type {
-      margin-top: 6px;
+      margin-top: 8px;
     }
 
     &.active-link:not(.about-us-link) {
@@ -31,6 +31,11 @@
       font-size: 18px;
       font-weight: 600;
       line-height: 44px;
+
+      &:hover {
+        color: $light-green;
+      }
+
       @media screen and (max-width: $desktop-large) {
         font-size: 16px;
       }
