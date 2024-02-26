@@ -52,15 +52,6 @@
             <h2>Poszukiwana nieruchomość:</h2>
           </ng-template>
         </div>
-        <div class="field" *ngIf="typ === ContactFormType.SZUKAM">
-          <input
-            type="text"
-            formControlName="advertisementType"
-            id="advertisementTypeSearch"
-            placeholder=""
-          />
-          <label for="advertisementTypeSearch">RODZAJ OGŁOSZENIA</label>
-        </div>
         <div class="field">
           <input
             type="text"
@@ -81,16 +72,7 @@
         </div>
         <div class="field">
           <input type="text" formControlName="city" id="city" placeholder="" />
-          <label for="city">MIASTO</label>
-        </div>
-        <div class="field">
-          <input
-            type="text"
-            formControlName="district"
-            id="district"
-            placeholder=""
-          />
-          <label for="district">DZIELNICA</label>
+          <label for="city">MIEJSCOWOŚĆ</label>
         </div>
         <div
           class="inputs-next-to-each-other"
@@ -141,24 +123,20 @@
         <div class="field" *ngIf="typ === ContactFormType.SPRZEDAM">
           <input
             type="text"
-            formControlName="price"
-            id="price"
+            formControlName="address"
+            id="address"
             placeholder=""
           />
-          <label for="price">CENA</label>
-        </div>
-        <div class="field" *ngIf="typ === ContactFormType.SPRZEDAM">
-          <input type="text" formControlName="area" id="area" placeholder="" />
-          <label for="area">POWIERZCHNIA</label>
+          <label for="address">ADRES NIERUCHOMOŚCI</label>
         </div>
         <div class="field" *ngIf="typ === ContactFormType.SPRZEDAM">
           <input
             type="text"
-            formControlName="advertisementType"
-            id="advertisementTypeSell"
+            formControlName="price"
+            id="price"
             placeholder=""
           />
-          <label for="advertisementTypeSell">RODZAJ OGŁOSZENIA</label>
+          <label for="price">SUGEROWANA CENA</label>
         </div>
       </div>
     </div>
@@ -168,10 +146,10 @@
         <mat-radio-button [value]="true" color="primary"></mat-radio-button>
       </mat-radio-group>
       Wyrażam zgodę na przetwarzanie podanych przeze mnie danych osobowych.
-      Administratorem danych jest Firma Infinity. Mam prawo dostępu do swoich
-      danych i ich poprawiania. Podanie danych jest dobrowolne. Dane zbierane są
-      w celu marketingowym oraz w celu realizowania i wykonania zawartej umowy
-      lub do podjęcia działań na Twoje żądanie przed zawarciem umowy.
+      Administratorem danych jest firma Perfect House. Mam prawo dostępu do
+      swoich danych i ich poprawiania. Podanie danych jest dobrowolne. Dane
+      wykorzystywane będą wyłącznie w celu realizowania i wykonania zawartej
+      umowy lub do podjęcia działań na Twoje żądanie przed zawarciem umowy.
     </label>
     <button type="submit" [disabled]="!form.valid">Wyślij</button>
   </form>
