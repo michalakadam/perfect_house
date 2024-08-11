@@ -83,11 +83,12 @@
     </div>
   </div>
 
-  <perfect-offer-card
+  <a
     *ngFor="let offer of offers; trackBy: trackById"
-    [offer]="offer"
-    (click)="loadOffer(offer.symbol)"
-  ></perfect-offer-card>
+    [routerLink]="['/oferta', offer.symbol]"
+  >
+    <perfect-offer-card [offer]="offer"></perfect-offer-card>
+  </a>
 
   <div class="bottom-paginator" *ngIf="isSearchAvailable">
     <perfect-paginator
