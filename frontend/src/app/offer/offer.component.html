@@ -85,7 +85,11 @@
       </div>
       <div class="buttons-container">
         <button
-          *ngIf="(offer.lattitude && offer.longitude) || offer.virtualVisitUrl"
+          *ngIf="
+            (offer.lattitude && offer.longitude) ||
+            offer.virtualVisitUrl ||
+            offer.youtubeLink
+          "
           pButton
           pRipple
           type="button"
