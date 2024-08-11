@@ -23,6 +23,7 @@ export class OfferComponent implements OnDestroy {
   definedOfferFields: OfferField<any>[] = [];
   photoUrls: string[] = [];
   isGalleryActive = true;
+  isVideoActive = false;
   isMapActive = false;
   isVirtualVisitActive = false;
   offerSearchSymbol = '';
@@ -45,6 +46,7 @@ export class OfferComponent implements OnDestroy {
         this.definedOfferFields = this.computeDefinedOfferFields(offer);
         this.photoUrls = this.computePhotoUrls(offer);
         this.isGalleryActive = true;
+        this.isVideoActive = false;
         this.isMapActive = false;
         this.isVirtualVisitActive = false;
       }),
@@ -104,6 +106,16 @@ export class OfferComponent implements OnDestroy {
   showGallery() {
     if (!this.isGalleryActive) {
       this.isGalleryActive = true;
+      this.isVideoActive = false;
+      this.isMapActive = false;
+      this.isVirtualVisitActive = false;
+    }
+  }
+
+  showVideo() {
+    if (!this.isVideoActive) {
+      this.isGalleryActive = false;
+      this.isVideoActive = true;
       this.isMapActive = false;
       this.isVirtualVisitActive = false;
     }
@@ -112,6 +124,7 @@ export class OfferComponent implements OnDestroy {
   showMap() {
     if (!this.isMapActive) {
       this.isGalleryActive = false;
+      this.isVideoActive = false;
       this.isMapActive = true;
       this.isVirtualVisitActive = false;
     }
@@ -120,6 +133,7 @@ export class OfferComponent implements OnDestroy {
   showVirtualVisit() {
     if (!this.isVirtualVisitActive) {
       this.isGalleryActive = false;
+      this.isVideoActive = false;
       this.isMapActive = false;
       this.isVirtualVisitActive = true;
     }

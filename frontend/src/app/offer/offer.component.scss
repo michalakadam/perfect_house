@@ -205,9 +205,9 @@
       }
 
       .selected {
-        background-color: $light-green;
-        border: 1px solid $light-green;
-        color: $dark-green;
+        background-color: $light-green !important;
+        border: 1px solid $light-green !important;
+        color: $dark-green !important;
       }
     }
   }

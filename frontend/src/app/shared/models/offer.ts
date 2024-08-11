@@ -21,6 +21,7 @@ export interface Offer {
   isExclusive: boolean;
   isForRent: boolean;
   photos: string[];
+  youtubeLink?: string;
   isNoCommission: boolean;
   isAvailableOnFacebook: boolean;
   parentOfferId: number;
@@ -73,7 +74,6 @@ export interface Offer {
   heatingType: OfferField<string>;
   windowsType: OfferField<string>;
   isMarketPrimary: boolean;
-  acquisitionType: OfferField<string>;
   rooms: Room[];
   officeBuildingCategory: OfferField<string>;
   electricityConnectionDetails: OfferField<string>;

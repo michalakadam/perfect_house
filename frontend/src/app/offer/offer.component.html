@@ -10,6 +10,12 @@
       <perfect-gallery *ngIf="isGalleryActive" [photoUrls]="photoUrls">
       </perfect-gallery>
 
+      <embed
+        *ngIf="isVideoActive"
+        type="text/html"
+        [src]="offer.youtubeLink | youtubeEmbedUrl | safe"
+      />
+
       <perfect-map
         *ngIf="isMapActive"
         [lattitude]="offer.lattitude"
@@ -87,6 +93,16 @@
           class="p-button-rounded p-button-raised"
           [class.selected]="isGalleryActive"
           (click)="showGallery()"
+        ></button>
+        <button
+          *ngIf="offer.youtubeLink"
+          pButton
+          pRipple
+          type="button"
+          label="Wideo"
+          class="p-button-rounded p-button-raised"
+          [class.selected]="isVideoActive"
+          (click)="showVideo()"
         ></button>
         <button
           *ngIf="offer.lattitude && offer.longitude"
