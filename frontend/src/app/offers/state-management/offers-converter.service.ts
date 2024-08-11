@@ -39,6 +39,9 @@ export class OffersConverter {
         isExclusive: this.convertToBoolean(offer.Wylacznosc),
         isForRent: this.convertToBoolean(offer.Wynajem),
         photos: this.convertPhotos(this.convertToArray(offer.Zdjecia?.Foto)),
+        youtubeLink: this.findYoutubeLink(
+          this.convertToArray(offer.Zdjecia?.Foto),
+        ),
         isNoCommission: this.convertToBoolean(offer.ZeroProwizji),
         isAvailableOnFacebook: this.convertToBoolean(
           offer.PublikacjaFacebook?.text,
@@ -455,6 +458,15 @@ export class OffersConverter {
 
   private convertPhotos(rawPhotos: any[]): string[] {
     return rawPhotos.map((rawPhoto) => 'ofe_' + rawPhoto.ID + '.jpg');
+  }
+
+  private findYoutubeLink(rawPhotos: any[]): string | null {
+    const rawMovie = rawPhotos.find((photo) => photo.typ === 'Filmy');
+
+    if (!rawMovie) {
+      return null;
+    }
+    return rawMovie.LinkFilmYouTube;
   }
 
   private convertRooms(rawRooms: any[]): Room[] {

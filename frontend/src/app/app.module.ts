@@ -63,6 +63,7 @@ import { AgentsStateManagementModule } from './agents/state-management/state-man
 import { EcoHousesComponent } from './eco-houses/eco-houses.component';
 import { ContactFormComponent } from './contact/contact-form/contact-form.component';
 import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
+import { YoutubeEmbedUrlPipe } from './shared/pipes/youtube-embed-url';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -84,6 +85,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     NavigationComponent,
     NumberPrettifier,
     UrlSanitizer,
+    YoutubeEmbedUrlPipe,
     StringDecoder,
     OfferCardComponent,
     OffersComponent,

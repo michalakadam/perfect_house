@@ -21,6 +21,7 @@ export interface Offer {
   isExclusive: boolean;
   isForRent: boolean;
   photos: string[];
+  youtubeLink?: string;
   isNoCommission: boolean;
   isAvailableOnFacebook: boolean;
   parentOfferId: number;
