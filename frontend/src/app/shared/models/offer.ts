@@ -73,7 +73,6 @@ export interface Offer {
   heatingType: OfferField<string>;
   windowsType: OfferField<string>;
   isMarketPrimary: boolean;
-  acquisitionType: OfferField<string>;
   rooms: Room[];
   officeBuildingCategory: OfferField<string>;
   electricityConnectionDetails: OfferField<string>;

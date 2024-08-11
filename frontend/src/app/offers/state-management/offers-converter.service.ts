@@ -241,10 +241,6 @@ export class OffersConverter {
           this.convertToBoolean(offer.Ogrodzenie),
         ),
         isMarketPrimary: this.convertToBoolean(offer.Pierwotny),
-        acquisitionType: this.convertToField(
-          'Podstawa nabycia',
-          offer.PodstawaNabycia?.text || '',
-        ),
         burden: this.convertToField('Obciążenia', offer.Obciazenia?.text || ''),
         // UsytuowanieLista is always a single element object.
         flatSetUp: this.convertToField(
