@@ -61,5 +61,6 @@ End["Process ends"]
     NewXML -- No --> End
 ```
 
-Note: this architecture is currently undergoing a major rework.
+Note: the db server architecture is currently undergoing a major rework. The goal is to have an API that will be the
+only client of the db. API will be called during incremental updates and by the Angular front-end web application.
 
