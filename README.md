@@ -6,9 +6,11 @@ This project is a comprehensive real estate management system for Perfect House 
 
 The project consists of three main components:
 
-1. Frontend (Angular)
-2. Backend Server
-3. Database Server
+1. Angular web application
+2. Back-end consisting of:
+   - several bash scripts orchestrating incremental update of data,
+   - Mongo DB instance persisting the data after each incremental data,
+   - Node JS application acting as a data access layer
 
 ### Frontend
 
@@ -17,9 +19,7 @@ The frontend is built with Angular and provides a user interface for clients and
 Key features:
 - Offer listings and detailed views
 - Agent profiles and contact information
-- Property management services
-- Eco-friendly house offerings
-- Mortgage consultancy
+- Information on property management services, eco-friendly house offerings, mortgage consultancy
 
 ### Backend Server
 
