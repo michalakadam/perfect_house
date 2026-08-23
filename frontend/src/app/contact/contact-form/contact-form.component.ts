@@ -53,7 +53,6 @@ export class ContactFormComponent implements OnDestroy {
         address: [''],
         price: [''],
       }),
-      consent: [false, Validators.requiredTrue],
     });
   }
 

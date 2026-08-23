@@ -1,0 +1,25 @@
+@use 'mixins.scss';
+@use 'variables.scss';
+
+.component-container {
+  @include mixins.article-page;
+
+  h2 {
+    margin-top: 2.5rem;
+  }
+
+  code {
+    background-color: #f4f4f4;
+    border-radius: 4px;
+    padding: 0.1rem 0.3rem;
+  }
+
+  .todo {
+    background-color: #fff3cd;
+    border-radius: 4px;
+    color: variables.$font-grey;
+    display: inline-block;
+    font-weight: 700;
+    padding: 0.1rem 0.4rem;
+  }
+}

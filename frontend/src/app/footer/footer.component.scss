@@ -49,5 +49,16 @@
     font-size: 10px;
     margin-top: 14px;
     text-align: center;
+
+    .privacy-policy-link {
+      color: variables.$light-green;
+      margin-left: 0.4rem;
+      text-decoration: underline;
+
+      &:focus-visible {
+        outline: 2px solid variables.$light-green;
+        outline-offset: 2px;
+      }
+    }
   }
 }

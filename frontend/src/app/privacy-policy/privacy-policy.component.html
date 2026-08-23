@@ -1,0 +1,225 @@
+<div class="component-container">
+  <header>
+    <h1>Polityka prywatności</h1>
+    <mat-divider></mat-divider>
+  </header>
+  <main>
+    <p>
+      Niniejsza polityka opisuje, w jaki sposób Perfect House przetwarza dane
+      osobowe osób korzystających z formularza kontaktowego na stronie
+      e-perfecthouse.pl, zgodnie z Rozporządzeniem Parlamentu Europejskiego i
+      Rady (UE) 2016/679 (RODO).
+    </p>
+
+    <h2>1. Administrator danych</h2>
+    <p>
+      Administratorem danych osobowych jest Perfect House, ul. Klin 17/2,
+      60-602 Poznań, NIP 972 011 44 98, REGON 300991458. Kontakt:
+      biuro&#64;e-perfecthouse.pl, tel. 61 296 03 95.
+    </p>
+
+    <h2>2. Cele i podstawy prawne przetwarzania</h2>
+    <p>Dane podane w formularzu kontaktowym przetwarzamy w celu:</p>
+    <ul>
+      <li>
+        udzielenia odpowiedzi na zapytanie oraz podjęcia działań przed
+        zawarciem umowy pośrednictwa, na żądanie osoby, której dane dotyczą —
+        podstawa prawna: art. 6 ust. 1 lit. b RODO;
+      </li>
+      <li>
+        wykonania zawartej umowy pośrednictwa w obrocie nieruchomościami —
+        podstawa prawna: art. 6 ust. 1 lit. b RODO;
+      </li>
+      <li>
+        wypełnienia obowiązków prawnych ciążących na Administratorze, w
+        szczególności wynikających z przepisów o przeciwdziałaniu praniu
+        pieniędzy oraz przepisów podatkowo-rachunkowych — podstawa prawna:
+        art. 6 ust. 1 lit. c RODO;
+      </li>
+      <li>
+        ustalenia, dochodzenia lub obrony przed roszczeniami oraz zapewnienia
+        bezpieczeństwa korespondencji przesyłanej przez formularz (np.
+        przeciwdziałania nadużyciom i spamowi) — podstawa prawna: art. 6 ust.
+        1 lit. f RODO, czyli prawnie uzasadniony interes Administratora.
+      </li>
+    </ul>
+    <p>
+      Obecnie formularz nie zawiera pola zgody, ponieważ żaden cel
+      przetwarzania nie wymaga zgody jako podstawy prawnej — w szczególności
+      Administrator nie wysyła w oparciu o dane z formularza komunikacji
+      marketingowej.
+    </p>
+
+    <h2>3. Zautomatyzowane podejmowanie decyzji</h2>
+    <p>
+      Dane osobowe nie są przetwarzane w sposób zautomatyzowany w formie
+      profilowania i nie są podstawą żadnych zautomatyzowanych decyzji
+      wywołujących skutki prawne wobec osoby, której dane dotyczą.
+    </p>
+
+    <h2>4. Odbiorcy danych</h2>
+    <!-- REVISIT after docs/rodo-compliance/task-02-replace-formspree.md lands. -->
+    <p>Dane mogą być przekazywane następującym kategoriom odbiorców:</p>
+    <ul>
+      <li>
+        dostawcy hostingu strony internetowej — Zenbox, na serwerach którego
+        utrzymywana jest witryna e-perfecthouse.pl;
+      </li>
+      <li>
+        dostawcy systemu CRM — Galactica Virgo, do którego przekazywane są
+        dane ofert nieruchomości.
+        <span class="todo"
+          >TODO(owner): dokładny charakter relacji z Galactica Virgo (czy
+          działa jako procesor w rozumieniu art. 28 RODO, czy jako odrębny
+          administrator) wynika z umowy, do której nie mamy wglądu w tym
+          repozytorium i wymaga potwierdzenia przez właściciela
+          serwisu.</span
+        >
+      </li>
+      <li>
+        operator formularza kontaktowego — obecnie treść formularza jest
+        przesyłana do Formspree (Formspree, Inc., USA). Ten stan zostanie
+        zweryfikowany po wdrożeniu zadania opisanego w
+        <code>task-02-replace-formspree.md</code>; do tego czasu Formspree
+        pozostaje faktycznym odbiorcą danych z formularza.
+      </li>
+      <li>
+        dostawcy zasobów ładowanych automatycznie z każdą wizytą na stronie:
+        Google (czcionki Google Fonts), Fonticons, Inc. (ikony Font Awesome
+        Kit) oraz biblioteka mapy OpenLayers — w zakresie technicznie
+        niezbędnym do wczytania tych zasobów przekazywany jest adres IP
+        przeglądarki odwiedzającego. Zostanie to ograniczone po wdrożeniu
+        zadania opisanego w <code>task-04-self-host-frontend-assets.md</code>
+        (samodzielne hostowanie tych zasobów).
+      </li>
+      <li>
+        w przypadku ofert zawierających film lub wirtualny spacer — dostawca
+        odtwarzanych treści (YouTube/Google, a w przypadku wirtualnego
+        spaceru — dostawca wskazany w danej ofercie), ponieważ materiał jest
+        obecnie osadzany na stronie bezpośrednio. Zostanie to zmienione po
+        wdrożeniu zadania opisanego w
+        <code>task-03-harden-third-party-embeds.md</code>.
+      </li>
+    </ul>
+
+    <h2>5. Przekazywanie danych poza Europejski Obszar Gospodarczy</h2>
+    <!-- REVISIT after docs/rodo-compliance/task-02-replace-formspree.md lands. -->
+    <p>
+      Formspree, Inc. ma siedzibę w Stanach Zjednoczonych, poza Europejskim
+      Obszarem Gospodarczym. Dopóki formularz kontaktowy przesyła dane do
+      Formspree, dane osobowe podane w formularzu są przekazywane do USA.
+      <span class="todo"
+        >TODO(owner): potwierdzić, na jakim mechanizmie transferu (np.
+        aktualny certyfikat EU-U.S. Data Privacy Framework) opiera się to
+        przekazanie — status certyfikacji dostawcy jest faktem zewnętrznym,
+        którego nie da się zweryfikować z poziomu tego repozytorium.</span
+      >
+    </p>
+    <p>
+      Podobnie, wczytanie czcionek Google Fonts oraz ikon Font Awesome Kit z
+      każdą wizytą na stronie wiąże się z przekazaniem adresu IP
+      przeglądarki do dostawców tych usług (odpowiednio Google LLC i
+      Fonticons, Inc.), obu z siedzibą w USA.
+      <span class="todo"
+        >TODO(owner): potwierdzić aktualny mechanizm transferu stosowany
+        przez tych dostawców.</span
+      >
+      Po wdrożeniu zadania opisanego w
+      <code>task-04-self-host-frontend-assets.md</code> te zasoby mają być
+      hostowane samodzielnie, co usunie ten transfer.
+    </p>
+    <p>
+      Jeżeli oferta zawiera film osadzony z YouTube, wczytanie strony oferty
+      wiąże się z przekazaniem adresu IP do Google LLC (USA). Zostanie to
+      zmienione po wdrożeniu zadania opisanego w
+      <code>task-03-harden-third-party-embeds.md</code>.
+    </p>
+
+    <h2>6. Okres przechowywania danych</h2>
+    <p>
+      Dane przetwarzane w związku z zawartą umową pośrednictwa oraz
+      dokumentacja z nią związana są przechowywane przez okres wynikający z
+      przepisów o przeciwdziałaniu praniu pieniędzy oraz finansowaniu
+      terroryzmu (ustawa z dnia 1 marca 2018 r. o przeciwdziałaniu praniu
+      pieniędzy oraz finansowaniu terroryzmu, art. 2 ust. 1 pkt 18), tj. co
+      do zasady przez 5 lat, licząc od pierwszego dnia roku następującego po
+      roku, w którym zakończono stosunki gospodarcze z klientem.
+    </p>
+    <p>
+      Dokumentacja związana z rozliczeniami podatkowymi jest przechowywana
+      przez okres wynikający z Ordynacji podatkowej (art. 70 § 1), tj. co do
+      zasady przez 5 lat, licząc od końca roku kalendarzowego, w którym
+      upłynął termin płatności podatku związanego z transakcją.
+    </p>
+    <p>
+      <span class="todo"
+        >TODO(owner): okres przechowywania zapytań, które nie doprowadziły do
+        umowy — nie jest to uregulowane przepisami prawa i wymaga decyzji
+        biznesowej właściciela serwisu.</span
+      >
+    </p>
+
+    <h2>7. Twoje prawa</h2>
+    <p>W związku z przetwarzaniem danych osobowych przysługuje Ci prawo do:</p>
+    <ul>
+      <li>dostępu do swoich danych,</li>
+      <li>sprostowania (poprawienia) danych,</li>
+      <li>usunięcia danych,</li>
+      <li>ograniczenia przetwarzania,</li>
+      <li>wniesienia sprzeciwu wobec przetwarzania,</li>
+      <li>przenoszenia danych.</li>
+    </ul>
+    <p>
+      Obecnie formularz kontaktowy nie zbiera zgody na przetwarzanie danych —
+      żaden cel przetwarzania nie opiera się na zgodzie (zob. sekcja 2), więc
+      nie występuje tu zgoda, którą można by wycofać.
+    </p>
+    <p>
+      Aby skorzystać z powyższych praw, skontaktuj się z Administratorem pod
+      adresem biuro&#64;e-perfecthouse.pl.
+    </p>
+
+    <h2>8. Prawo do wniesienia skargi</h2>
+    <p>
+      Przysługuje Ci prawo wniesienia skargi do organu nadzorczego — Prezesa
+      Urzędu Ochrony Danych Osobowych, ul. Stawki 2, 00-193 Warszawa.
+    </p>
+
+    <h2>9. Dobrowolność podania danych</h2>
+    <p>
+      Podanie danych w formularzu kontaktowym jest dobrowolne, ale niezbędne
+      do udzielenia odpowiedzi na zapytanie — bez podania danych kontaktowych
+      (imienia i nazwiska, numeru telefonu, adresu e-mail) nie jest możliwe
+      nawiązanie kontaktu ani podjęcie działań zmierzających do zawarcia
+      umowy pośrednictwa.
+    </p>
+
+    <h2>10. Pliki cookies i podobne technologie</h2>
+    <!-- REVISIT after docs/rodo-compliance/task-03-harden-third-party-embeds.md lands. -->
+    <p>
+      Strona e-perfecthouse.pl sama w sobie nie zapisuje plików cookies ani
+      innych informacji w pamięci urządzenia odwiedzającego i nie korzysta z
+      narzędzi analitycznych ani śledzących.
+    </p>
+    <p>
+      Wyjątkiem są strony ofert zawierające osadzony film z YouTube lub
+      wirtualny spacer. Taki materiał jest obecnie wczytywany bezpośrednio z
+      serwera dostawcy (YouTube/Google lub dostawcy wirtualnego spaceru), bez
+      mechanizmu wcześniejszej zgody — a dostawca ten może, niezależnie od
+      Administratora, zapisać własne pliki cookies w przeglądarce
+      odwiedzającego. Sposób osadzania tych treści zostanie zmieniony po
+      wdrożeniu zadania opisanego w
+      <code>task-03-harden-third-party-embeds.md</code>; do tego czasu
+      zalecamy ostrożność przy oglądaniu takich materiałów, jeśli chcesz
+      uniknąć zapisania plików cookies przez zewnętrznego dostawcę.
+    </p>
+
+    <h2>11. Zmiany polityki prywatności</h2>
+    <p>
+      Niniejsza polityka może być aktualizowana w miarę zmian w sposobie
+      przetwarzania danych przez Administratora, w szczególności wraz z
+      wdrażaniem kolejnych zadań programu dostosowania serwisu do RODO
+      wymienionych w sekcjach powyżej.
+    </p>
+  </main>
+</div>

@@ -13,6 +13,7 @@ import { ValuesComponent } from './values/values.component';
 import { NewsFeedComponent } from './news-feed/news-feed.component';
 import { EcoHousesComponent } from './eco-houses/eco-houses.component';
 import { ContactFormComponent } from './contact/contact-form/contact-form.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 const routes: Routes = [
   {
@@ -92,6 +93,13 @@ const routes: Routes = [
     component: ContactFormComponent,
     data: {
       title: 'Formularz kontaktowy',
+    },
+  },
+  {
+    path: 'polityka-prywatnosci',
+    component: PrivacyPolicyComponent,
+    data: {
+      title: 'Polityka prywatności',
     },
   },
   {

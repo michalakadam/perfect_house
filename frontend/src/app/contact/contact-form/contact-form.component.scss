@@ -119,9 +119,7 @@
       }
     }
 
-    label {
-      display: flex;
-      align-items: center;
+    .privacy-info {
       font-size: 12px;
       color: variables.$font-light-grey;
       margin-top: 2rem;
@@ -131,12 +129,9 @@
         width: 95%;
       }
 
-      mat-radio-group {
-        color: variables.$light-green;
-
-        mat-radio-button {
-          margin-right: 1rem;
-        }
+      a {
+        color: variables.$font-light-grey;
+        text-decoration: underline;
       }
     }
 

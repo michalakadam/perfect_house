@@ -71,8 +71,8 @@ import { RouterStateManagementModule } from './router/state-management/state-man
 import { AgentsStateManagementModule } from './agents/state-management/state-management.module';
 import { EcoHousesComponent } from './eco-houses/eco-houses.component';
 import { ContactFormComponent } from './contact/contact-form/contact-form.component';
-import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
 import { YoutubeEmbedUrlPipe } from './shared/pipes/youtube-embed-url';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -118,6 +118,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     LoadingSpinnerComponent,
     EcoHousesComponent,
     ContactFormComponent,
+    PrivacyPolicyComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -144,8 +145,6 @@ export class MyHammerConfig extends HammerGestureConfig {
     RouterStateManagementModule,
     AgentsStateManagementModule,
     ReactiveFormsModule,
-    MatRadioGroup,
-    MatRadioButton,
   ],
   providers: [
     { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig },
