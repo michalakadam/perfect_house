@@ -1,10 +1,11 @@
 <div class="component-container">
-  <div *ngIf="typ === ContactFormType.SPRZEDAM; else searchTitle">
-    <h1>CHCĘ <strong>SPRZEDAĆ/WYNAJĄĆ</strong> NIERUCHOMOŚĆ</h1>
-  </div>
-  <ng-template #searchTitle>
+  @if (typ === ContactFormType.SPRZEDAM) {
+    <div>
+      <h1>CHCĘ <strong>SPRZEDAĆ/WYNAJĄĆ</strong> NIERUCHOMOŚĆ</h1>
+    </div>
+  } @else {
     <h1><strong>SZUKAM</strong> NIERUCHOMOŚCI</h1>
-  </ng-template>
+  }
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="inputs-container">
@@ -45,12 +46,13 @@
       <div class="inputs-subcontainer" formGroupName="propertyDetails">
         <div class="text-with-image">
           <img src="assets/lupka.png" alt="Icon" class="icon" />
-          <div *ngIf="typ === ContactFormType.SPRZEDAM; else searchSubtitle">
-            <h2>Moja nieruchomość:</h2>
-          </div>
-          <ng-template #searchSubtitle>
+          @if (typ === ContactFormType.SPRZEDAM) {
+            <div>
+              <h2>Moja nieruchomość:</h2>
+            </div>
+          } @else {
             <h2>Poszukiwana nieruchomość:</h2>
-          </ng-template>
+          }
         </div>
         <div class="field">
           <input
@@ -74,70 +76,72 @@
           <input type="text" formControlName="city" id="city" placeholder="" />
           <label for="city">MIEJSCOWOŚĆ</label>
         </div>
-        <div
-          class="inputs-next-to-each-other"
-          *ngIf="typ === ContactFormType.SZUKAM"
-        >
+        @if (typ === ContactFormType.SZUKAM) {
+          <div class="inputs-next-to-each-other">
+            <div class="field">
+              <input
+                type="text"
+                formControlName="priceFrom"
+                id="priceFrom"
+                placeholder=""
+              />
+              <label for="priceFrom">CENA OD</label>
+            </div>
+            <div class="field">
+              <input
+                type="text"
+                formControlName="priceTo"
+                id="priceTo"
+                placeholder=""
+              />
+              <label for="priceTo">CENA DO</label>
+            </div>
+          </div>
+        }
+        @if (typ === ContactFormType.SZUKAM) {
+          <div class="inputs-next-to-each-other">
+            <div class="field">
+              <input
+                type="text"
+                formControlName="areaFrom"
+                id="areaFrom"
+                placeholder=""
+              />
+              <label for="areaFrom">POWIERZCHNIA OD</label>
+            </div>
+            <div class="field">
+              <input
+                type="text"
+                formControlName="areaTo"
+                id="areaTo"
+                placeholder=""
+              />
+              <label for="areaTo">POWIERZCHNIA DO</label>
+            </div>
+          </div>
+        }
+        @if (typ === ContactFormType.SPRZEDAM) {
           <div class="field">
             <input
               type="text"
-              formControlName="priceFrom"
-              id="priceFrom"
+              formControlName="address"
+              id="address"
               placeholder=""
             />
-            <label for="priceFrom">CENA OD</label>
+            <label for="address">ADRES NIERUCHOMOŚCI</label>
           </div>
+        }
+        @if (typ === ContactFormType.SPRZEDAM) {
           <div class="field">
             <input
               type="text"
-              formControlName="priceTo"
-              id="priceTo"
+              formControlName="price"
+              id="price"
               placeholder=""
             />
-            <label for="priceTo">CENA DO</label>
+            <label for="price">SUGEROWANA CENA</label>
           </div>
-        </div>
-        <div
-          class="inputs-next-to-each-other"
-          *ngIf="typ === ContactFormType.SZUKAM"
-        >
-          <div class="field">
-            <input
-              type="text"
-              formControlName="areaFrom"
-              id="areaFrom"
-              placeholder=""
-            />
-            <label for="areaFrom">POWIERZCHNIA OD</label>
-          </div>
-          <div class="field">
-            <input
-              type="text"
-              formControlName="areaTo"
-              id="areaTo"
-              placeholder=""
-            />
-            <label for="areaTo">POWIERZCHNIA DO</label>
-          </div>
-        </div>
-        <div class="field" *ngIf="typ === ContactFormType.SPRZEDAM">
-          <input
-            type="text"
-            formControlName="address"
-            id="address"
-            placeholder=""
-          />
-          <label for="address">ADRES NIERUCHOMOŚCI</label>
-        </div>
-        <div class="field" *ngIf="typ === ContactFormType.SPRZEDAM">
-          <input
-            type="text"
-            formControlName="price"
-            id="price"
-            placeholder=""
-          />
-          <label for="price">SUGEROWANA CENA</label>
-        </div>
+        }
       </div>
     </div>
 

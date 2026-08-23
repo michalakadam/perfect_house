@@ -6,6 +6,7 @@ import { Offer } from 'src/app/shared/models';
   templateUrl: './offer-details.component.html',
   styleUrls: ['./offer-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class OfferDetailsComponent {
   @Input() offer: Offer;

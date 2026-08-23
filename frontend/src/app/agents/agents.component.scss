@@ -1,8 +1,8 @@
-@import 'variables.scss';
-@import 'mixins.scss';
+@use 'variables.scss';
+@use 'mixins.scss';
 
 .component-container {
-  @include responsive-page;
+  @include mixins.responsive-page;
 
   .title {
     text-align: center;
@@ -15,14 +15,14 @@
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
     margin: 40px auto;
-    @media screen and (max-width: $desktop-small) {
+    @media screen and (max-width: variables.$desktop-small) {
       gap: 20px 10px;
       margin: 20px auto;
     }
-    @media screen and (max-width: $tablet) {
+    @media screen and (max-width: variables.$tablet) {
       grid-template-columns: repeat(2, 1fr);
     }
-    @media screen and (max-width: $mobile) {
+    @media screen and (max-width: variables.$mobile) {
       grid-template-columns: repeat(1, 1fr);
     }
 
@@ -33,10 +33,10 @@
         grid-column-start: 1;
         grid-column-end: 4;
 
-        @media screen and (max-width: $tablet) {
+        @media screen and (max-width: variables.$tablet) {
           grid-column-end: 3;
         }
-        @media screen and (max-width: $mobile) {
+        @media screen and (max-width: variables.$mobile) {
           grid-column-end: initial;
         }
       }

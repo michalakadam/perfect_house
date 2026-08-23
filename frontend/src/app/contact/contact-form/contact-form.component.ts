@@ -16,6 +16,7 @@ export enum ContactFormType {
   templateUrl: './contact-form.component.html',
   styleUrl: './contact-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ContactFormComponent implements OnDestroy {
   private subscription: Subscription;

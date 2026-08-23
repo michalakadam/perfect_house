@@ -14,6 +14,7 @@ import { OFFERS_PER_PAGE } from 'src/app/shared/constants';
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class PaginatorComponent {
   private currentPage = -1;

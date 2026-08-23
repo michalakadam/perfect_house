@@ -16,6 +16,7 @@ import { WindowSizeDetector } from '../shared/services/window-size-detector.serv
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class FooterComponent implements OnDestroy {
   private subscription: Subscription;

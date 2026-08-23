@@ -27,33 +27,31 @@
     <div class="green-frame"></div>
 
     <div class="content">
-      <div *ngIf="!windowSizeDetector.isWindowSmallerThanMobile" class="title">
-        Chcesz SPRZEDAĆ lub ZNALEŹĆ nieruchomość?
-      </div>
+      @if (!windowSizeDetector.isWindowSmallerThanMobile) {
+        <div class="title">Chcesz SPRZEDAĆ lub ZNALEŹĆ nieruchomość?</div>
+      }
       <div class="buttons">
         <div
           class="button sell-rent"
           [routerLink]="['/kontakt/formularz', FormType.SPRZEDAM]"
         >
           <img class="icon first" />
-          <div
-            class="button-content first"
-            *ngIf="!windowSizeDetector.isWindowSmallerThanMobileSmall"
-          >
-            SPRZEDAMY/ WYNAJMIEMY Twoją nieruchomość!
-          </div>
+          @if (!windowSizeDetector.isWindowSmallerThanMobileSmall) {
+            <div class="button-content first">
+              SPRZEDAMY/ WYNAJMIEMY Twoją nieruchomość!
+            </div>
+          }
         </div>
         <div
           class="button search"
           [routerLink]="['/kontakt/formularz', FormType.SZUKAM]"
         >
           <img class="icon second" />
-          <div
-            class="button-content second"
-            *ngIf="!windowSizeDetector.isWindowSmallerThanMobileSmall"
-          >
-            POSZUKAMY nieruchomości dla Ciebie!
-          </div>
+          @if (!windowSizeDetector.isWindowSmallerThanMobileSmall) {
+            <div class="button-content second">
+              POSZUKAMY nieruchomości dla Ciebie!
+            </div>
+          }
         </div>
       </div>
     </div>
@@ -86,27 +84,28 @@
     </div>
   </div>
 
-  <div
-    *ngIf="offersStateManager.offersForMainPage$ | async as carouselOffers"
-    class="carousel-container"
-    [ngClass]="{ 'move-to-advanced': advancedVisible }"
-  >
-    <p-carousel
-      [value]="carouselOffers"
-      styleClass="custom-carousel"
-      [numVisible]="computeOffersVisible()"
-      [numScroll]="1"
-      [circular]="true"
-      [autoplayInterval]="5000"
+  @if (offersStateManager.offersForMainPage$ | async; as carouselOffers) {
+    <div
+      class="carousel-container"
+      [ngClass]="{ 'move-to-advanced': advancedVisible }"
     >
-      <ng-template let-offer pTemplate="item">
-        <perfect-offer-card
-          [offer]="offer"
-          inCarousel
-          (click)="offersStateManager.openMainPageOffer(offer.symbol)"
-        >
-        </perfect-offer-card>
-      </ng-template>
-    </p-carousel>
-  </div>
+      <p-carousel
+        [value]="carouselOffers"
+        styleClass="custom-carousel"
+        [numVisible]="computeOffersVisible()"
+        [numScroll]="1"
+        [circular]="true"
+        [autoplayInterval]="5000"
+      >
+        <ng-template let-offer pTemplate="item">
+          <perfect-offer-card
+            [offer]="offer"
+            inCarousel
+            (click)="offersStateManager.openMainPageOffer(offer.symbol)"
+          >
+          </perfect-offer-card>
+        </ng-template>
+      </p-carousel>
+    </div>
+  }
 </div>

@@ -1,8 +1,8 @@
-@import 'variables.scss';
-@import 'mixins.scss';
+@use 'variables.scss';
+@use 'mixins.scss';
 
 .component-container {
-  @include article-page;
+  @include mixins.article-page;
 
   h1 {
     font-weight: 500;
@@ -19,7 +19,7 @@
       display: flex;
       justify-content: space-between;
 
-      @media screen and (max-width: $desktop-small) {
+      @media screen and (max-width: variables.$desktop-small) {
         flex-direction: column;
         align-content: center;
       }
@@ -28,7 +28,7 @@
         width: 50%;
         padding: 2rem;
 
-        @media screen and (max-width: $desktop-small) {
+        @media screen and (max-width: variables.$desktop-small) {
           width: 100%;
         }
 
@@ -71,7 +71,7 @@
 
           input {
             border: none;
-            border-bottom: 2px solid $light-green;
+            border-bottom: 2px solid variables.$light-green;
             padding: 0;
             width: 100%;
           }
@@ -123,16 +123,16 @@
       display: flex;
       align-items: center;
       font-size: 12px;
-      color: $font-light-grey;
+      color: variables.$font-light-grey;
       margin-top: 2rem;
 
-      @media screen and (max-width: $desktop-small) {
+      @media screen and (max-width: variables.$desktop-small) {
         align-self: center;
         width: 95%;
       }
 
       mat-radio-group {
-        color: $light-green;
+        color: variables.$light-green;
 
         mat-radio-button {
           margin-right: 1rem;

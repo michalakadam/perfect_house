@@ -3,15 +3,16 @@
     <h2 class="title">Ludzie</h2>
   </header>
   <div class="list-of-agents">
-    <perfect-agent-brief
-      *ngFor="
-        let agent of agentsStateManager.agents$ | async;
-        trackBy: trackById
-      "
-      vertical
-      [agent]="agent"
-      (click)="agentsStateManager.openAgentPage(agent.fullName)"
-    >
-    </perfect-agent-brief>
+    @for (
+      agent of agentsStateManager.agents$ | async;
+      track trackById($index, agent)
+    ) {
+      <perfect-agent-brief
+        vertical
+        [agent]="agent"
+        (click)="agentsStateManager.openAgentPage(agent.fullName)"
+      >
+      </perfect-agent-brief>
+    }
   </div>
 </div>

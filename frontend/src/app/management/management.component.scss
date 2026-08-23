@@ -1,16 +1,16 @@
-@import 'variables.scss';
-@import 'mixins.scss';
+@use 'variables.scss';
+@use 'mixins.scss';
 
 .image-container {
-  @include screen-wide-image;
+  @include mixins.screen-wide-image;
 }
 
 .component-container {
-  @include article-page;
+  @include mixins.article-page;
 
   h2 {
     text-align: left;
-    @media screen and (max-width: $mobile) {
+    @media screen and (max-width: variables.$mobile) {
       text-align: center;
     }
   }
@@ -19,35 +19,35 @@
     margin-bottom: 0;
 
     .contact {
-      @include perfect-box;
+      @include mixins.perfect-box;
       float: right;
       margin-left: -476px;
       padding: 1rem 1rem 2rem 2rem;
       position: relative;
       top: 274px;
       width: 440px;
-      @media screen and (max-width: $desktop-large) {
+      @media screen and (max-width: variables.$desktop-large) {
         top: 244px;
         width: 400px;
       }
-      @media screen and (max-width: $desktop-large) {
+      @media screen and (max-width: variables.$desktop-large) {
         top: 224px;
       }
-      @media screen and (max-width: $desktop-small) {
+      @media screen and (max-width: variables.$desktop-small) {
         float: initial;
         margin: 2rem auto;
         position: unset;
         top: unset;
         width: 365px;
       }
-      @media screen and (max-width: $mobile) {
+      @media screen and (max-width: variables.$mobile) {
         padding-left: 1rem;
         width: 224px;
       }
 
       h2 {
         margin-block-start: 0;
-        @media screen and (max-width: $mobile-small) {
+        @media screen and (max-width: variables.$mobile-small) {
           text-align: center;
         }
       }
@@ -55,7 +55,7 @@
       perfect-agent-brief {
         ::ng-deep .component-container {
           width: 450px;
-          @media screen and (max-width: $mobile) {
+          @media screen and (max-width: variables.$mobile) {
             width: unset;
           }
         }
@@ -69,7 +69,7 @@
       margin-top: -1rem;
 
       .title {
-        @media screen and (max-width: $desktop-small) {
+        @media screen and (max-width: variables.$desktop-small) {
           order: 2;
         }
       }
@@ -78,12 +78,12 @@
         height: 7rem;
         margin-left: 1rem;
         width: 7rem;
-        @media screen and (max-width: $desktop-small) {
+        @media screen and (max-width: variables.$desktop-small) {
           margin-left: 0;
           margin-right: 1rem;
           order: 1;
         }
-        @media screen and (max-width: $mobile) {
+        @media screen and (max-width: variables.$mobile) {
           margin-right: 0;
         }
       }
@@ -104,7 +104,7 @@
 
       ul {
         list-style-type: disc;
-        @media screen and (max-width: $desktop-small) {
+        @media screen and (max-width: variables.$desktop-small) {
           padding-inline-start: 30px;
         }
       }

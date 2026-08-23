@@ -1,8 +1,8 @@
-@import 'variables.scss';
-@import 'mixins.scss';
+@use 'variables.scss';
+@use 'mixins.scss';
 
 .component-container {
-  @include perfect-box;
+  @include mixins.perfect-box;
   display: flex;
   height: 25vw;
   margin: 20px auto;
@@ -41,7 +41,7 @@
         margin-bottom: 10px;
 
         .description {
-          color: $font-light-grey;
+          color: variables.$font-light-grey;
         }
 
         .offer-number {
@@ -51,7 +51,7 @@
 
       .location {
         align-items: center;
-        color: $font-light-grey;
+        color: variables.$font-light-grey;
         display: flex;
         margin-bottom: 15px;
         margin-left: -3px;
@@ -72,10 +72,10 @@
           &:first-of-type {
             display: inline-block;
             width: 250px;
-            @media screen and (max-width: $desktop-large) {
+            @media screen and (max-width: variables.$desktop-large) {
               width: 235px;
             }
-            @media screen and (max-width: $desktop-medium) {
+            @media screen and (max-width: variables.$desktop-medium) {
               width: 220px;
             }
           }
@@ -98,12 +98,12 @@
         margin-bottom: 14px;
 
         p-button {
-          @include perfect-button;
+          @include mixins.perfect-button;
         }
       }
 
       .price {
-        color: $dark-green;
+        color: variables.$dark-green;
         font-size: 2.5rem;
         font-weight: 700;
         margin-bottom: 15px;
@@ -111,7 +111,7 @@
         text-align: right;
 
         .client-price {
-          color: $font-grey;
+          color: variables.$font-grey;
           font-size: 16px;
         }
       }

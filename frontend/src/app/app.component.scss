@@ -1,5 +1,5 @@
-@import 'variables.scss';
-@import 'mixins.scss';
+@use 'variables.scss';
+@use 'mixins.scss';
 
 .hidden {
   visibility: hidden;
@@ -29,12 +29,12 @@
     margin-left: 430px;
     top: 115px;
     width: 180px;
-    @media screen and (max-width: $desktop-large) {
+    @media screen and (max-width: variables.$desktop-large) {
       margin-left: 384px;
       top: 110px;
       width: 164px;
     }
-    @media screen and (max-width: $desktop-medium) {
+    @media screen and (max-width: variables.$desktop-medium) {
       margin-left: 334px;
       top: 105px;
       width: 148px;
@@ -50,10 +50,10 @@
     bottom: 5%;
     width: 100%;
     .snackbar-content {
-      @include perfect-box;
+      @include mixins.perfect-box;
       align-items: center;
-      background-color: $light-green;
-      color: $font-white;
+      background-color: variables.$light-green;
+      color: variables.$font-white;
       display: flex;
       font-weight: 700;
       justify-content: space-between;
@@ -61,7 +61,7 @@
       margin: 0 auto;
       padding: 0 20px;
       width: 350px;
-      @media screen and (max-width: $desktop-small) {
+      @media screen and (max-width: variables.$desktop-small) {
         width: 300px;
       }
 

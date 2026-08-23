@@ -1,5 +1,5 @@
-@import 'variables.scss';
-@import 'mixins.scss';
+@use 'variables.scss';
+@use 'mixins.scss';
 
 .component-container {
   align-items: center;
@@ -12,18 +12,18 @@
     width: 96x;
 
     .title {
-      color: $font-light-grey;
+      color: variables.$font-light-grey;
     }
   }
 
   .sorter {
     .title {
-      color: $font-light-grey;
+      color: variables.$font-light-grey;
       margin-right: 3px;
     }
 
-    p-dropdown {
-      @include perfect-dropdown;
+    p-select {
+      @include mixins.perfect-dropdown;
     }
   }
 }

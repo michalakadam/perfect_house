@@ -1,4 +1,4 @@
-@import 'variables.scss';
+@use 'variables.scss';
 
 .component-container {
   display: flex;
@@ -6,6 +6,6 @@
   width: 100px;
 
   i {
-    color: $light-green;
+    color: variables.$light-green;
   }
 }

@@ -20,6 +20,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './offers.component.html',
   styleUrls: ['./offers.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class OffersComponent implements OnDestroy {
   private subscription: Subscription;

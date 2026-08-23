@@ -1,4 +1,4 @@
-@import 'variables.scss';
+@use 'variables.scss';
 
 .map {
   ::ng-deep .ol-viewport {
@@ -7,8 +7,8 @@
     pointer-events: none;
 
     .ol-control button {
-      background-color: $light-green;
-      color: $dark-green;
+      background-color: variables.$light-green;
+      color: variables.$dark-green;
       pointer-events: initial;
     }
   }

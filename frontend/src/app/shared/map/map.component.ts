@@ -13,6 +13,7 @@ declare let ol: any;
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class MapComponent implements OnInit {
   @Input() lattitude: number;

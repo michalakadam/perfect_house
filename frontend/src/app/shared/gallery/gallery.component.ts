@@ -15,6 +15,7 @@ const HORIZONTAL_PHOTO_MAX_WIDTH_TO_HEIGHT_RATIO = 1.2;
   templateUrl: './gallery.component.html',
   styleUrls: ['./gallery.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class GalleryComponent {
   private photos: string[] = [];

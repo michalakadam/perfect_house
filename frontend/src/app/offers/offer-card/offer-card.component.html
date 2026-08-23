@@ -2,7 +2,7 @@
   class="component-container"
   [ngClass]="{
     'smaller-container':
-      displaySmaller || windowSizeDetector.isWindowSmallerThanDesktopSmall
+      displaySmaller || windowSizeDetector.isWindowSmallerThanDesktopSmall,
   }"
 >
   <div
@@ -14,8 +14,11 @@
       <h4>
         <div class="description">
           <span>{{ offer.estateType }} na &nbsp;</span>
-          <span *ngIf="offer.isForRent; else sale">wynajem</span>
-          <ng-template #sale>sprzedaż</ng-template>
+          @if (offer.isForRent) {
+            <span>wynajem</span>
+          } @else {
+            sprzedaż
+          }
           <span>:</span>
         </div>
         <div class="offer-number">
@@ -24,21 +27,24 @@
       </h4>
       <perfect-offer-details [offer]="offer"></perfect-offer-details>
     </div>
-    <div
-      class="bottom-row"
-      *ngIf="agentsStateManager.agentById$(offer.agentId) | async as agent"
-    >
-      <a class="phone" href="tel:{{ agent.mobile }}">
-        <p-button [label]="agent.mobile" icon="fas fa-phone-alt"></p-button>
-      </a>
-      <div class="price" *ngIf="offer.price > -1">
-        <span *ngIf="offer.price > 1">
-          {{ offer.price | prettifyNumber: 'zł' }}
-        </span>
-        <span class="client-price" *ngIf="offer.price === 1">
-          Zaproponuj cenę!
-        </span>
+    @if (agentsStateManager.agentById$(offer.agentId) | async; as agent) {
+      <div class="bottom-row">
+        <a class="phone" href="tel:{{ agent.mobile }}">
+          <p-button [label]="agent.mobile" icon="fas fa-phone-alt"></p-button>
+        </a>
+        @if (offer.price > -1) {
+          <div class="price">
+            @if (offer.price > 1) {
+              <span>
+                {{ offer.price | prettifyNumber: 'zł' }}
+              </span>
+            }
+            @if (offer.price === 1) {
+              <span class="client-price"> Zaproponuj cenę! </span>
+            }
+          </div>
+        }
       </div>
-    </div>
+    }
   </div>
 </div>

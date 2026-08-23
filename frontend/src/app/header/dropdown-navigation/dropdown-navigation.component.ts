@@ -6,6 +6,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
   templateUrl: './dropdown-navigation.component.html',
   styleUrls: ['./dropdown-navigation.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class DropdownNavigationComponent {
   @Input() links = [];

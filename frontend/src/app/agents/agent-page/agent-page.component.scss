@@ -1,33 +1,33 @@
-@import 'variables.scss';
-@import 'mixins.scss';
+@use 'variables.scss';
+@use 'mixins.scss';
 
 .component-container {
-  @include responsive-page;
+  @include mixins.responsive-page;
 
   .hidden {
     visibility: hidden;
   }
 
   .agent-info {
-    @include responsive-page;
+    @include mixins.responsive-page;
     display: flex;
     justify-content: space-between;
     margin: 50px auto;
-    @media screen and (max-width: $desktop-small) {
+    @media screen and (max-width: variables.$desktop-small) {
       margin: 20px auto;
     }
-    @media screen and (max-width: $mobile-large) {
+    @media screen and (max-width: variables.$mobile-large) {
       flex-direction: column;
     }
 
     & > * {
-      @include perfect-box;
+      @include mixins.perfect-box;
       margin: 0 25px;
       padding: 25px;
-      @media screen and (max-width: $desktop-small) {
+      @media screen and (max-width: variables.$desktop-small) {
         margin: 0;
       }
-      @media screen and (max-width: $mobile-large) {
+      @media screen and (max-width: variables.$mobile-large) {
         flex-direction: column;
         margin: 0 auto;
         width: 300px;
@@ -36,12 +36,12 @@
 
     perfect-agent-brief {
       max-height: 420px;
-      @media screen and (max-width: $desktop-small) {
+      @media screen and (max-width: variables.$desktop-small) {
         margin-right: 20px;
         max-height: 376px;
         padding: 25px 0;
       }
-      @media screen and (max-width: $mobile-large) {
+      @media screen and (max-width: variables.$mobile-large) {
         margin-bottom: 20px;
         margin-right: auto;
         padding: 25px;
@@ -54,26 +54,26 @@
     }
 
     button {
-      background-color: $light-green;
+      background-color: variables.$light-green;
       border: initial;
       border-radius: 50%;
-      color: $dark-green;
+      color: variables.$dark-green;
       margin-top: 13%;
 
-      @media screen and (max-width: $desktop-large) {
+      @media screen and (max-width: variables.$desktop-large) {
         margin-top: 14%;
       }
-      @media screen and (max-width: $desktop-medium) {
+      @media screen and (max-width: variables.$desktop-medium) {
         margin-top: 18%;
       }
 
       &:focus {
-        background-color: $light-green;
+        background-color: variables.$light-green;
         box-shadow: initial;
       }
 
       &:hover {
-        box-shadow: 0 0 0 1px $dark-green;
+        box-shadow: 0 0 0 1px variables.$dark-green;
       }
 
       ::ng-deep .pi {

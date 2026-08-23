@@ -1,6 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'decodeString' })
+@Pipe({
+  name: 'decodeString',
+  standalone: false,
+})
 export class StringDecoder implements PipeTransform {
   transform(value: string) {
     const tempElement = document.createElement('div');

@@ -1,12 +1,12 @@
-@import 'variables.scss';
-@import 'mixins.scss';
+@use 'variables.scss';
+@use 'mixins.scss';
 
 :host {
-  @include perfect-box;
-  background-color: $font-white;
+  @include mixins.perfect-box;
+  background-color: variables.$font-white;
   border-radius: 10px;
   z-index: 100;
-  @media screen and (max-width: $mobile-small) {
+  @media screen and (max-width: variables.$mobile-small) {
     left: 40px;
   }
 
@@ -19,8 +19,8 @@
     }
 
     &.active-link:not(.about-us-link) {
-      background-color: $light-green;
-      color: $font-white;
+      background-color: variables.$light-green;
+      color: variables.$font-white;
       font-weight: 700;
       height: 100%;
       width: 100%;
@@ -33,16 +33,16 @@
       line-height: 44px;
 
       &:hover {
-        color: $light-green;
+        color: variables.$light-green;
       }
 
-      @media screen and (max-width: $desktop-large) {
+      @media screen and (max-width: variables.$desktop-large) {
         font-size: 16px;
       }
-      @media screen and (max-width: $desktop-medium) {
+      @media screen and (max-width: variables.$desktop-medium) {
         font-size: 14px;
       }
-      @media screen and (max-width: $mobile-small) {
+      @media screen and (max-width: variables.$mobile-small) {
         font-size: 12px;
       }
     }
@@ -51,7 +51,7 @@
   .about-us-link {
     .active-link {
       background-color: white;
-      color: $light-green;
+      color: variables.$light-green;
     }
   }
 }

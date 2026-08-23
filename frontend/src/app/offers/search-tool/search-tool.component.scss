@@ -1,12 +1,12 @@
-@import 'variables.scss';
-@import 'mixins.scss';
+@use 'variables.scss';
+@use 'mixins.scss';
 
 .component-container {
   display: flex;
   flex-direction: column;
   width: 100%;
-  @media screen and (max-width: $desktop-small) {
-    @include perfect-box;
+  @media screen and (max-width: variables.$desktop-small) {
+    @include mixins.perfect-box;
     margin: 0 auto 20px;
     padding: 15px 25px;
     width: 316px;
@@ -19,7 +19,7 @@
     margin-bottom: 10px;
     min-height: 50px;
     width: 100%;
-    @media screen and (max-width: $desktop-small) {
+    @media screen and (max-width: variables.$desktop-small) {
       flex-direction: column;
       margin-bottom: 0;
       min-height: 0;
@@ -36,13 +36,13 @@
     }
 
     .transaction-toggle {
-      @include perfect-toggle-button;
+      @include mixins.perfect-toggle-button;
 
-      ::ng-deep .p-button {
-        @media screen and (max-width: $desktop-medium) {
+      ::ng-deep p-togglebutton {
+        @media screen and (max-width: variables.$desktop-medium) {
           padding: 0.5rem 0.75rem;
         }
-        @media screen and (max-width: $desktop-small) {
+        @media screen and (max-width: variables.$desktop-small) {
           padding: 0.5rem 1rem;
         }
       }
@@ -50,7 +50,7 @@
 
     .location-input {
       ::ng-deep perfect-input input {
-        @media screen and (max-width: $desktop-small) {
+        @media screen and (max-width: variables.$desktop-small) {
           width: 130px;
         }
       }
@@ -60,7 +60,7 @@
       display: grid;
       gap: 10px 10px;
       grid-template-columns: repeat(2, 1fr);
-      @media screen and (max-width: $desktop-small) {
+      @media screen and (max-width: variables.$desktop-small) {
         gap: 10px 0;
       }
 
@@ -69,20 +69,21 @@
       }
 
       .checkbox-container {
+        align-items: center;
         display: flex;
 
         p-checkbox {
-          padding-right: 5px;
+          margin-right: 5px;
 
-          ::ng-deep .p-checkbox {
+          ::ng-deep {
             .p-checkbox-box {
               &.p-highlight {
-                border-color: $light-green;
-                background: $light-green;
+                border-color: variables.$light-green;
+                background: variables.$light-green;
               }
 
               .p-checkbox-icon {
-                color: $dark-green;
+                color: variables.$dark-green;
                 font-weight: 700;
               }
             }
@@ -90,8 +91,8 @@
             &:not(.p-checkbox-disabled) {
               .p-checkbox-box {
                 &:hover {
-                  border-color: $light-green;
-                  box-shadow: 0 0 0 0.2rem $light-green;
+                  border-color: variables.$light-green;
+                  box-shadow: 0 0 0 0.2rem variables.$light-green;
                 }
 
                 &.p-focus {
@@ -102,8 +103,8 @@
 
               &.p-checkbox-checked .p-checkbox-box {
                 &.p-focus {
-                  border-color: $light-green;
-                  box-shadow: 0 0 0 0.2rem $light-green;
+                  border-color: variables.$light-green;
+                  box-shadow: 0 0 0 0.2rem variables.$light-green;
                 }
               }
             }
@@ -111,9 +112,8 @@
         }
 
         label {
-          color: $font-light-grey;
+          color: variables.$font-light-grey;
           font-weight: 700;
-          padding-top: 1.5px;
         }
       }
     }
@@ -121,7 +121,7 @@
     .from-to-input-container {
       display: flex;
       flex-direction: column;
-      @media screen and (max-width: $desktop-small) {
+      @media screen and (max-width: variables.$desktop-small) {
         align-items: center;
         flex-direction: row;
         justify-content: space-between;
@@ -130,10 +130,10 @@
       }
 
       .title {
-        color: $font-light-grey;
+        color: variables.$font-light-grey;
         font-weight: 700;
         margin-bottom: 5px;
-        @media screen and (max-width: $desktop-small) {
+        @media screen and (max-width: variables.$desktop-small) {
           margin-bottom: 0;
         }
       }
@@ -150,13 +150,13 @@
         align-items: center;
         display: flex;
         ::ng-deep perfect-input input {
-          @media screen and (max-width: $desktop-small) {
+          @media screen and (max-width: variables.$desktop-small) {
             width: 75px;
           }
         }
 
         span {
-          color: $font-light-grey;
+          color: variables.$font-light-grey;
           font-weight: 700;
         }
 
@@ -171,29 +171,29 @@
     }
 
     .area {
-      @media screen and (max-width: $desktop-small) {
+      @media screen and (max-width: variables.$desktop-small) {
         order: 3;
       }
     }
 
     .market-toggle {
-      @include perfect-toggle-button;
-      @media screen and (max-width: $desktop-small) {
+      @include mixins.perfect-toggle-button;
+      @media screen and (max-width: variables.$desktop-small) {
         order: 3;
       }
 
-      ::ng-deep .p-button {
-        @media screen and (max-width: $desktop-medium) {
+      ::ng-deep p-togglebutton {
+        @media screen and (max-width: variables.$desktop-medium) {
           padding: 0.5rem 0.75rem;
         }
-        @media screen and (max-width: $desktop-small) {
+        @media screen and (max-width: variables.$desktop-small) {
           padding: 0.5rem 1rem;
         }
       }
     }
 
     .price-slider {
-      @media screen and (max-width: $desktop-small) {
+      @media screen and (max-width: variables.$desktop-small) {
         margin-left: 3px;
       }
     }
@@ -205,7 +205,7 @@
 
     .buttons-container {
       display: flex;
-      @media screen and (max-width: $desktop-small) {
+      @media screen and (max-width: variables.$desktop-small) {
         display: flex;
         justify-content: space-between;
         margin-bottom: 5px;
@@ -214,7 +214,7 @@
       }
 
       p-button {
-        @include perfect-button;
+        @include mixins.perfect-button;
       }
 
       .show-advanced {
@@ -227,12 +227,12 @@
         }
 
         ::ng-deep .p-button {
-          background-color: $dark-green;
-          border: 1px solid $dark-green;
-          color: $font-white;
+          background-color: variables.$dark-green;
+          border: 1px solid variables.$dark-green;
+          color: variables.$font-white;
 
           &.p-highlight {
-            border-color: $light-green;
+            border-color: variables.$light-green;
           }
 
           &:not(.p-disabled):not(.p-highlight):hover {

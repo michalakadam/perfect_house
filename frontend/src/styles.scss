@@ -1,19 +1,21 @@
+@use 'variables.scss';
+
 @import '../node_modules/primeicons/primeicons.css';
-@import '../node_modules/primeng/resources/primeng.min.css';
-@import 'variables.scss';
 
 html {
+  background-color: variables.$font-white;
   font-size: 16px;
   height: 100%;
-  @media screen and (max-width: $desktop-large) {
+  @media screen and (max-width: variables.$desktop-large) {
     font-size: 14px;
   }
-  @media screen and (max-width: $desktop-small) {
+  @media screen and (max-width: variables.$desktop-small) {
     font-size: 12px;
   }
 
   body {
-    color: $font-grey;
+    background-color: variables.$font-white;
+    color: variables.$font-grey;
     font-family: 'Open Sans', sans-serif;
     height: 100%;
     margin: 0;

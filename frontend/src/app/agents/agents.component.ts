@@ -8,6 +8,7 @@ import { AgentsStateManager } from './state-management/state-manager.service';
   templateUrl: './agents.component.html',
   styleUrls: ['./agents.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class AgentsComponent {
   constructor(readonly agentsStateManager: AgentsStateManager) {}

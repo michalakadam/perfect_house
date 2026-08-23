@@ -1,38 +1,43 @@
 <nav>
-  <span class="link-container" *ngFor="let link of links">
-    <a
-      *ngIf="link.route !== '/o_nas' && link.route !== '/oferty'"
-      class="link"
-      [routerLink]="link.route"
-      routerLinkActive="active-link"
-      [routerLinkActiveOptions]="{ exact: true }"
-      tabindex="0"
-      role="button"
-      aria-pressed="false"
-      >{{ link.title }}</a
-    >
-    <a
-      *ngIf="link.route === '/o_nas'"
-      class="link"
-      [ngClass]="{ 'active-link': isAboutUsActive }"
-      (click)="aboutUsToggled.emit()"
-      tabindex="0"
-      role="button"
-      aria-pressed="false"
-      >{{ link.title }}</a
-    >
-    <a
-      *ngIf="link.route === '/oferty'"
-      class="link"
-      [routerLink]="[
-        link.route,
-        { page: 1, sorting: 'creationDate_descending' }
-      ]"
-      [ngClass]="{ 'active-link': isOffersLinkActive() }"
-      tabindex="0"
-      role="button"
-      aria-pressed="false"
-      >{{ link.title }}</a
-    >
-  </span>
+  @for (link of links; track link) {
+    <span class="link-container">
+      @if (link.route !== '/o_nas' && link.route !== '/oferty') {
+        <a
+          class="link"
+          [routerLink]="link.route"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+          tabindex="0"
+          role="button"
+          aria-pressed="false"
+          >{{ link.title }}</a
+        >
+      }
+      @if (link.route === '/o_nas') {
+        <a
+          class="link"
+          [ngClass]="{ 'active-link': isAboutUsActive }"
+          (click)="aboutUsToggled.emit()"
+          tabindex="0"
+          role="button"
+          aria-pressed="false"
+          >{{ link.title }}</a
+        >
+      }
+      @if (link.route === '/oferty') {
+        <a
+          class="link"
+          [routerLink]="[
+            link.route,
+            { page: 1, sorting: 'creationDate_descending' },
+          ]"
+          [ngClass]="{ 'active-link': isOffersLinkActive() }"
+          tabindex="0"
+          role="button"
+          aria-pressed="false"
+          >{{ link.title }}</a
+        >
+      }
+    </span>
+  }
 </nav>

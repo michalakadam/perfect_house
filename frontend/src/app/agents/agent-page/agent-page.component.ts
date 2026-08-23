@@ -14,6 +14,7 @@ import { AgentsStateManager } from '../state-management/state-manager.service';
   templateUrl: './agent-page.component.html',
   styleUrls: ['./agent-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class AgentPageComponent implements OnDestroy {
   private subscription: Subscription;

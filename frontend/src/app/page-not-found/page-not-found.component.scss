@@ -1,4 +1,4 @@
-@import 'variables.scss';
+@use 'variables.scss';
 
 :host {
   // background image source: https://unsplash.com/photos/Vwdq_KoW74E
@@ -13,16 +13,16 @@
   justify-content: center;
   margin-bottom: -14px;
   text-align: center;
-  @media screen and (max-width: $desktop-small) {
+  @media screen and (max-width: variables.$desktop-small) {
     height: 73.5vh;
   }
-  @media screen and (max-width: $mobile-large) {
+  @media screen and (max-width: variables.$mobile-large) {
     height: 68.7vh;
   }
 
   .error-code {
     font-size: 96px;
-    @media screen and (max-width: $mobile-large) {
+    @media screen and (max-width: variables.$mobile-large) {
       font-size: 64px;
     }
   }
@@ -30,7 +30,7 @@
   .error-message {
     font-size: 24px;
     margin-top: 20px;
-    @media screen and (max-width: $mobile-large) {
+    @media screen and (max-width: variables.$mobile-large) {
       font-size: 16px;
     }
   }

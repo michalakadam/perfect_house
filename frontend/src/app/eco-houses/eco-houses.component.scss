@@ -1,48 +1,49 @@
-@import 'mixins.scss';
+@use 'mixins.scss';
+@use 'variables.scss';
 
 .image-container {
-  @include screen-wide-image;
+  @include mixins.screen-wide-image;
 }
 
 .component-container {
-  @include article-page;
+  @include mixins.article-page;
 
   h1 {
-    @media screen and (max-width: $desktop-small) {
+    @media screen and (max-width: variables.$desktop-small) {
       text-align: left;
     }
   }
 
   .contact {
-    @include perfect-box;
+    @include mixins.perfect-box;
     float: right;
     margin-left: -476px;
     padding: 1rem 1rem 2rem 2rem;
     position: relative;
     top: 274px;
     width: 440px;
-    @media screen and (max-width: $desktop-large) {
+    @media screen and (max-width: variables.$desktop-large) {
       top: 244px;
       width: 400px;
     }
-    @media screen and (max-width: $desktop-medium) {
+    @media screen and (max-width: variables.$desktop-medium) {
       top: 355px;
       width: 365px;
     }
-    @media screen and (max-width: $desktop-small) {
+    @media screen and (max-width: variables.$desktop-small) {
       float: initial;
       margin: 2rem auto;
       position: unset;
       top: unset;
     }
-    @media screen and (max-width: $mobile) {
+    @media screen and (max-width: variables.$mobile) {
       padding-left: 1rem;
       width: 224px;
     }
 
     h2 {
       margin-block-start: 0;
-      @media screen and (max-width: $mobile-small) {
+      @media screen and (max-width: variables.$mobile-small) {
         text-align: center;
       }
     }
@@ -50,7 +51,7 @@
     perfect-agent-brief {
       ::ng-deep .component-container {
         width: 450px;
-        @media screen and (max-width: $mobile) {
+        @media screen and (max-width: variables.$mobile) {
           width: unset;
         }
       }
@@ -61,18 +62,18 @@
     margin-top: 2rem;
     height: 715px;
     width: 100%;
-    @media screen and (max-width: $desktop-large) {
+    @media screen and (max-width: variables.$desktop-large) {
       height: 627px;
     }
-    @media screen and (max-width: $desktop-medium) {
+    @media screen and (max-width: variables.$desktop-medium) {
       height: 514px;
       margin-top: 4rem;
     }
-    @media screen and (max-width: $desktop-small) {
+    @media screen and (max-width: variables.$desktop-small) {
       height: 445px;
       margin-top: 2rem;
     }
-    @media screen and (max-width: $mobile-small) {
+    @media screen and (max-width: variables.$mobile-small) {
       height: 368px;
     }
   }

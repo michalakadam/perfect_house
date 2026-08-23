@@ -10,6 +10,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ContactComponent {
   officeLattitude = 52.4183375;

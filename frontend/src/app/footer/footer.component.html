@@ -140,6 +140,8 @@
 <mat-divider></mat-divider>
 <div class="legal-info">
   Agencja nieruchomości Perfect House © 2024.
-  <span *ngIf="windowSizeDetector.isWindowSmallerThanMobile"><br /></span>
+  @if (windowSizeDetector.isWindowSmallerThanMobile) {
+    <span><br /></span>
+  }
   Wszelkie prawa zastrzeżone.
 </div>

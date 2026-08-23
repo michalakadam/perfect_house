@@ -43,6 +43,7 @@ const IMAGES: GalleryPhoto[] = [
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class MainComponent implements OnDestroy {
   private subscription: Subscription;

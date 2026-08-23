@@ -1,13 +1,13 @@
-@import 'variables.scss';
+@use 'variables.scss';
 
 p-paginator {
-  ::ng-deep .p-paginator {
+  ::ng-deep {
     padding-left: unset;
     padding-right: unset;
 
     .p-paginator-pages {
-      .p-link {
-        color: $font-grey;
+      .p-paginator-page {
+        color: variables.$font-grey;
         font-weight: 700;
 
         &:focus {
@@ -15,15 +15,15 @@ p-paginator {
         }
       }
 
-      .p-highlight {
-        background: $light-green;
-        border-color: $light-green;
-        color: $dark-green;
+      .p-paginator-page-selected {
+        background: variables.$light-green;
+        border-color: variables.$light-green;
+        color: variables.$dark-green;
       }
     }
 
     button {
-      color: $font-grey;
+      color: variables.$font-grey;
     }
   }
 }

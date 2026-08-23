@@ -10,34 +10,42 @@
     (sideMenuToggled)="toggleSideMenuVisibility()"
     (aboutUsOptionsToggled)="toggleAboutUsOptionsVisibility()"
   ></perfect-header>
-  <perfect-dropdown-navigation
-    *ngIf="isSideMenuVisible"
-    class="side-navigation"
-    sideNavigation
-    [links]="allLinks"
-    [@openCloseSideNavAnimation]
-  ></perfect-dropdown-navigation>
+  @if (isSideMenuVisible) {
+    <perfect-dropdown-navigation
+      class="side-navigation"
+      sideNavigation
+      [links]="allLinks"
+      [@openCloseSideNavAnimation]
+    ></perfect-dropdown-navigation>
+  }
 
-  <perfect-dropdown-navigation
-    *ngIf="isAboutUsOptionsVisible"
-    class="about-us-navigation"
-    [links]="aboutUsLinks"
-  ></perfect-dropdown-navigation>
+  @if (isAboutUsOptionsVisible) {
+    <perfect-dropdown-navigation
+      class="about-us-navigation"
+      [links]="aboutUsLinks"
+    ></perfect-dropdown-navigation>
+  }
 
-  <div
-    class="router-outlet-container"
-    *ngIf="(offersStateManager.isLoading$ | async) === false"
-    [style.opacity]="isSideMenuVisible || isAboutUsOptionsVisible ? 0.3 : 1"
-  >
-    <router-outlet></router-outlet>
-  </div>
-
-  <div class="snackbar-container" *ngIf="isSnackbarVisible">
-    <div class="snackbar-content">
-      <span>{{ snackbarContent }}</span>
-      <i class="pi pi-times close-icon" (click)="isSnackbarVisible = false"></i>
+  @if ((offersStateManager.isLoading$ | async) === false) {
+    <div
+      class="router-outlet-container"
+      [style.opacity]="isSideMenuVisible || isAboutUsOptionsVisible ? 0.3 : 1"
+    >
+      <router-outlet></router-outlet>
     </div>
-  </div>
+  }
+
+  @if (isSnackbarVisible) {
+    <div class="snackbar-container">
+      <div class="snackbar-content">
+        <span>{{ snackbarContent }}</span>
+        <i
+          class="pi pi-times close-icon"
+          (click)="isSnackbarVisible = false"
+        ></i>
+      </div>
+    </div>
+  }
 
   <perfect-footer></perfect-footer>
 </div>

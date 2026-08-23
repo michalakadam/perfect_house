@@ -1,18 +1,18 @@
-@import 'variables.scss';
-@import 'mixins.scss';
+@use 'variables.scss';
+@use 'mixins.scss';
 
 .component-container {
   display: flex;
   flex-direction: column;
 
   .map-container {
-    @media screen and (max-width: $desktop-small) {
+    @media screen and (max-width: variables.$desktop-small) {
       order: 1;
     }
   }
 
   .contact-info {
-    @include perfect-box;
+    @include mixins.perfect-box;
     background-color: rgba(255, 255, 255, 0.85);
     left: 53px;
     padding: 20px;
@@ -20,17 +20,17 @@
     top: 218px;
     width: 322px;
     z-index: 10;
-    @media screen and (max-width: $desktop-large) {
+    @media screen and (max-width: variables.$desktop-large) {
       left: 47px;
       top: 200px;
       width: 287px;
     }
-    @media screen and (max-width: $desktop-medium) {
+    @media screen and (max-width: variables.$desktop-medium) {
       left: 40px;
       top: 187px;
     }
-    @media screen and (max-width: $desktop-small) {
-      @include responsive-page;
+    @media screen and (max-width: variables.$desktop-small) {
+      @include mixins.responsive-page;
       background-color: white;
       margin: 0 auto 20px;
       order: 0;
@@ -53,7 +53,7 @@
         font-weight: 700;
 
         .name {
-          color: $light-green;
+          color: variables.$light-green;
         }
       }
 
@@ -70,16 +70,16 @@
 
       a {
         mat-icon {
-          @include resized-mat-icon(32px);
+          @include mixins.resized-mat-icon(32px);
         }
       }
     }
   }
 
   .info {
-    @include responsive-page;
+    @include mixins.responsive-page;
     text-align: justify;
-    @media screen and (max-width: $desktop-small) {
+    @media screen and (max-width: variables.$desktop-small) {
       order: 3;
     }
 

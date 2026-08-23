@@ -25,6 +25,7 @@ export interface DropdownValue {
   templateUrl: './grouped-dropdown.component.html',
   styleUrls: ['./grouped-dropdown.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class GroupedDropdownComponent implements OnInit {
   clickedInside = false;

@@ -2,6 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'youtubeEmbedUrl',
+  standalone: false,
 })
 export class YoutubeEmbedUrlPipe implements PipeTransform {
   transform(value: string): string {

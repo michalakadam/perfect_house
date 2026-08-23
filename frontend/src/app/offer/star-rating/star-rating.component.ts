@@ -10,6 +10,7 @@ import {
   templateUrl: './star-rating.component.html',
   styleUrls: ['./star-rating.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class StarRatingComponent implements OnInit {
   @Input() score = 0;

@@ -6,35 +6,42 @@
     <span>{{ offer.voivodeship }}</span>
   </div>
   <div class="pairs-container">
-    <span class="key-value-pair" *ngIf="exists(offer.totalArea.value)">
-      <span class="key">{{ offer.totalArea.displayName }}: </span>
-      <span class="value">{{
-        offer.totalArea.value | prettifyNumber: offer.totalArea.unit
-      }}</span>
-    </span>
-    <span
-      class="key-value-pair"
-      *ngIf="exists(offer.pricePerSquareMeter.value)"
-    >
-      <span class="key">{{ offer.pricePerSquareMeter.displayName }}: </span>
-      <span class="value">{{
-        offer.pricePerSquareMeter.value
-          | prettifyNumber: offer.pricePerSquareMeter.unit
-      }}</span>
-    </span>
-    <span class="key-value-pair" *ngIf="exists(offer.floor.value)">
-      <span class="key">{{ offer.floor.displayName }}: </span>
-      <span class="value">{{ offer.floor.value }}</span>
-    </span>
-    <span class="key-value-pair" *ngIf="exists(offer.landArea.value)">
-      <span class="key">{{ offer.landArea.displayName }}: </span>
-      <span class="value">{{
-        offer.landArea.value | prettifyNumber: offer.landArea.unit
-      }}</span>
-    </span>
-    <span class="key-value-pair" *ngIf="offer.numberOfRooms.value > 0">
-      <span class="key">{{ offer.numberOfRooms.displayName }}: </span>
-      <span class="value">{{ offer.numberOfRooms.value }}</span>
-    </span>
+    @if (exists(offer.totalArea.value)) {
+      <span class="key-value-pair">
+        <span class="key">{{ offer.totalArea.displayName }}: </span>
+        <span class="value">{{
+          offer.totalArea.value | prettifyNumber: offer.totalArea.unit
+        }}</span>
+      </span>
+    }
+    @if (exists(offer.pricePerSquareMeter.value)) {
+      <span class="key-value-pair">
+        <span class="key">{{ offer.pricePerSquareMeter.displayName }}: </span>
+        <span class="value">{{
+          offer.pricePerSquareMeter.value
+            | prettifyNumber: offer.pricePerSquareMeter.unit
+        }}</span>
+      </span>
+    }
+    @if (exists(offer.floor.value)) {
+      <span class="key-value-pair">
+        <span class="key">{{ offer.floor.displayName }}: </span>
+        <span class="value">{{ offer.floor.value }}</span>
+      </span>
+    }
+    @if (exists(offer.landArea.value)) {
+      <span class="key-value-pair">
+        <span class="key">{{ offer.landArea.displayName }}: </span>
+        <span class="value">{{
+          offer.landArea.value | prettifyNumber: offer.landArea.unit
+        }}</span>
+      </span>
+    }
+    @if (offer.numberOfRooms.value > 0) {
+      <span class="key-value-pair">
+        <span class="key">{{ offer.numberOfRooms.displayName }}: </span>
+        <span class="value">{{ offer.numberOfRooms.value }}</span>
+      </span>
+    }
   </div>
 </div>

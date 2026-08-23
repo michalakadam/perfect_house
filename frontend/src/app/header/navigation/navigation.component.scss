@@ -1,4 +1,4 @@
-@import 'variables.scss';
+@use 'variables.scss';
 
 nav {
   display: flex;
@@ -8,11 +8,11 @@ nav {
   margin: 18px auto 0;
   width: 1180px;
   text-align: center;
-  @media screen and (max-width: $desktop-large) {
+  @media screen and (max-width: variables.$desktop-large) {
     font-size: 16px;
     width: 1064px;
   }
-  @media screen and (max-width: $desktop-medium) {
+  @media screen and (max-width: variables.$desktop-medium) {
     font-size: 14px;
     width: 920px;
   }
@@ -24,11 +24,11 @@ nav {
     transition: color 0.25s;
 
     &:hover {
-      color: $light-green;
+      color: variables.$light-green;
     }
   }
 
   .active-link {
-    color: $light-green;
+    color: variables.$light-green;
   }
 }

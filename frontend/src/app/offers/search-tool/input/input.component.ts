@@ -16,6 +16,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class InputComponent {
   @Input() lhsIcon = '';

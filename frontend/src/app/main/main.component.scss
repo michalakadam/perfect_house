@@ -1,11 +1,11 @@
-@import 'variables.scss';
-@import 'mixins.scss';
+@use 'variables.scss';
+@use 'mixins.scss';
 
 .component-container {
   width: 100%;
 
   p-galleria {
-    ::ng-deep .p-galleria .p-galleria-indicators {
+    ::ng-deep .p-galleria .p-galleria-indicator-list {
       display: none;
     }
   }
@@ -18,38 +18,38 @@
     height: 600px;
     width: 400px;
 
-    @media screen and (max-width: $desktop-huge) {
+    @media screen and (max-width: variables.$desktop-huge) {
       height: 27vw;
       right: 30px;
       top: 160px;
     }
-    @media screen and (max-width: $desktop-large) {
+    @media screen and (max-width: variables.$desktop-large) {
       height: 24vw;
     }
-    @media screen and (max-width: $desktop-medium) {
+    @media screen and (max-width: variables.$desktop-medium) {
       height: 37vw;
     }
-    @media screen and (max-width: $desktop-small) {
+    @media screen and (max-width: variables.$desktop-small) {
       top: 90px;
       right: 24px;
       width: 350px;
     }
-    @media screen and (max-width: $tablet) {
+    @media screen and (max-width: variables.$tablet) {
       top: 87px;
       width: 275px;
     }
-    @media screen and (max-width: $mobile-large) {
+    @media screen and (max-width: variables.$mobile-large) {
       left: 5%;
       height: 30vw;
       width: 86%;
       top: 130px;
     }
-    @media screen and (max-width: $mobile) {
+    @media screen and (max-width: variables.$mobile) {
       top: 115px;
       left: 3%;
       width: 94%;
     }
-    @media screen and (max-width: $mobile-small) {
+    @media screen and (max-width: variables.$mobile-small) {
       height: 43vw;
       width: 20%;
       left: 75%;
@@ -57,82 +57,82 @@
     }
 
     .green-frame {
-      border: 2px solid $light-green;
+      border: 2px solid variables.$light-green;
       position: absolute;
       top: 2%;
       left: 3%;
       height: 96%;
       width: 94%;
 
-      @media screen and (max-width: $desktop-large) {
+      @media screen and (max-width: variables.$desktop-large) {
         left: 2%;
         width: 96%;
       }
-      @media screen and (max-width: $tablet) {
+      @media screen and (max-width: variables.$tablet) {
         top: 2.5%;
         height: 95%;
       }
-      @media screen and (max-width: $mobile-large) {
+      @media screen and (max-width: variables.$mobile-large) {
         left: 1%;
         width: 98%;
       }
-      @media screen and (max-width: $mobile-small) {
+      @media screen and (max-width: variables.$mobile-small) {
         display: none;
       }
     }
 
     .content {
-      color: $font-white;
+      color: variables.$font-white;
       font-weight: bold;
       display: flex;
       flex-direction: column;
       justify-content: space-around;
       padding: 11% 10.5%;
 
-      @media screen and (max-width: $desktop-huge) {
+      @media screen and (max-width: variables.$desktop-huge) {
         padding-top: 2vw;
       }
-      @media screen and (max-width: $desktop-small) {
+      @media screen and (max-width: variables.$desktop-small) {
         padding: 8% 11%;
       }
-      @media screen and (max-width: $tablet) {
+      @media screen and (max-width: variables.$tablet) {
         padding: 7% 8%;
       }
-      @media screen and (max-width: $mobile-large) {
+      @media screen and (max-width: variables.$mobile-large) {
         padding: 3% 4%;
       }
-      @media screen and (max-width: $mobile-large) {
+      @media screen and (max-width: variables.$mobile-large) {
         padding: 3% 4%;
       }
-      @media screen and (max-width: $mobile) {
+      @media screen and (max-width: variables.$mobile) {
         padding: 2% 5%;
       }
-      @media screen and (max-width: $mobile) {
+      @media screen and (max-width: variables.$mobile) {
         padding: 1% 4%;
       }
 
       .title {
         font-size: 36px;
 
-        @media screen and (max-width: $desktop-large) {
+        @media screen and (max-width: variables.$desktop-large) {
           font-size: 25px;
         }
-        @media screen and (max-width: $desktop-medium) {
+        @media screen and (max-width: variables.$desktop-medium) {
           font-size: 30px;
         }
-        @media screen and (max-width: $desktop-small) {
+        @media screen and (max-width: variables.$desktop-small) {
           font-size: 20px;
         }
-        @media screen and (max-width: $tablet) {
+        @media screen and (max-width: variables.$tablet) {
           font-size: 18px;
         }
-        @media screen and (max-width: $mobile-large) {
+        @media screen and (max-width: variables.$mobile-large) {
           font-size: 16px;
         }
       }
 
       .buttons {
-        @media screen and (max-width: $mobile-small) {
+        @media screen and (max-width: variables.$mobile-small) {
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -144,22 +144,22 @@
           font-size: 20px;
           margin-top: 4rem;
 
-          @media screen and (max-width: $desktop-huge) {
+          @media screen and (max-width: variables.$desktop-huge) {
             margin-top: 1.5vw;
           }
-          @media screen and (max-width: $desktop-large) {
+          @media screen and (max-width: variables.$desktop-large) {
             font-size: 18px;
             margin-top: 1vw;
           }
-          @media screen and (max-width: $desktop-medium) {
+          @media screen and (max-width: variables.$desktop-medium) {
             font-size: 20px;
             margin-top: 1.75rem;
           }
-          @media screen and (max-width: $desktop-small) {
+          @media screen and (max-width: variables.$desktop-small) {
             font-size: 16px;
             margin-top: 1rem;
           }
-          @media screen and (max-width: $mobile-large) {
+          @media screen and (max-width: variables.$mobile-large) {
             justify-content: flex-start;
             margin-top: 0.5vw;
           }
@@ -169,7 +169,7 @@
           position: relative;
           z-index: 9999;
           &:hover {
-            color: $light-green;
+            color: variables.$light-green;
             cursor: pointer;
 
             .icon.first {
@@ -186,16 +186,16 @@
             padding-right: 2rem;
             padding-top: 6px;
 
-            @media screen and (max-width: $tablet) {
+            @media screen and (max-width: variables.$tablet) {
               height: 60px;
             }
-            @media screen and (max-width: $mobile-large) {
+            @media screen and (max-width: variables.$mobile-large) {
               height: 48px;
             }
-            @media screen and (max-width: $mobile) {
+            @media screen and (max-width: variables.$mobile) {
               padding-right: 1.5rem;
             }
-            @media screen and (max-width: $mobile-small) {
+            @media screen and (max-width: variables.$mobile-small) {
               padding: unset;
               margin-top: 5vw;
             }
@@ -210,33 +210,33 @@
           }
 
           .button-content {
-            @media screen and (max-width: $desktop-large) {
+            @media screen and (max-width: variables.$desktop-large) {
               margin-top: 0.4rem;
             }
-            @media screen and (max-width: $desktop-medium) {
+            @media screen and (max-width: variables.$desktop-medium) {
               margin-top: 0;
             }
-            @media screen and (max-width: $desktop-small) {
+            @media screen and (max-width: variables.$desktop-small) {
               margin-top: 0.8rem;
             }
-            @media screen and (max-width: $tablet) {
+            @media screen and (max-width: variables.$tablet) {
               font-size: 14px;
               margin-top: 0.4rem;
             }
-            @media screen and (max-width: $mobile-large) {
+            @media screen and (max-width: variables.$mobile-large) {
               font-size: 12px;
               margin-top: 1.5rem;
             }
-            @media screen and (max-width: $mobile) {
+            @media screen and (max-width: variables.$mobile) {
               font-size: 14px;
               margin-top: 0.6rem;
             }
 
             &.second {
-              @media screen and (max-width: $mobile) {
+              @media screen and (max-width: variables.$mobile) {
                 width: 230px;
               }
-              @media screen and (max-width: $mobile-small) {
+              @media screen and (max-width: variables.$mobile-small) {
                 width: unset;
               }
             }
@@ -251,16 +251,16 @@
     bottom: 223px;
     padding: 20px 0 10px;
     position: relative;
-    @media screen and (max-width: $desktop-large) {
+    @media screen and (max-width: variables.$desktop-large) {
       bottom: 196px;
       padding: 10px 0 0;
     }
-    @media screen and (max-width: $desktop-medium) {
+    @media screen and (max-width: variables.$desktop-medium) {
       background-color: white;
       bottom: unset;
       margin-top: 10px;
     }
-    @media screen and (max-width: $desktop-small) {
+    @media screen and (max-width: variables.$desktop-small) {
       margin-top: 20px;
       padding: unset;
     }
@@ -268,19 +268,19 @@
     .search-tool-container {
       margin: 0 auto;
       width: 1120px;
-      @media screen and (max-width: $desktop-large) {
+      @media screen and (max-width: variables.$desktop-large) {
         width: 990px;
       }
-      @media screen and (max-width: $desktop-medium) {
-        @include responsive-page;
-        @include perfect-box;
+      @media screen and (max-width: variables.$desktop-medium) {
+        @include mixins.responsive-page;
+        @include mixins.perfect-box;
         padding: 5px 15px 0;
       }
-      @media screen and (max-width: $desktop-small) {
+      @media screen and (max-width: variables.$desktop-small) {
         border-radius: 0;
         box-shadow: unset;
       }
-      @media screen and (max-width: $mobile-small) {
+      @media screen and (max-width: variables.$mobile-small) {
         padding: 5px 0 0;
       }
     }
@@ -288,10 +288,10 @@
 
   .space-for-advanced {
     bottom: 296px;
-    @media screen and (max-width: $desktop-large) {
+    @media screen and (max-width: variables.$desktop-large) {
       bottom: 262px;
     }
-    @media screen and (max-width: $desktop-medium) {
+    @media screen and (max-width: variables.$desktop-medium) {
       bottom: unset;
     }
   }
@@ -301,53 +301,59 @@
     margin: 0 auto -200px;
     position: relative;
     width: 97%;
-    @media screen and (max-width: $desktop-large) {
+    @media screen and (max-width: variables.$desktop-large) {
       bottom: 196px;
     }
-    @media screen and (max-width: $desktop-medium) {
+    @media screen and (max-width: variables.$desktop-medium) {
       bottom: unset;
       margin-bottom: 0;
       position: initial;
       width: 85%;
     }
-    @media screen and (max-width: $desktop-small) {
+    @media screen and (max-width: variables.$desktop-small) {
       margin-top: -10px;
       width: 95%;
     }
-    @media screen and (max-width: $tablet) {
+    @media screen and (max-width: variables.$tablet) {
       width: 85%;
     }
-    @media screen and (max-width: $mobile) {
+    @media screen and (max-width: variables.$mobile) {
       width: 100%;
     }
 
     p-carousel {
-      ::ng-deep .p-carousel {
-        .p-carousel-indicators {
+      ::ng-deep {
+        .p-carousel-indicator-list {
           display: none;
         }
 
         .p-carousel-content {
-          .p-carousel-prev,
-          .p-carousel-next {
-            background-color: $light-green;
-            color: $dark-green;
+          .p-carousel-prev-button,
+          .p-carousel-next-button {
+            align-items: center;
+            background-color: variables.$light-green;
+            border-radius: 50%;
+            color: variables.$dark-green;
+            display: flex;
+            height: 2.5rem;
+            justify-content: center;
+            width: 2.5rem;
 
             &:focus {
-              background-color: $light-green;
+              background-color: variables.$light-green;
               box-shadow: initial;
             }
 
             &:hover {
-              background-color: $light-green;
-              box-shadow: 0 0 0 0.2rem $dark-green;
+              background-color: variables.$light-green;
+              box-shadow: 0 0 0 0.2rem variables.$dark-green;
             }
 
             .pi {
               font-size: 1.2rem;
               padding-bottom: 2px;
             }
-            @media screen and (max-width: $desktop-small) {
+            @media screen and (max-width: variables.$desktop-small) {
               display: none;
             }
           }
@@ -358,10 +364,10 @@
 
   .move-to-advanced {
     bottom: 281px;
-    @media screen and (max-width: $desktop-large) {
+    @media screen and (max-width: variables.$desktop-large) {
       bottom: 262px;
     }
-    @media screen and (max-width: $desktop-medium) {
+    @media screen and (max-width: variables.$desktop-medium) {
       bottom: unset;
     }
   }

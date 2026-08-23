@@ -1,23 +1,23 @@
-@import 'variables.scss';
-@import 'mixins.scss';
+@use 'variables.scss';
+@use 'mixins.scss';
 
 .component-container {
-  @include responsive-page;
-  @media screen and (max-width: $desktop-small) {
+  @include mixins.responsive-page;
+  @media screen and (max-width: variables.$desktop-small) {
     margin-top: 10px;
   }
 
   .tools-container {
-    @include perfect-box;
+    @include mixins.perfect-box;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     padding: 20px 25px;
-    @media screen and (max-width: $desktop-large) {
+    @media screen and (max-width: variables.$desktop-large) {
       padding: 15px 25px;
     }
-    @media screen and (max-width: $desktop-medium) {
+    @media screen and (max-width: variables.$desktop-medium) {
       padding: 15px;
     }
-    @media screen and (max-width: $desktop-small) {
+    @media screen and (max-width: variables.$desktop-small) {
       border-radius: unset;
       box-shadow: unset;
       transition: unset;
@@ -25,8 +25,8 @@
     }
 
     .other-tools-container {
-      @media screen and (max-width: $desktop-small) {
-        @include perfect-box;
+      @media screen and (max-width: variables.$desktop-small) {
+        @include mixins.perfect-box;
         margin: 0 auto;
         padding: 15px;
         width: 316px;
@@ -35,10 +35,10 @@
       .top-paginator {
         margin-top: -46px;
         min-height: 32px;
-        @media screen and (max-width: $desktop-large) {
+        @media screen and (max-width: variables.$desktop-large) {
           margin-top: -40px;
         }
-        @media screen and (max-width: $desktop-small) {
+        @media screen and (max-width: variables.$desktop-small) {
           margin-top: 0;
         }
       }
@@ -49,7 +49,7 @@
     display: flex;
     justify-content: center;
     margin-top: 5rem;
-    @media screen and (max-width: $desktop-small) {
+    @media screen and (max-width: variables.$desktop-small) {
       flex-direction: column;
       margin: 3rem auto 0;
       max-width: 400px;
@@ -68,36 +68,36 @@
       vertical-align: top;
 
       h4 {
-        color: $font-light-grey;
+        color: variables.$font-light-grey;
       }
 
       .contact-info-container {
         display: flex;
         font-size: 1.3rem;
         justify-content: center;
-        @media screen and (max-width: $mobile-small) {
+        @media screen and (max-width: variables.$mobile-small) {
           flex-direction: column;
         }
 
         a {
           display: flex;
           font-style: italic;
-          @media screen and (max-width: $desktop-small) {
+          @media screen and (max-width: variables.$desktop-small) {
             line-height: 2rem;
           }
-          @media screen and (max-width: $mobile-small) {
+          @media screen and (max-width: variables.$mobile-small) {
             justify-content: center;
           }
 
           &:first-of-type {
             margin-right: 2rem;
-            @media screen and (max-width: $mobile-small) {
+            @media screen and (max-width: variables.$mobile-small) {
               margin-bottom: 1rem;
             }
           }
 
           mat-icon {
-            color: $light-green;
+            color: variables.$light-green;
             margin-right: 0.4rem;
 
             &.mat-icon {

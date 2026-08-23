@@ -1,18 +1,18 @@
-@import 'variables.scss';
+@use 'variables.scss';
 
 @mixin responsive-page {
   margin: 0 auto;
   width: 1178px;
-  @media screen and (max-width: $desktop-large) {
+  @media screen and (max-width: variables.$desktop-large) {
     width: 1064px;
   }
-  @media screen and (max-width: $desktop-medium) {
+  @media screen and (max-width: variables.$desktop-medium) {
     width: 920px;
   }
-  @media screen and (max-width: $desktop-small) {
+  @media screen and (max-width: variables.$desktop-small) {
     width: 90%;
   }
-  @media screen and (max-width: $mobile) {
+  @media screen and (max-width: variables.$mobile) {
     width: 98%;
   }
 }
@@ -33,34 +33,34 @@
     0 3px 6px rgba(0, 0, 0, 0.16),
     0 3px 6px rgba(0, 0, 0, 0.23);
   z-index: 10;
-  @media screen and (max-width: $desktop-small) {
+  @media screen and (max-width: variables.$desktop-small) {
     border-radius: 10px;
   }
 }
 
 @mixin perfect-dropdown {
-  ::ng-deep .p-dropdown {
+  ::ng-deep {
     &:not(.p-disabled) {
       &:hover {
-        border-color: $light-green;
+        border-color: variables.$light-green;
       }
 
       &.p-focus {
-        box-shadow: 0 0 0 0.2rem $light-green;
-        border-color: $dark-green;
+        box-shadow: 0 0 0 0.2rem variables.$light-green;
+        border-color: variables.$dark-green;
       }
     }
 
-    .p-inputtext {
+    .p-select-label {
       font-weight: 700;
     }
 
-    .p-dropdown-items .p-dropdown-item {
+    .p-select-list .p-select-option {
       font-weight: 700;
 
-      &.p-highlight {
-        background: $light-green;
-        color: $dark-green;
+      &.p-select-option-selected {
+        background: variables.$light-green;
+        color: variables.$dark-green;
       }
     }
   }
@@ -68,16 +68,16 @@
 
 @mixin perfect-button {
   ::ng-deep .p-button {
-    background-color: $light-green;
-    border: 1px solid $light-green;
-    color: $dark-green;
+    background-color: variables.$light-green;
+    border: 1px solid variables.$light-green;
+    color: variables.$dark-green;
 
     &.p-highlight {
-      border-color: $dark-green;
+      border-color: variables.$dark-green;
     }
 
     &:not(.p-disabled):not(.p-highlight):hover {
-      border-color: $dark-green;
+      border-color: variables.$dark-green;
     }
 
     &:focus {
@@ -91,28 +91,44 @@
 }
 
 @mixin perfect-toggle-button {
-  ::ng-deep .p-buttonset .p-button {
-    &.p-highlight {
-      background-color: $light-green;
-      color: $dark-green;
-      border-color: $dark-green;
-    }
-
-    &:not(.p-disabled):not(.p-highlight):hover {
+  ::ng-deep {
+    p-togglebutton {
       background-color: white;
-      border-color: $light-green;
-    }
+      border: 1px solid #cbd5e1;
+      color: variables.$font-grey;
 
-    &:not(:last-child) {
-      border-right: 1px solid $dark-green;
-    }
+      .p-togglebutton-content {
+        background-color: transparent;
+        color: variables.$font-grey;
+      }
 
-    &:focus {
-      box-shadow: unset;
-    }
+      &[data-p-checked='true'] {
+        background-color: variables.$light-green;
+        color: variables.$dark-green;
+        border-color: variables.$dark-green;
 
-    .p-button-label {
-      font-weight: 700;
+        .p-togglebutton-content {
+          background-color: variables.$light-green;
+          color: variables.$dark-green;
+        }
+      }
+
+      &:not([data-p-disabled='true']):not([data-p-checked='true']):hover {
+        background-color: white;
+        border-color: variables.$light-green;
+
+        .p-togglebutton-content {
+          background-color: white;
+        }
+      }
+
+      &:focus {
+        box-shadow: unset;
+      }
+
+      .p-togglebutton-label {
+        font-weight: 700;
+      }
     }
   }
 }
@@ -120,12 +136,12 @@
 @mixin screen-wide-image {
   img {
     min-width: 100%;
-    @media screen and (max-width: $desktop-huge) {
+    @media screen and (max-width: variables.$desktop-huge) {
       max-width: 100%;
       min-width: unset;
     }
 
-    @media screen and (max-width: $desktop-small) {
+    @media screen and (max-width: variables.$desktop-small) {
       height: 60vw;
       object-fit: cover;
       object-position: center;

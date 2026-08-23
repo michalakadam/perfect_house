@@ -1,23 +1,23 @@
-@import 'variables.scss';
-@import 'mixins.scss';
+@use 'variables.scss';
+@use 'mixins.scss';
 
 :host {
   display: flex;
   flex-direction: column;
   margin: 22px 0;
   text-align: center;
-  @media screen and (max-width: $desktop-small) {
+  @media screen and (max-width: variables.$desktop-small) {
     margin: 14px 0;
   }
 
   .top-buttons-container {
-    @include responsive-page;
+    @include mixins.responsive-page;
     align-items: center;
     display: flex;
     justify-content: space-between;
 
     button {
-      background-color: $light-green;
+      background-color: variables.$light-green;
       border-radius: 3px;
       margin-left: 7px;
 
@@ -26,7 +26,7 @@
       }
 
       mat-icon {
-        color: $dark-green;
+        color: variables.$dark-green;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -38,35 +38,35 @@
       cursor: pointer;
       outline: none;
       max-height: 42px;
-      @media screen and (max-width: $desktop-large) {
+      @media screen and (max-width: variables.$desktop-large) {
         max-height: 40px;
       }
-      @media screen and (max-width: $desktop-medium) {
+      @media screen and (max-width: variables.$desktop-medium) {
         max-height: 38px;
       }
-      @media screen and (max-width: $desktop-small) {
+      @media screen and (max-width: variables.$desktop-small) {
         max-height: 36px;
       }
     }
 
     a {
-      color: $font-grey;
+      color: variables.$font-grey;
       font-size: 18px;
       font-weight: 600;
       margin-right: 4px;
-      @media screen and (max-width: $desktop-large) {
+      @media screen and (max-width: variables.$desktop-large) {
         font-size: 16px;
       }
-      @media screen and (max-width: $desktop-medium) {
+      @media screen and (max-width: variables.$desktop-medium) {
         font-size: 14px;
       }
-      @media screen and (max-width: $desktop-small) {
+      @media screen and (max-width: variables.$desktop-small) {
         margin-right: 7px;
       }
 
       mat-icon {
-        background-color: $light-green;
-        color: $dark-green;
+        background-color: variables.$light-green;
+        color: variables.$dark-green;
         height: 24px;
         width: 24px;
         font-size: 24px;

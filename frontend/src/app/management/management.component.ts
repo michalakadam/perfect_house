@@ -16,6 +16,7 @@ const AGENT_RESPONSIBLE_FOR_MANAGEMENT_ID = 20202;
   templateUrl: './management.component.html',
   styleUrls: ['./management.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ManagementComponent implements OnDestroy {
   private subscription: Subscription;

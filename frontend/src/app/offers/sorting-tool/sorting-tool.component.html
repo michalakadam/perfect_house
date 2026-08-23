@@ -1,15 +1,11 @@
 <div class="component-container">
   <div class="offers-counter">
     <span class="title">
-      <span
-        *ngIf="
-          windowSizeDetector.isWindowSmallerThanDesktopSmall;
-          else fullTitle
-        "
-      >
-        ofert:
-      </span>
-      <ng-template #fullTitle> liczba ofert: </ng-template>
+      @if (windowSizeDetector.isWindowSmallerThanDesktopSmall) {
+        <span> ofert: </span>
+      } @else {
+        liczba ofert:
+      }
     </span>
     <span>
       {{ offersQuantity }}
@@ -17,12 +13,12 @@
   </div>
   <div class="sorter">
     <span class="title"> sortuj po: </span>
-    <p-dropdown
+    <p-select
       [options]="availableSortings"
       [(ngModel)]="selectedSorting"
       optionLabel="displayName"
       scrollHeight="250px"
       (onChange)="sortingChanged.emit($event.value)"
-    ></p-dropdown>
+    ></p-select>
   </div>
 </div>

@@ -1,9 +1,9 @@
-@import 'variables.scss';
-@import 'mixins.scss';
+@use 'variables.scss';
+@use 'mixins.scss';
 
 :host {
-  background-color: $dark-green;
-  color: $font-white;
+  background-color: variables.$dark-green;
+  color: variables.$font-white;
   display: flex;
   flex-direction: column;
   margin-top: 14px;
@@ -14,10 +14,10 @@
     justify-content: space-evenly;
     margin: 0 auto 20px;
     width: 800px;
-    @media screen and (max-width: $desktop-small) {
+    @media screen and (max-width: variables.$desktop-small) {
       width: 650px;
     }
-    @media screen and (max-width: $mobile-large) {
+    @media screen and (max-width: variables.$mobile-large) {
       flex-direction: column;
       margin: 0 0 20px 24px;
       width: unset;
@@ -39,7 +39,7 @@
 
       a {
         mat-icon {
-          @include resized-mat-icon(32px);
+          @include mixins.resized-mat-icon(32px);
         }
       }
     }

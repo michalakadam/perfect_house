@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { WindowSizeDetector } from 'src/app/shared/services/window-size-detector.service';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { PrimeNGConfig } from 'primeng/api';
+import { PrimeNG } from 'primeng/config';
 import { ABOUT_US_LINKS, ALL_LINKS } from './header/menu-links';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
@@ -37,6 +37,7 @@ const sideNavId = 'sideNavToggleButton';
       ]),
     ]),
   ],
+  standalone: false,
 })
 export class AppComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
@@ -56,7 +57,7 @@ export class AppComponent implements OnInit, OnDestroy {
     readonly windowSizeDetector: WindowSizeDetector,
     readonly offersStateManager: OffersStateManager,
     private readonly titleService: Title,
-    private readonly primengConfig: PrimeNGConfig,
+    private readonly primengConfig: PrimeNG,
     private readonly snackbarService: SnackbarService,
     private readonly changeDetector: ChangeDetectorRef,
     router: Router,
@@ -95,7 +96,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.primengConfig.ripple = true;
+    this.primengConfig.ripple.set(true);
     // Throw setting window size to event loop so that it happens
     // after all components are initialized.
     setTimeout(() => {
@@ -121,7 +122,7 @@ export class AppComponent implements OnInit, OnDestroy {
     return data;
   }
 
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize')
   onResize() {
     this.windowSizeDetector.windowSizeChanged(window.innerWidth);
   }

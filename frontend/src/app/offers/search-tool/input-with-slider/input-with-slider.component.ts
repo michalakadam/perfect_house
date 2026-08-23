@@ -16,6 +16,7 @@ enum PositionOnScale {
   templateUrl: './input-with-slider.component.html',
   styleUrls: ['./input-with-slider.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class InputWithSliderComponent {
   @Input() title = '';

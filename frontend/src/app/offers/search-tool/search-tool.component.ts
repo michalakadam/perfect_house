@@ -47,6 +47,7 @@ const AVAILABLE_MARKETS = [
   templateUrl: './search-tool.component.html',
   styleUrls: ['./search-tool.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class SearchToolComponent implements OnInit, OnChanges, OnDestroy {
   private inputSubject = new Subject<void>();

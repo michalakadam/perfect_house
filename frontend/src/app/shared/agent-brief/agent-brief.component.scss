@@ -1,11 +1,11 @@
-@import 'variables.scss';
+@use 'variables.scss';
 
 .component-container {
   display: flex;
   width: 375px;
 
   .offers-count {
-    background-color: $light-green;
+    background-color: variables.$light-green;
     height: 50px;
     position: relative;
     left: 50%;
@@ -17,10 +17,10 @@
     top: 0;
     width: 51%;
 
-    @media screen and (max-width: $desktop-large) {
+    @media screen and (max-width: variables.$desktop-large) {
       padding-top: 4px;
     }
-    @media screen and (max-width: $desktop-small) {
+    @media screen and (max-width: variables.$desktop-small) {
       padding-right: 12px;
       padding-top: 8px;
       width: 56.5%;
@@ -54,7 +54,7 @@
     }
 
     .position {
-      color: $font-light-grey;
+      color: variables.$font-light-grey;
       font-weight: 700;
       margin: 3px 0 5px;
     }
@@ -63,12 +63,12 @@
       display: flex;
       font-style: italic;
       margin-bottom: 5px;
-      @media screen and (max-width: $desktop-small) {
+      @media screen and (max-width: variables.$desktop-small) {
         line-height: 24px;
       }
 
       mat-icon {
-        color: $light-green;
+        color: variables.$light-green;
         line-height: 14px;
       }
     }

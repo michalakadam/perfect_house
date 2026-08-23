@@ -1,17 +1,17 @@
-@import 'variables.scss';
+@use 'variables.scss';
 
 .component-container {
   display: flex;
   flex-direction: column;
   height: 50px;
   width: 344px;
-  @media screen and (max-width: $desktop-large) {
+  @media screen and (max-width: variables.$desktop-large) {
     width: 299px;
   }
-  @media screen and (max-width: $desktop-medium) {
+  @media screen and (max-width: variables.$desktop-medium) {
     width: 260px;
   }
-  @media screen and (max-width: $desktop-small) {
+  @media screen and (max-width: variables.$desktop-small) {
     width: 254px;
   }
 
@@ -19,12 +19,12 @@
     align-items: center;
     display: flex;
     margin-bottom: 10px;
-    @media screen and (max-width: $desktop-small) {
+    @media screen and (max-width: variables.$desktop-small) {
       margin-bottom: 15px;
     }
 
     span {
-      color: $font-light-grey;
+      color: variables.$font-light-grey;
       font-weight: 700;
     }
 
@@ -40,32 +40,32 @@
   p-slider {
     margin-left: 10px;
     width: 326px;
-    @media screen and (max-width: $desktop-large) {
+    @media screen and (max-width: variables.$desktop-large) {
       margin-left: 8px;
       width: 284px;
     }
-    @media screen and (max-width: $desktop-medium) {
+    @media screen and (max-width: variables.$desktop-medium) {
       width: 244px;
     }
-    @media screen and (max-width: $desktop-small) {
+    @media screen and (max-width: variables.$desktop-small) {
       margin-left: 5px;
       width: 242px;
     }
 
-    ::ng-deep .p-slider {
+    ::ng-deep {
       .p-slider-range {
-        background-color: $light-green;
+        background-color: variables.$light-green;
       }
 
       .p-slider-handle {
-        border-color: $dark-green;
+        border-color: variables.$dark-green;
 
         &:focus {
           box-shadow: unset;
         }
 
         &:hover {
-          background-color: $light-green;
+          background-color: variables.$light-green;
         }
       }
     }

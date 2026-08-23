@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
   templateUrl: './offer.component.html',
   styleUrls: ['./offer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class OfferComponent implements OnDestroy {
   private subscription: Subscription;

@@ -1,105 +1,97 @@
-<div
-  class="component-container"
-  *ngIf="offersStateManager.offersForCurrentPage$ | async as offers"
->
-  <div class="tools-container" *ngIf="isSearchAvailable">
-    <perfect-search-tool
-      [filters]="offersStateManager.filters$ | async"
-      [rawVoivodeshipsWithCounties]="
-        offersStateManager.voivodeshipsWithCounties$ | async
-      "
-      [rawEstateTypesWithSubtypes]="
-        offersStateManager.estateTypesWithSubtypes$ | async
-      "
-      [lowestPriceForCurrentSearch]="
-        offersStateManager.lowestPriceForCurrentSearch$ | async
-      "
-      [highestPriceForCurrentSearch]="
-        offersStateManager.highestPriceForCurrentSearch$ | async
-      "
-      (searchOffers)="offersStateManager.updateFilters($event)"
-      (openOffer)="loadOffer($event)"
-    >
-    </perfect-search-tool>
-
-    <div
-      class="other-tools-container"
-      *ngIf="
-        offersStateManager.currentSearchOffersQuantity$
-          | async as offersQuantity
-      "
-    >
-      <perfect-sorting-tool
-        [offersQuantity]="offersQuantity"
-        [selectedSorting]="offersStateManager.sorting$ | async"
-        (sortingChanged)="offersStateManager.updateSorting($event)"
-      >
-      </perfect-sorting-tool>
-
-      <div
-        class="top-paginator"
-        *ngIf="(offersStateManager.numberOfPages$ | async) > 0"
-      >
-        <perfect-paginator
-          [totalOffersQuantity]="offersQuantity"
-          [selectedPage]="offersStateManager.pageNumber$ | async"
-          (pageChanged)="offersStateManager.updatePageNumber($event)"
+@if (offersStateManager.offersForCurrentPage$ | async; as offers) {
+  <div class="component-container">
+    @if (isSearchAvailable) {
+      <div class="tools-container">
+        <perfect-search-tool
+          [filters]="offersStateManager.filters$ | async"
+          [rawVoivodeshipsWithCounties]="
+            offersStateManager.voivodeshipsWithCounties$ | async
+          "
+          [rawEstateTypesWithSubtypes]="
+            offersStateManager.estateTypesWithSubtypes$ | async
+          "
+          [lowestPriceForCurrentSearch]="
+            offersStateManager.lowestPriceForCurrentSearch$ | async
+          "
+          [highestPriceForCurrentSearch]="
+            offersStateManager.highestPriceForCurrentSearch$ | async
+          "
+          (searchOffers)="offersStateManager.updateFilters($event)"
+          (openOffer)="loadOffer($event)"
         >
-        </perfect-paginator>
+        </perfect-search-tool>
+        @if (
+          offersStateManager.currentSearchOffersQuantity$ | async;
+          as offersQuantity
+        ) {
+          <div class="other-tools-container">
+            <perfect-sorting-tool
+              [offersQuantity]="offersQuantity"
+              [selectedSorting]="offersStateManager.sorting$ | async"
+              (sortingChanged)="offersStateManager.updateSorting($event)"
+            >
+            </perfect-sorting-tool>
+            @if ((offersStateManager.numberOfPages$ | async) > 0) {
+              <div class="top-paginator">
+                <perfect-paginator
+                  [totalOffersQuantity]="offersQuantity"
+                  [selectedPage]="offersStateManager.pageNumber$ | async"
+                  (pageChanged)="offersStateManager.updatePageNumber($event)"
+                >
+                </perfect-paginator>
+              </div>
+            }
+          </div>
+        }
       </div>
-    </div>
-  </div>
-
-  <div
-    class="no-offers-prompt"
-    *ngIf="
-      offers.length === 0 && agentsStateManager.agentById$(1155)
-        | async as agent
-    "
-  >
-    <perfect-agent-brief
-      *ngIf="!windowSizeDetector.isWindowSmallerThanDesktopSmall"
-      [agent]="agent"
-      onlyPhoto
-      bigger
-    >
-    </perfect-agent-brief>
-    <div class="prompt">
-      <h2>Brak ofert spełniających podane kryteria.</h2>
-      <h4>
-        Skontaktuj się z nami! Korzystając z naszego doświadczenia, pomożemy Ci
-        znaleźć to, czego szukasz.
-      </h4>
-      <div class="contact-info-container">
-        <a href="mailto:{{ agent.mail }}">
-          <mat-icon><i class="fas fa-envelope-square"></i></mat-icon>
-          {{ agent.mail }}
-        </a>
-        <a href="tel:{{ agent.mobile }}">
-          <mat-icon><i class="fas fa-phone-square-alt"></i></mat-icon>
-          {{ agent.mobile }}
-        </a>
+    }
+    @if (
+      offers.length === 0 && agentsStateManager.agentById$(1155) | async;
+      as agent
+    ) {
+      <div class="no-offers-prompt">
+        @if (!windowSizeDetector.isWindowSmallerThanDesktopSmall) {
+          <perfect-agent-brief [agent]="agent" onlyPhoto bigger>
+          </perfect-agent-brief>
+        }
+        <div class="prompt">
+          <h2>Brak ofert spełniających podane kryteria.</h2>
+          <h4>
+            Skontaktuj się z nami! Korzystając z naszego doświadczenia, pomożemy
+            Ci znaleźć to, czego szukasz.
+          </h4>
+          <div class="contact-info-container">
+            <a href="mailto:{{ agent.mail }}">
+              <mat-icon><i class="fas fa-envelope-square"></i></mat-icon>
+              {{ agent.mail }}
+            </a>
+            <a href="tel:{{ agent.mobile }}">
+              <mat-icon><i class="fas fa-phone-square-alt"></i></mat-icon>
+              {{ agent.mobile }}
+            </a>
+          </div>
+        </div>
       </div>
-    </div>
+    }
+    @for (offer of offers; track trackById($index, offer)) {
+      <a [routerLink]="['/oferta', offer.symbol]">
+        <perfect-offer-card [offer]="offer"></perfect-offer-card>
+      </a>
+    }
+    @if (isSearchAvailable) {
+      <div class="bottom-paginator">
+        @if ((offersStateManager.numberOfPages$ | async) > 0) {
+          <perfect-paginator
+            class="bottom-paginator"
+            [totalOffersQuantity]="
+              offersStateManager.currentSearchOffersQuantity$ | async
+            "
+            [selectedPage]="offersStateManager.pageNumber$ | async"
+            (pageChanged)="offersStateManager.updatePageNumber($event)"
+          >
+          </perfect-paginator>
+        }
+      </div>
+    }
   </div>
-
-  <a
-    *ngFor="let offer of offers; trackBy: trackById"
-    [routerLink]="['/oferta', offer.symbol]"
-  >
-    <perfect-offer-card [offer]="offer"></perfect-offer-card>
-  </a>
-
-  <div class="bottom-paginator" *ngIf="isSearchAvailable">
-    <perfect-paginator
-      *ngIf="(offersStateManager.numberOfPages$ | async) > 0"
-      class="bottom-paginator"
-      [totalOffersQuantity]="
-        offersStateManager.currentSearchOffersQuantity$ | async
-      "
-      [selectedPage]="offersStateManager.pageNumber$ | async"
-      (pageChanged)="offersStateManager.updatePageNumber($event)"
-    >
-    </perfect-paginator>
-  </div>
-</div>
+}

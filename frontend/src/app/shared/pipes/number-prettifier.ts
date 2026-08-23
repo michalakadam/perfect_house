@@ -1,6 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'prettifyNumber' })
+@Pipe({
+  name: 'prettifyNumber',
+  standalone: false,
+})
 export class NumberPrettifier implements PipeTransform {
   transform(unformattedNumber: number, unit?: string): string {
     if (unformattedNumber === 0) {

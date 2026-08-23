@@ -1,17 +1,17 @@
-@import 'variables.scss';
-@import 'mixins.scss';
+@use 'variables.scss';
+@use 'mixins.scss';
 
 .component-container {
-  @include responsive-page;
+  @include mixins.responsive-page;
   height: 100%;
   margin: 0 auto 2rem;
 
   .card {
-    @include perfect-box;
+    @include mixins.perfect-box;
     margin: 1rem auto;
     padding: 1.5rem;
     width: 100%;
-    @media screen and (max-width: $desktop-small) {
+    @media screen and (max-width: variables.$desktop-small) {
       padding: 1rem;
     }
   }
@@ -20,23 +20,23 @@
     display: flex;
     height: 715px;
     justify-content: space-between;
-    @media screen and (max-width: $desktop-large) {
+    @media screen and (max-width: variables.$desktop-large) {
       height: 627px;
     }
-    @media screen and (max-width: $desktop-medium) {
+    @media screen and (max-width: variables.$desktop-medium) {
       height: 514px;
     }
-    @media screen and (max-width: $desktop-small) {
+    @media screen and (max-width: variables.$desktop-small) {
       flex-direction: column;
       height: 72vw;
     }
-    @media screen and (max-width: $tablet) {
+    @media screen and (max-width: variables.$tablet) {
       height: 78vw;
     }
-    @media screen and (max-width: $mobile) {
+    @media screen and (max-width: variables.$mobile) {
       height: 88vw;
     }
-    @media screen and (max-width: $mobile-small) {
+    @media screen and (max-width: variables.$mobile-small) {
       height: 92vw;
     }
 
@@ -46,29 +46,29 @@
       margin-right: 1rem;
       overflow: hidden;
       padding: 0;
-      @media screen and (max-width: $desktop-small) {
+      @media screen and (max-width: variables.$desktop-small) {
         width: 100%;
       }
 
       perfect-map {
         ::ng-deep .map {
           height: 715px;
-          @media screen and (max-width: $desktop-large) {
+          @media screen and (max-width: variables.$desktop-large) {
             height: 627px;
           }
-          @media screen and (max-width: $desktop-medium) {
+          @media screen and (max-width: variables.$desktop-medium) {
             height: 514px;
           }
-          @media screen and (max-width: $desktop-small) {
+          @media screen and (max-width: variables.$desktop-small) {
             height: 60vw;
           }
-          @media screen and (max-width: $tablet) {
+          @media screen and (max-width: variables.$tablet) {
             height: 62vw;
           }
 
           .ol-viewport canvas {
             border-radius: 15px;
-            @media screen and (max-width: $desktop-small) {
+            @media screen and (max-width: variables.$desktop-small) {
               border-radius: 10px;
             }
           }
@@ -79,7 +79,7 @@
         border-radius: 15px;
         height: 100%;
         width: 100%;
-        @media screen and (max-width: $desktop-small) {
+        @media screen and (max-width: variables.$desktop-small) {
           border-radius: 10px;
         }
       }
@@ -92,11 +92,11 @@
       margin: 0;
       margin-left: auto;
       width: 323px;
-      @media screen and (max-width: $desktop-small) {
+      @media screen and (max-width: variables.$desktop-small) {
         margin-left: 0;
         width: 100%;
       }
-      @media screen and (max-width: $mobile-small) {
+      @media screen and (max-width: variables.$mobile-small) {
         margin: 0 auto;
       }
 
@@ -105,10 +105,10 @@
         flex-direction: column;
         justify-content: center;
         margin-bottom: 16px;
-        @media screen and (max-width: $desktop-medium) {
+        @media screen and (max-width: variables.$desktop-medium) {
           width: 250px;
         }
-        @media screen and (max-width: $desktop-small) {
+        @media screen and (max-width: variables.$desktop-small) {
           align-items: center;
           flex-direction: row-reverse;
           justify-content: space-evenly;
@@ -122,7 +122,7 @@
           justify-content: space-between;
           margin-bottom: 16px;
           width: 100%;
-          @media screen and (max-width: $desktop-small) {
+          @media screen and (max-width: variables.$desktop-small) {
             align-items: center;
             margin-bottom: unset;
             max-width: 200px;
@@ -139,11 +139,11 @@
             color: inherit;
 
             &.p-highlight {
-              border-color: $dark-green;
+              border-color: variables.$dark-green;
             }
 
             &:not(.p-disabled):not(.p-highlight):hover {
-              border-color: $dark-green;
+              border-color: variables.$dark-green;
             }
 
             &:focus {
@@ -158,7 +158,7 @@
 
         .symbol-input {
           margin: 0 auto;
-          @media screen and (max-width: $desktop-small) {
+          @media screen and (max-width: variables.$desktop-small) {
             margin: unset;
           }
         }
@@ -168,7 +168,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        @media screen and (max-width: $desktop-small) {
+        @media screen and (max-width: variables.$desktop-small) {
           flex-direction: row;
           justify-content: space-evenly;
         }
@@ -176,26 +176,26 @@
         .p-button-rounded {
           background-color: white;
           border: 1px solid white;
-          color: $dark-green;
+          color: variables.$dark-green;
           font-weight: 700;
           height: 2.75rem;
           margin: 0 auto 1rem;
           width: 13rem;
-          @media screen and (max-width: $desktop-medium) {
+          @media screen and (max-width: variables.$desktop-medium) {
             height: 2rem;
             margin-bottom: 0.5rem;
           }
-          @media screen and (max-width: $desktop-small) {
+          @media screen and (max-width: variables.$desktop-small) {
             height: 2.75rem;
             margin: 1rem;
             width: 10rem;
           }
-          @media screen and (max-width: $mobile-small) {
+          @media screen and (max-width: variables.$mobile-small) {
             width: initial;
           }
 
           &:not(.p-disabled):not(.p-highlight):hover {
-            border-color: $dark-green;
+            border-color: variables.$dark-green;
           }
 
           &:last-of-type {
@@ -205,9 +205,9 @@
       }
 
       .selected {
-        background-color: $light-green !important;
-        border: 1px solid $light-green !important;
-        color: $dark-green !important;
+        background-color: variables.$light-green !important;
+        border: 1px solid variables.$light-green !important;
+        color: variables.$dark-green !important;
       }
     }
   }
@@ -219,16 +219,16 @@
     .basic-info {
       h2 {
         margin-bottom: 0.5rem;
-        @media screen and (max-width: $tablet) {
+        @media screen and (max-width: variables.$tablet) {
           text-align: center;
         }
       }
 
       .location {
         align-items: center;
-        color: $font-light-grey;
+        color: variables.$font-light-grey;
         display: flex;
-        @media screen and (max-width: $tablet) {
+        @media screen and (max-width: variables.$tablet) {
           justify-content: center;
         }
 
@@ -243,7 +243,7 @@
         position: relative;
         text-align: right;
         top: -4.4rem;
-        @media screen and (max-width: $tablet) {
+        @media screen and (max-width: variables.$tablet) {
           float: initial;
           position: initial;
           text-align: center;
@@ -251,11 +251,11 @@
         }
 
         .price {
-          color: $light-green;
+          color: variables.$light-green;
           font-size: 2rem;
 
           .client-price {
-            color: $font-grey;
+            color: variables.$font-grey;
             font-size: 16px;
             position: relative;
             top: -0.3rem;
@@ -263,7 +263,7 @@
         }
 
         .price-per-meter {
-          color: $font-light-grey;
+          color: variables.$font-light-grey;
           margin-top: 5px;
 
           &.hidden {
@@ -284,39 +284,33 @@
     .description-details-responsive {
       margin: 1rem auto 0;
       width: 98%;
-      @media screen and (max-width: $mobile-large) {
+      @media screen and (max-width: variables.$mobile-large) {
         width: 100%;
       }
 
-      p-TabView {
-        ::ng-deep .p-tabview {
-          .p-tabview-nav li {
+      p-tabs {
+        ::ng-deep {
+          .p-tab {
             width: 80px;
+            padding: 1rem 0;
+            text-align: center;
 
-            &.p-highlight .p-tabview-nav-link {
-              color: $font-grey;
-              border-color: $light-green;
+            &:not([data-p-disabled='true']):focus {
+              box-shadow: unset;
             }
 
-            &:not(.p-highlight):not(.p-disabled):hover .p-tabview-nav-link {
-              color: $font-grey;
-              border-color: $light-green;
+            &[data-p-active='true'] {
+              color: variables.$font-grey;
+              border-color: variables.$light-green;
             }
 
-            .p-tabview-nav-link {
-              padding: 1rem 0;
-
-              &:not(.p-disabled):focus {
-                box-shadow: unset;
-              }
-
-              .p-tabview-title {
-                margin: 0 auto;
-              }
+            &:not([data-p-active='true']):not([data-p-disabled='true']):hover {
+              color: variables.$font-grey;
+              border-color: variables.$light-green;
             }
           }
 
-          .p-tabview-panels {
+          .p-tabpanels {
             padding: 1rem 0;
           }
         }
@@ -329,10 +323,10 @@
       text-align: justify;
       white-space: pre-line;
       width: 55%;
-      @media screen and (max-width: $desktop-medium) {
+      @media screen and (max-width: variables.$desktop-medium) {
         width: 50%;
       }
-      @media screen and (max-width: $desktop-small) {
+      @media screen and (max-width: variables.$desktop-small) {
         margin-right: 0;
         width: 100%;
       }
@@ -342,15 +336,15 @@
       display: flex;
       flex-direction: column;
       width: 40%;
-      @media screen and (max-width: $desktop-medium) {
+      @media screen and (max-width: variables.$desktop-medium) {
         width: 50%;
       }
-      @media screen and (max-width: $desktop-small) {
+      @media screen and (max-width: variables.$desktop-small) {
         width: 100%;
       }
 
       .field {
-        border-bottom: 1px dashed $font-light-grey;
+        border-bottom: 1px dashed variables.$font-light-grey;
         display: flex;
         justify-content: space-between;
         margin-bottom: 0.25rem;
@@ -367,7 +361,7 @@
           overflow: hidden;
           white-space: nowrap;
           text-overflow: ellipsis;
-          @media screen and (max-width: $desktop-small) {
+          @media screen and (max-width: variables.$desktop-small) {
             max-width: initial;
           }
         }
@@ -376,7 +370,7 @@
           max-width: 235px;
           overflow: hidden;
           text-align: right;
-          @media screen and (max-width: $desktop-small) {
+          @media screen and (max-width: variables.$desktop-small) {
             max-width: initial;
           }
         }
@@ -388,13 +382,13 @@
     }
 
     .legal-note {
-      color: $font-light-grey;
+      color: variables.$font-light-grey;
       font-size: 10.5px;
-      @media screen and (max-width: $desktop-small) {
+      @media screen and (max-width: variables.$desktop-small) {
         margin: 0 auto;
         width: 98%;
       }
-      @media screen and (max-width: $mobile-large) {
+      @media screen and (max-width: variables.$mobile-large) {
         width: 100%;
       }
     }
@@ -405,7 +399,7 @@
     margin-top: 0;
     max-height: 376px;
     padding: 1rem 0;
-    @media screen and (max-width: $desktop-small) {
+    @media screen and (max-width: variables.$desktop-small) {
       padding: 2rem 1.2rem;
       margin: 0 auto;
       width: 280px;

@@ -11,22 +11,24 @@
     (keydown)="isEnterPressed($event)"
     (input)="computeDropdownVisibility(inputValue)"
   />
-  <label class="label" *ngIf="title" for="input">
-    <i *ngIf="lhsIcon" [class]="lhsIcon"></i> {{ title }}
-  </label>
-  <i
-    *ngIf="inputValue && isRemovable"
-    class="pi pi-times remove-input-icon"
-    (click)="removeContent()"
-  >
-  </i>
+  @if (title) {
+    <label class="label" for="input">
+      @if (lhsIcon) {
+        <i [class]="lhsIcon"></i>
+      }
+      {{ title }}
+    </label>
+  }
+  @if (inputValue && isRemovable) {
+    <i class="pi pi-times remove-input-icon" (click)="removeContent()"> </i>
+  }
 </div>
-<div class="options-dropdown" *ngIf="isDropdownVisible">
-  <div
-    class="option"
-    *ngFor="let option of filterOptions(inputValue); let i = index"
-    (click)="optionSelected(option)"
-  >
-    {{ option }}
+@if (isDropdownVisible) {
+  <div class="options-dropdown">
+    @for (option of filterOptions(inputValue); track option; let i = $index) {
+      <div class="option" (click)="optionSelected(option)">
+        {{ option }}
+      </div>
+    }
   </div>
-</div>
+}

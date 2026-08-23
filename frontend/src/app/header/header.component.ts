@@ -15,6 +15,7 @@ import { WindowSizeDetector } from 'src/app/shared/services/window-size-detector
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class HeaderComponent implements OnDestroy {
   private subscription: Subscription;

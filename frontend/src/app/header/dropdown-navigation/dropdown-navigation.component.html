@@ -1,32 +1,35 @@
 <nav>
-  <div
-    *ngFor="let link of links"
-    routerLinkActive="active-link"
-    [ngClass]="{ 'about-us-link': !isSideNavigation }"
-  >
-    <a
-      *ngIf="link.route !== '/oferty'"
-      class="link"
-      [routerLink]="link.route"
+  @for (link of links; track link) {
+    <div
       routerLinkActive="active-link"
-      [routerLinkActiveOptions]="{ exact: true }"
-      tabindex="0"
-      role="button"
-      aria-pressed="false"
-      >{{ link.title }}</a
+      [ngClass]="{ 'about-us-link': !isSideNavigation }"
     >
-    <a
-      *ngIf="link.route === '/oferty'"
-      class="link"
-      [routerLink]="[
-        link.route,
-        { page: 1, sorting: 'creationDate_descending' }
-      ]"
-      routerLinkActive="active-link"
-      tabindex="0"
-      role="button"
-      aria-pressed="false"
-      >{{ link.title }}</a
-    >
-  </div>
+      @if (link.route !== '/oferty') {
+        <a
+          class="link"
+          [routerLink]="link.route"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+          tabindex="0"
+          role="button"
+          aria-pressed="false"
+          >{{ link.title }}</a
+        >
+      }
+      @if (link.route === '/oferty') {
+        <a
+          class="link"
+          [routerLink]="[
+            link.route,
+            { page: 1, sorting: 'creationDate_descending' },
+          ]"
+          routerLinkActive="active-link"
+          tabindex="0"
+          role="button"
+          aria-pressed="false"
+          >{{ link.title }}</a
+        >
+      }
+    </div>
+  }
 </nav>

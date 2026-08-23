@@ -1,4 +1,4 @@
-@import 'variables.scss';
+@use 'variables.scss';
 
 .component-container {
   display: flex;
@@ -15,13 +15,13 @@
   .photo-with-buttons-container {
     height: 610px;
     width: 100%;
-    @media screen and (max-width: $desktop-large) {
+    @media screen and (max-width: variables.$desktop-large) {
       height: 533px;
     }
-    @media screen and (max-width: $desktop-medium) {
+    @media screen and (max-width: variables.$desktop-medium) {
       height: 436px;
     }
-    @media screen and (max-width: $desktop-small) {
+    @media screen and (max-width: variables.$desktop-small) {
       height: 100%;
     }
 
@@ -45,7 +45,7 @@
           width: initial;
         }
 
-        @media screen and (max-width: $desktop-small) {
+        @media screen and (max-width: variables.$desktop-small) {
           height: 100%;
           object-fit: cover;
         }
@@ -54,19 +54,19 @@
 
     button {
       position: relative;
-      background-color: $light-green;
+      background-color: variables.$light-green;
       border: initial;
-      color: $dark-green;
+      color: variables.$dark-green;
       top: -53%;
       z-index: 10;
 
       &:focus {
-        background-color: $light-green;
+        background-color: variables.$light-green;
         box-shadow: initial;
       }
 
       &:hover {
-        box-shadow: 0 0 0 1px $dark-green;
+        box-shadow: 0 0 0 1px variables.$dark-green;
       }
 
       ::ng-deep .pi {
@@ -78,25 +78,25 @@
         left: 2%;
       }
 
-      @media screen and (max-width: $desktop-small) {
+      @media screen and (max-width: variables.$desktop-small) {
         display: none;
       }
 
       &:nth-of-type(2) {
         right: -90%;
-        @media screen and (max-width: $desktop-medium) {
+        @media screen and (max-width: variables.$desktop-medium) {
           right: -88%;
         }
-        @media screen and (max-width: $desktop-small) {
+        @media screen and (max-width: variables.$desktop-small) {
           right: -91%;
         }
-        @media screen and (max-width: $tablet) {
+        @media screen and (max-width: variables.$tablet) {
           right: -86%;
         }
-        @media screen and (max-width: $mobile) {
+        @media screen and (max-width: variables.$mobile) {
           right: -84%;
         }
-        @media screen and (max-width: $mobile-small) {
+        @media screen and (max-width: variables.$mobile-small) {
           right: -80%;
         }
       }
@@ -110,10 +110,10 @@
     justify-content: space-between;
     margin-bottom: 12px;
     width: 100%;
-    @media screen and (max-width: $desktop-large) {
+    @media screen and (max-width: variables.$desktop-large) {
       margin-bottom: 6px;
     }
-    @media screen and (max-width: $desktop-medium) {
+    @media screen and (max-width: variables.$desktop-medium) {
       border-top: 2px solid white;
       height: 78px;
       margin-bottom: 2px;
@@ -121,24 +121,24 @@
 
     .carousel-button {
       align-items: center;
-      background-color: $light-green;
-      color: $dark-green;
+      background-color: variables.$light-green;
+      color: variables.$dark-green;
       display: flex;
       font-weight: 700;
       height: 106px;
       margin: -12px auto 0;
       width: 1.5rem;
-      @media screen and (max-width: $desktop-large) {
+      @media screen and (max-width: variables.$desktop-large) {
         height: 94px;
         margin-top: -6px;
       }
-      @media screen and (max-width: $desktop-medium) {
+      @media screen and (max-width: variables.$desktop-medium) {
         height: 80px;
         margin-top: -2px;
       }
 
       &:hover {
-        box-shadow: 0 0 0 1px $dark-green;
+        box-shadow: 0 0 0 1px variables.$dark-green;
       }
 
       i {
@@ -157,7 +157,7 @@
         max-height: 100%;
         overflow: hidden;
         max-width: 112px;
-        @media screen and (max-width: $desktop-medium) {
+        @media screen and (max-width: variables.$desktop-medium) {
           width: 99px;
         }
 
@@ -174,13 +174,13 @@
           &.vertical {
             height: 100%;
             width: initial;
-            @media screen and (max-width: $desktop-medium) {
+            @media screen and (max-width: variables.$desktop-medium) {
               height: 95%;
             }
           }
 
           &.selected {
-            outline: 3px solid $light-green;
+            outline: 3px solid variables.$light-green;
             outline-offset: -3px;
           }
         }

@@ -5,40 +5,45 @@
       isBigger ||
       (!windowSizeDetector.isWindowSmallerThanDesktopLarge && isVertical),
     'vertical-component-container':
-      isVertical || windowSizeDetector.isWindowSmallerThanMobile
+      isVertical || windowSizeDetector.isWindowSmallerThanMobile,
   }"
 >
-  <div class="offers-count" *ngIf="offersCount > 0">
-    <div>{{ offersCount }}</div>
-    <div>ofert</div>
-  </div>
+  @if (offersCount > 0) {
+    <div class="offers-count">
+      <div>{{ offersCount }}</div>
+      <div>ofert</div>
+    </div>
+  }
   <div
     class="agent-photo"
     style="background-image: url('/agents/{{ agent.photoFileName }}');"
   ></div>
-  <div class="agent-info-container" *ngIf="!isOnlyPhotoVisible">
-    <h3 class="full-name">
-      {{ agent.fullName }}
-    </h3>
-    <h4 class="position">
-      {{ agent.position }}
-    </h4>
-    <div class="contact-info" *ngIf="isContactInfoVisible">
-      <a href="mailto:{{ agent.mail }}" (click)="$event.stopPropagation()">
-        <mat-icon><i class="fas fa-envelope-square"></i></mat-icon>
-        {{ agent.mail }}
-      </a>
-      <a href="tel:{{ agent.mobile }}" (click)="$event.stopPropagation()">
-        <mat-icon><i class="fas fa-phone-square-alt"></i></mat-icon>
-        {{ agent.mobile }}
-      </a>
-      <div
-        class="license"
-        *ngIf="agent.licenseNumber && isLicenseNumberVisible"
-      >
-        <span class="title"> Numer licencji: </span>
-        {{ agent.licenseNumber }}
-      </div>
+  @if (!isOnlyPhotoVisible) {
+    <div class="agent-info-container">
+      <h3 class="full-name">
+        {{ agent.fullName }}
+      </h3>
+      <h4 class="position">
+        {{ agent.position }}
+      </h4>
+      @if (isContactInfoVisible) {
+        <div class="contact-info">
+          <a href="mailto:{{ agent.mail }}" (click)="$event.stopPropagation()">
+            <mat-icon><i class="fas fa-envelope-square"></i></mat-icon>
+            {{ agent.mail }}
+          </a>
+          <a href="tel:{{ agent.mobile }}" (click)="$event.stopPropagation()">
+            <mat-icon><i class="fas fa-phone-square-alt"></i></mat-icon>
+            {{ agent.mobile }}
+          </a>
+          @if (agent.licenseNumber && isLicenseNumberVisible) {
+            <div class="license">
+              <span class="title"> Numer licencji: </span>
+              {{ agent.licenseNumber }}
+            </div>
+          }
+        </div>
+      }
     </div>
-  </div>
+  }
 </div>

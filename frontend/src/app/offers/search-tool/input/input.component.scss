@@ -1,41 +1,61 @@
-@import 'variables.scss';
-@import 'mixins.scss';
+@use 'variables.scss';
+@use 'mixins.scss';
 
 @mixin input-size {
   width: 250px;
-  @media screen and (max-width: $desktop-large) {
+  @media screen and (max-width: variables.$desktop-large) {
     width: 200px;
   }
-  @media screen and (max-width: $desktop-medium) {
+  @media screen and (max-width: variables.$desktop-medium) {
     width: 170px;
   }
 }
 
 .input {
+  position: relative;
+
   ::ng-deep .p-inputtext {
     @include input-size;
     padding-right: 2rem;
 
     &:enabled {
       &:focus {
-        box-shadow: 0 0 0 0.2rem $light-green;
-        border-color: $dark-green;
+        box-shadow: 0 0 0 0.2rem variables.$light-green;
+        border-color: variables.$dark-green;
       }
 
       &:hover {
-        border-color: $light-green;
+        border-color: variables.$light-green;
       }
     }
   }
 
   &.selected {
-    @media screen and (max-width: $desktop-small) {
+    @media screen and (max-width: variables.$desktop-small) {
       margin-top: 1rem;
+    }
+
+    label {
+      background-color: variables.$font-white;
+      font-size: 12px;
+      padding: 0 4px;
+      top: 0;
     }
   }
 
   label {
+    color: variables.$font-light-grey;
+    display: flex;
+    align-items: center;
+    gap: 4px;
     font-size: unset;
+    left: 0.75rem;
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.2s ease-in-out;
+    white-space: nowrap;
   }
 
   .remove-input-icon {
@@ -45,10 +65,10 @@
     position: relative;
     top: 1px;
     z-index: 100;
-    @media screen and (max-width: $desktop-large) {
+    @media screen and (max-width: variables.$desktop-large) {
       margin-right: -14px;
     }
-    @media screen and (max-width: $desktop-small) {
+    @media screen and (max-width: variables.$desktop-small) {
       margin-right: -12px;
     }
   }
@@ -57,10 +77,10 @@
 .number-input {
   input {
     width: 140px;
-    @media screen and (max-width: $desktop-large) {
+    @media screen and (max-width: variables.$desktop-large) {
       width: 120px;
     }
-    @media screen and (max-width: $desktop-medium) {
+    @media screen and (max-width: variables.$desktop-medium) {
       width: 100px;
     }
     &[type='number']::-webkit-inner-spin-button,
@@ -77,7 +97,7 @@
 
 .options-dropdown {
   @include input-size;
-  @include perfect-box;
+  @include mixins.perfect-box;
   background-color: white;
   border-radius: 2px;
   max-height: 220px;
@@ -92,8 +112,8 @@
     padding: 5px 10px;
 
     &:hover {
-      background-color: $light-green;
-      color: $font-white;
+      background-color: variables.$light-green;
+      color: variables.$font-white;
     }
   }
 }

@@ -1,5 +1,5 @@
-@import 'variables.scss';
-@import 'mixins.scss';
+@use 'variables.scss';
+@use 'mixins.scss';
 
 $prime-light-grey: #ced4da;
 
@@ -20,16 +20,16 @@ $prime-light-grey: #ced4da;
   width: 12.9rem;
 
   &:hover {
-    border-color: $light-green;
+    border-color: variables.$light-green;
   }
 
   &:focus {
-    border-color: $dark-green;
-    box-shadow: 0 0 0 0.2rem $light-green;
+    border-color: variables.$dark-green;
+    box-shadow: 0 0 0 0.2rem variables.$light-green;
   }
 
   &.selected {
-    @media screen and (max-width: $desktop-small) {
+    @media screen and (max-width: variables.$desktop-small) {
       margin-top: 1rem;
     }
   }
@@ -51,7 +51,7 @@ $prime-light-grey: #ced4da;
       overflow: hidden;
 
       .placeholder {
-        color: $font-light-grey;
+        color: variables.$font-light-grey;
       }
 
       .selected {
@@ -68,7 +68,7 @@ $prime-light-grey: #ced4da;
   }
 
   .dropdown {
-    @include perfect-box;
+    @include mixins.perfect-box;
     background-color: white;
     border-radius: 0 0 3px 3px;
     margin-left: -1px;
@@ -99,13 +99,13 @@ $prime-light-grey: #ced4da;
 
           &.selected,
           &:hover {
-            background-color: $light-green;
+            background-color: variables.$light-green;
             background: linear-gradient(
               90deg,
               rgba(180, 228, 52, 1) 95%,
               rgba(255, 255, 255, 1) 100%
             );
-            color: $font-white;
+            color: variables.$font-white;
           }
         }
 
@@ -113,7 +113,7 @@ $prime-light-grey: #ced4da;
           @include icon-container;
 
           &:hover {
-            color: $light-green;
+            color: variables.$light-green;
           }
         }
       }
@@ -127,7 +127,7 @@ $prime-light-grey: #ced4da;
 
         &.selected,
         &:hover {
-          color: $light-green;
+          color: variables.$light-green;
         }
       }
     }

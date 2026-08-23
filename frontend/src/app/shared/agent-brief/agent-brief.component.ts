@@ -16,6 +16,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './agent-brief.component.html',
   styleUrls: ['./agent-brief.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class AgentBriefComponent implements OnDestroy {
   private subscription: Subscription;

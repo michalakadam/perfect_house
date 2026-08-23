@@ -16,6 +16,7 @@ import { AgentsStateManager } from 'src/app/agents/state-management/state-manage
   templateUrl: './offer-card.component.html',
   styleUrls: ['./offer-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class OfferCardComponent implements OnDestroy {
   private subscription: Subscription;

@@ -54,6 +54,7 @@ const SHROOMS_2021_PHOTO_NAMES = [
   templateUrl: './news-feed.component.html',
   styleUrls: ['./news-feed.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NewsFeedComponent {
   seaPhotoUrls = SEA_PHOTO_NAMES.map(convertPhotoNameToUrl);

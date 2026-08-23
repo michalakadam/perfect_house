@@ -16,6 +16,7 @@ import { Sorting, AVAILABLE_SORTINGS } from 'src/app/shared/models';
   templateUrl: './sorting-tool.component.html',
   styleUrls: ['./sorting-tool.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class SortingToolComponent implements OnDestroy {
   private subscription: Subscription;

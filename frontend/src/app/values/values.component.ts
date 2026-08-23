@@ -5,5 +5,6 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   templateUrl: './values.component.html',
   styleUrls: ['./values.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ValuesComponent {}

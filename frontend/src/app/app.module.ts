@@ -6,6 +6,15 @@ import {
 } from '@angular/platform-browser';
 import * as Hammer from 'hammerjs';
 import { NgModule } from '@angular/core';
+import { providePrimeNG } from 'primeng/config';
+import { definePreset, palette } from '@primeuix/themes';
+import Aura from '@primeuix/themes/aura';
+
+const PerfectHousePreset = definePreset(Aura, {
+  semantic: {
+    primary: palette('#b4e434'),
+  },
+});
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -29,7 +38,7 @@ import { OfferCardComponent } from './offers/offer-card/offer-card.component';
 import { NumberPrettifier } from './shared/pipes/number-prettifier';
 import { PaginatorModule } from 'primeng/paginator';
 import { SortingToolComponent } from './offers/sorting-tool/sorting-tool.component';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { SearchToolComponent } from './offers/search-tool/search-tool.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -46,7 +55,7 @@ import { GalleriaModule } from 'primeng/galleria';
 import { InputWithSliderComponent } from './offers/search-tool/input-with-slider/input-with-slider.component';
 import { CarouselModule } from 'primeng/carousel';
 import { OfferDetailsComponent } from 'src/app/offers/offer-card/offer-details/offer-details.component';
-import { TabViewModule } from 'primeng/tabview';
+import { TabsModule } from 'primeng/tabs';
 import { GroupedDropdownComponent } from './offers/search-tool/grouped-dropdown/grouped-dropdown.component';
 import { ValuesComponent } from './values/values.component';
 import { GalleryComponent } from './shared/gallery/gallery.component';
@@ -117,7 +126,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     ButtonModule,
     CarouselModule,
     CheckboxModule,
-    DropdownModule,
+    SelectModule,
     FormsModule,
     GalleriaModule,
     HammerModule,
@@ -128,7 +137,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     PaginatorModule,
     SelectButtonModule,
     SliderModule,
-    TabViewModule,
+    TabsModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     OffersStateManagementModule,
@@ -138,7 +147,15 @@ export class MyHammerConfig extends HammerGestureConfig {
     MatRadioGroup,
     MatRadioButton,
   ],
-  providers: [{ provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig }],
+  providers: [
+    { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig },
+    providePrimeNG({
+      theme: {
+        preset: PerfectHousePreset,
+        options: { darkModeSelector: false },
+      },
+    }),
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,9 +1,9 @@
-@import 'variables.scss';
+@use 'variables.scss';
 
 .component-container {
   .location {
     align-items: center;
-    color: $font-light-grey;
+    color: variables.$font-light-grey;
     display: flex;
     margin-bottom: 16px;
     margin-left: -3px;

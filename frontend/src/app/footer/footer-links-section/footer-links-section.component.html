@@ -1,20 +1,30 @@
 <section [style.margin-bottom.px]="computeSectionMargin()">
-  <div class="non-responsive-container" *ngIf="!showResponsiveView">
-    <h4>{{ headerTitle }}</h4>
-    <ng-container *ngTemplateOutlet="links"></ng-container>
-  </div>
-  <div class="responsive-container" *ngIf="showResponsiveView">
-    <div class="header-container">
+  @if (!showResponsiveView) {
+    <div class="non-responsive-container">
       <h4>{{ headerTitle }}</h4>
-      <span class="toggle" (click)="sectionToggled.emit()">
-        <mat-icon *ngIf="isSectionOpen">keyboard_arrow_up</mat-icon>
-        <mat-icon *ngIf="!isSectionOpen">keyboard_arrow_down</mat-icon>
-      </span>
-    </div>
-    <div *ngIf="isSectionOpen" [@openCloseLinks]>
       <ng-container *ngTemplateOutlet="links"></ng-container>
     </div>
-  </div>
+  }
+  @if (showResponsiveView) {
+    <div class="responsive-container">
+      <div class="header-container">
+        <h4>{{ headerTitle }}</h4>
+        <span class="toggle" (click)="sectionToggled.emit()">
+          @if (isSectionOpen) {
+            <mat-icon>keyboard_arrow_up</mat-icon>
+          }
+          @if (!isSectionOpen) {
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          }
+        </span>
+      </div>
+      @if (isSectionOpen) {
+        <div [@openCloseLinks]>
+          <ng-container *ngTemplateOutlet="links"></ng-container>
+        </div>
+      }
+    </div>
+  }
 </section>
 
 <!-- ng-content can only be used once per template -->

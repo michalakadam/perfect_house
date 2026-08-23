@@ -25,6 +25,7 @@ const HOUSES_PHOTO_NAMES = [
   templateUrl: './eco-houses.component.html',
   styleUrls: ['./eco-houses.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class EcoHousesComponent implements OnDestroy {
   private subscription: Subscription;

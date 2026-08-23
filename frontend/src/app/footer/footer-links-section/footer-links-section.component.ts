@@ -24,6 +24,7 @@ import { trigger, style, animate, transition } from '@angular/animations';
       ]),
     ]),
   ],
+  standalone: false,
 })
 export class FooterLinksSectionComponent {
   @Input() headerTitle: string;
