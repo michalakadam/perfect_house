@@ -14,9 +14,4 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 export class ContactComponent {
   officeLattitude = 52.4183375;
   officeLongitude = 16.912935;
-  isInfoOpen = false;
-
-  toggleInfoOpen() {
-    this.isInfoOpen = !this.isInfoOpen;
-  }
 }

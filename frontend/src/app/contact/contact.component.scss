@@ -76,26 +76,6 @@
     }
   }
 
-  .cooperation {
-    @include responsive-page;
-    align-items: center;
-    display: flex;
-    margin-top: 10px;
-
-    h3 {
-      margin-right: 0.5em;
-    }
-
-    a img {
-      height: 1.8em;
-      margin-top: 0.3em;
-    }
-
-    @media screen and (max-width: $desktop-small) {
-      order: 2;
-    }
-  }
-
   .info {
     @include responsive-page;
     text-align: justify;
@@ -105,13 +85,6 @@
 
     .header {
       display: flex;
-
-      .toggle {
-        cursor: pointer;
-        margin: auto 0;
-        min-width: 70px;
-        text-align: center;
-      }
     }
 
     .content {

@@ -44,21 +44,11 @@
       </a>
     </div>
   </div>
-  <div class="cooperation">
-    <h3>Współpracujemy z</h3>
-    <a target="_blank" href="https://www.adresowo.pl" rel="noopener noreferrer">
-      <img src="/assets/adresowo.png" />
-    </a>
-  </div>
   <div class="info">
     <div class="header">
       <h3>Informacja dla konsumentów</h3>
-      <span class="toggle" (click)="toggleInfoOpen()">
-        <mat-icon *ngIf="isInfoOpen">keyboard_arrow_up</mat-icon>
-        <mat-icon *ngIf="!isInfoOpen">keyboard_arrow_down</mat-icon>
-      </span>
     </div>
-    <div class="content" *ngIf="isInfoOpen">
+    <div class="content">
       <mat-divider></mat-divider>
       <p>
         W celu nawiązania współpracy oraz poinformowania o głównych warunkach
