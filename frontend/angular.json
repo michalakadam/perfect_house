@@ -29,7 +29,8 @@
               "src/favicon.ico",
               "src/assets",
               "src/agents",
-              "src/offers"
+              "src/offers",
+              "src/api"
             ],
             "styles": [
               "src/styles.scss",

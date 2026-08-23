@@ -119,6 +119,17 @@
       }
     }
 
+    // Honeypot. Positioned off-screen rather than display:none or
+    // visibility:hidden — the cruder properties are the ones bots check for.
+    .honeypot {
+      position: absolute;
+      left: -9999px;
+      top: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
     .privacy-info {
       font-size: 12px;
       color: variables.$font-light-grey;

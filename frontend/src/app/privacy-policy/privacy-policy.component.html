@@ -58,12 +58,16 @@
     </p>
 
     <h2>4. Odbiorcy danych</h2>
-    <!-- REVISIT after docs/rodo-compliance/task-02-replace-formspree.md lands. -->
     <p>Dane mogą być przekazywane następującym kategoriom odbiorców:</p>
     <ul>
       <li>
-        dostawcy hostingu strony internetowej — Zenbox, na serwerach którego
-        utrzymywana jest witryna e-perfecthouse.pl;
+        dostawcy hostingu strony internetowej oraz poczty elektronicznej —
+        Zenbox, na serwerach którego utrzymywana jest witryna
+        e-perfecthouse.pl i skrzynka pocztowa
+        biuro&#64;e-perfecthouse.pl. Dane podane w formularzu kontaktowym są
+        przetwarzane wyłącznie na tej infrastrukturze: formularz przekazuje
+        je bezpośrednio do skrzynki pocztowej administratora i nie są one
+        wysyłane do żadnego innego usługodawcy;
       </li>
       <li>
         dostawcy systemu CRM — Galactica Virgo, do którego przekazywane są
@@ -75,13 +79,6 @@
           repozytorium i wymaga potwierdzenia przez właściciela
           serwisu.</span
         >
-      </li>
-      <li>
-        operator formularza kontaktowego — obecnie treść formularza jest
-        przesyłana do Formspree (Formspree, Inc., USA). Ten stan zostanie
-        zweryfikowany po wdrożeniu zadania opisanego w
-        <code>task-02-replace-formspree.md</code>; do tego czasu Formspree
-        pozostaje faktycznym odbiorcą danych z formularza.
       </li>
       <li>
         dostawcy zasobów ładowanych automatycznie z każdą wizytą na stronie:
@@ -103,17 +100,12 @@
     </ul>
 
     <h2>5. Przekazywanie danych poza Europejski Obszar Gospodarczy</h2>
-    <!-- REVISIT after docs/rodo-compliance/task-02-replace-formspree.md lands. -->
     <p>
-      Formspree, Inc. ma siedzibę w Stanach Zjednoczonych, poza Europejskim
-      Obszarem Gospodarczym. Dopóki formularz kontaktowy przesyła dane do
-      Formspree, dane osobowe podane w formularzu są przekazywane do USA.
-      <span class="todo"
-        >TODO(owner): potwierdzić, na jakim mechanizmie transferu (np.
-        aktualny certyfikat EU-U.S. Data Privacy Framework) opiera się to
-        przekazanie — status certyfikacji dostawcy jest faktem zewnętrznym,
-        którego nie da się zweryfikować z poziomu tego repozytorium.</span
-      >
+      Dane podane w formularzu kontaktowym nie są przekazywane poza Europejski
+      Obszar Gospodarczy. Formularz jest obsługiwany na serwerze
+      administratora, a jego treść trafia wyłącznie do skrzynki pocztowej
+      biuro&#64;e-perfecthouse.pl utrzymywanej u tego samego dostawcy
+      hostingu.
     </p>
     <p>
       Podobnie, wczytanie czcionek Google Fonts oraz ikon Font Awesome Kit z

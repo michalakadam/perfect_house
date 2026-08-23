@@ -145,6 +145,23 @@
       </div>
     </div>
 
+    <!--
+      Honeypot: invisible to people, irresistible to form-filling bots.
+      Hidden with CSS rather than type="hidden" on purpose — bots ignore hidden
+      inputs. aria-hidden and tabindex="-1" keep it away from screen readers and
+      keyboard navigation, so it is invisible to assistive technology too.
+    -->
+    <div class="honeypot" aria-hidden="true">
+      <label for="website">Nie wypełniaj tego pola</label>
+      <input
+        type="text"
+        formControlName="website"
+        id="website"
+        tabindex="-1"
+        autocomplete="off"
+      />
+    </div>
+
     <p class="privacy-info">
       Administratorem Twoich danych osobowych jest Perfect House, ul. Klin
       17/2, 60-602 Poznań. Dane podane w formularzu przetwarzamy w celu

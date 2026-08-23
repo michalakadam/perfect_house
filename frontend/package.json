@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
+    "test:endpoint": "node --experimental-strip-types --test test/contact-endpoint.test.mts",
     "lint": "ng lint",
     "prettify": "prettier --write . --single-quote"
   },

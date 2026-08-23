@@ -3,8 +3,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-import { Observable, of, Subscription } from 'rxjs';
+import { EMPTY, Subscription } from 'rxjs';
 import { SnackbarService } from '../../shared/services/snackbar.service';
+
+/**
+ * Relative on purpose. The site is served from more than one hostname
+ * (production and the perfect.stronazen.pl target in deploy.sh), so an absolute
+ * URL would break whichever one it was not written for.
+ */
+const CONTACT_ENDPOINT = '/api/contact.php';
 
 export enum ContactFormType {
   SPRZEDAM = 'sprzedam',
@@ -53,36 +60,42 @@ export class ContactFormComponent implements OnDestroy {
         address: [''],
         price: [''],
       }),
+      // Honeypot. Hidden with CSS rather than type="hidden" because bots skip
+      // hidden inputs but do fill anything that looks like a real field. A
+      // non-empty value server-side means the submission is not a person.
+      website: [''],
     });
   }
 
   onSubmit() {
-    if (this.form.valid) {
-      const message: string = `Dane osobowe: ${JSON.stringify(this.form.get('personalData').value, null, 2)},\nDane nieruchomości: ${JSON.stringify(this.form.get('propertyDetails').value, null, 2)}`;
-
-      this.subscription.add(
-        this.httpClient
-          .post<any>(
-            'https://formspree.io/f/xoqgdpag',
-            {
-              message,
-            },
-            {
-              headers: new HttpHeaders({ 'content-type': 'application/json' }),
-            },
-          )
-          .subscribe((response) => {
-            if (response.ok) {
-              this.snackbarService.open('Dziękujemy za zgłoszenie :)');
-              setTimeout(() => {
-                this.router.navigate(['/']);
-              }, 500);
-            } else {
-              this.snackbarService.open('Wystąpił błąd, spróbuj ponownie');
-            }
-          }),
-      );
+    if (!this.form.valid) {
+      return;
     }
+
+    // Structured fields rather than a pre-rendered blob: the endpoint formats
+    // the email, so the client has no business deciding how it reads.
+    const payload = { ...this.form.getRawValue(), typ: this.typ };
+
+    this.subscription.add(
+      this.httpClient
+        .post<{ ok: boolean }>(CONTACT_ENDPOINT, payload, {
+          headers: new HttpHeaders({ 'content-type': 'application/json' }),
+        })
+        .pipe(
+          // Any non-2xx or network failure lands here. Without this the
+          // submission failed silently and the enquiry was simply lost.
+          catchError(() => {
+            this.snackbarService.open('Wystąpił błąd, spróbuj ponownie');
+            return EMPTY;
+          }),
+        )
+        .subscribe(() => {
+          this.snackbarService.open('Dziękujemy za zgłoszenie :)');
+          setTimeout(() => {
+            this.router.navigate(['/']);
+          }, 500);
+        }),
+    );
   }
 
   ngOnDestroy() {
