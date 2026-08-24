@@ -25,6 +25,12 @@ declare(strict_types=1);
  * Configuration lives OUTSIDE the web root, at ../../contact-config.php
  * relative to this file. See docs/rodo-compliance/task-02-endpoint-setup.md.
  *
+ * "Log nothing" (above) is about enquiry content, not operational visibility.
+ * A server-side failure (mail_failed / internal_error) is appended, as one
+ * line with no personal data, to a small size-capped file outside the web
+ * root — see logFailure() — so a systemic outage (wrong password, mail host
+ * down, TLS broken) can be diagnosed without creating a personal-data store.
+ *
  * Written to PHP 7.2-compatible syntax on purpose: the shell on the Zenbox host
  * reports PHP 7.2.34 while the web handler appears to be lsphp 8.3, and this
  * file should not depend on which one wins.
@@ -64,6 +70,56 @@ class InvalidField extends Exception
 /** Raised when the SMTP conversation fails. Never carries enquiry content. */
 class SmtpError extends Exception
 {
+}
+
+/** Default path for the operational failure log, used before config is loaded. */
+function defaultErrorLogPath(): string
+{
+    return __DIR__ . '/../../contact-error.log';
+}
+
+/**
+ * Append one line to the operational failure log, then keep it under
+ * $maxBytes by dropping the oldest lines.
+ *
+ * $detail must never be enquiry content — callers pass an SMTP stage token
+ * (e.g. 'connect', 'auth', 'data') or an exception class name, never a form
+ * field. Fails silently: a broken log must never turn a real failure response
+ * into a different one.
+ */
+function logFailure(string $path, int $maxBytes, string $event, string $detail)
+{
+    $line = sprintf('[%s] event=%s detail=%s%s', date('c'), $event, $detail, PHP_EOL);
+
+    $handle = @fopen($path, 'c+');
+    if ($handle === false) {
+        return;
+    }
+
+    if (flock($handle, LOCK_EX)) {
+        $stats = fstat($handle);
+        $size = ($stats !== false) ? $stats['size'] : 0;
+
+        if ($size > $maxBytes) {
+            $contents = stream_get_contents($handle);
+            $contents = is_string($contents) ? $contents : '';
+            $tail = substr($contents, -intdiv($maxBytes, 2));
+            // Drop a possibly-truncated first line so what remains is whole lines.
+            $firstBreak = strpos($tail, "\n");
+            if ($firstBreak !== false) {
+                $tail = substr($tail, $firstBreak + 1);
+            }
+            ftruncate($handle, 0);
+            rewind($handle);
+            fwrite($handle, $tail);
+        }
+
+        fseek($handle, 0, SEEK_END);
+        fwrite($handle, $line);
+        flock($handle, LOCK_UN);
+    }
+
+    fclose($handle);
 }
 
 /**
@@ -411,6 +467,8 @@ try {
         'rate_limit_salt' => '',
         'rate_limit_max' => 5,
         'rate_limit_window' => 3600,
+        'error_log_path' => defaultErrorLogPath(),
+        'error_log_max_bytes' => 262144,
     ], $config);
 
     if ($config['recipient'] === '' || $config['from_email'] === '' || $config['rate_limit_salt'] === '') {
@@ -554,14 +612,19 @@ try {
         smtpSend($config, $config['from_email'], $config['recipient'], $message);
     } catch (SmtpError $exception) {
         // Fail loudly. The client turns this into a visible retry prompt rather
-        // than pretending the enquiry was delivered. Nothing is written to disk.
+        // than pretending the enquiry was delivered. Only the failed SMTP stage
+        // is recorded — never the enquiry itself.
+        logFailure((string) $config['error_log_path'], (int) $config['error_log_max_bytes'], 'mail_failed', $exception->getMessage());
         respond(502, ['ok' => false, 'error' => 'mail_failed']);
     }
 
     respond(200, ['ok' => true]);
 } catch (Throwable $exception) {
-    // Nothing escapes. An uncaught throwable could reach the host's error log
-    // with the enquiry in its stack trace, which is exactly what must not
-    // happen on shared hosting.
+    // Nothing escapes, and nothing about the enquiry is ever logged — an
+    // uncaught throwable's message could in principle echo a field value, so
+    // only the exception class and line are recorded, never getMessage().
+    $logPath = (isset($config) && is_array($config) && isset($config['error_log_path'])) ? (string) $config['error_log_path'] : defaultErrorLogPath();
+    $logMaxBytes = (isset($config) && is_array($config) && isset($config['error_log_max_bytes'])) ? (int) $config['error_log_max_bytes'] : 262144;
+    logFailure($logPath, $logMaxBytes, 'internal_error', get_class($exception) . '@' . $exception->getLine());
     respond(500, ['ok' => false, 'error' => 'internal_error']);
 }

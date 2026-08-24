@@ -209,11 +209,16 @@ function writeConfig(overrides: ConfigOverrides = {}): string {
     // rate-limit test sets its own.
     rate_limit_max: 10000,
     rate_limit_window: 3600,
+    error_log_path: '/dev/null/unused',
+    error_log_max_bytes: 8192,
     ...overrides,
   };
 
   if (settings.rate_limit_dir === '/dev/null/unused') {
     settings.rate_limit_dir = path.posix.join(phpRootInsideRunner(), 'contact-ratelimit');
+  }
+  if (settings.error_log_path === '/dev/null/unused') {
+    settings.error_log_path = path.posix.join(phpRootInsideRunner(), 'contact-error.log');
   }
 
   const render = (value: unknown): string => {
@@ -587,6 +592,18 @@ describe('rate limiting', () => {
   });
 });
 
+/** Read a file the PHP process wrote, from wherever it actually wrote it. */
+function readRunnerFile(relativePath: string): string {
+  if (dockerAvailable) {
+    const read = spawnSync('docker', ['exec', containerName, 'cat', path.posix.join('/srv', relativePath)], {
+      encoding: 'utf8',
+    });
+    return read.status === 0 ? read.stdout : '';
+  }
+  const full = path.join(root, relativePath);
+  return fs.existsSync(full) ? fs.readFileSync(full, 'utf8') : '';
+}
+
 describe('failure handling', () => {
   it('answers 502 when the mail server is unreachable, rather than claiming success', async () => {
     const deadPort = await freePort();
@@ -595,6 +612,45 @@ describe('failure handling', () => {
     const response = await post(validPayload());
     assert.equal(response.status, 502);
     assert.equal(response.json.ok, false);
+
+    await applyConfig();
+  });
+
+  it('logs the failure stage without leaking any personal data', async () => {
+    const deadPort = await freePort();
+    await applyConfig({ smtp_port: deadPort, smtp_timeout: 3, error_log_path: path.posix.join(phpRootInsideRunner(), 'contact-error.log') });
+
+    const payload = validPayload();
+    payload.personalData.name = 'Nieujawnialny Testowicz';
+    payload.personalData.email = 'nieujawnialny@example.com';
+    const response = await post(payload);
+    assert.equal(response.status, 502);
+
+    const log = readRunnerFile('contact-error.log');
+    assert.match(log, /event=mail_failed/);
+    assert.match(log, /detail=connect/, 'the failed SMTP stage should be recorded');
+    assert.doesNotMatch(log, /Nieujawnialny/, 'the log must never contain a submitted name');
+    assert.doesNotMatch(log, /nieujawnialny@example\.com/, 'the log must never contain a submitted email');
+
+    await applyConfig();
+  });
+
+  it('keeps the failure log bounded instead of growing without limit', async () => {
+    const deadPort = await freePort();
+    const logPath = path.posix.join(phpRootInsideRunner(), 'bounded-error.log');
+    const maxBytes = 2048;
+    await applyConfig({ smtp_port: deadPort, smtp_timeout: 2, error_log_path: logPath, error_log_max_bytes: maxBytes });
+
+    for (let attempt = 0; attempt < 40; attempt++) {
+      await post(validPayload());
+    }
+
+    const log = readRunnerFile('bounded-error.log');
+    const entryCount = log.split('\n').filter((line) => line.trim() !== '').length;
+
+    assert.ok(Buffer.byteLength(log, 'utf8') < maxBytes * 1.5, `log grew to ${Buffer.byteLength(log, 'utf8')} bytes, past its ${maxBytes}-byte cap`);
+    assert.ok(entryCount < 40, 'older entries should have been dropped, not kept forever');
+    assert.ok(entryCount > 0, 'the most recent entries should still be present');
 
     await applyConfig();
   });
