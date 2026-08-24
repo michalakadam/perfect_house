@@ -59,7 +59,6 @@ import { TabsModule } from 'primeng/tabs';
 import { GroupedDropdownComponent } from './offers/search-tool/grouped-dropdown/grouped-dropdown.component';
 import { ValuesComponent } from './values/values.component';
 import { GalleryComponent } from './shared/gallery/gallery.component';
-import { UrlSanitizer } from './shared/pipes/url-sanitizer';
 import { StringDecoder } from './shared/pipes/string-decoder';
 import { NewsFeedComponent } from './news-feed/news-feed.component';
 import { StarRatingComponent } from './offer/star-rating/star-rating.component';
@@ -71,7 +70,6 @@ import { RouterStateManagementModule } from './router/state-management/state-man
 import { AgentsStateManagementModule } from './agents/state-management/state-management.module';
 import { EcoHousesComponent } from './eco-houses/eco-houses.component';
 import { ContactFormComponent } from './contact/contact-form/contact-form.component';
-import { YoutubeEmbedUrlPipe } from './shared/pipes/youtube-embed-url';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
@@ -93,8 +91,6 @@ export class MyHammerConfig extends HammerGestureConfig {
     MapComponent,
     NavigationComponent,
     NumberPrettifier,
-    UrlSanitizer,
-    YoutubeEmbedUrlPipe,
     StringDecoder,
     OfferCardComponent,
     OffersComponent,

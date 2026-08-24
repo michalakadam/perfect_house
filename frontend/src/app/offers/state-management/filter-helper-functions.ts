@@ -3,6 +3,7 @@ import {
   Offer,
   OffersFilters,
 } from 'src/app/shared/models';
+import { isAllowedVirtualVisitUrl } from 'src/app/shared/embeds/virtual-visit-embed';
 
 export const filterOffers = (
   offers: Offer[],
@@ -50,7 +51,11 @@ export const filterOffers = (
     offers = offers.filter((offer) => offer.isNoCommission);
   }
   if (filters.isVirtualVisitAvailable) {
-    offers = offers.filter((offer) => !!offer.virtualVisitUrl);
+    // An offer whose tour URL is not embeddable must not reach this list, or
+    // the visitor clicks through to a virtual visit that is not there.
+    offers = offers.filter((offer) =>
+      isAllowedVirtualVisitUrl(offer.virtualVisitUrl),
+    );
   }
   if (filters.pricePerSquareMeterFrom > -1) {
     offers = offers.filter(

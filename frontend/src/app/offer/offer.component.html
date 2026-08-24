@@ -5,11 +5,41 @@
         @if (isGalleryActive) {
           <perfect-gallery [photoUrls]="photoUrls"> </perfect-gallery>
         }
-        @if (isVideoActive) {
-          <embed
-            type="text/html"
-            [src]="offer.youtubeLink | youtubeEmbedUrl | safe"
-          />
+        @if (isVideoActive && videoEmbedUrl) {
+          @if (isVideoAccepted) {
+            <iframe
+              class="embedded-frame"
+              title="Film prezentujący ofertę"
+              [src]="videoEmbedUrl"
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+            ></iframe>
+          } @else {
+            <button
+              type="button"
+              class="video-consent"
+              aria-label="Odtwórz film prezentujący ofertę (film zostanie wczytany z serwisu YouTube)"
+              (click)="acceptVideo()"
+            >
+              @if (videoPosterUrl) {
+                <img
+                  class="video-consent-poster"
+                  [src]="videoPosterUrl"
+                  alt=""
+                />
+              }
+              <span class="video-consent-overlay">
+                <span class="video-consent-play" aria-hidden="true">
+                  <i class="pi pi-play"></i>
+                </span>
+                <span class="video-consent-note">
+                  Kliknij, aby odtworzyć film. Zostanie on wczytany z serwisu
+                  YouTube, co połączy Twoją przeglądarkę z serwerami Google.
+                </span>
+              </span>
+            </button>
+          }
         }
         @if (isMapActive) {
           <perfect-map
@@ -18,8 +48,15 @@
           >
           </perfect-map>
         }
-        @if (isVirtualVisitActive) {
-          <embed type="text/html" [src]="offer.virtualVisitUrl | safe" />
+        @if (isVirtualVisitActive && virtualVisitEmbedUrl) {
+          <iframe
+            class="embedded-frame"
+            title="Wirtualna wizyta w nieruchomości"
+            [src]="virtualVisitEmbedUrl"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allow="fullscreen; xr-spatial-tracking"
+          ></iframe>
         }
       </div>
       <div class="agent-buttons-container">
@@ -82,8 +119,8 @@
         <div class="buttons-container">
           @if (
             (offer.lattitude && offer.longitude) ||
-            offer.virtualVisitUrl ||
-            offer.youtubeLink
+            virtualVisitEmbedUrl ||
+            videoEmbedUrl
           ) {
             <button
               pButton
@@ -95,7 +132,7 @@
               (click)="showGallery()"
             ></button>
           }
-          @if (offer.youtubeLink) {
+          @if (videoEmbedUrl) {
             <button
               pButton
               pRipple
@@ -117,7 +154,7 @@
               (click)="showMap()"
             ></button>
           }
-          @if (offer.virtualVisitUrl) {
+          @if (virtualVisitEmbedUrl) {
             <button
               pButton
               pRipple
@@ -144,7 +181,7 @@
             <div class="price">
               @if (offer.price > 1) {
                 <span>
-                  {{ offer.price | prettifyNumber: 'zł' }}
+                  {{ offer.price | prettifyNumber: "zł" }}
                 </span>
               }
               @if (offer.price === 1) {
@@ -155,7 +192,7 @@
               class="price-per-meter"
               [class.hidden]="!offer.pricePerSquareMeter.value"
             >
-              {{ offer.pricePerSquareMeter.value | prettifyNumber: 'zł/m²' }}
+              {{ offer.pricePerSquareMeter.value | prettifyNumber: "zł/m²" }}
             </div>
           </div>
         }
@@ -231,7 +268,7 @@
         @if (field.value) {
           <div class="field" [class.last]="last">
             <span class="field-name">{{ field.displayName }}:</span>
-            @if (!isBoolean(field.value) && field.displayName !== 'Standard') {
+            @if (!isBoolean(field.value) && field.displayName !== "Standard") {
               <span class="field-value">
                 {{ field.value }}
                 @if (field.unit) {
@@ -239,7 +276,7 @@
                 }
               </span>
             }
-            @if (field.displayName === 'Standard') {
+            @if (field.displayName === "Standard") {
               <perfect-star-rating [score]="field.value" outOf="5">
               </perfect-star-rating>
             }

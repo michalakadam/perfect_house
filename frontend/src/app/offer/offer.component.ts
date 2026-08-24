@@ -10,6 +10,8 @@ import { WindowSizeDetector } from '../shared/services/window-size-detector.serv
 import { OffersStateManager } from '../offers/state-management/state-manager.service';
 import { AgentsStateManager } from '../agents/state-management/state-manager.service';
 import { Router } from '@angular/router';
+import { SafeResourceUrl } from '@angular/platform-browser';
+import { EmbedUrlService } from '../shared/embeds/embed-url.service';
 
 @Component({
   selector: 'perfect-offer',
@@ -23,8 +25,12 @@ export class OfferComponent implements OnDestroy {
   offer: Offer;
   definedOfferFields: OfferField<any>[] = [];
   photoUrls: string[] = [];
+  videoEmbedUrl: SafeResourceUrl | null = null;
+  videoPosterUrl: string | null = null;
+  virtualVisitEmbedUrl: SafeResourceUrl | null = null;
   isGalleryActive = true;
   isVideoActive = false;
+  isVideoAccepted = false;
   isMapActive = false;
   isVirtualVisitActive = false;
   offerSearchSymbol = '';
@@ -35,6 +41,7 @@ export class OfferComponent implements OnDestroy {
     readonly offersStateManager: OffersStateManager,
     private readonly changeDetector: ChangeDetectorRef,
     private readonly router: Router,
+    private readonly embedUrls: EmbedUrlService,
   ) {
     this.subscription = this.windowSizeDetector.windowSizeChanged$.subscribe(
       () => {
@@ -46,8 +53,14 @@ export class OfferComponent implements OnDestroy {
         this.offer = offer;
         this.definedOfferFields = this.computeDefinedOfferFields(offer);
         this.photoUrls = this.computePhotoUrls(offer);
+        this.videoEmbedUrl = this.embedUrls.youtubeEmbedUrl(offer?.youtubeLink);
+        this.videoPosterUrl = this.photoUrls[0] || null;
+        this.virtualVisitEmbedUrl = this.embedUrls.virtualVisitEmbedUrl(
+          offer?.virtualVisitUrl,
+        );
         this.isGalleryActive = true;
         this.isVideoActive = false;
+        this.isVideoAccepted = false;
         this.isMapActive = false;
         this.isVirtualVisitActive = false;
       }),
@@ -108,6 +121,7 @@ export class OfferComponent implements OnDestroy {
     if (!this.isGalleryActive) {
       this.isGalleryActive = true;
       this.isVideoActive = false;
+      this.isVideoAccepted = false;
       this.isMapActive = false;
       this.isVirtualVisitActive = false;
     }
@@ -117,6 +131,7 @@ export class OfferComponent implements OnDestroy {
     if (!this.isVideoActive) {
       this.isGalleryActive = false;
       this.isVideoActive = true;
+      this.isVideoAccepted = false;
       this.isMapActive = false;
       this.isVirtualVisitActive = false;
     }
@@ -126,6 +141,7 @@ export class OfferComponent implements OnDestroy {
     if (!this.isMapActive) {
       this.isGalleryActive = false;
       this.isVideoActive = false;
+      this.isVideoAccepted = false;
       this.isMapActive = true;
       this.isVirtualVisitActive = false;
     }
@@ -135,9 +151,15 @@ export class OfferComponent implements OnDestroy {
     if (!this.isVirtualVisitActive) {
       this.isGalleryActive = false;
       this.isVideoActive = false;
+      this.isVideoAccepted = false;
       this.isMapActive = false;
       this.isVirtualVisitActive = true;
     }
+  }
+
+  // Nothing is fetched from YouTube until this runs.
+  acceptVideo() {
+    this.isVideoAccepted = true;
   }
 
   computePhotoUrls(offer: Offer) {

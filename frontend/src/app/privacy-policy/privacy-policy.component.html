@@ -91,11 +91,14 @@
       </li>
       <li>
         w przypadku ofert zawierających film lub wirtualny spacer — dostawca
-        odtwarzanych treści (YouTube/Google, a w przypadku wirtualnego
-        spaceru — dostawca wskazany w danej ofercie), ponieważ materiał jest
-        obecnie osadzany na stronie bezpośrednio. Zostanie to zmienione po
-        wdrożeniu zadania opisanego w
-        <code>task-03-harden-third-party-embeds.md</code>.
+        odtwarzanych treści, wyłącznie jeżeli odwiedzający sam uruchomi dany
+        materiał. Film jest wczytywany z serwisu YouTube (Google) dopiero po
+        kliknięciu przycisku odtwarzania, a wirtualny spacer — z serwera
+        Galactica (<code>virgo.galapp.net</code>) dopiero po wybraniu zakładki
+        „Wirtualna wizyta”. Samo otwarcie strony oferty nie łączy przeglądarki
+        z żadnym z tych dostawców. Adresy wirtualnych spacerów są ograniczone
+        do zamkniętej listy dozwolonych domen, więc na stronie nie może
+        zostać osadzony inny dostawca niż wskazany powyżej.
       </li>
     </ul>
 
@@ -121,10 +124,22 @@
       hostowane samodzielnie, co usunie ten transfer.
     </p>
     <p>
-      Jeżeli oferta zawiera film osadzony z YouTube, wczytanie strony oferty
-      wiąże się z przekazaniem adresu IP do Google LLC (USA). Zostanie to
-      zmienione po wdrożeniu zadania opisanego w
-      <code>task-03-harden-third-party-embeds.md</code>.
+      Jeżeli oferta zawiera film z serwisu YouTube, jego odtworzenie wymaga
+      kliknięcia przycisku odtwarzania — dopiero wtedy adres IP przeglądarki
+      jest przekazywany do Google LLC (USA). Samo wczytanie strony oferty nie
+      powoduje takiego przekazania. Film jest osadzany z domeny
+      <code>youtube-nocookie.com</code>.
+    </p>
+    <p>
+      Wirtualny spacer jest wczytywany z serwera Galactica
+      (<code>virgo.galapp.net</code>) dopiero po wybraniu przez
+      odwiedzającego zakładki „Wirtualna wizyta”; wiąże się to z przekazaniem
+      adresu IP przeglądarki do tego dostawcy.
+      <span class="todo"
+        >TODO(owner): potwierdzić, gdzie Galactica utrzymuje serwery
+        udostępniające wirtualne spacery, oraz — jeżeli znajdują się poza EOG
+        — podstawę transferu.</span
+      >
     </p>
 
     <h2>6. Okres przechowywania danych</h2>
@@ -187,23 +202,27 @@
     </p>
 
     <h2>10. Pliki cookies i podobne technologie</h2>
-    <!-- REVISIT after docs/rodo-compliance/task-03-harden-third-party-embeds.md lands. -->
     <p>
       Strona e-perfecthouse.pl sama w sobie nie zapisuje plików cookies ani
       innych informacji w pamięci urządzenia odwiedzającego i nie korzysta z
       narzędzi analitycznych ani śledzących.
     </p>
     <p>
-      Wyjątkiem są strony ofert zawierające osadzony film z YouTube lub
-      wirtualny spacer. Taki materiał jest obecnie wczytywany bezpośrednio z
-      serwera dostawcy (YouTube/Google lub dostawcy wirtualnego spaceru), bez
-      mechanizmu wcześniejszej zgody — a dostawca ten może, niezależnie od
-      Administratora, zapisać własne pliki cookies w przeglądarce
-      odwiedzającego. Sposób osadzania tych treści zostanie zmieniony po
-      wdrożeniu zadania opisanego w
-      <code>task-03-harden-third-party-embeds.md</code>; do tego czasu
-      zalecamy ostrożność przy oglądaniu takich materiałów, jeśli chcesz
-      uniknąć zapisania plików cookies przez zewnętrznego dostawcę.
+      Na stronach ofert żaden materiał zewnętrzny nie jest wczytywany, dopóki
+      odwiedzający sam o to nie poprosi. Film z serwisu YouTube pozostaje
+      zasłonięty zdjęciem oferty do momentu kliknięcia przycisku odtwarzania,
+      a wirtualny spacer wczytuje się dopiero po wybraniu zakładki „Wirtualna
+      wizyta”. Do tego momentu w pamięci urządzenia odwiedzającego nie są
+      zapisywane żadne dane — ani przez Administratora, ani przez dostawców
+      zewnętrznych.
+    </p>
+    <p>
+      Po świadomym uruchomieniu takiego materiału jego dostawca
+      (YouTube/Google albo Galactica) może, niezależnie od Administratora,
+      zapisać własne pliki cookies lub inne dane w pamięci urządzenia. Aby
+      tego uniknąć, wystarczy nie uruchamiać filmu i nie otwierać wirtualnego
+      spaceru — pozostała część serwisu działa bez zapisywania jakichkolwiek
+      danych na urządzeniu odwiedzającego.
     </p>
 
     <h2>11. Zmiany polityki prywatności</h2>
