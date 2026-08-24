@@ -33,6 +33,7 @@
               "src/api"
             ],
             "styles": [
+              "src/assets/vendor/openlayers/ol.css",
               "src/styles.scss",
               "node_modules/primeicons/primeicons.css"
             ],
@@ -42,7 +43,7 @@
             "stylePreprocessorOptions": {
               "includePaths": ["src"]
             },
-            "scripts": []
+            "scripts": ["src/assets/vendor/openlayers/ol.js"]
           },
           "configurations": {
             "production": {
