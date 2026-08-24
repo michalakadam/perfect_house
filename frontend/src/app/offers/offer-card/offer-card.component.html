@@ -30,7 +30,11 @@
     @if (agentsStateManager.agentById$(offer.agentId) | async; as agent) {
       <div class="bottom-row">
         <a class="phone" href="tel:{{ agent.mobile }}">
-          <p-button [label]="agent.mobile" icon="fas fa-phone-alt"></p-button>
+          <p-button [label]="agent.mobile">
+            <ng-template #icon let-iconClass="class">
+              <mat-icon [class]="iconClass" svgIcon="phone-alt"></mat-icon>
+            </ng-template>
+          </p-button>
         </a>
         @if (offer.price > -1) {
           <div class="price">

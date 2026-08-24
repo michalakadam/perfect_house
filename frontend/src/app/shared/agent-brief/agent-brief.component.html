@@ -29,11 +29,11 @@
       @if (isContactInfoVisible) {
         <div class="contact-info">
           <a href="mailto:{{ agent.mail }}" (click)="$event.stopPropagation()">
-            <mat-icon><i class="fas fa-envelope-square"></i></mat-icon>
+            <mat-icon svgIcon="envelope-square"></mat-icon>
             {{ agent.mail }}
           </a>
           <a href="tel:{{ agent.mobile }}" (click)="$event.stopPropagation()">
-            <mat-icon><i class="fas fa-phone-square-alt"></i></mat-icon>
+            <mat-icon svgIcon="phone-square-alt"></mat-icon>
             {{ agent.mobile }}
           </a>
           @if (agent.licenseNumber && isLicenseNumberVisible) {

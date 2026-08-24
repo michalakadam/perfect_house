@@ -15,6 +15,7 @@ const PerfectHousePreset = definePreset(Aura, {
     primary: palette('#b4e434'),
   },
 });
+import { providePerfectIcons } from './shared/icons/icon-registry';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -144,6 +145,7 @@ export class MyHammerConfig extends HammerGestureConfig {
   ],
   providers: [
     { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig },
+    providePerfectIcons(),
     providePrimeNG({
       theme: {
         preset: PerfectHousePreset,

@@ -99,6 +99,16 @@
 
         p-button {
           @include mixins.perfect-button;
+
+          // Ikona SVG zastąpiła ikonę fontową Font Awesome. mat-icon ma
+          // własny rozmiar 24px, więc skalujemy ją do rozmiaru tekstu
+          // przycisku (1em), co odpowiada dotychczasowym 12x12 px i
+          // pozostaje poprawne po zmianie font-size na mniejszych ekranach.
+          ::ng-deep mat-icon {
+            font-size: inherit;
+            height: 1em;
+            width: 1em;
+          }
         }
       }
 

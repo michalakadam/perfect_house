@@ -81,13 +81,15 @@
         >
       </li>
       <li>
-        dostawcy zasobów ładowanych automatycznie z każdą wizytą na stronie:
-        Google (czcionki Google Fonts), Fonticons, Inc. (ikony Font Awesome
-        Kit) oraz biblioteka mapy OpenLayers — w zakresie technicznie
-        niezbędnym do wczytania tych zasobów przekazywany jest adres IP
-        przeglądarki odwiedzającego. Zostanie to ograniczone po wdrożeniu
-        zadania opisanego w <code>task-04-self-host-frontend-assets.md</code>
-        (samodzielne hostowanie tych zasobów).
+        dostawca kafelków mapy — Fundacja OpenStreetMap (OpenStreetMap
+        Foundation). Wczytanie kafelków przekazuje do serwerów Fundacji adres
+        IP przeglądarki odwiedzającego wraz z informacją o przeglądarce. Mapa
+        wczytuje się automatycznie wyłącznie na stronie „Kontakt”; na
+        stronach ofert dopiero po wybraniu przez odwiedzającego zakładki
+        „Mapa”. Jest to jedyny zasób zewnętrzny wczytywany przez serwis —
+        czcionki, ikony oraz biblioteka obsługująca mapę są hostowane na
+        serwerze Administratora, więc otwarcie pozostałych stron nie łączy
+        przeglądarki z żadnym podmiotem zewnętrznym.
       </li>
       <li>
         w przypadku ofert zawierających film lub wirtualny spacer — dostawca
@@ -111,17 +113,27 @@
       hostingu.
     </p>
     <p>
-      Podobnie, wczytanie czcionek Google Fonts oraz ikon Font Awesome Kit z
-      każdą wizytą na stronie wiąże się z przekazaniem adresu IP
-      przeglądarki do dostawców tych usług (odpowiednio Google LLC i
-      Fonticons, Inc.), obu z siedzibą w USA.
+      Czcionki, ikony oraz biblioteka obsługująca mapę są hostowane na
+      serwerze Administratora. Samo otwarcie strony nie powoduje więc
+      przekazania jakichkolwiek danych do dostawców tych zasobów.
+    </p>
+    <p>
+      Wyjątkiem są kafelki mapy pobierane z serwerów OpenStreetMap Foundation
+      — podmiotu zarejestrowanego w Wielkiej Brytanii. Wobec Wielkiej
+      Brytanii Komisja Europejska utrzymuje decyzję stwierdzającą odpowiedni
+      stopień ochrony danych (decyzja odnowiona 19 grudnia 2025 r. i
+      obowiązująca do 27 grudnia 2031 r.), więc samo przekazanie danych do
+      podmiotu brytyjskiego nie wymaga dodatkowych zabezpieczeń. Zgodnie
+      jednak z polityką prywatności Fundacji kafelki są udostępniane przez
+      globalną sieć serwerów pośredniczących, w związku z czym pojedyncze
+      żądanie może zostać obsłużone przez serwer znajdujący się poza Wielką
+      Brytanią i poza EOG.
       <span class="todo"
-        >TODO(owner): potwierdzić aktualny mechanizm transferu stosowany
-        przez tych dostawców.</span
+        >TODO(owner): ustalić i opisać podstawę transferu dla żądań kafelków
+        mapy — polityka prywatności OpenStreetMap Foundation nie wskazuje ani
+        lokalizacji serwera obsługującego pojedyncze żądanie kafelka, ani
+        okresu przechowywania danych o takich żądaniach.</span
       >
-      Po wdrożeniu zadania opisanego w
-      <code>task-04-self-host-frontend-assets.md</code> te zasoby mają być
-      hostowane samodzielnie, co usunie ten transfer.
     </p>
     <p>
       Jeżeli oferta zawiera film z serwisu YouTube, jego odtworzenie wymaga
@@ -211,10 +223,11 @@
       Na stronach ofert żaden materiał zewnętrzny nie jest wczytywany, dopóki
       odwiedzający sam o to nie poprosi. Film z serwisu YouTube pozostaje
       zasłonięty zdjęciem oferty do momentu kliknięcia przycisku odtwarzania,
-      a wirtualny spacer wczytuje się dopiero po wybraniu zakładki „Wirtualna
-      wizyta”. Do tego momentu w pamięci urządzenia odwiedzającego nie są
-      zapisywane żadne dane — ani przez Administratora, ani przez dostawców
-      zewnętrznych.
+      wirtualny spacer wczytuje się dopiero po wybraniu zakładki „Wirtualna
+      wizyta”, a mapa — dopiero po wybraniu zakładki „Mapa”. Do tego momentu
+      w pamięci urządzenia odwiedzającego nie są zapisywane żadne dane — ani
+      przez Administratora, ani przez dostawców zewnętrznych. Wyjątkiem jest
+      strona „Kontakt”, na której mapa wczytuje się automatycznie.
     </p>
     <p>
       Po świadomym uruchomieniu takiego materiału jego dostawca
