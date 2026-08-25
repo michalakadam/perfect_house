@@ -451,6 +451,16 @@ try {
         respond(500, ['ok' => false, 'error' => 'server_misconfigured']);
     }
 
+    // NOTE (2026-08-25): 'recipient' lives in contact-config.php on the host,
+    // outside this repository, so its live value cannot be reviewed here.
+    // It MUST be biuro@e-perfecthouse.pl in production. While it points anywhere
+    // else — in particular a developer's Gmail address used for post-deploy
+    // testing — the published privacy policy is untrue: §5 states that contact
+    // form data is not transferred outside the EEA, and a Google-hosted mailbox
+    // is both an undisclosed recipient and a US transfer.
+    // Tracked as [P-8] in docs/rodo-compliance/processors.md. Switch it back
+    // immediately after smoke-testing a deployment, and re-verify with one test
+    // submission.
     $config = array_merge([
         'allowed_origins' => [],
         'recipient' => '',
