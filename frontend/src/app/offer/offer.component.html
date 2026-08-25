@@ -16,12 +16,10 @@
               allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
             ></iframe>
           } @else {
-            <button
-              type="button"
-              class="video-consent"
-              aria-label="Odtwórz film prezentujący ofertę (film zostanie wczytany z serwisu YouTube)"
-              (click)="acceptVideo()"
-            >
+            <!-- The play control and the policy link must be siblings, never
+                 nested: an anchor inside a button is invalid HTML and the link
+                 would not be independently reachable. -->
+            <div class="video-consent">
               @if (videoPosterUrl) {
                 <img
                   class="video-consent-poster"
@@ -29,16 +27,33 @@
                   alt=""
                 />
               }
-              <span class="video-consent-overlay">
-                <span class="video-consent-play" aria-hidden="true">
-                  <i class="pi pi-play"></i>
-                </span>
-                <span class="video-consent-note">
+              <div class="video-consent-overlay">
+                <button
+                  type="button"
+                  class="video-consent-play"
+                  aria-label="Odtwórz film prezentujący ofertę (film zostanie wczytany z serwisu YouTube)"
+                  (click)="acceptVideo()"
+                >
+                  <i class="pi pi-play" aria-hidden="true"></i>
+                </button>
+                <p class="video-consent-note">
                   Kliknij, aby odtworzyć film. Zostanie on wczytany z serwisu
-                  YouTube, co połączy Twoją przeglądarkę z serwerami Google.
-                </span>
-              </span>
-            </button>
+                  YouTube (<code>youtube-nocookie.com</code>): Twój adres IP
+                  zostanie przekazany do Google LLC, a dostawca może zapisać w
+                  pamięci Twojego urządzenia własne pliki cookies i podobne
+                  dane — m.in. w celu odtwarzania filmu i pomiaru oglądalności.
+                  Jeżeli nie klikniesz, film nie zostanie wczytany, a pozostała
+                  część serwisu działa bez zmian. Zasady przetwarzania danych
+                  przez dostawcę opisuje
+                  <a
+                    href="https://policies.google.com/privacy?hl=pl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >polityka prywatności Google</a
+                  >.
+                </p>
+              </div>
+            </div>
           }
         }
         @if (isMapActive) {

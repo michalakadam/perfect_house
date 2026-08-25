@@ -86,16 +86,15 @@
       }
 
       // Click-to-load gate for the YouTube frame: nothing is requested from
-      // Google until this button is activated.
+      // Google until the play button is activated. The container is a plain
+      // div, not a button, so the provider's privacy policy link inside the
+      // overlay stays independently clickable and valid.
       .video-consent {
         background-color: variables.$dark-green;
-        border: 0;
         border-radius: 15px;
-        cursor: pointer;
         display: block;
         height: 100%;
         overflow: hidden;
-        padding: 0;
         position: relative;
         width: 100%;
         @media screen and (max-width: variables.$desktop-small) {
@@ -109,9 +108,8 @@
           width: 100%;
         }
 
-        // The overlay both dims the poster for text contrast and carries the
-        // focus ring: it paints above the poster image, whereas an outline on
-        // the button itself is hidden behind it.
+        // The overlay dims the poster so the note and the play control keep
+        // contrast against any photo.
         .video-consent-overlay {
           align-items: center;
           background-color: rgba(20, 68, 51, 0.7);
@@ -127,35 +125,53 @@
           top: 0;
         }
 
-        // styles.scss zeroes the outline on span, but only when the span itself
-        // is focused, so this ring survives; it is verified to render.
-        &:focus-visible .video-consent-overlay {
-          outline: 3px solid variables.$light-green;
-          outline-offset: -3px;
-        }
-
         .video-consent-play {
           align-items: center;
           background-color: variables.$light-green;
+          border: 0;
           border-radius: 50%;
           color: variables.$dark-green;
+          cursor: pointer;
           display: flex;
+          flex: none;
           font-size: 2rem;
           height: 5rem;
           justify-content: center;
+          padding: 0;
           width: 5rem;
+        }
+
+        // styles.scss zeroes focus outlines globally, so the ring is set
+        // explicitly here and verified to render.
+        .video-consent-play:focus-visible {
+          outline: 3px solid variables.$font-white;
+          outline-offset: 3px;
         }
 
         .video-consent-note {
           font-size: 0.85rem;
-          margin-top: 1rem;
-          max-width: 30rem;
+          margin: 1rem 0 0;
+          max-width: 34rem;
           text-align: center;
           text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+
+          a {
+            color: variables.$font-white;
+            text-decoration: underline;
+
+            &:focus-visible {
+              outline: 2px solid variables.$font-white;
+              outline-offset: 2px;
+            }
+          }
+
+          code {
+            font-size: 0.95em;
+          }
         }
 
         &:hover .video-consent-play,
-        &:focus-visible .video-consent-play {
+        .video-consent-play:focus-visible {
           background-color: variables.$font-white;
         }
       }
