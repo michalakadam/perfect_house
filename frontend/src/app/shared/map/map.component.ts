@@ -26,7 +26,16 @@ export class MapComponent implements OnInit {
     setTimeout(() => {
       this.map = new ol.Map({
         target: 'map',
-        layers: [new ol.layer.Tile({ source: new ol.source.OSM() })],
+        layers: [
+          new ol.layer.Tile({
+            // Adres wymagany przez Tile Usage Policy OSM. Domyślne w
+            // OpenLayers 4.6.5 subdomeny a/b/c. są odradzane i mogą zostać
+            // wycofane bez uprzedzenia.
+            source: new ol.source.OSM({
+              url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            }),
+          }),
+        ],
         view: new ol.View({
           center: ol.proj.fromLonLat([this.longitude, this.lattitude]),
           zoom: 15,
