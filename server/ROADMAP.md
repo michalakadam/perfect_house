@@ -98,38 +98,69 @@ Galactica ──FTP──> Zenbox: public_ftp/          (skrzynka, nic więcej)
 
 ---
 
-## Etap 0 — Widoczność i sprzątanie
+## Etap 0 — Widoczność i sprzątanie ✅ ZROBIONE 2026-09-06
 
-**Nie czeka na Springa. Robione na obecnym systemie.**
+**Nie czekało na Springa. Zrobione na obecnym systemie.**
 
 Cel: przestać być ślepym i odzyskać miejsce na dysku Zenboxa.
 
-1. **Dead man's switch.** Cron sprawdza wiek ostatniego udanego przebiegu; brak > 24 h → mail.
-   Ten sam alert przenosi się potem 1:1 na nowe API, więc to nie jest praca do wyrzucenia.
-2. **Zdjąć `>> /dev/null 2>&1`** z crona w panelu Zenboxa, przekierować do pliku logu.
-3. **Jednorazowe GC starych dumpów bazy.** `update_db.sh` przy każdym przebiegu wysyła
-   do `public_html/offers` **timestampowany** eksport całej bazy (`offers2026_09_05_15_25.json`,
-   dziś 1,78 MB) i nigdy nie kasuje starych. Przy 2–5 paczkach dziennie od 2021 to rząd
-   kilku tysięcy plików, czyli kilkanaście GB — plus ~1 400 sztuk z okresu awarii, gdy
-   pipeline mielił co 15 minut. **Do zweryfikowania przed sprzątaniem** (produkcja może
-   różnić się od repo):
+1. **Dead man's switch** ✅ — `maintenance/watchdog.sh`, cron `*/15` na VPS.
 
-   ```
-   ls /home/perfect/domains/perfect.stronazen.pl/public_html/offers/offers*.json | wc -l
-   du -sh /home/perfect/domains/perfect.stronazen.pl/public_html/offers
-   ```
+   Kryterium **nie** brzmi „brak danych od 24 h", jak zakładał pierwotny plan. Galactica
+   nie wysyła codziennie (realne przerwy 21.08→23.08, 27.08→29.08), więc taki alert
+   dzwoniłby bez powodu — a alert dzwoniący bez powodu przestaje być czytany i nie
+   zadziała wtedy, kiedy trzeba. To gorsze niż brak alertu.
 
-   Uwaga: front czyta `offers/offers.json` (stała nazwa), a repo generuje nazwy
-   timestampowane — jeśli produkcja robi to, co repo, ten plik jest aktualizowany
-   w jakiś inny sposób. Ustalić, **zanim** cokolwiek się kasuje.
-4. **GC osieroconych zdjęć** — `maintenance/export_photo_refs.sh` (VPS) +
+   Właściwe kryterium: **plik zalega w `public_ftp` dłużej niż 30 min.** Cisza od
+   Galactiki to pusty folder, czyli stan zdrowy — zero fałszywych alarmów. Awarię
+   z 21.08 wykryłby w pół godziny zamiast w 15 dni. Do tego alarm zapasowy (brak
+   przetworzonej paczki od 72 h) i trzeci przypadek: nieudany kontakt z Zenboxem —
+   cisza byłaby tu najgorszą odpowiedzią.
+
+   Stoi na VPS, nie na Zenboxie: **strażnik nie może mieszkać wewnątrz tego, co pilnuje.**
+   Wysyłka przez `msmtp` i skrzynkę na domenie — poczta z gołego IP VPS-a do Gmaila nie
+   dolatuje (brak SPF i reverse DNS). Powtórzenia ograniczone do jednego na 6 h.
+   Adresy w `/root/perfect/watchdog.conf`, poza repozytorium.
+
+2. **Logi crona** ✅ — `>> /dev/null 2>&1` zastąpione plikiem `logs/cron.log`.
+
+   Watchdog mówi *co* („coś zalega"), log mówi *dlaczego*. 21 sierpnia pipeline nie
+   milczał — co 15 minut wypluwał `ambiguous redirect`, `unzip: cannot find zipfile
+   directory` i `mv: target is not a directory`, czyli gotową diagnozę. Wszystkie
+   ~1 440 kopii poszły do `/dev/null`.
+
+   Pole „Wysyłaj wynik powiadomień cron na E-Mail" w panelu zostaje **puste**: `unzip`
+   wypisuje coś przy każdym *udanym* przebiegu, więc mailowałoby ~96 razy dziennie
+   i zostałoby wyciszone w tydzień — razem z jedynym kanałem ostrzegania.
+
+3. **Dumpów bazy nie ma — za to repozytorium rozjechało się z produkcją.**
+
+   Pierwotne założenie (kilka tysięcy timestampowanych eksportów, kilkanaście GB)
+   opierało się na zacommitowanym `db_server_scripts/update_db.sh` i **było błędne**.
+   Na produkcji nie ma ani jednego takiego pliku.
+
+   Produkcyjny `update_db.sh` różni się od repo w dwóch miejscach:
+
+   | | repo | produkcja |
+   |---|---|---|
+   | cel `scp` | `.../public_html/offers` — katalog, więc nazwa timestampowana | `.../public_html/offers/offers.json` — stała nazwa, nadpisywana |
+   | `mongoexport` | `--pretty` | `--pretty --jsonArray` |
+
+   Druga różnica jest krytyczna: bez `--jsonArray` mongoexport produkuje NDJSON, którego
+   `httpClient.get()` we froncie nie sparsuje. Czyli **skrypty w repo nie są zdatne do
+   uruchomienia** — ktoś łatał je bezpośrednio na serwerze i nie wrócił z tym do repo.
+
+   Konsekwencja dla Etapów 1–2: **punktem odniesienia przy przepisywaniu są skrypty
+   z serwera, nie z repozytorium.** Przed każdym etapem trzeba je pobrać i zdiffować.
+
+4. **GC osieroconych zdjęć** ✅ — `maintenance/export_photo_refs.sh` (VPS) +
    `maintenance/gc_offer_photos.sh` (Zenbox). `copy_offer_jpgs` robi wyłącznie `mv`
    do środka i nic nigdy nie kasuje; sieroty to zdjęcia usuniętych ofert oraz podmienione
    zdjęcia ofert zaktualizowanych, narastająco od 2021.
 
-   **Skrypt jest idempotentny i re-runnable** — nie jest „jednorazowy". Odpalasz go ręcznie
-   raz na jakiś czas (albo z osobnego crona, niezwiązanego z pipelinem) aż do Etapu 2.
-   Drugi przebieg po prostu nic nie znajdzie.
+   **Skrypt jest idempotentny**, więc można go puścić ponownie bez ryzyka — ale nie jest
+   to rutyna do wpinania w crona. To narzędzie przejściowe: ostatni przebieg wypada
+   w Etapie 3, przy przenoszeniu zdjęć, a potem znika razem ze skryptami bash.
 
    **Pułapka, która raz już skasowała wszystkie zdjęcia.** Załącznik w bazie ma pole `plik`
    (np. `"2.jpg"`) i pole `ID`. Nazwa na dysku to `ofe_<ID>.jpg` — patrz
@@ -158,8 +189,13 @@ Cel: przestać być ślepym i odzyskać miejsce na dysku Zenboxa.
 Jednorazowe sprzątanie jest pilne, bo kończy się dysk. Mechanizm ciągły należy do Etapu 2 —
 inwestowanie w skrypty, które i tak znikają, to podwójna praca.
 
-**Kryterium ukończenia:** przychodzi mail, gdy ingest milczy dobę; `du -sh` na katalogu
-zdjęć wraca do rozsądnej wartości.
+**Stan po zamknięciu etapu.** Alert działa i został przetestowany end-to-end (`--test`).
+Logi crona spływają do pliku. Osierocone zdjęcia sprzątnięte, miejsce odzyskane.
+
+**Przeciek zdjęć trwa dalej** — `copy_offer_jpgs` nadal robi wyłącznie `mv` do środka.
+Nie planujemy jednak cyklicznego sprzątania: Etap 2 usuwa przyczynę, a jedyna
+pozostała czystka wypada w Etapie 3. Tempo przecieku (kilkadziesiąt–kilkaset MB
+miesięcznie) nie wymaga reagowania w międzyczasie.
 
 ## Etap 1 — API read-only nad obecną Mongo
 
@@ -213,6 +249,9 @@ Cel: własny storage z API S3 i realna oszczędność transferu.
 
 - **MinIO w compose**, dane na wolumenie hosta (np. `/var/lib/minio/data`),
   `restart: unless-stopped`, `systemctl enable docker` — przeżywa restart VPS-a.
+- **Ostatnia czystka zdjęć** — `gc_offer_photos.sh` tuż przed migracją. Do MinIO jadą
+  wyłącznie pliki żywe; sieroty zostają i nie zaśmiecają nowego storage'u. Po tym kroku
+  problem znika u źródła, bo ingest z Etapu 2 nowych sierot już nie produkuje.
 - **Miniatury generowane w ingescie.** Dziś karuzela ładuje pełne zdjęcia jako miniatury;
   to wymierny koszt dla użytkownika na komórce i jedyna twarda korzyść wydajnościowa
   tego etapu. Warianty: miniatura (karuzela/karta) + pełny (galeria).
@@ -241,9 +280,12 @@ alternatywą z tym samym API jest Garage.
 
 ## Do zweryfikowania
 
-- [ ] Czy produkcyjne `update_db.sh` różni się od repo — jak faktycznie aktualizowany jest
-      `public_html/offers/offers.json`, skoro repo generuje nazwy timestampowane.
-- [ ] `du -sh` na `public_html/offers` z podziałem na obrazki i JSON-y.
+- [x] ~~Czy produkcyjne `update_db.sh` różni się od repo~~ — **tak, w dwóch miejscach.**
+      Patrz Etap 0 pkt 3. `offers.json` jest nadpisywany pod stałą nazwą.
+- [ ] **Pobrać produkcyjne wersje wszystkich skryptów i zdiffować z repo.** Skoro
+      `update_db.sh` się rozjechał, pozostałe prawdopodobnie też. Do zrobienia przed
+      Etapem 2, bo to one są specyfikacją tego, co przepisujemy.
+- [x] ~~`du -sh` na `public_html/offers`~~ — zrobione przy GC zdjęć.
 - [ ] Wolne miejsce na VPS-ie pod MinIO.
 - [ ] Czy `offers_archive` na Zenboxie jest kompletne od 2021 (to backup zdjęć z Etapu 3).
 - [ ] Czy Zenbox udostępnia SFTP, czy tylko FTP (wpływa na Etap 2).
