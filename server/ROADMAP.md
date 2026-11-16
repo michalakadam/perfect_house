@@ -1,6 +1,6 @@
 # Roadmapa przepisania back-endu
 
-Dokument roboczy. Stan na 2026-09-05.
+Dokument roboczy. Stan na 2026-11-16 (pierwotna wersja: 2026-09-05).
 
 Cel: zastąpić obecny łańcuch skryptów jednym serwisem Spring Boot, który serwuje oferty,
 agentów i zdjęcia, i który da się monitorować oraz wdrażać powtarzalnie.
@@ -50,8 +50,25 @@ w przeglądarce, którego jedynym zadaniem jest tłumaczenie schematu CRM na mod
 - **Zenbox** (`perfect@2.57.137.38`, perfect.stronazen.pl) — hosting **współdzielony**.
   Brak roota, cron przez formularz w panelu. Nie uruchomi Dockera ani Spring Boota.
   Docelowa rola: hosting statycznych plików Angulara + skrzynka FTP na paczki z Galactiki.
-- **VPS** (`root@51.77.195.170`) — root, MongoDB, node przez nvm.
+- **VPS** (`root@51.77.195.170`, OVH) — root, MongoDB, node przez nvm.
   Docelowa rola: cały back-end w Dockerze.
+
+  Pomiary z 2026-11-16: **1 vCPU, 1,9 GB RAM, brak swapu**, dysk 20 GB (9,5 GB wolne).
+  Ubuntu 20.04 i MongoDB 4.2.18 — oba poza wsparciem. Dockera nie ma. nginx + certbot
+  serwują na 80/443 prywatną stronę `adam-michalak.site` (statyczny build, 2,1 MB,
+  `/var/www/mysite/dist`). Na porcie 21 działał `vsftpd` z gołym FTP (`ssl_enable=NO`).
+  Nie należy do łańcucha ofert, a w logach nie ma ani jednego udanego logowania, tylko
+  skanery. **Wyłączony 2026-11-16** (`systemctl disable --now vsftpd`, pakiet
+  zostaje, więc można go przywrócić).
+
+  **Decyzja 2026-11-16: nowy back-end dostaje nowy VPS.** Obecny zostaje tylko dla
+  strony prywatnej, do czasu jej przeniesienia na serwer domowy, a potem zostanie
+  zlikwidowany. Jego ograniczenia nie wpływają więc na architekturę.
+
+- **Nowy VPS pod API** — OVH VPS-1: 2 vCore, 4 GB RAM, 40 GB NVMe, ok. 20 zł brutto
+  miesięcznie, dzienny backup w cenie, Ubuntu 24.04. Wystarcza na Spring, bazę, MinIO
+  i reverse proxy. Zdjęcia (~1 GB plus miniatury) mieszczą się z dużym zapasem.
+  Archiwum ZIP-ów zostaje na Zenboxie.
 
 ## 3. Ustalenia
 
@@ -64,6 +81,9 @@ w przeglądarce, którego jedynym zadaniem jest tłumaczenie schematu CRM na mod
 | Filtrowanie po stronie API | Nie dla wydajności (329 rekordów filtruje się w ułamku ms), tylko dla payloadu i modelu domenowego. |
 | Galactica: brak API | Potwierdzone u dostawcy. FTP + ZIP to jedyny kanał, na stałe. |
 | Bez CQRS, heksagonu, kolejek, cache'a | Jeden klient, 329 rekordów. Największa pokusa przy przepisywaniu na Springa to architektura pod skalę, której nie będzie. |
+| Spring Boot 4.x | Linia 3.x wychodzi ze wsparcia; nowy serwis nie zaczyna od migracji. Prototyp z 2023 (`origin/feat/offers_api`, Boot 3.1, push przez `POST /upload`) nie jest bazą — najwyżej źródłem DTO dla XML-a z Galactiki. |
+| Etapy 1–4 najpierw lokalnie | Cały nowy back-end powstaje i jest testowany lokalnie (docker compose) na kopii danych produkcyjnych. Wdrożenie na VPS to osobny krok po Etapie 4, nie część każdego etapu. Produkcja do tego czasu działa na starym łańcuchu. |
+| Agenci: jednorazowy seed | Lista agentów się nie zmienia i nie przychodzi w paczkach. Ładowana raz, przy pierwszym imporcie, z `frontend/src/agents/agents.json` (10 rekordów + zdjęcia `user_*.jpg`). Ingest jej nie dotyka. |
 
 ### Odwrócenie kierunku przepływu
 
@@ -255,15 +275,21 @@ Cel: własny storage z API S3 i realna oszczędność transferu.
 - **Miniatury generowane w ingescie.** Dziś karuzela ładuje pełne zdjęcia jako miniatury;
   to wymierny koszt dla użytkownika na komórce i jedyna twarda korzyść wydajnościowa
   tego etapu. Warianty: miniatura (karuzela/karta) + pełny (galeria).
-- Zmiana URL-i zdjęć we froncie, subdomena + certyfikat dla MinIO.
+- Zmiana URL-i zdjęć we froncie. MinIO bez własnej subdomeny: reverse proxy wystawia
+  zdjęcia pod `api.e-perfecthouse.pl`, na osobnej ścieżce.
 
 **Trwałość — czego MinIO w tej konfiguracji nie daje.** Jeden węzeł, jeden dysk, brak
 redundancji. Restart VPS-a przeżyje (to kwestia wolumenu, nie MinIO), ale awaria dysku nie.
-Ratuje to fakt, że **zdjęcia są odtwarzalne z archiwum ZIP-ów** — paczki z Galactiki
-zawierają komplet i leżą w `offers_archive`. Warunek: to archiwum musi być utrzymywane
-i backupowane. To jest tańsze niż replikacja MinIO i przy tej skali wystarczające.
 
-**Otwarte:** przed startem `du -sh` na katalogu zdjęć i wolne miejsce na VPS-ie.
+Pierwotny plan zakładał, że zdjęcia są odtwarzalne z `offers_archive`. **To nieprawda**
+(sprawdzone 2026-11-16): archiwum zaczyna się 2026-01-02, a oferty wystawione wcześniej
+mają zdjęcia wyłącznie w `public_html/offers`. Potrzebny jest więc osobny backup zdjęć —
+np. jednorazowy snapshot żywych zdjęć przy migracji do MinIO plus okresowy `mc mirror`
+poza VPS. Archiwum ZIP-ów (18 GB, przyrost ~1,7 GB/mies.) nie zmieści się na VPS-ie
+i zostaje na Zenboxie.
+
+Zdjęcia po GC z Etapu 0: 4 128 plików, 983 MB — mieszczą się w 9,5 GB wolnego miejsca
+na VPS-ie z zapasem na miniatury.
 MinIO jest na AGPL v3 — dla własnego serwisu bez redystrybucji bez znaczenia; lżejszą
 alternatywą z tym samym API jest Garage.
 
@@ -282,10 +308,55 @@ alternatywą z tym samym API jest Garage.
 
 - [x] ~~Czy produkcyjne `update_db.sh` różni się od repo~~ — **tak, w dwóch miejscach.**
       Patrz Etap 0 pkt 3. `offers.json` jest nadpisywany pod stałą nazwą.
-- [ ] **Pobrać produkcyjne wersje wszystkich skryptów i zdiffować z repo.** Skoro
-      `update_db.sh` się rozjechał, pozostałe prawdopodobnie też. Do zrobienia przed
-      Etapem 2, bo to one są specyfikacją tego, co przepisujemy.
+- [x] ~~Pobrać produkcyjne wersje wszystkich skryptów i zdiffować z repo~~ — zrobione
+      2026-11-16. Rozjazd jest tylko w `update_db.sh` (dwie znane różnice).
+      `check_ftp_folder.sh` różni się wyłącznie białymi znakami; `process_files.sh`
+      i `convert_xml_to_json.sh` są identyczne; `offers_updater/src` ma jeden nieużywany
+      import więcej (produkcja uruchamia skompilowany `dist/` z 2021). **Specyfikacją
+      dla Etapu 2 są skrypty z repo + poprawiony `update_db.sh`.**
 - [x] ~~`du -sh` na `public_html/offers`~~ — zrobione przy GC zdjęć.
-- [ ] Wolne miejsce na VPS-ie pod MinIO.
-- [ ] Czy `offers_archive` na Zenboxie jest kompletne od 2021 (to backup zdjęć z Etapu 3).
-- [ ] Czy Zenbox udostępnia SFTP, czy tylko FTP (wpływa na Etap 2).
+- [x] ~~Wolne miejsce na VPS-ie pod MinIO~~ — 9,5 GB z 20 GB. Zdjęcia (983 MB) się
+      mieszczą, archiwum ZIP-ów (18 GB) nie.
+- [x] ~~Czy `offers_archive` jest kompletne od 2021~~ — **nie.** 943 paczki od
+      2026-01-02. Nie jest backupem zdjęć — patrz Etap 3.
+- [x] ~~Czy Zenbox udostępnia SFTP~~ — tak, `s38.zenbox.pl:22`, logowanie kluczem.
+      VPS już ma dostęp (`update_db.sh` robi tam `scp`), więc pull w Etapie 2 nie
+      wymaga zmian po stronie Zenboxa.
+- [ ] **DNS domeny `e-perfecthouse.pl` jest u Galactiki** (`ns1–3.galactica.pl`)
+      i przeniesienie go nie wchodzi w grę. Potrzebny jest **jeden** rekord A:
+      `api.e-perfecthouse.pl` → IP nowego VPS-a. Zdjęcia z MinIO też idą pod tę
+      nazwę, przez ścieżkę w reverse proxy, więc Galacticę prosimy tylko raz.
+      CAA domeny dopuszcza `letsencrypt.org`, więc certyfikat da się wystawić bez
+      zmian po ich stronie. Zapytanie wysyłamy po zakupie VPS-a, kiedy znamy już IP.
+      Nie blokuje pracy lokalnej.
+- [ ] Zgodność sterownika MongoDB z Boot 4 z serwerem 4.2.18 — ważne tylko przy
+      wdrożeniu Etapu 1 na produkcyjną Mongo.
+
+## Zatory wróciły (2026-11)
+
+Awaria z sierpnia powtarza się: Galactica coraz częściej wysyła kilka paczek w jednym
+oknie crona (np. 15.11 o 22:07, 22:11 i 22:16). `check_ftp_folder.sh` nadal czyta
+`$(ls public_ftp)` i blokuje się trwale. Watchdog zadziałał zgodnie z planem (alert
+16.11 rano), zator został rozładowany ręcznie, paczka po paczce. Katalog roboczy
+`fix_20261109` wskazuje, że nie był to pierwszy raz w listopadzie.
+
+Skoro nowy back-end trafi na produkcję dopiero po Etapie 4, stary łańcuch będzie
+działał jeszcze tygodnie. Dlatego zrobiony został wyjątek od zasady „nie inwestujemy
+w bash”. **Poprawka wdrożona 2026-11-16 18:09** (kopia poprzedniej wersji:
+`check_ftp_folder.sh.bak_20261116` na Zenboxie):
+
+- `check_ftp_folder.sh` przetwarza **wszystkie** paczki z `public_ftp` w jednym
+  przebiegu, każdą osobno, od najstarszej (nazwy sortują się chronologicznie).
+  To odtwarza ręczną procedurę rozładowywania zatoru.
+- `flock` na `check_ftp_folder.lock`: jeśli poprzedni przebieg jeszcze trwa, kolejny
+  wypisuje komunikat do `cron.log` i kończy się. Zawieszony przebieg trzyma blokadę,
+  więc paczki zaczynają zalegać i po 30 minutach alarmuje watchdog.
+
+Rozważany był wariant „jedna, najstarsza paczka na przebieg”. Odrzucono go po
+symulacji na 943 paczkach z archiwum. Paczki z 13.11 (15:05, 15:09, 15:14, 15:32,
+15:36) czekałyby do 39 minut, a watchdog dwa razy zgłosiłby fałszywy zator.
+Przy przetwarzaniu wszystkich paczek naraz najdłuższe czekanie to jeden tick crona.
+
+Przetestowane w sandboksie na Zenboxie, na prawdziwych paczkach z 15.11. Kolejność
+została zweryfikowana sumami kontrolnymi `oferty.xml`, a pominięcie przebiegu przy
+zajętej blokadzie sprawdzone osobno.
